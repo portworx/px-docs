@@ -23,9 +23,8 @@ alert(s);
 
 ## Bullets
 * Bullet
- * Sub-bullet
- <p>indent</p>
-* Bullet<p>indent</p>
+ * Sub-bullet <p>Indent</p>
+* Bullet <p>Indent</p>
 
 
 ## Numbered Lists
@@ -38,6 +37,7 @@ alert(s);
 > **Note:** <br/> This is something to pay attention to. This is something to pay attention to. This is something to pay attention to. This is something to pay attention to.
 
 ## Tables
+
 
 |Table head|Table head 2|
 |---|---|
@@ -84,7 +84,8 @@ alt="IMAGE ALT TEXT HERE" width="96" height="72" border="10" /></a>
 </dl>
 
 ## HRs
-These aren't working.
+Use triple asterisks, dashes, or underlines.
+
 ***
 
 ---
