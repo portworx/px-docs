@@ -20,9 +20,9 @@ See our quick start guides on:
 
   **FIGURE OUT RELATIVE PATHS**
 
-* [Launching PX-Dev with Docker Compose](../blob/master/px-dev/quick-start/README.md)
-* [Running PX-Dev with Kubernetes](../blob/master/px-dev/install_with_k8s.md)
-* [Running PX-Dev on Ubuntu](../blob/master/px-dev/install_run_ubuntu), [CentOS](../blob/master/px-dev/install_run_rhel), and [CoreOS](../blob/master/px-dev/install_run_coreos)
+* [Launching PX-Dev with Docker Compose](https://github.com/portworx/px-dev/blob/master/install_with_compose.md)
+* [Running PX-Dev with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
+* [Running PX-Dev on Ubuntu](https://github.com/portworx/px-dev/blob/master/install_run_ubuntu.md), [CentOS](https://github.com/portworx/px-dev/blob/master/install_run_rhel.md), and [CoreOS](https://github.com/portworx/px-dev/blob/master/install_run_coreos.md)
 
 Run stateful containers with Docker volumes:
 
