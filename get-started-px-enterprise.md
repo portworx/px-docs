@@ -1,8 +1,8 @@
 # Get Started with PX-Enterprise
 
-## Step 1: Verify requirements
+Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, and the enterprise.
 
-#TO DO: filenames and links; get px-ent user experience; insert web console Walkthrough
+## Step 1: Verify requirements
 
 * Linux kernel 3.10 or greater
 * Docker 1.10 or greater, configured with [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
@@ -17,9 +17,9 @@
 
 ## Step 2: Get PX-Enterprise
 
-For access to PX-Enterprise and its web management console, please contact Sales at Portworx.
+For information about PX-Enterprise and to request a demo, please provide your contact information [here](http://na-sj15.marketo.com/lp/126-NHQ-240/request_a_demo.html).
 
-What's the customer experience for this: contact sales and then receive a PX-Enterprise account?
+After you purchase PX-Enterprise, you'll receive an email with the PX-Enterprise web console URL.
 
 ## Step 3: Take a tour of the PX-Enterprise web console
 
@@ -30,9 +30,9 @@ What's the customer experience for this: contact sales and then receive a PX-Ent
 [Create a PX-Enterprise Cluster](XXX.md)  <br/>
 [Create and Manage Storage Volumes](YYY.md)  <br/>
 [Manage Nodes and Capacity](ZZZ.md)  <br/>
-[Manage users and groups](AAA.md)
+[Manage Users and Groups](AAA.md)
 
-You can also use our [pxctl CLI](./cli_reference.md) to:
+You can also use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.md) to:
 
 * View the cluster global capacity and health
 * Create, inspect, and delete storage volumes

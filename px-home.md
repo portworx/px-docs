@@ -32,7 +32,6 @@ PX-Developer is free, easy-to-deploy scale-out storage for developers. If you're
 PX-Developer features:
 
 * Scale-out storage deployed as a container
-* Shared volumes, where multiple containers can share a single filesystem
 * Container-granular controls
 * Distributed file access
 * Command-line interface

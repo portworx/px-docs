@@ -16,13 +16,17 @@
 
 ## Step 2: Install and run PX-Developer
 
-See our quick start guides on:
+See our quick start guides:
 
+* [Docker Compose Quick Start Installation for PX-Developer](https://github.com/portworx/px-dev/blob/master/install_with_compose.md)
+* [Run PX-Developer on Ubuntu](https://github.com/portworx/px-dev/blob/master/install_run_ubuntu.md), [CentOS](https://github.com/portworx/px-dev/blob/master/install_run_rhel.md), and [CoreOS](https://github.com/portworx/px-dev/blob/master/install_run_coreos.md)
 
+Run PX-Developer with Schedulers:
 
-* [Launching PX-Dev with Docker Compose](README.md)
-* [Running PX-Dev with Kubernetes](install_with_k8s.md)
-* [Running PX-Dev on Ubuntu](install_run_ubuntu), [CentOS](install_run_rhel), and [CoreOS](install_run_coreos)
+* Docker Swarm
+* [Running PX-Developer with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
+* [Running PX-Developer with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
+* [Running PX-Developer with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
 
 Run stateful containers with Docker volumes:
 
@@ -30,14 +34,14 @@ Run stateful containers with Docker volumes:
 * [Running the Docker registry with high availability](./blob/master/px-dev/examples/registry.md)
 * [Running PostgreSQL from CrunchyData on PX volumes]()
 
-Use our [pxctl CLI](./cli_reference.md) to directly:
+Use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.md) to directly:
 
 * View the cluster global capacity and health
 * Create, inspect, and delete storage volumes
 * Attach policies for IOPs prioritization, maximum volume size, and enable storage replication
 
-Refer to the [Technical FAQ and Troubleshooting guide](../blob/master/px-dev/faq.md) if you run into an issue.
+Refer to [Technical FAQ and Troubleshooting](https://github.com/portworx/px-dev/blob/master/faq.md) if you run into an issue.
 
-As you use PX-Dev, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
+As you use PX-Developer, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
 
-If your requirements extend beyond the scope of PX-Developer, then please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise.
+If your requirements extend beyond the scope of PX-Developer, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise.
