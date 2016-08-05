@@ -8,7 +8,7 @@ Paragraph with `code phrase` inline.
 
 Two tildes to show ~~strikethrough~~.
 
-## Code
+<h2><a id="code"</a>Code</h2>
 
 >code sample
 >    code sample
@@ -96,3 +96,5 @@ ___
 
 |[This is a button](https://www.google.com)|
 |---|
+
+Link to earlier <a href="#code">Code</a>.
