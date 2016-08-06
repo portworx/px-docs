@@ -22,7 +22,7 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 * Command-line interface
 * RESTful API for automation and statistics
 
-|[Get Started with PX-Enterprise](https://www.google.com)|
+|[Get Started with PX-Enterprise](https://github.com/portworx/px-docs/blob/master/get-started-px-enterprise.md)|
 |---|
 
 ## PX-Developer
@@ -38,7 +38,7 @@ PX-Developer features:
 * Support for up three servers per cluster and 1 TB per volume
 * Requires an etcd key/value store (Consul coming soon) **??????**
 
-|[Get Started with PX-Developer](https://www.google.com)|
+|[Get Started with PX-Developer](https://github.com/portworx/px-docs/blob/master/get-started-px-developer.md)|
 |---|
 
 Contact us to share feedback, work with us, and to request features.
