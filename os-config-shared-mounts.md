@@ -1,6 +1,6 @@
 #OS Configuration for Shared Mounts
 
-The following sections describe how to configure Docker for shared mounts on [CoreOS](coreos-configuration-and-shared-mounts), [CentOS](centos-configuration-and-shared-mounts), and [Ubuntu](ubuntu-configuration-and-shared-mounts). The examples use AWS EC2 for servers in the cluster.
+The following sections describe how to configure Docker for shared mounts on [CoreOS](https://github.com/portworx/px-docs/blob/master/os-config-shared-mounts.md#coreos-configuration-and-shared-mounts), [CentOS](https://github.com/portworx/px-docs/blob/master/os-config-shared-mounts.md#centos-configuration-and-shared-mounts), and [Ubuntu](https://github.com/portworx/px-docs/blob/master/os-config-shared-mounts.md#ubuntu-configuration-and-shared-mounts). The examples use AWS EC2 for servers in the cluster.
 
 ##CoreOS Configuration and Shared Mounts
 
