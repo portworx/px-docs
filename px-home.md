@@ -41,4 +41,4 @@ PX-Developer features:
 |[Get Started with PX-Developer](https://github.com/portworx/px-docs/blob/master/get-started-px-developer.md)|
 |---|
 
-Contact us to share feedback, work with us, and to request features.
+[Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.
