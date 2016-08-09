@@ -6,27 +6,27 @@ This section walks through installing and configuring a PX-Enterprise cluster. I
 
 ##Step 1: Provision a cluster in the PX-Enterprise console
 
-Log in to the PX-Enterprise console. If a cluster has not already been created for your account, click the Manage Clusters menu and then click Manage Clusters.
+Log in to the PX-Enterprise console. If a cluster has not already been created for your account, click the **Manage Clusters** menu and then click **Manage Clusters**.
 
-SCREENSHOT: top-right corner, with menu open
+![Manage Clusters menu](https://github.com/portworx/px-docs/blob/master/images/clusters-manage-clusters-menu.png "Manage Clusters menu")
 
 On the **Clusters** page, click the **+** icon to create a new storage cluster.
 
-SCREENSHOT: Clusters
+![Add a cluster](https://github.com/portworx/px-docs/blob/master/images/clusters-add.png "Add a cluster")
 
 Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
-SCREENSHOT: New Cluster
+![Name a new cluster](https://github.com/portworx/px-docs/blob/master/images/clusters-new.png "Name a new cluster")
 
 ##Step 2: Run discovery on a server node
 
 You will now add your first server node to the storage cluster. Click **Get Startup Script** for the cluster you just created. The window below appears with a `curl` command. This `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
-SCREENSHOT: curl command in Startup Script
+![Startup script to add a cluster](https://github.com/portworx/px-docs/blob/master/images/startup-script-window.png "Startup script to add a cluster")
 
 Log in to the first server node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. Copy the above curl string and paste it into a terminal session and press Enter, as shown below.
 
-SCREENSHOT: terminal window
+![Startup script status messages](https://github.com/portworx/px-docs/blob/master/images/startup-script-result.png "Startup script status messages")
 
 ##Step 3: Select storage to be aggregated
 
@@ -40,7 +40,7 @@ The following example of the Hardware Configuration page shows the discovered at
 
 * **Criteria**: Performs the above tasks based on the check boxes you select.
 
-SCREENSHOT: Hardware Configuration
+![Discovered hardware configuration](https://github.com/portworx/px-docs/blob/master/images/hardware-configuration.png "Discovered hardware configuration")
 
 Only servers matching all criteria will install PX-Enterprise. In the example above, only servers with the same Vendor, CPU ID, selected disks, and selected NICs will join the cluster.
 
@@ -77,7 +77,7 @@ To instruct the PX-Enterprise container on the server node to complete the insta
 
 From the server node that ran the `curl` command, you should see the following status:
 
-SCREENSHOT: terminal window
+![Status messages after activation](https://github.com/portworx/px-docs/blob/master/images/status-messages-after-activate.png "Status messages after activation")
 
 ##Step 4: Expand the cluster
 
