@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Get Started with PX-Enterprise
 
 Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, and the enterprise.
