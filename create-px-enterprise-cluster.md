@@ -83,6 +83,6 @@ SCREENSHOT: terminal window
 
 You can add new servers nodes to the existing cluster by running the bootstrap script for a cluster. Server nodes can have different Server Profiles, where some servers might contribute little or no storage to the cluster.
 
->**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see Recommendations [**NEED LINK**].
+>**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see [Step 1: Verify requirements](https://github.com/portworx/px-docs/blob/master/get-started-px-developer.md#step-1-verify-requirements).
 
 For a new server node to be automatically accepted into the PX-Enterprise cluster, the server must match an activated Server Profile.

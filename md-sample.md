@@ -8,11 +8,13 @@ Paragraph with `code phrase` inline.
 
 Two tildes to show ~~strikethrough~~.
 
-<h2><a id="code"</a>Code</h2>
+<h2>Code</h2>
 
->code sample
->    code sample
->code sample
+```
+code sample
+    code sample
+    code sample
+```
 
 These indicate the language type for syntax highlighting.
 
@@ -61,6 +63,10 @@ Specify alignment with colons.
 
 [Relative reference to a repository file](../blob/master/LICENSE)
 
+Link to a heading within a page:
+
+[Heading Text](#heading-text)
+
 ## Images
 
 ![alt text](https://nnn.com/logo.png "Logo Title Text 1")
@@ -97,4 +103,4 @@ ___
 |[This is a button](https://www.google.com)|
 |---|
 
-Link to earlier <a href="#code">Code</a>.
+![Screen shot of Clusters page](/images/clusters.png)

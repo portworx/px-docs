@@ -1,6 +1,4 @@
-#Manage Users and Groups
-
-**IF GROUP MGMT NOT AVAILABLE, CHANGE TITLE**
+#Manage Users
 
 To create users, click the gear icon in the upper-right corner of the console and choose **User Admin**.
 

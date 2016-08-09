@@ -36,7 +36,7 @@ PX-Developer features:
 * Distributed file access
 * Command-line interface
 * Support for up three servers per cluster and 1 TB per volume
-* Requires an etcd key/value store (Consul coming soon) **??????**
+* Requires an etcd key/value store (Consul coming soon)
 
 |[Get Started with PX-Developer](https://www.google.com)|
 |---|

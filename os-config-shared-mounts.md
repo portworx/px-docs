@@ -1,6 +1,6 @@
 #OS Configuration for Shared Mounts
 
-The following sections describe how to configure Docker for shared mounts on [CoreOS](coreos-configuration-and-shared-mounts), [CentOS](centos-configuration-and-shared-mounts), and [Ubuntu](ubuntu-configuration-and-shared-mounts). The examples use AWS EC2 for servers in the cluster.
+The following sections describe how to configure Docker for shared mounts on [CoreOS](coreos-configuration-and-shared-mounts), [CentOS](centos-configuration-and-shared-mounts), and [Ubuntu](ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. The examples use AWS EC2 for servers in the cluster.
 
 ##CoreOS Configuration and Shared Mounts
 
@@ -30,8 +30,6 @@ The following sections describe how to configure Docker for shared mounts on [Co
 
 ##CentOS Configuration and Shared Mounts
 
-The following shared mounts configuration is required, because PX-Developer exports mount points.
-
 1. Follow the Docker installation guide, [Red Hat Enterprise Linux](https://docs.docker.com/engine/installation/linux/rhel/) and then start the Docker service.
 
 2. Verify that your Docker version is 1.10 or later:
@@ -55,8 +53,6 @@ The following shared mounts configuration is required, because PX-Developer expo
      ~~~
 
 ##Ubuntu Configuration and Shared Mounts
-
-The following shared mounts configuration is required, because PX-Developer exports mount points.
 
 1. SSH into your first server.
 2. While following the Docker installation guide, [Unbuntu](https://docs.docker.com/engine/installation/linux/ubuntulinux/):

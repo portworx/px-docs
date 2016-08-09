@@ -8,11 +8,13 @@
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM
-*Recommended resources per server:
+* Recommended resources per server:
   * 12 CPU cores
   * 16 GB RAM
   * 128 GB Storage
   * 10Gb
+* Maximum nodes per cluster:
+  * 20 server nodes
 
 ## Step 2: Install and run PX-Developer
 
@@ -21,7 +23,7 @@ See our quick start guides:
 * [Docker Compose Quick Start Installation for PX-Developer](https://github.com/portworx/px-dev/blob/master/install_with_compose.md)
 * [Run PX-Developer on Ubuntu](https://github.com/portworx/px-dev/blob/master/install_run_ubuntu.md), [CentOS](https://github.com/portworx/px-dev/blob/master/install_run_rhel.md), and [CoreOS](https://github.com/portworx/px-dev/blob/master/install_run_coreos.md)
 
-Run PX-Developer with Schedulers:
+Run PX-Developer with schedulers:
 
 * Docker Swarm
 * [Running PX-Developer with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)

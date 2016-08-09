@@ -9,11 +9,13 @@ Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, an
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM
-*Recommended resources per server:
+* Recommended resources per server:
   * 12 CPU cores
   * 16 GB RAM
   * 128 GB Storage
   * 10Gb
+* Maximum nodes per cluster:
+    * 20 server nodes
 
 ## Step 2: Get PX-Enterprise
 
@@ -23,14 +25,37 @@ After you purchase PX-Enterprise, you'll receive an email with the PX-Enterprise
 
 ## Step 3: Take a tour of the PX-Enterprise web console
 
-**insert Web Console Walkthrough content**
+The PX-Enterprise web console provides storage management for all of your PX-Enterprise deployments, including on-premises clusters and in public clouds. The console monitors health and capacity and lets you provide container-granular storage. You can use any scheduler to orchestrate containers.
+
+The Overview page provides a summary view of the health of a cluster. In the example below, the cluster called DBaaS-cluster-1 is selected in the upper right. **There are twenty server nodes offering XXX TB of capacity through YYY drives.** The Alerts identify key status changes for that cluster, sorted by severity or recency.
+
+**insert screen**
+
+Use the top row of the cluster Overview page to navigate to server Nodes, manage Storage, view running Containers, or chart the Performance and storage capacity for the cluster.
+
+The Storage page presents a complete view for a cluster’s storage, as shown below. From this page, you can create new volumes (under Actions) and manage existing volumes, including snapshotting a volume.
+
+**insert screen**
+
+Create volumes programmatically using a scheduler or directly by the container, as well as from the command-line. You can manage a volume created by any of those methods from the Storage page. For information about supported schedulers, see "Run PX-Enterprise with schedulers" in the next step.
+
+For more on creating and managing volumes, see [Create and Manage Storage Volumes](https://github.com/portworx/px-docs/blob/master/create-manage-storage-volumes.md).
+
 
 ## Step 4: Start configuring
 
-[Create a PX-Enterprise Cluster](XXX.md)  <br/>
-[Create and Manage Storage Volumes](YYY.md)  <br/>
+[Create a PX-Enterprise Cluster](https://github.com/portworx/px-docs/blob/master/create-px-enterprise-cluster.md)  <br/>
+[Create and Manage Storage Volumes](https://github.com/portworx/px-docs/blob/master/create-manage-storage-volumes.md)  <br/>
 [Manage Nodes and Capacity](ZZZ.md)  <br/>
-[Manage Users and Groups](AAA.md)
+[Manage Users](https://github.com/portworx/px-docs/blob/master/manage-users-groups.md)
+
+Run PX-Enterprise with schedulers:
+
+* Docker Swarm
+* [Running PX-Developer with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
+* [Running PX-Developer with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
+* [Running PX-Developer with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
+
 
 You can also use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.md) to:
 
