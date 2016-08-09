@@ -37,7 +37,7 @@ The Storage page presents a complete view for a cluster’s storage, as shown be
 
 **insert screen**
 
-Create volumes programmatically using a scheduler or directly by the container, as well as from the command-line. You can manage a volume created by any of those methods from the Storage page. For information about supported schedulers, see "Run PX-Enterprise with schedulers" in the next step.
+You can also create volumes programmatically using a scheduler or by the container itself, as well as from the command-line. You can manage a volume created by any of those methods from the Storage page. For information about supported schedulers, see "Run PX-Enterprise with schedulers" in the next step.
 
 For more on creating and managing volumes, see [Create and Manage Storage Volumes](https://github.com/portworx/px-docs/blob/master/create-manage-storage-volumes.md).
 
@@ -52,9 +52,9 @@ For more on creating and managing volumes, see [Create and Manage Storage Volume
 Run PX-Enterprise with schedulers:
 
 * Docker Swarm
-* [Running PX-Developer with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
-* [Running PX-Developer with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
-* [Running PX-Developer with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
+* [Run Portworx with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
+* [Run Portworx with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
+* [Run Portworx with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
 
 
 You can also use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.md) to:

@@ -23,12 +23,12 @@ See our quick start guides:
 * [Docker Compose Quick Start Installation for PX-Developer](https://github.com/portworx/px-dev/blob/master/install_with_compose.md)
 * [Run PX-Developer on Ubuntu](https://github.com/portworx/px-dev/blob/master/install_run_ubuntu.md), [CentOS](https://github.com/portworx/px-dev/blob/master/install_run_rhel.md), and [CoreOS](https://github.com/portworx/px-dev/blob/master/install_run_coreos.md)
 
-Run PX-Developer with schedulers:
+Run Portworx with schedulers:
 
 * Docker Swarm
-* [Running PX-Developer with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
-* [Running PX-Developer with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
-* [Running PX-Developer with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
+* [Run Portworx with Kubernetes](https://github.com/portworx/px-dev/blob/master/install_with_k8s.md)
+* [Run Portworx with Mesosphere](https://github.com/portworx/px-dev/blob/master/install_with_mesosphere.md)
+* [Run Portworx with Rancher](https://github.com/portworx/px-dev/blob/master/run_with_rancher.md)
 
 Run stateful containers with Docker volumes:
 
