@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Get Started with PX-Developer
 
 ## Step 1: Verify requirements
