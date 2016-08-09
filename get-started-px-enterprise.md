@@ -32,18 +32,17 @@ The PX-Enterprise web console provides storage management for all of your PX-Ent
 
 The Overview page provides a summary view of the health of a cluster. In the example below, the cluster called DBaaS-cluster-1 is selected in the upper right. **There are twenty server nodes offering XXX TB of capacity through YYY drives.** The Alerts identify key status changes for that cluster, sorted by severity or recency.
 
-**insert screen**
+![Overview page in Portworx console](https://github.com/portworx/px-docs/blob/master/images/overview.png "Overview page in Portworx console")
 
 Use the top row of the cluster Overview page to navigate to server Nodes, manage Storage, view running Containers, or chart the Performance and storage capacity for the cluster.
 
 The Storage page presents a complete view for a cluster’s storage, as shown below. From this page, you can create new volumes (under Actions) and manage existing volumes, including snapshotting a volume.
 
-**insert screen**
+![Storage page in Portworx console](https://github.com/portworx/px-docs/blob/master/images/storage-with-volume-groups.png "Storage page in Portworx console")
 
 You can also create volumes programmatically using a scheduler or by the container itself, as well as from the command-line. You can manage a volume created by any of those methods from the Storage page. For information about supported schedulers, see "Run PX-Enterprise with schedulers" in the next step.
 
 For more on creating and managing volumes, see [Create and Manage Storage Volumes](https://github.com/portworx/px-docs/blob/master/create-manage-storage-volumes.md).
-
 
 ## Step 4: Start configuring
 

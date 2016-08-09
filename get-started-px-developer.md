@@ -35,8 +35,8 @@ Run Portworx with schedulers:
 
 Run stateful containers with Docker volumes:
 
-* [Scaling a Cassandra database with PX-Dev](cassandra.md)
-* [Running the Docker registry with high availability](./blob/master/px-dev/examples/registry.md)
+* [Scaling a Cassandra database with PX-Dev](https://github.com/portworx/px-dev/blob/master/examples/cassandra.md)
+* [Running the Docker registry with high availability](https://github.com/portworx/px-dev/blob/master/examples/registry.md)
 * [Running PostgreSQL from CrunchyData on PX volumes]()
 
 Use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.md) to directly:
@@ -49,4 +49,4 @@ Refer to [Technical FAQ and Troubleshooting](https://github.com/portworx/px-dev/
 
 As you use PX-Developer, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
 
-If your requirements extend beyond the scope of PX-Developer, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise.
+If your requirements extend beyond the scope of PX-Developer, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise. You can take a tour of the PX-Enterprise console [here](https://github.com/portworx/px-docs/blob/master/get-started-px-enterprise.md#step-3-take-a-tour-of-the-px-enterprise-web-console).
