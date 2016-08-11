@@ -1,3 +1,8 @@
+---
+layout: page
+title: "Portworx Documentation"
+category: get_started
+---
 # Welcome to the Portworx Documentation
 
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. Portworx technology:
@@ -22,7 +27,7 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 * Command-line interface
 * RESTful API for automation and statistics
 
-|[Get Started with PX-Enterprise](https://github.com/portworx/px-docs/blob/master/get-started-px-enterprise.md)|
+|[Get Started with PX-Enterprise](get-started-px-enterprise.html)|
 |---|
 
 ## PX-Developer
@@ -38,7 +43,7 @@ PX-Developer features:
 * Support for up three servers per cluster and 1 TB per volume
 * Requires an etcd key/value store (Consul coming soon)
 
-|[Get Started with PX-Developer](https://github.com/portworx/px-docs/blob/master/get-started-px-developer.md)|
+|[Get Started with PX-Developer](get-started-px-developer.html)|
 |---|
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.

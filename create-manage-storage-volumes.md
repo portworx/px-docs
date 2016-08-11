@@ -1,8 +1,13 @@
+---
+layout: page
+title: "Portworx Documentation"
+category: manage_vols
+---
 #Create and Manage Storage Volumes
 
 To create volumes from the PX-Enterprise console, click **Storage** and then click **+** under **Actions**.
 
-![Create a storage volume](https://github.com/portworx/px-docs/blob/master/images/storage-actions.png "Create a storage volume")
+![Create a storage volume](images/storage-actions.png "Create a storage volume")
 
 In the **Configure Your Volume** page, specify these settings and then click **Create** to create a volume.
 
@@ -19,7 +24,7 @@ In the **Configure Your Volume** page, specify these settings and then click **C
 |Volume Labels|Specific labels or name/value pairs for coordination with orchestration engines.|
 |Count|The number of volumes to create simultaneously.|
 
-![Configure a storage volume](https://github.com/portworx/px-docs/blob/master/images/configure-volume.png "Configure a storage volume")
+![Configure a storage volume](images/configure-volume.png "Configure a storage volume")
 
 ##Manage Storage Volumes
 
@@ -29,4 +34,4 @@ To manage an existing volume, go to the **Storage** page and select the volume.
 
 * In the **Actions** area, you can clone (or snapshot) and delete a volume.
 
-![Manage a storage volume](https://github.com/portworx/px-docs/blob/master/images/storage-details.png "Manage a storage volume")
+![Manage a storage volume](images/storage-details.png "Manage a storage volume")
