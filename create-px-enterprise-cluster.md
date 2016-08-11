@@ -59,7 +59,7 @@ For storage disks, you can match based on wildcards. For example:
 `/dev/sdc *  *`
 
 * Storage must have a specified size:<br/>
-` /dev/sdc 300GB *`
+`/dev/sdc 300GB *`
 
 * Storage must have a specified type:<br/>
 `/dev/sdc 300GB SSD`
