@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: News
-      url: http://portworx.com/news/
+      url: http://portworx.com/news
 
 #Topnav dropdowns
 topnav_dropdowns:
