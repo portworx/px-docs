@@ -33,7 +33,7 @@ Log in to the first server node that will install PX-Enterprise and join the clu
 
 ![Startup script status messages](images/startup-script-result.png "Startup script status messages")
 
-##Step 3: Select storage to be aggregated
+## Step 3: Select storage to be aggregated
 
 The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify what storage you want aggregated by PX-Enterprise.
 
@@ -51,7 +51,7 @@ Only servers matching all criteria will install PX-Enterprise. In the example ab
 
 >**Important:**<br/>As part of aggregation, PX-Enterprise overwrites any pre-existing data on the underlying storage. Preserve any data that you want to keep.  
 
-###General vs. specific Server Profiles
+### General vs. specific Server Profiles
 
 For storage disks, you can match based on wildcards. For example:
 
@@ -72,7 +72,7 @@ Consider carefully the implications of making a Server Profile more general or m
 
 PX-Enterprise aggregates and monitors for health only the disks marked with **Allocated to PX**.
 
-## Step 3: Select network interfaces and activate
+## Step 4: Select network interfaces and activate
 
 Portworx assigns the selected NICs to the management interface, the data interface, or both. Portworx only needs a maximum of two NICs.
 
@@ -84,7 +84,7 @@ From the server node that ran the `curl` command, you should see the following s
 
 ![Status messages after activation](images/status-messages-after-activate.png "Status messages after activation")
 
-## Step 4: Expand the cluster
+## Step 5: Expand the cluster
 
 You can add new servers nodes to the existing cluster by running the bootstrap script for a cluster. Server nodes can have different Server Profiles, where some servers might contribute little or no storage to the cluster.
 
