@@ -1,0 +1,101 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: Sidebar
+  levels: one
+  folders:
+
+  - title: Get Started 
+    output: web
+    folderitems:
+    - title: Get Started with PX-Enterprise
+      url: /get-started-px-enterprise.html
+      output: web
+    - title: Get Started with PX-Developer
+      url: /get-started-px-developer.html
+      output: web
+  - title: Architecture
+    output: web
+    folderitems:
+    - title: Architecture
+      url: /architecture.html
+      output: web
+  - title: Install and Run
+    output: web
+    folderitems:
+    - title: Docker Compose Quick Start Installation for PX-Developer
+      output: web
+      url: /
+    - title: Run Portworx on Ubuntu
+      output: web
+      url: /
+    - title: Run Portworx on CentOS
+      output: web
+      url: /
+    - title: Run Portworx on CoreOS
+      output: web
+      url: /
+  - title: Upgrade
+    url: /p2_landing_page.html
+    output: web
+  - title: Create PX-Enterprise Cluster
+    url: /create-px-enterprise-cluster.html
+    output: web
+  - title: Create and Manage Storage Volumes
+    url: /create-manage-storage-volumes.html
+    output: web
+  - title: Manage Nodes and Capacity
+    url: /create-manage-storage-volumes.html
+    output: web
+  - title: Schedulers
+    output: web
+    folderitems:
+    - title: Portworx and Docker UCP
+      output: web
+      url: /
+    - title: Portworx and Kubernetes
+      output: web
+      url: /
+    - title: Portworx and Mesosphere
+      output: web
+      url: /
+    - title: Portworx and Rancher
+      output: web
+      url: /
+  - title: Application Solutions
+    output: web
+    folderitems:
+    - title: Manage MySQL Database Volumes with Portworx
+      output: web
+      url: /
+    - title: Scale a Cassandra Database with Portworx
+      output: web
+      url: /
+    - title: Run the Docker Registry with High Availability
+      output: web
+      url: /
+    - title: Run Redis with Portworx
+      output: web
+      url: /
+    - title: Run the Docker Registry with High Availability
+      output: web
+      url: /
+    - title: Create Portworx-based Volume Stacks with Docker Compose
+      output: web
+      url: /
+  - title: Performance and Monitoring
+    output: web
+    folderitems:
+  - title: CLI Reference
+    output: web
+    folderitems:
+  - title: REST API Reference
+    output: web
+    folderitems:
+  - title: Troubleshooting
+    output: web
+    folderitems:
+  - title: Release Notes
+    output: web
+    folderitems:
+
