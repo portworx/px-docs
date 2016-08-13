@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Portworx Documentation"
-category: get_started_px_enterprise
+sidebar: home_sidebar
 ---
 # Get Started with PX-Enterprise
 
@@ -50,18 +50,15 @@ For more on creating and managing volumes, see [Create and Manage Storage Volume
 
 [Create a PX-Enterprise Cluster](create-px-enterprise-cluster.html)  <br/>
 [Create and Manage Storage Volumes](create-manage-storage-volumes.html)  <br/>
-[Manage Nodes and Capacity](ZZZ.html)  <br/>
 [Manage Users](manage-users-groups.html)
 
-Run PX-Enterprise with schedulers:
+Run Portworx with schedulers:
 
-* Docker Swarm
-* [Run Portworx with Kubernetes](install_with_k8s.html)
-* [Run Portworx with Mesosphere](install_with_mesosphere.html)
-* [Run Portworx with Rancher](run_with_rancher.html)
+* [Run Portworx with Kubernetes](run-with-k8s.html)
+* [Run Portworx with Mesosphere](run-with-mesosphere.html)
+* [Run Portworx with Rancher](run-with-rancher.html)
 
-
-You can also use our [pxctl CLI](https://github.com/portworx/px-dev/blob/master/cli_reference.html) to:
+Use **pxctl** ([CLI Reference](cli-reference.html)) to directly:
 
 * View the cluster global capacity and health
 * Create, inspect, and delete storage volumes

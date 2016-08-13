@@ -1,9 +1,9 @@
 ---
 layout: page
 title: "Portworx Documentation"
-category: manage_vols
+sidebar: home_sidebar
 ---
-#Create and Manage Storage Volumes
+# Create and Manage Storage Volumes
 
 To create volumes from the PX-Enterprise console, click **Storage** and then click **+** under **Actions**.
 
@@ -26,7 +26,7 @@ In the **Configure Your Volume** page, specify these settings and then click **C
 
 ![Configure a storage volume](images/configure-volume.png "Configure a storage volume")
 
-##Manage Storage Volumes
+## Manage Storage Volumes
 
 To manage an existing volume, go to the **Storage** page and select the volume.
 

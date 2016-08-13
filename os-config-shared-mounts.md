@@ -1,13 +1,13 @@
 ---
 layout: page
 title: "Portworx Documentation"
-category: os_cfg_shared_mounts
+sidebar: home_sidebar
 ---
-#OS Configuration for Shared Mounts
+# OS Configuration for Shared Mounts
 
-The following sections describe how to configure Docker for shared mounts on [CoreOS](os-config-shared-mounts.html#coreos-configuration-and-shared-mounts), [CentOS](os-config-shared-mounts.html#centos-configuration-and-shared-mounts), and [Ubuntu](os-config-shared-mounts.html#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. The examples use AWS EC2 for servers in the cluster.
+The following sections describe how to configure Docker for shared mounts on [CoreOS](os-config-shared-mounts.html#coreos-configuration-and-shared-mounts), [RedHat/CentOS](os-config-shared-mounts.html#centos-configuration-and-shared-mounts), and [Ubuntu](os-config-shared-mounts.html#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. The examples use AWS EC2 for servers in the cluster.
 
-##CoreOS Configuration and Shared Mounts
+## CoreOS Configuration and Shared Mounts
 
 1. Verify that your Docker version is 1.10 or later:
     ~~~
@@ -33,7 +33,7 @@ The following sections describe how to configure Docker for shared mounts on [Co
       sudo systemctl restart docker
       ~~~
 
-##CentOS Configuration and Shared Mounts
+## RedHat/CentOS Configuration and Shared Mounts
 
 1. Follow the Docker installation guide, [Red Hat Enterprise Linux](https://docs.docker.com/engine/installation/linux/rhel/) and then start the Docker service.
 
@@ -42,22 +42,22 @@ The following sections describe how to configure Docker for shared mounts on [Co
     docker -v
     ~~~
 
-2. Edit the service file for `systemd`:
+3. Edit the service file for `systemd`:
     ~~~
     sudo vi /lib/systemd/system/docker.service
     ~~~
-3. Remove the `MountFlags` line.
+4. Remove the `MountFlags` line.
 
-4. Reload the daemon:
+5. Reload the daemon:
      ~~~
      sudo systemctl daemon-reload
      ~~~
-5. Restart Docker:
+6. Restart Docker:
      ~~~
      sudo systemctl restart docker
      ~~~
 
-##Ubuntu Configuration and Shared Mounts
+## Ubuntu Configuration and Shared Mounts
 
 1. SSH into your first server.
 2. While following the Docker installation guide, [Unbuntu](https://docs.docker.com/engine/installation/linux/ubuntulinux/):
@@ -65,7 +65,6 @@ The following sections describe how to configure Docker for shared mounts on [Co
     * Update your apt sources for Ubuntu Trusty 14.04 (LTS).
     * Make sure you use Trusty 14.04 as the deb entry in step 7 when you add an entry for Ubuntu.
     * Install Docker and start the Docker service.
-
 
 3. Verify that your Docker version is 1.10 or later. In your SSH window, run:
     ~~~

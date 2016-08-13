@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Portworx Documentation"
-category: get_started_px_developer
+sidebar: home_sidebar
 ---
 # Get Started with PX-Developer
 
@@ -25,29 +25,28 @@ category: get_started_px_developer
 
 See our quick start guides:
 
-* [Docker Compose Quick Start Installation for PX-Developer](install_with_compose.html)
-* [Run PX-Developer on Ubuntu](install_run_ubuntu.html), [CentOS](install_run_rhel.html), and [CoreOS](install_run_coreos.html)
+* [Run PX-Developer with Docker Compose](run-with-compose.html)
+* [Convert x86 Servers to Storage-Capable Nodes](convert-x86-to-storage-nodes.html)
 
 Run Portworx with schedulers:
 
-* Docker Swarm
-* [Run Portworx with Kubernetes](install_with_k8s.html)
-* [Run Portworx with Mesosphere](install_with_mesosphere.html)
-* [Run Portworx with Rancher](run_with_rancher.html)
+* [Run Portworx with Kubernetes](run-with-k8s.html)
+* [Run Portworx with Mesosphere](run-with-mesosphere.html)
+* [Run Portworx with Rancher](run-with-rancher.html)
 
 Run stateful containers with Docker volumes:
 
-* [Scaling a Cassandra database with PX-Dev](examples/cassandra.html)
-* [Running the Docker registry with high availability](examples/registry.html)
-* [Running PostgreSQL from CrunchyData on PX volumes]()
+* [Application Solutions](application-solutions.html)
 
-Use our [pxctl CLI](cli_reference.html) to directly:
+Use **pxctl** ([CLI Reference](cli-reference.html)) to directly:
 
 * View the cluster global capacity and health
 * Create, inspect, and delete storage volumes
 * Attach policies for IOPs prioritization, maximum volume size, and enable storage replication
 
-Refer to [Technical FAQ and Troubleshooting](faq.html) if you run into an issue.
+If you run into an issue:
+
+* [Troubleshooting](troubleshooting.html)
 
 As you use PX-Developer, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
 

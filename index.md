@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Portworx Documentation"
-category: get_started
+sidebar: home_sidebar
 ---
 # Welcome to the Portworx Documentation
 
