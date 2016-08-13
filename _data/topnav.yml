@@ -16,9 +16,4 @@ topnav_dropdowns:
           external_url: https://github.com/portworx/px-docs/
         - title: Portworx YouTube Channel
           external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
-    - title: Products
-      folderitems:
-        - title: PX-Enterprise
-          url: /get-started-px-enterprise.html
-        - title: PX-Developer
-          url: /get-started-px-developer.html
+   
