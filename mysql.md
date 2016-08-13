@@ -3,7 +3,7 @@ layout: page
 title: "Portworx Documentation"
 sidebar: home_sidebar
 ---
-# Manage MySQL Database Volumes with PX-Developer
+# Manage MySQL Database Volumes with Portworx
 
 These instructions demonstrate running the official `mysql` container from https://hub.docker.com/_/mysql/.
 
@@ -36,7 +36,7 @@ Your mysql container is now available for use at port 3306.
 
 ## Step 3: Use `pxctl` to create snaps of your mysql volume
 
-To demonstrate the capabilities of the SAN-like functionality offered by PX-Developer, create a snapshot of a mysql volume.
+To demonstrate the capabilities of the SAN-like functionality offered by Portworx, create a snapshot of a mysql volume.
 
 1. Create a database and a demo table in your mysql container.
 

@@ -5,7 +5,8 @@ entries:
   levels: one
   folders:
 
-  - title: Get Started 
+  - title: Get Started
+    url: /index.html
     output: web
     folderitems:
     - title: Get Started with PX-Enterprise
@@ -15,26 +16,17 @@ entries:
       url: /get-started-px-developer.html
       output: web
   - title: Architecture
+    url: /architecture.html
     output: web
-    folderitems:
-    - title: Architecture
-      url: /architecture.html
-      output: web
   - title: Install and Run
     output: web
     folderitems:
-    - title: Docker Compose Quick Start Installation for PX-Developer
+    - title: Run PX-Developer with Docker Compose
+      url: /run-with-compose.html
       output: web
-      url: /
-    - title: Run Portworx on Ubuntu
+    - title: Convert x86 Servers to Storage-Capable Nodes
+      url: /convert-x86-to-storage-nodes.html
       output: web
-      url: /
-    - title: Run Portworx on CentOS
-      output: web
-      url: /
-    - title: Run Portworx on CoreOS
-      output: web
-      url: /
   - title: Upgrade
     url: /p2_landing_page.html
     output: web
@@ -44,58 +36,61 @@ entries:
   - title: Create and Manage Storage Volumes
     url: /create-manage-storage-volumes.html
     output: web
+    folderitems:
+    - title: Shared Volumes
+      url: /shared-volumes.html
+      output: web
   - title: Manage Nodes and Capacity
-    url: /create-manage-storage-volumes.html
+    url: /p2_landing_page.html
     output: web
   - title: Schedulers
     output: web
     folderitems:
-    - title: Portworx and Docker UCP
+    - title: Run Portworx with Docker UCP
+      url: /p2_landing_page.html
       output: web
-      url: /
-    - title: Portworx and Kubernetes
+    - title: Run Portworx with Kubernetes
+      url: /run-with-k8s.html
       output: web
-      url: /
-    - title: Portworx and Mesosphere
+    - title: Run Portworx with Mesosphere
+      url: /run-with-mesosphere.html
       output: web
-      url: /
-    - title: Portworx and Rancher
+    - title: Run Portworx with Rancher
+      url: /run-with-rancher.html
       output: web
-      url: /
+  - title: Manage Users
+    url: /manage-users.html
+    output: web
   - title: Application Solutions
     output: web
     folderitems:
     - title: Manage MySQL Database Volumes with Portworx
+      url: /mysql.html
       output: web
-      url: /
     - title: Scale a Cassandra Database with Portworx
+      url: /cassandra.html
       output: web
-      url: /
     - title: Run the Docker Registry with High Availability
+      url: /registry.html
       output: web
-      url: /
     - title: Run Redis with Portworx
+      url: /redis.html
       output: web
-      url: /
-    - title: Run the Docker Registry with High Availability
-      output: web
-      url: /
     - title: Create Portworx-based Volume Stacks with Docker Compose
+      url: /docker-compose.html
       output: web
-      url: /
   - title: Performance and Monitoring
+    url: /p2_landing_page.html
     output: web
-    folderitems:
   - title: CLI Reference
+    url: /cli-reference.html
     output: web
-    folderitems:
   - title: REST API Reference
+    url: /p2_landing_page.html
     output: web
-    folderitems:
   - title: Troubleshooting
+    url: /troubleshooting.html
     output: web
-    folderitems:
   - title: Release Notes
+    url: /p2_landing_page.html
     output: web
-    folderitems:
-
