@@ -1,0 +1,19 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  items:
+    - title: News
+      url: /news
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  folders:
+    - title: Portworx Resources
+      folderitems:
+        - title: Portworx Documentation Github Repo
+          external_url: https://github.com/portworx/px-docs/
+        - title: Portworx YouTube Channel
+          external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
+    
