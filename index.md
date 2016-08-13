@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Welcome"
 category: get_started
 ---
 # Welcome to the Portworx Documentation
