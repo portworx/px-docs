@@ -5730,7 +5730,7 @@ button.list-group-item-info.active:hover,
 a.list-group-item-info.active:focus,
 button.list-group-item-info.active:focus {
   color: #fff;
-  background-color: #31708f;
+  background-color: #f15a22;
   border-color: #31708f;
 }
 .list-group-item-warning {
