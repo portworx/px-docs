@@ -1,7 +1,5 @@
 ---
 layout: page
-title: "Portworx Documentation"
-category: get_started_px_enterprise
 ---
 # Get Started with PX-Enterprise
 
