@@ -6,9 +6,11 @@ entries:
   folders:
 
   - title: Get Started
-    url: /index.html
     output: web
     folderitems:
+    - title: Get Started
+      url: /index.html
+      output: web
     - title: Get Started with PX-Enterprise
       url: /get-started-px-enterprise.html
       output: web
@@ -16,8 +18,11 @@ entries:
       url: /get-started-px-developer.html
       output: web
   - title: Architecture
-    url: /architecture.html
     output: web
+    folderitems:
+    - title: Architecture
+      url: /architecture.html
+      output: web
   - title: Install and Run
     output: web
     folderitems:
@@ -28,21 +33,29 @@ entries:
       url: /convert-x86-to-storage-nodes.html
       output: web
   - title: Upgrade
-    url: /p2_landing_page.html
-    output: web
-  - title: Create PX-Enterprise Cluster
-    url: /create-px-enterprise-cluster.html
-    output: web
-  - title: Create and Manage Storage Volumes
-    url: /create-manage-storage-volumes.html
     output: web
     folderitems:
+    - title: Upgrade
+      url: /p2_landing_page.html
+      output: web
+  - title: Clusters and Storage Volumes
+    output: web
+    folderitems:
+    - title: Create PX-Enterprise Cluster
+      url: /create-px-enterprise-cluster.html
+      output: web
+    - title: Create and Manage Storage Volumes
+      url: /create-manage-storage-volumes.html
+      output: web
     - title: Shared Volumes
       url: /shared-volumes.html
       output: web
-  - title: Manage Nodes and Capacity
-    url: /p2_landing_page.html
+  - title: Nodes and Capacity
     output: web
+    folderitems:
+    - title: Manage Nodes and Capacity
+      url: /p2_landing_page.html
+      output: web
   - title: Schedulers
     output: web
     folderitems:
@@ -59,8 +72,11 @@ entries:
       url: /run-with-rancher.html
       output: web
   - title: Manage Users
-    url: /manage-users.html
     output: web
+    folderitems:
+    - title: Manage Users
+      url: /manage-users.html
+      output: web
   - title: Application Solutions
     output: web
     folderitems:
@@ -80,17 +96,29 @@ entries:
       url: /docker-compose.html
       output: web
   - title: Performance and Monitoring
-    url: /p2_landing_page.html
     output: web
-  - title: CLI Reference
-    url: /cli-reference.html
+    folderitems:
+    - title: Performance and Monitoring
+      url: /p2_landing_page.html
+      output: web
+  - title: Reference
     output: web
-  - title: REST API Reference
-    url: /p2_landing_page.html
-    output: web
+    folderitems:
+    - title: CLI Reference
+      url: /cli-reference.html
+      output: web
+    - title: REST API Reference
+      url: /p2_landing_page.html
+      output: web
   - title: Troubleshooting
-    url: /troubleshooting.html
     output: web
+    folderitems:
+    - title: Troubleshooting
+      url: /troubleshooting.html
+      output: web
   - title: Release Notes
-    url: /p2_landing_page.html
     output: web
+    folderitems:
+    - title: Release Notes
+      url: /p2_landing_page.html
+      output: web
