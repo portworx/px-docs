@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: News
-      url: /news
+      external_url: http://portworx.com/news
 
 #Topnav dropdowns
 topnav_dropdowns:
@@ -16,4 +16,4 @@ topnav_dropdowns:
           external_url: https://github.com/portworx/px-docs/
         - title: Portworx YouTube Channel
           external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
-    
+   

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Welcome"
 sidebar: home_sidebar
 ---
 # Welcome to the Portworx Documentation

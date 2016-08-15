@@ -72,7 +72,7 @@ Consider carefully the implications of making a Server Profile more general or m
 
 PX-Enterprise aggregates and monitors for health only the disks marked with **Allocated to PX**.
 
-## Step 3: Select network interfaces and activate
+## Step 4: Select network interfaces and activate
 
 Portworx assigns the selected NICs to the management interface, the data interface, or both. Portworx only needs a maximum of two NICs.
 
@@ -84,7 +84,7 @@ From the server node that ran the `curl` command, you should see the following s
 
 ![Status messages after activation](images/status-messages-after-activate.png "Status messages after activation")
 
-## Step 4: Expand the cluster
+## Step 5: Expand the cluster
 
 You can add new servers nodes to the existing cluster by running the bootstrap script for a cluster. Server nodes can have different Server Profiles, where some servers might contribute little or no storage to the cluster.
 

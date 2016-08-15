@@ -1,6 +1,5 @@
 ---
 layout: page
-title: "Portworx Documentation"
 sidebar: home_sidebar
 ---
 # Get Started with PX-Enterprise
