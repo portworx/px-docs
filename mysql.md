@@ -11,8 +11,6 @@ These instructions demonstrate running the official `mysql` container from https
 Here is a three-minute video that shows how to set up a three-node cluster for mysql and add more capacity on the fly:
 <iframe src="https://player.vimeo.com/video/163637386" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-https://vimeo.com/163637386.
-
 ## Step 1: Create a storage volume for mysql
 
 To create a storage volume for mysql, run the following command and note the returned volume ID. You will need the volume ID when you start the mysql container in the next step.
