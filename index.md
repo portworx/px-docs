@@ -3,7 +3,7 @@ layout: page
 title: "Welcome to Portworx Docs"
 sidebar: home_sidebar
 ---
-Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. Portworx technology:
+Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
 
 * Provides data protection and container-granular management.
 * Enables companies to run multi-cloud with any scheduler.
