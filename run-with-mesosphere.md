@@ -2,6 +2,7 @@
 layout: page
 title: "Run Portworx with Mesosphere"
 sidebar: home_sidebar
+youtubeId : 02yMYE-CEdw
 ---
 # Run Portworx with Mesosphere
 
@@ -11,7 +12,8 @@ The Marathon application configuration files map options through the Docker comm
 
 ## Watch the video
 Here is a short video that shows how to configure and run Portworx with Mesosphere:
-<iframe src="https://www.youtube.com/watch?v=02yMYE-CEdw" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+{% include youtubePlayer.html id=page.youtubeId %}
+
 
 ## Step 1: Install Mesosphere DC/OS CLI
 
