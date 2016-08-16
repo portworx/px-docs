@@ -62,7 +62,7 @@ entries:
     output: web
     folderitems:
     - title: Run Portworx with Docker UCP
-      url: /p2_landing_page.html
+      url: /run-with-docker-ucp.html
       output: web
     - title: Run Portworx with Kubernetes
       url: /run-with-k8s.html
