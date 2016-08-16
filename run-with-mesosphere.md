@@ -9,6 +9,10 @@ You can use Portworx to implement storage for Mesosphere and Marathon. Portworx 
 
 The Marathon application configuration files map options through the Docker command line to reference the Portworx volume driver and associated volume.
 
+## Watch the video
+Here is a short video that shows how to configure and run Portworx with Mesosphere:
+<iframe src="https://www.youtube.com/watch?v=02yMYE-CEdw" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
 ## Step 1: Install Mesosphere DC/OS CLI
 
 Follow the instructions for installing [Mesosphere DC/OS](https://dcos.io/install) and the [DC/OS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
