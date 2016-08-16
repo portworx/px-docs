@@ -9,7 +9,7 @@ These instructions demonstrate running the official `mysql` container from https
 
 ## Watch the video
 Here is a three-minute video that shows how to set up a three-node cluster for mysql and add more capacity on the fly:
-<iframe width="420" height="315" src="https://vimeo.com/163637386" frameborder="0" allowfullscreen> </iframe>
+<iframe src="https://player.vimeo.com/video/163637386" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 https://vimeo.com/163637386.
 
