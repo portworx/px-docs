@@ -9,7 +9,7 @@ h3 {color: #F15A22; }
 h4 {color: #808080; }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    background-color: white;
+    background-color: #248ec2;
     color: white;
 }
 
