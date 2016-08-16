@@ -2,6 +2,8 @@
 
 entries:
 - title: Sidebar
+  product: Portworx Documentation Site
+  version: 1.0
   levels: one
   folders:
 
