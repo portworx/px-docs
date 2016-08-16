@@ -75,7 +75,7 @@ entries:
     output: web
     folderitems:
     - title: Manage Users
-      url: /manage-users.html
+      url: /manage-users-groups.html
       output: web
   - title: Application Solutions
     output: web
@@ -95,20 +95,11 @@ entries:
     - title: Create Portworx-based Volume Stacks with Docker Compose
       url: /docker-compose.html
       output: web
-  - title: Performance and Monitoring
-    output: web
-    folderitems:
-    - title: Performance and Monitoring
-      url: /p2_landing_page.html
-      output: web
   - title: Reference
     output: web
     folderitems:
     - title: CLI Reference
       url: /cli-reference.html
-      output: web
-    - title: REST API Reference
-      url: /p2_landing_page.html
       output: web
   - title: Troubleshooting
     output: web
