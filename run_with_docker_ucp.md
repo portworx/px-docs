@@ -5,11 +5,12 @@ sidebar: home_sidebar
 ---
 
 You can use Portworx to implement storage for Docker Universal Control Plane (UCP). 
-Portworx pools your servers' capacity and is deployed as a container. This section, qualified using Docker 1.12, and Universal Control Plane 1.1.2
+This section, qualified using Docker 1.12, and Universal Control Plane 1.1.2
 
+Follow the instructions for [Installing Docker UCP](https://docs.docker.com/ucp/installation/install-production)
 >**Note:**<br/>You must run Docker Commercially Supported (CS) Engine
 
-https://docs.docker.com/ucp/installation/install-production/
+
 
 
 Install Controller:
