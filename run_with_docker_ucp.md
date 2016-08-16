@@ -45,6 +45,6 @@ docker  run -d -P -e constraint:pxfabric==px-cluster1 --name db mysql
 ```
 
 Or on the UCP GUI for launching a contaner:
-
+![UCP GUI constraints](images/constraints.png)
 
 Addition information on Docker Filters and Constraints can be found [here](https://docs.docker.com/swarm/scheduler/filter/)
