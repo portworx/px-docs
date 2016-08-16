@@ -3,7 +3,6 @@ layout: page
 title: "CLI Reference"
 sidebar: home_sidebar
 ---
-# CLI Reference
 The Portworx command line tool, `pxctl`, lets you directly provision and manage storage. You can pre-provision storage and perform management tasks through the Portworx or Docker CLI.
 
 Applications can provision and consume storage through the Docker API. The Portworx documentation references the Docker documentation for information about managing Docker volumes.

@@ -3,8 +3,6 @@ layout: page
 title: "Manage Users"
 sidebar: home_sidebar
 ---
-# Manage Users
-
 To create users, click the gear icon in the upper-right corner of the console and choose **User Admin**.
 
 ![User Admin selected in Settings menu](images/settings-user-admin.png "User Admin selected in Settings menu")

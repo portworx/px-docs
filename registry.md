@@ -3,8 +3,6 @@ layout: page
 title: "Run the Docker Registry with High Availability"
 sidebar: home_sidebar
 ---
-# Run the Docker Registry with High Availability
-
 The Docker Registry is a server-side application that stores and lets you distribute Docker images. The following instructions use Docker Registry version 2.3.0.
 
 ## Step 1: Create a storage volume for the Docker Registry

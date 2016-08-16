@@ -3,8 +3,6 @@ layout: page
 title: "Run PX-Developer with Docker Compose"
 sidebar: home_sidebar
 ---
-# Run PX-Developer with Docker Compose
-
 You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) as follows:
 
 ```

@@ -3,8 +3,6 @@ layout: page
 title: "Create a PX-Enterprise Cluster"
 sidebar: home_sidebar
 ---
-# Create a PX-Enterprise Cluster
-
 PX-Enterprise is a multi-cluster storage system that provides and manages storage for containerized workloads which run on-premises and in public clouds.
 
 This section walks through installing and configuring a PX-Enterprise cluster. In this example, you run the PX-Enterprise Docker container on server nodes. Running the container enables PX-Enterprise to aggregate storage capacity and monitor hardware for degradation and failure. Server nodes are joined into a cluster for the sake of high availability. You can use direct attached disks, storage arrays, or cloud volumes for the underlying storage.

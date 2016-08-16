@@ -3,8 +3,6 @@ layout: page
 title: "Scale a Cassandra Database with PX-Developer"
 sidebar: home_sidebar
 ---
-# Scale a Cassandra Database with PX-Developer
-
 Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across commodity servers. Setting up a Cassandra cluster with Portworx storage takes only a few commands.
 
 The following example scenario creates a three-node Cassandra cluster. The example has three servers:
@@ -32,7 +30,7 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
 * To retrieve the `DOCKER_CREATE_VOLUME_ID` passed into the `-v` option, run `docker volume ls`.
 * Be sure to substitute your IP address for the 10.0.0.1 placeholder in the `CASSANDRA_BROADCAST_ADDRESS` parameter.
 
->**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](https://github.com/portworx/px-dev/blob/master/faq.md) parameter between `run` and `--name`.
+>**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](troubleshooting.html) parameter between `run` and `--name`.
 
 ```
 docker run --name cassandra1 -d \

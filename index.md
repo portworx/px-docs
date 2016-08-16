@@ -1,10 +1,8 @@
 ---
 layout: page
-title: "Welcome"
+title: "Welcome to Portworx Docs"
 sidebar: home_sidebar
 ---
-# Welcome to the Portworx Documentation
-
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. Portworx technology:
 
 * Provides data protection and container-granular management.

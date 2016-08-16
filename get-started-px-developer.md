@@ -3,8 +3,6 @@ layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Developer"
 ---
-# Get Started with PX-Developer
-
 ## Step 1: Verify requirements
 
 * Linux kernel 3.10 or greater

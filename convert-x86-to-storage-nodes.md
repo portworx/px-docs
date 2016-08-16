@@ -3,8 +3,6 @@ layout: page
 title: "Convert x86 Servers to Storage-Capable Nodes"
 sidebar: home_sidebar
 ---
-# Convert x86 Servers to Storage-Capable Nodes
-
 This section takes you through the command-line steps for installing and configuring the PX-Developer release. If you are using the PX-Enterprise product, see [Get Started with PX-Enterprise](get-started-px-enterprise.html).
 
 The example in this section uses AWS EC2 for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.

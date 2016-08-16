@@ -3,8 +3,6 @@ layout: page
 title: "Create and Manage Storage Volumes"
 sidebar: home_sidebar
 ---
-# Create and Manage Storage Volumes
-
 To create volumes from the PX-Enterprise console, click **Storage** and then click **+** under **Actions**.
 
 ![Create a storage volume](images/storage-actions.png "Create a storage volume")

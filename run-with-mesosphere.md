@@ -4,8 +4,6 @@ title: "Run Portworx with Mesosphere"
 sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 ---
-# Run Portworx with Mesosphere
-
 You can use Portworx to implement storage for Mesosphere and Marathon. Portworx pools your servers' capacity and is deployed as a container. This section, qualified using DC/OS 1.7, describes how to launch Docker containers through Marathon.
 
 The Marathon application configuration files map options through the Docker command line to reference the Portworx volume driver and associated volume.

@@ -3,8 +3,6 @@ layout: page
 title: "Shared Volumes"
 sidebar: home_sidebar
 ---
-# Shared Volumes
-
 Through shared volumes (also known as a `global namespace`), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 
 ![Conceptual diagram of shared virtual volumes](images/shared-virtual-volumes.png "Conceptual diagram of shared virtual volumes")

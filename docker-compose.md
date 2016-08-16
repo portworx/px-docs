@@ -3,8 +3,6 @@ layout: page
 title: "Create Portworx-based Volume Stacks with Docker Compose"
 sidebar: home_sidebar
 ---
-# Create Portworx-based Volume Stacks with Docker Compose
-
 Docker Compose provides a simple powerful way of quickly deploying application stacks. Version 2 of Compose provides the ability to use PX volume drivers in one of the following ways:
 
 * Create new volumes on the fly

@@ -1,11 +1,9 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Application Solutions"
 sidebar: home_sidebar
 ---
-# Application Solutions
-
-The following examples illustrate managing data volumes with stateful databases and applications. PX-Developer lets you scale capacity, snapshot volumes, create clones, and perform other SAN features using commodity hardware.
+PX-Developer lets you scale capacity, snapshot volumes, create clones, and perform other SAN features using commodity hardware. The following examples illustrate managing data volumes with stateful databases and applications.
 
 * [Manage MySQL Database Volumes with PX-Developer](mysql.html)
 * [Scale a Cassandra Database with PX-Developer](cassandra.html)

@@ -3,8 +3,6 @@ layout: page
 title: "Run Redis with PX-Developer"
 sidebar: home_sidebar
 ---
-# Run Redis with PX-Developer
-
 You can use Redis as a cache, database, or for messaging. Here is an example of durable storage for containers with container-granular controls.
 
 This example shows how to create a volume for Redis, run and write to Redis, and then snapshot just that Redis volume's state. Portworx snapshots are thinly provisioned and copy on write.
