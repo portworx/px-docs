@@ -5,8 +5,6 @@ sidebar: home_sidebar
 ---
 # Shared Volumes
 
->**Note:**<br/> This is an early access feature.
-
 Through shared volumes (also known as a `global namespace`), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 
 ![Conceptual diagram of shared virtual volumes](images/shared-virtual-volumes.png "Conceptual diagram of shared virtual volumes")
@@ -15,8 +13,6 @@ A typical pattern is for a single container to have one or more volumes. Convers
 
 * A techincal computing workload sourcing its input and writing its output to a shared volume.
 * Scaling a number of Wordpress containers based on load while managing a single shared volume.
-
-The shared volumes feature is only available in PX-Developer version 0.5.4 and above.
 
 ## Create shared volumes
 To create a Portworx shared volume, use the **pxctl** command.  (Future releases will enable shared volumes through `docker volume create`.)
