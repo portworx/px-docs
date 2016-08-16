@@ -10,7 +10,7 @@ entries:
   - title: Get Started
     output: web
     folderitems:
-    - title: Get Started
+    - title: Welcome to Portworx Docs
       url: /index.html
       output: web
     - title: Get Started with PX-Enterprise
