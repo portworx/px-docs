@@ -5,8 +5,6 @@ sidebar: home_sidebar
 ---
 # Manage MySQL Database Volumes with Portworx
 
-These instructions demonstrate running the official `mysql` container from https://hub.docker.com/_/mysql/.
-
 ## Watch the video
 Here is a three-minute video that shows how to set up a three-node cluster for mysql and add more capacity on the fly:
 <iframe src="https://player.vimeo.com/video/163637386" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
