@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "CLI Reference"
 sidebar: home_sidebar
 ---
 # CLI Reference

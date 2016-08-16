@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Manage Users"
 sidebar: home_sidebar
 ---
 # Manage Users

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Manage MySQL Database Volumes with Portworx"
 sidebar: home_sidebar
 ---
 # Manage MySQL Database Volumes with Portworx

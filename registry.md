@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Run the Docker Registry with High Availability"
 sidebar: home_sidebar
 ---
 # Run the Docker Registry with High Availability

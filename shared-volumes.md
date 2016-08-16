@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Shared Volumes"
 sidebar: home_sidebar
 ---
 # Shared Volumes

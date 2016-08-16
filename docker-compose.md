@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Create Portworx-based Volume Stacks with Docker Compose"
 sidebar: home_sidebar
 ---
 # Create Portworx-based Volume Stacks with Docker Compose

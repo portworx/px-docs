@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Convert x86 Servers to Storage-Capable Nodes"
 sidebar: home_sidebar
 ---
 # Convert x86 Servers to Storage-Capable Nodes

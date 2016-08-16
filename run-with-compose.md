@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Run PX-Developer with Docker Compose"
 sidebar: home_sidebar
 ---
 # Run PX-Developer with Docker Compose

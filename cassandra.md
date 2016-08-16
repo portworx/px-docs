@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Scale a Cassandra Database with PX-Developer"
 sidebar: home_sidebar
 ---
 # Scale a Cassandra Database with PX-Developer

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "OS Configuration for Shared Mounts"
 sidebar: home_sidebar
 ---
 # OS Configuration for Shared Mounts

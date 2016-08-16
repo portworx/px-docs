@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Architecture"
 sidebar: home_sidebar
 ---
 # Architecture

@@ -47,7 +47,7 @@ layout: default
 
     {% endunless %}
 
-  {{content}}
+  {{content | strip_h1: "<h1.*$" }}
 
     <div class="tags">
         {% if page.tags != null %}

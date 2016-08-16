@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Create a PX-Enterprise Cluster"
 sidebar: home_sidebar
 ---
 # Create a PX-Enterprise Cluster

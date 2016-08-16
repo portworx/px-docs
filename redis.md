@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx Documentation"
+title: "Run Redis with PX-Developer"
 sidebar: home_sidebar
 ---
 # Run Redis with PX-Developer
