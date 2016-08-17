@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Run Portworx with Kubernetes"
+keywords: portworx, PX-Developer, container, Kubernetes, storage
 sidebar: home_sidebar
 ---
 You can use Portworx to implement storage for Kubernetes pods. Portworx pools your servers' capacity and is deployed as a container. This section describes how to install PX-Developer on each server.
