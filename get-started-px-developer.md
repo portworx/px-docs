@@ -2,6 +2,7 @@
 layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Developer"
+keywords: portworx, px-developer, container, storage, requirements
 ---
 ## Step 1: Verify requirements
 

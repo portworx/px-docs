@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Create and Manage Storage Volumes"
+keywords: portworx, px-enterprise, storage, volume, create volume, clone volume
 sidebar: home_sidebar
 ---
 To create volumes from the PX-Enterprise console, click **Storage** and then click **+** under **Actions**.

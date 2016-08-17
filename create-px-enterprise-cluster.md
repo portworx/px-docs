@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Create a PX-Enterprise Cluster"
+keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
 ---
 PX-Enterprise is a multi-cluster storage system that provides and manages storage for containerized workloads which run on-premises and in public clouds.

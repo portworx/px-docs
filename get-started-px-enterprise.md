@@ -2,6 +2,7 @@
 layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Enterprise"
+keywords: portworx, px-enterprise, container, storage, requirements, console
 ---
 Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, and the enterprise.
 
