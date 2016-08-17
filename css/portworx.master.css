@@ -7454,7 +7454,7 @@ section.hero-section {
 
 ***********************/
 hr {
-  margin: 0 25%;
+  margin: 0 0;
   background: #f1732f;
   height: 3px;
   border-top: none;
@@ -7680,8 +7680,7 @@ i.material-icons {
 
 ******************************/
 footer {
-  background-color: #555559;
-  color: #fff;
+  color: #333;
   padding: 0;
 }
 footer a {
