@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Manage MySQL Database Volumes with Portworx"
+keywords: portworx, container, mysql, storage
 sidebar: home_sidebar
 ---
 ## Watch the video

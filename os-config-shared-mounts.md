@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "OS Configuration for Shared Mounts"
+keywords: portworx, px-developer, shared mounts
 sidebar: home_sidebar
 ---
 The following sections describe how to configure Docker for shared mounts on [CoreOS](os-config-shared-mounts.html#coreos-configuration-and-shared-mounts), [RedHat/CentOS](os-config-shared-mounts.html#centos-configuration-and-shared-mounts), and [Ubuntu](os-config-shared-mounts.html#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. The examples use AWS EC2 for servers in the cluster.

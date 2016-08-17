@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Run Redis with PX-Developer"
+keywords: portworx, container, redis, storage
 sidebar: home_sidebar
 ---
 You can use Redis as a cache, database, or for messaging. Here is an example of durable storage for containers with container-granular controls.

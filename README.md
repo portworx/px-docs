@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Welcome to Portworx Docs"
+keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
 ---
 
