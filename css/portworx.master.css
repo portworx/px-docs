@@ -4880,7 +4880,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333;
+  color: #f15a22;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -7586,6 +7586,7 @@ i.material-icons {
     padding: 2px 2px;
     margin: 13px 18px;
     font-size: 10pt;
+    background-color: transparent;
   }
   .navbar-collapse .navbar-nav li:after {
     content: "";
