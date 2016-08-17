@@ -1637,16 +1637,18 @@ pre code {
     width: 100%;
   }
 }
+
 @media (min-width: 780px) {
   .container {
     width: 780px;
   }
 }
-/*@media (min-width: 999px) {
+
+@media (min-width: 999px) {
   .container {
     width: 930px;
   }
-}*/
+}
 @media (min-width: 1300px) {
   .container {
     width: 1130px;
