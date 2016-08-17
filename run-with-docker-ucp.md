@@ -22,7 +22,7 @@ systemctl status docker
 [...]
 
 ```
-
+Replace the existing ExecStart line with the one below
 ```
 [...]
 ExecStart=/usr/bin/docker daemon -H fd:// --label pxfabric=px-cluster1
@@ -81,6 +81,7 @@ systemctl status docker
 [...]
 
 ```
+Replace the existing ExecStart line with the one below
 
 
 ```
