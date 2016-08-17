@@ -15,8 +15,13 @@ After installing Docker UCP, you will need to [license your installation](https:
 Not all nodes within a UCP cluster will necessarily be running Portworx.   In order for UCP to properly identify Portworx nodes, the Docker Daemon must start with a Label that indicates Portworx is running.
 
 For Docker 1.11 
-First you will need to update the docker.service file:
+First you will need to update the docker.service file run the systemctl command to find where your docker.service file is located:
+```
+[...]
+systemctl status docker
+[...]
 
+```
 
 ```
 [...]
@@ -69,7 +74,13 @@ After installing Docker UCP, you will need to [license your installation](https:
 Not all nodes within a UCP cluster will necessarily be running Portworx.   In order for UCP to properly identify Portworx nodes, the Docker Daemon must start with a Label that indicates Portworx is running.
 
 
-First you will need to update the docker.service file:
+First you will need to update the docker.service file run the systemctl command to find where your docker.service file is located:
+```
+[...]
+systemctl status docker
+[...]
+
+```
 
 
 ```
