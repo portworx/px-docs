@@ -5,7 +5,7 @@ keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
 ---
 
-<a class="github-fork-ribbon" color=black href="https://github.com/portworx/px-docs" title="Fork me on GitHub">Fork me on GitHub</a>
+<a class="github-fork-ribbon" href="https://github.com/portworx/px-docs" title="Fork me on GitHub">Fork me on GitHub</a>
 
 
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
