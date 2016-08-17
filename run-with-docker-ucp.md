@@ -86,7 +86,7 @@ Replace the existing ExecStart line with the one below
 
 ```
 [...]
-ExecStart=/usr/bin/docker --label pxfabric=px-cluster1
+ExecStart=/usr/bin/dockerd --label pxfabric=px-cluster1
 [...]
 
 
