@@ -21,7 +21,10 @@ entries:
       output: web
   - title: Architecture
     output: web
-    url: /architecture.html
+    folderitems:
+      - title: Architecture
+        url: /architecture.html
+        output: web
   - title: Install and Run
     output: web
     folderitems:
