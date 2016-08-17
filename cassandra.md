@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Scale a Cassandra Database with PX-Developer"
+keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 ---
 Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across commodity servers. Setting up a Cassandra cluster with Portworx storage takes only a few commands.

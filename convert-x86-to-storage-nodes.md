@@ -1,11 +1,12 @@
 ---
 layout: page
 title: "Convert x86 Servers to Storage-Capable Nodes"
+keywords: portworx, px-developer, install, configure, container, storage, add nodes
 sidebar: home_sidebar
 ---
-This section takes you through the command-line steps for installing and configuring the PX-Developer release. If you are using the PX-Enterprise product, see [Get Started with PX-Enterprise](get-started-px-enterprise.html).
+To install and configure PX-Developer, use the command-line steps in this section. If you use PX-Enterprise, see [Get Started with PX-Enterprise](get-started-px-enterprise.html).
 
-The example in this section uses AWS EC2 for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
+The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
 After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
 
