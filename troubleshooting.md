@@ -4,12 +4,12 @@ title: "Troubleshooting"
 keywords: portworx, troubleshooting, logs, issue
 sidebar: home_sidebar
 ---
-For troubleshooting help, get logs for PX-Developer, just as you do for any other Docker container. For example:
+For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as you do for any other Docker container. For example:
 
 * `docker ps` and get the CONTAINER ID for PX-Developer
 * `docker logs [CONTAINER_ID]`
 
-**"No such file or directory" message when running on SELinux**
+#### "No such file or directory" message when running on SELinux
 
  If you have `SELinux` enabled, you may get the following error message:
  ```
@@ -25,7 +25,7 @@ To resolve the issue:
 
  You will not need to workaround this after [20834](https://github.com/docker/docker/pull/20834) is merged.
 
-**"permission denied" message in `pxctl`**
+#### "permission denied" message in `pxctl`
 
  ```
  pxctl cluster list
@@ -35,7 +35,7 @@ To resolve the issue:
 
  Run as `root` to use the `pxctl` tools. To enable root, run `sudo su`.
 
-**"invalid value... bad mode specified" message when running PX-Developer**
+#### "invalid value... bad mode specified" message when running PX-Developer
 
  The following error occurs when your Docker version is not 1.10 or greater. For example, running with v1.9.1 will report this error:
 
@@ -43,7 +43,7 @@ To resolve the issue:
  invalid value "/var/lib/osd:/var/lib/osd:shared" for flag -v: bad mode specified: shared
   ```
 
-**"Not enough free space in /dev/shm" message**
+#### "Not enough free space in /dev/shm" message
 
   ```
 "Invalid PX configuration: Configuration check failed: Not enough free space in /dev/shm, needs 258MB, available 224MB"
