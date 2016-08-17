@@ -14,12 +14,15 @@ After installing Docker UCP, you will need to [license your installation](https:
 
 Not all nodes within a UCP cluster will necessarily be running Portworx.   In order for UCP to properly identify Portworx nodes, the Docker Daemon must start with a Label that indicates Portworx is running.
 
+
 First you will need to update the docker.service file:
+
 
 ```
 [...]
 ExecStart=/usr/bin/docker daemon -H fd:// --label pxfabric=px-cluster1
 [...]
+
 
 ```
 Then you will need to reload systemctl and restart the docker daemon:
@@ -28,6 +31,7 @@ Then you will need to reload systemctl and restart the docker daemon:
 # systemctl daemon-reload
 # systemctl restart docker
 ```
+
 
 Afterwards, you should be able to verify that the label is in place for whichever nodes are running PX:
 
@@ -48,6 +52,7 @@ To launch a container from the command line and restrict it to running on a node
 ```
 docker  run -d -P -e constraint:pxfabric==px-cluster1 --name db mysql
 ```
+
 
 Or on the UCP GUI for launching a contaner:
 ![UCP GUI constraints](images/constraints.png)
