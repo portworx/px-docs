@@ -6,8 +6,10 @@ sidebar: home_sidebar
 ---
 
 <!--<a class="github-fork-ribbon" href="https://github.com/portworx/px-docs" title="Fork me on GitHub">Fork me on GitHub</a>-->
-<a href="https://github.com/you"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" align=right alt="Fork me on GitHub"></a>
-<div class="github-ribbon"><a class="github-ribbon__link" href="https://github.com/hmps" title="Fork me on GitHub">Fork me on GitHub</a></div>
+
+<a href="https://github.com/portworx/px-docs"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" align=right alt="Fork me on GitHub"></a>
+
+<!--<div class="github-ribbon"><a class="github-ribbon__link" href="https://github.com/hmps" title="Fork me on GitHub">Fork me on GitHub</a></div>-->
 
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
 
