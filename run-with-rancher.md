@@ -18,7 +18,7 @@ As directed, copy from the clipboard and paste on to the new host. The form for 
 
 ```
 sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
-                -e CATTLE_HOST_LABELS='fabric=px'  \
+                -e CATTLE_HOST_LABELS='px-fabric=px-cluster1'  \
                 -d --privileged                    \ 
                 -v /var/run/docker.sock:/var/run/docker.sock   \
                 -v /var/lib/rancher:/var/lib/rancher           \
@@ -26,17 +26,17 @@ sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
 
 ```
 
-* Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric.
+* Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric called "px-cluster1".
 
 ## Step 3: Launch jobs, specifying host affinity
 
-When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host with "fabric=px".
+When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host (Ex: "px-fabric=px-cluster1)".
 
 The `label` clause should look like the following:
 
 ```
 labels:
-    io.rancher.scheduler.affinity:host_label: fabric=px
+    io.rancher.scheduler.affinity:host_label: px-fabric=px-cluster1
 ```
 
 Following is an example for starting Elasticsearch. The "docker-compose.yml" file is:
@@ -52,7 +52,7 @@ elasticsearch:
   volumes:
     - elasticsearch1:/usr/share/elasticsearch/data
   labels:
-      io.rancher.scheduler.affinity:host_label: fabric=px
+      io.rancher.scheduler.affinity:host_label: px-fabric=px-cluster1
 ```
 
 * Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
