@@ -15,6 +15,7 @@ Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher
 If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
 
 As directed, copy from the clipboard and paste on to the new host. The form for the command follows. Use IP addresses that are appropriate for your environment.
+
 ```
 sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  -e CATTLE_HOST_LABELS='fabric=px'  -d --privileged \
 
@@ -31,6 +32,7 @@ sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  -e CATTLE_HOST_LABELS='fabri
 When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host with "fabric=px".
 
 The `label` clause should look like the following:
+
 ```
 labels:
     io.rancher.scheduler.affinity:host_label: fabric=px
