@@ -30,7 +30,7 @@ You will now add your first server node to the storage cluster. Click **Get Star
 
 ![Startup script to add a cluster](images/startup-script-window.png "Startup script to add a cluster")
 
-Log in to the first server node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. Copy the above curl string and paste it into a terminal session and press Enter, as shown below.
+Log in to the first server node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the curl string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
 ![Startup script status messages](images/startup-script-result.png "Startup script status messages")
 
@@ -42,7 +42,7 @@ The following example of the Hardware Configuration page shows the discovered at
 
 * **Storage**: Aggregates storage based on the disks you select by toggling the drop-down list from **Not Used** to **Used**.
 
-* **Network**: Specifies the interfaces PX-Enterprise should use for management and the data path. Set by toggling the drop-down list from **Not Used** to **Allocate to PX**.
+* **Network**: Specifies the interfaces PX-Enterprise should use for management and the data path. Set by toggling the drop-down list for either **Management** or **Data**.
 
 * **Criteria**: Performs the above tasks based on the check boxes you select.
 
@@ -62,7 +62,7 @@ For storage disks, you can match based on wildcards. For example:
 * Storage must have a specified size:<br/>
 `/dev/sdc 300GB *`
 
-* Storage must have a specified type:<br/>
+* Storage must have a specified size and type:<br/>
 `/dev/sdc 300GB SSD`
 
 Consider carefully the implications of making a Server Profile more general or more specific. For a new server node to be automatically accepted into the PX-Enterprise cluster, the server must match an activated Server Profile.
