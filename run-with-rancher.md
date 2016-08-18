@@ -17,11 +17,12 @@ If new hosts are added through the GUI, be sure to create a label with the follo
 As directed, copy from the clipboard and paste on to the new host. The form for the command follows. Use IP addresses that are appropriate for your environment.
 
 ```
-sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  -e CATTLE_HOST_LABELS='fabric=px'  -d --privileged \
-
-           -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher           \
-
-            rancher/agent:v1.0.2 http://192.168.33.10:8080/v1/scripts/98DD3D1ADD1F0CE368B5:1470250800000:IVpsBQEDjYGHDEULOfGjt9qgA
+sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
+                -e CATTLE_HOST_LABELS='fabric=px'  \
+                -d --privileged                    \ 
+                -v /var/run/docker.sock:/var/run/docker.sock   \
+                -v /var/lib/rancher:/var/lib/rancher           \
+                rancher/agent:v1.0.2 http://192.168.33.10:8080/v1/scripts/98DD3D1ADD1F0CE368B5:1470250800000:IVpsBQEDjYGHDEULOfGjt9qgA
 
 ```
 
