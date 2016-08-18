@@ -16,7 +16,7 @@ In the **Configure Your Volume** page, specify these settings and then click **C
 |Provisioned Capacity|The volume size: GB (default) or TB.|
 |Filesystem|The file system type:  **ext4** (default) or **xfs**.|
 |Seed Data|The GitHub repository to use to pre-populate the volume.|
-|Block Size|The file system block size: **4K** (default), **8K**, **32K**, **64K**|
+|Block Size|The file system block size: **4K**, **8K**, **32K**, **64K**(default)|
 |Availability Level|The number of nodes used to replicate volume data for availability.|
 |IOPS Priority|The class of service for performance, using the various available tiers.|
 |Snapshot Interval|The number of hours between automatic snapshots taken for crash-consistent volume recovery.|
