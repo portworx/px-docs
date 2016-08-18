@@ -22,6 +22,8 @@ Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
 ![Name a new cluster](images/clusters-new.png "Name a new cluster")
 
+(The "Existing Cluster" option should not be used, unless so directed by Portworx Support)
+
 ## Step 2: Run discovery on a server node
 
 You will now add your first server node to the storage cluster. Click **Get Startup Script** for the cluster you just created. The window below appears with a `curl` command. This `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
