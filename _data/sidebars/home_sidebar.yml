@@ -2,8 +2,7 @@
 
 entries:
 - title: Sidebar
-  product: Portworx Documentation
-  version: 1.0
+  product: Menu
   levels: one
   folders:
 
