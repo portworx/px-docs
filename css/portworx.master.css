@@ -8645,8 +8645,8 @@ body.search article:nth-child(even) {
 
 footer {
   margin-bottom: 52px;
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 .sticky-footer {
   color: white;
