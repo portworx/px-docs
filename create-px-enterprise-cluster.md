@@ -39,8 +39,8 @@ Log in to each node that will install PX-Enterprise and join the cluster. Open a
 The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
 
 There are 2 important aspects of Server Profile configuration:<br/>
-* Used elements (dropdowns):<br/>
-* Elements required for a "match" rule (checkboxes):<br/>
+*  **Used elements** (dropdowns):<br/>
+*  **Elements required for a "match" rule** (checkboxes):<br/>
 
 "Used elements" refers to which storage and network elements on the server will be used by PX-Enterprise.   You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list.    For example, this provides the ability to contribute certain storage elements in to the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server.    PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
 
