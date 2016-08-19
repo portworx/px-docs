@@ -38,7 +38,8 @@ Log in to each node that will install PX-Enterprise and join the cluster. Open a
 
 The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
 
-There are 2 important aspects of Server Profile configuration:<br/>
+There are 2 important aspects of Server Profile configuration:
+
 *  **Used elements** (dropdowns):<br/>
 *  **Elements required for a "match" rule** (checkboxes):<br/>
 
