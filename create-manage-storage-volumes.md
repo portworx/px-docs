@@ -34,3 +34,7 @@ To manage an existing volume, go to the **Storage** page and select the volume.
 * In the **Actions** area, you can clone (or snapshot) and delete a volume.
 
 ![Manage a storage volume](images/storage-details.png "Manage a storage volume")
+
+* In the **Alerts for Storage** area, click **View more** to view system alerts. You can filter alerts by date and severity; you can search by alert title and details.
+
+![Alerts for Storage](images/alerts-date-filter.png "Alerts for Storage")
