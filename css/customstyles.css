@@ -267,7 +267,7 @@ div#toc ul {
     border-radius: 5px;
     max-width: 300px;
     color: gray;
-    float: right;     /* JSS 08/16/16 */
+/*    float: right;     JSS 08/16/16 */
 }
 
 div#toc ul li ul {
