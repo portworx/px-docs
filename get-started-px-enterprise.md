@@ -16,8 +16,8 @@ Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, an
 * Recommended resources per server:
   * 12 CPU cores
   * 16 GB RAM
-  * 128 GB Storage
-  * 10Gb Ethernet NIC
+  * 128 GB storage
+  * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
     * 20 server nodes
 
@@ -35,7 +35,7 @@ The Overview page provides a summary view of the health of a cluster. In the exa
 
 ![Overview page in Portworx console](images/overview.png "Overview page in Portworx console")
 
-Use the top row of the cluster Overview page to navigate to server Nodes, manage Storage, view Containers, or chart the Performance and storage capacity for the cluster.
+Use the top row of the cluster Overview page to navigate to server Nodes, manage Storage, view Containers, or chart the performance and storage capacity for the cluster.
 
 The Storage page presents a complete view for a cluster’s storage, as shown below. From this page, you can create new volumes (under Actions) and manage existing volumes, including snapshotting a volume.
 
