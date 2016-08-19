@@ -17,7 +17,7 @@ Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, an
   * 12 CPU cores
   * 16 GB RAM
   * 128 GB Storage
-  * 10Gb
+  * 10Gb Ethernet NIC
 * Maximum nodes per cluster:
     * 20 server nodes
 
@@ -31,7 +31,7 @@ After you purchase PX-Enterprise, you'll receive an email with the PX-Enterprise
 
 The PX-Enterprise web console provides storage management for all of your PX-Enterprise deployments, including on-premises clusters and in public clouds. The console monitors health and capacity and lets you provide container-granular storage. You can use any scheduler to orchestrate containers.
 
-The Overview page provides a summary view of the health of a cluster. In the example below, the cluster called DBaaS-cluster-1 is selected in the upper right. **There are twenty server nodes offering XXX TB of capacity through YYY drives.** The Alerts identify key status changes for that cluster, sorted by severity or recency.
+The Overview page provides a summary view of the health of a cluster. In the example below, the cluster can be selected from the upper right dropdown list. The Alerts identify key status changes for that cluster, sorted by recency of the error or warning.
 
 ![Overview page in Portworx console](images/overview.png "Overview page in Portworx console")
 
