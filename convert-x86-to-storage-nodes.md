@@ -189,24 +189,21 @@ To view the global storage capacity, run:
 
 The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
 
-
-
 ```
    # /opt/pwx/bin/pxctl status
     Status: PX is operational
-    Node ID:  c553a764-9565-4f6b-b70c-10d963096b76
-        IP:  172.31.23.134
-        Local Storage Pool:
-        Device      Caching Tier    Size    Used
-        /dev/xvdb   true            64 GB   2.0 GB
-        /dev/xvdc   true            64 GB   2.0 GB
-        total       -               128 GB  4.0 GB
+    Node ID: 99510ef0-fb89-46b7-a1cc-9468c6354a69
+       	IP: 172.31.48.62
+       	Local Storage Pool: 1 device
+       	Device 	Path   		Media Type     		Size   		Last-Scan
+       	1      	/dev/xvdf      	STORAGE_MEDIUM_SSD     	128 GiB 		19 Aug 16 17:24 UTC
+       	total  			-      			64 GiB
     Cluster Summary
-        ID:  86428a61-a22a-4a7a-a79a-1cfbbb846f7e
-        IP: 172.31.23.134 - Capacity: 119 GiB/3.7 GiB OK (This node)
+       	Cluster ID: HARI-DEV-MACHINE2
+       	Node IP: 172.31.48.62 - Capacity: 18 MiB/64 GiB Online (This node)
     Global Storage Pool
-        Total Used      :  3.7 GiB
-        Total Capacity  :  119 GiB
+       	Total Used     	:  18 MiB
+       	Total Capacity 	:  128 GiB
 ```
 
 For more on using **pxctl**, see the [CLI Reference](cli_reference.html).
