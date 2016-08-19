@@ -76,8 +76,6 @@ COMMANDS:
      create, c           Create a volume
      list, l             List volumes in the cluster
      ha-update, u        Update volume HA level
-     ha-reduce, r        Reduce volume HA
-     replication-add     Add nodes to a volume replication set
      inspect, i          Inspect a volume
      requests            Show all pending requests
      delete, d           Delete a volume
@@ -162,15 +160,17 @@ USAGE:
    pxctl volume create [command options] [arguments...]
 
 OPTIONS:
-   --shared                           Specify --shared to make this a globally shared namespace volume
-   --label value, -l value            Comma separated name=value pairs, e.g name=sqlvolume,type=production
-   --size value, -s value             specify size in GB (default: 1)
-   --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --seed value                       optional data that the volume should be seeded with
-   --block_size value, -b value       block size in Kbytes (default: 32)
-   --repl value, -r value             replication factor [1..2] (default: 1)
-   --cos value                        Class of Service: [1..9] (default: 1)
-   --snap_interval value, --si value  snapshot interval in minutes, 0 disables snaps (default: 0)
+   --shared                             Specify --shared to make this a globally shared namespace volume
+   --label value, -l value              Comma separated name=value pairs, e.g name=sqlvolume,type=production
+   --size value, -s value               specify size in GB (default: 1)
+   --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
+   --seed value                         optional data that the volume should be seeded with
+   --block_size value, -b value         block size in Kbytes (default: 32)
+   --repl value, -r value               replication factor [1..3] (default: 1)
+   --cos value                          Class of Service: [1..3] (default: 1)
+   --snap_interval value, --si value    snapshot interval in minutes, 0 disables snaps (default: 0)
+   --aggregation_level value, -a value  aggregation level: [1..3] (default: 1)
+   --nodes value                        Comma seprated Node Id(s)
 ```
 
 ## Global Namespace (Shared Volumes)
@@ -188,25 +188,24 @@ USAGE:
    pxctl [global options] command [command options] [arguments...]
 
 VERSION:
-   0.4.3-9da1bcd
+   0.9.0-208a8b1
 
 COMMANDS:
-   status       Show status summary
-   volume, v    Manage volumes
-   snap, s      Manage volume snapshots
-   cluster, c   Manage the cluster
-   container    Display containers in the cluster
-   service, sv  Service mode utilities
-   host         Attach volumes to the host
-   eula         Show license agreement
-   help, h      Shows a list of commands or help for one command
+     status       Show status summary
+     volume, v    Manage volumes
+     snap, s      Manage volume snapshots
+     cluster, c   Manage the cluster
+     container    Display containers in the cluster
+     service, sv  Service mode utilities
+     host         Attach volumes to the host
+     eula         Show license agreement
 
 GLOBAL OPTIONS:
-   --json, -j           output in json
-   --color              output with color coding
-   --raw, -r            raw CLI output for instrumentation
-   --help, -h           show help
-   --version, -v        print the version
+   --json, -j     output in json
+   --color        output with color coding
+   --raw, -r      raw CLI output for instrumentation
+   --help, -h     show help
+   --version, -v  print the version
 ```
 
 ## Volumes with Docker
