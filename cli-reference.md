@@ -45,21 +45,20 @@ Example of the status summary from the first node:
 ```
 # pxctl status
 Status: PX is operational
-Node ID:  2ecf6b47-c461-4f80-b334-55954eb229fb
-        IP:  10.21.25.218
-        Local Storage Pool:
-        Device          Caching Tier    Size    Used
-        /dev/xvdj       true            128 GB  4.0 GB
-        /dev/xvdi       true            128 GB  4.0 GB
-        total           -               256 GB  4.0 GB
+Node ID: d0479845-ac95-4dee-aa51-bac2daf22c04
+       	IP: 10.0.0.141
+       	Local Storage Pool: 1 device
+       	Device 	Path   		Media Type     		Size   		Last-Scan
+       	1      	/dev/sdc       	STORAGE_MEDIUM_MAGNETIC	932 GiB		19 Aug 16 11:06 PDT
+       	total  			-      			932 GiB
 Cluster Summary
-        ID:  px_cluster_1
-        IP: 10.21.25.218 - Capacity: 256 GiB/1.9 GiB OK (This node)
-        IP: 10.21.25.219 - Capacity: 186 GiB/1.9 GiB OK
-        IP: 10.21.25.220 - Capacity: 186 GiB/1.9 GiB OFFLINE
+       	Cluster ID: 04c58dcf-c831-4e90-8476-4c6ff69e6a14
+       	Node IP: 10.0.0.141 - Capacity: 550 MiB/932 GiB Online (This node)
+       	Node IP: 10.0.0.109 - Capacity: 550 MiB/932 GiB Online
+       	Node IP: 10.0.0.84 - Capacity: 549 MiB/932 GiB Online
 Global Storage Pool
-        Total Capacity  :  413 GiB
-        Total Used      :  3.7 GiB
+       	Total Used     	:  1.6 GiB
+       	Total Capacity 	:  2.7 TiB
 ```
 
 ### Manage storage volumes: `pxctl volume`
@@ -74,16 +73,20 @@ USAGE:
    pxctl volume command [command options] [arguments...]
 
 COMMANDS:
-   create, c	Create a volume
-   list, l	List volumes in the cluster
-   inspect, i	Inspect a volume
-   delete, d	Delete a volume
-   stats, st	Volume Statistics
-   alerts, a	Show volume related alerts
-   help, h	Shows a list of commands or help for one command
+     create, c           Create a volume
+     list, l             List volumes in the cluster
+     ha-update, u        Update volume HA level
+     ha-reduce, r        Reduce volume HA
+     replication-add     Add nodes to a volume replication set
+     inspect, i          Inspect a volume
+     requests            Show all pending requests
+     delete, d           Delete a volume
+     stats-history, sth  Volume Statistics
+     stats, st           Volume Statistics
+     alerts, a           Show volume related alerts
 
 OPTIONS:
-   --help, -h	show help
+   --help, -h  show help
 ```
 
 Running `cluster list` returns the current global state of the cluster, including usage, the number of containers running per node, and the status of the node within the cluster.
@@ -92,14 +95,14 @@ Example of `cluster list` for the same three-node cluster:
 
 ```
 # pxctl cluster list
-Cluster ID: cluster-xxx-yyy-zzz
+Cluster ID: 04c58dcf-c831-4e90-8476-4c6ff69e6a14
 Status: OK
 
 Nodes in the cluster:
-ID                                      MGMT IP         CPU             MEM TOTAL       MEM FREE        CONTAINERS      STATUS
-8018cc5a-8293-49ef-904c-600b3f562ef2    172.31.25.219   1.754386        7.8 GB          6.6 GB          N/A             ok
-75b37f58-7ef1-4b2d-acc4-37d3ceb5b30a    172.31.25.218   0.375           7.8 GB          7.2 GB          N/A             ok
-7707a0cb-eda0-4f9a-921a-c778e2d722df    172.31.25.220   0               7.8 GB          6.4 GB          N/A             ok
+ID     					DATA IP		CPU    		MEM TOTAL      	MEM FREE       	CONTAINERS     	STATUS
+d0479845-ac95-4dee-aa51-bac2daf22c04   	10.0.0.141     	0.03125		33 GB  		31 GB  		N/A    		Online
+374d95fa-ffab-4f3c-b06d-ae6cfd2cf0f9   	10.0.0.109     	0.04686		33 GB  		32 GB  		N/A    		Online
+273e4389-8368-478f-8ef6-033346ad162c   	10.0.0.84      	0.031245       	33 GB  		32 GB  		N/A    		Online
 ```
 
 To view the cluster from a container-centric perspective, run `container show`. The output lists the running containers by container ID, the container image/name, and the mounted Portworx storage volume.
@@ -108,13 +111,10 @@ Example of `container show` for the same three-node cluster:
 
 ```
 # pxctl container show
-ID           IMAGE        NAMES       VOLUMES            NODE 									STATUS
-4b01b7d9ec4b mysql        /clonesql   788684553346073923 485a9a8e-4811-4399-a8d0-ec65c7dfafbd	Up 39 seconds
-1557f4d9a605 gourao/px-li /px-dev    N/A                										Up 3 minutes
-a2aa17b4edcf google/cadvi /cadvisor   N/A                										Up 8 minutes
-e5a00a52e276 mysql        /jeff-mysql 211470040694089666 685324a3-21ef-40cf-92cf-60d605f45d65	Up 15 minutes
-d84fc4caf344 portworx/px-li /px-dev    N/A                										Up 2 minutes
-81a3f4b95cdf google/cadvi /cadvisor   N/A                										Up 8 minutes
+ID           IMAGE        NAMES         VOLUMES STATUS
+78adc5102d64 mysql        /clonesql     N/A     Up 5 hours
+eae3eac65ea5 google/cadvi /px-dev       N/A     Up 5 hours
+5a7850b7cc72 portworx/px- /px-lite      N/A     Up 5 hours
 ```
 
 ## `volume create` and Options
