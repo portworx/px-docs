@@ -24,19 +24,28 @@ Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
 (The "Existing Cluster" option should not be used, unless so directed by Portworx Support)
 
-## Step 2: Run discovery on a server node
+## Step 2: Run discovery and bootstrap on a server node
 
 You will now add your first server node to the storage cluster. Click **Get Startup Script** for the cluster you just created. The window below appears with a `curl` command. This `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
 ![Startup script to add a cluster](images/startup-script-window.png "Startup script to add a cluster")
 
-Log in to the first server node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the curl string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
+Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the curl string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
 ![Startup script status messages](images/startup-script-result.png "Startup script status messages")
 
-## Step 3: Select storage to be aggregated
+## Step 3: Configure the Server Profile
 
-The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify what storage you want aggregated by PX-Enterprise.
+The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
+
+There are 2 important aspects of Server Profile configuration:
+* Used elements   (dropdowns) 
+* Elements required for a "match" rule  (checkboxes) <br>
+
+"Used elements" refers to which storage and network elements on the server will be used by PX-Enterprise.   You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list.    For example, this provides the ability to contribute certain storage elements in to the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server.    PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
+
+PX-Enterprise makes it easy to add nodes to a cluster through Server Profile "matching".   For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, etc...) matches an existing Server Profile in the PX-Enterprise Console, then that node will be automatically added in to the appropriate cluster.   Note:  If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile will be created and will need to be "Accepted" in the Console before that node can participate in the cluster.
+
 
 The following example of the Hardware Configuration page shows the discovered attributes, including hostname, server vendor, CPU, RAM, storage devices, and network devices. The Hardware Configuration rule performs the following:
 
