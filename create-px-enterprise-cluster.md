@@ -54,7 +54,7 @@ The following example of the Hardware Configuration page shows the discovered at
 
 * **Network**: Specifies the interfaces PX-Enterprise should use for management and the data path. Set by toggling the drop-down list for either **Management** or **Data**.
 
-* **Criteria**: Performs the above tasks based on the check boxes you select.
+* **Match Criteria** (checkbox): Ensures that this element is required of all servers attempting to join the cluster
 
 ![Discovered hardware configuration](images/hardware-configuration.png "Discovered hardware configuration")
 
