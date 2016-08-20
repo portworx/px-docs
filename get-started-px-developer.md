@@ -16,7 +16,7 @@ keywords: portworx, px-developer, container, storage, requirements
   * 12 CPU cores
   * 16 GB RAM
   * 128 GB Storage
-  * 10Gb
+  * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
   * 20 server nodes
 
