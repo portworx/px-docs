@@ -22,31 +22,44 @@ Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
 ![Name a new cluster](images/clusters-new.png "Name a new cluster")
 
-(The "Existing Cluster" option should not be used, unless so directed by Portworx Support)
+(Don't use the "Existing Cluster" option, unless directed by Portworx Support.)
+
+The new cluster appears in the Clusters list.
+
+![List of clusters](images/cluster-list.png "List of clusters")
 
 ## Step 2: Run discovery and bootstrap on a server node
 
-You will now add your first server node to the storage cluster. Click **Get Startup Script** for the cluster you just created. The window below appears with a `curl` command. This `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
+You will now add your first server node to the storage cluster. On the **Clusters** page, click **Get Startup Script** for the cluster you just created.
+
+![Startup script example](images/cluster-list.png "Startup script example")
+
+A window containing a `curl` command opens. The following `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
 ![Startup script to add a cluster](images/startup-script-window.png "Startup script to add a cluster")
 
-Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the curl string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
+Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the `curl` string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
 ![Startup script status messages](images/startup-script-result.png "Startup script status messages")
 
 ## Step 3: Configure the Server Profile
 
-The bootstrap startup script sends its configuration to the PX-Enterprise console. To view the discovered hardware configuration, click **Server Profiles**. If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
+The bootstrap startup script sends the server/node configuration to the PX-Enterprise web console. To view the discovered hardware configuration, click **Server Profiles** on the Manage Clusters page.
+
+![Hardware configuration](images/manage-clusters-server-profiles.png "Hardware configuration")
+
+If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
 
 There are 2 important aspects of Server Profile configuration:
 
-*  **Used elements** (dropdowns):<br/>
-*  **Elements required for a "match" rule** (checkboxes):<br/>
+*  **Used elements** (dropdowns)<br/>
+*  **Elements required for a "match" rule** (checkboxes)<br/>
 
-"Used elements" refers to which storage and network elements on the server will be used by PX-Enterprise.   You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list.    For example, this provides the ability to contribute certain storage elements in to the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server.    PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
+**Used elements** refers to which storage and network elements on the server will be used by PX-Enterprise. You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list. For example, this provides the ability to contribute certain storage elements into the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server. PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
 
-PX-Enterprise makes it easy to add nodes to a cluster through Server Profile "matching".   For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, etc...) matches an existing Server Profile in the PX-Enterprise Console, then that node will be automatically added in to the appropriate cluster.   Note:  If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile will be created and will need to be "Activated" in the Console before that node can participate in the cluster.
+**Elements required for a "match" rule** refers to Server Profile matching, which you can easily use to add nodes to a cluster. For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, and so on...) matches an existing Server Profile in the PX-Enterprise console, then that node gets automatically added into the appropriate cluster.
 
+>**Note:**<br/>If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile gets created and it must be "Activated" in the console before that node can participate in the cluster.
 
 The following example of the Hardware Configuration page shows the discovered attributes, including hostname, server vendor, CPU, RAM, storage devices, and network devices. The Hardware Configuration rule performs the following:
 
@@ -88,11 +101,11 @@ PX-Enterprise aggregates and monitors for health only the disks marked with **Al
 
 ## Step 4: Select network interfaces and activate
 
-Portworx assigns the selected NICs to the management interface, the data interface, or both. Portworx only needs a maximum of two NICs.
+PX-Enterprise assigns the selected NICs to the management interface, the data interface, or both. PX-Enterprise requires at least one NIC and only needs a maximum of two NICs.
 
 The *management interface* is used for communication between the hosted PX-Enterprise product and the individual server nodes, for control-path as well as statistics and metrics. The *data interface* is used between server nodes, primarily for data transfer as part of data availability (that is, multi-node data replication).
 
-To instruct the PX-Enterprise container on the server node to complete the installation, click **Activate**. Upon installation, PX-Enterprise aggregates the specified storage and uses the network interfaces selected.
+To instruct the PX-Enterprise container on the server node to complete the installation, click **Activate** on the Hardware Configuration page. Upon installation, PX-Enterprise aggregates the specified storage and uses the network interfaces selected.
 
 From the server node that ran the `curl` command, you should see the following status:
 
