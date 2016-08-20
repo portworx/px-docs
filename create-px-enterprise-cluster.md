@@ -45,7 +45,7 @@ There are 2 important aspects of Server Profile configuration:
 
 "Used elements" refers to which storage and network elements on the server will be used by PX-Enterprise.   You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list.    For example, this provides the ability to contribute certain storage elements in to the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server.    PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
 
-PX-Enterprise makes it easy to add nodes to a cluster through Server Profile "matching".   For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, etc...) matches an existing Server Profile in the PX-Enterprise Console, then that node will be automatically added in to the appropriate cluster.   Note:  If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile will be created and will need to be "Accepted" in the Console before that node can participate in the cluster.
+PX-Enterprise makes it easy to add nodes to a cluster through Server Profile "matching".   For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, etc...) matches an existing Server Profile in the PX-Enterprise Console, then that node will be automatically added in to the appropriate cluster.   Note:  If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile will be created and will need to be "Activated" in the Console before that node can participate in the cluster.
 
 
 The following example of the Hardware Configuration page shows the discovered attributes, including hostname, server vendor, CPU, RAM, storage devices, and network devices. The Hardware Configuration rule performs the following:
@@ -59,6 +59,7 @@ The following example of the Hardware Configuration page shows the discovered at
 ![Discovered hardware configuration](images/hardware-configuration.png "Discovered hardware configuration")
 
 Only servers matching all criteria will install PX-Enterprise. In the example above, only servers with the same Vendor, CPU ID, selected disks, and selected NICs will join the cluster.
+
 
 >**Important:**<br/>As part of aggregation, PX-Enterprise overwrites any pre-existing data on the underlying storage. Preserve any data that you want to keep.  
 
@@ -77,9 +78,11 @@ For storage disks, you can match based on wildcards. For example:
 
 Consider carefully the implications of making a Server Profile more general or more specific. For a new server node to be automatically accepted into the PX-Enterprise cluster, the server must match an activated Server Profile.
 
-* When a Server Profile is more general (the Hardware Configuration page has fewer check boxes selected), new nodes can more easily join a cluster because they are activated without your intervention.
+* When a Server Profile is more **general** (the Hardware Configuration page has fewer check boxes selected), new nodes can more easily join a cluster because they are activated without your intervention
 
-* When a Server Profiles is more specific, such as matched on hostnames, you must specifically activate those Server Profiles before servers can join a cluster.
+* When a Server Profiles is more **specific**, such as matched on hostnames, you must specifically activate those Server Profiles before servers can join a cluster.
+
+>**Important:**<br/>Portworx recommends implementing **specific** matching policies versus **general** policies.   Strict policies will tend to enforce stronger deterministic and predictable behavior.
 
 PX-Enterprise aggregates and monitors for health only the disks marked with **Allocated to PX**.
 
