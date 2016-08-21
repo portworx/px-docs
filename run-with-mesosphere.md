@@ -32,14 +32,16 @@ For each Mesos Agent node that is participating in the PX cluster, specify `MESO
 
 1. Add `MESOS_ATTRIBUTES=fabric:px` to the file /var/lib/dcos/mesos-slave-common.
 2. Restart the slave service:
-   ```
+
+  ```
   rm -f /var/lib/mesos/slave/meta/slaves/latest
   systemctl restart dcos-mesos-slave.service
   ```
 3. Verify that the slave service started properly:
+
    ```
   systemctl status dcos-mesos-slave.service
-```
+   ```
 
 ## Step 4: Reference PX volumes through the Marathon configuration file
 
