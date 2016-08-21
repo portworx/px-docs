@@ -37,6 +37,7 @@ For each Mesos Agent node that is participating in the PX cluster, specify `MESO
   rm -f /var/lib/mesos/slave/meta/slaves/latest
   systemctl restart dcos-mesos-slave.service
 ```
+
 3. Verify that the slave service started properly:
 
 ```
