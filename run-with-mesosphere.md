@@ -44,6 +44,7 @@ For each Mesos Agent node that is participating in the PX cluster, specify `MESO
 ## Step 4: Reference PX volumes through the Marathon configuration file
 
 Portworx passes the `pxd` docker volume driver and any associated volumes to Marathon as Docker parameters. The following example is for `mysql`.
+
 ```
 {
     "id": "mysql",
