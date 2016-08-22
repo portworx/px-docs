@@ -44,6 +44,7 @@ All writes and modifications to files and directories will be immediately availa
 
 ### Use shared volumes externally
 Any nodes outside of the Portworx cluster can access a shared volume through NFS with the following format:
+
 ```
 mount -o nolock HOSTNAME:/var/lib/osd/pxns/my_shared_vol  /local_mnt
 ```
