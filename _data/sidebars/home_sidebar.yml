@@ -102,6 +102,9 @@ entries:
     - title: CLI Reference
       url: /cli-reference.html
       output: web
+    - title: config.json definition
+      url: /config-json.html
+      output: web
   - title: Troubleshooting
     output: web
     folderitems:
