@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 
 ### Can Portworx run in the cloud?   On premise?   Both?
-Portworx clusters can run in the cloud or on premise.  But a single cluster cannot currently span.
+Portworx clusters can run in the cloud or on premise.  
 Volume format is the same, regardless of running cloud or on-prem.
 
 ### Is there a Hardware/Software compatibility list?
