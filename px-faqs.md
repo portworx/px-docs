@@ -10,7 +10,8 @@ Portworx clusters can run in the cloud or on premise.
 Volume format is the same, regardless of running cloud or on-prem.
 
 ### Is there a Hardware/Software compatibility list?
-Hardware : No. But there are minimum resource recommendation listed [here](get-started-px-enterprise.html#step-1-verify-requirements) 
+Hardware : No. But there are minimum resource recommendation listed [here](get-started-px-enterprise.html#step-1-verify-requirements)
+
 Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 
 ### Does Portworx need to take over all the disks on a given server?
@@ -35,9 +36,6 @@ Portworx also supports "head-only" mode, where a node participates in a cluster,
 
 ### Are read operations parallelized?
 Yes, if replication is > 1, then different blocks will be read from different servers.   We multisource the read operations across nodes for high-performance.
-
-### Can one server participate in multiple different PX clusters?
-No.  Currently only one instance of PX per server is allowed.  
 
 ### Can Portworx work in a multi-cloud environment?
 Yes absolutely you can create a fabric, based on servers across multiple different cloud providers.
