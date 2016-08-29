@@ -96,6 +96,9 @@ entries:
     - title: Create Portworx-based Volume Stacks with Docker Compose
       url: /docker-compose.html
       output: web
+    - title: PostgreSQL with CrunchyData and Portworx
+      url: /postgres.html
+      output: web
   - title: Reference
     output: web
     folderitems:
@@ -105,9 +108,12 @@ entries:
     - title: config.json definition
       url: /config-json.html
       output: web
-  - title: Troubleshooting
+  - title: FAQs
     output: web
     folderitems:
+    - title: FAQs about PX-Enterprise
+      url: /px-faqs.html
+      output: web
     - title: Troubleshooting
       url: /troubleshooting.html
       output: web
