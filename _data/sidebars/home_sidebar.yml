@@ -27,17 +27,14 @@ entries:
   - title: Install and Run
     output: web
     folderitems:
-    - title: Run PX-Developer with Docker Compose
-      url: /run-with-compose.html
-      output: web
     - title: Convert x86 Servers to Storage-Capable Nodes
       url: /convert-x86-to-storage-nodes.html
       output: web
-  - title: Upgrade
-    output: web
-    folderitems:
     - title: Upgrade
-      url: /coming_soon.html
+      url: /upgrade.html
+      output: web
+    - title: Run PX-Developer with Docker Compose
+      url: /run-with-compose.html
       output: web
   - title: Clusters and Storage Volumes
     output: web
