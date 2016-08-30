@@ -10,6 +10,7 @@ Portworx clusters can run in the cloud or on premise.  The volume format is the 
 
 ### Is there a Hardware/Software compatibility list?
 Hardware : No. But there are minimum resource recommendation listed [here](get-started-px-enterprise.html#step-1-verify-requirements) 
+
 Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 
 ### Can Portworx work with any drive vendor?
@@ -53,8 +54,8 @@ However, we recommend that individual scale-out applications run within the cont
 ### Can I access my data outside of Portworx volume, or is it only for containers?
 With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside of a container context.
 Among the possible use cases:
-   * Easily sharing results of containerized workloads with non-containerized apps/reports
-   * Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
+* Easily sharing results of containerized workloads with non-containerized apps/reports
+* Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
 Please see the documentation [here](/shared-volumes.html), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
 
 ### How are snapshots implemented?    Thick clones or Thin copy-on-write?
@@ -73,7 +74,7 @@ We do not support Object native.   But minio provides an S3 Object interface tha
 ### Any way to segregate frontend/backend/management traffic?
 Yes.  Management traffic (for configuration) and statistics traffic will travel over "mgtiface" .
 Traffic associated with replication and resynchronization will travel over "dataiface".
-Please see the [config-json file definition](/config-json.html )
+Please see the [config-json file definition](/config-json.html ).  
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
 
 ## Did we miss your question? 
