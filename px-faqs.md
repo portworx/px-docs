@@ -31,7 +31,7 @@ Yes. Any block storage presented to a host can be used within a Portworx cluster
 No.  We are software-only, deployed as a container
 
 ### Can storage be added to a server and used after the server has joined the cluster?
-Yes.  With 'pxctl service add /dev/xyz', or corresponding API call, additional storage gets dynamically incorporated into the the global capacity pool.
+Yes.  With 'pxctl service add /dev/xyz' additional storage gets dynamically incorporated into the the global capacity pool.
 
 ### What happens when a drive fails?
 Portworx will enter maintenance mode.  In this mode, you can replace up to one failed drive.  If there are multiple drive failures, a node can be decommissioned from the cluster.  Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
