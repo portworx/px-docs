@@ -44,7 +44,7 @@ Portworx also supports "head-only" mode, where a node participates in a cluster,
 ### Are read operations parallelized?
 Yes, if replication is > 1, then different blocks will be read from different servers.   We multi-source the read operations across nodes for high-performance.
 
-### Can one server participate in multiple different PX clusters?
+### Can one server participate in multiple (different) PX clusters?
 No.  Currently only one instance of PX per server is allowed.  
 
 ### Can Portworx work in a multi-cloud environment?
