@@ -30,7 +30,7 @@ Complete the installation process to create a Portworx cluster using Mesos Agent
 
 For each Mesos Agent node that is participating in the PX cluster, specify `MESOS_ATTRIBUTES` that allow for affinity of tasks to nodes that are part of the Portworx cluster.
 
-1. Add `MESOS_ATTRIBUTES=fabric:px` to the file /var/lib/dcos/mesos-slave-common.
+1. Add `MESOS_ATTRIBUTES=pxfabric:px-cluster1` to the file /var/lib/dcos/mesos-slave-common.
 2. Restart the slave service:
 
 ```
@@ -79,9 +79,9 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
     },
     "constraints": [
             [
-              "fabric",
+              "pxfabric",
               "CLUSTER",
-              "px"
+              "px-cluster1"
             ]],
     "env": {
         "MYSQL_ROOT_PASSWORD": "password"
@@ -93,7 +93,7 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
 
 * Notice the Docker `parameters` clause as the way to reference the `pxd` volume driver as well as the volume itself.
 * The referenced volume can be a volume name, a volume ID, or a snapshot ID.   If the volume name does not previously exist, it gets created in-band with default settings.
-* The `constraints` clause, restricts this task to running only on Agent nodes that are part of the Portworx cluster.
+* The `constraints` clause, restricts this task to running only on Agent nodes that are part of a given Portworx cluster.
 
 ## Step 5: Launch the application through Marathon
 
