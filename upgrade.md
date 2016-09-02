@@ -1,13 +1,14 @@
 ---
 layout: page
-title: "Upgrade"
+title: "Upgrade Portworx"
 keywords: upgrade
 sidebar: home_sidebar
 ---
 
 ## Upgrading Portworx 
 
-Upgrading Portworx Enterprise on a node is done through the **'pxctl upgrade'** command as shown below.
+Upgrading Portworx Enterprise is performed as a rolling upgrade.
+On each node in the cluster , please execute **'pxctl upgrade'** command as shown below.
 
 ```
 [root@PX-SM2 ~]# pxctl upgrade px-enterprise

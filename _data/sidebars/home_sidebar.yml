@@ -30,11 +30,17 @@ entries:
     - title: Convert x86 Servers to Storage-Capable Nodes
       url: /convert-x86-to-storage-nodes.html
       output: web
-    - title: Upgrade
-      url: /upgrade.html
-      output: web
     - title: Run PX-Developer with Docker Compose
       url: /run-with-compose.html
+      output: web
+  - title: Operate and Maintain
+    output: web
+    folderitems:
+    - title: Upgrade Portworx
+      url: /upgrade.html
+      output: web
+    - title: Scale-Up Nodes
+      url: /scale-up.html
       output: web
   - title: Clusters and Storage Volumes
     output: web
