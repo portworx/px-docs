@@ -42,6 +42,9 @@ entries:
     - title: Scale-Up Nodes
       url: /scale-up.html
       output: web
+    - title: Scale-Down Nodes
+      url: /scale-down.html
+      output: web
   - title: Clusters and Storage Volumes
     output: web
     folderitems:

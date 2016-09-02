@@ -7,7 +7,7 @@ sidebar: home_sidebar
 
 ## Scale-up Nodes 
 
-To scale up storage on a given node, you can add more disks with the **pxctl service add** command, as shown below:
+To scale up storage and add disks on a given node, use the **pxctl service add** command, as shown below:
 
 ```
 [root@PX-SM2 ~]# pxctl status
