@@ -20,6 +20,8 @@ Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, an
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
     * 20 server nodes
+* Open network ports:
+  * Ports 9000 - 9005 must be open for internal network traffic between nodes running PX
 
 ## Step 2: Get PX-Enterprise
 
