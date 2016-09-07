@@ -130,7 +130,7 @@ To view all **pxctl** options, run:
 
 ### To run the Portworx container
 
-For CentOS or Ubuntu, start the Portworx container with the following run command:
+For **CentOS** or **Ubuntu**, start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px-dev -d --net=host \
@@ -147,7 +147,7 @@ For CentOS or Ubuntu, start the Portworx container with the following run comman
                 portworx/px-dev
 ```
 
-For CoreOS, start the Portworx container with the following run command:
+For **CoreOS**, start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px-dev -d --net=host \
