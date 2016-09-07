@@ -130,11 +130,11 @@ To view all **pxctl** options, run:
 
 ### To run the Portworx container
 
-Start the Portworx container with the following run command:
+For CentOS or Ubuntu, start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px-dev -d --net=host \
-                 --privileged=true                            \
+                 --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
@@ -143,6 +143,23 @@ Start the Portworx container with the following run command:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
+                 --ipc=host                                    \
+                portworx/px-dev
+```
+
+For CoreOS, start the Portworx container with the following run command:
+
+```
+# sudo docker run --restart=always --name px-dev -d --net=host \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-dev
 ```
