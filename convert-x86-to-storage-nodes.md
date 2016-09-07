@@ -234,7 +234,7 @@ To add nodes to increase capacity and enable high availability, complete the JSO
 
 * If you have the same storage device configuration on every node, copy the config.json you created earlier to all the nodes.
 * If you have different storage device configurations on the nodes, make sure to use the same `clusterid` and `kvdb` on all the nodes.
-* Then, continue with the [CLI Reference](cli_reference.html) or the [Application Solutions](application-solutions.html).
+* Then, continue with the [CLI Reference](cli-reference.html) or the [Application Solutions](application-solutions.html).
 
 ### To provision a key/value store
 
