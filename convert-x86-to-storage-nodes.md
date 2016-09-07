@@ -53,7 +53,7 @@ Portworx pools the storage devices on your server and creates a global capacity 
 Use this command line:
 
 ```
-run # lsblk
+# lsblk
 ```
 
 Example output:
@@ -224,7 +224,7 @@ The following sample output of `pxctl status` shows that the global capacity for
        	Total Capacity 	:  128 GiB
 ```
 
-For more on using **pxctl**, see the [CLI Reference](cli_reference.html).
+For more on using **pxctl**, see the [CLI Reference](cli-reference.html).
 
 You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX-Developer, see [Application Solutions](application-solutions.html).
 
