@@ -62,13 +62,20 @@ This is the schema definition for a valid PX configuration file.  This file is e
 **loggingurl**: Endpoint used communicating to PX-Enterpise control (aka "Lighthouse").  Primary use is system statistics.   Ex:  "http://lighthouse.portworx.com/api/stats/listen"
 
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.   
-
+For 'etcd', an example would be:
 ```
  Ex:  
     "kvdb": [
         "etcd://etcd0.portworx.com:4001",
         "etcd://etcd1.portworx.com:4001",
         "etcd://etcd2.portworx.com:4001"
+     ]
+```
+For 'consul', an example would be:
+```
+Ex:
+    "kvdb": [
+        "consul://consul01-e.portworx.com:8500"
      ]
 ```
 
