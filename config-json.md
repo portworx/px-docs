@@ -63,6 +63,7 @@ This is the schema definition for a valid PX configuration file.  This file is e
 
 **kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.   
 For 'etcd', an example would be:
+
 ```
  Ex:  
     "kvdb": [
@@ -71,7 +72,9 @@ For 'etcd', an example would be:
         "etcd://etcd2.portworx.com:4001"
      ]
 ```
+
 For 'consul', an example would be:
+
 ```
 Ex:
     "kvdb": [
