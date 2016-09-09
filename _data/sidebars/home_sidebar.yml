@@ -48,6 +48,9 @@ entries:
     - title: Scale-Down Nodes
       url: /scale-down.html
       output: web
+    - title: Maintenance Mode
+      url: /maintenance.html
+      output: web
   - title: Clusters and Storage Volumes
     output: web
     folderitems:
