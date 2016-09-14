@@ -46,6 +46,7 @@ An absolute minimal configuration would look like this:
         ]
     },
     "version": "0.3"
+}
 ```
 
 Make sure the list of "devices" includes all disks that will be part of the Portworx fabric.
