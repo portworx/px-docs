@@ -36,6 +36,9 @@ entries:
     - title: Run PX-Developer with Docker Compose
       url: /run-with-compose.html
       output: web
+    - title: Run PX-Enterprise in 'air-gap' environments
+      url: /air-gap.html
+      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
