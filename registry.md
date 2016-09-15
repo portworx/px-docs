@@ -10,7 +10,7 @@ The Docker Registry is a server-side application that stores and lets you distri
 To create a storage volume for the Docker Registry, run the following command on each server and make a note of the returned volume ID. You will need the volume ID when you start the Registry container in the next step.
 
 ```
-docker volume create -d pxd --opt name=registry_volume --opt \
+docker volume create -d pxd --name registry_volume --opt \
     size=4 --opt block_size=64 --opt repl=3 --opt fs =ext4
 ```
 
@@ -23,7 +23,7 @@ To start the Docker Registry, run the following command. Substitute `DOCKER_CREA
 
 ```
 docker run -d -p 5000:5000  --name registry \
-    -v DOCKER_CREATE_VOLUME_ID:/tmp/registry registry:2.3.0
+    -v registry_volume:/tmp/registry registry:2.3.0
 ```
 
 Your Docker Registry is now available for Docker push and pull commands on port 5000.
