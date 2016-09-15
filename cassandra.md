@@ -22,13 +22,11 @@ docker volume create -d pxd --name cassandra_volume --opt \
     size=4 --opt block_size=64 --opt repl=1 --opt fs=ext4
 ```
 
-The output of the command is the volume identifier, referred to as `DOCKER_CREATE_VOLUME_ID` in the command-line examples in the Portworx documentation. To later retrieve the volume identifier, run `docker volume ls`.
 
 ## Step 2: Start the Cassandra Docker image on node 1
 
 Use the Docker `-v` option to assign the volume created with `docker volume create`.
 
-* To retrieve the `DOCKER_CREATE_VOLUME_ID` passed into the `-v` option, run `docker volume ls`.
 * Be sure to substitute your IP address for the 10.0.0.1 placeholder in the `CASSANDRA_BROADCAST_ADDRESS` parameter.
 
 >**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](troubleshooting.html) parameter between `run` and `--name`.
