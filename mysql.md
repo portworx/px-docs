@@ -21,7 +21,7 @@ That command creates a volume to attach to the mysql_volume container, which sto
 
 ## Step 2: Start the mysql container
 
-To start the mysql container, run the following command. Substitute `DOCKER_CREATE_VOLUME_ID` for the volume id from the `docker volume create` command.
+To start the mysql container, run the following command. 
 
 ```
 # docker run -p 3306:3306 --volume-driver=pxd               \
