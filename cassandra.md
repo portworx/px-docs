@@ -18,7 +18,7 @@ When creating these servers in a public cloud, such as AWS, you can specify the 
 To create storage volumes for each instance, run the following command on each server. Note that `size=4` specifies 4 GB.
 
 ```
-docker volume create -d pxd --opt name=cassandra_volume --opt \
+docker volume create -d pxd --name cassandra_volume --opt \
     size=4 --opt block_size=64 --opt repl=1 --opt fs=ext4
 ```
 
@@ -37,7 +37,7 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
 docker run --name cassandra1 -d \
     -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
     -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.1 \
-    -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
+    -v cassandra_volume:/var/lib/cassandra cassandra:latest
 ```
 
 ## Step 3: Start Docker on the other nodes
