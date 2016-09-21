@@ -12,11 +12,11 @@ For customers wanting to deploy PX-Enterprise in an automated manner, a config f
 with the following options:
 
 
-+ -t <token> this token was provided to you in your welcome email
-+ -s <device> this is of the form /dev/sda, repeat for multiple devices
-+ -d <data_network_interface> this is of the form eth0 - (optional)
-+ -m <management_network_interface> this is of the form eth0 - (optional)
-+ -k <key_value_store> this is of the form [etcd|consul]://<IP>:<port|4001> - (optional)
++ -t <token> token that was provided in email (or arbitrary clusterID)
++ -s <device> of the form /dev/sda, repeat for multiple devices
++ -d <data_network_interface> of the form eth0 - (optional)
++ -m <management_network_interface> of the form eth0 - (optional)
++ -k <key_value_store> of the form [etcd|consul]://<IP>:<port|4001> - (optional)
 + -a will attempt to use all available devices
 + -f when combined with -a will use all available devices even those with a filesystem
 
