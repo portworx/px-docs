@@ -12,6 +12,7 @@ For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as yo
 #### "No such file or directory" message when running on SELinux
 
  If you have `SELinux` enabled, you may get the following error message:
+ 
  ```
  # docker run --name mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw  --volume-driver=pxd -v sql_vol:/var/lib/mysql -d mysql
  docker: Error response from daemon: no such file or directory.
