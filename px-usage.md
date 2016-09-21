@@ -40,8 +40,10 @@ portworx/px-enterprise ...
 Provide one of the following examples as command line arguments positioned after "px-enterprise"
 
 ```
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde -d eth0 -m eth1"
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde"
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -a" 
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f"
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde -d eth0 -m eth1
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:4001 
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
 ```
+
+If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from "Manage Clusters -> Get Startup Script".  If running in an "air-gapped" mode, then the "-t" argument will correspond to any site-generated ClusterID that should be the same for all nodes participating in the same cluster.
