@@ -9,6 +9,7 @@ Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
 ## Summary and features
 
 **Scale-out fabric for containers**
+
 * Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. * Portworx technology:
   * Provides data protection and container-granular management.
   * Enables companies to run multi-cloud with any scheduler.
@@ -16,6 +17,7 @@ Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
   * Is radically simple.
 
 **"Lighthouse" is the Portworx web console to manage multi-tenancy**
+
 * Lighthouse provides storage management for all of your PX-Enterprise deployments, including on-premises clusters and in public clouds.
 * Lighthouse monitors health and capacity and lets you provide container-granular storage.
 
