@@ -46,4 +46,4 @@ Provide one of the following examples as command line arguments positioned after
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
 ```
 
-If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from "Manage Clusters -> Get Startup Script".  If running in an "air-gapped" mode, then the "-t" argument will correspond to any site-generated ClusterID that should be the same for all nodes participating in the same cluster.
+If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from **"Manage Clusters -> Get Startup Script"**.  If running in an "air-gapped" mode, then the "-t" argument will correspond to any site-generated ClusterID that should be the same for all nodes participating in the same cluster.
