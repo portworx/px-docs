@@ -4,7 +4,8 @@ title: "Release notes 1.0.4"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
-Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
+
+## Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
 
 ## Summary and features
 
