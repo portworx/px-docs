@@ -22,6 +22,7 @@ with the following options:
 
 Example:
 Following the "docker run" command:
+
 ```
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true \
 -v /run/docker/plugins:/run/docker/plugins \
@@ -37,6 +38,7 @@ docker run --restart=always --name px-enterprise -d --net=host --privileged=true
 portworx/px-enterprise ...
 ```
 Provide one of the following examples as command line arguments positioned after "px-enterprise"
+
 ```
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde -d eth0 -m eth1"
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde"
