@@ -135,6 +135,6 @@ entries:
   - title: Release Notes
     output: web
     folderitems:
-    - title: Release Notes
+    - title: Release 1.0.4
       url: /release-notes-1-0-4.html
       output: web
