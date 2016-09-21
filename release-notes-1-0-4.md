@@ -9,13 +9,15 @@ Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
 ## Summary and features
 
 **Scale-out fabric for containers**
-* Description.
-* Benefits.
+* Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. * Portworx technology:
+  * Provides data protection and container-granular management.
+  * Enables companies to run multi-cloud with any scheduler.
+  * Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
+  * Is radically simple.
 
-**Lighthouse, a web console to manage multi-tenancy**
-* Will the console be branded with the name Lighthouse?
-* Lighthouse (or "The PX-Enterprise web console") provides storage management for all of your PX-Enterprise deployments, including on-premises clusters and in public clouds.
-* Lighthouse (or "The console") monitors health and capacity and lets you provide container-granular storage.
+**"Lighthouse" is the Portworx web console to manage multi-tenancy**
+* Lighthouse provides storage management for all of your PX-Enterprise deployments, including on-premises clusters and in public clouds.
+* Lighthouse monitors health and capacity and lets you provide container-granular storage.
 
 ## Limits
 
@@ -47,9 +49,6 @@ PX-Enterprise is tested and qualified against the following schedulers:
 PX-Enterprise 1.0.X contains experimental support for the shared volumes feature. For this release, shared volumes will not perform as well as non-shared volumes. Portworx will address this issue in an upcoming minor release.
 
 ## Known issues
-
-* Issue placeholder
-* Issue placeholder
 
 ## Documentation
 
