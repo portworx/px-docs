@@ -55,3 +55,9 @@ To resolve the issue:
   ```
 mount -o remount,size=1GB /dev/shm
 ```
+
+#### Duplicate NodeID
+PX Cluster tries to start, but all nodes are reporting the same NodeID.
+You probably tried to bring up multiple nodes from a cloned image that already had PX running.
+The NodeID is generated on the fly as new nodes join the cluster and is stored in the /etc/pwx directory.
+The act of removing the /etc/pwx directory will cause a new ID to be generated. The config.json tells us what cluster to join and the storage devices to use.   For the proper way to clone system images with Portworx via **systemd**, please see [this](/systemd.html)
