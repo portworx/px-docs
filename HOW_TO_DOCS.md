@@ -2,6 +2,7 @@
 (Sept 22, 2016)
 
 This doc site is developed using [jekyll](https://jekyllrb.com/) and hosted on [github pages](https://pages.github.com/)
+The default branch is "gh-pages", which means that any updates to the content will get immediately rendered by github/jekyll and reflected onto [docs.portworx.com](http://docs.portworx.com)
 
 The template for this site is based on [this documentation template](http://idratherbewriting.com/documentation-theme-jekyll/) for jekyll
 
