@@ -67,5 +67,5 @@ systemctl daemon-reload
 
 At this point your machine image is ready to be saved and cloned.  You can launch a multiple of these images and each initial execution of the machine will cause PX to initialize the node and join the provided cluster.  Subsequent boots will simply cause PX to join as an existing node.
 
-*** Note - do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image.
+** Note - do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image. **
 
