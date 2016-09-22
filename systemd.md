@@ -25,7 +25,7 @@ After=docker.service
 
 [Service]
 Restart=always
-ExecStartPre=-/usr/bin/docker rm -f px-lite
+ExecStartPre=-/usr/bin/docker rm px-enterprise
 Type=forking
 ExecStart=/usr/bin/docker run --net=host --privileged=true  \
   --cgroup-parent=/system.slice/px-enterprise.service       \
@@ -33,7 +33,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true  \
   -v /var/lib/osd:/var/lib/osd:shared                       \
   -v /dev:/dev                                              \
   -v /etc/pwx:/etc/pwx                                      \
-  -v /opt/pwx/bin:/export_bin:shared                        \
+  -v /opt/pwx/bin:/export_bin:                              \
   -v /var/run/docker.sock:/var/run/docker.sock              \
   -v /var/cores:/var/cores                                  \
   -v /usr/src:/usr/src                                      \
@@ -41,7 +41,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true  \
   --name=px-enterprise                                      \
   -d portworx/px-enterprise
 KillMode=control-group
-ExecStop=/usr/bin/docker stop -t 10 px-lite
+ExecStop=/usr/bin/docker stop -t 10 px-enterprise
 
 [Install]
 WantedBy=multi-user.target
@@ -51,20 +51,20 @@ You must edit the above template to provide the cluster and node initialization 
 
 ```
 -t <token> token that was provided in email (or arbitrary clusterID)
--s <device> of the form /dev/sda, repeat for multiple devices
+-s <device> of the form /dev/sdN, repeat for multiple devices
 -d <data_network_interface> of the form eth0 - (optional)
 -m <management_network_interface> of the form eth0 - (optional)
--k <key_value_store> of the form [etcd|consul]://<IP>:<port|4001> - (optional)
+-k <key_value_store> of the form [etcd|consul]://<IP>:<port> - (Not required if Portworx Management portal, Lighthouse is used)
 -a will attempt to use all available devices
 -f when combined with -a will use all available devices even those with a filesystem
 ```
 
-For example, you can provide this after the `-d px-enterprise` line in ythe above `systemd` unit file:
+For example, you can provide this after the `-d px-enterprise` line in the above `systemd` unit file:
 
 ```
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde -d eth0 -m eth1
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:4001 
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:4001
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
 ```
 
