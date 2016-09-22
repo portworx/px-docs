@@ -12,7 +12,7 @@ If you are creating a template image - be it an AWS AMI or a Virtual Machine Ima
 Create a file called
 
 ```
-/lib/systemd/system/px-enterprise.system
+/lib/systemd/system/px-enterprise.service
 ```
 
 Add the following as the contents of that file:
