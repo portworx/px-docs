@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "PX-Enterprise deployment via templates 'systemd'"
+title: "PX-Enterprise deployment via templates and 'systemd'"
 keywords: systemd automate
 sidebar: home_sidebar
 ---
