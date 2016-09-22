@@ -68,7 +68,8 @@ For example, you can provide this after the `-d px-enterprise` line in ythe abov
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
 ```
 
-Once you create an image with this `systemd` unit file, be sure to run
+Once you create an image with this `systemd` unit file, be sure to enable this unit by running:
+
 ```
 systemctl daemon-reload
 systemctl enable px-enterprise
