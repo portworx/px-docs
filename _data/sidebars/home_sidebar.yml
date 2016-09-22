@@ -39,7 +39,7 @@ entries:
     - title: Run PX-Enterprise in 'air-gap' environments
       url: /air-gap.html
       output: web
-      - title: Deploying via system image templates systemd
+    - title: Deploying via system image templates systemd
       url: /systemd.html
       output: web
   - title: Operate and Maintain
