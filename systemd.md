@@ -9,6 +9,14 @@ sidebar: home_sidebar
 
 If you are creating a template image - be it an AWS AMI or a Virtual Machine Image - This reference outlines the best practices to automate the provisioning of a multinode PX cluster by creating a base image via `systemd`:
 
+Create a file called
+
+```
+/lib/systemd/system/px-enterprise.system
+```
+
+Add the following as the contents of that file:
+
 ```
 [Unit]
 Description=Portworx Container
