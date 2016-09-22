@@ -39,6 +39,9 @@ entries:
     - title: Run PX-Enterprise in 'air-gap' environments
       url: /air-gap.html
       output: web
+      - title: Deploying via system image templates systemd
+      url: /systemd.html
+      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
@@ -119,9 +122,6 @@ entries:
       output: web
     - title: px-enterprise usage
       url: /px-usage.html
-      output: web
-    - title: Deploying via systemd
-      url: /systemd.html
       output: web
   - title: FAQs
     output: web
