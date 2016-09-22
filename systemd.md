@@ -72,7 +72,6 @@ Once you create systemd unit file, be sure to enable this unit by running:
 
 ```
 systemctl daemon-reload
-
 systemctl enable px-enterprise
 ```
 
