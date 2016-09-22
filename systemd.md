@@ -71,6 +71,7 @@ For example, you can provide this after the `-d px-enterprise` line in ythe abov
 Once you create an image with this `systemd` unit file, be sure to run
 ```
 systemctl daemon-reload
+systemctl enable px-enterprise
 ```
 
 At this point your machine image is ready to be saved and cloned.  You can launch a multiple of these images and each initial execution of the machine will cause PX to initialize the node and join the provided cluster.  Subsequent boots will simply cause PX to join as an existing node.
