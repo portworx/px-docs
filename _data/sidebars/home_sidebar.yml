@@ -42,6 +42,9 @@ entries:
     - title: Deploying via system image templates systemd
       url: /systemd.html
       output: web
+    - title: Deploying Portworx with Rancher
+      url: /deploy_px_with_rancher.html
+      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
