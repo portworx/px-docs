@@ -14,8 +14,8 @@ For availability zone, use either "West N. California", or "East N. Virginia".  
 
 * Select the name and count of your instances
 * Use **m3.medium** as the instance type
-* For US-West (N. California), use **ami-ebe6a98b** as the AMI image name
-* For US-East (N. Virginia), use **ami-d0651bc7** as the AMI image name.
+* For US-West (N. California), use **ami-d0651bc7** as the AMI image name
+* For US-East (N. Virginia), use **ami-ebe6a98b** as the AMI image name.
 * Specify **128GB** as the root size
 
 ![Configuring Instance](images/rancherpx.png "Depoloying Portworx with Rancher")
