@@ -10,6 +10,9 @@ Portworx PX-Enterprise is full-featured container storage for DevOps, IT ops, an
 
 * Linux kernel 3.10 or greater
 * Docker 1.10 or greater, configured with [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
+* Configure Docker to use shared mounts
+* Run sudo mount --make-shared / in your SSH window
+* The shared mounts configuration is required, as PX-Enterprise exports mount points. If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM

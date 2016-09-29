@@ -8,6 +8,7 @@ keywords: portworx, px-developer, container, storage, requirements
 
 * Linux kernel 3.10 or greater
 * Docker 1.10 or greater, configured with [devicemapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper)
+* The shared mounts configuration is required, as PX-Developer exports mount points. If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
 * An etcd 2.0 key/value store (Consul coming soon)
 * Minimum resources per server:
   * 4 CPU cores
