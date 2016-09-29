@@ -95,9 +95,9 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
    * `devices`: These are the storage devices that will be pooled from the prior step.
 
 
-    <br/>Example config.json:
+      <br/>Example config.json:
 
-   ```
+ ```
    {
       "clusterid": "make this unique in your k/v store",
       "kvdb": [
@@ -110,7 +110,7 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
         ]
       }
     }
-    ```
+```
 
     The format for the `kvdb` section is as follows:
 
