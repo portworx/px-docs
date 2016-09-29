@@ -78,17 +78,22 @@ With PX-Developer, use the following steps to specify in the config.json file wh
 1. Download the sample config.json file:
 https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 2. Create a directory for the configuration file.
+
    ```
    # sudo mkdir -p /etc/pwx
    ```
+   
 3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
+
    ```
    # sudo cp -p config.json /etc/pwx
    ```
+   
 4. Edit the config.json to include the following:
    * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
    * `kvdb`: This is the etcd connection string for your etcd key/value store.
    * `devices`: These are the storage devices that will be pooled from the prior step.
+
 
     <br/>Example config.json:
 
@@ -124,6 +129,7 @@ When you run Docker and the Portworx container, Portworx aggregates and manages 
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
 
 To view all **pxctl** options, run:
+
 ```
 # /opt/pwx/bin/pxctl help
 ```
