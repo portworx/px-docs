@@ -1,11 +1,9 @@
 ---
 layout: page
-title: "Release notes 1.0.6"
+title: "Release notes 1.0.6 - Sept 29th, 2016"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
-
-### Release date: Sept 29th, 2016
 
 ## Key enhancements to the previous release
 * Support for Consul
