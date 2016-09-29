@@ -49,6 +49,7 @@ You must edit the above template to provide the cluster and node initialization 
 
 ```
 -t <token> token that was provided in email (or arbitrary clusterID)
+-c <cluster_id> cluster ID is required if token is not specified
 -s <device> of the form /dev/sdN, repeat for multiple devices
 -d <data_network_interface> of the form eth0 - (optional)
 -m <management_network_interface> of the form eth0 - (optional)
@@ -64,6 +65,11 @@ For example, you can provide this after the `-d px-enterprise` line in the above
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:4001
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f"
+   -c my_cluster_id -k etcd://my_etcd.domain.com:4001 -a -f"
+   -c my_cluster_id -k etcd://etcd1:4001,etcd://etcd2:4001 -a -f"
+   -c my_cluster_id -k consul://consul1:4001,consul://consul2:4001 -a -f"
+
 ```
 
 Once you create systemd unit file, be sure to enable this unit by running:
