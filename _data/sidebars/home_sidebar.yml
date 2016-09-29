@@ -138,6 +138,9 @@ entries:
   - title: Release Notes
     output: web
     folderitems:
-    - title: Release 1.0.4
-      url: /release-notes-1-0-4.html
+    - title: About 1.x
+      url: /about-1-x.html
+      output: web
+    - title: Release 1.0.6
+      url: /release-notes-1-0-6.html
       output: web

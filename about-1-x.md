@@ -1,21 +1,22 @@
 ---
 layout: page
-title: "Release notes 1.0.4"
+title: "About the 1.0 PX releases"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
-### Portworx released PX-Enterprise 1.0.4 on September 15, 2016.
+### Portworx released PX-Enterprise 1.0 on September 15, 2016.
 
 ## Summary and features
 
-**Scale-out fabric for containers**
+**"PX" Scale-out fabric for containers**
 
-* Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that gets installed on your servers. * Portworx technology:
-  * Provides data protection and container-granular management.
-  * Enables companies to run multi-cloud with any scheduler.
-  * Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
-  * Is radically simple.
+* PX provides scale-out storage for containers. PX is delivered as a container and turns any server it runs on into a converged storage and compute node.
+  * PX aggregates all storage LUNs (local or external) and creates tiers of storage on each node.
+  * PX clusters storage across different nodes in the cluster.
+  * PX provides virtual volumes at container granularity.  These volumes are accessible and usable on any node in the cluster.
+  * PX will run with any Docker scheduler.
+  * PX understands different drive and volume types, including cloud volumes such as EBS (provisioned IOPS vs GP vs instance local).
 
 **"Lighthouse" is the Portworx web console to manage multi-tenancy**
 
@@ -26,11 +27,10 @@ sidebar: home_sidebar
 
 Following are the supported limits as tested and qualified by Portworx.
 
-* 35 nodes per cluster
-* 100 volumes per node
-* 12 devices per node
+* 96 nodes per cluster
+* 255 volumes per node
 * 96 TB per node
-* 30 snapshots per volume
+* 255 snapshots per volume
 * 3 replicas per volume
 
 ## Support matrix
@@ -49,7 +49,7 @@ PX-Enterprise is tested and qualified against the following schedulers:
 
 ## Shared volumes
 
-PX-Enterprise 1.0.X contains experimental support for the shared volumes feature. For this release, shared volumes will not perform as well as non-shared volumes. Portworx will address this issue in an upcoming minor release.
+PX-Enterprise 1.0.X contains experimental support for the shared volumes feature. For this release, shared volumes has an overhead compared to regular PX volumes. Portworx will address this issue in an upcoming minor release.
 
 ## Known issues
 
