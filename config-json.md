@@ -67,9 +67,9 @@ For 'etcd', an example would be:
 ```
  Ex:  
     "kvdb": [
-        "etcd://etcd0.yourdomain.com:4001",
-        "etcd://etcd1.yourdomain.com:4001",
-        "etcd://etcd2.yourdomain.com:4001"
+        "etcd:http://etcd0.yourdomain.com:4001",
+        "etcd:http://etcd1.yourdomain.com:4001",
+        "etcd:http://etcd2.yourdomain.com:4001"
      ]
 ```
 
@@ -78,7 +78,7 @@ For 'consul', an example would be:
 ```
 Ex:
     "kvdb": [
-        "consul://consul.yourdomain.com:8500"
+        "consul:http://consul.yourdomain.com:8500"
      ]
 ```
 
