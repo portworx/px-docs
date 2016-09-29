@@ -51,8 +51,3 @@ PX-Enterprise is tested and qualified against the following schedulers:
 
 PX-Enterprise 1.0.X contains experimental support for the shared volumes feature. For this release, shared volumes has an overhead compared to regular PX volumes. Portworx will address this issue in an upcoming minor release.
 
-## Known issues
-
-## Documentation
-
-For all Portworx reference documentation, please visit [docs.portworx.com](http://docs.portworx.com).
