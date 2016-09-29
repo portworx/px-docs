@@ -112,13 +112,6 @@ Example config.json:
     }
 ```
 
-    The format for the `kvdb` section is as follows:
-
-```
-    kvdb:[
-      "etcd:[http/https]://[....]"
-    ]
-```
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
