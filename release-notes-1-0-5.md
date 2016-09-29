@@ -10,8 +10,8 @@ sidebar: home_sidebar
 ## New Features
 
 * Support for Consul
-* Ability to add storage to a head-only node
-* Ability to import data from an external storage source
+* Support for "head-only" node that participates in a cluster but contributes no local storage
+* Ability to import data from an external storage source (**pxctl 
 * Ability to bootstrap and deploy PX through external automated procedures.  PX takes command line parameters and does not need a config.json. 
 * Support for Rancher
 
