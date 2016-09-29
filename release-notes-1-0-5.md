@@ -18,3 +18,5 @@ sidebar: home_sidebar
 ## Bug fixes and improvements
 * Minor bug fixes
 * Minor CLI additions
+
+[Prior Release Notes](/release-notes-1-0-4.html)
