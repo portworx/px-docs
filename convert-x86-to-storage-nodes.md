@@ -95,9 +95,9 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
    * `devices`: These are the storage devices that will be pooled from the prior step.
 
 
-      <br/>Example config.json:
+Example config.json:
 
- ```
+```
    {
       "clusterid": "make this unique in your k/v store",
       "kvdb": [
@@ -114,11 +114,11 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
     The format for the `kvdb` section is as follows:
 
-    ```
+```
     kvdb:[
       "etcd:[http/https]://[....]"
     ]
-    ```
+```
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
