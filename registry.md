@@ -23,7 +23,7 @@ To start the Docker Registry, run the following command. Substitute `DOCKER_CREA
 
 ```
 docker run -d -p 5000:5000  --name registry \
-    -v registry_volume:/tmp/registry registry:2.3.0
+    -v registry_volume:/var/lib/registry registry:2
 ```
 
 Your Docker Registry is now available for Docker push and pull commands on port 5000.
