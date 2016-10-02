@@ -10,8 +10,8 @@ The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud
 
 After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
 
-* [Scale a Cassandra Database with PX-Developer](examples/cassandra.html)
-* [Run the Docker Registry with High Availability](examples/registry.html)
+* [Scale a Cassandra Database with PX-Developer](/cassandra.html)
+* [Run the Docker Registry with High Availability](/registry.html)
 
 >**Important:**<br/>The PX-Developer release requires you to launch or have a pre-existing key/value store, such as etcd or Consul. For more information, see the [etcd example](https://github.com/portworx/px-dev/blob/master/examples/etcd_in_container) for PX-Developer. PX-Enterprise does not have this requirement.
 
