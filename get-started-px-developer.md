@@ -29,8 +29,8 @@ keywords: portworx, px-developer, container, storage, requirements
 
 See our quick start guides:
 
+* [Run PX-Developer with Docker](run-with-docker.html)
 * [Run PX-Developer with Docker Compose](run-with-compose.html)
-* [Convert x86 Servers to Storage-Capable Nodes](convert-x86-to-storage-nodes.html)
 
 Run Portworx with schedulers:
 
