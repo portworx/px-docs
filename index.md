@@ -24,13 +24,16 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 
 * Scale-out storage deployed as a container
 * Shared volumes, where multiple containers can share a single filesystem
-* Container-granular controls
+* Container granular storage operations that work on any cloud, such as
+  * Container volume granular snapshots
+  * Container volume granular CoS
+  * Container volume granular encryption
+  * Container volume granular access controls and quota management
 * Multi-cluster visibility and management
 * Distributed file access
 * Web management console with role-based access
 * Command-line interface
 * RESTful API for automation and statistics
-
 
 <FORM METHOD="LINK" ACTION="get-started-px-enterprise.html">
 <INPUT TYPE="submit" VALUE="Get Started with PX-Enterprise">
@@ -48,7 +51,7 @@ PX-Developer features:
 * Distributed file access
 * Command-line interface
 * Support for up three servers per cluster and 1 TB per volume
-* Requires an etcd key/value store (Consul coming soon)
+* Requires an etcd or Consul key/value store
 
 <FORM METHOD="LINK" ACTION="get-started-px-developer.html">
 <INPUT TYPE="submit" VALUE="Get Started with PX-Developer">
