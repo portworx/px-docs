@@ -27,7 +27,7 @@ entries:
   - title: Install and Run
     output: web
     folderitems:
-    - title: Prerequisite - OS Configuration for Docker Shared Mounts
+    - title: Prerequisite - OS Configurations for Docker Shared Mounts
       url: /os-config-shared-mounts.html
       output: web
     - title: Run With Docker
