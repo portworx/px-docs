@@ -27,8 +27,8 @@ entries:
   - title: Install and Run
     output: web
     folderitems:
-    - title: Convert x86 Servers to Storage-Capable Nodes
-      url: /convert-x86-to-storage-nodes.html
+    - title: Run With Docker
+      url: /run-with-docker.html
       output: web
     - title: OS Configuration for Docker Shared Mounts
       url: /os-config-shared-mounts.html
