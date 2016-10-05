@@ -24,7 +24,7 @@ Example:
 Following the "docker run" command:
 
 ```
-docker run --restart=always --name px-enterprise -d --net=host --privileged=true \
+#sudo docker run --restart=always --name px-enterprise -d --net=host --privileged=true \
 -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd:shared \
 -v /dev:/dev \

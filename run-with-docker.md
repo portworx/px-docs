@@ -124,7 +124,7 @@ When you run Docker and the Portworx container, Portworx aggregates and manages 
 For **CentOS** or **Ubuntu**, start the Portworx container with the following run command:
 
 ```
-# sudo docker run --restart=always --name px-dev -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
@@ -141,7 +141,7 @@ For **CentOS** or **Ubuntu**, start the Portworx container with the following ru
 For **CoreOS**, start the Portworx container with the following run command:
 
 ```
-# sudo docker run --restart=always --name px-dev -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
@@ -153,6 +153,23 @@ For **CoreOS**, start the Portworx container with the following run command:
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-dev
+```
+
+Running **without config.json**:
+
+```
+# sudo docker run --restart=always --name px -d --net=host \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
+                 --ipc=host                                    \
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
 ```
 
 Runtime command options:

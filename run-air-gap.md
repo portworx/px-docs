@@ -1,12 +1,12 @@
 ---
 layout: page
-title: "Running PX-Enterprise in 'air-gap' environments"
+title: "Running PX-Developer and PX-Enterprise in 'air-gap' environments"
 keywords: portworx, air-gap
 sidebar: home_sidebar
 ---
 
 Environments that do not permit any outside connectivity are considered an "air-gap" environment.
-Such environments preclude the use PX-Enterprise "Lighthouse" console, but can still run PX-Enterprise.
+Such environments preclude the use PX-Enterprise "Lighthouse" console, but can still run PX-Developer or PX-Enterprise.
 There are 3 main requirements
 - Run a local version of 'etcd'
 - Create a customer 'config.json' file
@@ -20,7 +20,7 @@ HOST_IP=1.2.3.4
 CLUSTER=etcd=http://${HOST_IP}:2380
 PORT=4001
 
-docker run -d --net=host --name etcd quay.io/coreos/etcd \
+# sudo docker run -d --net=host --name etcd quay.io/coreos/etcd \
     /usr/local/bin/etcd \
     --data-dir=data.etcd  --name etcd \
     --initial-advertise-peer-urls http://${HOST_IP}:2380 --listen-peer-urls http://${HOST_IP}:2380 \
@@ -55,7 +55,7 @@ Ensure the value of "clusterid" is unique.
 ## Launch Portworx manually
 
 ```
-docker run --restart=always --name px-enterprise -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
@@ -66,8 +66,24 @@ docker run --restart=always --name px-enterprise -d --net=host \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  --ipc=host                                    \
-                portworx/px-enterprise
+                portworx/px-dev
+```
+
+Running **without config.json**:
+
+```
+# sudo docker run --restart=always --name px -d --net=host \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
+                 --ipc=host                                    \
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
 ```
 
 NB:  If running CoreOS, then use "-v /lib/modules:/lib/modules" instead of "-v /usr/src:/usr/src"
-

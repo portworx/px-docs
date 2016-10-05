@@ -27,17 +27,17 @@ entries:
   - title: Install and Run
     output: web
     folderitems:
+    - title: Prerequisite - OS Configuration for Docker Shared Mounts
+      url: /os-config-shared-mounts.html
+      output: web
     - title: Run With Docker
       url: /run-with-docker.html
       output: web
-    - title: OS Configuration for Docker Shared Mounts
-      url: /os-config-shared-mounts.html
-      output: web
-    - title: Run PX-Developer with Docker Compose
+    - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
-    - title: Run PX-Enterprise in 'air-gap' environments
-      url: /air-gap.html
+    - title: Run in 'air-gap' environments
+      url: /run-air-gap.html
       output: web
     - title: Deploying via system image templates systemd
       url: /systemd.html

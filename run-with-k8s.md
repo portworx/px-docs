@@ -13,7 +13,7 @@ You can use Portworx to implement storage for Kubernetes pods. Portworx pools yo
 Run the PX-Developer container using Docker with following command:
 
 ```
-$ docker run --restart=always --name px-dev -d --net=host
+# sudo docker run --restart=always --name px -d --net=host
 --privileged=true \
 -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd \
@@ -106,8 +106,8 @@ spec:
 
 1. Run the PX-Developer container using Docker with following command.
 
-   ```
-$ docker run --restart=always --name px-dev -d --net=host
+```
+# sudo docker run --restart=always --name px -d --net=host
 --privileged=true \
 -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd \
