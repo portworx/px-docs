@@ -119,14 +119,6 @@ Example config.json:
 
 When you run Docker and the Portworx container, Portworx aggregates and manages your storage capacity. As you run the Portworx container on each server, new capacity is added to the cluster.
 
-After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
-
-To view all **pxctl** options, run:
-
-```
-# /opt/pwx/bin/pxctl help
-```
-
 ### To run the Portworx container
 
 For **CentOS** or **Ubuntu**, start the Portworx container with the following run command:
@@ -192,6 +184,15 @@ Runtime command options:
 
 -v /opt/pwx/bin:/export_bin:shared
     > Exports the PX command line (**pxctl**) tool from the container to the host.
+```
+
+### pxctl
+After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
+
+To view all **pxctl** options, run:
+
+```
+# /opt/pwx/bin/pxctl help
 ```
 
 ### To view global storage capacity
