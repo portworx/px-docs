@@ -26,7 +26,8 @@ Global Storage Pool
 	Total Used    	:  34 MiB
 	Total Capacity	:  1.5 TiB
 [root@PX-SM2 ~]# pxctl service add /dev/sdf
-Adding device /dev/sdf...success.
+Adding device /dev/sdf...
+Device /dev/sdf added.
 [root@PX-SM2 ~]# pxctl status
 Status: PX is operational
 Node ID: 003e61eb-51ba-4d42-bd64-06140b91850a
