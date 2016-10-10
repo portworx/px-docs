@@ -29,7 +29,7 @@ Global Storage Pool
 	Total Capacity	:  4.2 TiB
 [root@PX-SM2 ~]# pxctl service remove /dev/sdf
 Are you sure? (Y/N): Y
-success.
+Device /dev/sdf removed.
 [root@PX-SM2 ~]# pxctl status
 Status: PX is operational
 Node ID: 003e61eb-51ba-4d42-bd64-06140b91850a
