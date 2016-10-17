@@ -114,6 +114,12 @@ entries:
     - title: PostgreSQL with CrunchyData and Portworx
       url: /postgres.html
       output: web
+  - title: Reference Architectures
+    output: web
+    folderitems:
+    - title: Create a container cluster on baremetal with Kubernetes and Portworx
+      url: /k8s-pwx.html
+      output: web
   - title: Reference
     output: web
     folderitems:

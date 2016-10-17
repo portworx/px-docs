@@ -4,13 +4,13 @@ title: "Run Portworx with Kubernetes"
 keywords: portworx, PX-Developer, container, Kubernetes, storage
 sidebar: home_sidebar
 ---
-You can use Portworx to implement storage for Kubernetes pods. Portworx pools your servers' capacity and is deployed as a container. This section describes how to install PX-Developer on each server.
+You can use Portworx to implement storage for Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
 >**Note:**<br/>We are tracking when shared mounts will be allowed within Kubernetes (K8s), which will allow Kubernetes to deploy PX-Developer.
 
-## Step 1: Run the PX-Developer container outside of Kubernetes
+## Step 1: Run the PX container on the Kubernetes host machines.  Portworx can be deployed via K8s directly, or run on each host via docker or systemd directly.
 
-Run the PX-Developer container using Docker with following command:
+To run the PX container using Docker, run the following command:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host
@@ -28,17 +28,11 @@ Run the PX-Developer container using Docker with following command:
 portworx/px-dev:latest
 ```
 
-## Step 2: Install the Flexvolume Binary on all Kubernetes nodes
+Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
 
-Flexvolume allows other volume drivers outside of Kubernetes to
-attach, detach, mount, and unmount custom volumes to pods, daemonsets, and rcs.
+## Step 2: Include PX as a VolumeSpec in the K8s spec file
 
-When you run the PX-Developer container on a Kubernetes node, it automatically
-installs the Flexvolume binary at the required path and is ready to use.
-
-## Step 3: Include PX Flexvolume as a VolumeSpec in the Kubernetes spec file
-
-Under the `spec` section of your spec yaml file, add a `volumes` section.
+Under the `spec` section of your spec yaml file, add a `volumes` section.  For example:
 
 ``` yaml
 spec:
@@ -54,15 +48,12 @@ spec:
 ```
 
 * Set the driver name to `px/flexvolume`.
-* Specify the unique ID for the volume created in the PX-Developer container as
-the `volumeID` field.
-* Always set `osdDriver` to `pxd`. It indicates that the Flexvolume
-should use the px driver for managing volumes.
+* Specify the unique ID for the volume created in the PX-Developer container as the `volumeID` field.
+* Always set `osdDriver` to `pxd`. It indicates that the Flexvolume should use the px driver for managing volumes.
 
-## Step 4: Include the Flexvolume as a VolumeMount spec in your container/application
+## Step 3: Include the PX volume as a VolumeMount spec in your container/application
 
-After you specify Flexvolume as a volume type in your spec
-file, you can mount it by including a `volumeMounts` section under the `spec` section. This example shows how you can use it in your container.
+After you specify PX as a volume type in your spec file, you can mount it by including a `volumeMounts` section under the `spec` section. This example shows how you can use it in your container.
 
 ``` yaml
 spec:
@@ -78,14 +69,14 @@ spec:
 
 Be sure to use the same `name` field that you used when defining the volume.
 
-## Step 5: Run the Kubernetes cluster in privileged mode
+## Note: Be sure to run the Kubernetes cluster in privileged mode
 
 * To share the namespace between the host, PX-Developer container,
   and your Kubernetes pod instance, you must run the cluster with
   privileges. You can do that by setting the environment variable
   `ALLOW_PRIVILEGED` equal to `true`.
-* Share the host path `/var/lib/kubelet` with the PX-Developer container and
-  your pods. The Docker run command for PX-Developer shares this
+* Share the host path `/var/lib/kubelet` with the PX container and
+  your pods. The Docker run command for PX-Dev above shares this
   path. To share it within your pod, add a new `hostPath` type
   volume and a corresponding `volumeMount` in your spec file.
 
