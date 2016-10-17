@@ -20,12 +20,12 @@ Compatible instance and storage options for popular cloud providers are:
 
 Supported bare metal cloud providers are
 
-* Scaleway.  Use this image: https://www.scaleway.com/imagehub/docker/
+* Scaleway.  Use this image: [https://www.scaleway.com/imagehub/docker/](https://www.scaleway.com/imagehub/docker/)
 * Digital Ocean
 * Rackspace
 * Packet.io
 
-When chosing an instance, verify that you meet the minimum requirements available at http://docs.portworx.com/get-started-px-enterprise.html#step-1-verify-requirements
+When chosing an instance, verify that you meet the minimum requirements available at [http://docs.portworx.com/get-started-px-enterprise.html#step-1-verify-requirements](http://docs.portworx.com/get-started-px-enterprise.html#step-1-verify-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
