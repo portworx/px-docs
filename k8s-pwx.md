@@ -5,7 +5,7 @@ keywords: portworx, PaaS, IaaS, docker, kubernetes, converged, bare metal
 sidebar: home_sidebar
 ---
 
-This guide shows you how you can easily deploy a hyper converged (compute and storage) cluster in any cloud (GCE, AWS, Azure) or bare metal server environment.
+This guide shows you how you can easily deploy a hyper converged (compute and storage) cluster in any cloud (GCE, AWS, Azure) with Kubernetes and Portworx.
 
 ## Step 1: Select your cloud instance type
 You can use any cloud instances (like EC2) with persistent storage.  Portworx will automatically detect the performance of the volumes and match the CoS levels to the containers appropriately.
