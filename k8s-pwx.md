@@ -14,9 +14,9 @@ Compatible Instance and storage options for popular cloud providers are
 
 | Provider | Instance Options | Storage Options |
 |--------- |------------------|-----------------|
-| AWS | [Any EC2 instance type](https://aws.amazon.com/ec2/instance-types/) | [GP2, IO1 or ST1] (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) |
+| AWS | [Any EC2 instance type](https://aws.amazon.com/ec2/instance-types/) | [GP2, IO1 or ST1](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) |
 | GCE | [Any GCE instance type](https://cloud.google.com/compute/docs/machine-types) | [Persistent disks and SSDs](https://cloud.google.com/compute/docs/disks/) |
-| Azure | [Any Linux VM] (https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/?cdn=disable) | [Disk storage type](https://azure.microsoft.com/en-us/pricing/details/storage/disks/) |
+| Azure | [Any Linux VM](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/?cdn=disable) | [Disk storage type](https://azure.microsoft.com/en-us/pricing/details/storage/disks/) |
 
 Supported bare metal cloud providers are
 
