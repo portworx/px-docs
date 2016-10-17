@@ -8,9 +8,9 @@ sidebar: home_sidebar
 This guide shows you how you can easily deploy a hyper converged (compute and storage) cluster in any cloud (GCE, AWS, Azure) with Kubernetes and Portworx.
 
 ## Step 1: Select your cloud instance type
-You can use any cloud instances (like EC2) with persistent storage.  Portworx will automatically detect the performance of the volumes and match the CoS levels to the containers appropriately.
+You can use any cloud instances (like EC2) with persistent storage.  Portworx will automatically detect the performance of the volumes and match the CoS levels to the containers appropriately.  Portworx will also aggregate the capacity across all the cloud instances to provide a global pool of virtual, highly available storage to Kubernetes.
 
-Compatible Instance and storage options for popular cloud providers are
+Compatible instance and storage options for popular cloud providers are:
 
 | Provider | Instance Options | Storage Options |
 |--------- |------------------|-----------------|
