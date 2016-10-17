@@ -50,7 +50,7 @@ Visit [Run Portworx with Kubernetes](http://docs.portworx.com/run-with-k8s.html)
 ## An example BOM
 In an example deployment, we used GCE to deploy a 30 node Portworx with Kubernetes cluster.  The cost breakdown (minus the Portworx Enterprise licence fees) to run this 30 node cluster per hour was as follows:
 
-### Hourly compute costs
+### Bill of Materials
 
 | Material | Type | Details | Cost per hour |
 |----------|------|------|
@@ -59,7 +59,8 @@ In an example deployment, we used GCE to deploy a 30 node Portworx with Kubernet
 | Container Engine | Docker | 1.12 with device mapper | $0.0 |
 | Scheduler | Kubernetes | v1.4.3 | $0.0 |
 
-Therefore the total hourly cost for the 30 node converged container cluster was $6.
+### Hourly compute costs
+Based on the above BOM, the total hourly cost for the 30 node converged container cluster was $6.
 
 ### Monthly storage costs
 

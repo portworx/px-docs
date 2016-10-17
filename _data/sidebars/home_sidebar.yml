@@ -118,7 +118,7 @@ entries:
     output: web
     folderitems:
     - title: Create a 30 node cluster in GCE with Kubernetes
-      url: /k8s-pwx.html
+      url: /gce-k8s-pwx.html
       output: web
   - title: Reference
     output: web
