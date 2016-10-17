@@ -117,7 +117,7 @@ entries:
   - title: Reference Architectures
     output: web
     folderitems:
-    - title: Create a container cluster on baremetal with Kubernetes and Portworx
+    - title: Create a 30 node cluster in GCE with Kubernetes
       url: /k8s-pwx.html
       output: web
   - title: Reference

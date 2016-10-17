@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Create a scaleout converged container cluster using Kubernetes and Portworx"
+title: "Create a scaleout converged container cluster using Kubernetes and Portworx in GCE"
 keywords: portworx, PaaS, IaaS, docker, kubernetes, converged, bare metal
 sidebar: home_sidebar
 ---
