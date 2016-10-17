@@ -11,8 +11,9 @@ This guide shows you how you can easily deploy a hyper converged (compute and st
 You can use any cloud instances (like EC2) with persistent storage.  Portworx will automatically detect the performance of the volumes and match the CoS levels to the containers appropriately.
 
 Compatible Instance and storage options for popular cloud providers are
-|: Provider :|: Instance Options: |: Storage Options :|
-|:--------- :|:------------------:|:-----------------:|
+
+| Provider | Instance Options | Storage Options |
+|--------- |------------------|-----------------|
 | AWS | [Any EC2 instance type](https://aws.amazon.com/ec2/instance-types/) | [GP2, IO1 or ST1] (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) |
 | GCE | [Any GCE instance type](https://cloud.google.com/compute/docs/machine-types) | [Persistent disks and SSDs](https://cloud.google.com/compute/docs/disks/) |
 | Azure | [Any Linux VM] (https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/?cdn=disable) | [Disk storage type](https://azure.microsoft.com/en-us/pricing/details/storage/disks/) |
@@ -51,8 +52,8 @@ In an example deployment, we used GCE to deploy a 30 node Portworx with Kubernet
 
 ### Hourly compute costs
 
-|: Material :|: Type :|: Details :|: Cost per hour :|
-|:----------:|:------:|:------:|
+| Material | Type | Details | Cost per hour |
+|----------|------|------|
 | Compute Instance|n1-standard-4|4 CPU cores, 4 GB RAM with 375 GB local SSD|$0.20|
 | Linux Distro |Ubuntu Xenial | 4.4.0-38-generic | $0.0 |
 | Container Engine | Docker | 1.12 with device mapper | $0.0 |
@@ -70,7 +71,7 @@ Each instance in our reference deployment had a local 375 GB SSD volume.  Google
 
 In total, we had a 30 node cluster with the following properties:
 
-|:Resource:|:Amount:|
+|Resource|Amount|
 |------|------|
 |CPU|120 cores|
 |Memory| 120 GB|
@@ -78,7 +79,7 @@ In total, we had a 30 node cluster with the following properties:
 
 The total monthly cost to run this in GCE was:
 
-|:Item:|:Cost:|
+|Item|Cost|
 |------|------|
 |Storage|$1912.50|
 |Compute|$4320.0|
