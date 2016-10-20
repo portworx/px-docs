@@ -5,6 +5,7 @@ keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
+## Changes from the last release
 * incremental fixes to the pxctl upgrade experience on multiple nodes
 
 ## Key notes
