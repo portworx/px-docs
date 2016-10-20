@@ -5,7 +5,7 @@ keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
-#incremental fixes to the pxctl upgrade experience on multiple nodes
+* incremental fixes to the pxctl upgrade experience on multiple nodes
 
 ## Key notes
 * Note that the shared namespace feature is still in beta.
