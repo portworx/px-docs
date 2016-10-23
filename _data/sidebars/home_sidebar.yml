@@ -120,6 +120,9 @@ entries:
     - title: Create a 30 node cluster in GCE with Kubernetes
       url: /gce-k8s-pwx.html
       output: web
+    - title: Portworx on the Packet.net Platform
+      url: /portworx_on_packet.html
+      output: web
   - title: Reference
     output: web
     folderitems:
