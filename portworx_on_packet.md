@@ -5,7 +5,7 @@ keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
 sidebar: home_sidebar
 ---
 
-This guide shows you how you can easily deploy Portworx on the **packet.net** hosting service, available [here](http://packet.net)
+This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](http://packet.net)
 
 Other supported bare metal cloud providers are
 
@@ -27,8 +27,7 @@ Note: Portworx requires Docker to allow shared mounts.  This is standard as of D
 If you are running Docker without shared mounts, please follow the steps listed [here](os-config-shared-mounts.html)
 
 ## Step 3: Create and Attach the Volume
-Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage]
-(https://www.packet.net/help/kb/how-to-use-the-block-storage/)
+Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage](https://www.packet.net/help/kb/how-to-use-the-block-storage/)
 
 ## Step 4: Install and Run the Packet host utilities for block storage
 On each host, download and install the [Packet block-storage utilities](https://github.com/packethost/packet-block-storage)
