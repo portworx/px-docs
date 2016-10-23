@@ -26,7 +26,7 @@ Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/eng
 Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
 If you are running Docker without shared mounts, please follow the steps listed [here] (/os-config-shared-mounts.html)
 
-## Step 2: Create and Attach the Volume
+## Step 3: Create and Attach the Volume
 Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage]
 (https://www.packet.net/help/kb/how-to-use-the-block-storage/)
 
@@ -54,12 +54,4 @@ Follow the instructions here [/get-started-px-enterprise.html] to launch PX-Ente
 Create a Portworx Cluster, and "Get Startup Script" from the "Manage Clusters" page.
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json] (/config-json.html) file.
-
-
-A recent enough Linux distribution is typically all that is needed.  We recommend one of the following:
-
-* Ubuntu Xenial+
-* CentOS 7.0+
-* RHEL 7+
-* CoreOS 1192.1.0+
 
