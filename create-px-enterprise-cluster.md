@@ -36,7 +36,7 @@ You will now add your first server node to the storage cluster. On the **Cluster
 
 A window containing a `curl` command opens. The following `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
-![Startup script to add a cluster](images/startup-script-window.png "Startup script to add a cluster")
+![Startup script to add a cluster](images/startup-script-window-temp.png "Startup script to add a cluster")
 
 Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the `curl` string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
