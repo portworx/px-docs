@@ -40,81 +40,41 @@ A window containing a `curl` command opens. The following `curl` example include
 
 Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the `curl` string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
-![Startup script status messages](images/startup-script-result.png "Startup script status messages")
+![Startup script status messages](images/startup-script-result-updated.png "Startup script status messages")
 
-## Step 3: Configure the Server Profile
+## Step 3: Configure the Hardware Profile
 
-The bootstrap startup script sends the server/node configuration to the PX-Enterprise web console. To view the discovered hardware configuration, click **Server Profiles** on the Manage Clusters page.
+The bootstrap startup script discovers the server/node configuration. It lets you specify which storage and network elements you want to participate in PX-Enterprise.
 
-![Hardware configuration](images/manage-clusters-server-profiles.png "Hardware configuration")
+First menu is ***Storage Selection Menu*** You can either pick individual storage devices or can choose to add all devices.
 
-If the hardware configuration is new, you can specify which storage and network elements you want to participate in PX-Enterprise.
+![Hardware configuration](images/storage-selection-menu.png "Hardware configuration")
 
-There are 2 important aspects of Server Profile configuration:
+Second menu is ***Data Network Interface Selection Menu*** This will let you assign one of your network interfaces as data interface for your this node.
+The *data interface* is used between server nodes, primarily for data transfer as part of data availability (that is, multi-node data replication).
 
-*  **Used elements** (dropdowns)<br/>
-*  **Elements required for a "match" rule** (checkboxes)<br/>
+![Hardware configuration](images/data-network-interface-selection-menu.png "Hardware configuration")
 
-**Used elements** refers to which storage and network elements on the server will be used by PX-Enterprise. You have the option of including or excluding any storage or network element from your server through the corresponding dropdown list. For example, this provides the ability to contribute certain storage elements into the aggregated Portworx Fabric, and to reserve certain storage elements for use only by the local server. PX-Enterprise will use only the storage and network elements that are provided through this Server Profile definition
+Last menu is ***Management Network Interface Selection Menu*** This will let you assign one of your network interfaces as management interface for your this PX node.
+The *management interface* is used for communication between the hosted PX-Enterprise product and the individual server nodes, for control-path as well as statistics and metrics.
+Note: You can choose to use the same interface both for data interface and management interface.PX-Enterprise requires at least one NIC and only needs a maximum of two NICs.
 
-**Elements required for a "match" rule** refers to Server Profile matching, which you can easily use to add nodes to a cluster. For any node running a bootstrap/discovery script, if that node's Server Profile (CPU, Memory, Storage, Network, and so on...) matches an existing Server Profile in the PX-Enterprise console, then that node gets automatically added into the appropriate cluster.
+![Hardware configuration](images/management-network-interface-selection-menu.png "Hardware configuration")
 
->**Note:**<br/>If there are subtle differences between the incoming node and an existing Server Profile, then a new Server Profile gets created and it must be "Activated" in the console before that node can participate in the cluster.
-
-The following example of the Hardware Configuration page shows the discovered attributes, including hostname, server vendor, CPU, RAM, storage devices, and network devices. The Hardware Configuration rule performs the following:
-
-* **Storage**: Aggregates storage based on the disks you select by toggling the drop-down list from **Not Used** to **Used**.
-
-* **Network**: Specifies the interfaces PX-Enterprise should use for management and the data path. Set by toggling the drop-down list for either **Management** or **Data**.
-
-* **Match Criteria** (checkbox): Ensures that this element is required of all servers attempting to join the cluster
-
-![Discovered hardware configuration](images/hardware-configuration.png "Discovered hardware configuration")
-
-Only servers matching all criteria will install PX-Enterprise. In the example above, only servers with the same Vendor, CPU ID, selected disks, and selected NICs will join the cluster.
-
-
->**Important:**<br/>As part of aggregation, PX-Enterprise overwrites any pre-existing data on the underlying storage. Preserve any data that you want to keep.  
-
-### General vs. specific Server Profiles
-
-For storage disks, you can match based on wildcards. For example:
-
-* Storage of any size and any type (SSD, HDD, or other):<br/>
-`/dev/sdc *  *`
-
-* Storage must have a specified size:<br/>
-`/dev/sdc 300GB *`
-
-* Storage must have a specified size and type:<br/>
-`/dev/sdc 300GB SSD`
-
-Consider carefully the implications of making a Server Profile more general or more specific. For a new server node to be automatically accepted into the PX-Enterprise cluster, the server must match an activated Server Profile.
-
-* When a Server Profile is more **general** (the Hardware Configuration page has fewer check boxes selected), new nodes can more easily join a cluster because they are activated without your intervention
-
-* When a Server Profiles is more **specific**, such as matched on hostnames, you must specifically activate those Server Profiles before servers can join a cluster.
-
->**Important:**<br/>Portworx recommends implementing **specific** matching policies versus **general** policies.   Strict policies will tend to enforce stronger deterministic and predictable behavior.
-
-PX-Enterprise aggregates and monitors for health only the disks marked with **Allocated to PX**.
-
-## Step 4: Select network interfaces and activate
-
-PX-Enterprise assigns the selected NICs to the management interface, the data interface, or both. PX-Enterprise requires at least one NIC and only needs a maximum of two NICs.
-
-The *management interface* is used for communication between the hosted PX-Enterprise product and the individual server nodes, for control-path as well as statistics and metrics. The *data interface* is used between server nodes, primarily for data transfer as part of data availability (that is, multi-node data replication).
-
-To instruct the PX-Enterprise container on the server node to complete the installation, click **Activate** on the Hardware Configuration page. Upon installation, PX-Enterprise aggregates the specified storage and uses the network interfaces selected.
+To instruct the PX-Enterprise container on the server node to complete the installation, click **Commit Selections** on the Management Network Interface Selection Menu. Upon installation, PX-Enterprise aggregates the specified storage and uses the network interfaces selected.
 
 From the server node that ran the `curl` command, you should see the following status:
 
-![Status messages after activation](images/status-messages-after-activate.png "Status messages after activation")
+![Status messages after activation](images/status-messages-after-activate-updated.png "Status messages after activation")
 
-## Step 5: Expand the cluster
+Bootstrap script also saves your selection as a unique *Hardware Profile*. You can reference this on any other node where you want to run PX-Enterprise with the same storage and network elements.
+
+![Hardware configuration](images/hardware-profile-example.png "Hardware configuration")
+
+## Step 4: Expand the cluster
 
 You can add new servers nodes to the existing cluster by running the bootstrap script for a cluster. Server nodes can have different Server Profiles, where some servers might contribute little or no storage to the cluster.
 
 >**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see [Step 1: Verify requirements](get-started-px-developer.html#step-1-verify-requirements).
 
-For a new server node to be automatically accepted into the PX-Enterprise cluster, the server must match an activated Server Profile.
+At this point you will have a PX-Enterprise cluster that you will be able to monitor from PX-Enterprise console.
