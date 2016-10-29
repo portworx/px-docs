@@ -65,11 +65,11 @@ To instruct the PX-Enterprise container on the server node to complete the insta
 
 From the server node that ran the `curl` command, you should see the following status:
 
-![Status messages after activation](images/status-messages-after-activate-updated.png "Status messages after activation")
+![Status messages after activation](images/status-messages-after-activate-updated-2.png "Status messages after activation")
 
 Bootstrap script also saves your selection as a unique *Hardware Profile*. You can reference this on any other node where you want to run PX-Enterprise with the same storage and network elements.
 
-![Hardware configuration](images/hardware-profile-example.png "Hardware configuration")
+![Hardware configuration](images/hardware-profile-example-updated.png "Hardware configuration")
 
 ## Step 4: Expand the cluster
 
