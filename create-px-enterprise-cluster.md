@@ -12,31 +12,31 @@ This section walks through installing and configuring a PX-Enterprise cluster. I
 
 Log in to the PX-Enterprise console. If a cluster has not already been created for your account, click the **Manage Clusters** menu and then click **Manage Clusters**.
 
-![Manage Clusters menu](images/clusters-manage-clusters-menu.png "Manage Clusters menu")
+![Manage Clusters menu](images/clusters-manage-clusters-menu-updated.png "Manage Clusters menu")
 
 On the **Clusters** page, click the **+** icon to create a new storage cluster.
 
-![Add a cluster](images/clusters-add.png "Add a cluster")
+![Add a cluster](images/clusters-add-updated.png "Add a cluster")
 
 Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
-![Name a new cluster](images/clusters-new.png "Name a new cluster")
+![Name a new cluster](images/clusters-new-updated.png "Name a new cluster")
 
 (Don't use the "Existing Cluster" option, unless directed by Portworx Support.)
 
 The new cluster appears in the Clusters list.
 
-![List of clusters](images/cluster-list.png "List of clusters")
+![List of clusters](images/cluster-list-updated.png "List of clusters")
 
 ## Step 2: Run discovery and bootstrap on a server node
 
 You will now add your first server node to the storage cluster. On the **Clusters** page, click **Get Startup Script** for the cluster you just created.
 
-![Startup script example](images/cluster-list.png "Startup script example")
+![Startup script example](images/cluster-list-updated.png "Startup script example")
 
 A window containing a `curl` command opens. The following `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
-![Startup script to add a cluster](images/startup-script-window-temp.png "Startup script to add a cluster")
+![Startup script to add a cluster](images/startup-script-window-updated.png "Startup script to add a cluster")
 
 Log in to each node that will install PX-Enterprise and join the cluster. Open a terminal window and run as `root` or `sudo su` to give privileges. On your system, copy the `curl` string provided by the pop-up window and paste it into a terminal session and press Enter, as shown below.
 
