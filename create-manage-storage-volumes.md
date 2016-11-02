@@ -32,7 +32,7 @@ To manage an existing volume, go to the **Storage** page and select the volume.
 
 * In the **Actions** area, you can clone (or snapshot), edit or delete a volume.
 
-![Manage a storage volume](images/storage-details-updated.png "Manage a storage volume"
+![Manage a storage volume](images/storage-details-updated.png "Manage a storage volume")
 
 * **Edit Volume** lets you change availibility level and snapshot interval of an existing volume.
 
