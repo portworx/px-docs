@@ -20,7 +20,7 @@ Portworx recommends a minimum cluster size of 3 nodes.
 
 ### Step 1: Provision Server
 
-## Step 2: Install Docker for the appropriate OS Version
+### Step 2: Install Docker for the appropriate OS Version
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
