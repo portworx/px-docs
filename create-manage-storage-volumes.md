@@ -36,4 +36,4 @@ To manage an existing volume, go to the **Storage** page and select the volume.
 
 * **Edit Volume** lets you change availibility level and snapshot interval of an existing volume.
 
-![Edit a storage volume](images/edit-volume.png "Edit a storage volume"
+![Edit a storage volume](images/edit-volume.png "Edit a storage volume")
