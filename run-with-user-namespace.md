@@ -13,7 +13,7 @@ You must enable the `--userns host` directive to Docker
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
-				 --userns=host                                 \
+                 --userns=host                                 \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
@@ -31,7 +31,7 @@ For **CoreOS**, start the Portworx container with the following run command:
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
-				 --userns=host                                 \
+                 --userns=host                                 \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
@@ -49,7 +49,7 @@ Running **without config.json**:
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
-				 --userns=host                                 \
+                 --userns=host                                 \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
