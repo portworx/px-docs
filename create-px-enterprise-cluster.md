@@ -12,7 +12,7 @@ This section walks through installing and configuring a PX-Enterprise cluster. I
 
 Log in to the PX-Enterprise console. If a cluster has not already been created for your account, click the **Manage Clusters** menu and then click **Manage Clusters**.
 
-![Manage Clusters menu](images/clusters-manage-clusters-menu-updated.png "Manage Clusters menu")
+![Manage Clusters menu](images/clusters-manage-clusters-menu-updated-2.png "Manage Clusters menu")
 
 On the **Clusters** page, click the **+** icon to create a new storage cluster.
 
@@ -26,13 +26,13 @@ Then, type a unique Name for your PX-Enterprise cluster and click **Create**.
 
 The new cluster appears in the Clusters list.
 
-![List of clusters](images/clusters-list-updated.png "List of clusters")
+![List of clusters](images/clusters-list-updated-2.png "List of clusters")
 
 ## Step 2: Run discovery and bootstrap on a server node
 
 You will now add your first server node to the storage cluster. On the **Clusters** page, click **Get Startup Script** for the cluster you just created.
 
-![Startup script example](images/clusters-list-updated.png "Startup script example")
+![Startup script example](images/clusters-list-updated-2.png "Startup script example")
 
 A window containing a `curl` command opens. The following `curl` example includes an authentication token and downloads the PX-Enterprise Docker container.
 
