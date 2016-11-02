@@ -50,7 +50,9 @@ Use the following command to identify the multipath devices:
 which block devices (and which corresponding multipath devices) are assocated with each service.
 
 ### Step 6: Determine the appropriate network interfaces
-Run the standard **ifconfig** utility to determine which network interface corresponds to your public and private IP address.  For Packet, your likely public interface will be "team0" and private interface will be "team0:0".   Use "team0" as the Portworx management interface, and "team0:0" as the Portworx data interface.
+Run the standard **ifconfig** utility to determine which network interface corresponds to your public and private IP address.  
+For CentOS7, your likely public interface will be "team0" and private interface will be "team0:0".   Use "team0" as the Portworx management interface, and "team0:0" as the Portworx data interface.
+For Ubuntu16, your likely public interface will be "bond0" and private interface will be "bond0:0".   Use "bond0" as the Portworx management interface, and "bond0:0" as the Portworx data interface.
 
 ### Step 7: Launch PX-Enterprise
 [Follow the instructions to launch PX-Enterprise](get-started-px-enterprise.html)
