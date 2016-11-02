@@ -57,6 +57,7 @@ The *data interface* is used between server nodes, primarily for data transfer a
 
 Last menu is ***Management Network Interface Selection Menu*** This will let you assign one of your network interfaces as management interface for your this PX node.
 The *management interface* is used for communication between the hosted PX-Enterprise product and the individual server nodes, for control-path as well as statistics and metrics.
+
 Note: You can choose to use the same interface both for data interface and management interface.PX-Enterprise requires at least one NIC and only needs a maximum of two NICs.
 
 ![Hardware configuration](images/management-network-interface-selection-menu.png "Hardware configuration")
