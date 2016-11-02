@@ -38,13 +38,13 @@ The PX-Enterprise web console provides storage management for all of your PX-Ent
 
 The Overview page provides a summary view of the health of a cluster. You select a cluster from the upper-right dropdown list. The Alerts identify important status changes for the selected cluster, sorted by recency of the error or warning.
 
-![Overview page in Portworx console](images/overview.png "Overview page in Portworx console")
+![Overview page in Portworx console](images/overview-updated.png "Overview page in Portworx console")
 
 Use the menu bar to navigate to server Nodes, manage Storage, view Containers, or chart the performance and storage capacity for a cluster.
 
 The Storage page presents a complete view for a cluster’s storage, as shown below. From this page, you can create new volumes (under Actions) and manage existing volumes, including snapshotting a volume.
 
-![Storage page in Portworx console](images/storage-actions.png "Storage page in Portworx console")
+![Storage page in Portworx console](images/storage-actions-updated.png "Storage page in Portworx console")
 
 You can also create volumes programmatically using a scheduler or by the container itself, as well as from the command-line. You can manage a volume created by any of those methods from the Storage page. For information about supported schedulers, see "Run PX-Enterprise with schedulers" in the next step.
 
