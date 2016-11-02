@@ -78,3 +78,5 @@ You can add new servers nodes to the existing cluster by running the bootstrap s
 >**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see [Step 1: Verify requirements](get-started-px-developer.html#step-1-verify-requirements).
 
 At this point you will have a PX-Enterprise cluster that you will be able to monitor from PX-Enterprise console.
+
+![New cluster in Lighthouse](images/new-cluster-in-lighthouse.png "New cluster in Lighthouse")
