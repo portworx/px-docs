@@ -54,7 +54,6 @@ Run the standard **ifconfig** utility to determine which network interface corre
 
 ### Step 7: Launch PX-Enterprise
 [Follow the instructions to launch PX-Enterprise](get-started-px-enterprise.html)
-Create a Portworx Cluster, and "Get Startup Script" from the "Manage Clusters" page.
 
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 
