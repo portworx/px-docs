@@ -40,7 +40,7 @@ entries:
       url: /run-air-gap.html
       output: web
     - title: Run With User Namespaces
-      url: /run-with-user-namespaces.html
+      url: /run-with-user-namespace.html
       output: web
     - title: Deploying via system image templates systemd
       url: /systemd.html
