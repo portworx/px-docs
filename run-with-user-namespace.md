@@ -1,131 +1,19 @@
 ---
 layout: page
-title: "Run PX with Docker"
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
+title: "Run PX with Docker User Namespaces"
+keywords: portworx, install, configure, container, user, namespaces, namespace, security
 sidebar: home_sidebar
 ---
-To install and configure PX via the Docker CLI, use the command-line steps in this section.
-
-The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
-
-After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
-
-* [Scale a Cassandra Database with PX](/cassandra.html)
-* [Run the Docker Registry with High Availability](/registry.html)
-
->**Important:**<br/>The PX-Developer release requires you to launch or have a pre-existing key/value store, such as etcd or Consul. For more information, see the [etcd example](https://github.com/portworx/px-dev/blob/master/examples/etcd_in_container) for PX-Developer. PX-Enterprise does not have this requirement.
-
-## Step 1: Launch servers
-
-To start, create three servers, following these requirements:
-
-* Image: Must support Docker 1.10 or later, such as:
-  * [Red Hat 7.2 (HVM)](https://aws.amazon.com/marketplace/pp/B019NS7T5I) or CentOS
-  * CoreOS (1010.6.0 or later)
-  * [Ubuntu 14.04 (HVM)](https://aws.amazon.com/marketplace/pp/B00JV9TBA6/ref=mkt_wir_Ubuntu14)
-* Instance type: c3.xlarge
-* Number of instances: 3
-* Storage:
-  * /dev/xvda: 8 GB boot device
-  * /dev/xvdb: 64 GB for container storage
-  * /dev/xvdc: 64 GB for container storage
-* Tag (optional): Add value **px-cluster1** as the name
-
-Volumes used for container data can be of any type, such as HDD, SSD, or provisioned IOPs SSDs. On-premises, the underlying storage could also be from a SAN. Portworx applies different policies based on storage device capabilities.
-
-## Step 2: Install and configure Docker
-
-SSH into your first server and perform the general steps below.
-
-1. Follow the Docker install guide to install and start the Docker Service.
-2. Verify that your Docker version is 1.10 or later.
-3. Configure Docker to use shared mounts.  
-     The shared mounts configuration is required, because Portworx exports mount points. For examples, including RedHat/CentOS, CoreOS, and Ubuntu, see [OS Configuration for Shared Mounts](os-config-shared-mounts.html).
-
-## Step 3: Specify storage
-
-Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc) from Step 1 of this section.
-
->**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
-
-### To view the storage devices on your server
-
-Use this command line:
-
-```
-# lsblk
-```
-
-Example output:
-
-Note that devices without the partition are shown under the **TYPE** column as **part**.
-
-```
-   $ lsblk
-    NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-    xvda                      202:0    0     8G  0 disk
-    └─xvda1                   202:1    0     8G  0 part /
-    xvdb                      202:16   0    64G  0 disk
-    xvdc                      202:32   0    64G  0 disk
-```
-
-### To choose storage devices
-
-Portworx lets you choose the storage devices that it will manage. For example, you might decide to have Portworx manage only a subset of your storage devices. With PX-Enterprise, you can choose storage devices through the PX-Enterprise web console.
-
-With PX, use the following steps to specify in the config.json file which storage devices you want Portworx to manage. The config.json file in PX identifies the key/value store for the cluster.
-
-1. Download the sample config.json file:
-https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
-2. Create a directory for the configuration file.
-
-   ```
-   # sudo mkdir -p /etc/pwx
-   ```
-   
-3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
-
-   ```
-   # sudo cp -p config.json /etc/pwx
-   ```
-   
-4. Edit the config.json to include the following:
-   * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
-   * `kvdb`: This is the etcd connection string for your etcd key/value store.
-   * `devices`: These are the storage devices that will be pooled from the prior step.
-
-
-Example config.json:
-
-```
-   {
-      "clusterid": "make this unique in your k/v store",
-      "kvdb": [
-          "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
-        ],
-      "storage": {
-        "devices": [
-          "/dev/xvdb",
-          "/dev/xvdc"
-        ]
-      }
-    }
-```
-
-
->**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
-
-## Step 4: Launch the PX Container
-
-When you run Docker and the Portworx container, Portworx aggregates and manages your storage capacity. As you run the Portworx container on each server, new capacity is added to the cluster.
+To install and configure PX with Docker user namespaces enabled, use the command-line steps in this section.
 
 ### To run the Portworx container
 
-For **CentOS** or **Ubuntu**, start the Portworx container with the following run command:
+You must enable the `--userns host` directive to Docker
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
+				 --userns=host								   \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
@@ -143,6 +31,7 @@ For **CoreOS**, start the Portworx container with the following run command:
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
+				 --userns=host								   \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
@@ -160,6 +49,7 @@ Running **without config.json**:
 ```
 # sudo docker run --restart=always --name px -d --net=host \
                  --privileged=true                             \
+				 --userns=host								   \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
