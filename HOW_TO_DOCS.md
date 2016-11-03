@@ -18,4 +18,4 @@ Most important things to know:
 [Create a PX-Enterprise Cluster](create-px-enterprise-cluster.html)  <br/>
  
  ```
-
+Note the reference to a **".html"** file, which gets generated automatically by jekyll from the **".md"** file.
