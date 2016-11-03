@@ -12,5 +12,10 @@ Most important things to know:
 
   + For now, the content is all flat.   All 'md' files are at this top level directory.   There are no subdirectories
   + The main sidebar is _data/sidebars/home_sidebar.yml.   If you create a new page, find an appropriate header under which to place it.  As of now, this is the only sidebar being used
-  
+  + Local references to files in this directory take the following form:  
+ ```
+ 
+[Create a PX-Enterprise Cluster](create-px-enterprise-cluster.html)  <br/>
+ 
+ ```
 
