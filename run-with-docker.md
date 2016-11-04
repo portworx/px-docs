@@ -15,7 +15,7 @@ After you complete this installation, continue with the set up to run stateful c
 
 >**Important:**<br/>The PX-Developer release requires you to launch or have a pre-existing key/value store, such as etcd or Consul. For more information, see the [etcd example](https://github.com/portworx/px-dev/blob/master/examples/etcd_in_container) for PX-Developer. PX-Enterprise does not have this requirement.
 
-## Step 1: Launch servers
+### Step 1: Launch servers
 
 To start, create three servers, following these requirements:
 
@@ -33,7 +33,7 @@ To start, create three servers, following these requirements:
 
 Volumes used for container data can be of any type, such as HDD, SSD, or provisioned IOPs SSDs. On-premises, the underlying storage could also be from a SAN. Portworx applies different policies based on storage device capabilities.
 
-## Step 2: Install and configure Docker
+### Step 2: Install and configure Docker
 
 SSH into your first server and perform the general steps below.
 
@@ -42,7 +42,7 @@ SSH into your first server and perform the general steps below.
 3. Configure Docker to use shared mounts.  
      The shared mounts configuration is required, because Portworx exports mount points. For examples, including RedHat/CentOS, CoreOS, and Ubuntu, see [OS Configuration for Shared Mounts](os-config-shared-mounts.html).
 
-## Step 3: Specify storage
+### Step 3: Specify storage
 
 Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc) from Step 1 of this section.
 
@@ -115,7 +115,7 @@ Example config.json:
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
-## Step 4: Launch the PX Container
+### Step 4: Launch the PX Container
 
 When you run Docker and the Portworx container, Portworx aggregates and manages your storage capacity. As you run the Portworx container on each server, new capacity is added to the cluster.
 
