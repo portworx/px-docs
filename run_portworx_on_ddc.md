@@ -8,9 +8,10 @@ sidebar: home_sidebar
 Portworx has been qualified to work with [Docker Datacenter](https://www.docker.com/products/docker-datacenter)
 
 Docker Datacenter (DDC) has 3 major components:
-1. Docker Universal Control Plan (UCP)
-2. Docker Trusted Registry (DTR)
-3. Docker Commercially Supported Engine (CSE)
+
+* Docker Universal Control Plan (UCP)
+* Docker Trusted Registry (DTR)
+* Docker Commercially Supported Engine (CSE)
 
 Of these elements, Portworx interacts with Docker Commercially Supported Engine (CSE) for Portworx configuration, and with Docker UCP for deployment of applications.
 
