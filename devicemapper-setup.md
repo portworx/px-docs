@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 Portworx recommends using devicemapper for the thinpool, rather than loopback devices.
 
-[This script](devicemapper-setup.html) can be used to help with the basic thinpool and devicemapper setup.
+[This script](devicemapper-setup.sh) can be used to help with the basic thinpool and devicemapper setup.
 
 Please note the following caveats:
 
