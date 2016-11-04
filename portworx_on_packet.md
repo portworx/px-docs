@@ -12,7 +12,7 @@ Other supported bare metal cloud providers are
 * Scaleway.  Use this image: [https://www.scaleway.com/imagehub/docker/](https://www.scaleway.com/imagehub/docker/)
 * Digital Ocean
 * Rackspace
-* Packet.net
+
 
 ### Step 1: Provision Server 
 When chosing an instance, verify that you meet the [minimum requirements](get-started-px-enterprise.html#step-1-verify-requirements)
