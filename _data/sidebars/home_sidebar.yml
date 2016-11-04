@@ -141,7 +141,7 @@ entries:
     - title: px-enterprise usage
       url: /px-usage.html
       output: web
-  - title: FAQs
+  - title: Troubleshooting and FAQs
     output: web
     folderitems:
     - title: FAQs about PX-Enterprise
@@ -149,6 +149,9 @@ entries:
       output: web
     - title: Troubleshooting
       url: /troubleshooting.html
+      output: web
+    - title: Devicemapper Thinpool setup
+      url: /devicemapper-setup.html
       output: web
   - title: Release Notes
     output: web
