@@ -8,7 +8,7 @@ Portworx requires Docker to allow shared mounts.
 
 The following sections describe how to configure Docker for shared mounts on [CoreOS](os-config-shared-mounts.html#coreos-configuration-and-shared-mounts), [RedHat/CentOS](os-config-shared-mounts.html#centos-configuration-and-shared-mounts), and [Ubuntu](os-config-shared-mounts.html#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. The examples use AWS EC2 for servers in the cluster.
 
-## CoreOS Configuration and Shared Mounts
+### CoreOS Configuration and Shared Mounts
 
 1. Verify that your Docker version is 1.10 or later:
 ```
@@ -34,7 +34,7 @@ The following sections describe how to configure Docker for shared mounts on [Co
       sudo systemctl restart docker
 ```
 
-## RedHat/CentOS Configuration and Shared Mounts
+### RedHat/CentOS Configuration and Shared Mounts
 
 1. Follow the Docker installation guide, [Red Hat Enterprise Linux](https://docs.docker.com/engine/installation/linux/rhel/) and then start the Docker service.
 
@@ -58,7 +58,7 @@ The following sections describe how to configure Docker for shared mounts on [Co
      sudo systemctl restart docker
 ```
 
-## Ubuntu Configuration and Shared Mounts
+### Ubuntu Configuration and Shared Mounts
 
 1. SSH into your first server.
 2. While following the Docker installation guide, [Unbuntu](https://docs.docker.com/engine/installation/linux/ubuntulinux/):
