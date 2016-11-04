@@ -7,7 +7,7 @@ sidebar: home_sidebar
 You can deploy Portworx through Rancher using the Rancher's Portworx Catalog.
 The following sequence illustrates deployment in an Amazon AWS/EC2 environment.
 
-## Step 1: Add a Host
+# Step 1: Add a Host
 For availability zone, use either "West N. California", or "East N. Virginia".  If you need a different availability zone, please contact support@portworx.com.
 
 ## Step 2: Configure Instance
