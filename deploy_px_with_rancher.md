@@ -10,7 +10,7 @@ The following sequence illustrates deployment in an Amazon AWS/EC2 environment.
 # Step 1: Add a Host
 For availability zone, use either "West N. California", or "East N. Virginia".  If you need a different availability zone, please contact support@portworx.com.
 
-## Step 2: Configure Instance
+# Step 2: Configure Instance
 
 * Select the name and count of your instances
 * Use **m3.medium** as the instance type
@@ -20,11 +20,11 @@ For availability zone, use either "West N. California", or "East N. Virginia".  
 
 ![Configuring Instance](images/rancherpx.png "Depoloying Portworx with Rancher")
 
-## Step 3 : Advanced Options
+# Step 3 : Advanced Options
 
 * Expand "Advanced Options".  For "Docker Install URL", select "Latest" from the dropdown
 
-## Step 4:  Add Portworx Service
+# Step 4:  Add Portworx Service
 
 Next, select "Add From Catalog".  Select Portworx.
 For "Cluster Token", provide the token supplied to you from Portworx.
