@@ -12,7 +12,7 @@ There are 3 main requirements
 - Create a customer 'config.json' file
 - Launch PX-Entprise manually
 
-## Run a local version of 'etcd'
+### Run a local version of 'etcd'
 Use the script below to launch 'etcd', using your own HOST_IP
 
 ```
@@ -29,7 +29,7 @@ PORT=4001
     --initial-cluster-state new --initial-cluster-token my-token
 ```
 
-## Create a custom 'config.json' file
+### Create a custom 'config.json' file
 The reference for 'config.json' can be found [here](/config-json.html).
 An absolute minimal configuration would look like this:
 
@@ -52,7 +52,7 @@ An absolute minimal configuration would look like this:
 Make sure the list of "devices" includes all disks that will be part of the Portworx fabric.
 Ensure the value of "clusterid" is unique.
 
-## Launch Portworx manually
+### Launch Portworx manually
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \
