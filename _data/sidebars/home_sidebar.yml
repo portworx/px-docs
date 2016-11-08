@@ -120,9 +120,6 @@ entries:
   - title: Reference Architectures
     output: web
     folderitems:
-    - title: Portworx on Azure
-      url: /portworx-on-azure.html
-      output: web
     - title: Create a 30 node cluster in GCE with Kubernetes
       url: /gce-k8s-pwx.html
       output: web
@@ -131,6 +128,9 @@ entries:
       output: web
     - title: Portworx on Packet.net Platform
       url: /portworx_on_packet.html
+      output: web
+    - title: Portworx on Azure
+      url: /portworx-on-azure.html
       output: web
   - title: Reference
     output: web
