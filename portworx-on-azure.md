@@ -9,7 +9,7 @@ This guide shows you how you can easily deploy Portworx on [**Azure**](https://a
 
 Other supported cloud providers are
 
-* [**AWS**](https://aws.amazon.com/
+* [**AWS**](https://aws.amazon.com/)
 
 ### Step 1: Provision Virtual Machine
 When chosing an instance, verify that you meet the [minimum requirements](get-started-px-enterprise.html#step-1-verify-requirements)
