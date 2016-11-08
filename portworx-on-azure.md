@@ -43,5 +43,5 @@ From the server node running px-enterprise container, you should see the followi
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
-![Azure-Cluster on Lighthouse](images/azure-cluster-on-lighthouse.png "Azure-Cluster on Lighthouse")
+![Azure-Cluster on Lighthouse](images/azure-cluster-on-lighthouse-updated.png "Azure-Cluster on Lighthouse")
 
