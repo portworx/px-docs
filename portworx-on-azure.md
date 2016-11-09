@@ -1,3 +1,5 @@
+
+
 ---
 layout: page
 title: "Portworx on Azure"
@@ -39,9 +41,11 @@ Use the docker run command to launch PX-Enterprise, substituting the appropriate
 Alternatively, you can either run the 'px_bootstrap' script from curl, or construct your own [config.json](config-json.html) file.
 
 From the server node running px-enterprise container, you should see the following status:
+
 ![PX-Cluster on Azure](images/azure-pxctl-status.png "PX-Cluster on Azure")
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
+
 ![Azure-Cluster on Lighthouse](images/azure-cluster-on-lighthouse-updated.png "Azure-Cluster on Lighthouse")
 
