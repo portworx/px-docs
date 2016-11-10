@@ -55,12 +55,14 @@ ADMIN_USER, INFLUXDB_INIT_PWD, INFLUXDB_HOSTNAME in http://<name>:<port> format
 
 ### Step 3: Launch the PX-Lighthouse Container
 
-## Docker compose method
+### Docker compose method
+
 
 Use compose file provided at this [link](https://github.com/portworx/lighthouse/tree/master/on-prem).
 
 
-## To run the Lighthouse container
+### To run the Lighthouse container
+
 
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
