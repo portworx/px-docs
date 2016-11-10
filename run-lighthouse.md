@@ -24,9 +24,11 @@ To start, create one server, following these requirements:
 
 
 For PX-Lighthouse, output required from this step
+
 ```
 Connection String in etcd:http://<IP_Address>:<Port_NO> format
 ```
+
 * Use your existing kvdb store
 * Install as a docker container from the following 
   * etcd2/etcd3 - https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md
@@ -35,6 +37,7 @@ Connection String in etcd:http://<IP_Address>:<Port_NO> format
 ### Step 2: Install influx
 
 For PX-Lighthouse, output required from this step
+
 ```
 ADMIN_USER, INFLUXDB_INIT_PWD, INFLUXDB_HOSTNAME in http://<name>:<port> format
 ```
