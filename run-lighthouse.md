@@ -31,10 +31,8 @@ To start, create one server, following these requirements:
 ### Step 1: Install kvdb
 
 
-For PX-Lighthouse, output required from this step
-
 ```
-Connection String in etcd:http://<IP_Address>:<Port_NO> format
+For PX-Lighthouse, output required from this step: 1) connection String in etcd:http://<IP_Address>:<Port_NO> format
 ```
 
 * Use your existing kvdb store
@@ -44,10 +42,9 @@ Connection String in etcd:http://<IP_Address>:<Port_NO> format
 
 ### Step 2: Install influx
 
-For PX-Lighthouse, output required from this step
-
 ```
-ADMIN_USER, INFLUXDB_INIT_PWD, INFLUXDB_HOSTNAME in http://<name>:<port> format
+
+For PX-Lighthouse, output required from this step: 1) ADMIN_USER, 2) INFLUXDB_INIT_PWD and 3) INFLUXDB_HOSTNAME in http://<name>:<port> format
 ```
 
 * [Use influx cloud](https://cloud.influxdata.com/)
