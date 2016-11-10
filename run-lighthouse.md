@@ -72,4 +72,4 @@ Use compose file provided at https://github.com/portworx/lighthouse/tree/master/
                  etcd:http://<IP_Address>:<Port_NO>
 ```
 
-In your browser visit *http://IP_ADDRESS:80* to access your local light-house.
+In your browser visit *http://IP_ADDRESS:80* to access your locally running PX-Lighthouse web interface.
