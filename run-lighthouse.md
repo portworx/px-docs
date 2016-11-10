@@ -78,4 +78,4 @@ Use compose file provided at this [link](https://github.com/portworx/lighthouse/
 
 In your browser visit *http://IP_ADDRESS:80* to access your locally running PX-Lighthouse.
 
-![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login.png "First Login")
+![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated.png "First Login")
