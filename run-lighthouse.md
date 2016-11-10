@@ -31,8 +31,8 @@ Connection String in etcd:http://<IP_Address>:<Port_NO> format
 
 * Use your existing kvdb store
 * Install as a docker container from the following 
-  * etcd2/etcd3 - https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md
-  * consul- https://hub.docker.com/_/consul/
+  * [etcd2/etcd3](https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md)
+  * [consul](https://hub.docker.com/_/consul/)
 
 ### Step 2: Install influx
 
@@ -42,8 +42,8 @@ For PX-Lighthouse, output required from this step
 ADMIN_USER, INFLUXDB_INIT_PWD, INFLUXDB_HOSTNAME in http://<name>:<port> format
 ```
 
-* Use influx cloud - https://cloud.influxdata.com/
-* Run influx as a docker container - https://github.com/tutumcloud/influxdb
+* [Use influx cloud](https://cloud.influxdata.com/)
+* [Run influx as a docker container](https://github.com/tutumcloud/influxdb)
 
 ### Step 3: Launch the PX-Lighthouse Container
 
