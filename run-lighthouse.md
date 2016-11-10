@@ -21,6 +21,11 @@ To start, create one server, following these requirements:
   * /dev/xvda: 8 GB boot device
 * Tag (optional): Add value **px-lighthouse** as the name
 
+# Install and configure Docker
+
+1. Follow the Docker [install guide] (https://docs.docker.com/engine/installation/) to install and start the Docker Service.
+2. Verify that your Docker version is 1.10 or later.
+
 ### Step 1: Install kvdb
 
 
