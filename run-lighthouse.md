@@ -5,7 +5,9 @@ keywords: portworx, px-developer, px-enterprise, install, configure, container, 
 sidebar: home_sidebar
 ---
 
-The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
+This guide shows you how you can run [PX-Enterprise Console] (http://lighthouse.portworx.com/) locally.
+
+Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
 ### Prerequisite
 
@@ -69,3 +71,5 @@ Use compose file provided at https://github.com/portworx/lighthouse/tree/master/
                  portworx/px-lighthouse                                 \
                  etcd:http://<IP_Address>:<Port_NO>
 ```
+
+In your browser visit http://<IP-ADDRESS>:80 to access your local light-house.
