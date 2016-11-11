@@ -39,7 +39,33 @@ For PX-Lighthouse, output required from this step:
 * Use your existing kvdb store
 * Install as a docker container from the following 
   * [etcd2/etcd3](https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md)
+  
+Example docker command to run etcd2 in a contianer:
+
+```
+sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
+     --name etcd-px quay.io/coreos/etcd:v2.3.7                                \
+     -name etcd0                                                              \
+     -data-dir /var/lib/etcd/                                                 \
+     -advertise-client-urls http://<IP_Address>:2379,http://<IP_Address:4001  \
+     -listen-client-urls http://0.0.0.0:2379                                  \
+     -initial-advertise-peer-urls http://<IP_Address>:2380                    \
+     -listen-peer-urls http://0.0.0.0:2380                                    \
+     -initial-cluster-token etcd-cluster                                      \
+     -initial-cluster etcd0=http://$<IP_Address>:2380                         \
+     -initial-cluster-state new
+```
+  
   * [consul](https://hub.docker.com/_/consul/)
+  
+Example docker command to run consul in a contianer:
+
+```
+sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
+     --name consul-px                                          \
+     -v /tmp/consul:/consul/data                               \
+     consul
+```
 
 ### Step 2: Install InfluxDB
 
@@ -53,13 +79,27 @@ For PX-Lighthouse, output required from this step:
 * [Use InfluxCloud](https://cloud.influxdata.com/)
 * [Run InfluxDB as a docker container](https://github.com/tutumcloud/influxdb)
 
+Example docker command to run influxdb in a contianer:
+
+```
+sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
+     --name influxdb                                          \
+     -e ADMIN_USER="admin"                                    \
+     -e INFLUXDB_INIT_PWD="password"                          \
+     -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
+```
+
 ### Step 3: Launch the PX-Lighthouse Container
 
 ### Docker compose method
 
+You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
 
-Use compose file provided at this [link](https://github.com/portworx/lighthouse/tree/master/on-prem).
-
+```
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/quick-start
+# docker-compose run portworx -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
+```
 
 ### To run the PX-Lighthouse container
 
@@ -72,10 +112,28 @@ Use compose file provided at this [link](https://github.com/portworx/lighthouse/
                  -e PWX_INFLUXPW="$INFLUXDB_INIT_PWD"                   \
                  -e PWX_HOSTNAME="${LOCAL_IP}"                          \
                  portworx/px-lighthouse                                 \
-                 etcd:http://<IP_Address>:<Port_NO>
+                 -d http://<IP_Address>:<Port_NO>                       \
+                 -k etcd:http://<IP_Address>:<Port_NO>                   
 ```
 
+Runtime command options
+
+```
+ -e  PWX_INFLUXDB
+     > Local influxdb hostname in http://<name>:<port> format
+ -e  PWX_INFLUXUSR
+     > Username of influxdb user with admin privilages
+ -e  PWX_INFLUXPW
+     > Password of PWX_INFLUXUSR
+ -e  PWX_HOSTNAME
+     > Public IP address or DNS name of the server where PX-Lighthouse container will be running
+  -d http://<IP_Address>:<Port_NO>
+     > 
+  -k etcd:http://<IP_Address>:<Port_NO>
+     > Connection string of your kbdb. 
+     > If you are using consul then you can specify your connection string in 'consul:http://<IP_Address>:<Port_NO>' format
+```
 
 In your browser visit *http://IP_ADDRESS:80* to access your locally running PX-Lighthouse.
 
-![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated.png "First Login")
+![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
