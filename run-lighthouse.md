@@ -119,9 +119,9 @@ Runtime command options
      > Username of influxdb user with admin privilages
  -e  PWX_INFLUXPW
      > Password of PWX_INFLUXUSR
-  -d http://{IP_Address}:{Port_NO}
+ -d http://{IP_Address}:{Port_NO}
      > Connection string of your influx db
-  -k etcd:http://{IP_Address}:{Port_NO}
+ -k etcd:http://{IP_Address}:{Port_NO}
      > Connection string of your kbdb. 
      > If you are using consul then you can specify your connection string in 'consul:http://{IP_Address}:{Port_NO}' format
 ```
