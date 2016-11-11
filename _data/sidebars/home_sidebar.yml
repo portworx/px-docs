@@ -48,9 +48,6 @@ entries:
     - title: Deploying Portworx with Rancher
       url: /deploy_px_with_rancher.html
       output: web
-    - title: Run Lighthouse
-      url: /run-lighthouse.html
-      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
