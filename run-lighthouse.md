@@ -31,8 +31,9 @@ To start, create one server, following these requirements:
 ### Step 1: Install kvdb
 
 
->**Important:**<br/> For PX-Lighthouse, output required from this step: 
-<br/>Connection String in etcd:http://<IP_Address>:<Port_NO> format
+>**Important:**
+<br/> For PX-Lighthouse, output required from this step: 
+<br/>Connection String in 'etcd:http://{IP_ADDRESS}:{Port_NO}' format
 
 * Use your existing kvdb store
 * Install as a docker container from the following 
@@ -67,10 +68,11 @@ sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
 
 ### Step 2: Install InfluxDB
 
->**Important:**<br/> For PX-Lighthouse, output required from this step: 
+>**Important:**
+<br/> For PX-Lighthouse, output required from this step: 
 <br/> 1) ADMIN_USER, 
 <br/> 2) INFLUXDB_INIT_PWD and 
-<br/> 3) INFLUXDB_HOSTNAME in http://<name>:<port> format
+<br/> 3) INFLUXDB_HOSTNAME in 'http://{IP_ADDRESS}:{port}' format
 
 * [Use InfluxCloud](https://cloud.influxdata.com/)
 * [Run InfluxDB as a docker container](https://github.com/tutumcloud/influxdb)
@@ -124,7 +126,7 @@ Runtime command options
  -e  PWX_HOSTNAME
      > Public IP address or DNS name of the server where PX-Lighthouse container will be running
   -d http://<IP_Address>:<Port_NO>
-     > 
+     > Connection string of your influx db
   -k etcd:http://<IP_Address>:<Port_NO>
      > Connection string of your kbdb. 
      > If you are using consul then you can specify your connection string in 'consul:http://<IP_Address>:<Port_NO>' format
