@@ -50,7 +50,7 @@ sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
      -listen-client-urls http://0.0.0.0:2379                                  \
      -initial-advertise-peer-urls http://<IP_Address>:2380                    \
      -listen-peer-urls http://0.0.0.0:2380                                    \
-     -initial-cluster-token etcd-cluster                                      \ 
+     -initial-cluster-token etcd-cluster                                      \
      -initial-cluster etcd0=http://$<IP_Address>:2380                         \
      -initial-cluster-state new
 ```
