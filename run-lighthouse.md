@@ -104,20 +104,19 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
-                 -p 80:80                                               \
-                 portworx/px-lighthouse                                 \
-                 -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}                       \
-                 -k etcd:http://{IP_Address}:{Port_NO}                   
+       -p 80:80                                                         \
+       portworx/px-lighthouse                                           \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}   \
+       -k {etcd/consul}:http://{IP_Address}:{Port_NO}                   
 ```
 
 Runtime command options
 
 ```
- -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}
-     > Connection string of your influx db
- -k etcd:http://{IP_Address}:{Port_NO}
-     > Connection string of your kbdb. 
-     > If you are using consul then you can specify your connection string in 'consul:http://{IP_Address}:{Port_NO}' format
+-d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}
+   > Connection string of your influx db
+-k {etcd/consul}:http://{IP_Address}:{Port_NO}
+   > Connection string of your kbdb. 
 ```
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
