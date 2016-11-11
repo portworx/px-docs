@@ -9,7 +9,7 @@ This guide shows you how you can run [PX-Enterprise Console](http://lighthouse.p
 
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
-### Prerequisite
+### Step 1: Launch Server:
 
 To start, create one server, following these requirements:
 
@@ -23,12 +23,12 @@ To start, create one server, following these requirements:
   * /dev/xvda: 8 GB boot device
 * Tag (optional): Add value **px-lighthouse** as the name
 
-### Install and configure Docker
+### Step 2: Install and configure Docker
 
 1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
 2. Verify that your Docker version is 1.10 or later.
 
-### Step 1: Install kvdb
+### Step 3: Install kvdb
 
 
 >**Important:**
@@ -39,7 +39,7 @@ To start, create one server, following these requirements:
 * Install as a docker container from the following 
   * [etcd2/etcd3](https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md)
   
-Example docker command to run etcd2 in a contianer:
+For **ETCD2**, start the container with the following run command:
 
 ```
 sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
@@ -57,7 +57,7 @@ sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
   
   * [consul](https://hub.docker.com/_/consul/)
   
-Example docker command to run consul in a contianer:
+For **Consul**, start the container with the following run command:
 
 ```
 sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
@@ -66,7 +66,7 @@ sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
      consul
 ```
 
-### Step 2: Install InfluxDB
+### Step 4: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -87,7 +87,7 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
      -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
 ```
 
-### Step 3: Launch the PX-Lighthouse Container
+### Step 5: Launch the PX-Lighthouse Container
 
 ### Docker compose method
 
