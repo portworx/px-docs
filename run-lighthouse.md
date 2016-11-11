@@ -9,7 +9,7 @@ This guide shows you how you can run [PX-Enterprise Console](http://lighthouse.p
 
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
-### Step 1: Launch Server:
+### Step 1: Launch Server
 
 To start, create one server, following these requirements:
 
