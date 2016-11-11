@@ -17,6 +17,13 @@ Here is a short video that shows how to configure and run Portworx with Rancher:
 
 Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher/latest/en/quick-start-guide/).
 
+If deploying PX-Enterprise, then you will need to add a "custom catalog" from the Rancher Admin->Settings menu.
+For PX-Enterprise, please add https://github.com/portworx/rancher.git as the catalog.
+You will also need to contact "support@portworx.com" to obtain a Lighthouse Cluster token.
+
+If deploying on AWS in US-East, then use the AMI rancher-100g-9-19 (ami-d0651bc7)
+
+
 ## Step 2: Label hosts that run Portworx
 
 If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
