@@ -33,7 +33,7 @@ To start, create one server, following these requirements:
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/>Connection String in 'etcd:http://{IP_ADDRESS}:{Port_NO}' format
+<br/>Connection string in 'etcd:http://{IP_ADDRESS}:{Port_NO}' format
 
 * Use your existing kvdb store
 * Install as a docker container from the following 
@@ -105,26 +105,20 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
                  -p 80:80                                               \
-                 -e PWX_INFLUXDB="http://<name>:<port>"                 \
                  -e PWX_INFLUXUSR="$ADMIN_USER"                         \
                  -e PWX_INFLUXPW="$INFLUXDB_INIT_PWD"                   \
-                 -e PWX_HOSTNAME="${LOCAL_IP}"                          \
                  portworx/px-lighthouse                                 \
-                 -d http://<IP_Address>:<Port_NO>                       \
-                 -k etcd:http://<IP_Address>:<Port_NO>                   
+                 -d http://{IP_Address}:{Port_NO}                       \
+                 -k etcd:http://{IP_Address}:{Port_NO}                   
 ```
 
 Runtime command options
 
 ```
- -e  PWX_INFLUXDB
-     > Local influxdb hostname in http://<name>:<port> format
  -e  PWX_INFLUXUSR
      > Username of influxdb user with admin privilages
  -e  PWX_INFLUXPW
      > Password of PWX_INFLUXUSR
- -e  PWX_HOSTNAME
-     > Public IP address or DNS name of the server where PX-Lighthouse container will be running
   -d http://<IP_Address>:<Port_NO>
      > Connection string of your influx db
   -k etcd:http://<IP_Address>:<Port_NO>
