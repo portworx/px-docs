@@ -50,7 +50,7 @@ sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
      -listen-client-urls http://0.0.0.0:2379                                  \
      -initial-advertise-peer-urls http://<IP_Address>:2380                    \
      -listen-peer-urls http://0.0.0.0:2380                                    \
-     -initial-cluster-token etcd-cluster                                      \
+     -initial-cluster-token etcd-cluster                                      \ 
      -initial-cluster etcd0=http://$<IP_Address>:2380                         \
      -initial-cluster-state new
 ```
@@ -70,8 +70,8 @@ sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/> 1) ADMIN_USER, 
-<br/> 2) INFLUXDB_INIT_PWD and 
+<br/> 1) ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
+<br/> 2) INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
 <br/> 3) INFLUXDB_HOSTNAME in 'http://{IP_ADDRESS}:{port}' format
 
 * [Use InfluxCloud](https://cloud.influxdata.com/)
@@ -105,7 +105,7 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
                  -p 80:80                                               \
-                 -e  PWX_INFLUXDB="http://<name>:<port>"                \
+                 -e PWX_INFLUXDB="http://<name>:<port>"                 \
                  -e PWX_INFLUXUSR="$ADMIN_USER"                         \
                  -e PWX_INFLUXPW="$INFLUXDB_INIT_PWD"                   \
                  -e PWX_HOSTNAME="${LOCAL_IP}"                          \
