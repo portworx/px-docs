@@ -70,9 +70,9 @@ sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/> 1) ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
-<br/> 2) INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
-<br/> 3) INFLUXDB_HOSTNAME in 'http://{IP_ADDRESS}:{port}' format
+<br/> Connection string in 'http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}' format 
+<br/> ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
+<br/> INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
 
 * [Use InfluxCloud](https://cloud.influxdata.com/)
 * [Run InfluxDB as a docker container](https://github.com/tutumcloud/influxdb)
@@ -105,21 +105,15 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
                  -p 80:80                                               \
-                 -e PWX_INFLUXUSR="$ADMIN_USER"                         \
-                 -e PWX_INFLUXPW="$INFLUXDB_INIT_PWD"                   \
                  portworx/px-lighthouse                                 \
-                 -d http://{IP_Address}:{Port_NO}                       \
+                 -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}                       \
                  -k etcd:http://{IP_Address}:{Port_NO}                   
 ```
 
 Runtime command options
 
 ```
- -e  PWX_INFLUXUSR
-     > Username of influxdb user with admin privilages
- -e  PWX_INFLUXPW
-     > Password of PWX_INFLUXUSR
- -d http://{IP_Address}:{Port_NO}
+ -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}
      > Connection string of your influx db
  -k etcd:http://{IP_Address}:{Port_NO}
      > Connection string of your kbdb. 
