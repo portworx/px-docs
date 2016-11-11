@@ -33,7 +33,7 @@ To start, create one server, following these requirements:
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/>Connection string in 'etcd:http://{IP_ADDRESS}:{Port_NO}' format
+<br/>Connection string in 'etcd:http://{IP_ADDRESS}:{Port_NO}' or 'consul:http://{IP_Address}:{Port_NO}' format
 
 * Use your existing kvdb store
 * Install as a docker container from the following 
@@ -119,13 +119,13 @@ Runtime command options
      > Username of influxdb user with admin privilages
  -e  PWX_INFLUXPW
      > Password of PWX_INFLUXUSR
-  -d http://<IP_Address>:<Port_NO>
+  -d http://{IP_Address}:{Port_NO}
      > Connection string of your influx db
-  -k etcd:http://<IP_Address>:<Port_NO>
+  -k etcd:http://{IP_Address}:{Port_NO}
      > Connection string of your kbdb. 
-     > If you are using consul then you can specify your connection string in 'consul:http://<IP_Address>:<Port_NO>' format
+     > If you are using consul then you can specify your connection string in 'consul:http://{IP_Address}:{Port_NO}' format
 ```
 
-In your browser visit *http://IP_ADDRESS:80* to access your locally running PX-Lighthouse.
+In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
 
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
