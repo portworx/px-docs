@@ -49,7 +49,7 @@ For each ECS instance:
 
 ```
 # ssh -i ~/.ssh/id_rsa ec2-user@35.163.77.134
-# vi /etc/init.d/docker
+# mount --make-shared /
 # service docker restart
 ```
 Note that this is a temporary workaround until ECS upgrades to Docker 1.12.  As of Docker 1.12, it is no longer required to modify Docker to allow the use of shared mounts.
