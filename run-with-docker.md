@@ -61,7 +61,7 @@ Example output:
 Note that devices without the partition are shown under the **TYPE** column as **part**.
 
 ```
-   $ lsblk
+# lsblk
     NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
     xvda                      202:0    0     8G  0 disk
     └─xvda1                   202:1    0     8G  0 part /
