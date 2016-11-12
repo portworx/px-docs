@@ -123,11 +123,14 @@ entries:
     - title: Create a 30 node cluster in GCE with Kubernetes
       url: /gce-k8s-pwx.html
       output: web
-    - title: Portworx on Docker Datacetner
-      url: /run_portworx_on_ddc.html
+    - title: Portworx on Docker Data Center
+      url: /portworx-on-ddc.html
       output: web
     - title: Portworx on Packet.net Platform
-      url: /portworx_on_packet.html
+      url: /portworx-on-packet.html
+      output: web
+    - title: Portworx on ECS
+      url: /portworx-on-ecs.html
       output: web
     - title: Portworx on Azure
       url: /portworx-on-azure.html

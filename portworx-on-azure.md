@@ -1,15 +1,11 @@
 ---
 layout: page
 title: "Portworx on Azure"
-keywords: portworx, azure, PaaS, IaaS, docker, converged, bare metal,cloud
+keywords: portworx, azure, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
 ---
 
 This guide shows you how you can easily deploy Portworx on [**Azure**](https://azure.microsoft.com/en-us/)
-
-Other supported cloud providers are
-
-* [**AWS**](https://aws.amazon.com/)
 
 ### Step 1: Provision Virtual Machine
 When chosing an instance, verify that you meet the [minimum requirements](get-started-px-enterprise.html#step-1-verify-requirements)
