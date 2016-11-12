@@ -101,13 +101,24 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 
 ### To run the PX-Lighthouse container
 
+For **ETCD**, start the container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086   \
-       -k {etcd/consul}:http://{IP_Address}:2379                   
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086        \
+       -k etcd:http://{IP_Address}:2379                
+```
+
+For **Consul**, start the container with the following run command:
+
+```
+# sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
+       -p 80:80                                                         \
+       portworx/px-lighthouse                                           \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086        \
+       -k consul:http://{IP_Address}:8500                
 ```
 
 Runtime command options
@@ -115,8 +126,9 @@ Runtime command options
 ```
 -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086
    > Connection string of your influx db
--k {etcd/consul}:http://{IP_Address}:2379
-   > Connection string of your kbdb. 
+-k {etcd/consul}:http://{IP_Address}:{Port_NO}
+   > Connection string of your kbdb.
+   > Note: Specify port 2379 for etcd and 8500 for consul
 ```
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
