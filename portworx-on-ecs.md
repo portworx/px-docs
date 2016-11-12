@@ -74,7 +74,7 @@ Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provis
 ```
 
 ### Step 7: Create Portworx volumes and use them with your containers
-Create PX volumes using the Docker CLI.  Log into any of the ECS instances and create the PX volumes.  You can also do this from your workstation by exporting the `DOCKER_HOST` variable to point to any of the ECS instances.
+Create PX volumes using the Docker CLI.  Log into any of the ECS instances and create the PX volumes.
 
 ```
 # ssh -i ~/.ssh/id_rsa ec2-user@35.163.77.134
@@ -85,8 +85,9 @@ demovol
 DRIVER              VOLUME NAME
 pxd                 demovol
 ```
+Note: You can also do this from your workstation by exporting the `DOCKER_HOST` variable to point to any of the ECS instances.  Docker will have to be configured to listen on a TCP port.
 
-You can use the `ecs-cli` to create tasks and use the PX volumes.  Launch `redis` with the PX volume from your workstation.
+Now you can use the `ecs-cli` to create tasks and use the PX volumes.  Launch `redis` with the PX volume from your workstation.
 
 ```
 # cat redis.yml
@@ -99,3 +100,4 @@ redis:
   volumes:
      - ecsvol1:/data
 # ecs-cli compose --file redis.yml up 
+```
