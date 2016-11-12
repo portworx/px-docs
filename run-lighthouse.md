@@ -33,7 +33,7 @@ To start, create one server, following these requirements:
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/>Connection string in 'etcd:http://{IP_ADDRESS}:{Port_NO}' or 'consul:http://{IP_Address}:{Port_NO}' format
+<br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' or 'consul:http://{IP_Address}:2379' format
 
 * Use your existing kvdb store
 * Install as a docker container from the following 
@@ -70,7 +70,7 @@ sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
-<br/> Connection string in 'http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}' format 
+<br/> Connection string in 'http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086' format 
 <br/> ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
 <br/> INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
 
@@ -106,16 +106,16 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 # sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}   \
-       -k {etcd/consul}:http://{IP_Address}:{Port_NO}                   
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086   \
+       -k {etcd/consul}:http://{IP_Address}:2379                   
 ```
 
 Runtime command options
 
 ```
--d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:{Port_NO}
+-d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086
    > Connection string of your influx db
--k {etcd/consul}:http://{IP_Address}:{Port_NO}
+-k {etcd/consul}:http://{IP_Address}:2379
    > Connection string of your kbdb. 
 ```
 
