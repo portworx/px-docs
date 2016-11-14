@@ -119,11 +119,11 @@ Pool ID: 2
 Let's first create three volumes with a high, medium and low class of service:
 
 ```
-# /opt/pwx/bin/pxctl v c --cos high test-high
+# /opt/pwx/bin/pxctl v c --cos high test-high --size 8
 test-high
-# /opt/pwx/bin/pxctl v c --cos med test-med
+# /opt/pwx/bin/pxctl v c --cos med test-med --size 8
 test-med
-# /opt/pwx/bin/pxctl v c --cos low test-low
+# /opt/pwx/bin/pxctl v c --cos low test-low --size 8
 test-low
 ```
 
@@ -142,85 +142,82 @@ xvdn              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0
 #### Test a high CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-high:/test        \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
-    --filename=test --ioengine=libaio --readwrite=randwrite     \
-    --size=500M --name=test --verify=meta --do_verify=1 		\
-	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
-    --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-high:/test      \
+gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
+--filename=test --ioengine=libaio --readwrite=randrw          \
+--size=1G --name=test --verify=meta --do_verify=1             \
+--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1        \
+--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
 
 ```
-test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
+test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 03:46:53 2016
-  read : io=512000KB, bw=888889KB/s, iops=13888, runt=   576msec
-  write: io=512000KB, bw=506931KB/s, iops=7920, runt=  1010msec
-  cpu          : usr=7.82%, sys=17.85%, ctx=3928, majf=0, minf=195
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.2%, 32=0.4%, >=64=99.2%
+test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:56:33 2016
+  read : io=524880KB, bw=48772KB/s, iops=3048, runt= 10762msec
+  write: io=523696KB, bw=48662KB/s, iops=3041, runt= 10762msec
+  cpu          : usr=1.28%, sys=6.92%, ctx=7987, majf=0, minf=6
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
-     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
-     issued    : total=r=8000/w=8000/d=0, short=r=0/w=0/d=0
-     latency   : target=0, window=0, percentile=100.00%, depth=64
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=512000KB, aggrb=888888KB/s, minb=888888KB/s, maxb=888888KB/s, mint=576msec, maxt=576msec
-  WRITE: io=512000KB, aggrb=506930KB/s, minb=506930KB/s, maxb=506930KB/s, mint=1010msec, maxt=1010msec
+   READ: io=524880KB, aggrb=48771KB/s, minb=48771KB/s, maxb=48771KB/s, mint=10762msec, maxt=10762msec
+  WRITE: io=523696KB, aggrb=48661KB/s, minb=48661KB/s, maxb=48661KB/s, mint=10762msec, maxt=10762msec
 
 Disk stats (read/write):
-  pxd!pxd481766400193330855: ios=5486/8000, merge=0/0, ticks=19664/46332, in_queue=66066, util=93.32%
+  pxd!pxd140712484780077737: ios=33003/32734, merge=0/2, ticks=222805/226336, in_queue=449230, util=98.87%
 ```
 
 #### Test a medium CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-med:/test         \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
-    --filename=test --ioengine=libaio --readwrite=randwrite     \
-    --size=500M --name=test --verify=meta --do_verify=1 		\
-	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
-    --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-med:/test      \
+gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
+--filename=test --ioengine=libaio --readwrite=randrw          \
+--size=1G --name=test --direct=1 --gtod_reduce=1        \
+--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
 
 ```
-test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
+test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
-test: Laying out IO file(s) (1 file(s) / 500MB)
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 03:48:48 2016
-  read : io=512000KB, bw=38343KB/s, iops=599, runt= 13353msec
-  write: io=512000KB, bw=462511KB/s, iops=7226, runt=  1107msec
-  cpu          : usr=1.20%, sys=1.89%, ctx=3394, majf=0, minf=195
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.2%, 32=0.4%, >=64=99.2%
+test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:57:08 2016
+  read : io=524880KB, bw=42363KB/s, iops=2647, runt= 12390msec
+  write: io=523696KB, bw=42268KB/s, iops=2641, runt= 12390msec
+  cpu          : usr=1.25%, sys=7.67%, ctx=10840, majf=0, minf=6
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
-     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
-     issued    : total=r=8000/w=8000/d=0, short=r=0/w=0/d=0
-     latency   : target=0, window=0, percentile=100.00%, depth=64
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=512000KB, aggrb=38343KB/s, minb=38343KB/s, maxb=38343KB/s, mint=13353msec, maxt=13353msec
-  WRITE: io=512000KB, aggrb=462511KB/s, minb=462511KB/s, maxb=462511KB/s, mint=1107msec, maxt=1107msec
+   READ: io=524880KB, aggrb=42363KB/s, minb=42363KB/s, maxb=42363KB/s, mint=12390msec, maxt=12390msec
+  WRITE: io=523696KB, aggrb=42267KB/s, minb=42267KB/s, maxb=42267KB/s, mint=12390msec, maxt=12390msec
 
 Disk stats (read/write):
-  pxd!pxd96377810411942024: ios=7267/8009, merge=0/34, ticks=844306/73839, in_queue=918328, util=99.39%
+  pxd!pxd1076009269408190983: ios=33394/32741, merge=0/4, ticks=474477/441750, in_queue=916431, util=98.94%
 ```
 
 #### Test a low CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-low:/test         \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
-    --filename=test --ioengine=libaio --readwrite=randwrite     \
-    --size=500M --name=test --verify=meta --do_verify=1 		\
-	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
-    --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-low:/test      \
+gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
+--filename=test --ioengine=libaio --readwrite=randrw          \
+--size=1G --name=test --direct=1 --gtod_reduce=1        \
+--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
@@ -229,29 +226,31 @@ Results:
 test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
 fio-2.1.11
 Starting 1 process
-test: Laying out IO file(s) (1 file(s) / 500MB)
+test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
+fio-2.1.11
+Starting 1 process
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 03:53:49 2016
-  read : io=512000KB, bw=875214KB/s, iops=13675, runt=   585msec
-  write: io=512000KB, bw=457961KB/s, iops=7155, runt=  1118msec
-  cpu          : usr=8.23%, sys=19.17%, ctx=3999, majf=0, minf=194
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.2%, 32=0.4%, >=64=99.2%
+test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:59:30 2016
+  read : io=524880KB, bw=4304.9KB/s, iops=269, runt=121928msec
+  write: io=523696KB, bw=4295.2KB/s, iops=268, runt=121928msec
+  cpu          : usr=0.19%, sys=0.88%, ctx=22021, majf=0, minf=6
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
-     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
-     issued    : total=r=8000/w=8000/d=0, short=r=0/w=0/d=0
-     latency   : target=0, window=0, percentile=100.00%, depth=64
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=512000KB, aggrb=875213KB/s, minb=875213KB/s, maxb=875213KB/s, mint=585msec, maxt=585msec
-  WRITE: io=512000KB, aggrb=457960KB/s, minb=457960KB/s, maxb=457960KB/s, mint=1118msec, maxt=1118msec
+   READ: io=524880KB, aggrb=4304KB/s, minb=4304KB/s, maxb=4304KB/s, mint=121928msec, maxt=121928msec
+  WRITE: io=523696KB, aggrb=4295KB/s, minb=4295KB/s, maxb=4295KB/s, mint=121928msec, maxt=121928msec
 
 Disk stats (read/write):
-  pxd!pxd772770186889012128: ios=7265/8000, merge=0/0, ticks=28338/52574, in_queue=80975, util=94.15%
+  pxd!pxd597887972375262430: ios=33477/32778, merge=0/22, ticks=7431768/6880651, in_queue=14312709, util=99.96%
 ```
 
 ## Summary of Results
 
-| CoS    	| Sequential Write 	| Sequential Read 	| Read IOPS 	| Write IOPS 	|
-| High   	| 506 MBPS         	| 888 MBPS        	| 13888     	| 7920       	|
-| Medium 	| 462 MBPS         	| 383 MBPS        	| 599       	| 7226       	|
-| Low    	| 457 MBPS         	| 875 MBPS        	| 13675     	| 7155       	|
+| CoS    	| Random Write 	| Random Read 	| Read IOPS 	| Write IOPS 	|
+| High   	| 48 MB/S     | 48 MB/S     | 3048     	| 3041       	|
+| Medium 	| 42 MB/S     | 42 MB/S     | 2647       	| 2641       	|
+| Low    	|   4.3 MB/s    | 4.3 MB/s       | 269     	| 268       	|
