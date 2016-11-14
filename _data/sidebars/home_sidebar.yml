@@ -174,3 +174,6 @@ entries:
     - title: Release 1.0.8
       url: /release-notes-1-0-8.html
       output: web
+    - title: Release 1.0.9
+      url: /release-notes-1-0-9.html
+      output: web
