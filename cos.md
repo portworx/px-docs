@@ -8,11 +8,36 @@ Through class of service (also known as a `CoS`), a single volume's class of ser
 
 ## Explanation of Class of Service
 
-Applications have different storage performance requirements; some require higher IOPS/throughput performance characteristics than others. Portworx provides the ability to specify a class of service level at the container granularity. Containers operating at different classes of service can co-exist in the same node/cluster.  Using class of service you can tune your volume for higher throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput.
+Portworx volumes can operate at different class of service. Using class of service you can tune your volume for higher 
+throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput. 
 
-## Try it out
+Portworx instances have a complete matrix of available CoS levels in the entire cluster. This is dynamic and dictates data placement and movement.  In runtime, IO queues are adjusted based on desired CoS levels.
 
-### Create CoS in AWS
+## Usage
+To create a volume with a specific class of service level, use the `--cos` parameter in the volume create options.  As with other parameters, this CoS parameter can also be passed in as a label via Docker or any scheduler.
+
+```
+# /opt/pwx/bin/pxctl v c --cos high volume-name
+```
+
+Here is an example output from [fio](https://github.com/axboe/fio) when measuring the CoS feature on an Intel server with NVMe and SATA drives.
+
+| Random   	| Low CoS IOPS	| High CoS IOPS 	|
+| 4K 	  	| 768         	| 65024				|
+| 8K    	| 768         	| 46848     		|
+| 64K    	| 496         	| 9824     			|
+
+The graph below shows the sequential and random read and write performance on high and low CoS volume types:
+
+### Random Read and Writes
+![CoS Random](images/cos-random.png)
+
+### Sequential Read and Writes
+![CoS Sequential](images/cos-seq.png)
+
+## Try it out on Amazon
+
+### Create EBS volumes AWS
 Here, we create volumes of 3 different volume types in AWS.  Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities.  PWX will automatically detect the volume type and classify it into the correct service category.
 
 * Create one 500GB HDD volume
@@ -244,9 +269,9 @@ Disk stats (read/write):
   pxd!pxd597887972375262430: ios=33477/32778, merge=0/22, ticks=7431768/6880651, in_queue=14312709, util=99.96%
 ```
 
-## Summary of Results
+## Summary of AWS Results
 
 | CoS    	| Random Write 	| Random Read 	| Read IOPS 	| Write IOPS 	|
-| High   	| 48 MB/S     | 48 MB/S     | 3048     	| 3041       	|
-| Medium 	| 42 MB/S     | 42 MB/S     | 2647       	| 2641       	|
-| Low    	|   4.3 MB/s    | 4.3 MB/s       | 269     	| 268       	|
+| High   	| 48 MB/S 	    | 48 MB/S		| 3048			| 3041       	|
+| Medium 	| 42 MB/S   	| 42 MB/S		| 2647       	| 2641       	|
+| Low    	| 4.3 MB/s		| 4.3 MB/s		| 269			| 268       	|
