@@ -85,7 +85,8 @@ Global Storage Pool
 
 The `status` command on any node shows the pools with different classes of services listed.  The format `x:y` in the Device column indicates the `pool:device` participating in that pool.
 
-Note the "SHARED" status of the volume, in the above output.
+
+
 ### Inspect different pools
 
 ```
