@@ -20,10 +20,11 @@ We will be creating an ECS cluster using the Amazon ECS and AWS CLI from your wo
 ```
 
 ### Step 2: Create a keypair to use with this cluster
-Create a keypair to use with the cluster that we will create.  Generate SSH keys using `ssh-keygen` and create a AWS keypair.  We will use `id_rsa` as your private key and `portworx` as the keypair for this tutorial.
+Create a keypair to use with the cluster that we will create.  Generate SSH keys using `ssh-keygen` and create a AWS keypair.  We will use `id_rsa` as your private key and `portworx` as the keypair for this tutorial.    
 
 ```
 # ssh-keygen
+# ecs-cli configure --region us-west-2 --cluster ecs-demo
 # aws ec2 import-key-pair --key-name portworx --public-key-material file://~/.ssh/id_rsa
 ```
 
@@ -31,7 +32,6 @@ Create a keypair to use with the cluster that we will create.  Generate SSH keys
 In this example, we create a 2 node cluster called `ecs-demo` in the US-WEST-2 region.
 
 ```
-# ecs-cli configure --region us-west-2 --cluster ecs-demo
 # ecs-cli up --keypair portworx --capability-iam --size 2 --instance-type t2.medium
 ```
 
@@ -42,6 +42,8 @@ Your ECS instances will appear in your AWS console like this.
 ![ECS instances](images/ecs-instances.png "ECS instances")
 
 You will need to provision storage to these instances by creating new EBS volumes and attaching it to the instances.  Portworx will be using these volumes to provision storage to your containers.
+
+Note that the ECS will create the instances in different availability regions by default.  Therefore, you must first note the instance's regions and then create the corresponding EBS volumes in the same regions.
 
 ### Step 5: Configure Docker to allow shared mounts
 Log into each of the instances using the key we created in step 2.  Once logged in, we have to configure Docker to allow shared mounts.
