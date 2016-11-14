@@ -16,8 +16,8 @@ Portworx instances have a complete matrix of available CoS levels in the entire 
 
 ## Try it out
 
-### Create 3 different class of service volumes in AWS
-Here, we create four volumes of 3 different volume types in AWS.  Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities.  PWX will automatically detect the volume type and classify it into the correct service category.
+### Create CoS in AWS
+Here, we create volumes of 3 different volume types in AWS.  Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities.  PWX will automatically detect the volume type and classify it into the correct service category.
 
 * Create one 500GB HDD volume
 * Create one 100GB standard volume
@@ -236,3 +236,12 @@ Run status group 0 (all jobs):
 Disk stats (read/write):
   pxd!pxd772770186889012128: ios=7265/8000, merge=0/0, ticks=28338/52574, in_queue=80975, util=94.15%
 ```
+
+## Summary of Results
+
+	| CoS    	| Sequential Write 	| Sequential Read 	| Read IOPS 	| Write IOPS 	|
+	|--------	|------------------	|-----------------	|-----------	|------------	|
+	| High   	| 506 MBPS         	| 888 MBPS        	| 13888     	| 7920       	|
+	| Medium 	| 462 MBPS         	| 383 MBPS        	| 599       	| 7226       	|
+	| Low    	| 457 MBPS         	| 875 MBPS        	| 13675     	| 7155       	|
+
