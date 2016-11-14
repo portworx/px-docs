@@ -135,7 +135,7 @@ entries:
     - title: Portworx on Azure
       url: /portworx-on-azure.html
       output: web
-  - title: Reference
+  - title: CLI Reference
     output: web
     folderitems:
     - title: pxctl CLI Reference
@@ -143,9 +143,6 @@ entries:
       output: web
     - title: config.json definition
       url: /config-json.html
-      output: web
-    - title: px-enterprise usage
-      url: /px-usage.html
       output: web
   - title: Troubleshooting and FAQs
     output: web
