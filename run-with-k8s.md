@@ -60,8 +60,6 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    securityContext:
-      privileged: true
     volumeMounts:
     - name: test
       mountPath: /data
