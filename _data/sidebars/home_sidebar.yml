@@ -42,12 +42,6 @@ entries:
     - title: Run With User Namespaces
       url: /run-with-user-namespace.html
       output: web
-    - title: Run PX-Enterprise
-      url: /create-px-enterprise-cluster.html
-      output: web
-    - title: Deploy via systemd
-      url: /systemd.html
-      output: web
   - title: Manage Volumes
     output: web
     folderitems:
@@ -74,6 +68,9 @@ entries:
       output: web
     - title: Run Portworx with Rancher
       url: /run-with-rancher.html
+      output: web
+    - title: Run with systemd
+      url: /run-with-systemd.html
       output: web
   - title: Manage Users
     output: web
@@ -143,6 +140,12 @@ entries:
       output: web
     - title: config.json definition
       url: /config-json.html
+      output: web
+  - title: Enterprise Edition
+    output: web
+    folderitems:
+    - title: Run PX-Enterprise
+      url: /create-px-enterprise-cluster.html
       output: web
   - title: Troubleshooting and FAQs
     output: web
