@@ -149,7 +149,7 @@ entries:
       output: web
     - title: PX-Enterprise Usage
       url: /px-usage.html
-      output:web
+      output: web
   - title: Troubleshooting and FAQs
     output: web
     folderitems:
