@@ -126,7 +126,17 @@ test-med
 test-low
 ```
 
-Now we use [fio](https://github.com/axboe/fio) to measure PX volume performance on each of these volumes
+Now we use [fio](https://github.com/axboe/fio) to measure PX volume performance on each of these volumes. 
+Note that backend disk performance while performance tests are running can be visualized with iostat
+
+```
+# iostat -xm 1
+
+Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util
+xvdj             30.00   114.00  660.00  380.00    10.61    43.66   106.87    48.63   93.53    1.30  253.71   0.67  70.00
+xvdl              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+xvdn              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0.00    0.00    0.00    0.00   0.00   0.00
+```
 
 Test a high CoS volume on EBS
 
