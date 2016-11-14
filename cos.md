@@ -11,7 +11,7 @@ XXX
 
 ## Try it out
 
-#### Create 3 different class of service volumes in AWS
+### Create 3 different class of service volumes in AWS
 Here, we create four volumes of 3 different volume types in AWS.  Refer to [AWS EBS volume types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) for more information on the EBS volume capabilities.  PWX will automatically detect the volume type and classify it into the correct service category.
 
 * Create one 500GB HDD volume
@@ -19,6 +19,8 @@ Here, we create four volumes of 3 different volume types in AWS.  Refer to [AWS 
 * Create one 1000GB IO optimized volume
 
 ![EBS Volumes](images/cos.png)
+
+Here is what you should see when you list your block devices:
 
 ```
 # lsblk
@@ -103,6 +105,10 @@ Test a high CoS volume on EBS
     --filename=test --ioengine=libaio --readwrite=randwrite                             \
     --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
     --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
+```
+
+Results:
+```
 test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
 fio-2.1.11
 Starting 1 process
@@ -133,7 +139,10 @@ Test a medium CoS volume on EBS
     --filename=test --ioengine=libaio --readwrite=randwrite                             \
     --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
     --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
+```
 
+Results:
+```
 test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
 fio-2.1.11
 Starting 1 process
@@ -165,7 +174,11 @@ Test a low CoS volume on EBS
     --filename=test --ioengine=libaio --readwrite=randwrite                             \
     --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
     --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
-t: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
+```
+
+Results:
+```
+test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
 fio-2.1.11
 Starting 1 process
 test: Laying out IO file(s) (1 file(s) / 500MB)
