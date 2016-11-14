@@ -269,7 +269,7 @@ Disk stats (read/write):
   pxd!pxd597887972375262430: ios=33477/32778, merge=0/22, ticks=7431768/6880651, in_queue=14312709, util=99.96%
 ```
 
-## Summary of AWS Results
+### Summary of AWS Results
 
 | CoS    	| Random Write 	| Random Read 	| Read IOPS 	| Write IOPS 	|
 | High   	| 48 MB/S 	    | 48 MB/S		| 3048			| 3041       	|
