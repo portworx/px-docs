@@ -239,9 +239,8 @@ Disk stats (read/write):
 
 ## Summary of Results
 
-	| CoS    	| Sequential Write 	| Sequential Read 	| Read IOPS 	| Write IOPS 	|
-	|--------	|------------------	|-----------------	|-----------	|------------	|
-	| High   	| 506 MBPS         	| 888 MBPS        	| 13888     	| 7920       	|
-	| Medium 	| 462 MBPS         	| 383 MBPS        	| 599       	| 7226       	|
-	| Low    	| 457 MBPS         	| 875 MBPS        	| 13675     	| 7155       	|
-
+| CoS    	| Sequential Write 	| Sequential Read 	| Read IOPS 	| Write IOPS 	|
+|--------	|------------------	|-----------------	|-----------	|------------	|
+| High   	| 506 MBPS         	| 888 MBPS        	| 13888     	| 7920       	|
+| Medium 	| 462 MBPS         	| 383 MBPS        	| 599       	| 7226       	|
+| Low    	| 457 MBPS         	| 875 MBPS        	| 13675     	| 7155       	|
