@@ -147,6 +147,9 @@ entries:
     - title: Run PX-Enterprise
       url: /create-px-enterprise-cluster.html
       output: web
+    - title: PX-Enterprise Usage
+      url: /px-usage.html
+      output:web
   - title: Troubleshooting and FAQs
     output: web
     folderitems:
