@@ -86,8 +86,33 @@ Global Storage Pool
 The `status` command on any node shows the pools with different classes of services listed.  The format `x:y` in the Device column indicates the `pool:device` participating in that pool.
 
 Note the "SHARED" status of the volume, in the above output.
+### Inspect different pools
 
-
+```
+# /opt/pwx/bin/pxctl service drives
+PX drive configuration:
+Pool ID: 0
+	Cos: COS_TYPE_LOW
+	Size: 500 GiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	1: /dev/xvdl, 4.1 GiB allocated of 500 GiB, Online
+Pool ID: 1
+	Cos: COS_TYPE_HIGH
+	Size: 991 GiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	1: /dev/xvdn, 2.1 GiB allocated of 991 GiB, Online
+Pool ID: 2
+	Cos: COS_TYPE_MEDIUM
+	Size: 128 GiB
+	Status: Online
+	Has meta data: Yes
+	Drives:
+	1: /dev/xvdj, 2.1 GiB allocated of 128 GiB, Online
+```
 ### Measure Performance
 Let's first create three volumes with a high, medium and low class of service:
 
