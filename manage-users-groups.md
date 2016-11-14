@@ -4,10 +4,10 @@ title: "Manage Users"
 keywords: portworx, px-enterprise, users, user admin
 sidebar: home_sidebar
 ---
-To create users, click the gear icon in the upper-right corner of the console and choose **User Admin**.
+To create users, click the gear icon in the upper-right corner of the console and choose **Manage Users**.
 
-![User Admin selected in Settings menu](images/settings-user-admin.png "User Admin selected in Settings menu")
+![User Admin selected in Settings menu](images/settings-user-admin-updated.png "User Admin selected in Settings menu")
 
 Click the **New User** button, fill in the user details, and click **Save**. Giving a user Admin permissions provides the user greater visibility across all clusters as well as the ability to create additional users.
 
-![New User dialog box](images/settings-new-user.png "New User dialog box")
+![New User dialog box](images/settings-new-user-updated.png "New User dialog box")
