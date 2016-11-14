@@ -42,26 +42,11 @@ entries:
     - title: Run With User Namespaces
       url: /run-with-user-namespace.html
       output: web
-    - title: Create PX-Enterprise Cluster
+    - title: Run PX-Enterprise
       url: /create-px-enterprise-cluster.html
       output: web
-    - title: Deploying via system image templates systemd
+    - title: Deploy via systemd
       url: /systemd.html
-      output: web
-  - title: Operate and Maintain
-    output: web
-    folderitems:
-    - title: Upgrade Portworx
-      url: /upgrade.html
-      output: web
-    - title: Scale-Up Nodes
-      url: /scale-up.html
-      output: web
-    - title: Scale-Down Nodes
-      url: /scale-down.html
-      output: web
-    - title: Maintenance Mode
-      url: /maintenance.html
       output: web
   - title: Manage Volumes
     output: web
@@ -71,6 +56,9 @@ entries:
       output: web
     - title: Shared Volumes
       url: /shared-volumes.html
+      output: web
+    - title: Class of Service
+      url: /cos.html
       output: web
   - title: Schedulers
     output: web
@@ -92,6 +80,21 @@ entries:
     folderitems:
     - title: Manage Users
       url: /manage-users-groups.html
+      output: web
+  - title: Operate and Maintain
+    output: web
+    folderitems:
+    - title: Upgrade Portworx
+      url: /upgrade.html
+      output: web
+    - title: Scale-Up Nodes
+      url: /scale-up.html
+      output: web
+    - title: Scale-Down Nodes
+      url: /scale-down.html
+      output: web
+    - title: Maintenance Mode
+      url: /maintenance.html
       output: web
   - title: Application Solutions
     output: web
