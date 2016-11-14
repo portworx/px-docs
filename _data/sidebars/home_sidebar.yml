@@ -42,11 +42,11 @@ entries:
     - title: Run With User Namespaces
       url: /run-with-user-namespace.html
       output: web
+    - title: Create PX-Enterprise Cluster
+      url: /create-px-enterprise-cluster.html
+      output: web
     - title: Deploying via system image templates systemd
       url: /systemd.html
-      output: web
-    - title: Deploying Portworx with Rancher
-      url: /deploy_px_with_rancher.html
       output: web
   - title: Operate and Maintain
     output: web
@@ -63,12 +63,9 @@ entries:
     - title: Maintenance Mode
       url: /maintenance.html
       output: web
-  - title: Clusters and Storage Volumes
+  - title: Manage Volumes
     output: web
     folderitems:
-    - title: Create PX-Enterprise Cluster
-      url: /create-px-enterprise-cluster.html
-      output: web
     - title: Create and Manage Storage Volumes
       url: /create-manage-storage-volumes.html
       output: web
