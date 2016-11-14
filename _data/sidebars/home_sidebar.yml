@@ -30,17 +30,17 @@ entries:
     - title: Prerequisite - OS Configurations for Docker Shared Mounts
       url: /os-config-shared-mounts.html
       output: web
-    - title: Run With Docker
+    - title: Run with Docker
       url: /run-with-docker.html
       output: web
     - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
+    - title: Run with User Namespaces
+      url: /run-with-user-namespace.html
+      output: web
     - title: Run in 'air-gap' environments
       url: /run-air-gap.html
-      output: web
-    - title: Run With User Namespaces
-      url: /run-with-user-namespace.html
       output: web
   - title: Manage Volumes
     output: web
