@@ -7,7 +7,12 @@ sidebar: home_sidebar
 Through class of service (also known as a `CoS`), a single volume's class of service can be controlled and mapped to specific underlying storage infrastructure capabilities.
 
 ## Explanation of Class of Service
-XXX
+
+Portworx volumes can operate at different class of service. Using class of service you can tune your volume for higher 
+throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput. 
+
+Portworx instances have a complete matrix of available CoS levels in the entire cluster. This is dynamic and dictates data placement and movement.  In runtime, IO queues are adjusted based on desired CoS levels.
+
 
 ## Try it out
 
