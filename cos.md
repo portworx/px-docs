@@ -17,7 +17,7 @@ Portworx instances have a complete matrix of available CoS levels in the entire 
 To create a volume with a specific class of service level, use the `--cos` parameter in the volume create options.  As with other parameters, this CoS parameter can also be passed in as a label via Docker or any scheduler.
 
 ```
-# /opt/pwx/bin/pxctl v c --cos high volume-name
+# /opt/pwx/bin/pxctl volume create --cos high volume-name
 ```
 
 Here is an example output from [fio](https://github.com/axboe/fio) when measuring the CoS feature on an Intel server with NVMe and SATA drives.
@@ -140,11 +140,11 @@ Pool ID: 2
 Let's first create three volumes with a high, medium and low class of service:
 
 ```
-# /opt/pwx/bin/pxctl v c --cos high test-high --size 8
+# /opt/pwx/bin/pxctl volume create --cos high test-high --size 8
 test-high
-# /opt/pwx/bin/pxctl v c --cos med test-med --size 8
+# /opt/pwx/bin/pxctl volume create --cos med test-med --size 8
 test-med
-# /opt/pwx/bin/pxctl v c --cos low test-low --size 8
+# /opt/pwx/bin/pxctl volume create --cos low test-low --size 8
 test-low
 ```
 
