@@ -8,11 +8,7 @@ Through class of service (also known as a `CoS`), a single volume's class of ser
 
 ## Explanation of Class of Service
 
-Portworx volumes can operate at different class of service levels. Using class of service you can tune your volume for higher 
-throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput. 
-
-Portworx instances have a complete matrix of available CoS levels in the entire cluster. This is dynamic and dictates data placement and movement.  In runtime, IO queues are adjusted based on desired CoS levels.
-
+Applications have different storage performance requirements; some require higher IOPS/throughput performance characteristics than others. Portworx provides the ability to specify a class of service level at the container granularity. Containers operating at different classes of service can co-exist in the same node/cluster.  Using class of service you can tune your volume for higher throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput.
 
 ## Try it out
 
