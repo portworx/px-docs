@@ -114,6 +114,7 @@ Pool ID: 2
 	Drives:
 	1: /dev/xvdj, 2.1 GiB allocated of 128 GiB, Online
 ```
+
 ### Measure Performance
 Let's first create three volumes with a high, medium and low class of service:
 
