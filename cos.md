@@ -24,7 +24,7 @@ Here is an example output from [fio](https://github.com/axboe/fio) when measurin
 
 | Random   	| Low CoS IOPS	| High CoS IOPS 	|
 | 4K 	  	| 768         	| 65024				|
-| 8K    	| 768         	| 46848     		|
+| 8K    	| 642         	| 46848     		|
 | 64K    	| 496         	| 9824     			|
 
 The graph below shows the sequential and random read and write performance on high and low CoS volume types:
