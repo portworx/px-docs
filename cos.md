@@ -100,11 +100,12 @@ Now we use [fio](https://github.com/axboe/fio) to measure PX volume performance 
 Test a high CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-high:/test                                \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test                           \
-    --filename=test --ioengine=libaio --readwrite=randwrite                             \
-    --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
-    --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-high:/test        \
+    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
+    --filename=test --ioengine=libaio --readwrite=randwrite     \
+    --size=500M --name=test --verify=meta --do_verify=1 		\
+	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
+    --iodepth=64 --randrepeat=1
 ```
 
 Results:
@@ -134,11 +135,12 @@ Disk stats (read/write):
 Test a medium CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-med:/test                                 \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test                           \
-    --filename=test --ioengine=libaio --readwrite=randwrite                             \
-    --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
-    --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-med:/test         \
+    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
+    --filename=test --ioengine=libaio --readwrite=randwrite     \
+    --size=500M --name=test --verify=meta --do_verify=1 		\
+	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
+    --iodepth=64 --randrepeat=1
 ```
 
 Results:
@@ -169,11 +171,12 @@ Disk stats (read/write):
 Test a low CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-low:/test                                 \
-    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test                           \
-    --filename=test --ioengine=libaio --readwrite=randwrite                             \
-    --size=500M --name=test --verify=meta --do_verify=1 --verify_pattern=0xDeadBeef     \
-    --direct=1 --gtod_reduce=1 --iodepth=64 --randrepeat=1
+# docker run --rm --volume-driver=pxd -v test-low:/test         \
+    gourao/fio /usr/bin/fio --blocksize=64k --directory=/test   \
+    --filename=test --ioengine=libaio --readwrite=randwrite     \
+    --size=500M --name=test --verify=meta --do_verify=1 		\
+	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1 i    \
+    --iodepth=64 --randrepeat=1
 ```
 
 Results:
