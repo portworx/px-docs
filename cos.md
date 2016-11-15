@@ -174,26 +174,24 @@ gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
 Results:
 
 ```
-test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
+test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:56:33 2016
-  read : io=524880KB, bw=48772KB/s, iops=3048, runt= 10762msec
-  write: io=523696KB, bw=48662KB/s, iops=3041, runt= 10762msec
-  cpu          : usr=1.28%, sys=6.92%, ctx=7987, majf=0, minf=6
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
+test: (groupid=0, jobs=1): err= 0: pid=6: Tue Nov 15 07:49:40 2016
+  read : io=4096.0MB, bw=41384KB/s, iops=10346, runt=101350msec
+  cpu          : usr=4.06%, sys=15.86%, ctx=462899, majf=0, minf=134
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
      complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
-     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     issued    : total=r=1048576/w=0/d=0, short=r=0/w=0/d=0
      latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=524880KB, aggrb=48771KB/s, minb=48771KB/s, maxb=48771KB/s, mint=10762msec, maxt=10762msec
-  WRITE: io=523696KB, aggrb=48661KB/s, minb=48661KB/s, maxb=48661KB/s, mint=10762msec, maxt=10762msec
+   READ: io=4096.0MB, aggrb=41384KB/s, minb=41384KB/s, maxb=41384KB/s, mint=101350msec, maxt=101350msec
 
 Disk stats (read/write):
-  pxd!pxd140712484780077737: ios=33003/32734, merge=0/2, ticks=222805/226336, in_queue=449230, util=98.87%
+  pxd!pxd110428589532375940: ios=1043909/5, merge=0/2, ticks=12308307/116, in_queue=12310012, util=100.00%
 ```
 
 #### Test a medium CoS volume on EBS
@@ -202,40 +200,38 @@ Disk stats (read/write):
 # docker run --rm --volume-driver=pxd -v test-med:/test      \
 gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
 --filename=test --ioengine=libaio --readwrite=randrw          \
---size=1G --name=test --direct=1 --gtod_reduce=1        \
+--size=4G --name=test --direct=1 --gtod_reduce=1        \
 --iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
 
 ```
-test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
+t: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:57:08 2016
-  read : io=524880KB, bw=42363KB/s, iops=2647, runt= 12390msec
-  write: io=523696KB, bw=42268KB/s, iops=2641, runt= 12390msec
-  cpu          : usr=1.25%, sys=7.67%, ctx=10840, majf=0, minf=6
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
+test: (groupid=0, jobs=1): err= 0: pid=7: Tue Nov 15 08:00:47 2016
+  read : io=4096.0MB, bw=23135KB/s, iops=5783, runt=181295msec
+  cpu          : usr=2.74%, sys=10.46%, ctx=591148, majf=0, minf=134
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
      complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
-     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     issued    : total=r=1048576/w=0/d=0, short=r=0/w=0/d=0
      latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=524880KB, aggrb=42363KB/s, minb=42363KB/s, maxb=42363KB/s, mint=12390msec, maxt=12390msec
-  WRITE: io=523696KB, aggrb=42267KB/s, minb=42267KB/s, maxb=42267KB/s, mint=12390msec, maxt=12390msec
+   READ: io=4096.0MB, aggrb=23135KB/s, minb=23135KB/s, maxb=23135KB/s, mint=181295msec, maxt=181295msec
 
 Disk stats (read/write):
-  pxd!pxd1076009269408190983: ios=33394/32741, merge=0/4, ticks=474477/441750, in_queue=916431, util=98.94%
+  pxd!pxd230469319006318075: ios=1045946/4, merge=0/1, ticks=22656364/162, in_queue=22658103, util=100.00%
 ```
 
 #### Test a low CoS volume on EBS
 
 ```
 # docker run --rm --volume-driver=pxd -v test-low:/test      \
-gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
+gourao/fio /usr/bin/fio --blocksize=4k -directory=/test       \
 --filename=test --ioengine=libaio --readwrite=randrw          \
 --size=1G --name=test --direct=1 --gtod_reduce=1        \
 --iodepth=128 --randrepeat=1  --end_fsync=1
@@ -244,34 +240,29 @@ gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
 Results:
 
 ```
-test: (g=0): rw=randwrite, bs=64K-64K/64K-64K/64K-64K, ioengine=libaio, iodepth=64
-fio-2.1.11
-Starting 1 process
-test: (g=0): rw=randrw, bs=16K-16K/16K-16K/16K-16K, ioengine=libaio, iodepth=128
+test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
 
-test: (groupid=0, jobs=1): err= 0: pid=6: Mon Nov 14 07:59:30 2016
-  read : io=524880KB, bw=4304.9KB/s, iops=269, runt=121928msec
-  write: io=523696KB, bw=4295.2KB/s, iops=268, runt=121928msec
-  cpu          : usr=0.19%, sys=0.88%, ctx=22021, majf=0, minf=6
-  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=99.9%
+test: (groupid=0, jobs=1): err= 0: pid=6: Tue Nov 15 09:20:17 2016
+  read : io=1024.0MB, bw=365111B/s, iops=89, runt=2940858msec
+  cpu          : usr=0.05%, sys=0.19%, ctx=160992, majf=0, minf=134
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
      complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
-     issued    : total=r=32805/w=32731/d=0, short=r=0/w=0/d=0
+     issued    : total=r=262144/w=0/d=0, short=r=0/w=0/d=0
      latency   : target=0, window=0, percentile=100.00%, depth=128
 
 Run status group 0 (all jobs):
-   READ: io=524880KB, aggrb=4304KB/s, minb=4304KB/s, maxb=4304KB/s, mint=121928msec, maxt=121928msec
-  WRITE: io=523696KB, aggrb=4295KB/s, minb=4295KB/s, maxb=4295KB/s, mint=121928msec, maxt=121928msec
+   READ: io=1024.0MB, aggrb=356KB/s, minb=356KB/s, maxb=356KB/s, mint=2940858msec, maxt=2940858msec
 
 Disk stats (read/write):
-  pxd!pxd597887972375262430: ios=33477/32778, merge=0/22, ticks=7431768/6880651, in_queue=14312709, util=99.96%
+  pxd!pxd660995725854051776: ios=260024/5, merge=0/2, ticks=376295185/22319, in_queue=376318258, util=100.00%
 ```
 
-### Summary of AWS Results
+### Summary of AWS Results (4K Random Reads)
 
-| CoS    	| Random Write 	| Random Read 	| Read IOPS 	| Write IOPS 	|
-| High   	| 48 MB/S 	    | 48 MB/S		| 3048			| 3041       	|
-| Medium 	| 42 MB/S   	| 42 MB/S		| 2647       	| 2641       	|
-| Low    	| 4.3 MB/s		| 4.3 MB/s		| 269			| 268       	|
+| CoS    	| Avg IOPS 	| Avg Response Time |
+| High   	| 10346		| 0.58ms 	  	   	|
+| Medium 	| 5783     	| 0.54ms       		|
+| Low    	| 89		| 23.61ms      		|
