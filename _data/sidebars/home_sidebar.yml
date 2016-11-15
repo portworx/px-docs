@@ -39,7 +39,7 @@ entries:
     - title: Run with User Namespaces
       url: /run-with-user-namespace.html
       output: web
-    - title: Run in 'air-gap' environments
+    - title: Run in 'air-gapped' environments
       url: /run-air-gap.html
       output: web
   - title: Manage Volumes
