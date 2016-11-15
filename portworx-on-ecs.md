@@ -7,8 +7,8 @@ sidebar: home_sidebar
 
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)
 
-### Step 1: Download and install the ECS CLI utilities on your workstation
-We will be creating an ECS cluster using the Amazon ECS CLI from your workstation.
+### Step 1: Install the ECS CLI
+Download and install the ECS CLI utilities on your workstation.  We will be creating an ECS cluster using the Amazon ECS CLI from your workstation.
 
 1. Download and install the ECS CLI by following [these instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html)
 2. Obtain your AWS access key ID and secret access key.  Export these environment variables.
@@ -18,8 +18,8 @@ We will be creating an ECS cluster using the Amazon ECS CLI from your workstatio
 # export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXX
 ```
 
-### Step 2: Create an ECS cluster with EC2 instances
-In this example, we create an ecs cluster called `ecs-demo` in the US-WEST-1 region.
+### Step 2: Create an ECS cluster named ecs-demo
+In this example, we create an ECS cluster called `ecs-demo` using EC2 instances in the US-WEST-1 region.
 
 We strongly recommend using a Linux AMI with a newer distro compared to the default ECS AMI.  The default ECS AMI uses an older distro and Docker 1.11.
 
@@ -30,7 +30,9 @@ Note that Portworx recommends a minimum cluster size of 3 nodes.
 #### Create an ECS cluster
 Log into the ECS console and create an ecs cluster called "ecs-demo".
 
-![ecs-clust-create](images/ecs-clust-create.png "ecs").  We will use the name `ecs-demo` to configure your EC2 instances and the `ecs-cli`.
+![ecs-clust-create](images/ecs-clust-create.png "ecs").
+
+We will use the name `ecs-demo` to configure your EC2 instances and the `ecs-cli`.
 
 #### Create your EC2 instances
 Your EC2 instances must have the correct IAM role set.  Follow these [IAM instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html).
@@ -41,7 +43,7 @@ Your EC2 instances must have the correct IAM role set.  Follow these [IAM instru
 You will need to provision storage to these instances by creating new EBS volumes and attaching it to the instances.  Portworx will be using these volumes to provision storage to your containers.
 
 #### Turn each EC2 instance into an ECS instance
-You must install the `ecs-agent` on each EC2 instance to convert the instance to an ECS instance.   Follow [these](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-install.html) instructions.
+Follow [these](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-install.html) instructions to install the `ecs-agent` on each EC2 instance to convert it into an ECS instance.
 
 Your command to launch the ecs-agent will look like this:
 
@@ -64,15 +66,7 @@ Your command to launch the ecs-agent will look like this:
 
 Note the use of the cluster name `ecs-demo` in the `--env=ECS_CLUSTER` environment variable.  Once this has been done, these nodes will now become part of your ECS cluster named `ecs-demo`
 
-### Step 3. Configure the `ecs-cli` on your workstation
-
-```
-# ecs-cli configure --region us-west-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo
-```
-
-Note the parameter `--cluster ecs-demo`.  This is what configures your CLI to talk to the ecs cluster named `ecs-demo`.
-
-### Step 4: Deploy Portworx on the ECS instances
+### Step 3: Deploy Portworx on the ECS instances
 Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.  You will have to log into each of the ECS instances for this step.
 
 ```
@@ -90,6 +84,14 @@ Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provis
                  --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -a -z -f
 ```
+
+### Step 4. Configure the `ecs-cli` on your workstation
+
+```
+# ecs-cli configure --region us-west-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo
+```
+
+Note the parameter `--cluster ecs-demo`.  This is what configures your CLI to talk to the ecs cluster named `ecs-demo`.
 
 ### Step 5: Create Portworx volumes and use them with your containers
 Create PX volumes using the Docker CLI.  Log into any of the ECS instances and create the PX volumes.
