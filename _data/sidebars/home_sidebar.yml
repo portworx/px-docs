@@ -156,6 +156,9 @@ entries:
     - title: FAQs about PX-Enterprise
       url: /px-faqs.html
       output: web
+    - title: Performance
+      url: /performance.html
+      output: web
     - title: Troubleshooting
       url: /troubleshooting.html
       output: web
