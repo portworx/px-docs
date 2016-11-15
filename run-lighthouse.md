@@ -105,7 +105,8 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 For **ETCD**, start the container with the following run command:
 
 ```
-IPADDR=10.1.2.3 sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
+IPADDR=10.1.2.3 sudo docker run --restart=always \
+       --name px-lighthouse -d --net=bridge \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
        -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IPADDR}:8086        \
