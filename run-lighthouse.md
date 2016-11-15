@@ -132,6 +132,8 @@ Runtime command options
 -k {etcd/consul}:http://{IP_Address}:{Port_NO}
    > Connection string of your kbdb.
    > Note: Specify port 2379 for etcd and 8500 for consul
+   > If you have multinode etcd cluster then you can specify your connection string as 
+       > 'etcd:http://{IP_Address_1}:2379,etcd:http://{IP_Address_2}:2379,etcd:http://{IP_Address_3}:2379'
 ```
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
@@ -146,4 +148,4 @@ In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX
 
 ![AZURE-SECURITY-RULES](images/azure-inbound-security-rules.png "Azure Inbound Security Settings")
 
-* Start your px-lighthouse container with your private ip address. Access the web console in browser at http://{public-ip-address}:80
+* Access the web console in browser at http://{public-ip-address}:80
