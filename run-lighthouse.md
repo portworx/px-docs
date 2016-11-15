@@ -42,7 +42,8 @@ To start, create one server, following these requirements:
 For **ETCD2**, start the container with the following run command:
 
 ```
-IPADDR=10.1.2.3 sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 --restart always    \
+IPADDR=10.1.2.3 sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 \
+     --restart always    \
      --name etcd-px quay.io/coreos/etcd:v2.3.7                                \
      -name etcd0                                                              \
      -data-dir /var/lib/etcd/                                                 \
