@@ -42,17 +42,18 @@ To start, create one server, following these requirements:
 For **ETCD2**, start the container with the following run command:
 
 ```
-IPADDR=10.1.2.3 sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380 \
-     --restart always    \
+IPADDR=10.1.2.3 
+sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
+     --restart always                                                         \
      --name etcd-px quay.io/coreos/etcd:v2.3.7                                \
      -name etcd0                                                              \
      -data-dir /var/lib/etcd/                                                 \
-     -advertise-client-urls http://${IPADDR}:2379,http://${IPADDR}:4001  \
+     -advertise-client-urls http://${IPADDR}:2379,http://${IPADDR}:4001       \
      -listen-client-urls http://0.0.0.0:2379                                  \
-     -initial-advertise-peer-urls http://${IPADDR}:2380                    \
+     -initial-advertise-peer-urls http://${IPADDR}:2380                       \
      -listen-peer-urls http://0.0.0.0:2380                                    \
      -initial-cluster-token etcd-cluster                                      \
-     -initial-cluster etcd0=http://${IPADDR}:2380                         \
+     -initial-cluster etcd0=http://${IPADDR}:2380                             \
      -initial-cluster-state new
 ```
   
@@ -105,21 +106,21 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 For **ETCD**, start the container with the following run command:
 
 ```
-sudo docker run --restart=always \
-       --name px-lighthouse -d --net=bridge \
+sudo docker run --restart=always                                        \
+       --name px-lighthouse -d --net=bridge                             \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086        \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086          \
        -k etcd:http://${IP_ADDR}:2379                
 ```
 
 For **Consul**, start the container with the following run command:
 
 ```
-sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
-       -p 80:80                                                         \
-       portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086        \
+sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
+       -p 80:80                                                          \
+       portworx/px-lighthouse                                            \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086           \
        -k consul:http://${IP_ADDR}:8500                
 ```
 
@@ -136,3 +137,13 @@ Runtime command options
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
 
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
+
+### Provider Specific Instructions
+
+### Azure
+
+* Make sure you have set inbound security rule to 'Allow' for port 80.
+
+![AZURE-SECURITY-RULES](images/azure-inbound-security-rules.png "Azure Inbound Security Settings")
+
+* Start your px-lighthouse container with your private ip address. Access the web console in browser at http://{public-ip-address}:80
