@@ -67,30 +67,6 @@ spec:
 
 Be sure to use the same `name` field that you used when defining the volume.
 
-## Note: Be sure to run the Kubernetes cluster in privileged mode
-
-* To share the namespace between the host, PX-Developer container,
-  and your Kubernetes pod instance, you must run the cluster with
-  privileges. You can do that by setting the environment variable
-  `ALLOW_PRIVILEGED` equal to `true`.
-* Share the host path `/var/lib/kubelet` with the PX container and
-  your pods. The Docker run command for PX-Dev above shares this
-  path. To share it within your pod, add a new `hostPath` type
-  volume and a corresponding `volumeMount` in your spec file.
-
-```yaml
-spec:
-  containers:
-    volumeMounts:
-    - name: lib
-      mountPath: /var/lib/kubelet
-  volumes:
-    - name: lib
-      hostPath:
-        path: /var/lib/kubelet
-
-```
-
 ## Summary of steps
 
 1. Run the PX-Developer container using Docker with following command.
@@ -115,11 +91,11 @@ spec:
 portworx/px-dev:latest
 ```
 
-2. Start your Kubernetes cluster in privileged mode.
+2. Start your Kubernetes cluster
 
     ```
 $ cd kubernetes
-$ ALLOW_PRIVILEGED=true hack/local-up-cluster.sh
+$ hack/local-up-cluster.sh
 ```
 
 3. Set your cluster details.
@@ -135,3 +111,31 @@ $ cluster/kubectl.sh config use-context local
     ```
 $ ./kubectl create -f nginx-pxd.yaml
 ```
+
+Example pod spec file
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-px
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: test
+      mountPath: <vol-mount-path>
+    ports:
+    - containerPort: 80
+  volumes:
+  - name: test
+    flexVolume:
+      driver: "px/flexvolume"
+      fsType: "ext4"
+      options:
+        volumeID: "<vol-id>"
+        size: "<vol-size>"
+        osdDriver: "pxd"
+```
+
