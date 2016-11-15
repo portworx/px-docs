@@ -105,21 +105,21 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 For **ETCD**, start the container with the following run command:
 
 ```
-# sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
+IPADDR=10.1.2.3 sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086        \
-       -k etcd:http://{IP_Address}:2379                
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IPADDR}:8086        \
+       -k etcd:http://${IPADDR}:2379                
 ```
 
 For **Consul**, start the container with the following run command:
 
 ```
-# sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
+IPADDR=10.1.2.3 sudo docker run --restart=always --name px-lighthouse -d --net=bridge \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086        \
-       -k consul:http://{IP_Address}:8500                
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IPADDR}:8086        \
+       -k consul:http://${IPADDR}:8500                
 ```
 
 Runtime command options
