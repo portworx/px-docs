@@ -117,7 +117,7 @@ web:
 redis:
   image: redis
   volumes:
-     - ecsvol1:/data
+     - demovol:/data
 # ecs-cli compose --file redis.yml up 
 ```
 
