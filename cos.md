@@ -262,7 +262,7 @@ Disk stats (read/write):
 
 ### Summary of AWS Results (4K Random Reads)
 
-| CoS    	| Avg IOPS 	| Avg Response Time |
-| High   	| 10346		| 0.58ms 	  	   	|
-| Medium 	| 5783     	| 0.54ms       		|
-| Low    	| 89		| 23.61ms      		|
+| CoS    	| Avg IOPS 		| Avg Response Time |
+| High   	| 10346			| 0.58ms 	  	   	|
+| Medium 	| 5783     		| 0.54ms       		|
+| Low    	| 89			| 23.61ms      		|
