@@ -55,7 +55,7 @@ The following is a sample JSON file that can be used to launch Portworx through 
             "privileged": true,
             "parameters": [{
                 "key": "volume",
-                "value": "/run/docker/plugins:/run/docker/plugins "
+                "value": "/run/docker/plugins:/run/docker/plugins"
             }, {
                 "key": "volume",
                 "value": "/var/lib/osd:/var/lib/osd:shared"
