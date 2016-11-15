@@ -97,8 +97,8 @@ You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/
 
 ```
 # git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/quick-start
-# docker-compose run portworx -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
+# cd px-lighthouse/on-prem
+# docker-compose -f docker-compose-etcd2.yaml run -d
 ```
 
 ### To run the PX-Lighthouse container
