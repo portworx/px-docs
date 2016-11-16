@@ -91,37 +91,6 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
 
 ### Step 5: Launch the PX-Lighthouse Container
 
-### Docker compose method
-
-You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
-
-For **ETCD2**
-
-```
-export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/etcd2
-# docker-compose up -d
-```
-
-For **ETCD3**
-
-```
-export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/etcd3
-# docker-compose up -d
-```
-
-For **Consul**
-
-```
-export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/consul
-# docker-compose up -d
-```
-
 ### To run the PX-Lighthouse container
 
 For **ETCD**, start the container with the following run command:
@@ -160,6 +129,37 @@ Runtime command options
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
 
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
+
+### Docker compose method
+
+You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
+
+For **ETCD2**
+
+```
+export LOCAL_IP=1.2.3.4
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/compose/etcd2
+# docker-compose up -d
+```
+
+For **ETCD3**
+
+```
+export LOCAL_IP=1.2.3.4
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/compose/etcd3
+# docker-compose up -d
+```
+
+For **Consul**
+
+```
+export LOCAL_IP=1.2.3.4
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/compose/consul
+# docker-compose up -d
+```
 
 ### Provider Specific Instructions
 
