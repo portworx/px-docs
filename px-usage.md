@@ -48,4 +48,25 @@ Provide one of the following examples as command line arguments positioned after
 
 If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from **"Manage Clusters -> Get Startup Script"**.  In this case, the **"-k"** argument would not apply, since Lighthouse uses a Portworx hosted **etcd**.
 
-If running in an "air-gapped" mode, then the "-t" argument will correspond to any site-generated ClusterID that should be the same for all nodes participating in the same cluster.  In this case, the **"-k"** argument should point to an existing on-prem version of **etcd** or **consul**.
+If running in an ["air-gapped"](/run-air-gap.html) environment, then also supply "-e API_SERVER=http://1.2.3.4" to the "docker run" command.   For example:
+
+```
+docker run --restart=always --name px-enterprise -d \
+      --net=host --privileged=true \
+      -v /run/docker/plugins:/run/docker/plugins \
+      -v /var/lib/osd:/var/lib/osd:shared \
+      -v /dev:/dev \
+      -v /etc/pwx:/etc/pwx \
+      -v /opt/pwx/bin:/export_bin:shared \
+      -v /var/run/docker.sock:/var/run/docker.sock \
+      -v /mnt:/mnt:shared \
+      -v /var/cores:/var/cores \
+      -v /usr/src:/usr/src \
+      --ipc=host  \
+      -e API_SERVER=http://1.2.3.4 \
+      portworx/px-enterprise -t token-8dc976f9-ab97-11e6-b3c8-0242ac110004 \
+      -s /dev/sdX -m enp0s3 -d enp0s3
+```
+
+The "-t" argument will correspond to the token from an on-prem Lighthouse and should be the same for all nodes participating in the same cluster.  In this case, the **"-k"** argument should point to an existing on-prem version of **etcd** or **consul**.
+
