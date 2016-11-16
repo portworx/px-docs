@@ -95,10 +95,31 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
 
 You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
 
+For **ETCD2**
+
 ```
+export LOCAL_IP=1.2.3.4
 # git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/on-prem
-# docker-compose -f docker-compose-etcd2.yaml run -d
+# cd px-lighthouse/compose/etcd2
+# docker-compose up -d
+```
+
+For **ETCD3**
+
+```
+export LOCAL_IP=1.2.3.4
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/compose/etcd3
+# docker-compose up -d
+```
+
+For **Consul**
+
+```
+export LOCAL_IP=1.2.3.4
+# git clone https://github.com/portworx/px-lighthouse.git
+# cd px-lighthouse/compose/consul
+# docker-compose up -d
 ```
 
 ### To run the PX-Lighthouse container
