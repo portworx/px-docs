@@ -91,8 +91,6 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
 
 ### Step 5: Launch the PX-Lighthouse Container
 
-### To run the PX-Lighthouse container
-
 For **ETCD**, start the container with the following run command:
 
 ```
