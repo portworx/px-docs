@@ -193,6 +193,7 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
 * Notice the Docker `parameters` clause as the way to reference the `pxd` volume driver as well as the volume itself.
 * The referenced volume can be a volume name, a volume ID, or a snapshot ID.   If the volume name does not previously exist, it gets created in-band with default settings.
 * The `constraints` clause, restricts this task to running only on Agent nodes that are part of a given Portworx cluster.
+
 >**Important:**<br/> If you are deploying Portworx on all nodes in the cluster, then you should omit the *"pxfabric"* constraint.
 
 
