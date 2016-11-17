@@ -42,6 +42,9 @@ entries:
     - title: Run in 'air-gapped' environments
       url: /run-air-gap.html
       output: web
+    - title: Run Lighthouse
+      url: /run-lighthouse.html
+      output: web
   - title: Manage Volumes
     output: web
     folderitems:
