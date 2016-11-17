@@ -137,28 +137,28 @@ Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
 For **ETCD2**
 
 ```
-# export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/etcd2
-# docker-compose up -d
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/etcd2
+docker-compose up -d
 ```
 
 For **ETCD3**
 
 ```
-# export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/etcd3
-# docker-compose up -d
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/etcd3
+docker-compose up -d
 ```
 
 For **Consul**
 
 ```
-# export LOCAL_IP=1.2.3.4
-# git clone https://github.com/portworx/px-lighthouse.git
-# cd px-lighthouse/compose/consul
-# docker-compose up -d
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/consul
+docker-compose up -d
 ```
 
 ### Provider Specific Instructions
