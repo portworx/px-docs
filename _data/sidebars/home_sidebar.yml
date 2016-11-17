@@ -135,6 +135,9 @@ entries:
     - title: Portworx on Azure
       url: /portworx-on-azure.html
       output: web
+    - title: Portworx on SoftLayer
+      url: /portworx-on-softlayer.html
+      output: web 
   - title: CLI Reference
     output: web
     folderitems:
