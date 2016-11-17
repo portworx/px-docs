@@ -74,7 +74,8 @@ spec:
 After you specify PX as a volume type in your spec file, you can mount it by including a `volumeMounts` section under the `spec` section. This example shows how you can use it with nginx.
 
 Example pod spec file
-```yaml
+
+``` yaml
 apiVersion: v1
 kind: Pod
 metadata:
