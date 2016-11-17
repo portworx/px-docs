@@ -32,7 +32,7 @@ To run the PX container using Docker, run the following command:
 # sudo docker run --restart=always --name px -d --net=host
     --privileged=true \
     -v /run/docker/plugins:/run/docker/plugins \
-    -v /var/lib/osd:/var/lib/osd \
+    -v /var/lib/osd:/var/lib/osd:shared \
     -v /dev:/dev \
     -v /etc/pwx:/etc/pwx \
     -v /opt/pwx/bin:/export_bin \
