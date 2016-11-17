@@ -132,10 +132,12 @@ In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX
 
 You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
 
+Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
+
 For **ETCD2**
 
 ```
-export LOCAL_IP=1.2.3.4
+# export LOCAL_IP=1.2.3.4
 # git clone https://github.com/portworx/px-lighthouse.git
 # cd px-lighthouse/compose/etcd2
 # docker-compose up -d
@@ -144,7 +146,7 @@ export LOCAL_IP=1.2.3.4
 For **ETCD3**
 
 ```
-export LOCAL_IP=1.2.3.4
+# export LOCAL_IP=1.2.3.4
 # git clone https://github.com/portworx/px-lighthouse.git
 # cd px-lighthouse/compose/etcd3
 # docker-compose up -d
@@ -153,7 +155,7 @@ export LOCAL_IP=1.2.3.4
 For **Consul**
 
 ```
-export LOCAL_IP=1.2.3.4
+# export LOCAL_IP=1.2.3.4
 # git clone https://github.com/portworx/px-lighthouse.git
 # cd px-lighthouse/compose/consul
 # docker-compose up -d
