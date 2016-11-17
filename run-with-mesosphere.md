@@ -5,7 +5,7 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storag
 sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 ---
-You can use Portworx to provide docker volumes for Mesos and Mesosphere through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7.   Mesos has been qualified using Mesos 1.0.1.
+You can use Portworx to provide docker volumes for Mesos and Mesosphere through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
 
 The Marathon service maps options through the Docker command line to reference the Portworx volume driver and associated volume.
 
@@ -21,7 +21,37 @@ Use the DC/OS CLI command `dcos node` to identify which nodes in the Mesos clust
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
 
-## Step 2: Deploy Portworx through Marathon
+## Step 2: Add Mesos constraints to Mesos-slave Nodes (optional)
+
+If the size of your Mesos cluster is larger than the maximum number of nodes supported for a Portworx release,
+then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
+on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
+Otherwise, Portworx recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
+
+The following steps are required only for configuring and using "constraints".
+
+For each Mesosphere Agent node or Mesos-slave that is participating in the PX cluster, specify Mesos attributes that allow for affinity of tasks to nodes that are part of the Portworx cluster.
+
+If using Mesosphere/DCOS:
+
+```
+  echo MESOS_ATTRIBUTES=pxfabric:pxclust1 >> /var/lib/dcos/mesos-slave-common
+  rm -f /var/lib/mesos/slave/meta/slaves/latest
+  systemctl restart dcos-mesos-slave.service
+  systemctl status dcos-mesos-slave.service -l
+```
+
+If using Apache Mesos:
+
+```
+   mkdir /etc/default/mesos-slave/attributes
+   echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
+   rm -f /var/lib/mesos/slave/meta/slaves/latest
+   systemctl restart mesos-slave
+   systemctl status mesos-slave -l
+```
+
+## Step 3: Deploy Portworx through Marathon
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
 The pre-requisites for installing Portworx through Marathon include:
@@ -39,7 +69,8 @@ The following is a sample JSON file that can be used to launch Portworx through 
     "mem": 512,
     "instances": 3,
     "constraints": [
-        ["hostname", "UNIQUE"]
+        ["hostname", "UNIQUE"],
+        ["pxfabric", "LIKE", "pxclust1"]
     ],
     "container": {
         "type": "DOCKER",
@@ -86,7 +117,7 @@ The following is a sample JSON file that can be used to launch Portworx through 
     "args": [
         "--name pxcluster.mesos",
         "--ipc host",
-        "-k etcd:http://10.0.13.85:4001",
+        "-k etcd:http://1.2.3.4:4001",
         "-c mesos-demo1",
         "-s /dev/sdb",
         "-m enp0s3",
@@ -108,23 +139,7 @@ For all command line options, please see [px-enterprise-usage](/px-usage.html)
 
 
 
-## Step 3: Add Mesos constraints
 
-For each Mesosphere Agent node that is participating in the PX cluster, specify `MESOS_ATTRIBUTES` that allow for affinity of tasks to nodes that are part of the Portworx cluster.
-
-1. Add `MESOS_ATTRIBUTES=pxfabric:px-cluster1` to the file /var/lib/dcos/mesos-slave-common.
-2. Restart the slave service:
-
-```
-  rm -f /var/lib/mesos/slave/meta/slaves/latest
-  systemctl restart dcos-mesos-slave.service
-```
-
-3. Verify that the slave service started properly:
-
-```
-  systemctl status dcos-mesos-slave.service
-```
 
 ## Step 4: Reference PX volumes through the Marathon configuration file
 
@@ -162,8 +177,8 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
     "constraints": [
             [
               "pxfabric",
-              "CLUSTER",
-              "px-cluster1"
+              "LIKE",
+              "pxclust1"
             ]],
     "env": {
         "MYSQL_ROOT_PASSWORD": "password"
@@ -179,8 +194,15 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
 
 ## Step 5: Launch the application through Marathon
 
-Launch the application as you normally would through the DC/OS CLI. For example:
+To launch the application through the DC/OS CLI:
 
 ```
 dcos marathon app add mysql.json
 ```
+
+To launch the application through Marathon directly:
+
+```
+curl -X POST http://1.2.3.4:8080/v2/apps -d @mysql.json -H "Content-type: application/json"
+```
+
