@@ -54,14 +54,14 @@ Once this is run, PX will automatically deploy the K8s volume driver so that you
 
 ## Step 2: Deploy Kubernetes
 
-1. Start the K8s cluster. One way to start K8s for single node local setup is using the local-up-cluster.sh startup script in kubernetes source code.
+Start the K8s cluster. One way to start K8s for single node local setup is using the local-up-cluster.sh startup script in kubernetes source code.
 
 ```
 # cd kubernetes
 # hack/local-up-cluster.sh
 ```
 
-2. Set your cluster details.
+Set your cluster details.
 
 ```
 # cluster/kubectl.sh config set-cluster local --server=http://127.0.0.1:8080 --insecure-skip-tls-verify=true
@@ -69,7 +69,7 @@ Once this is run, PX will automatically deploy the K8s volume driver so that you
 # cluster/kubectl.sh config use-context local
 ```
 
-3. Set the K8s volume plugin directory
+Set the K8s volume plugin directory
 
 By default the K8s volume plugin directory is "/usr/libexec/kubernetes/kubelet-plugins/volume/exec". If you are starting kubelet service by hand then make sure that you set the --volume-plugin-dir correctly. This is the directory where kubelet tries to search for portworx's volume driver. Example kubelet commands:
 
