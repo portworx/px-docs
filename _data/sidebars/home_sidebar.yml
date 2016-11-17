@@ -63,7 +63,7 @@ entries:
     - title: Run Portworx with Kubernetes
       url: /run-with-k8s.html
       output: web
-    - title: Run Portworx with Mesosphere
+    - title: Run Portworx with Mesos and Mesosphere
       url: /run-with-mesosphere.html
       output: web
     - title: Run Portworx with Rancher
