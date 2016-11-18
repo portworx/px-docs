@@ -118,6 +118,12 @@ Once each bucket is filled, it gets aggregated (summarized) and entered into the
 Based on this scheme, active stats for a volume can be kept for a maximum of 12 months, 31 days, 23 hours 
 (aggregated at each level respectively).
 
+For historical stats for a volume, use the **statshistory** endpoint.  For example:
+
+```
+curl -XGET http://localhost:9001/statshistory?volumeid=47726638939690023\&stattype=volstat
+```
+
 ### Delete Volumes
 
 Volume deletion can be done through the Docker Remote API.   For example:
