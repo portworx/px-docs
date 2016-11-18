@@ -45,6 +45,7 @@ sudo docker run --restart=always --name px -d --net=host \
   -v /var/run/docker.sock:/var/run/docker.sock  \
   -v /var/cores:/var/cores                      \
   -v /lib/modules:/lib/modules                  \
+  -v /var/lib/kubelet:/var/lib/kubelet:shared \
   -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \
   --ipc=host                                    \
   portworx/px-dev:latest
