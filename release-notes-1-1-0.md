@@ -10,9 +10,17 @@ sidebar: home_sidebar
 ## Key Features
 * Class of Service Support. Refer to [CoS](/cos.html)
 * Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/run-lighthouse.html)
-* scale to 125 nodes
+* Scale to 125 nodes
+
 
 ## Key Fixes
+
+* Fixes to improve maintenance mode entry and exit experience
+* REST API improvements for Volume status
+* REST API improvements for aggregated node status
+* Alert message improvements for HA increase operations
+* Fix for shared volume detach failures
+
 
 
 
