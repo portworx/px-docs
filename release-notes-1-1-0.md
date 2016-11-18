@@ -7,13 +7,13 @@ sidebar: home_sidebar
 
 ## 1.1.0 Release notes
 
-## Key Features
+### Key Features
 * Class of Service Support. Refer to [CoS](/cos.html)
 * Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/run-lighthouse.html)
 * Scale up to 125 nodes
 
 
-## Key Fixes
+### Key Issues Addressed
 
 * Portworx Flexvolume compatibility fixes with latest Kubernetes
 * Changes to improve Marathon and Mesos compatibility
@@ -23,7 +23,7 @@ sidebar: home_sidebar
 * Alert message improvements for HA increase operations
 * Fix for shared volume detach failures
 
-## Key notes
+### Key notes
 * Note that the shared namespace feature is still in beta.
 
 
@@ -38,10 +38,10 @@ sidebar: home_sidebar
 
 ## 1.0.7 Release Notes
 
-### Key enhancements to the previous release
+### Key Features
 * Continual online drive health monitoring.
 
-### Key bugs addressed since the previous release
+### Key Issues addressed
 * Fix for Lighthouse reporting some nodes as online when the entire cluster is down.
 * Shared volumes can occasionally cause high CPU spikes.  This has been fixed.
 * Improvements to the shared volumes throughput.
@@ -50,14 +50,14 @@ sidebar: home_sidebar
 
 ## 1.0.6 Release Notes
 
-### Key enhancements to the previous release
+### Key Features 
 * Support for Consul
 * Ability to add storage to a head-only node
 * Ability to import data from an external storage source
 * Ability to bootstrap and deploy PX through external automated procedures.  PX takes command line parameters and does not need a config.json. 
 * Support for Rancher
 
-### Key bugs addressed since the previous release
+### Key Issues addressed 
 * Fix for occasional PX node restart.  Occasionaly during heavy load, a PX node would get marked down by gossip, and asked to restart.  While this did not cause any noticable delay in IO, it would flood the logs with gossip error messages.  This bug has been fixed.
 * Minor CLI enhancements around displaying IP addresses instead of node IDs (where possible).
 
