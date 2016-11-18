@@ -7,8 +7,8 @@ sidebar: home_sidebar
 
 Portworx data services can be managed and monitored through RESTful API's.
 There are 2 API's that are referenced in this section:
-* [Docker Remote API](https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24)
-* [LibOpenStorage OSD API](https://github.com/portworx/openstorage)
++ [Docker Remote API](https://docs.docker.com/engine/reference/api/docker_remote_api_v1.24)
++ [LibOpenStorage OSD API](https://github.com/portworx/openstorage)
 
 ## Volume Lifecycle 
 
