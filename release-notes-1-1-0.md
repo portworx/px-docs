@@ -38,10 +38,10 @@ sidebar: home_sidebar
 
 ## 1.0.7 Release Notes
 
-## Key enhancements to the previous release
+### Key enhancements to the previous release
 * Continual online drive health monitoring.
 
-## Key bugs addressed since the previous release
+### Key bugs addressed since the previous release
 * Fix for Lighthouse reporting some nodes as online when the entire cluster is down.
 * Shared volumes can occasionally cause high CPU spikes.  This has been fixed.
 * Improvements to the shared volumes throughput.
@@ -50,14 +50,14 @@ sidebar: home_sidebar
 
 ## 1.0.6 Release Notes
 
-## Key enhancements to the previous release
+### Key enhancements to the previous release
 * Support for Consul
 * Ability to add storage to a head-only node
 * Ability to import data from an external storage source
 * Ability to bootstrap and deploy PX through external automated procedures.  PX takes command line parameters and does not need a config.json. 
 * Support for Rancher
 
-## Key bugs addressed since the previous release
+### Key bugs addressed since the previous release
 * Fix for occasional PX node restart.  Occasionaly during heavy load, a PX node would get marked down by gossip, and asked to restart.  While this did not cause any noticable delay in IO, it would flood the logs with gossip error messages.  This bug has been fixed.
 * Minor CLI enhancements around displaying IP addresses instead of node IDs (where possible).
 
