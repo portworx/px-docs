@@ -25,10 +25,18 @@ sidebar: home_sidebar
 * Note that the shared namespace feature is still in beta.
 
 
-# 1.0.9 Release Notes
+## 1.0.9 Release Notes
 
-## Changes from the last release
 * Add Amazon ECS Support. Refer to [Portworx-on-ECS](/portworx-on-ecs.html)
 
-## Key notes
-* Note that the shared namespace feature is still in beta.
+## 1.0.8 Release Notes
+
+* Incremental fixes to the pxctl upgrade that showed version mismatch between the CLI and px daemon after upgrades
+* Add support for cloud providers like Packet
+
+## 1.0.7 Release Notes
+
+
+
+
+
