@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Release notes 1.1.0 - Nov 17th, 2016"
+title: "PX-Enterprise Release notes"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
