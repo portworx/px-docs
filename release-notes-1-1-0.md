@@ -21,8 +21,14 @@ sidebar: home_sidebar
 * Alert message improvements for HA increase operations
 * Fix for shared volume detach failures
 
+## Key notes
+* Note that the shared namespace feature is still in beta.
 
 
+# 1.0.9 Release Notes
+
+## Changes from the last release
+* Add Amazon ECS Support. Refer to [Portworx-on-ECS](/portworx-on-ecs.html)
 
 ## Key notes
 * Note that the shared namespace feature is still in beta.
