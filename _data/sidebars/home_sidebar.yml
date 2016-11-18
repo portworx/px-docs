@@ -138,7 +138,7 @@ entries:
     - title: Portworx on SoftLayer
       url: /portworx-on-softlayer.html
       output: web 
-  - title: CLI Reference
+  - title: CLI and API Reference
     output: web
     folderitems:
     - title: pxctl CLI Reference
@@ -146,6 +146,9 @@ entries:
       output: web
     - title: config.json definition
       url: /config-json.html
+      output: web
+    - title: REST API Reference
+      url: /rest_api.html
       output: web
   - title: Enterprise Edition
     output: web
