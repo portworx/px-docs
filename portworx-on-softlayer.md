@@ -33,10 +33,10 @@ Alternatively, you can either run the 'px_bootstrap' script from curl, or constr
 
 From the server node running px-enterprise container, you should see the following status:
 
-![PX-Cluster on SoftLayer](images/softlayer-pxctl-status.png "PX-Cluster on SoftLayer")
+![PX-Cluster on SoftLayer](images/softlayer-pxctl-status-updated.png "PX-Cluster on SoftLayer")
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
 
-![SoftLayer-Cluster on Lighthouse](images/softlayer-cluster-on-lighthouse.png "SoftLayer-Cluster on Lighthouse")
+![SoftLayer-Cluster on Lighthouse](images/softlayer-cluster-on-lighthouse-updated.png "SoftLayer-Cluster on Lighthouse")
 
