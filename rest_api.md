@@ -105,8 +105,9 @@ curl -XGET http://localhost:9001/v1/osd-volumes/px7vol  | python -mjson.tool
 ### Monitor Volumes
 
 Volume statistics can be monitored in 2 different modes:
-. Live Stats
-. Historical Stats
+
+* Live Stats
+* Historical Stats
 
 For live stats for a volume (over the past 2 seconds), use the **statslive** endpoint along with the Volume **id**, as noted above:
 
@@ -124,6 +125,13 @@ For historical stats for a volume, use the **statshistory** endpoint.  For examp
 ```
 curl -XGET http://localhost:9001/statshistory?volumeid=47726638939690023\&stattype=volstat
 ```
+
+Volume alerts can be queried through the **/alerts** endpoint.  For example:
+
+```
+curl -XGET http://localhost:9001/v1/osd-volumes/alerts
+```
+
 
 ### Delete Volumes
 
