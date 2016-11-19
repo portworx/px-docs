@@ -142,3 +142,245 @@ curl --unix-socket /var/run/docker.sock \
       -H "Content-Type: application/json" \
       -XDELETE http::/volumes/px7vol
 ```
+
+## Cluster Monitoring
+
+### Cluster Status
+
+To query overall cluster and node meta, use the **/cluster/enumerate** enpoint.   For example:
+
+```
+curl -XGET http://localhost:9001/v1/cluster/enumerate | python -mjson.tool
+{
+    "Id": "9256cd75-add2-11e6-ae2d-0242ac110003",
+    "NodeId": "db62a060-6e1d-4aec-99f8-518d97bbd1cd",
+    "Nodes": [
+        {
+            "Avgload": 0,
+            "Cpu": 0,
+            "DataIp": "10.0.12.224",
+            "Disks": null,
+            "GenNumber": 1479511413349655793,
+            "Hostname": "mesos4",
+            "Id": "db62a060-6e1d-4aec-99f8-518d97bbd1cd",
+            "Luns": {},
+            "MemFree": 3023777792,
+            "MemTotal": 3975540736,
+            "MemUsed": 951762944,
+            "MgmtIp": "10.0.12.224",
+            "NodeData": {
+                "STORAGE-INFO": {
+                    "LastError": "",
+                    "Random4KIops": 0,
+                    "ReadThroughput": 0,
+                    "ResourceMdUUID": "23e8d89d-699d-4230-951f-f0b7c407137d",
+                    "ResourceUUID": "23e8d89d-699d-4230-951f-f0b7c407137d",
+                    "Resources": {
+                        "1": {
+                            "last_scan": {
+                                "nanos": 111935554,
+                                "seconds": 1479514695
+                            },
+                            "online": true,
+                            "path": "/dev/sdb",
+                            "rotation_speed": "Unknown",
+                            "size": 68719476736,
+                            "used": 4337916968
+                        }
+                    },
+                    "ResourcesCount": 1,
+                    "ResourcesLastScan": "Resources Scan OK",
+                    "ResourcesMd": {},
+                    "ResourcesMdCount": 0,
+                    "ResourcesMdLastScan": "",
+                    "Status": "Up",
+                    "TotalSize": 68719476736,
+                    "WriteThroughput": 0
+                },
+                "STORAGE-RUNTIME": {
+                    "TotalAllocated": 2147483648
+                },
+                "storage_stats": {
+                    "Cpu": 100,
+                    "DiskAvail": 64469835776,
+                    "DiskTotal": 68719476736,
+                    "DiskUtil": 2109464576,
+                    "Memory": 21,
+                    "PendingIo": 0
+                }
+            },
+            "NodeLabels": {
+                "Arch": "x86_64",
+                "City": "Kennesaw",
+                "Country": "United States",
+                "Docker Version": "1.12.3",
+                "IP": "208.185.17.115",
+                "ISP": "Zayo Bandwidth",
+                "Kernel Version": "3.10.0-327.36.2.el7.x86_64",
+                "LAT": "3.40331E+01",
+                "LNG": "-8.46011E+01",
+                "Node Count Limit": "35",
+                "OS": "CentOS Linux 7 (Core)",
+                "PX Version": "1.0.9-d1ade46",
+                "Region": "GA",
+                "Timezone": "America/New_York",
+                "Zip": "30144"
+            },
+            "StartTime": "2016-11-18T23:23:33.349659166Z",
+            "Status": 2,
+            "Timestamp": "2016-11-19T00:19:38.209272869Z"
+        },
+        {
+            "Avgload": 0,
+            "Cpu": 0,
+            "DataIp": "10.0.13.42",
+            "Disks": null,
+            "GenNumber": 1479503189525952161,
+            "Hostname": "mesos3",
+            "Id": "681a6600-f156-4eab-b55b-a8e14ff0c13d",
+            "Luns": {},
+            "MemFree": 3254935552,
+            "MemTotal": 3975540736,
+            "MemUsed": 720605184,
+            "MgmtIp": "10.0.13.42",
+            "NodeData": {
+                "STORAGE-INFO": {
+                    "LastError": "",
+                    "Random4KIops": 0,
+                    "ReadThroughput": 0,
+                    "ResourceMdUUID": "5a395415-9658-4599-acbd-be3c8f75710c",
+                    "ResourceUUID": "5a395415-9658-4599-acbd-be3c8f75710c",
+                    "Resources": {
+                        "1": {
+                            "last_scan": {
+                                "nanos": 638057825,
+                                "seconds": 1479514714
+                            },
+                            "online": true,
+                            "path": "/dev/sdb",
+                            "rotation_speed": "Unknown",
+                            "size": 68719476736,
+                            "used": 5411658792
+                        }
+                    },
+                    "ResourcesCount": 1,
+                    "ResourcesLastScan": "Resources Scan OK",
+                    "ResourcesMd": {},
+                    "ResourcesMdCount": 0,
+                    "ResourcesMdLastScan": "",
+                    "Status": "Up",
+                    "TotalSize": 68719476736,
+                    "WriteThroughput": 0
+                },
+                "STORAGE-RUNTIME": {
+                    "TotalAllocated": 2362232012
+                },
+                "storage_stats": {
+                    "Cpu": 100,
+                    "DiskAvail": 64246095872,
+                    "DiskTotal": 68719476736,
+                    "DiskUtil": 2334711808,
+                    "Memory": 21,
+                    "PendingIo": 0
+                }
+            },
+            "NodeLabels": {
+                "Arch": "x86_64",
+                "City": "Kennesaw",
+                "Country": "United States",
+                "Docker Version": "1.12.3",
+                "IP": "208.185.17.115",
+                "ISP": "Zayo Bandwidth",
+                "Kernel Version": "3.10.0-327.36.2.el7.x86_64",
+                "LAT": "3.40331E+01",
+                "LNG": "-8.46011E+01",
+                "Node Count Limit": "35",
+                "OS": "CentOS Linux 7 (Core)",
+                "PX Version": "1.0.8-9a5c0ea",
+                "Region": "GA",
+                "Timezone": "America/New_York",
+                "Zip": "30144"
+            },
+            "StartTime": "2016-11-18T21:06:29.525956328Z",
+            "Status": 2,
+            "Timestamp": "2016-11-19T00:19:34.520081887Z"
+        },
+        {
+            "Avgload": 0,
+            "Cpu": 100,
+            "DataIp": "10.0.13.85",
+            "Disks": null,
+            "GenNumber": 1479503173752120061,
+            "Hostname": "mesos2",
+            "Id": "0666fe49-e5c8-43e1-be27-3c3b0feefcbf",
+            "Luns": {},
+            "MemFree": 3133652992,
+            "MemTotal": 3975540736,
+            "MemUsed": 841887744,
+            "MgmtIp": "10.0.13.85",
+            "NodeData": {
+                "STORAGE-INFO": {
+                    "LastError": "",
+                    "Random4KIops": 0,
+                    "ReadThroughput": 0,
+                    "ResourceMdUUID": "b53c8b54-d98e-48e3-9155-620ff51ad2c3",
+                    "ResourceUUID": "b53c8b54-d98e-48e3-9155-620ff51ad2c3",
+                    "Resources": {
+                        "1": {
+                            "last_scan": {
+                                "nanos": 510241127,
+                                "seconds": 1479511375
+                            },
+                            "online": true,
+                            "path": "/dev/sdb",
+                            "rotation_speed": "Unknown",
+                            "size": 68719476736,
+                            "used": 4337916968
+                        }
+                    },
+                    "ResourcesCount": 1,
+                    "ResourcesLastScan": "Resources Scan OK",
+                    "ResourcesMd": {},
+                    "ResourcesMdCount": 0,
+                    "ResourcesMdLastScan": "",
+                    "Status": "Up",
+                    "TotalSize": 68719476736,
+                    "WriteThroughput": 0
+                },
+                "STORAGE-RUNTIME": {
+                    "TotalAllocated": 1039138816
+                },
+                "storage_stats": {
+                    "Cpu": 0.25252525252525254,
+                    "DiskAvail": 65466560512,
+                    "DiskTotal": 68719476736,
+                    "DiskUtil": 1094979584,
+                    "Memory": 10,
+                    "PendingIo": 24641536
+                }
+            },
+            "NodeLabels": {
+                "Arch": "x86_64",
+                "City": "Kennesaw",
+                "Country": "United States",
+                "Docker Version": "1.12.3",
+                "IP": "208.185.17.115",
+                "ISP": "Zayo Bandwidth",
+                "Kernel Version": "3.10.0-327.36.2.el7.x86_64",
+                "LAT": "3.40331E+01",
+                "LNG": "-8.46011E+01",
+                "Node Count Limit": "35",
+                "OS": "CentOS Linux 7 (Core)",
+                "PX Version": "1.0.9-d1ade46",
+                "Region": "GA",
+                "Timezone": "America/New_York",
+                "Zip": "30144"
+            },
+            "StartTime": "2016-11-18T21:06:13.752123905Z",
+            "Status": 3,
+            "Timestamp": "2016-11-18T23:23:45.496762379Z"
+        }
+    ],
+    "Status": 2
+}
+```
