@@ -28,7 +28,7 @@ curl --unix-socket /var/run/docker.sock \
             "Mountpoint":"","Labels":null,\
             "Scope":"global"}'
 ```
-The above command will create a volume named "px7vol", with a size of 14GB and a H/A replication factor of 3
+The above command will create a volume named "px7vol", with a size of 14GB and a H/A replication factor of 3. <br>
 For the full set of available "DriverOpts" options, please refer to the [pxctl volume create](/cli-reference.html#volume-create-and-options) command.
 
 ### List Volumes
