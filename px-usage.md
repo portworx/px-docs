@@ -48,7 +48,7 @@ Provide one of the following examples as command line arguments positioned after
 
 If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from **"Manage Clusters -> Get Startup Script"**.  In this case, the **"-k"** argument would not apply, since Lighthouse uses a Portworx hosted **etcd**.
 
-If running in an ["air-gapped"](/run-air-gap.html) environment, then also supply "-e API_SERVER=http://1.2.3.4" to the "docker run" command.   For example:
+If running in an ["air-gapped"](/run-air-gap.html) environment, then also supply "**-e API_SERVER=http://1.2.3.4**" to the "docker run" command, which should point to the IPaddr of the on-prem Lighthouse instance.   For example:
 
 ```
 docker run --restart=always --name px-enterprise -d \
