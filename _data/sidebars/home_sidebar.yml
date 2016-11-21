@@ -183,6 +183,9 @@ entries:
     - title: About 1.x
       url: /about-1-x.html
       output: web
+    - title: PX-Enterprise Release Notes
+      url: /px-enterprise-release-notes.html
+      output: web    
     - title: Release 1.0.6
       url: /release-notes-1-0-6.html
       output: web
