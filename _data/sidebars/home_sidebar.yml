@@ -75,15 +75,12 @@ entries:
     - title: Run with systemd
       url: /run-with-systemd.html
       output: web
-  - title: Manage Users
-    output: web
-    folderitems:
-    - title: Manage Users
-      url: /manage-users-groups.html
-      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
+    - title: Manage Users and Groups
+      url: /manage-users-groups.html
+      output: web
     - title: Upgrade Portworx
       url: /upgrade.html
       output: web
