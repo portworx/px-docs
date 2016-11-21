@@ -117,6 +117,9 @@ entries:
     - title: PostgreSQL with CrunchyData and Portworx
       url: /postgres.html
       output: web
+    - title: Deploying Jenkins with Portworx
+      url: /jenkins.html
+      output: web
   - title: Reference Architectures
     output: web
     folderitems:
