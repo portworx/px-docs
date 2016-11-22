@@ -51,6 +51,23 @@ In this example, we measure the performance as measured by running a `mysql` wor
 
 ## Containerized NoSQL Workloads: Replication performance of PX-Enterprise vs Cassandra on a three-node cluster
 In this example, we show how PX-Enterprise's network-optimized replication out-perform Cassandra's replication when running on a 3-node replica=3 Cassandra Cluster. We measured the performance with Cassandra replication enabled and PX-Enterprise replication disabled (C3P1) and Cassandra replication disabled and PX-Enterprise replication enabled (C1P3). The results demontrate that running with PX-Enterprise for Cassandra workloads provide significant gains. PX-Enterprise's breakthrough performance for containerized workloads along with the cloud scale data protection and data services make it a compelling container data services infrastructure for cassandra and other no-sql workloads
-![Cassandra Reads](images/Cassandra-PX Read OPS.png)
+
+### Cassandra with PX-Enterprise - Read OPS/sec improvements
+
+![Cassandra Reads Ops](images/Cassandra-PX Read OPS.png)
+
+### Cassandra with PX-Enterprise - Write OPS/sec improvements
+
+![Cassandra Writes Ops](images/Cassandra-PX Write OPS.png)
+
+### Cassandra with PX-Enterprise - Read Latency improvements
+
+![Cassandra Read Lats](images/Cassandra-PX Read Latencies.png)
+
+### Cassandra with PX-Enterprise - Write Latency improvements
+
+![Cassandra Write Lats](images/Cassandra-PX Write Latencies.png)
+
+
 
 
