@@ -58,7 +58,7 @@ In this example, we show how PX-Enterprise's network-optimized replication out-p
 
 ### Cassandra with PX-Enterprise - Write OPS/sec improvements
 
-![Cassandra Writes Ops](images/Cassandra-PX Write OPS.png)
+![Cassandra Writes Ops](images/Cassandra-PX Write Ops.png)
 
 ### Cassandra with PX-Enterprise - Read Latency improvements
 
