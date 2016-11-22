@@ -72,7 +72,7 @@ The results demontrate that running with PX-Enterprise for Cassandra workloads p
 
 ### Cassandra with PX-Enterprise - Write Latency improvements
 
-![Cassandra Write Lats](images/Cassandra-PX Write Latencies.png)
+![Cassandra Write Lats](images/Cassandra-PX Write latencies.png)
 
 
 
