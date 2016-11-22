@@ -78,6 +78,9 @@ entries:
   - title: Operate and Maintain
     output: web
     folderitems:
+    - title: Performance
+      url: /performance.html
+      output: web
     - title: Manage Users and Groups
       url: /manage-users-groups.html
       output: web
@@ -164,9 +167,6 @@ entries:
     folderitems:
     - title: FAQs about PX-Enterprise
       url: /px-faqs.html
-      output: web
-    - title: Performance
-      url: /performance.html
       output: web
     - title: Troubleshooting
       url: /troubleshooting.html
