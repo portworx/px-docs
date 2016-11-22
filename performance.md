@@ -51,12 +51,14 @@ In this example, we measure the performance as measured by running a `mysql` wor
 
 ## Containerized NoSQL Workloads: Cassandra Performance gains with running PX-Enterprise
 
-In this example, we show how PX-Enterprise's network-optimized replication out-perform Cassandra's replication when running on a 3-node replica=3 Cassandra Cluster. We compared the performance between the following two configurations.
+In this example, we show how PX-Enterprise's network-optimized replication out-perform Cassandra's replication when running on a 3-node replica=3 Cassandra Cluster. We compared the performance between the following two configurations. We ran these tests  on the same servers as the tests above.
  
  - PX-Enterprise replication factor set to 1 and Cassandra replication factor set to 3. (Legend: P1C3 in the diagram below)     
  - PX-Enterprise replication factor set to 3 and Cassandra replication factor set to 1. (Legend: P3C1 in the diagram below)
 
 The results demontrate that running with PX-Enterprise for Cassandra workloads provide significant gains. PX-Enterprise's breakthrough performance for containerized workloads along with the cloud scale data protection and data services make it a compelling container data services infrastructure for cassandra and other no-sql workloads
+
+The Read OPS/sec and Write OPS/sec improvements graphs show how running with PX-Enterprise's three-node replication deliver a significantly better OPS/sec than running with Cassandra's three-node replication. This PX-Enterprise performance is also made possible because PX container software stack intelligently leverages NVMe SSDs to deliver high OPS/sec and low latencies.
 
 ### Cassandra with PX-Enterprise - Read OPS/sec improvements
 
@@ -65,6 +67,8 @@ The results demontrate that running with PX-Enterprise for Cassandra workloads p
 ### Cassandra with PX-Enterprise - Write OPS/sec improvements
 
 ![Cassandra Writes Ops](images/Cassandra-PX Write Ops.png)
+
+The latency graphs below demonstrate the network-optimized replication performance of PX-Enterprise as it accelerates Cassandra performance by delivering IO at very low latencies to the Cassandra Container
 
 ### Cassandra with PX-Enterprise - Read Latency improvements
 
