@@ -52,6 +52,7 @@ In this example, we measure the performance as measured by running a `mysql` wor
 ## Containerized NoSQL Workloads: Cassandra Performance gains with running PX-Enterprise
 
 In this example, we show how PX-Enterprise's network-optimized replication out-perform Cassandra's replication when running on a 3-node replica=3 Cassandra Cluster. We compared the performance between the following two configurations.
+ 
  - PX-Enterprise replication factor set to 1 and Cassandra replication factor set to 3. (Legend: P1C3 in the diagram below)     
  - PX-Enterprise replication factor set to 3 and Cassandra replication factor set to 1. (Legend: P3C1 in the diagram below)
 
