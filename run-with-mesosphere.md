@@ -44,7 +44,7 @@ If using Mesosphere/DCOS:
 If using Apache Mesos:
 
 ```
-   mkdir /etc/default/mesos-slave/attributes
+   mkdir -p /etc/default/mesos-slave/attributes
    echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
    rm -f /var/lib/mesos/slave/meta/slaves/latest
    systemctl restart mesos-slave
