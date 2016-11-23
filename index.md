@@ -18,6 +18,9 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 
 Portworx technology is available as PX-Enterprise and PX-Developer.
 
+## Join us on Slack!
+Join us on [slack](http://slack.portworx.com)
+
 ## PX-Enterprise
 
 PX-Enterprise is for DevOps and IT ops teams managing storage for containerized workloads. PX-Enterprise provides multi-cluster and multi-cloud support, where storage under management can be on-premise or in a public cloud like AWS.
