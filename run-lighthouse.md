@@ -62,10 +62,10 @@ sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
 For **Consul**, start the container with the following run command:
 
 ```
-sudo docker run -d -p 8300:8300 -p 8500:8500 --restart always  \
-     --name consul-px                                          \
-     -v /tmp/consul:/consul/data                               \
-     consul
+sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500 --restart always                       \
+     --name consul-px                                                                            \ 
+     -e 'CONSUL_LOCAL_CONFIG={"bootstrap_expect":1,"data_dir":"/var/lib/consul","server":true}'  \
+     consul agent -server -bind=127.0.0.1 -client=0.0.0.0
 ```
 
 ### Step 4: Install InfluxDB
