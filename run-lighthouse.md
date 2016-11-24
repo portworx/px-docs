@@ -35,7 +35,11 @@ To start, create one server, following these requirements:
 <br/> For PX-Lighthouse, output required from this step: 
 <br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' or 'consul:http://{IP_Address}:2379' format
 
+You can either 
 * Use your existing kvdb store
+
+or
+
 * Install as a docker container from the following 
   * [etcd2/etcd3](https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md)
   
