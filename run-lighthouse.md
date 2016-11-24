@@ -161,6 +161,36 @@ cd px-lighthouse/compose/consul
 docker-compose up -d
 ```
 
+### Step 6: Upgrade PX-LIGHTHOUSE
+
+You can upgrade your PX-LIGHTHOUSE as shown below:
+
+For **ETCD**, upgrade with the following commands:
+
+```
+sudo docker stop px-lighthouse
+sudo docker rm px-lighthouse
+sudo docker run --restart=always                                        \
+       --name px-lighthouse -d --net=bridge                             \
+       -p 80:80                                                         \
+       portworx/px-lighthouse                                           \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086          \
+       -k etcd:http://${IP_ADDR}:2379
+```
+For **Consul**, upgrade with the following commands:
+
+```
+sudo docker stop px-lighthouse
+sudo docker rm px-lighthouse
+sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
+       -p 80:80                                                          \
+       portworx/px-lighthouse                                            \
+       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086           \
+       -k consul:http://${IP_ADDR}:8500   
+```
+
+PX-LIGHTHOUSE repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-LIGHTHOUSE container to the latest release. There should be minimal downtime in this upgrade process. 
+
 ### Provider Specific Instructions
 
 ### Azure
