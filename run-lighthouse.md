@@ -35,7 +35,8 @@ To start, create one server, following these requirements:
 <br/> For PX-Lighthouse, output required from this step: 
 <br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' or 'consul:http://{IP_Address}:2379' format
 
-You can either 
+You can either
+
 * Use your existing kvdb store
 
 or
@@ -80,6 +81,7 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500 --restart=always --nam
 Lighthouse requires access to InfluxDB for tracking statistics.
 
 Either 
+
 * [Use InfluxCloud](https://cloud.influxdata.com/)
 
 or
