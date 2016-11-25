@@ -77,10 +77,18 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500 --restart=always --nam
 <br/> ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
 <br/> INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
 
+Lighthouse requires access to InfluxDB for tracking statistics.
+
+Either 
 * [Use InfluxCloud](https://cloud.influxdata.com/)
+
+or
+
 * [Run InfluxDB as a docker container](https://github.com/tutumcloud/influxdb)
 
-Example docker command to run influxdb in a contianer:
+for configuring InfluxDB access for Lighthouse
+
+Example docker command to run influxdb in a container:
 
 ```
 sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
