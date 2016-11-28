@@ -58,7 +58,7 @@ For more on creating and managing volumes, see [Create and Manage Storage Volume
 
 Run Portworx with schedulers:
 
-* [Run Portworx with Kubernetes](run-with-k8s.html)
+* [Run Portworx with Kubernetes](run-with-kubernetes.html)
 * [Run Portworx with Mesosphere](run-with-mesosphere.html)
 * [Run Portworx with Rancher](run-with-rancher.html)
 

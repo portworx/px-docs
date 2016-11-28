@@ -64,7 +64,7 @@ entries:
       url: /run-with-docker-ucp.html
       output: web
     - title: Run Portworx with Kubernetes
-      url: /run-with-k8s.html
+      url: /run-with-kubernetes.html
       output: web
     - title: Run Portworx with Mesos and Mesosphere
       url: /run-with-mesosphere.html
