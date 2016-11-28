@@ -173,9 +173,9 @@ Now you can run the nginx pod:
 
 You can configure PX to influence where Kubernetes schedules a container based on the container volume's data location.  When this mode is enabled, PX will communicate with Kubernetes and place host labels.  These labels will be used in influencing Kubernetes scheduling decisions.  To enable this mode, you must add a scheduler directive to the PX configuration as documented below.
 
-### Create a kubernetes.yaml configuration file
+### Provide access to kubernetes
 
-This configuration file contains the necessary information for PX to communicate with Kubernetes.  This file needs to be located at `/etc/pwx/kubernetes.yaml`
+A kubernetes.yaml configuration file is needed to allow PX to communicate with Kubernetes.  This configuration file contains the necessary information for PX to communicate with Kubernetes.  This file needs to be located at `/etc/pwx/kubernetes.yaml`
 
 ```
 # cat /etc/pwx/kubernetes.yaml
@@ -192,9 +192,9 @@ preferences:
   colors: true
 ```
 
-### Instruct PX to enable the Kubernetes scheduler hooks
+### Configure PX
 
-The PX configuration file needs to specify Kubernetes in the scheduler hook section.  Here is an example PX config.json that has this directive:
+Instruct PX to enable the Kubernetes scheduler hooks.  To do this, the PX configuration file needs to specify Kubernetes in the scheduler hook section.  Here is an example PX config.json that has this directive:
 
 ```
 # cat /etc/pwx/config.json
