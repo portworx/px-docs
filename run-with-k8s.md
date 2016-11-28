@@ -168,3 +168,94 @@ Now you can run the nginx pod:
 ```
 # ./kubectl create -f nginx-pxd.yaml
 ```
+
+## Step 5: Enable scheduler convergence
+
+You can configure PX to influence where Kubernetes schedules a container based on the container volume's data location.  When this mode is enabled, PX will communicate with Kubernetes and place host labels.  These labels will be used in influencing Kubernetes scheduling decisions.  To enable this mode, you must add a scheduler directive to the PX configuration as documented below.
+
+### Create a kubernetes.yaml configuration file
+
+This configuration file contains the necessary information for PX to communicate with Kubernetes.  This file needs to be located at `/etc/pwx/kubernetes.yaml`
+
+```
+# cat /etc/pwx/kubernetes.yaml
+```
+
+``` yaml
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    api-version: v1
+    server: http://10.0.7.73:8080
+preferences:
+  colors: true
+```
+
+### Instruct PX to enable the Kubernetes scheduler hooks
+
+The PX configuration file needs to specify Kubernetes in the scheduler hook section.  Here is an example PX config.json that has this directive:
+
+```
+# cat /etc/pwx/config.json
+```
+
+```json
+{
+    "clusterid": "4420f99f-a068-11e6-8688-0242ac110004",
+    "kvdb": [
+        "etcd://etcd.mycompany.com:4001"
+    ],
+    "scheduler": "kubernetes",
+    "storage": {
+        "devices": [
+            "/dev/sdb"
+        ]
+    }
+}
+``` 
+
+Note the specific directive `"scheduler": "kubernetes"`
+
+At this point, when you create a volume, PX will communicate with Kubernetes to place host labels on the nodes that contain a volume's data blocks.
+For example:
+```
+[root@localhost porx]# kubectl --kubeconfig="/root/kube-config.json" get nodes --show-labels
+NAME         STATUS    AGE       LABELS
+10.0.7.181   Ready     13d       kubernetes.io/hostname=10.0.7.181,vol2=true,vol3=true
+10.0.8.108   Ready     12d       kubernetes.io/hostname=10.0.8.108,vol1=true,vol2=true
+```
+
+The label `vol1=true` implies that the node hosts volume vol1's data.
+
+You can now use these labels as `nodeSelector` fields in your Kubernetes pod spec as explained [here](http://kubernetes.io/docs/user-guide/node-selection/).
+
+For example, your pod may look like:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    vol1: "true"
+  volumes:
+  - name: test
+    flexVolume:
+      driver: "px/flexvolume"
+      fsType: "ext4"
+      options:
+        volumeID: "<vol-id>"
+        size: "<vol-size>"
+        osdDriver: "pxd"
+```
+
+Note the new section called nodeSelector
+
