@@ -219,6 +219,7 @@ Note the specific directive `"scheduler": "kubernetes"`
 
 At this point, when you create a volume, PX will communicate with Kubernetes to place host labels on the nodes that contain a volume's data blocks.
 For example:
+
 ```
 [root@localhost porx]# kubectl --kubeconfig="/root/kube-config.json" get nodes --show-labels
 NAME         STATUS    AGE       LABELS
