@@ -175,7 +175,9 @@ You can configure PX to influence where Kubernetes schedules a container based o
 
 ### Provide access to kubernetes
 
-A kubernetes.yaml configuration file is needed to allow PX to communicate with Kubernetes.  This configuration file contains the necessary information for PX to communicate with Kubernetes.  This file needs to be located at `/etc/pwx/kubernetes.yaml`
+A kubernetes.yaml file is needed for allowing PX to communicate with Kubernetes. This configuration file primarily consists of the kubernetes cluster information and the kubernetes master node's IP and port where the kube-apiserver is running. This file needs to be located at 
+
+`/etc/pwx/kubernetes.yaml`
 
 ```
 # cat /etc/pwx/kubernetes.yaml
@@ -187,14 +189,14 @@ kind: Config
 clusters:
 - cluster:
     api-version: v1
-    server: http://10.0.7.73:8080
+    server: http://<master-node-ip>:<api-server-port>
 preferences:
   colors: true
 ```
 
 ### Configure PX
 
-Instruct PX to enable the Kubernetes scheduler hooks.  To do this, the PX configuration file needs to specify Kubernetes in the scheduler hook section.  Here is an example PX config.json that has this directive:
+Instruct PX to enable the Kubernetes scheduler hooks.  To do this, the PX configuration file needs to specify Kubernetes in the scheduler hook section.  Here is a sample section of PX config.json that has this directive:
 
 ```
 # cat /etc/pwx/config.json
@@ -215,13 +217,14 @@ Instruct PX to enable the Kubernetes scheduler hooks.  To do this, the PX config
 }
 ``` 
 
-Note the specific directive `"scheduler": "kubernetes"`
+Note the specific directive:  `"scheduler": "kubernetes"`
 
 At this point, when you create a volume, PX will communicate with Kubernetes to place host labels on the nodes that contain a volume's data blocks.
 For example:
 
 ```
 [root@localhost porx]# kubectl --kubeconfig="/root/kube-config.json" get nodes --show-labels
+
 NAME         STATUS    AGE       LABELS
 10.0.7.181   Ready     13d       kubernetes.io/hostname=10.0.7.181,vol2=true,vol3=true
 10.0.8.108   Ready     12d       kubernetes.io/hostname=10.0.8.108,vol1=true,vol2=true
@@ -246,7 +249,7 @@ spec:
     image: nginx
     imagePullPolicy: IfNotPresent
   nodeSelector:
-    vol1: "true"
+    <vol-id>: "true"
   volumes:
   - name: test
     flexVolume:
