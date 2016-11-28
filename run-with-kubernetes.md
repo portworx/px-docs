@@ -219,6 +219,26 @@ Instruct PX to enable the Kubernetes scheduler hooks.  To do this, the PX config
 
 Note the specific directive:  `"scheduler": "kubernetes"`
 
+Alternatively, you can also pass in the scheduler directive via the PX command line as follows:
+
+```
+# sudo docker run --restart=always --name px -d --net=host
+    --privileged=true \
+    -v /run/docker/plugins:/run/docker/plugins \
+    -v /var/lib/osd:/var/lib/osd:shared \
+    -v /dev:/dev \
+    -v /etc/pwx:/etc/pwx \
+    -v /opt/pwx/bin:/export_bin \
+    -v /usr/libexec/kubernetes/kubelet-plugins/volume/exec/px~flexvolume:/export_flexvolume:shared \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/cores:/var/cores \
+    -v /var/lib/kubelet:/var/lib/kubelet:shared \
+    --ipc=host \
+    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -x kubernetes
+```
+
+Note the flag `-x kubernetes`
+
 At this point, when you create a volume, PX will communicate with Kubernetes to place host labels on the nodes that contain a volume's data blocks.
 For example:
 
