@@ -217,7 +217,7 @@ This step is optional.  You can either use the etcd that was setup for Flannel, 
 Use the following format for launching a local containerized 'etcd'.   
 To make use of the overlay network, note that ‘etcd’ runs with “--net=bridge”.   
 Also note the exposed ports are changed from the default 2379 and 2380 to 12379 and 12380 respectively, 
-so as not to conflict with the ‘etcd’ ports being used by the host-level instsance of ‘etcd’.
+so as not to conflict with the ‘etcd’ ports being used by the host-level instance of ‘etcd’.
 
 ```
 IPADDR=10.1.2.3
