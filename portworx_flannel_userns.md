@@ -22,6 +22,51 @@ This guide further assumes the following:
 * The Docker Engine runs with User Namespaces enabled
 * The Portworx 'etcd' instance runs with *--net=bridge*
 * The Portworx instance runs with *--privileged=true* and *--net=host*
+* All commands are run as 'root'
+
+### Configure User Namespaces
+
+On all hosts that will be running Docker, enable **'user_namespaces'** in the kernel
+
+```
+grubby --args="user_namespace.enable=1"   \
+       --update-kernel=/boot/vmlinuz-`uname -r`
+reboot
+```
+
+After reboot validate new configuration with:
+
+```
+cat /proc/cmdline.  
+```
+
+Output should be similar to:
+
+```
+BOOT_IMAGE=/vmlinuz-3.10.0-327.36.2.el7.x86_64 root=/dev/mapper/centos-root ro crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 user_namespace.enable=1
+```
+
+Configure User Namespaces for Docker.   Create a user called "dockremap"
+
+```
+adduser dockremap
+
+# Setup subuid and subgid
+echo dockremap:500000:65536 > /etc/subuid
+echo dockremap:500000:65536 > /etc/subgid
+```
+
+Validate User Namespaces are properly configured.    This command:
+
+```
+docker run -it --rm --privileged=true busybox sh
+```
+
+Should output:
+
+```
+docker: Error response from daemon: Privileged mode is incompatible with user namespaces.
+```
 
 ### Deploy 'etcd' at the host level
 For every node participating a member of the host-level 'etcd' cluster,
@@ -47,57 +92,65 @@ systemctl restart etcd
 systemctl status etcd
 ```
 
-Install ‘etcdctl’
+Verify from the output of 'systemctl status etcd' that 'etcd' has started without errors before proceeding.
+
+### Deploy 'flannel'
+
+
+Install ‘etcdctl’ as a way of easily accessing 'etcd'.
+Set the 'ETCDCTL_ENDPOINT' to you appropriate host IP address.
 
 ```
 wget https://github.com/coreos/etcd/releases/download/v3.0.15/etcd-v3.0.15-linux-amd64.tar.gz
 tar xzvf
-mv etcdctl /usr/local/bin;  chmod +x /usr/local/bin/etcdctl
+mv etcdctl /usr/local/bin
+chmod +x /usr/local/bin/etcdctl
 export ETCDCTL_ENDPOINT=http://10.1.2.3:2379
 ```
 
+Populate 'etcd' with the definition of the Flannel SDN name and subnet range, 
+using appropriate values for the root directory (i.e. “flannelsdn”) and the Network Subnet:
 
-Using your appropriate IP:port
-
-
-Do Once:
+```
 etcdctl set /flannelsdn/network/config '{ "Network": "10.1.0.0/16" }'
+```
 
+Install 'flannel'. This guide has been qualified with flannel version 0.5.3
 
-Using your appropriate values for the root directory (i.e. “flannelsdn”) and the Network Subnet
+```
+yum -y install flannel
+```
 
-Install, Configure, Deploy “flanneld”
-On ALL hosts (using appropriate kernel version)
-sudo grubby --args="user_namespace.enable=1"   \
-                     --update-kernel=/boot/vmlinuz-`uname -r`   && reboot
-Validate with : cat /proc/cmdline.   Should yield:
-BOOT_IMAGE=/vmlinuz-3.10.0-327.36.2.el7.x86_64 root=/dev/mapper/centos-root ro crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 user_namespace.enable=1
+Configure 'flannel'.    Edit '/etc/sysconfig/flanneld', with values appropriate for your environment.
+For FLANNEL_ETCD_KEY, use the corresponding string from the 'etcdctl' command above.
+For "FLANNEL_OPTIONS", use the appropriate external facing network interface.
 
+```
+[...]
+# etcd url location.  Point this to the server where etcd runs
+FLANNEL_ETCD="http://10.1.2.3:2379"
 
+# etcd config key.  This is the configuration key that flannel queries
+# For address range assignment
+FLANNEL_ETCD_KEY="/flannelsdn/network"
 
+# Any additional options that you want to pass
+FLANNEL_OPTIONS="-iface=enp0s3"
+```
 
-Start flannel with the following form, either manually or through systemd:
-flanneld -etcd-endpoints=http://10.0.6.234:2379 -etcd-prefix=/flannelsdn/network -iface=enp0s3
-Using your appropriate values 
+Enable and Start 'flanneld':
 
+```
+systemctl enable flanneld
+systemctl start flanneld
+systemctl status flanneld
+```
 
-Configure User Namespaces
-# Create a user called "dockremap"
-$ sudo adduser dockremap
+Verify from the output of 'systemtl status flanneld' that 'flanneld' started with the expected command line options.
 
-# Setup subuid and subgid
-$ sudo sh -c 'echo dockremap:500000:65536 > /etc/subuid'
-$ sudo sh -c 'echo dockremap:500000:65536 > /etc/subgid'
+### Configure 'docker'
 
-
-Validate User Namespaces are in place
-
-
-# docker run -it --rm --privileged=true busybox sh
-docker: Error response from daemon: Privileged mode is incompatible with user namespaces.
-
-
-Configure docker to use the overlay network
+Configure docker to use the overlay network.  
 For all hosts running docker, do the following :
 Reveal the overlay network via  :   “cat /run/flannel/subnet.env”  on each host.   Ex:
 FLANNEL_NETWORK=10.1.0.0/16
