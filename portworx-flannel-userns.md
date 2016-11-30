@@ -8,7 +8,7 @@ sidebar: home_sidebar
 This reference guide shows how to configure and run Portworx with User Namespaces under a Flannel SDN.
 
 ### Introduction
-This guide has been qualified under CentOS 7.
+This guide has been qualified under CentOS 7 for machines with minimum 8GB RAM.
 
 This guide further assumes the following:
 
@@ -25,8 +25,7 @@ Since Docker will be dependant on the Flannel SDN, we setup Flannel's etcd and t
 For this guide, the Flannel 'etcd' will run in a host context.  While Portworx can use this same etcd, in this reference architecture, we additionally show you how you can run a second etcd instance running with the Flannel SDN.
 
 #### Install 'etcd'
-Now we deploy etcd at the host level for the Flannel SDN service.  For every node participating a member of the host-level 'etcd' cluster,
-install, configure, and deploy ‘etcd’ as follows:
+Now we deploy etcd at the host level for the Flannel SDN service.  For every node participating a member of the host-level Flannel 'etcd' cluster, install, configure, and deploy ‘etcd’ as follows:
 
 ```
 yum -y install etcd
@@ -76,7 +75,7 @@ etcdctl set /flannelsdn/network/config '{ "Network": "10.1.0.0/16" }'
 
 
 #### Install 'flannel'
-Install 'flannel'. This guide has been qualified with flannel version 0.5.3
+Install 'flannel' on each node that will be running docker. This guide has been qualified with flannel version 0.5.3
 
 ```
 yum -y install flannel
@@ -213,7 +212,7 @@ Therefore the IPaddr for the busybox instances on different hosts might be "10.1
 Verify on each host that the IP address for the busybox instance corresponds to the subnet range found in **'/run/flannel/subnet.env'**
 
 ### Start ‘etcd’ container in bridged mode
-This step is optional.  You can either use the etcd that was setup for Flannel, or create a new seperate etcd in bridged mode using the Flannel SDN and deployed as a Docker container.
+This step is optional.  You can either use the 'etcd' that was setup for Flannel, or create a new seperate 'etcd' in bridged mode using the Flannel SDN and deployed as a Docker container.
 
 Use the following format for launching a local containerized 'etcd'.   
 To make use of the overlay network, note that ‘etcd’ runs with “--net=bridge”.   
