@@ -123,7 +123,7 @@ entries:
   - title: Reference Architectures
     output: web
     folderitems:
-    - title: Create a 30 node cluster in GCE with Kubernetes
+    - title: Portworx on GCE with Kubernetes
       url: /gce-k8s-pwx.html
       output: web
     - title: Portworx on Docker Data Center
@@ -141,7 +141,7 @@ entries:
     - title: Portworx on SoftLayer
       url: /portworx-on-softlayer.html
       output: web 
-    - title: Portworx on Flannel SDN with User Namespaces
+    - title: Portworx on SDN with userns
       url: /portworx-flannel-userns.html
       output: web
   - title: CLI and API Reference
