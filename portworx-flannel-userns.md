@@ -211,7 +211,7 @@ the "Network" defined by the 'flannel' SDN configuration.   In the above example
 Therefore the IPaddr for the busybox instances on different hosts might be "10.1.78.2" and "10.1.19.3".
 Verify on each host that the IP address for the busybox instance corresponds to the subnet range found in **'/run/flannel/subnet.env'**
 
-### Start up ‘etcd’ container in bridged mode
+### Start ‘etcd’ container in bridged mode
 This step is optional.  You can either use the etcd that was setup for Flannel, or create a new seperate etcd in bridged mode using the Flannel SDN and deployed as a Docker container.
 
 Use the following format for launching a local containerized 'etcd'.   
