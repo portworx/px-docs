@@ -143,6 +143,7 @@ entries:
       output: web 
     - title: Portworx on Flannel SDN with User Namespaces
       url: /portworx-flannel-userns.html
+      output: web
   - title: CLI and API Reference
     output: web
     folderitems:
