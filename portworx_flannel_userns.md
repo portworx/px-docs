@@ -58,17 +58,7 @@ echo dockremap:500000:65536 > /etc/subuid
 echo dockremap:500000:65536 > /etc/subgid
 ```
 
-Validate User Namespaces are properly configured.    This command:
 
-```
-docker run -it --rm --privileged=true busybox sh
-```
-
-Should output:
-
-```
-docker: Error response from daemon: Privileged mode is incompatible with user namespaces.
-```
 
 ### Deploy 'etcd' at the host level
 For every node participating a member of the host-level 'etcd' cluster,
@@ -179,6 +169,18 @@ Verify that docker has started properly with the expected arguments to 'dockerd'
  CGroup: /system.slice/docker.service
            ├─2849 /usr/bin/dockerd --bip=10.1.78.1/24 --ip-masq=true --mtu=1472 --userns-remap=default
 [...]
+```
+
+Validate User Namespaces are properly configured.    This command:
+
+```
+docker run -it --rm --privileged=true busybox sh
+```
+
+Should output:
+
+```
+docker: Error response from daemon: Privileged mode is incompatible with user namespaces.
 ```
 
 ### Verify Overlay Network
