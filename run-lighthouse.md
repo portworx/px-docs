@@ -47,18 +47,18 @@ or
 For **ETCD2**, start the container with the following run command:
 
 ```
-IPADDR=10.1.2.3 
+IP_ADDR=10.1.2.3 
 sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
      --restart=always                                                         \
      --name etcd-px quay.io/coreos/etcd:v2.3.7                                \
      -name etcd0                                                              \
      -data-dir /var/lib/etcd/                                                 \
-     -advertise-client-urls http://${IPADDR}:2379,http://${IPADDR}:4001       \
+     -advertise-client-urls http://${IP_ADDR}:2379,http://${IP_ADDR}:4001       \
      -listen-client-urls http://0.0.0.0:2379                                  \
-     -initial-advertise-peer-urls http://${IPADDR}:2380                       \
+     -initial-advertise-peer-urls http://${IP_ADDR}:2380                       \
      -listen-peer-urls http://0.0.0.0:2380                                    \
      -initial-cluster-token etcd-cluster                                      \
-     -initial-cluster etcd0=http://${IPADDR}:2380                             \
+     -initial-cluster etcd0=http://${IP_ADDR}:2380                             \
      -initial-cluster-state new
 ```
   
@@ -76,7 +76,7 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500 --restart=always --nam
 <br/> For PX-Lighthouse, output required from this step: 
 <br/> Connection string in 'http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086' format 
 <br/> ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
-<br/> INFLUXDB_INIT_PWD: Password of admin user for PWX_INFLUXPW 
+<br/> INFLUXDB_INIT_PWD: Password of admin user for $PWX_INFLUXPW 
 
 Lighthouse requires access to InfluxDB for tracking statistics.
 
@@ -109,7 +109,7 @@ sudo docker run --restart=always                                        \
        --name px-lighthouse -d --net=bridge                             \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086          \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086          \
        -k etcd:http://${IP_ADDR}:2379                
 ```
 
@@ -119,7 +119,7 @@ For **Consul**, start the container with the following run command:
 sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086           \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086           \
        -k consul:http://${IP_ADDR}:8500                
 ```
 
@@ -185,7 +185,7 @@ sudo docker run --restart=always                                        \
        --name px-lighthouse -d --net=bridge                             \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086          \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086          \
        -k etcd:http://${IP_ADDR}:2379
 ```
 For **Consul**, upgrade with the following commands:
@@ -196,7 +196,7 @@ sudo docker rm px-lighthouse
 sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
-       -d http://{ADMIN_USER}:{ADMIN_PASSWORD}@${IP_ADDR}:8086           \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086           \
        -k consul:http://${IP_ADDR}:8500   
 ```
 
