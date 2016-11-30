@@ -264,10 +264,6 @@ Note:   The **'kvdb**' parameter refers to the IP:Port of the containerized ‘e
 
 Verify that the Portworx cluster is running via "/opt/pwx/bin/pxctl status".   
 All nodes should be present through the host IP address.
-Example the /etc/pwx/config.json file.
-The 'kvdb' parameter should be referencing the containerized instance of 'etcd'.
-
-
 
 ### Reference Links:
                           
