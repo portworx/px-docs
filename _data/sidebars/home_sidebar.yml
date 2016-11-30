@@ -142,7 +142,7 @@ entries:
       url: /portworx-on-softlayer.html
       output: web 
     - title: Portworx on Flannel SDN with User Namespaces
-      url: /portworx_flannel_userns.html
+      url: /portworx-flannel-userns.html
   - title: CLI and API Reference
     output: web
     folderitems:
