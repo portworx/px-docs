@@ -79,6 +79,11 @@ ETCD_INITIAL_ADVERTISE_PEER_URLS="http://10.1.2.3:2380"
 ETCD_INITIAL_CLUSTER="default=http://10.1.2.3:2380"
 ETCD_INITIAL_CLUSTER_STATE="new"
 ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+```
+
+Enable and start etcd
+
+```
 systemctl enable etcd
 systemctl restart etcd
 systemctl status etcd
