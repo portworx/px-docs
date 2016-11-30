@@ -24,25 +24,6 @@ Since Docker will be dependant on the Flannel SDN, we setup Flannel's etcd and t
 
 For this guide, the Flannel 'etcd' will run in a host context.  While Portworx can use this same etcd, in this reference architecture, we additionally show you how you can run a second etcd instance running with the Flannel SDN.
 
-#### Install 'etcdctl'
-Install ‘etcdctl’ as a way of easily accessing 'etcd'.
-Set the 'ETCDCTL_ENDPOINT' to you appropriate host IP address.
-
-```
-wget https://github.com/coreos/etcd/releases/download/v3.0.15/etcd-v3.0.15-linux-amd64.tar.gz
-tar xzvf
-mv etcdctl /usr/local/bin
-chmod +x /usr/local/bin/etcdctl
-export ETCDCTL_ENDPOINT=http://10.1.2.3:2379
-```
-
-Populate 'etcd' with the definition of the Flannel SDN name and subnet range, 
-using appropriate values for the root directory (i.e. “flannelsdn”) and the Network Subnet:
-
-```
-etcdctl set /flannelsdn/network/config '{ "Network": "10.1.0.0/16" }'
-```
-
 #### Install 'etcd'
 Now we deploy etcd at the host level for the Flannel SDN service.  For every node participating a member of the host-level 'etcd' cluster,
 install, configure, and deploy ‘etcd’ as follows:
@@ -73,6 +54,26 @@ systemctl status etcd
 ```
 
 Verify from the output of 'systemctl status etcd' that 'etcd' has started without errors before proceeding.
+
+#### Install 'etcdctl'
+Install ‘etcdctl’ as a way of easily accessing 'etcd'.
+Set the 'ETCDCTL_ENDPOINT' to you appropriate host IP address.
+
+```
+wget https://github.com/coreos/etcd/releases/download/v3.0.15/etcd-v3.0.15-linux-amd64.tar.gz
+tar xzvf etcd-v3.0.15-linux-amd64.tar.gz
+mv etcd-v3.0.15-linux-amd64/etcdctl /usr/local/bin
+chmod +x /usr/local/bin/etcdctl
+export ETCDCTL_ENDPOINT=http://10.1.2.3:2379
+```
+
+Populate 'etcd' with the definition of the Flannel SDN name and subnet range, 
+using appropriate values for the root directory (i.e. “flannelsdn”) and the Network Subnet:
+
+```
+etcdctl set /flannelsdn/network/config '{ "Network": "10.1.0.0/16" }'
+```
+
 
 #### Install 'flannel'
 Install 'flannel'. This guide has been qualified with flannel version 0.5.3
