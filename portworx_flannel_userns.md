@@ -15,7 +15,7 @@ Using Portworx within the context of the Flannel overlay network requires two di
 * For Portworx 
 
 The [Flannel SDN](https://coreos.com/flannel/docs/latest) is dependent on 'etcd'.   
-And since Portworx will be running within a Flannel SDN context, it must therefore have its own instance of 'etcd'.
+Since Portworx will be running within a Flannel SDN context, it must therefore have its own instance of 'etcd'.
 For this guide, the Flannel 'etcd' will run in a host context and the Portworx 'etcd' will run in a container context.
 
 This guide further assumes the following:
@@ -152,7 +152,7 @@ Verify from the output of 'systemtl status flanneld' that 'flanneld' started wit
 
 ### Configure 'docker'
 
-Configure docker to use the overlay network.  Ensure the docker.service file has the following form:
+Configure docker to use both user namespaces and the overlay network.  Ensure the docker.service file has the following form:
 
 ```
 [Service]
