@@ -20,6 +20,7 @@ Since Portworx will be running within a Flannel SDN context, it must therefore h
 For this guide, the Flannel 'etcd' will run in a host context and the Portworx 'etcd' will run in a container context.
 
 This guide further assumes the following:
+
 * The Docker Engine runs with User Namespaces enabled
 * The Portworx 'etcd' instance runs with *--net=bridge*
 * The Portworx instance runs with *--privileged=true* and *--net=host*
