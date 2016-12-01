@@ -37,7 +37,7 @@ To start, create one server, following these requirements:
 
 You can either
 
-* Use your existing kvdb store
+* Use your existing kvdb store (Lighthouse works with etcd2, etcd3 and consul
 
 or
 
