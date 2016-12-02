@@ -68,18 +68,18 @@ For **ETCD3**, start the container with the following run command:
 
 ```
 IP_ADDR=10.1.2.3
-sudo	docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
+sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
      --restart always                                                         \
      -e "ETCDCTL_API=3" --name etcd3-px quay.io/coreos/etcd                   \
-	    /usr/local/bin/etcd                                                      \
-	    --name etcd0                                                             \
-    	--data-dir /var/lib/etcd/                                                \
-	    --advertise-client-urls http://${IP_ADDR}:2379,http://${LOCAL_IP}:4001   \
-	    --listen-client-urls http://0.0.0.0:2379                                 \
-	    --initial-advertise-peer-urls http://${IP_ADDR}:2380                     \
-	    --listen-peer-urls http://0.0.0.0:2380                                   \
-	    --initial-cluster-token etcd-cluster                                     \
-	    --initial-cluster etcd0=http://${IP_ADDR}:2380                           \
+     /usr/local/bin/etcd                                                      \
+     --name etcd0                                                             \
+     --data-dir /var/lib/etcd/                                                \
+     --advertise-client-urls http://${IP_ADDR}:2379,http://${LOCAL_IP}:4001   \
+     --listen-client-urls http://0.0.0.0:2379                                 \
+     --initial-advertise-peer-urls http://${IP_ADDR}:2380                     \
+     --listen-peer-urls http://0.0.0.0:2380                                   \
+     --initial-cluster-token etcd-cluster                                     \
+     --initial-cluster etcd0=http://${IP_ADDR}:2380                           \
      --initial-cluster-state new
 ```
 
