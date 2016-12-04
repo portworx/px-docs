@@ -29,7 +29,7 @@ To start, create one server, following these requirements:
 2. Verify that your Docker version is 1.10 or later.
 
 
-### Docker compose method
+#### Docker compose method
 
 We have a developed a docker compose method to bring up on-prem lighthouse with a few easy steps. Please skip this section and go to Step 3 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. If you would like to use our compose steps, please read on.
 
