@@ -28,9 +28,10 @@ To start, create one server, following these requirements:
 1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
 2. Verify that your Docker version is 1.10 or later.
 
-We have a developed a docker compose method to bring up on-prem lighthouse with a few easy steps. Please skip this section and go to Step 3 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. If you would like to use our compose steps, please read on.
 
 ### Docker compose method
+
+We have a developed a docker compose method to bring up on-prem lighthouse with a few easy steps. Please skip this section and go to Step 3 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. If you would like to use our compose steps, please read on.
 
 You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
 
