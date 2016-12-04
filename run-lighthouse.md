@@ -28,6 +28,40 @@ To start, create one server, following these requirements:
 1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
 2. Verify that your Docker version is 1.10 or later.
 
+
+### Docker compose method
+
+You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
+
+Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
+
+For **ETCD2**
+
+```
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/etcd2
+docker-compose up -d
+```
+
+For **ETCD3**
+
+```
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/etcd3
+docker-compose up -d
+```
+
+For **Consul**
+
+```
+export LOCAL_IP=1.2.3.4
+git clone https://github.com/portworx/px-lighthouse.git
+cd px-lighthouse/compose/consul
+docker-compose up -d
+```
+
 ### Step 3: Install kvdb
 
 
@@ -158,38 +192,6 @@ In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX
 
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
 
-### Docker compose method
-
-You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
-
-Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
-
-For **ETCD2**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/etcd2
-docker-compose up -d
-```
-
-For **ETCD3**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/etcd3
-docker-compose up -d
-```
-
-For **Consul**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/consul
-docker-compose up -d
-```
 
 ### Step 6: Upgrade PX-LIGHTHOUSE
 
