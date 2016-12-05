@@ -169,6 +169,9 @@ OPTIONS:
    --repl value, -r value               replication factor [1..3] (default: 1)
    --cos value                          Class of Service: [1..3] (default: 1)
    --snap_interval value, --si value    snapshot interval in minutes, 0 disables snaps (default: 0)
+   --daily value, --sd value            daily snapshot at specified hh:mm (default: 00:00)
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm (default: Sunday@00:00)
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm (default: 1@00:00)
    --aggregation_level value, -a value  aggregation level: [1..3] (default: 1)
    --nodes value                        Comma seprated Node Id(s)
 ```
