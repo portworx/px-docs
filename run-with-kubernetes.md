@@ -285,16 +285,16 @@ spec:
 
 Note the new section called nodeSelector
 
-## Using PersistentVolumes and PersistentVolumeClaims
+## PersistentVolumeClaims
 
-A Kubernetes PersistentVolume is basically a PX volume provisioned by an administrator. A PersistentVolumeClaim on the other hand is a request for storage which is bound to an available PersistentVolume based on matching the claim's specifications.
+A Kubernetes PersistentVolume is basically a PX volume provisioned by an administrator.  A PersistentVolumeClaim on the other hand is a request for storage which is bound to an available PersistentVolume based on matching the claim's specifications.
 
 Here is an example of a PX volume and a corresponding PersistentVolume spec
 
 ```
 $ /opt/pwx/bin/pxctl volume list
-ID			        NAME		SIZE	HA	SHARED	ENCRYPTED	COS		        STATUS
-417242494658829963	pv-pwx-vol	1 GiB	1	no	    no		    COS_TYPE_LOW	up - detached
+ID	    NAME		SIZE	HA	SHARED	ENCRYPTED	COS		        STATUS
+41724	pv-pwx-vol	1 GiB	1	no	    no		    COS_TYPE_LOW	up - detached
 ```
 
 ```yaml
@@ -489,9 +489,9 @@ CreationTimestamp:	Tue, 06 Dec 2016 02:36:48 +0000
 Pods Status:		2 Running / 0 Waiting / 0 Succeeded / 0 Failed
 No volumes.
 Events:
-  FirstSeen	LastSeen	Count	From		SubobjectPath	Type		Reason			Message
-  ---------	--------	-----	----		-------------	--------	------			-------
-  9m		9m		1	{petset }			Normal		SuccessfulCreate	pet: petset-pwx-0
-  9m		9m		1	{petset }			Normal		SuccessfulCreate	pet: petset-pwx-1
+  FirstSeen	LastSeen	Count	From	SubobjectPath	Type		Reason			Message
+  ---------	--------	-----	----	-------------	--------	------			-------
+  9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-0
+  9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-1
 
 ```
