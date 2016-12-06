@@ -29,14 +29,17 @@ To start, create one server, following these requirements:
 2. Verify that your Docker version is 1.10 or later.
 
 
-#### Docker compose method
+#### Step 3: Start PX-Lighthouse with Docker compose
 
-We have a developed a docker compose method to bring up on-prem lighthouse with a few easy steps. Please skip this section and go to Step 3 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. If you would like to use our compose steps, please read on.
+>**Important:**
+<br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
+
+There is a docker compose file available to bring up on-prem lighthouse with a few easy steps. 
+Please skip this section and go to Step 4 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. 
 
 You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
 
 Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
-
 
 For **ETCD2**
 
@@ -66,7 +69,7 @@ docker-compose up -d
 ``` 
 
 
-### Step 3: Install kvdb
+### Step 4: Install kvdb
 
 
 >**Important:**
@@ -124,10 +127,14 @@ sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
 For **Consul**, start the container with the following run command:
 
 ```
-sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500 --restart=always --name consul-px -e 'CONSUL_LOCAL_CONFIG={"bootstrap_expect":1,"data_dir":"/var/lib/consul","server":true}' consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
+sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500                                       \
+     --restart=always                                                                           \
+     --name consul-px                                                                           \
+     -e 'CONSUL_LOCAL_CONFIG={"bootstrap_expect":1,"data_dir":"/var/lib/consul","server":true}' \
+     consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
 ```
 
-### Step 4: Install InfluxDB
+### Step 5: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -157,7 +164,7 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
      -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
 ```
 
-### Step 5: Launch the PX-Lighthouse Container
+### Step 6: Launch the PX-Lighthouse Container
 
 For **ETCD**, start the container with the following run command:
 
@@ -166,7 +173,7 @@ sudo docker run --restart=always                                        \
        --name px-lighthouse -d --net=bridge                             \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086          \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086        \
        -k etcd:http://${IP_ADDR}:2379                
 ```
 
@@ -176,7 +183,7 @@ For **Consul**, start the container with the following run command:
 sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
-       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086           \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
        -k consul:http://${IP_ADDR}:8500                
 ```
 
@@ -197,7 +204,7 @@ In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
 
 
-### Step 6: Upgrade PX-LIGHTHOUSE
+### Step 7: Upgrade PX-LIGHTHOUSE
 
 You can upgrade your PX-LIGHTHOUSE as shown below:
 
@@ -210,7 +217,7 @@ sudo docker run --restart=always                                        \
        --name px-lighthouse -d --net=bridge                             \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
-       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086          \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086        \
        -k etcd:http://${IP_ADDR}:2379
 ```
 For **Consul**, upgrade with the following commands:
@@ -221,7 +228,7 @@ sudo docker rm px-lighthouse
 sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
-       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086           \
+       -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
        -k consul:http://${IP_ADDR}:8500   
 ```
 
