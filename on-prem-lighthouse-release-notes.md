@@ -5,6 +5,8 @@ keywords: portworx, px-enterprise, px-lighthouse, release notes
 sidebar: home_sidebar
 ---
 
+To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
+
 ## Lighthouse 1.1.2 Release notes
 
 
