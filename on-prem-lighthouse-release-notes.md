@@ -16,3 +16,7 @@ sidebar: home_sidebar
 * Fix panics around influx or consul being down and when customer does first login after initial setup
 * Fix inability to create new clusters after a node is added to a cluster
 
+### Known issues
+
+* This version does not support clear alerts. This will be fixed in the upcoming 1.1.3 release along with the addition of "Clear All Alerts" capability.
+
