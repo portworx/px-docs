@@ -187,6 +187,6 @@ entries:
       url: /px-enterprise-release-notes.html
       output: web 
     - title: Lighthouse On-Prem Release Notes
-      url: /onprem-lighthouse-release-notes.html
+      url: /on-prem-lighthouse-release-notes.html
       output: web    
 
