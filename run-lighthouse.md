@@ -34,7 +34,7 @@ To start, create one server, following these requirements:
 >**Important:**
 <br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
 <br/> Here are the release notes for the latest version of PX-Lighthouse [on-prem-lighthouse-release-notes] 
-      (/on-prem-lighthouse-release-notes.html)
+      (http://docs.portworx.com/on-prem-lighthouse-release-notes.html)
 
 There is a docker compose file available to bring up on-prem lighthouse with a few easy steps. 
 Please skip this section and go to Step 4 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. 
