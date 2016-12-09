@@ -67,6 +67,8 @@ The following is a sample JSON file that can be used to launch Portworx through 
 ```
 {
     "id": "pxcluster1",
+    "cpus": 4,
+    "mem": 4096.0,
     "instances": 3,
     "constraints": [
         ["hostname", "UNIQUE"],
