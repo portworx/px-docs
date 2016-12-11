@@ -126,12 +126,26 @@ Each spec key must be comma seperated.  The following are supported key value pa
 
 ```
 Class of service - cos=[1,2,3]
-Volume size - size=[1..9][G|M|T]
-HA factor - ha=[1,2,3]
-Block size - bs=[4096...]
-Shared volume - shared=true
-File System - fs=[xfs|ext4]
-Encryption - passphrase=secret
+Volume size      - size=[1..9][G|M|T]
+HA factor        - ha=[1,2,3]
+Block size       - bs=[4096...]
+Shared volume    - shared=true
+File System      - fs=[xfs|ext4]
+Encryption       - passphrase=secret
+```
+
+These inline specs can be passed in through the scheduler application template.  For example, below is a snippet from a marathon configuration file:
+
+```json
+"parameters": [
+	{
+		"key": "volume-driver",
+		"value": "pxd"
+	},
+	{
+		"key": "volume",
+		"value": "size=100G,ha=3,cos=3,name=mysql_vol:/var/lib/mysql"
+	}],
 ```
 
 ## Volumes with the PX Enterprise console
@@ -155,8 +169,6 @@ In the **Configure Your Volume** page, specify these settings and then click **C
 |Count|The number of volumes to create simultaneously.|
 
 ![Configure a storage volume](images/configure-volume-updated.png "Configure a storage volume")
-
-## Manage Storage Volumes
 
 To manage an existing volume, go to the **Storage** page and select the volume.
 
