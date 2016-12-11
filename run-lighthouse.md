@@ -35,7 +35,7 @@ There are two ways to deploy PX-Lighthouse
 1. Jump to [Docker Compose](http://docs.portworx.com/run-lighthouse.html#step-3-start-px-lighthouse-with-docker-compose)
 2. Jump to installing the [PX-Lighthouse components manually](http://docs.portworx.com/run-lighthouse.html#component-install-step-#1:-install-kvdb)
 
-#### Start PX-Lighthouse with Docker compose
+#### Install via Docker compose
 
 >**Important:**
 <br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
