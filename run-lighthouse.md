@@ -9,7 +9,7 @@ This guide shows you how you can run [PX-Enterprise Console](http://lighthouse.p
 
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
-### Step 1: Launch Server
+### Prerequisite #1 - Launch Server
 
 To start, create one server, following these requirements:
 
@@ -23,13 +23,19 @@ To start, create one server, following these requirements:
   * /dev/xvda: 8 GB boot device
 * Tag (optional): Add value **px-lighthouse** as the name
 
-### Step 2: Install and configure Docker
+### Prerequisite #2 - Install and configure Docker
 
 1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
 2. Verify that your Docker version is 1.10 or later.
 
 
-#### Step 3: Start PX-Lighthouse with Docker compose
+## Install PX-Lighthouse
+There are two ways to deploy PX-Lighthouse
+
+1. Jump to [Docker Compose](http://docs.portworx.com/run-lighthouse.html#step-3-start-px-lighthouse-with-docker-compose)
+2. Jump to installing the [PX-Lighthouse components manually](http://docs.portworx.com/run-lighthouse.html#component-install-step-#1:-install-kvdb)
+
+### Start PX-Lighthouse with Docker compose
 
 >**Important:**
 <br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
@@ -69,9 +75,9 @@ cd px-lighthouse/compose/consul
 docker-compose up -d
 ``` 
 
+At this point, Lighthouse should be functional.  If you wish to bring up the individual components without compose, follow the steps below.
 
-### Step 4: Install kvdb
-
+### Component install step #1: Install kvdb
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -135,7 +141,7 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500                       
      consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
 ```
 
-### Step 5: Install InfluxDB
+### Component install step #2: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -165,7 +171,7 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
      -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
 ```
 
-### Step 6: Launch the PX-Lighthouse Container
+### Component install step #3: Run the PX-Lighthouse container
 
 For **ETCD**, start the container with the following run command:
 
@@ -205,9 +211,9 @@ In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX
 ![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login")
 
 
-### Step 7: Upgrade PX-LIGHTHOUSE
+### Upgrading PX-Lighthouse
 
-You can upgrade your PX-LIGHTHOUSE as shown below:
+You can upgrade your PX-Lighthouse as shown below:
 
 For **ETCD**, upgrade with the following commands:
 
@@ -233,11 +239,11 @@ sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -k consul:http://${IP_ADDR}:8500   
 ```
 
-PX-LIGHTHOUSE repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-LIGHTHOUSE container to the latest release. There should be minimal downtime in this upgrade process. 
+PX-Lighthouse repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-Lighthouse container to the latest release. There should be minimal downtime in this upgrade process. 
 
 ### Provider Specific Instructions
 
-### Azure
+#### Azure
 
 * Make sure you have set inbound security rule to 'Allow' for port 80.
 
