@@ -114,7 +114,7 @@ Example of options for selecting the container's filesystem and volume size:
 
 ## Inline volume spec
 
-PX supports passing the volume spec inline along with the volume name.  This is useful when creating a volume with your scheduler application template.
+PX supports passing the volume spec inline along with the volume name.  This is useful when creating a volume with your scheduler application template inline and you do not want to create volumes before hand.
 
 For example, a PX inline spec can be specified as the following:
 
