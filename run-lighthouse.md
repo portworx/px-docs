@@ -29,13 +29,13 @@ To start, create one server, following these requirements:
 2. Verify that your Docker version is 1.10 or later.
 
 
-## Install PX-Lighthouse
+### Install PX-Lighthouse
 There are two ways to deploy PX-Lighthouse
 
 1. Jump to [Docker Compose](http://docs.portworx.com/run-lighthouse.html#step-3-start-px-lighthouse-with-docker-compose)
 2. Jump to installing the [PX-Lighthouse components manually](http://docs.portworx.com/run-lighthouse.html#component-install-step-#1:-install-kvdb)
 
-### Start PX-Lighthouse with Docker compose
+#### Start PX-Lighthouse with Docker compose
 
 >**Important:**
 <br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
@@ -77,7 +77,7 @@ docker-compose up -d
 
 At this point, Lighthouse should be functional.  If you wish to bring up the individual components without compose, follow the steps below.
 
-### Component install step #1: Install kvdb
+#### Component install step #1: Install kvdb
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -141,7 +141,7 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500                       
      consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
 ```
 
-### Component install step #2: Install InfluxDB
+#### Component install step #2: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -171,7 +171,7 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
      -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
 ```
 
-### Component install step #3: Run the PX-Lighthouse container
+#### Component install step #3: Run the PX-Lighthouse container
 
 For **ETCD**, start the container with the following run command:
 
