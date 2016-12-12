@@ -4,17 +4,16 @@ title: "Shared Volumes"
 keywords: portworx, shared volumes, global namespace
 sidebar: home_sidebar
 ---
-Through shared volumes (also known as a `global namespace`), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
-
-![Conceptual diagram of shared virtual volumes](images/shared-virtual-volumes.png "Conceptual diagram of shared virtual volumes")
+Through shared volumes (also known as a **global namespace**), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 
 A typical pattern is for a single container to have one or more volumes. Conversely, many scenarios would benefit from multiple containers being able to access the same volume, possibly from different hosts. Accordingly, the shared volume feature enables a single volume to be read/write accessible by multiple containers. Example use cases include:
 
 * A technical computing workload sourcing its input and writing its output to a shared volume.
 * Scaling a number of Wordpress containers based on load while managing a single shared volume.
+* Collecting logs to a central location
 
 ## Create shared volumes
-To create a Portworx shared volume, use the **pxctl** command.  (Future releases will enable shared volumes through `docker volume create`.)
+To create a Portworx shared volume, use the `pxctl` command or `docker volume create`.
 
 ```
 # pxctl volume create my_shared_vol --shared --size=5 --repl=3
@@ -26,6 +25,12 @@ ID			            NAME		        SIZE	   HA	  SHARED	STATUS
 
 Note the "SHARED" status of the volume, in the above output.
 
+You can also use `docker volume create` as
+
+```
+# docker volume create --driver pxd --opt shared=blue --opt size-10G demovol
+```
+
 ## Use shared volumes
 Shared volumes are accessed in the same way any  volume would be used in Docker. For example:
 
@@ -33,7 +38,7 @@ Shared volumes are accessed in the same way any  volume would be used in Docker.
 host1# docker run -it --name box1  -v my_shared_vol:/data --volume-driver=pxd  busybox sh
 ```
 
-### Use shared volumes from different hosts
+### Share a volume from different hosts
 A shared volume can be accessed by containers on different hosts. Any host in the cluster can access a shared volume by name. For example:
 
 ```
