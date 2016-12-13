@@ -96,7 +96,9 @@ same scheduling arguments as the create command.  If a schedule
 is set, the `pxctl volume inspect` command will display it.
 The scheduled snapshots have names of the form
 `<parent-ID>_sched_<creation_time>`, for example
-```593988376247244600_sched_2016-12-12T18:00:53-08:00```
+```
+593988376247244600_sched_2016-12-12T18:00:53-08:00
+```
 There is an implementation limit of five scheduled snapshots per
 volume.  When a new scheduled snapshot is created, the oldest
 existing one will be deleted if necessary to keep the total
