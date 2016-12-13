@@ -43,7 +43,7 @@ The parent volume, `myvol`, must be attached for this command
 to succeed.
 
 The string of digits in the output is the volume ID of the new
-snapshot.  You can use this ID or the name, `mysnap` to refer
+snapshot.  You can use this ID or the name, `mysnap`, to refer
 to the snapshot in subsequent `pxctl` commands.  The label values
 allow you to tag the snapshot with descriptive information of
 your choosing.  You can use them to filter the output of the
