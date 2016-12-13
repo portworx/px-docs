@@ -50,7 +50,7 @@ Example of creating a volume through `pxctl`, where the volume ID is returned:
 
  ```
  # pxctl volume create foobar
-  3903386035533561360
+ 3903386035533561360
  ```
 
 Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
