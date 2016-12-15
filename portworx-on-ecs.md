@@ -56,7 +56,15 @@ Your command to launch the ecs-agent will look like this:
 Note the use of the cluster name `ecs-demo` in the `--env=ECS_CLUSTER` environment variable.  Once this has been done, these nodes will now become part of your ECS cluster named `ecs-demo`
 
 ### Step 2: Deploy Portworx
-Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.  You will have to log into each of the ECS instances for this step.
+Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
+You will need the etcd be running, and you can use container for your etcd.
+
+```
+docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
+
+```
+
+You will have to log into each of the ECS instances for this step.
 
 ```
 # ssh -i ~/.ssh/id_rsa ec2-user@35.163.77.134
@@ -124,3 +132,13 @@ redis:
 You can view the task in the ECS console.
 
 ![task](images/ecs-task.png "task")
+
+You can also attach your docker volume from the AWS ECS console (GUI)
+
+Create a new docker volume similar like step 4
+```
+docker volume create -d pxd --name=testvol2
+```
+Go to AWS ECS console, On the same cluster "ecs-demo"; create a new task definition.
+Under Advanced container configuration, go to section Storage and logging; then define your mount points and the volume path.
+![task](images/aws-ecs-image03.PNG)
