@@ -141,6 +141,7 @@ docker volume create -d pxd --name=testvol2
 ```
 
 Go to AWS ECS console, On the same cluster "ecs-demo"; create a new task definition.
+
 ![task](images/aws-ecs-image00.PNG)
 
 Add a new container and under Advanced container configuration, go to section Storage and logging; then define your mount points and the volume path.
