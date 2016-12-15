@@ -151,4 +151,5 @@ On the new task definition screen; first add a volume for your container.  Both 
 ![task](images/aws-ecs-image02.PNG)
 
 Then add a new container - In the new container configuration page, go to the advanced container configuration.  Under the section of Storage and Logging, define your mount points and the volume path.  Click the drop down selection next to "Mount Points" and choose volume-0. Then enter the path for that mount points, for example `/data`.
+
 ![task](images/aws-ecs-image03.PNG)
