@@ -133,19 +133,22 @@ You can view the task in the ECS console.
 
 ![task](images/ecs-task.png "task")
 
-You can also attach your docker volume from the AWS ECS console (GUI)
+#### Creating a task via the console
 
-Create a new docker volume similar like step 4
+You can also attach yYou can also create stateful tasks via the ECS console (GUI) and attach Portworx volumes.
+
+Create a new docker volume like we did in step 4.
+
 ```
-docker volume create -d pxd --name=testvol2
+# docker volume create -d pxd --name=testvol2
 ```
 
 Go to AWS ECS console, On the same cluster "ecs-demo"; create a new task definition.
 
 ![task](images/aws-ecs-image00.PNG)
 
-On the new task definition screen; first add a volume for your container.
+On the new task definition screen; first add a volume for your container.  Both the name and the source path must be the name of the Portworx volume.
 ![task](images/aws-ecs-image02.PNG)
 
-Then add a new container, in the new container configuration page, go to Advanced container configuration, under the section of Storage and Logging; then define your mount points and the volume path. Click the drop down selection next to "Mount Points" and choose volume-0. Then enter the path for that mount points /data
+Then add a new container - In the new container configuration page, go to the advanced container configuration.  Under the section of Storage and Logging, define your mount points and the volume path.  Click the drop down selection next to "Mount Points" and choose volume-0. Then enter the path for that mount points, for example `/data`.
 ![task](images/aws-ecs-image03.PNG)
