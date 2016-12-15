@@ -169,7 +169,7 @@ Running **without config.json**:
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
-                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 Runtime command options:
