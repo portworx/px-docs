@@ -144,11 +144,8 @@ Go to AWS ECS console, On the same cluster "ecs-demo"; create a new task definit
 
 ![task](images/aws-ecs-image00.PNG)
 
-Add a new container and under Advanced container configuration, go to section Storage and logging; then define your mount points and the volume path.
-
-![task](images/aws-ecs-image03.PNG)
-
-On the new task definition screen; add a volume for this container.
-
+On the new task definition screen; first add a volume for your container.
 ![task](images/aws-ecs-image02.PNG)
 
+Then add a new container, in the new container configuration page, go to Advanced container configuration, under the section of Storage and Logging; then define your mount points and the volume path. Click the drop down selection next to "Mount Points" and choose volume-0. Then enter the path for that mount points /data
+![task](images/aws-ecs-image03.PNG)
