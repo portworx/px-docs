@@ -27,9 +27,6 @@ entries:
   - title: Install and Run
     output: web
     folderitems:
-    - title: Prerequisite - OS Configurations for Docker Shared Mounts
-      url: /os-config-shared-mounts.html
-      output: web
     - title: Run with Docker
       url: /run-with-docker.html
       output: web
@@ -168,6 +165,9 @@ entries:
   - title: Troubleshooting and FAQs
     output: web
     folderitems:
+    - title: Shared Mount Propogation
+      url: /os-config-shared-mounts.html
+      output: web
     - title: FAQs about PX-Enterprise
       url: /px-faqs.html
       output: web

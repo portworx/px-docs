@@ -6,49 +6,21 @@ sidebar: home_sidebar
 ---
 To install and configure PX via the Docker CLI, use the command-line steps in this section.
 
-The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
+>**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](run-etcd.md) for PX
 
-After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
+### Install and configure Docker
 
-* [Scale a Cassandra Database with PX](/cassandra.html)
-* [Run the Docker Registry with High Availability](/registry.html)
+PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 
->**Important:**<br/>The PX-Developer release requires you to launch or have a pre-existing key/value store, such as etcd or Consul. For more information, see the [etcd example](https://github.com/portworx/px-dev/blob/master/examples/etcd_in_container) for PX-Developer. PX-Enterprise does not have this requirement.
+>**Important:**<br/>If you are runnig a version prior to Docker 1.12, then you *must* configure Docker to allow shared mounts propogation.  Please follow [these](os-config-shared-mounts.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
-### Step 1: Launch servers
-
-To start, create three servers, following these requirements:
-
-* Image: Must support Docker 1.10 or later, such as:
-  * [Red Hat 7.2 (HVM)](https://aws.amazon.com/marketplace/pp/B019NS7T5I) or CentOS
-  * CoreOS (1010.6.0 or later)
-  * [Ubuntu 14.04 (HVM)](https://aws.amazon.com/marketplace/pp/B00JV9TBA6/ref=mkt_wir_Ubuntu14)
-* Instance type: c3.xlarge
-* Number of instances: 3
-* Storage:
-  * /dev/xvda: 8 GB boot device
-  * /dev/xvdb: 64 GB for container storage
-  * /dev/xvdc: 64 GB for container storage
-* Tag (optional): Add value **px-cluster1** as the name
-
-Volumes used for container data can be of any type, such as HDD, SSD, or provisioned IOPs SSDs. On-premises, the underlying storage could also be from a SAN. Portworx applies different policies based on storage device capabilities.
-
-### Step 2: Install and configure Docker
-
-SSH into your first server and perform the general steps below.
-
-1. Follow the Docker install guide to install and start the Docker Service.
-2. Verify that your Docker version is 1.10 or later.
-3. Configure Docker to use shared mounts.  
-     The shared mounts configuration is required, because Portworx exports mount points. For examples, including RedHat/CentOS, CoreOS, and Ubuntu, see [OS Configuration for Shared Mounts](os-config-shared-mounts.html).
-
-### Step 3: Specify storage
+### Specify storage
 
 Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc) from Step 1 of this section.
 
 >**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
 
-### To view the storage devices on your server
+To view the storage devices on your server
 
 Use this command line:
 
@@ -69,11 +41,109 @@ Note that devices without the partition are shown under the **TYPE** column as *
     xvdc                      202:32   0    64G  0 disk
 ```
 
-### To choose storage devices
+Identify the storage devices you will be allocating to PX.  PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
 
-Portworx lets you choose the storage devices that it will manage. For example, you might decide to have Portworx manage only a subset of your storage devices. With PX-Enterprise, you can choose storage devices through the PX-Enterprise web console.
+### Run PX
 
-With PX, use the following steps to specify in the config.json file which storage devices you want Portworx to manage. The config.json file in PX identifies the key/value store for the cluster.
+You can now run PX via the Docker CLI as follows:
+
+```
+# sudo docker run --restart=always --name px -d --net=host \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
+                 --ipc=host                                    \
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+```
+
+Where the following arguments are provided to the PX daemon:
+
+```
+-daemon
+	> Instructs PX to start in daemon mode.  Other modes are for service users only.
+
+-k
+	> Points to your key value database, such as an etcd cluster or a consul cluster.
+
+-c
+	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
+
+-s
+	> Specifies the various drives that PX should use for storing the data.
+
+-a
+	> Instructs PX to use any available, unused and unmounted drive.  PX will never use a drive that is mounted.
+
+-f
+	> Optional.  Instructs PX to use an unmounted drive even if it has a filesystem on it.
+
+-z
+	> Optional.  Instructs PX to run in zero storage mode.  In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes.
+
+-d
+	> Optional.  Specifies the data interface.
+
+-m
+	> Optional.  Specifies the management interface.
+```
+
+The following Docker runtime command options are explained:
+
+```
+--privileged
+    > Sets PX to be a privileged container. Required to export block  device and for other functions.
+
+--net=host
+    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
+
+--shm-size=384M
+    > PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts
+
+-v /run/docker/plugins
+    > Specifies that the volume driver interface is enabled.
+
+-v /dev
+    > Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\].
+
+-v /etc/pwx/config.json:/etc/pwx/config.json
+    > the configuration file location.
+
+-v /var/run/docker.sock
+    > Used by Docker to export volume container mappings.
+
+-v /var/lib/osd:/var/lib/osd:shared
+    > Location of the exported container mounts. This must be a shared mount.
+
+-v /opt/pwx/bin:/export_bin:shared
+    > Exports the PX command line (**pxctl**) tool from the container to the host.
+```
+
+For **CoreOS**, start the Portworx container with the following run command:
+
+```
+# sudo docker run --restart=always --name px -d --net=host \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
+                 --ipc=host                                    \
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+```
+
+#### Optional - running with config.json
+
+You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to pass the runtime parameters via the command line.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
 
 1. Download the sample config.json file:
 https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
@@ -115,13 +185,8 @@ Example config.json:
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
-### Step 4: Launch the PX Container
 
-When you run Docker and the Portworx container, Portworx aggregates and manages your storage capacity. As you run the Portworx container on each server, new capacity is added to the cluster.
-
-### To run the Portworx container
-
-For **CentOS** or **Ubuntu**, start the Portworx container with the following run command:
+You can now start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \
@@ -136,71 +201,6 @@ For **CentOS** or **Ubuntu**, start the Portworx container with the following ru
                  -v /usr/src:/usr/src                          \
                  --ipc=host                                    \
                 portworx/px-dev
-```
-
-For **CoreOS**, start the Portworx container with the following run command:
-
-```
-# sudo docker run --restart=always --name px -d --net=host \
-                 --privileged=true                             \
-                 -v /run/docker/plugins:/run/docker/plugins    \
-                 -v /var/lib/osd:/var/lib/osd:shared           \
-                 -v /dev:/dev                                  \
-                 -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
-                 -v /var/run/docker.sock:/var/run/docker.sock  \
-                 -v /var/cores:/var/cores                      \
-                 -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
-                portworx/px-dev
-```
-
-Running **without config.json**:
-
-```
-# sudo docker run --restart=always --name px -d --net=host \
-                 --privileged=true                             \
-                 -v /run/docker/plugins:/run/docker/plugins    \
-                 -v /var/lib/osd:/var/lib/osd:shared           \
-                 -v /dev:/dev                                  \
-                 -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
-                 -v /var/run/docker.sock:/var/run/docker.sock  \
-                 -v /var/cores:/var/cores                      \
-                 -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
-                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
-```
-
-Runtime command options:
-
-```
---privileged
-    > Sets PX to be a privileged container. Required to export block  device and for other functions.
-
---net=host
-    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
-
---shm-size=384M
-    > PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts
-
--v /run/docker/plugins
-    > Specifies that the volume driver interface is enabled.
-
--v /dev
-    > Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\].
-
--v /etc/pwx/config.json:/etc/pwx/config.json
-    > the configuration file location.
-
--v /var/run/docker.sock
-    > Used by Docker to export volume container mappings.
-
--v /var/lib/osd:/var/lib/osd:shared
-    > Location of the exported container mounts. This must be a shared mount.
-
--v /opt/pwx/bin:/export_bin:shared
-    > Exports the PX command line (**pxctl**) tool from the container to the host.
 ```
 
 ### pxctl
@@ -253,16 +253,9 @@ To add nodes to increase capacity and enable high availability, complete the JSO
 * If you have different storage device configurations on the nodes, make sure to use the same `clusterid` and `kvdb` on all the nodes.
 * Then, continue with the [CLI Reference](cli-reference.html) or the [Application Solutions](application-solutions.html).
 
-### To provision a key/value store
+### Application Examples
 
-You can use an existing etcd service or set up your own. This example uses Compose.IO, for its ease of use.
+After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
 
-1. Create a new etcd deployment in Compose.IO.
-2. Select 256 MB RAM as the memory.
-3. Save the connection string, including your username and password. For example:
-
- https://[username]:[password]@[string].dblayer.com:[port]
-
- >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
-
-After you set up etcd, you can use the same etcd service for multiple PX clusters.
+* [Scale a Cassandra Database with PX](/cassandra.html)
+* [Run the Docker Registry with High Availability](/registry.html)
