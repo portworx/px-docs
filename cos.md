@@ -11,10 +11,10 @@ Through class of service (also known as a `CoS`), a single volume's class of ser
 Applications have different storage performance requirements; some require higher IOPS/throughput performance characteristics than others. Portworx provides the ability to specify a class of service level at the container granularity. Containers operating at different classes of service can co-exist in the same node/cluster.  Using class of service you can tune your volume for higher throughput and/or IOPS. The *High* CoS is optimized for IOPS, *Medium* is optimized for throughput.
 
 ## Usage
-To create a volume with a specific class of service level, use the `--cos` parameter in the volume create options.  As with other parameters, this CoS parameter can also be passed in as a label via Docker or any scheduler.
+To create a volume with a specific class of service level, use the `--io_prioirity` parameter in the volume create options.  As with other parameters, this CoS parameter can also be passed in as a label via Docker or any scheduler.
 
 ```
-# /opt/pwx/bin/pxctl volume create --cos high volume-name
+# /opt/pwx/bin/pxctl volume create --io_priority high volume-name
 ```
 
 Here is an example output from [fio](https://github.com/axboe/fio) when measuring the CoS feature on an Intel server with NVMe and SATA drives.
@@ -137,11 +137,11 @@ Pool ID: 2
 Let's first create three volumes with a high, medium and low class of service:
 
 ```
-# /opt/pwx/bin/pxctl volume create --cos high test-high --size 8
+# /opt/pwx/bin/pxctl volume create --io_priority high test-high --size 8
 test-high
-# /opt/pwx/bin/pxctl volume create --cos med test-med --size 8
+# /opt/pwx/bin/pxctl volume create --io_priority med test-med --size 8
 test-med
-# /opt/pwx/bin/pxctl volume create --cos low test-low --size 8
+# /opt/pwx/bin/pxctl volume create --io_priority low test-low --size 8
 test-low
 ```
 
