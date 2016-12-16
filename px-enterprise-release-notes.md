@@ -11,7 +11,7 @@ sidebar: home_sidebar
 * Support scaling up to 256 nodes
 * Enhanced authentication support for etcd
 * Support Kubernetes scheduler placement of containers
-* Enhancements to Class of Service to improve better detection on different public clouds
+* Enhancements to Class of Service or IOPriority to improve better detection on different public clouds. 
 * Enhanced drive replacement workflows
 
 ### Key Issues Addressed
