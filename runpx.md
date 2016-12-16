@@ -1,4 +1,5 @@
-docker run -d --restart=always --name px --net=host          \
+```
+# docker run -d --restart=always --name px --net=host          \
                  -v /run/docker/plugins:/run/docker/plugins                 \
                  -v /var/lib/osd:/var/lib/osd:shared                        \
                  -v /dev:/dev                                               \
@@ -9,4 +10,5 @@ docker run -d --restart=always --name px --net=host          \
                  -v /var/cores:/var/cores                                   \
                  -v /usr/src:/usr/src                                       \
                  --ipc=host                                                 \
-                portworx/px-enterprise -daemon -k etcd:http://172.22.174.176:2379 -c 2sigma-01 -s /dev/vdb
+                portworx/px-enterprise -daemon -k etcd:http://myetcd.mycompany.com:2379 -c mycluster-01 -s /dev/vdb
+```
