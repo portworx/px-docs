@@ -8,17 +8,17 @@ sidebar: home_sidebar
 ## 1.1.2 Release notes
 
 ### Key Features
-* Scale up to 256 nodes
+* Support scaling up to 256 nodes
 * Enhanced authentication support for etcd
 * Support Kubernetes scheduler placement of containers
 * Enhancements to Class of Service to improve better detection on different public clouds
 * Enhanced drive replacement workflows
 
-
 ### Key Issues Addressed
 * Prevent volume updates in maintenance mode from happening
 * Fixed netstats calculation to resolve the network throughput display issues
 * Improve etcd version check handling in cases where the etcd version is not recieved
+* Add support for etcd versions between 2.0 to 2.3
 
 ### Key notes
 * Note that the shared namespace feature is still in beta.
