@@ -12,7 +12,6 @@ sidebar: home_sidebar
 * Enhanced authentication support for etcd
 * Support Kubernetes scheduler placement of containers
 * Enhancements to Class of Service to improve better detection on different public clouds. 
-  We have also renamed Class of Service to IOPriority to better match the functionality offered.
 * Enhanced drive replacement workflows
 
 ### Key Issues Addressed
