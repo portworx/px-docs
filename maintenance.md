@@ -23,73 +23,166 @@ This puts Portworx back in to "Operational" state for a given node.
 
 ### Example
 
+The drive management commands are organized under `pxctl service drive` command
+
 ```
-[root@PX-SM2 ~]# pxctl status
-Status: PX is operational
-Node ID: 30fa483f-9874-4b38-a4d4-bb8ae8e261fa
-	IP: 10.0.0.61
- 	Local Storage Pool: 3 devices
-	Device	Path		Media Type		Size		Last-Scan
-	1	/dev/nvme0n1	STORAGE_MEDIUM_SSD	745 GiB		09 Sep 16 13:30 PDT
-	2	/dev/sdf	STORAGE_MEDIUM_MAGNETIC	2.7 TiB		09 Sep 16 13:30 PDT
-	3	/dev/sdg	STORAGE_MEDIUM_MAGNETIC	2.7 TiB		09 Sep 16 13:30 PDT
-	total			-			6.2 TiB
-	Warning: Disk sizes are not the same, therefore disk usage will be suboptimal. For best disk utilization, please use disks of identical size.
-Cluster Summary
-	Cluster ID: 910b106a-7617-11e6-b5c3-0242ac110003
-	Node IP: 10.1.1.61 - Capacity: 17 MiB/6.2 TiB Online (This node)
-	Node IP: 10.1.1.153 - Capacity: 17 MiB/746 GiB Online
-Global Storage Pool
-	Total Used    	:  34 MiB
-	Total Capacity	:  6.9 TiB
-[root@PX-SM2 ~]# pxctl service remove /dev/sdf
-Are you sure? (Y/N): Y
-success.
-[root@PX-SM2 ~]# pxctl service remove /dev/sdg
-Are you sure? (Y/N): Y
-success.
-[root@PX-SM2 ~]# pxctl status
-Status: PX is operational
-Node ID: 30fa483f-9874-4b38-a4d4-bb8ae8e261fa
-	IP: 10.0.0.61
- 	Local Storage Pool: 2 devices
-	Device	Path		Media Type		Size		Last-Scan
-	1	/dev/nvme0n1	STORAGE_MEDIUM_SSD	745 GiB		09 Sep 16 13:43 PDT
-	total			-			745 GiB
-Cluster Summary
-	Cluster ID: 910b106a-7617-11e6-b5c3-0242ac110003
-	Node IP: 10.1.1.61 - Capacity: 17 MiB/3.5 TiB Online (This node)
-	Node IP: 10.1.1.153 - Capacity: 17 MiB/746 GiB Online
-Global Storage Pool
-	Total Used    	:  34 MiB
-	Total Capacity	:  4.2 TiB
-[root@PX-SM2 ~]# pxctl service repair -e
+/opt/pwx/bin/pxctl service drive
+
+NAME:
+   pxctl service drive - Storage drive maintenance
+
+USAGE:
+   pxctl service drive command [command options] [arguments...]
+
+COMMANDS:
+     show           Show drives
+     add            Add storage
+     replace        Replace source drive with target drive
+     rebalance, rs  Rebalance storage
+
+OPTIONS:
+   --help, -h  show help
+```
+
+Here is a typical workflow on how to identify and replace drives. 
+
+Show the list of drives in the system
+
+```
+/opt/pwx/bin/pxctl service drive show
+ 
+PX drive configuration:
+Pool ID: 0
+	IO_Priority: LOW
+	Size: 7.3 TiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	1: /dev/sde, 3.0 GiB allocated of 7.3 TiB, Online
+Pool ID: 1
+	IO_Priority: HIGH
+	Size: 1.7 TiB
+	Status: Online
+	Has meta data: Yes
+	Drives:
+	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
+Drive add 
+
+```
+## Add drives to the cluster
+
+### Step 1: Enter Maintenance Mode 
+
+```
+
+/opt/pwx/bin/pxctl service  maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
-Are you sure you want to proceed ? (Y/N): Y
+Are you sure you want to proceed ? (Y/N): y
 PX is not running on this host.
-[root@PX-SM2 ~]# pxctl status
-PX is not running on this host
 
-[ Power-off machine.  Perform any needed maintenance ]
-
-[root@PX-SM2 ~]# docker restart px-enterprise
-px-enterprise
-[root@PX-SM2 ~]# pxctl service repair -x
-PX is now operational.
-[root@PX-SM2 ~]# pxctl status
-Status: PX is operational
-Node ID: 30fa483f-9874-4b38-a4d4-bb8ae8e261fa
-	IP: 10.0.0.61
- 	Local Storage Pool: 1 device
-	Device	Path		Media Type		Size		Last-Scan
-	1	/dev/nvme0n1	STORAGE_MEDIUM_SSD	745 GiB		09 Sep 16 13:46 PDT
-	total			-			745 GiB
-Cluster Summary
-	Cluster ID: 910b106a-7617-11e6-b5c3-0242ac110003
-	Node IP: 10.1.1.61 - Capacity: 17 MiB/746 GiB Online (This node)
-	Node IP: 10.1.1.153 - Capacity: 17 MiB/746 GiB Online
-Global Storage Pool
-	Total Used    	:  34 MiB
-	Total Capacity	:  1.5 TiB
-[root@PX-SM2 ~]#
 ```
+
+### Step 2: Add drive to the system
+
+Add drive /dev/sdb to px
+
+```
+/opt/pwx/bin/pxctl service drive add /dev/sdb
+Adding device  /dev/sdb ...
+Drive add  successful. Requires restart (Exit maintenance mode).
+
+```
+
+### Step 3: Exit Maintenance mode 
+
+```
+/opt/pwx/bin/pxctl service  maintenance --exit
+PX is now operational
+
+```
+
+Check if the drive is added using drive show command
+
+```
+/opt/pwx/bin/pxctl service drive show
+PX drive configuration:
+
+Pool ID: 0
+	IO_Priority: LOW
+	Size: 15 TiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
+	1: /dev/sde, 3.0 GiB allocated of 7.3 TiB, Online
+Pool ID: 1
+	IO_Priority: HIGH
+	Size: 1.7 TiB
+	Status: Online
+	Has meta data: Yes
+	Drives:
+	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
+
+
+```
+
+## Replace a drive that is already part of the Portworx Cluster
+
+### Step 1: Enter Maintenance mode
+
+```
+/opt/pwx/bin/pxctl service  maintenance --enter
+This is a disruptive operation, PX will restart in maintenance mode.
+Are you sure you want to proceed ? (Y/N): y
+
+PX is not running on this host.
+
+```
+
+### Step 2: Replace old drive with a new drive
+
+Ensure the replacement drive is already available in the system. 
+
+For e.g., Replace drive /dev/sde with /dev/sdc
+
+```
+
+/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
+"Replace operation is in progress"
+​Check the replace status​
+/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
+"Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
+```
+
+
+### Step 3: Exit Maintenance mode 
+
+```
+/opt/pwx/bin/pxctl service  maintenance --exit
+PX is now operational
+
+```
+
+### Step 4: Check if the drive has been successfully replaced
+
+```
+/opt/pwx/bin/pxctl service drive show
+PX drive configuration:
+Pool ID: 0
+	IO_Priority: LOW
+	Size: 15 TiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	1: /dev/sdc, 3.0 GiB allocated of 7.3 TiB, Online
+	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
+Pool ID: 1
+	IO_Priority: HIGH
+	Size: 1.7 TiB
+	Status: Online
+	Has meta data: Yes
+	Drives:
+	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
+
+```
+
