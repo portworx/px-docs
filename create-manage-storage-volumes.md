@@ -125,7 +125,7 @@ For example, a PX inline spec can be specified as the following:
 Each spec key must be comma seperated.  The following are supported key value pairs:
 
 ```
-Class of service - cos=[1,2,3]
+IO priority      - cos=[1,2,3]
 Volume size      - size=[1..9][G|M|T]
 HA factor        - ha=[1,2,3]
 Block size       - bs=[4096...]
