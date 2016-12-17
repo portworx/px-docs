@@ -27,7 +27,7 @@ sidebar: home_sidebar
 
 Following are the supported limits as tested and qualified by Portworx.
 
-* 96 nodes per cluster
+* 1024 nodes per cluster
 * 255 volumes per node
 * 96 TB per node
 * 255 snapshots per volume
@@ -43,11 +43,8 @@ Following are the supported limits as tested and qualified by Portworx.
 
 PX-Enterprise is tested and qualified against the following schedulers:
 
-* Docker UCP running in swarm mode (minimum version 1.12)
+* Kubernetes (minimum version 1.2)
 * Mesos, Mesosphere, and DC/OS (minimum version 1.7)
+* Docker UCP running in swarm mode (minimum version 1.12)
 * Rancher (minimum version 1.1.3)
-
-## Shared volumes
-
-PX-Enterprise 1.0.X contains experimental support for the shared volumes feature. For this release, shared volumes has an overhead compared to regular PX volumes. Portworx will address this issue in an upcoming minor release.
-
+* Amazon ECS
