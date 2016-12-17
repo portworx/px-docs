@@ -12,8 +12,6 @@ topnav_dropdowns:
   folders:
     - title: Portworx Resources
       folderitems:
-        - title: Portworx Documentation Repo
-          external_url: https://github.com/portworx/px-docs/
         - title: Portworx YouTube Channel
           external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
    
