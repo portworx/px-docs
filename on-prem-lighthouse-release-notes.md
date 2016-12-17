@@ -9,9 +9,11 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 ## Lighthouse 1.1.3 Release notes
 
+In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well. 
+
 ### Key Features
 
-* Support for authenticated etcd2. Refer to [Lighthouse with Secure etcd] (http://docs.portworx.com/run-lighthouse-with-secure-etcd.html)
+* Support for authenticated etcd2. Refer to [Lighthouse with Secure etcd] (/run-lighthouse-with-secure-etcd.html)
 
 ### Known issues
 
