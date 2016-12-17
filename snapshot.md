@@ -32,13 +32,16 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
+
 ### Snapshot creation
 Use `pxctl snap create` to make a new snapshot of a volume.
 A typical example looks like this:
+
 ```
 # pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
 Volume successfully snapped: 1152602487227170184
 ```
+
 The parent volume, `myvol`, must be attached for this command
 to succeed.
 
@@ -50,6 +53,7 @@ your choosing.  You can use them to filter the output of the
 `pxctl snap list` command, as described below.
 
 Here is the synopsis for `pxctl snap create`:
+
 ```
 NAME:
    pxctl snap create - Create a volume snapshot
@@ -62,14 +66,17 @@ OPTIONS:
    --label value, -l value  Comma separated name=value pairs, e.g. name=sqlvolume,type=production
    --readonly               true if snapshot is readonly
 ```
+
 The argument is the name or ID of the parent volume on which
 the snapshot is based.  By default, the snapshot will be writable,
 but you can make it read-only with the `--readonly` option.  If
 you omit the `--name` option, a default name is assigned.  Its
 format is `<parent-ID>.snap-<creation-time>`, for example,
+
 ```
 593988376247244600.snap-2016-12-12T13:59:17.952372744-08:00
 ```
+
 Each snapshot is a volume and can be used like any other volume.
 For instance, you can attach it and can create snapshots of it:
 ```
@@ -85,6 +92,7 @@ use `pxctl volume inspect` to see more detailed information.
 There is an implementation limit of 64 snapshots per volume.
 
 ### Listing snapshots
+
 ```
 NAME:
    pxctl snap list - List volume snapshots in the cluster
@@ -96,14 +104,17 @@ OPTIONS:
    --parent value           parent volume ID
    --label value, -l value  Comma separated name=value pairs, e.g name=sqlvolume,type=production
 ```
+
 If you run this command with no options, you get a list of all snapshots,
 with information about their attributes:
+
 ```
 # pxctl snap list
 ID                   NAME       SIZE   HA  SHARED  STATUS
 1152602487227170184  mysnap     1 GiB  1   no      up - attached on 10.0.2.15
 1312421116276761727  mysnap_jr  1 GiB  1   no      up - detached
 ```
+
 You can filter the results with the `--parent` and `--label`
 options.  For instance, `--parent myvol` will show only snapshots
 whose parent is `myvol`, i.e., `mysnap` in this example.  Giving
@@ -113,6 +124,7 @@ again show `mysnap` but `--label fabric=cotton` would produce
 an empty list.
 
 ### Deleting snapshots
+
 ```
 NAME:
    pxctl snap delete - Delete a volume snapshot
@@ -120,6 +132,7 @@ NAME:
 USAGE:
    pxctl snap delete [arguments...]
 ```
+
 The argument is the name or ID of the snapshot that you wish to delete.
 The snapshot must be detached in order to delete it.
 
@@ -136,9 +149,11 @@ created at a fixed interval, say every 60 minutes.  The example below
 sets a schedule of daily snapshots at 8:00 a.m. and 6:00 p.m., a
 weekly snapshot on Friday at 11:30 p.m., and a monthly snapshot on
 the 1st of the month at 6:00 a.m.
+
 ```
 pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
 ```
+
 Interval-based snapshots are set with the `--snap_interval` option.
 As a special case `--snap_interval 0` removes any current snapshot
 schedule.
@@ -146,11 +161,13 @@ schedule.
 The snapshot schedule can be changed with the
 `pxctl volume snap-interval-update` command.  It accepts the
 same scheduling arguments as the create command:
+
 ```
 # pxctl volume snap-interval-update --daily @15:00 myvol
 ```
 
 If a schedule is set, `pxctl volume inspect` will display it:
+
 ```
 # pxctl volume inspect tester
 Volume    :  593988376247244600
@@ -179,9 +196,11 @@ Volume    :  593988376247244600
 
 Scheduled snapshots have names of the form
 `<parent-ID>_sched_<creation_time>`, for example
+
 ```
 593988376247244600_sched_2016-12-12T18:00:53-08:00
 ```
+
 There is an implementation limit of five scheduled snapshots per
 volume.  When a new scheduled snapshot is created, the oldest
 existing one will be deleted if necessary to keep the total
