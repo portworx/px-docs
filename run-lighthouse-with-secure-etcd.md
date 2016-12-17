@@ -76,13 +76,13 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
 
 * You can enable authentication in etcd2, using the guide [here](https://coreos.com/etcd/docs/latest/authentication.html)
 
-### Component install step #2C: Start etcd2 server
+### Component Install Step #2C: Start etcd2 server
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
 <br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' format
 
-### Step #3: Run the PX-Lighthouse container
+### Component Install Step #3: Run the PX-Lighthouse container
 
 For **ETCD2**, start the PX-Lighthouse container with the following run command:
 
