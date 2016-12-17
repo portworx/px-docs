@@ -62,7 +62,7 @@ Global Storage Pool
 
 If there are any alerts or warnings, those are also displayed in the status output.
 
-### Command Line Help
+## Command Line Help
 ```
 # pxctl help
 NAME:
