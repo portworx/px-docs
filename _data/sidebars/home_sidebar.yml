@@ -75,6 +75,18 @@ entries:
     - title: Run with systemd
       url: /run-with-systemd.html
       output: web
+  - title: CLI and API Reference
+    output: web
+    folderitems:
+    - title: CLI Reference
+      url: /cli-reference.html
+      output: web
+    - title: config.json definition
+      url: /config-json.html
+      output: web
+    - title: REST API Reference
+      url: /rest_api.html
+      output: web
   - title: Operate and Maintain
     output: web
     folderitems:
@@ -143,18 +155,6 @@ entries:
       output: web 
     - title: Portworx on SDN with userns
       url: /portworx-flannel-userns.html
-      output: web
-  - title: CLI and API Reference
-    output: web
-    folderitems:
-    - title: CLI Reference
-      url: /cli-reference.html
-      output: web
-    - title: config.json definition
-      url: /config-json.html
-      output: web
-    - title: REST API Reference
-      url: /rest_api.html
       output: web
   - title: Enterprise Edition
     output: web

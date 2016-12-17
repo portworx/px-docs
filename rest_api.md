@@ -45,6 +45,9 @@ For example:
 
 ```
 curl -XGET http://localhost:9001/v1/osd-volumes/px7vol  | python -mjson.tool
+```
+
+```json
 [
     {
         "ctime": {
@@ -152,6 +155,9 @@ To query overall cluster and node meta, use the **/cluster/enumerate** enpoint. 
 
 ```
 curl -XGET http://localhost:9001/v1/cluster/enumerate | python -mjson.tool
+```
+
+```json
 {
     "Id": "9256cd75-add2-11e6-ae2d-0242ac110003",
     "NodeId": "db62a060-6e1d-4aec-99f8-518d97bbd1cd",
