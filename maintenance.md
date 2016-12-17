@@ -10,7 +10,7 @@ The most common cases would be for Disk/DIMM/NIC replacement.
 
 Here are some of the commands that are needed for maintenance operations
 
-## Some general maintenance comamnds
+## Some general maintenance commands
 
 ### Enter Maintenance Mode 
 Run **"pxctl service repair -e"**.
@@ -24,7 +24,7 @@ This restarts the Portworx fabric on a given node.
 Run **"pxctl service repair -x"**.
 This puts Portworx back in to "Operational" state for a given node.
 
-### Example
+### Drive management example
 
 The drive management commands are organized under `pxctl service drive` command
 
