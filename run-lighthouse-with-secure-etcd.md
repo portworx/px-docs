@@ -33,7 +33,7 @@ To start, create one server, following these requirements:
 1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
 2. Verify that your Docker version is 1.10 or later.
 
-#### Component Install Step #1: Install InfluxDB
+### Component Install Step #1: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
