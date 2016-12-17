@@ -1,13 +1,16 @@
 ---
 layout: page
 title: "Maintenance Mode"
-keywords: maintenance
+keywords: maintenance, drive removal, drive replacement
 sidebar: home_sidebar
 ---
 
 Maintenance Mode is useful for cases where a node needs to be physically decommissioned.
 The most common cases would be for Disk/DIMM/NIC replacement.
-For these instances, follow these steps:
+
+Here are some of the commands that are needed for maintenance operations
+
+## Some general maintenance comamnds
 
 ### Enter Maintenance Mode 
 Run **"pxctl service repair -e"**.
@@ -140,7 +143,8 @@ For e.g., Replace drive /dev/sde with /dev/sdc
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
 "Replace operation is in progress"
 ```
-​Check the replace status​
+
+Check the replace status
 
 ```
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
