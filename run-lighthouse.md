@@ -77,7 +77,7 @@ docker-compose up -d
 
 At this point, Lighthouse should be functional.  If you wish to bring up the individual components without compose, follow the steps below.
 
-#### Component install step #1: Install kvdb
+#### Component Install Step #1: Install kvdb
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -141,7 +141,7 @@ sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500                       
      consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
 ```
 
-#### Component install step #2: Install InfluxDB
+#### Component Install Step #2: Install InfluxDB
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
@@ -171,7 +171,7 @@ sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
      -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
 ```
 
-#### Component install step #3: Run the PX-Lighthouse container
+#### Component Install Step #3: Run the PX-Lighthouse container
 
 For **ETCD**, start the container with the following run command:
 
