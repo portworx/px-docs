@@ -12,17 +12,23 @@ Lighthouse supports etcd2 auth features
 2. You can enable auth in etcd and provide username and password as well. This user should have read/write access to etcd
 3. Provide all above options as commandline arguments to docker run command for lighthouse
 
+
 #### Step #1: Install kvdb with a CA file and/or a Certificate-Key pair
 
-* You can have CA file and/or a Certificate-Key pair for you etcd2 server. There is an example document at [Etcd with Encryption and Authentication] (
-https://medium.com/@gargar454/coreos-etcd-and-fleet-with-encryption-and-authentication-27ffefd0785c#.w24dog98z)
+
+* You can have CA file and/or a Certificate-Key pair for you etcd2 server. There is an example document at [Etcd with Encryption and Authentication](https://medium.com/@gargar454/coreos-etcd-and-fleet-with-encryption-and-authentication-27ffefd0785c#.w24dog98z)
+
 * Lighthouse requires that you pass the certs into the container using persistant storage and you map them to '/etc/pwx' path using -v option
+
 
 #### Step #2: Enable auth in etcd
 
-* You can enable authentication in etcd, using this [guide] (https://coreos.com/etcd/docs/latest/authentication.html)
+
+* You can enable authentication in etcd, using this [guide](https://coreos.com/etcd/docs/latest/authentication.html)
+
 
 #### Step #3: Run the PX-Lighthouse container
+
 
 For **ETCD2**, start the container with the following run command:
 
