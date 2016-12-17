@@ -5,13 +5,7 @@ topnav:
   items:
     - title: News
       external_url: http://portworx.com/news
+    - title:  Portworx YouTube Channel
+      external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
 
-#Topnav dropdowns
-topnav_dropdowns:
-- title: Topnav dropdowns
-  folders:
-    - title: Portworx Resources
-      folderitems:
-        - title: Portworx YouTube Channel
-          external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
    
