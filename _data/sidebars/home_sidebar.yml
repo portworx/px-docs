@@ -51,9 +51,6 @@ entries:
     - title: Create and Manage Storage Volumes
       url: /create-manage-storage-volumes.html
       output: web
-    - title: Snapshots
-      url: /snapshot.html
-      output: web
     - title: Shared Volumes
       url: /shared-volumes.html
       output: web
