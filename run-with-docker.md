@@ -16,7 +16,7 @@ PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docke
 
 ### Specify storage
 
-Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc) from Step 1 of this section.
+Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc).
 
 >**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
 
