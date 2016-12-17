@@ -4,9 +4,9 @@ title: "CLI Reference"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 ---
-The Portworx command-line tool, `pxctl`, lets you directly provision and manage storage. You can pre-provision storage and perform management tasks through the Portworx or Docker CLI.
-
-Applications can provision and consume storage through the Docker API. The Portworx documentation references the Docker documentation for information about managing Docker volumes.
+The Portworx command-line tool, `pxctl`, is available on every node where PX is running.  It is exposed at the host at `/opt/pwx/bin/pxctl`.  The CLI is designed to display human readable output by default.  In addition, every command takes in a `-j` option such that the output is in machine parsable `json` format.
+	
+In most production deployments, you will provision volumes directly using Docker or your scheduler (such as a Kubernetes pod spec).  However, pxctl also lets you directly provision and manage storage. In addition, the pxctl has a rich set of cluster wide management features which are explained in this document.
 
 ## About `pxctl`
 
@@ -34,8 +34,7 @@ Now you can just type `pxctl` and you're ready to start.
 
 To view all Portworx commands, run [`pxctl help`](cli-reference.html#pxctl-command-line-help).
 
-### Overall Node and Cluster Status: `pxctl status`
-
+## Node and Cluster Status
 To see the total storage capacity, use `pxctl status`. In the example below, a three-node cluster has a global capacity of 413 GB. The node on which `pxctl` ran contributed 256 GB to that global capacity.
 
 As nodes join the cluster, `pxctl` reports the updated global capacity.
@@ -61,127 +60,9 @@ Global Storage Pool
        	Total Capacity 	:  2.7 TiB
 ```
 
-### Manage storage volumes: `pxctl volume`
+If there are any alerts or warnings, those are also displayed in the status output.
 
-To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.
-
-```
-NAME:
-   pxctl volume - Manage volumes
-
-USAGE:
-   pxctl volume command [command options] [arguments...]
-
-COMMANDS:
-     create, c           Create a volume
-     list, l             List volumes in the cluster
-     ha-update, u        Update volume HA level
-     inspect, i          Inspect a volume
-     requests            Show all pending requests
-     delete, d           Delete a volume
-     stats-history, sth  Volume Statistics
-     stats, st           Volume Statistics
-     alerts, a           Show volume related alerts
-
-OPTIONS:
-   --help, -h  show help
-```
-
-Running `cluster list` returns the current global state of the cluster, including usage, the number of containers running per node, and the status of the node within the cluster.
-
-Example of `cluster list` for the same three-node cluster:
-
-```
-# pxctl cluster list
-Cluster ID: 04c58dcf-c831-4e90-8476-4c6ff69e6a14
-Status: OK
-
-Nodes in the cluster:
-ID     					DATA IP		CPU    		MEM TOTAL      	MEM FREE       	CONTAINERS     	STATUS
-d0479845-ac95-4dee-aa51-bac2daf22c04   	10.0.0.141     	0.03125		33 GB  		31 GB  		N/A    		Online
-374d95fa-ffab-4f3c-b06d-ae6cfd2cf0f9   	10.0.0.109     	0.04686		33 GB  		32 GB  		N/A    		Online
-273e4389-8368-478f-8ef6-033346ad162c   	10.0.0.84      	0.031245       	33 GB  		32 GB  		N/A    		Online
-```
-
-To view the cluster from a container-centric perspective, run `container show`. The output lists the running containers by container ID, the container image/name, and the mounted Portworx storage volume.
-
-Example of `container show` for the same three-node cluster:
-
-```
-# pxctl container show
-ID           IMAGE        NAMES         VOLUMES STATUS
-78adc5102d64 mysql        /clonesql     N/A     Up 5 hours
-eae3eac65ea5 google/cadvi /px-dev       N/A     Up 5 hours
-5a7850b7cc72 portworx/px- /px-lite      N/A     Up 5 hours
-```
-
-## `volume create` and Options
-
-Storage is durable, elastic, and has fine-grained controls. Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
-
-* Durability: Set replication through policy, using the High Availability setting.
- * Each write is synchronously replicated to a quorum set of nodes.
- * Any hardware failure means that the replicated volume has the latest acknowledged writes.
-* Elastic: Add capacity and throughput at each layer, at any time.
- * Volumes are thinly provisioned, only using capacity as needed by the container.
-  * You can expand and contract the volume's maximum size, even after data has been written to the volume.
-
-A volume can be created before use by its container or by the container directly at runtime. Creating a volume returns the volume's ID. This same volume ID is returned in Docker commands (such as `Docker volume ls`) as is shown in `pxctl` commands.
-
->**Note:**<br/>Portworx recommends generally creating volumes "in-band" through `docker volume create`. Employing mixed modes for volume management, including creation, is not generally recommended.
-
-Example of creating a volume through `pxctl`, where the volume ID is returned:
-
- ```
- # pxctl volume create foobar
-  3903386035533561360
- ```
-
-Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
-
- * Throughput is set by the Class of Service setting. Throughput capacity is pooled.
-  * Adding a node to the cluster expands the available throughput for reads and writes.
-  * The best node is selected to service reads, whether that read is from a local storage devices or another node's storage devices.
-  * Read throughput is aggregated, where multiple nodes can service one read request in parallel streams.
-* Fine-grained controls: Policies are specified per volume and give full control to storage.
- * Policies enforce how the volume is replicated across the cluster, IOPs priority, filesystem, blocksize, and additional parameters described below.
- * Policies are specified at create time and can be applied to existing volumes.
-
-Set policies on a volume through the options parameter. Or, set policies through a Docker Compose file. Using a Kubernetes Pod spec is slated for a future release.
-
-Show the available options through the --help command, as shown below:
-
-```
-# pxctl volume create --help
-NAME:
-   pxctl volume create - Create a volume
-
-USAGE:
-   pxctl volume create [command options] [arguments...]
-
-OPTIONS:
-   --shared                             Specify --shared to make this a globally shared namespace volume
-   --label value, -l value              Comma separated name=value pairs, e.g name=sqlvolume,type=production
-   --size value, -s value               specify size in GB (default: 1)
-   --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --seed value                         optional data that the volume should be seeded with
-   --block_size value, -b value         block size in Kbytes (default: 32)
-   --repl value, -r value               replication factor [1..3] (default: 1)
-   --cos value                          Class of Service: [1..3] (default: 1)
-   --snap_interval value, --si value    snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily value, --sd value            daily snapshot at specified hh:mm (default: 00:00)
-   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm (default: Sunday@00:00)
-   --monthly value, --sm value          monthly snapshot at specified day@hh:mm (default: 1@00:00)
-   --aggregation_level value, -a value  aggregation level: [1..3] (default: 1)
-   --nodes value                        Comma seprated Node Id(s)
-```
-
-## Global Namespace (Shared Volumes)
-
-To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](shared-volumes.html).
-
-## `pxctl` Command Line Help
-
+### Command Line Help
 ```
 # pxctl help
 NAME:
@@ -211,20 +92,192 @@ GLOBAL OPTIONS:
    --version, -v  print the version
 ```
 
-## Volumes with Docker
+## Manage storage volumes
+To create and manage volumes, use `pxctl volume`.  You can use the created volumes directly with Docker with the `-v` option.
 
-All `docker volume` commands are reflected into Portworx storage. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
+The pxctl volume CLI is documented in detail [here](create-manage-storage-volumes.html)
 
-```
-# docker volume create -d pxd --name <volume_name>
-```
-
-As part of the `docker volume` command, you can add optional parameters through the `--opt` flag. The option parameters are the same, whether you use Portworx storage through the Docker volume or the `pxctl` commands.
-
-Example of options for selecting the container's filesystem and volume size:
+## Cluster operations
+The PX cluster can be inspected and managed from any node in the cluster using the `pxctl cluster` CLI sub menu:
 
 ```
-  docker volume create -d pxd --name <volume_name> --opt fs=ext4 --opt size=10G
+# pxctl cluster -h
+NAME:
+   pxctl cluster - Manage the cluster
+
+USAGE:
+   pxctl cluster command [command options] [arguments...]
+
+COMMANDS:
+     list, l              List nodes in the cluster
+     inspect, i           Inspect a node
+     delete, d            Delete a node
+     alerts, a            Show cluster wide alerts
+     node-alerts          Show node related alerts
+     provision-status, p  Show cluster provision status
+     drive-alerts         Show drive related alerts
+
+OPTIONS:
+   --help, -h  show help
 ```
 
-For more on Docker volumes, refer to  [https://docs.docker.com/engine/reference/commandline/volume_create/](https://docs.docker.com/engine/reference/commandline/volume_create/).
+Example of `cluster list` for a three node cluster:
+
+```
+# pxctl cluster list
+Cluster ID: 04c58dcf-c831-4e90-8476-4c6ff69e6a14
+Status: OK
+
+Nodes in the cluster:
+ID     					DATA IP		CPU    		MEM TOTAL      	MEM FREE       	CONTAINERS     	STATUS
+d0479845-ac95-4dee-aa51-bac2daf22c04   	10.0.0.141     	0.03125		33 GB  		31 GB  		N/A    		Online
+374d95fa-ffab-4f3c-b06d-ae6cfd2cf0f9   	10.0.0.109     	0.04686		33 GB  		32 GB  		N/A    		Online
+273e4389-8368-478f-8ef6-033346ad162c   	10.0.0.84      	0.031245       	33 GB  		32 GB  		N/A    		Online
+```
+
+Example of inspecting a node in the cluster in `json` format
+
+```
+# pxctl -j cluster inspect 5533acd1-655e-4247-a780-3272bfc863fd
+```
+
+```json
+{
+ "Id": "5533acd1-655e-4247-a780-3272bfc863fd",
+ "Cpu": 4.5,
+ "MemTotal": 8369946624,
+ "MemUsed": 643772416,
+ "MemFree": 7726174208,
+ "Avgload": 0,
+ "Status": 2,
+ "GenNumber": 1482001398854514045,
+ "Disks": null,
+ "MgmtIp": "172.31.8.91",
+ "DataIp": "172.31.8.91",
+ "Timestamp": "2016-12-17T19:17:57.67877491Z",
+ "StartTime": "2016-12-17T19:03:18.854698639Z",
+ "Hostname": "ip-172-31-8-91",
+ "NodeData": {
+  "STORAGE-INFO": {
+   "LastError": "",
+   "Random4KIops": 0,
+   "ReadThroughput": 0,
+   "ResourceMdUUID": "",
+   "ResourceUUID": "",
+   "Resources": {
+    "0:1": {
+     "id": "1",
+     "last_scan": {
+      "nanos": 4.14873566e+08,
+      "seconds": 1.482001405e+09
+     },
+     "medium": 1,
+     "online": true,
+     "path": "/dev/xvdb",
+     "rotation_speed": "Unknown",
+     "seq_write": 1.1079e+07,
+     "size": 1.073741824e+12,
+     "used": 2.168958484e+09
+    }
+   },
+   "ResourcesCount": 1,
+   "ResourcesLastScan": "Resources Scan OK",
+   "ResourcesMd": null,
+   "ResourcesMdCount": 0,
+   "ResourcesMdLastScan": "",
+   "Status": "Up",
+   "TotalSize": 1.073741824e+12,
+   "Used": 0,
+   "WriteThroughput": 0
+  },
+  "STORAGE-RUNTIME": {
+   "MID": "5533acd1-655e-4247-a780-3272bfc863fd",
+   "PoolUsage": {
+    "0": {
+     "TotalAllocated": 1.245540516e+09
+    }
+   },
+   "Usage": {
+    "TotalAllocated": 1.245540516e+09
+   }
+  },
+  "storage_stats": {
+   "Cpu": 4.5,
+   "DiskAvail": 1.071572865516e+12,
+   "DiskTotal": 1.073741824e+12,
+   "DiskUtil": 2.168958484e+09,
+   "Memory": 7,
+   "PendingIo": 0
+  }
+ },
+ "NodeLabels": {
+  "City": "San Jose",
+  "Country": "United States",
+  "Data IP": "172.31.8.91",
+  "ISP": "Amazon",
+  "ISP IP": "54.67.4.138",
+  "LAT": "3.73394E+01",
+  "LNG": "-1.21895E+02",
+  "Managemet IP": "172.31.8.91",
+  "Node Count Limit": "3",
+  "PX Version": "1.2.0-136e7d1",
+  "Region": "CA",
+  "Timezone": "America/Los_Angeles",
+  "Zip": "95141"
+ }
+}
+```
+
+Note the usage of the `-j` flag.
+
+## Service mode operations
+The PX cluster can be serviced using the `pxctl service` sub menu.
+
+```
+# pxctl service
+NAME:
+   pxctl service - Service mode utilities
+
+USAGE:
+   pxctl service command [command options] [arguments...]
+
+COMMANDS:
+     exit, e         Stop the PX daemon
+     info, i         Show PX module version information
+     call-home       Enable or disable the call home feature
+     logs            Display PX logs
+     diags, d        creates a new tgz package with minimal essential diagnostic information.
+     maintenance, m  Maintenance mode operations
+     drive           Storage drive maintenance
+     scan            scan for bad blocks
+     alerts          System alerts
+     stats           System stats
+
+OPTIONS:
+   --help, -h  show help
+```
+
+When there is an operational failure, you can use `pxctl service diags <name-of-px-container>` to generate a complete diagnostics package.  This package will be automatically uploaded to Portworx.  Additionally, the service package can be mailed to Portworx at support@portworx.com.  The package will be available at  `/tmp/diags.tgz` inside the PX container.  You can use `docker cp` to extract the diagnostics package.
+
+You can manage the physical storage drives on a node using the `pxctl service drive` sub menu.
+
+```
+# pxctl service drive
+NAME:
+   pxctl service drive - Storage drive maintenance
+
+USAGE:
+   pxctl service drive command [command options] [arguments...]
+
+COMMANDS:
+     show           Show drives
+     add            Add storage
+     replace        Replace source drive with target drive
+     rebalance, rs  Rebalance storage
+
+OPTIONS:
+   --help, -h  show help
+```
+
+To rebalance the storage across the drives, use `pxctl service drive rebalance`.  This is useful after prolonged operation of a node.
+
