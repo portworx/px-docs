@@ -46,7 +46,7 @@ OPTIONS:
 
 Here is a typical workflow on how to identify and replace drives. 
 
-Show the list of drives in the system
+## Show the list of drives in the system
 
 ```
 /opt/pwx/bin/pxctl service drive show
@@ -66,31 +66,26 @@ Pool ID: 1
 	Has meta data: Yes
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
-Drive add 
-
 ```
 ## Add drives to the cluster
 
 ### Step 1: Enter Maintenance Mode 
 
 ```
-
 /opt/pwx/bin/pxctl service  maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 PX is not running on this host.
-
 ```
 
 ### Step 2: Add drive to the system
 
-Add drive /dev/sdb to px
+For e.g., Add drive /dev/sdb to PX cluster
 
 ```
 /opt/pwx/bin/pxctl service drive add /dev/sdb
 Adding device  /dev/sdb ...
 Drive add  successful. Requires restart (Exit maintenance mode).
-
 ```
 
 ### Step 3: Exit Maintenance mode 
@@ -98,7 +93,6 @@ Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit
 PX is now operational
-
 ```
 
 Check if the drive is added using drive show command
@@ -122,8 +116,6 @@ Pool ID: 1
 	Has meta data: Yes
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
-
-
 ```
 
 ## Replace a drive that is already part of the Portworx Cluster
@@ -136,7 +128,6 @@ This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 
 PX is not running on this host.
-
 ```
 
 ### Step 2: Replace old drive with a new drive
@@ -146,10 +137,12 @@ Ensure the replacement drive is already available in the system.
 For e.g., Replace drive /dev/sde with /dev/sdc
 
 ```
-
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
 "Replace operation is in progress"
+```
 ​Check the replace status​
+
+```
 /opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
 "Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
 ```
@@ -160,7 +153,6 @@ For e.g., Replace drive /dev/sde with /dev/sdc
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit
 PX is now operational
-
 ```
 
 ### Step 4: Check if the drive has been successfully replaced
@@ -183,6 +175,5 @@ Pool ID: 1
 	Has meta data: Yes
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
-
 ```
 
