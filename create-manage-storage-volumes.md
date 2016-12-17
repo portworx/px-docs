@@ -33,7 +33,7 @@ OPTIONS:
 
 ## `volume create` and Options
 
-Storage is durable, elastic, and has fine-grained controls. Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
+Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
 
 * Durability: Set replication through policy, using the High Availability setting.
  * Each write is synchronously replicated to a quorum set of nodes.
@@ -43,8 +43,6 @@ Storage is durable, elastic, and has fine-grained controls. Portworx creates vol
   * You can expand and contract the volume's maximum size, even after data has been written to the volume.
 
 A volume can be created before use by its container or by the container directly at runtime. Creating a volume returns the volume's ID. This same volume ID is returned in Docker commands (such as `Docker volume ls`) as is shown in `pxctl` commands.
-
->**Note:**<br/>Portworx recommends generally creating volumes "in-band" through `docker volume create`. Employing mixed modes for volume management, including creation, is not generally recommended.
 
 Example of creating a volume through `pxctl`, where the volume ID is returned:
 
@@ -63,7 +61,7 @@ Throughput is controlled per container and can be shared. Volumes have fine-grai
  * Policies enforce how the volume is replicated across the cluster, IOPs priority, filesystem, blocksize, and additional parameters described below.
  * Policies are specified at create time and can be applied to existing volumes.
 
-Set policies on a volume through the options parameter. Or, set policies through a Docker Compose file. Using a Kubernetes Pod spec is slated for a future release.
+Set policies on a volume through the options parameter.  These options can also be passed in through the scheduler or using the [inline volume spec](create-manage-storage-volumes.html#inline-volume-spec).
 
 Show the available options through the --help command, as shown below:
 
