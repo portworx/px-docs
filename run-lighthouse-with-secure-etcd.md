@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Run Lighthouse"
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
+title: "Run Lighthouse with Secure etcd"
+keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse, secure, etcd
 sidebar: home_sidebar
 ---
 
