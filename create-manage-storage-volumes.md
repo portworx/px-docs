@@ -281,3 +281,5 @@ OPTIONS:
    --help, -h  show help
 ```
 
+Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`.
+

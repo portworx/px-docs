@@ -147,7 +147,7 @@ entries:
   - title: CLI and API Reference
     output: web
     folderitems:
-    - title: pxctl CLI Reference
+    - title: CLI Reference
       url: /cli-reference.html
       output: web
     - title: config.json definition
