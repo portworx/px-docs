@@ -31,8 +31,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-## `volume create` and Options
-
+## Create volumes
 Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
 
 * Durability: Set replication through policy, using the High Availability setting.
@@ -90,12 +89,7 @@ OPTIONS:
    --nodes value                      Comma seprated Node Id(s)
 ```
 
-### Global Namespace (Shared Volumes)
-
-To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](shared-volumes.html).
-
-## Volumes with Docker
-
+### Create with Docker
 All `docker volume` commands are reflected into Portworx storage. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
 
 ```
@@ -111,7 +105,6 @@ Example of options for selecting the container's filesystem and volume size:
 ```
 
 ## Inline volume spec
-
 PX supports passing the volume spec inline along with the volume name.  This is useful when creating a volume with your scheduler application template inline and you do not want to create volumes before hand.
 
 For example, a PX inline spec can be specified as the following:
@@ -154,36 +147,137 @@ These inline specs can be passed in through the scheduler application template. 
 	}],
 ```
 
-## Volumes with the PX Enterprise console
+## Global Namespace (Shared Volumes)
+To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](shared-volumes.html).
 
-To create volumes from the PX Enterprise console, click **Storage** and then click **+**New next to **VOLUMES**.
+## Inspect volumes
+Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.
 
-![Create a storage volume](images/storage-actions-updated.png "Create a storage volume")
+```
+# pxctl volume inspect v1
+Volume  :  774553971874590484
+        Name                     :  v1
+        Size                     :  1000 GiB
+        Format                   :  ext4
+        HA                       :  1
+        IO Priority              :  LOW
+        Shared                   :  no
+        Status                   :  up
+        State                    :  Attached: 5533acd1-655e-4247-a780-3272bfc863fd
+        Device Path              :  /dev/pxd/pxd774553971874590484
+        Reads                    :  94
+        Reads MS                 :  0
+        Bytes Read               :  606208
+        Writes                   :  2448
+        Writes MS                :  1842492
+        Bytes Written            :  158642176
+        IOs in progress          :  0
+        Bytes used               :  139 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  172.31.8.91
+                Set  1
+                        Node     :  172.12.8.92
+```
 
-In the **Configure Your Volume** page, specify these settings and then click **Create** to create a volume.
+You can also inspect multiple volumes in one command.
 
-|Setting|Description|
-|---|---|
-|Shared|Indicates whether this volume can be shared concurrently with multiple containers and/or accessed externally via NFS. Defaults to **OFF**.|
-|Provisioned Capacity|The volume size: GB (default) or TB.|
-|Filesystem|The file system type:  **ext4** (default), **xfs**, or **None**.|
-|Block Size|The file system block size: **4K**, **8K**, **32K**, **64K**(default)|
-|Availability Level|The number of nodes used to replicate volume data for availability.|
-|IOPS Priority|The class of service for performance, using the various available tiers.|
-|Snapshot Interval|The number of hours between automatic snapshots taken for crash-consistent volume recovery.|
-|Volume Labels|Specific labels or name/value pairs for coordination with orchestration engines.|
-|Count|The number of volumes to create simultaneously.|
+To inspect the volume in `json` format:
 
-![Configure a storage volume](images/configure-volume-updated.png "Configure a storage volume")
+```
+# pxctl -j volume inspect v1
+```
 
-To manage an existing volume, go to the **Storage** page and select the volume.
+```json
+[{
+ "id": "774553971874590484",
+ "source": {
+  "parent": "",
+  "seed": ""
+ },
+ "readonly": false,
+ "locator": {
+  "name": "v1"
+ },
+ "ctime": "2016-12-17T18:47:07Z",
+ "spec": {
+  "ephemeral": false,
+  "size": "1073741824000",
+  "format": "ext4",
+  "block_size": "32768",
+  "ha_level": "1",
+  "cos": "low",
+  "dedupe": false,
+  "snapshot_interval": 0,
+  "shared": false,
+  "replica_set": {
 
-* In the **Details** area, view all attributes as well as any referencing containers and nodes used for replication, as shown in the following sample.
+  },
+  "aggregation_level": 1,
+  "encrypted": false,
+  "passphrase": "",
+  "snapshot_schedule": ""
+ },
+ "usage": "145285120",
+ "last_scan": "2016-12-17T18:47:07Z",
+ "format": "ext4",
+ "status": "up",
+ "state": "attached",
+ "attached_on": "5533acd1-655e-4247-a780-3272bfc863fd",
+ "device_path": "/dev/pxd/pxd774553971874590484",
+ "attach_path": [
+  "/var/lib/osd/mounts/v1"
+ ],
+ "replica_sets": [
+  {
+   "nodes": [
+    "5533acd1-655e-4247-a780-3272bfc863fd"
+   ]
+  }
+ ],
+ "error": "",
+ "runtime_state": [
+  {
+   "runtime_state": {
+    "FullResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+    "ID": "0",
+    "ReadQuorum": "1",
+    "ReadSet": "[0]",
+    "ReplicaSetCurr": "[0]",
+    "ReplicaSetNext": "[0]",
+    "ResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
+    "RuntimeState": "clean",
+    "TimestampBlocksPerNode": "[0 0 0 0 0]",
+    "TimestampBlocksTotal": "0",
+    "WriteQuorum": "1",
+    "WriteSet": "[0]"
+   }
+  }
+ ],
+ "secure_device_path": "",
+ "background_processing": false
+}]
+```
 
-* In the **Actions** area, you can clone (or snapshot), edit or delete a volume.
+Note the use of the `-j` flag.
 
-![Manage a storage volume](images/storage-details-updated.png "Manage a storage volume")
+## Volume snapshots
+You can take snapshots of PX volumes.  Snapshots are thin and do not take additional space.  PX snapshots use branch-on-write so that there is no additional copy when a snapshot is written to.  This is done through B+ Trees.
 
-* **Edit Volume** lets you change availibility level and snapshot interval of an existing volume.
+```
+# pxctl snap -h
+NAME:
+   pxctl snap - Manage volume snapshots
 
-![Edit a storage volume](images/edit-volume.png "Edit a storage volume")
+USAGE:
+   pxctl snap command [command options] [arguments...]
+
+COMMANDS:
+     create, c  Create a volume snapshot
+     list, l    List volume snapshots in the cluster
+     delete, d  Delete a volume snapshot
+
+OPTIONS:
+   --help, -h  show help
+```
+
