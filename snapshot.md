@@ -79,12 +79,14 @@ format is `<parent-ID>.snap-<creation-time>`, for example,
 
 Each snapshot is a volume and can be used like any other volume.
 For instance, you can attach it and can create snapshots of it:
+
 ```
 # pxctl host attach mysnap
 Volume successfully attached at: /dev/pxd/pxd1152602487227170184
 # pxctl snap create --name mysnap_jr mysnap
 Volume successfully snapped: 1312421116276761727
 ```
+
 However, snapshots do not appear in the output of `pxctl volume list`.
 To list them, use `pxctl snap list`. As with other volumes, you can
 use `pxctl volume inspect` to see more detailed information.
