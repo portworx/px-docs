@@ -25,6 +25,7 @@ https://medium.com/@gargar454/coreos-etcd-and-fleet-with-encryption-and-authenti
 #### Step #3: Run the PX-Lighthouse container
 
 For **ETCD2**, start the container with the following run command:
+
 ```
 Sudo docker run -d -p 80:80 -v /etc/ssl:/etc/pwx --restart always  \
 -e PWX_KVDB_CA_PATH="/etc/ssl/ca.crt"                              \
