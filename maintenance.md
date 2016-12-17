@@ -70,6 +70,7 @@ Pool ID: 1
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
+
 ## Add drives to the cluster
 
 ### Step 1: Enter Maintenance Mode 
