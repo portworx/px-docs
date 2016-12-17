@@ -12,11 +12,11 @@ entries:
     - title: Welcome to Portworx Docs
       url: /index.html
       output: web
-    - title: Get Started with PX-Enterprise
-      url: /get-started-px-enterprise.html
-      output: web
     - title: Get Started with PX-Developer
       url: /get-started-px-developer.html
+      output: web
+    - title: Get Started with PX-Enterprise
+      url: /get-started-px-enterprise.html
       output: web
   - title: Architecture
     output: web
