@@ -24,7 +24,7 @@ Lighthouse supports etcd2 auth features
 #### Step #2: Enable auth in etcd
 
 
-* You can enable authentication in etcd, using this [guide](https://coreos.com/etcd/docs/latest/authentication.html)
+* You can enable authentication in etcd, using the guide [here](https://coreos.com/etcd/docs/latest/authentication.html)
 
 
 #### Step #3: Run the PX-Lighthouse container
