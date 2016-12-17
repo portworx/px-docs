@@ -11,7 +11,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 
 ### Key Features
 
-* Support for authenticated etcd2. Refer to [link]
+* Support for authenticated etcd2. Refer to [Lighthouse with Secure etcd] (http://docs.portworx.com/run-lighthouse-with-secure-etcd.html)
 
 ### Known issues
 
