@@ -67,7 +67,9 @@ You can now run PX via the Docker CLI as follows:
                 portworx/px-enterprise -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
-Where the following arguments are provided to the PX daemon:
+>**Note:**<br/>For Lighthouse users, when you create a cluster in the Lighthouse console, Lighthouse will craft the above command with the correct values for the KVDB and cluster ID.
+
+The following arguments are provided to the PX daemon:
 
 ```
 -daemon
