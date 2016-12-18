@@ -8,7 +8,7 @@ To install and configure PX via the Docker CLI, use the command-line steps in th
 
 >**Important:**<br/>You must be granted access to the PX-Enterprise container on the Docker hub.  Please contact support@portworx.com if you need a license key.
 
-### Key Value DB for metadata
+### Lighthouse
 If you are using the SaaS version of the PX-Enterprise Lighthouse, then we are hosting your metadata for cloud analytics and a GUI interface to manage your cluster.  Please make sure you received the correct token from support@portworx.com.
 
 >**Important:**<br/>If you are *NOT* using the Portworx hosted SaaS service for management, then note that PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](run-etcd.md) for PX
