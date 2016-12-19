@@ -10,7 +10,7 @@ sidebar: home_sidebar
 We recommend that you run etcd in a container
 
 ```
-# docker run --name etcd -ti --net host elcolio/etcd
+# docker run --name etcd --net host elcolio/etcd
 
 2016/05/14 05:01:21 etcdserver: published {Name:default ClientURLs:[http://localhost:2379 http://localhost:4001]} to cluster 7e27652122e8b2ae
 ```
