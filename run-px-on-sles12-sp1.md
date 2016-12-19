@@ -33,7 +33,7 @@ sidebar: home_sidebar
   /dev/sdb
   /dev/sdc
   ```
-  8. Create PX configuration folder and file 
+  8. Create PX configuration folder and file, in the following the etcd host is running on 10.201.100.161 
   ```
   mkdir -p /etc/pwx   cat  << EOF  > /etc/pwx/config.json
   {  
@@ -52,11 +52,10 @@ sidebar: home_sidebar
   ```
   9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
   ```
-  zypper install kernel-headers
+  
   zypper install kernel-devel
-  zypper install kernel-source
   zypper install kernel-syms
-  zypper install module-init-tools 
+  
   ```
   
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
