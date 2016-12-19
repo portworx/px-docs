@@ -1,3 +1,10 @@
+---
+layout: page
+title: "Run on SLES 12 SP1"
+keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP1
+sidebar: home_sidebar
+---
+
 # Install PX container on SLES (SuSe Enterpise Linux) 12SP1
 
   1. disable suse firewall
