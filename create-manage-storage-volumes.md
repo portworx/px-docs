@@ -78,7 +78,6 @@ OPTIONS:
    --label value, -l value            Comma separated name=value pairs, e.g name=sqlvolume,type=production
    --size value, -s value             specify size in GB (default: 1)
    --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --seed value                       optional data that the volume should be seeded with
    --block_size value, -b value       block size in Kbytes (default: 32)
    --repl value, -r value             replication factor [1..3] (default: 1)
    --io_priority value                IO Priority: [high|medium|low] (default: "low")
@@ -193,7 +192,6 @@ To inspect the volume in `json` format:
  "id": "774553971874590484",
  "source": {
   "parent": "",
-  "seed": ""
  },
  "readonly": false,
  "locator": {
