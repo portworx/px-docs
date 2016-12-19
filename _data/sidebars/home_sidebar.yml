@@ -42,6 +42,9 @@ entries:
     - title: Run Lighthouse
       url: /run-lighthouse.html
       output: web
+    - title: Run on SLES 12 SP1
+      url: /run-px-on-slex12.sp1.html
+      output: web
     - title: Run Lighthouse with Secure etcd
       url: /run-lighthouse-with-secure-etcd.html
       output: web
