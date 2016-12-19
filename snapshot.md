@@ -41,16 +41,20 @@ A typical example looks like this:
 # pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
 Volume successfully snapped: 1152602487227170184
 ```
-
-The parent volume, `myvol`, must be attached for this command
-to succeed.
-
 The string of digits in the output is the volume ID of the new
 snapshot.  You can use this ID or the name, `mysnap`, to refer
 to the snapshot in subsequent `pxctl` commands.  The label values
 allow you to tag the snapshot with descriptive information of
 your choosing.  You can use them to filter the output of the
 `pxctl snap list` command, as described below.
+
+The parent volume, `myvol`, must be attached and all nodes that
+contain volume data must be accessible in order for this command
+to succeed.  If these conditions do not hold, the system will try
+creating a snapshot 10 minutes later and keep retrying until it
+succeeds.  The resulting snapshot will not have the name specified
+in your command, but will have a name of the form
+`<parent-ID>.auto<creation-time>`.
 
 Here is the synopsis for `pxctl snap create`:
 
