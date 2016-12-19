@@ -59,7 +59,7 @@ sidebar: home_sidebar
   ```
   
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
-  **Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
+  Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
   ```
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/generated /usr/src/linux-3.12.67-60.64.21/include/generated
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/config /usr/src/linux-3.12.67-60.64.21/include/config
