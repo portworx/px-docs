@@ -31,7 +31,7 @@ For CentOS
     -v /var/cores:/var/cores \
     -v /var/lib/kubelet:/var/lib/kubelet:shared \
     --ipc=host \
-    portworx/px-dev:latest
+    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 For CoreOS
@@ -50,7 +50,7 @@ sudo docker run --restart=always --name px -d --net=host \
   -v /var/lib/kubelet:/var/lib/kubelet:shared \
   -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \
   --ipc=host                                    \
-  portworx/px-dev:latest
+  portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
