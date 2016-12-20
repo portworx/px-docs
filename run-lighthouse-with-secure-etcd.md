@@ -116,8 +116,8 @@ The following environment variables are available for px-lighthouse:
 PWX_KVDB                    KVDB URL:PORT without username:password
 PWX_KVDB_AUTH               'true' or 'false', to enable or disable auth 
 PWX_KVDB_CA_PATH            Absolute path to host ca cert(e.g. /etc/ssl/ca.crt)
-PWX_KVDB_USER_CERT_KEY_PATH Absolute path to host's certificate file (e.g. /etc/pwd/key.cert)
-PWX_KVDB_USER_CERT_PATH     Absolute path to host's private key (e.g. /etc/pwd/key.key)
+PWX_KVDB_USER_CERT_KEY_PATH Absolute path to host's certificate file (e.g. /etc/ssl/key.cert)
+PWX_KVDB_USER_CERT_PATH     Absolute path to host's private key (e.g. /etc/ssl/key.key)
 PWX_KVDB_USER_PWD           Username and password for etcd2 as username:password
 PWX_INFLUXDB                Influx URL:PORT without username:password
 PWX_INFLUXUSR               Influx username
