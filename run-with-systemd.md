@@ -37,7 +37,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true  \
   -v /usr/src:/usr/src                                      \
   --ipc=host                                                \
   --name=px-enterprise                                      \
-  -d portworx/px-enterprise
+  -d portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 KillMode=control-group
 ExecStop=/usr/bin/docker stop -t 10 px-enterprise
 
