@@ -14,6 +14,7 @@ with the following options:
 
 + -t <token> token that was provided in email (or arbitrary clusterID)
 + -s <device> of the form /dev/sda, repeat for multiple devices
++ -z indicates a "head-only" node that contributes no local storage
 + -d <data_network_interface> of the form eth0 - (optional)
 + -m <management_network_interface> of the form eth0 - (optional)
 + -k <key_value_store> of the form [etcd|consul]://<IP>:<port|4001> - (optional)
@@ -69,4 +70,6 @@ docker run --restart=always --name px-enterprise -d \
 ```
 
 The "-t" argument will correspond to the token from an on-prem Lighthouse and should be the same for all nodes participating in the same cluster.  In this case, the **"-k"** argument should point to an existing on-prem version of **etcd** or **consul**.
+
+One of the **-z**, or **-a** or the **-s <drive>** options must be specified.
 
