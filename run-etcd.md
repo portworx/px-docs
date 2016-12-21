@@ -10,7 +10,7 @@ sidebar: home_sidebar
 We recommend that you run etcd in a container
 
 ```
-# docker run --name etcd -d --net host quay.io/coreos/etcd
+# docker run -d --name etcd --net host --entrypoint=/usr/local/bin/etcd  quay.io/coreos/etcd:latest --listen-peer-urls 'http://0.0.0.0:2380' --listen-client-urls 'http://0.0.0.0:2379' --advertise-client-urls 'http://<your ip>:2379'
 
 2016/05/14 05:01:21 etcdserver: published {Name:default ClientURLs:[http://localhost:2379]} to cluster 7e27652122e8b2ae
 ```
