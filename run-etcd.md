@@ -10,10 +10,12 @@ sidebar: home_sidebar
 We recommend that you run etcd in a container
 
 ```
-# docker run --name etcd -d --net host elcolio/etcd
+# docker run --name etcd -d --net host quay.io/coreos/etcd
 
-2016/05/14 05:01:21 etcdserver: published {Name:default ClientURLs:[http://localhost:2379 http://localhost:4001]} to cluster 7e27652122e8b2ae
+2016/05/14 05:01:21 etcdserver: published {Name:default ClientURLs:[http://localhost:2379]} to cluster 7e27652122e8b2ae
 ```
+
+Note that the etcd port is 2379.
 
 For complete instructions, please visit the [Etcd installation documentation](https://coreos.com/etcd/docs/latest/v2/docker_guide.html)
 
