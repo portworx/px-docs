@@ -124,7 +124,19 @@ The following is a sample JSON file that can be used to launch Portworx through 
         "-s /dev/sdb",
         "-m enp0s3",
         "-d enp0s3"
-    ]
+    ],
+    "healthChecks": [
+     {
+       "protocol": "COMMAND",
+       "command": { "value": "curl -X GET http://$HOST:9001/status"},
+       "portIndex": 0,
+       "gracePeriodSeconds": 300,
+       "intervalSeconds": 60,
+       "timeoutSeconds": 20,
+       "maxConsecutiveFailures": 3,
+       "ignoreHttp1xx": false
+   }
+  ]
 }
 ```
 
