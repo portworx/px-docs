@@ -35,18 +35,17 @@ sidebar: home_sidebar
      docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
 ```
   
-  7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
-  In this case, we have two extra disks 
+7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
+   In this case, we have two extra disks 
   
-  ```
+```
      /dev/sdb
      /dev/sdc
+```
   
-  ```
+8. Create PX configuration folder and file, in the following the etcd host is running on 10.201.100.161 
   
-  8. Create PX configuration folder and file, in the following the etcd host is running on 10.201.100.161 
-  
-  ```
+```
   mkdir -p /etc/pwx   cat  << EOF  > /etc/pwx/config.json
   {  
   "clusterid": "5ac2ed6f-7e4e-4e1d-8e8c-3a6df1fb61a5",
@@ -61,20 +60,20 @@ sidebar: home_sidebar
     }
   }
   EOF
-  ```
+```
   
-  9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
+9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
  
 ```
     zypper install kernel-devel
     zypper install kernel-syms
-  
+ 
 ```
   
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
   Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
   
-  ```
+```
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/generated /usr/src/linux-3.12.67-60.64.21/include/generated
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/config /usr/src/linux-3.12.67-60.64.21/include/config
   ln -s /usr/src/linux-3.12.67-60.64.21/arch/sh/include/uapi/asm/unistd_64.h /usr/src/linux-3.12.67-60.64.21/arch/x86/include/asm/unistd_64.h
@@ -85,9 +84,9 @@ sidebar: home_sidebar
   
   cp -p -r /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/Module.symvers /usr/src/linux/
   
-  ```
+```
   
-  9. Run PX container
+9. Run PX container
   
 ```
   sudo docker run --restart=always --name px -d --net=host --privileged=true \
@@ -104,15 +103,15 @@ sidebar: home_sidebar
   
 ```
   
-  10. Check PX container
+10. Check PX container
   
-  ```
+```
   docker ps -a
   docker logs px
   
-  ```
+```
   
-  11. If everything is OK; you can use pxctl commands 
+11. If everything is OK; you can use pxctl commands 
   
 ```
   suse01:/ # /opt/pwx/bin/pxctl status
@@ -135,18 +134,15 @@ sidebar: home_sidebar
   Total Used      :  2.2 GiB
   Total Capacity  :  128 GiB
   
-  ```
+```
   
-  12. Create a docker volume
+12. Create a docker volume
   
-  ```
+```
   docker volume create -d pxd --name demovolume1 --opt fs=ext4 --opt size=10G
   
-  ```
-  
-  ```
   suse01:/ # /opt/pwx/bin/pxctl volume list
   ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       COS             STATUS
   804850618821436883      demovolume1     10 GiB  1       no      no              COS_TYPE_LOW    up - detached
   
-  ```
+```
