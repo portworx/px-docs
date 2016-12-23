@@ -135,6 +135,9 @@ entries:
     - title: Deploying Jenkins with Portworx
       url: /jenkins.html
       output: web
+    - title: Create PX volume for NFS share
+      url: /share-vol-for-nfs.html
+      output: web
   - title: Reference Architectures
     output: web
     folderitems:
