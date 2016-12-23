@@ -5,7 +5,7 @@ keywords: portworx, px-developer, px-enterprise, install, configure, nfs, storag
 sidebar: home_sidebar
 ---
 
-This guide demonstrate Create a shared docker volume from PX and share it via NFS.
+This guide demonstrate creating a shared docker volume from PX and share it via NFS.
 In this setup, PX containers are running on three nodes (suse01, suse04, susue05).
 And the nfs clients are kabo1, kabo21. 
 
