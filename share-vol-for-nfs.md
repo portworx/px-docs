@@ -109,11 +109,14 @@ Below is the example of  /etc/exports  on node "suse01"
 
 ```
 
-#### Write a file on each nfs mount on both kabo1 and kabo2
+#### Testing NFS shares exported from shared PX volume
+
+Write a file on each nfs mount on both kabo1 and kabo2
 
 ```
 
    [root@kabo1 ~]# for h in 1 4 5 ; do echo "This is a test file 0$h" > /mnt/testmount$h/test-kabo1-file0$h ; done
+   
    [root@kabo2 ~]# for h in 1 4 5 ; do echo "This is another test file 0$h" > /mnt/testmount$h/test-kabo2-file0$h ; done
 
 ```
