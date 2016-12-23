@@ -5,41 +5,42 @@ keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP
 sidebar: home_sidebar
 ---
 
-  Disable suse firewall
+1. Disable suse firewall
   
-  ```
-      yast firewall  
-  ```
-  2. install docker module
+```
+      yast firewall  
+```
   
-  ```
-  zypper install docker
-  ```
+2. install docker module
   
-  3. start docker service  
+```
+     zypper install docker
+```
   
-  ```
-  sudo systemctl start docker
-  ```
+3. start docker service  
   
-  4. Enable docker service
+```
+     sudo systemctl start docker
+```
   
-  ```
-  sudo systemctl enable docker
-  ```
+4. Enable docker service
   
-  5. Set up etcd in one of the node; in here we use etcd container 
+```
+     sudo systemctl enable docker
+```
   
-  ```
-  docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
-  ```
+5. Set up etcd in one of the node; in here we use etcd container 
+  
+```
+     docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
+```
   
   7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
   In this case, we have two extra disks 
   
   ```
-  /dev/sdb
-  /dev/sdc
+     /dev/sdb
+     /dev/sdc
   
   ```
   
@@ -63,12 +64,12 @@ sidebar: home_sidebar
   ```
   
   9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
-  ```
+ 
+```
+    zypper install kernel-devel
+    zypper install kernel-syms
   
-  zypper install kernel-devel
-  zypper install kernel-syms
-  
-  ```
+```
   
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
   Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
@@ -87,7 +88,8 @@ sidebar: home_sidebar
   ```
   
   9. Run PX container
-  ```
+  
+```
   sudo docker run --restart=always --name px -d --net=host --privileged=true \
   -v /run/docker/plugins:/run/docker/plugins    \
   -v /var/lib/osd:/var/lib/osd:shared           \
@@ -99,7 +101,8 @@ sidebar: home_sidebar
   -v /usr/src:/usr/src                          \
   --ipc=host                                    \
   portworx/px-dev
-  ```
+  
+```
   
   10. Check PX container
   
@@ -111,7 +114,7 @@ sidebar: home_sidebar
   
   11. If everything is OK; you can use pxctl commands 
   
-  ```
+```
   suse01:/ # /opt/pwx/bin/pxctl status
   
   Status: PX is operational
