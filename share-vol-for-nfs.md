@@ -7,23 +7,23 @@ sidebar: home_sidebar
 
 This guide demonstrate creating a shared docker volume from PX and share it via NFS.
 In this setup, PX containers are running on three nodes (suse01, suse04, suse05).
-And the nfs clients are kabo1, kabo21. 
+And the nfs clients are kabo1, kabo2. 
 
-#### Create a shared volume using pxctl (do this on one of PX containers node e.g.  suse01).
+1. Create a shared volume using pxctl (do this on one of PX containers node e.g.  suse01).
 
 ```
    /opt/pwx/bin/pxctl volume create my_shared_vol --shared --size=5 --repl=3
 
 ```
 
-#### Attach the shared volume on one of the node running PX containers.
+2. Attach the shared volume on one of the node running PX containers.
 
 ```
    /opt/pwx/bin/pxctl host attach my_shared_vol
 
 ```
 
-#### Mount the shared volume locally using "pxctl host mount" on three of those nodes running PX containers.
+3. Mount the shared volume locally using "pxctl host mount" on three of those nodes running PX containers.
    
 on suse01 node
 
@@ -57,7 +57,7 @@ Use "df -kh" to check if shared volume is mounted on your specified mount point.
 
 ```   
    
-#### Display the shared volume from pxctl volume list showing status is attached on.
+4. Display the shared volume from pxctl volume list showing status is attached on.
 
 ```
    /opt/pwx/bin/pxctl volume list
@@ -66,7 +66,7 @@ Use "df -kh" to check if shared volume is mounted on your specified mount point.
 
 ```
 
-#### On the nodes suse01,04,05 edit /etc/exports and restart nfs server.
+5. On the nodes suse01,04,05 edit /etc/exports and restart nfs server.
 
 Below is the example of  /etc/exports  on node "suse01"
 
@@ -75,7 +75,7 @@ Below is the example of  /etc/exports  on node "suse01"
 
 ```
 
-#### Verify nfs exports are observed from client node kabo1.
+6. Verify nfs exports are observed from client node kabo1.
 
 ```
    [root@kabo1 ~]# for h in suse01 suse04 suse05; do showmount -e $h ; done
@@ -85,7 +85,7 @@ Below is the example of  /etc/exports  on node "suse01"
 
 ```
 
-#### Create three mount points on both kabo1, kabo2 and mount the nfs exports from three PX container hosts suse01, suse04, suse05.
+7. Create three mount points on both kabo1, kabo2 and mount the nfs exports from three PX container hosts suse01, suse04, suse05.
 
 ```
 
@@ -109,7 +109,7 @@ Below is the example of  /etc/exports  on node "suse01"
 
 ```
 
-#### Testing NFS shares exported from shared PX volume
+8. Testing NFS shares exported from shared PX volume
 
 Write a file on each nfs mount on both kabo1 and kabo2
 
