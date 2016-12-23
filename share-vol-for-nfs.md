@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "PX volume for NFS"
+title: "Create PX volume for NFS share"
 keywords: portworx, px-developer, px-enterprise, install, configure, nfs, storage, share, volume
 sidebar: home_sidebar
 ---
