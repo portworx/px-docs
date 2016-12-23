@@ -9,21 +9,21 @@ This guide demonstrate creating a shared docker volume from PX and share it via 
 In this setup, PX containers are running on three nodes (suse01, suse04, susue05).
 And the nfs clients are kabo1, kabo21. 
 
-1. create a shared volume using pxctl (do this on one of PX containers node e.g.  suse01)
+1. create a shared volume using pxctl (do this on one of PX containers node e.g.  suse01).
 
 ```
    /opt/pwx/bin/pxctl volume create my_shared_vol --shared --size=5 --repl=3
 
 ```
 
-2. Attach the shared volume on one of the node running PX containers
+2. Attach the shared volume on one of the node running PX containers.
 
 ```
    /opt/pwx/bin/pxctl host attach my_shared_vol
 
 ```
 
-3. Mount the shared volume locally using "pxctl host mount" on three of those nodes running PX containers
+3. Mount the shared volume locally using "pxctl host mount" on three of those nodes running PX containers.
    
 ### on suse01 node
 
@@ -48,7 +48,7 @@ And the nfs clients are kabo1, kabo21.
 
 ```   
 
-Use "df -kh" to check if shared volume is mounted on your specified mount point
+Use "df -kh" to check if shared volume is mounted on your specified mount point.
 
 ```   
    df -kh
@@ -66,7 +66,8 @@ Use "df -kh" to check if shared volume is mounted on your specified mount point
 
 ```
 
-5. On the PX container nodes (suse01, suse04, suse05), edit /etc/exports and restart nfsserver.
+5. On the PX container nodes suse01, suse04, suse05.
+   edit /etc/exports and restart nfsserver.
 
 Below is the example of  /etc/exports  on node "suse01"
 
