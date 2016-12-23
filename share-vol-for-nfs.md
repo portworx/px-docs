@@ -60,9 +60,9 @@ Use "df -kh" to check if shared volume is mounted on your specified mount point.
 Step4. Display the shared volume from pxctl volume list showing status is attached on.
 
 ```
-   /opt/pwx/bin/pxctl volume list
-   ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       PRIORITY        STATUS
-   689753078804469955      my_shared_vol   5 GiB   3       yes     no              LOW             up - attached on 10.201.100.155
+/opt/pwx/bin/pxctl volume list
+ID                    NAME            SIZE    HA    SHARED  ENCRYPTED    PRIORITY    STATUS
+689753078804469955    my_shared_vol   5 GiB   3     yes     no           LOW         up - attached on 10.201.100.155
 
 ```
 
