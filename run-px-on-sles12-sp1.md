@@ -107,11 +107,15 @@ sidebar: home_sidebar
   ```
   
   10. Check PX container
+  
   ```
   docker ps -a
   docker logs px
+  
   ```
+  
   11. If everything is OK; you can use pxctl commands 
+  
   ```
   suse01:/ # /opt/pwx/bin/pxctl status
   
@@ -132,13 +136,19 @@ sidebar: home_sidebar
   Global Storage Pool
   Total Used      :  2.2 GiB
   Total Capacity  :  128 GiB
+  
   ```
+  
   12. Create a docker volume
+  
   ```
   docker volume create -d pxd --name demovolume1 --opt fs=ext4 --opt size=10G
+  
   ```
+  
   ```
   suse01:/ # /opt/pwx/bin/pxctl volume list
   ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       COS             STATUS
   804850618821436883      demovolume1     10 GiB  1       no      no              COS_TYPE_LOW    up - detached
+  
   ```
