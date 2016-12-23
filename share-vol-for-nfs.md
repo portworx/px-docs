@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 
 This guide demonstrate creating a shared docker volume from PX and share it via NFS.
-In this setup, PX containers are running on three nodes (suse01, suse04, susue05).
+In this setup, PX containers are running on three nodes (suse01, suse04, suse05).
 And the nfs clients are kabo1, kabo21. 
 
 #### Create a shared volume using pxctl (do this on one of PX containers node e.g.  suse01).
