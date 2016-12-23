@@ -6,8 +6,10 @@ sidebar: home_sidebar
 ---
 
   1. disable suse firewall
+  
   ```
-   yast firewall
+  yast firewall
+  
   ```
   2. install docker module   
   ```
