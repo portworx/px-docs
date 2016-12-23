@@ -46,7 +46,7 @@ entries:
       url: /run-lighthouse-with-secure-etcd.html
       output: web
     - title: Run PX on SLES12 SP1
-      url :/run-px-on-sles12-sp1.md
+      url: /run-px-on-sles12-sp1.html
       output: web
   - title: Manage Volumes
     output: web
