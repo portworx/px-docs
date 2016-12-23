@@ -1,6 +1,7 @@
----layout: page
+---
+layout: page
 title: "PX volume for NFS"
-keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
+keywords: portworx, px-developer, px-enterprise, install, configure, nfs, storage, share, volume
 sidebar: home_sidebar
 ---
 
