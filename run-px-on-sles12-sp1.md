@@ -5,35 +5,51 @@ keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP
 sidebar: home_sidebar
 ---
 
-  ### 1. disable suse firewall
+  1. disable suse firewall
   
   ```
   yast firewall
   
   ```
-  2. install docker module   
+  2. install docker module
+  
   ```
   zypper install docker
+  
   ```
+  
   3. start docker service  
+  
   ```
   sudo systemctl start docker
+  
   ```
+  
   4. Enable docker service
+  
   ```
   sudo systemctl enable docker
+  
   ```
+  
   5. Set up etcd in one of the node; in here we use etcd container 
+  
   ```
   docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
+  
   ```
+  
   7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
-  In this case, we have two extra disks   
+  In this case, we have two extra disks 
+  
   ```
   /dev/sdb
   /dev/sdc
+  
   ```
+  
   8. Create PX configuration folder and file, in the following the etcd host is running on 10.201.100.161 
+  
   ```
   mkdir -p /etc/pwx   cat  << EOF  > /etc/pwx/config.json
   {  
@@ -50,6 +66,7 @@ sidebar: home_sidebar
   }
   EOF
   ```
+  
   9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
   ```
   
@@ -60,6 +77,7 @@ sidebar: home_sidebar
   
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
   Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
+  
   ```
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/generated /usr/src/linux-3.12.67-60.64.21/include/generated
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/include/config /usr/src/linux-3.12.67-60.64.21/include/config
@@ -70,7 +88,9 @@ sidebar: home_sidebar
   ln -s /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/scripts/mod/modpost /usr/src/linux-3.12.67-60.64.21/scripts/mod/modpost
   
   cp -p -r /usr/src/linux-3.12.67-60.64.21-obj/x86_64/default/Module.symvers /usr/src/linux/
+  
   ```
+  
   9. Run PX container
   ```
   sudo docker run --restart=always --name px -d --net=host --privileged=true \
