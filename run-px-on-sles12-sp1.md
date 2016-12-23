@@ -5,7 +5,7 @@ keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP
 sidebar: home_sidebar
 ---
 
-  1. disable suse firewall
+  ### 1. disable suse firewall
   
   ```
   yast firewall
