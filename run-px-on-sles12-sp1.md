@@ -8,35 +8,30 @@ sidebar: home_sidebar
   1. disable suse firewall
   
   ```
-  yast firewall
-  
+      yast firewall  
   ```
   2. install docker module
   
   ```
   zypper install docker
-  
   ```
   
   3. start docker service  
   
   ```
   sudo systemctl start docker
-  
   ```
   
   4. Enable docker service
   
   ```
   sudo systemctl enable docker
-  
   ```
   
   5. Set up etcd in one of the node; in here we use etcd container 
   
   ```
   docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
-  
   ```
   
   7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
