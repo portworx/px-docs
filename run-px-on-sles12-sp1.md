@@ -9,7 +9,6 @@ sidebar: home_sidebar
   
 ```
 yast firewall  
-
 ```
   
 ### Install docker module
