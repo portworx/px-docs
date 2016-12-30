@@ -75,7 +75,7 @@ entries:
     - title: CLI Reference
       url: /cli-reference.html
       output: web
-    - title: config.json definition
+    - title: Understanding config.json
       url: /config-json.html
       output: web
     - title: REST API Reference
