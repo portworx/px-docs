@@ -39,7 +39,7 @@ entries:
     - title: Run in 'Air-Gapped' Environments
       url: /run-air-gap.html
       output: web
-    - title: Run PX on SLES12 SP1
+    - title: Run PX on Suse
       url: /run-px-on-sles12-sp1.html
       output: web
   - title: Manage Volumes
