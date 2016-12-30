@@ -168,6 +168,9 @@ entries:
     - title: Run PX-Enterprise
       url: /get-started-px-enterprise.html
       output: web
+    - title: Launch via Lighthouse
+      url: /launch-via-lighthouse.html
+      output: web
   - title: Troubleshooting
     output: web
     folderitems:

@@ -1,16 +1,16 @@
 ---
 layout: page
-title: "Create a PX-Enterprise Cluster"
+title: "Launch PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
 ---
-PX-Enterprise is a multi-cluster storage system that provides and manages storage for containerized workloads which run on-premises and in public clouds.
+Lighthouse is a management and GUI service that allows you to create PX clusters and launch PX nodes to join your clusters.  You can then manage your PX clusters via the Lighthouse web interface.
 
-This section walks through installing and configuring a PX-Enterprise cluster. In this example, you run the PX-Enterprise Docker container on server nodes. Running the container enables PX-Enterprise to aggregate storage capacity and monitor hardware for degradation and failure. Server nodes are joined into a cluster for the sake of high availability. You can use direct attached disks, storage arrays, or cloud volumes for the underlying storage.
+This section walks through installing and configuring a PX-Enterprise cluster via Lighthouse. In this example, you run the PX-Enterprise Docker container on server nodes. Running the container enables PX-Enterprise to aggregate storage capacity and monitor hardware for degradation and failure. Server nodes are joined into a cluster for the sake of high availability. You can use direct attached disks, storage arrays, or cloud volumes for the underlying storage.
 
 ## Step 1: Provision a cluster in the PX-Enterprise console
 
-Log in to the PX-Enterprise console. If a cluster has not already been created for your account, click the **Manage Clusters** menu and then click **Manage Clusters**.
+Log in to the PX-Enterprise Lighthouse console. If a cluster has not already been created for your account, click the **Manage Clusters** menu and then click **Manage Clusters**.
 
 ![Manage Clusters menu](images/clusters-manage-clusters-menu-updated-2.png "Manage Clusters menu")
 
