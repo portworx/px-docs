@@ -8,7 +8,8 @@ sidebar: home_sidebar
 ### Disable suse firewall
   
 ```
-      yast firewall  
+yast firewall  
+
 ```
   
 ### Install docker module
