@@ -39,12 +39,6 @@ entries:
     - title: Run in 'air-gapped' environments
       url: /run-air-gap.html
       output: web
-    - title: Run Lighthouse
-      url: /run-lighthouse.html
-      output: web
-    - title: Run Lighthouse with Secure etcd
-      url: /run-lighthouse-with-secure-etcd.html
-      output: web
     - title: Run PX on SLES12 SP1
       url: /run-px-on-sles12-sp1.html
       output: web
@@ -168,8 +162,14 @@ entries:
     - title: Run PX-Enterprise
       url: /get-started-px-enterprise.html
       output: web
-    - title: Launch via Lighthouse
+    - title: Launch PX via Lighthouse
       url: /launch-via-lighthouse.html
+      output: web
+    - title: On Prem Lighthouse
+      url: /run-lighthouse.html
+      output: web
+    - title: Run Lighthouse with Secure etcd
+      url: /run-lighthouse-with-secure-etcd.html
       output: web
   - title: Troubleshooting
     output: web
