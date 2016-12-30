@@ -5,45 +5,46 @@ keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP
 sidebar: home_sidebar
 ---
 
-1. Disable suse firewall
+### Disable suse firewall
   
 ```
       yast firewall  
 ```
   
-2. install docker module
+### Install docker module
   
 ```
      zypper install docker
 ```
   
-3. start docker service  
+### Start docker service  
   
 ```
      sudo systemctl start docker
 ```
   
-4. Enable docker service
+### Enable docker service
   
 ```
      sudo systemctl enable docker
 ```
-  
-5. Set up etcd in one of the node; in here we use etcd container 
+
+### Set up etcd in one of the node 
   
 ```
      docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
 ```
   
-7. Check your local disk with lsblk, this system should minium have one extra disk for PX container.
-   In this case, we have two extra disks 
+### Check your local disks 
   
 ```
      /dev/sdb
      /dev/sdc
 ```
   
-8. Create PX configuration folder and file, in the following the etcd host is running on 10.201.100.161 
+### Create PX configuration folder and file 
+
+  In the following, the etcd host is running on 10.201.100.161 
   
 ```
   mkdir -p /etc/pwx   cat  << EOF  > /etc/pwx/config.json
@@ -62,14 +63,15 @@ sidebar: home_sidebar
   EOF
 ```
   
-9. Before running the PX container; make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
+### Check dependencies
+
+  Make sure you have kernel-headers, kernel-syms, module-init-tools, kernel-syms installed
  
 ```
     zypper install kernel-devel
     zypper install kernel-syms
  
 ```
-  
   Resolve some missing files issue. Due to some header files are in linux-obj folder.
   Depends on your installed kernel version, on SLES 12 SP1, the updated kernel version could be 3.12.67.60.64.24
   
@@ -86,7 +88,7 @@ sidebar: home_sidebar
   
 ```
   
-9. Run PX container
+### Run PX container
   
 ```
   sudo docker run --restart=always --name px -d --net=host --privileged=true \
@@ -103,7 +105,7 @@ sidebar: home_sidebar
   
 ```
   
-10. Check PX container
+### Check PX container
   
 ```
   docker ps -a
@@ -111,7 +113,7 @@ sidebar: home_sidebar
   
 ```
   
-11. If everything is OK; you can use pxctl commands 
+### Check cluster status 
   
 ```
   suse01:/ # /opt/pwx/bin/pxctl status
@@ -136,7 +138,7 @@ sidebar: home_sidebar
   
 ```
   
-12. Create a docker volume
+### Create a docker volume
   
 ```
   docker volume create -d pxd --name demovolume1 --opt fs=ext4 --opt size=10G
