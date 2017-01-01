@@ -35,7 +35,9 @@ yast firewall  
      docker run -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
 ```
   
-### Check your local disks 
+### Check your local disks.
+
+In this example, we would be using the following local disks for PX-Enterprise storage
   
 ```
      /dev/sdb
