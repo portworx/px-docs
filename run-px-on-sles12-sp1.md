@@ -5,6 +5,22 @@ keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP
 sidebar: home_sidebar
 ---
 
+### Check btrfs kernel module
+Ensure btrfs kernel module allow unsupported features.
+
+```
+cat /sys/module/btrfs/parameters/allow_unsupported
+```
+IF above output is Y and btrfs will allow unsupported features.
+Otherwise do the following to allow unsupported features on btrfs kenrel module
+
+Create a file named /etc/modprobe.d/btrfs.conf; then reboot the system to enable this.
+
+```
+cat /etc/modprobe.d/btrfs.conf
+options btrfs allow_unupported=1
+```
+
 ### Disable suse firewall
   
 ```
