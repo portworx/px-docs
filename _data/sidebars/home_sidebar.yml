@@ -38,7 +38,10 @@ entries:
       output: web
     - title: Run in 'Air-Gapped' Environments
       url: /run-air-gap.html
-      output: web
+      output: web  
+    - title: Run in SLES 12 SP1 Environments
+      url: /run-px-on-sles12-sp1.html
+      output: web 
   - title: Manage Volumes
     output: web
     folderitems:
