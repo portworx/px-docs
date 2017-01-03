@@ -52,7 +52,7 @@ Example of creating a volume through `pxctl`, where the volume ID is returned:
 
 Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
 
- * Throughput is set by the Class of Service setting. Throughput capacity is pooled.
+ * Throughput is set by the IO Priority setting. Throughput capacity is pooled.
   * Adding a node to the cluster expands the available throughput for reads and writes.
   * The best node is selected to service reads, whether that read is from a local storage devices or another node's storage devices.
   * Read throughput is aggregated, where multiple nodes can service one read request in parallel streams.
@@ -70,19 +70,19 @@ NAME:
    pxctl volume create - Create a volume
 
 USAGE:
-   pxctl volume create [command options] [arguments...]
+   pxctl volume create [command options] volume-name
 
 OPTIONS:
-   --shared                           Specify --shared to make this a globally shared namespace volume
+   --shared                           make this a globally shared namespace volume
    --passphrase value                 passphrase to use for the PBKDF2 function
-   --label value, -l value            Comma separated name=value pairs, e.g name=sqlvolume,type=production
-   --size value, -s value             specify size in GB (default: 1)
+   --label value, -l value            list of comma-separated name=value pairs
+   --size value, -s value             volume size in GB (default: 1)
    --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --block_size value, -b value       block size in Kbytes (default: 32)
-   --repl value, -r value             replication factor [1..3] (default: 1)
+   --block_size size, -b size         block size in Kbytes (default: 32)
+   --repl factor, -r factor           replication factor [1..3] (default: 1)
    --io_priority value                IO Priority: [high|medium|low] (default: "low")
-   --snap_interval value, --si value  snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily value, --sd value          daily snapshot at specified hh:mm
+   --snap_interval min, --si min      snapshot interval in minutes, 0 disables snaps (default: 0)
+   --daily hh:mm, --sd hh:mm          daily snapshot at specified hh:mm
    --weekly value, --sw value         weekly snapshot at specified weekday@hh:mm
    --monthly value, --sm value        monthly snapshot at specified day@hh:mm
    --nodes value                      Comma seprated Node Id(s)
@@ -112,7 +112,7 @@ For example, a PX inline spec can be specified as the following:
 # docker volume create -d pxd --name cos=3,size=10G,ha=3,name=demovolume
 ```
 
-This is useful when you need to be able to dynamically create a volume while using docker run.  For example, the following command will create a volume and launch the container dynamically:
+This is useful when you need to create a volume dynamically while using docker run.  For example, the following command will create a volume and launch the container dynamically:
 
 ```
 # docker run --volume-driver pxd -it -v cos=3,size=10G,ha=3,name=demovolume:/data busybox sh
@@ -120,7 +120,7 @@ This is useful when you need to be able to dynamically create a volume while usi
 
 The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3 and a IO priority level of 3 and start the busybox container.
 
-Each spec key must be comma seperated.  The following are supported key value pairs:
+Each spec key must be comma separated.  The following are supported key value pairs:
 
 ```
 IO priority      - cos=[1,2,3]

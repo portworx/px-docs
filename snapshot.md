@@ -67,7 +67,7 @@ USAGE:
 
 OPTIONS:
    --name value             user friendly name
-   --label value, -l value  Comma separated name=value pairs, e.g. name=sqlvolume,type=production
+   --label value, -l value  list of comma-separated name=value pairs
    --readonly               true if snapshot is readonly
 ```
 
