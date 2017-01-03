@@ -79,3 +79,11 @@ The following sections describe how to configure Docker for shared mounts on [Co
 5. If you are using `systemd`, remove the `MountFlags=slave` line in your docker.service file.
 
     The Ubuntu in this example is not using `systemd`.
+
+### Quick and Dirty Test
+
+Run the following command to verify that shared mounts are configured and running properly on your system:
+
+```
+docker run -it -v /mnt:/mnt:shared busybox sh
+```
