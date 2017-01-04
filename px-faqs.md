@@ -17,7 +17,7 @@ Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 Yes.  Portworx can recognize any drive and its type, capacity and IOPS capability and use it appropriately for the given workload.
 
 ### Do I need to create a RAID group or do I present all the drives to Portworx individually?
-There is no nead to pre-prepare a RAID group.  Portworx will appropriately raid drives into different tiers based on their profile.
+There is no nead to pre-prepare a RAID group.  Portworx will appropriately place raid drives into different tiers based on their profile.
 
 ### Does Portworx need to take over all the disks on a given server?
 No.  You can explicitly allow/disallow drives that participate in a Portworx cluster. In PX-Enterprise, this notion of device delegation/participation is exposed through the "Server Profile".
@@ -67,7 +67,7 @@ We support 20 nodes for the 1.0 release of PX-Enterprise.  But this is only a QA
 ### How quickly is node failure detected?
 On the order of milliseconds. 
 
-### Do you support Block?  File?   Object?
+### Do you support Block?  File?  Object?
 We provide "Container Volumes".   We support Block and File, out of the box (though block is never exposed directly).
 We do not support Object native.   But minio provides an S3 Object interface that we've tested with (and works).
 
