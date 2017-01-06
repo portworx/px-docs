@@ -138,7 +138,7 @@ For **CoreOS** and **VMWare Photon**, start the Portworx container with the foll
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
-                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+                portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdX-s /dev/sdY -d ethX -m ethY
 ```
 
 #### Optional - running with config.json
