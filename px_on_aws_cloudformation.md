@@ -45,7 +45,8 @@ Using the AWS CLI the particular region, list the IP Addresses for the instances
 Example:
 
 ```
-aws --region us-east-1 ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=Jeff-CoreOS" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}'
+STACK_NAME="My-CoreOS-Stack"
+aws --region us-east-1 ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}'
 ```
 
 ### Step 3: Launch PX-Enterprise
