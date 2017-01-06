@@ -10,6 +10,7 @@ This guide shows you how you can easily deploy Portworx on the [**AWS CloudForma
 ### Step 1: Load PX CloudFormation Template 
 
 The [Portworx CloudFormation](/px_aws_coreos_cf.json) Template is based on the CoreOS Autoscaling cluster.
+
 The defaults are:
 
 + cluster size = 3
@@ -21,7 +22,13 @@ This template is based on the CoreOS "Stable" Channel and includes the following
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002)
 
-Load the template, select the number of nodes, type of instance and keys, as seen here:
+Navigate to the [AWS EC2 CloudFormation Service Page](https://console.aws.amazon.com/cloudformation/home)
+
+Select the "Create Stack" button on the upper left corner.
+
+Either download the [Portworx CloudFormation Template](/px_aws_coreos_cf.json) locally if modifying, or use the [public Portworx CoreOS CloudFormation Template](https://s3-external-1.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017006g7a-Portworx_CoreOS_Stack8jubr711244gmvrjgy26xyldi)
+
+Select the number of nodes, type of instance and keys, as seen here:
 ![Cloud_formation_setup](/images/cf_px.png)
 
 Pick a specific Name for the Stack.
