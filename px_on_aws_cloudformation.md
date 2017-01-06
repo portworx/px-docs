@@ -26,7 +26,7 @@ Navigate to the [AWS EC2 CloudFormation Service Page](https://console.aws.amazon
 
 Select the "Create Stack" button on the upper left corner.
 
-Either download the [Portworx CloudFormation Template](/px_aws_coreos_cf.json) locally if modifying, or use the [public Portworx CoreOS CloudFormation Template](https://s3-external-1.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017006g7a-Portworx_CoreOS_Stack8jubr711244gmvrjgy26xyldi)
+Either download the [Portworx CloudFormation Template](/px_aws_coreos_cf.json) locally if modifying, or use copy/paste this link for the [public Portworx CoreOS CloudFormation Template](https://s3-external-1.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017006g7a-Portworx_CoreOS_Stack8jubr711244gmvrjgy26xyldi) into the text box for "Specify an Amazon S3 template URL".
 
 Select the number of nodes, type of instance and keys, as seen here:
 ![Cloud_formation_setup](/images/cf_px.png)
