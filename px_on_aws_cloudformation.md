@@ -28,6 +28,14 @@ Portworx recommends a minimum cluster size of 3 nodes.
 Load the template, select the number of nodes, type of instance and keys, as seen here:
 ![Cloud_formation_setup](/images/cf_px.png)
 
+### Step 2: List Instance IP Addrs
+
+Using the AWS CLI the particular region, list the IP Addresses for the instances, based on the CloudFormation Stack Name
+Example:
+
+```
+aws --region us-east-1 ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=Jeff-CoreOS" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}'
+```
 
 ### Step 2: Launch PX-Enterprise
 [Follow the instructions to launch PX-Enterprise](get-started-px-enterprise.html)
