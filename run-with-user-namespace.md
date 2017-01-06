@@ -26,7 +26,7 @@ You must enable the `--userns host` directive to Docker
                 portworx/px-dev
 ```
 
-For **CoreOS**, start the Portworx container with the following run command:
+For **CoreOS** and **VMWare Photon**, start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \

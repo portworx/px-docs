@@ -124,7 +124,7 @@ The following Docker runtime command options are explained:
     > Exports the PX command line (**pxctl**) tool from the container to the host.
 ```
 
-For **CoreOS**, start the Portworx container with the following run command:
+For **CoreOS** and **VMWare Photon**, start the Portworx container with the following run command:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \

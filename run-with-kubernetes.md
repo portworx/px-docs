@@ -34,7 +34,7 @@ For CentOS
     portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
-For CoreOS
+For CoreOS and VMWare Photon
 
 ```
 sudo docker run --restart=always --name px -d --net=host \
