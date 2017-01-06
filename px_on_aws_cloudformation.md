@@ -45,9 +45,12 @@ Using the AWS CLI the particular region, list the IP Addresses for the instances
 Example:
 
 ```
+REGION=us-east-1
 STACK_NAME="My-CoreOS-Stack"
-aws --region us-east-1 ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}'
+aws --region ${REGION} ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}'
 ```
+
+Using the key provided for the template, you can now login to the nodes with the "core" user, and "sudo root" as needed.
 
 ### Step 3: Launch PX-Enterprise
 
