@@ -46,6 +46,7 @@ aws --region us-east-1 ec2  describe-instances --filters "Name=tag:aws:cloudform
 If running PX-Enterprise, then [follow the instructions to launch PX-Enterprise](get-started-px-enterprise.html)
 
 If running PX-Enterprise "air-gapped", then [follow the instructions to launch in "air-gapped" mode](/run-air-gap.html)
+
 NB: Since this stack uses CoreOS, use “-v /lib/modules:/lib/modules” instead of “-v /usr/src:/usr/src” if launching through "docker run"
 
 
