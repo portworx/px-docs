@@ -16,6 +16,11 @@ The defaults are:
 + cluster type = m3.medium
 + single disk = 128GB
 
+This template is based on the CoreOS "Stable" Channel and includes the following to enable Portworx deployments:
+
++ An additional non-root device called "/dev/xvdb" for the global shared storage pool
++ Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002)
+
 Defaults can be changed by modifying the CloudFormation json file.
 
 Portworx recommends a minimum cluster size of 3 nodes.
