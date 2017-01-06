@@ -156,6 +156,9 @@ entries:
     - title: Portworx on SDN with userns
       url: /portworx-flannel-userns.html
       output: web
+    - title: Portworx on AWS CloudFormation with CoreOS
+      url: /px_on_aws_cloudformation.html
+      output: web
   - title: Enterprise Edition
     output: web
     folderitems:
