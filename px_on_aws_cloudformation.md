@@ -9,7 +9,7 @@ This guide shows you how you can easily deploy Portworx on the [**AWS CloudForma
 
 ### Step 1: Load PX CloudFormation Template 
 
-The [Porworx CloudFormation](/px_aws_coreos_cf.json) Template is based on the CoreOS Autoscaling cluster.
+The [Portworx CloudFormation](/px_aws_coreos_cf.json) Template is based on the CoreOS Autoscaling cluster.
 The defaults are:
 
 + cluster size = 3
