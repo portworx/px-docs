@@ -1,9 +1,11 @@
 ---
 layout: page
-title: "Zero Storage Nodes"
+title: "Storage-less Nodes with PX Enterprise"
 keywords: zero storage
 sidebar: home_sidebar
 ---
+
+PX-Enterprise can be run in a client-only mode such that the storage availale in a PX-Cluster can be consumed by apps that are running on nodes that have no storage. This enables deployments to be able to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
 
 ## Add a new node PX Cluster with no storage
 
