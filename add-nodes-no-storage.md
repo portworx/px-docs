@@ -64,3 +64,30 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	0.375469	8.4 GB	7.9 GB		N/A	
 2c7d4e55-0c2a-4842-8594-dd5084dce208	10.99.117.129	0.749064	8.4 GB	8.0 GB		N/A		1.1.3-b33d4fa	Online
 
 ```
+
+### Show that this new node is a zero storage node and does not add to the capacity of the cluster
+
+```
+sudo /opt/pwx/bin/pxctl status
+Status: PX is operational
+Node ID: da758d06-aa9e-4bcb-8cc8-a74ee09030e3
+	IP: 147.75.99.55 
+ 	Local Storage Pool: 0 pool
+	Pool	IO_Priority	Size	Used	Status	Zone	Region
+	No storage pool
+	Local Storage Devices: 0 device
+	Device	Path	Media Type	Size		Last-Scan
+	No storage device
+	total		-	0 B
+Cluster Summary
+	Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
+	Node IP: 147.75.99.55 - Capacity: 0 B/0 B Online (This node)
+	Node IP: 147.75.198.197 - Capacity: 2.0 GiB/320 GiB Online
+	Node IP: 10.99.117.129 - Capacity: 1.2 GiB/100 GiB Online
+	Node IP: 147.75.104.185 - Capacity: 1.0 GiB/100 GiB Online
+	Node IP: 10.99.119.1 - Capacity: 1.2 GiB/100 GiB Online
+Global Storage Pool
+	Total Used    	:  5.3 GiB
+	Total Capacity	:  620 GiB
+	
+```
