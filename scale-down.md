@@ -7,7 +7,7 @@ sidebar: home_sidebar
 
 ## Scale-down Nodes 
 
-How to removing a node from a cluster
+How to remove an offline node from a cluster
 
 ### Identify the cluster that needs to be managed
 
