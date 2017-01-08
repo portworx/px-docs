@@ -65,7 +65,9 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	0.375469	8.4 GB	7.9 GB		N/A	
 
 ```
 
-### Show that this new node is a zero storage node and does not add to the capacity of the cluster
+### Check overall cluster status
+
+The status below shows that the new node (147.75.99.55) is the zero storage node that has been added to the cluster
 
 ```
 sudo /opt/pwx/bin/pxctl status
