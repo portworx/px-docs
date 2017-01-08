@@ -50,7 +50,7 @@ docker run --restart=always --name px-enterprise -d --net=host --privileged=true
 
 Note the -z option in the command above that starts this node as a zero storage node
 
-### Display the cluster node list with the new node added to the cluster
+### Display the cluster node list 
 
 ```
 [root@pxnostorage ~]# sudo /opt/pwx/bin/pxctl cluster list
