@@ -2,7 +2,7 @@
 ---
 layout: page
 title: "Zero Storage Nodes"
-keywords: scale-up
+keywords: zero storage
 sidebar: home_sidebar
 ---
 
