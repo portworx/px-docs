@@ -102,6 +102,9 @@ entries:
     - title: Scale-Down Nodes
       url: /scale-down.html
       output: web
+    - title: Storage less Nodes
+      url: /add-nodes-no-storage.html
+      output: web
     - title: Maintenance Mode
       url: /maintenance.html
       output: web
