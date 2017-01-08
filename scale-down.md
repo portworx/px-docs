@@ -65,7 +65,6 @@ In this case, there is one volume in the cluster and it is attached to node with
 In the example below, Node 147.75.198.197 has been marked offline. 
 
 ```
-
 # sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: bb4bcf13-d394-11e6-afae-0242ac110002
 Status: OK
@@ -75,7 +74,6 @@ ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
 2c7d4e55-0c2a-4842-8594-dd5084dce208	10.99.117.129	5.506884	8.4 GB	8.0 GB		N/A		1.1.3-b33d4fa	Online
 5de71f19-8ac6-443c-bd83-d3478c485a61	10.99.119.1	0.25		8.4 GB	8.0 GB		N/A		1.1.3-b33d4fa	Online
 a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	-		-	N/A		1.1.2-c27cf42	Offline
-
 ```
 
 ### Attach and Detach the volume in one of the surviving nodes
@@ -85,7 +83,6 @@ a56a4821-6f17-474d-b2c0-3e2b01cd0bc3	147.75.198.197	-		-	N/A		1.1.2-c27cf42	Offl
 Volume successfully attached at: /dev/pxd/pxd845707146523643463
 # sudo /opt/pwx/bin/pxctl host detach 845707146523643463
 Volume successfully detached
-
 ```
 
 ### Delete the local volume that belonged to the offline node
@@ -93,14 +90,14 @@ Volume successfully detached
 ```
 # sudo /opt/pwx/bin/pxctl volume delete 845707146523643463
 Volume 845707146523643463 successfully deleted.
-
 ```
+
+
 ### Delete the node that is offline
 
 ```
 # sudo /opt/pwx/bin/pxctl cluster delete a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 Node a56a4821-6f17-474d-b2c0-3e2b01cd0bc3 successfully deleted.
-
 ```
 
 ### List the nodes in the cluster to make sure the node is removed
