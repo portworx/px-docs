@@ -94,6 +94,7 @@ Volume 845707146523643463 successfully deleted.
 
 ### Delete the node that is offline
 
+
 ```
 # sudo /opt/pwx/bin/pxctl cluster delete a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
 Node a56a4821-6f17-474d-b2c0-3e2b01cd0bc3 successfully deleted.
