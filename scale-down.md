@@ -92,7 +92,6 @@ Volume successfully detached
 Volume 845707146523643463 successfully deleted.
 ```
 
-
 ### Delete the node that is offline
 
 ```
