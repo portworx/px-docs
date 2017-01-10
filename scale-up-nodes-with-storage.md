@@ -1,3 +1,11 @@
+---
+layout: page
+title: "Scale-Up Nodes with Storage"
+keywords: scale-up, storage, add new nodes
+sidebar: home_sidebar
+---
+
+
 ## Scale-up Nodes 
 
 This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added
