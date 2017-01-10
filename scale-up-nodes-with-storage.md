@@ -6,9 +6,9 @@ sidebar: home_sidebar
 ---
 
 
-## Scale-up Nodes 
+## Scale-up Nodes with Storage
 
-This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added
+This section illustrates how to add a new node with attached storage to a PX cluster 
 
 ### Display current cluster status
 
@@ -39,8 +39,9 @@ The above cluster has three nodes and 520GiB of total capacity.
 
 ### Provision a new node with storage
 
-In this case, for e.g., this node comes with 100GiB of storage
+Provision a server or a cloud instance from a provider of your choice with some storage.
 
+In this case, for e.g., this node comes with 100GiB of storage
 
 ```
 # multipath -ll
@@ -56,8 +57,7 @@ The storage is available at /dev/dm-1
 ### Add this node to the PX Cluster
 
 Below is an example of how to run PX in a new node so it joins an existing cluster. 
-Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix 
-to the cluster ID to which we want to add the new node
+Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node
 
 ```
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins \
