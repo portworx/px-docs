@@ -22,6 +22,9 @@ This template is based on the CoreOS "Stable" Channel and includes the following
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002)
 
+Here you go:
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=S3Asset&amp;templateURL=https://s3-external-1.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017006aMC-Portworx_CoreOS_Stack_v2sy5zdasfczjbltbig67n1att9" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+
 Navigate to the [AWS EC2 CloudFormation Service Page](https://console.aws.amazon.com/cloudformation/home)
 
 Select the "Create Stack" button on the upper left corner.
