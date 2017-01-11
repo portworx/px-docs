@@ -28,6 +28,8 @@ Select the instance type from the list (default type is 'm3.medium')
 
 Select the volume size of the non-root volume (default size is 128 GB)
 
+Input the name of your key-pair
+
 Create the stack and wait for completion.
 
 ### Step 2: List Instance IP Addrs
