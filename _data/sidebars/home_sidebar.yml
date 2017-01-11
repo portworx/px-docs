@@ -54,6 +54,9 @@ entries:
     - title: Class of Service
       url: /cos.html
       output: web
+    - title: Snapshots
+      url: /snapshot.html
+      output: web
   - title: Schedulers
     output: web
     folderitems:

@@ -67,7 +67,7 @@ USAGE:
 
 OPTIONS:
    --name value             user friendly name
-   --label value, -l value  list of comma-separated name=value pairs
+   --label pairs, -l pairs  list of comma-separated name=value pairs
    --readonly               true if snapshot is readonly
 ```
 
@@ -108,7 +108,7 @@ USAGE:
 
 OPTIONS:
    --parent value           parent volume ID
-   --label value, -l value  Comma separated name=value pairs, e.g name=sqlvolume,type=production
+   --label pairs, -l pairs  Comma separated name=pairs pairs
 ```
 
 If you run this command with no options, you get a list of all snapshots,
@@ -201,10 +201,12 @@ Volume    :  593988376247244600
 ```
 
 Scheduled snapshots have names of the form
-`<parent-ID>_sched_<creation_time>`, for example
+`<parent-ID>_<freq>_<creation_time>`, where `<freq>` denotes
+the schedule frequency, i.e., daily, weekly, monthly, or
+periodic.  For example,
 
 ```
-593988376247244600_sched_2016-12-12T18:00:53-08:00
+593988376247244600_daily_2016-12-12T18:00:53-08:00
 ```
 
 There is an implementation limit of five scheduled snapshots per

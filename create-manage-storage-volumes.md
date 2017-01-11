@@ -75,7 +75,7 @@ USAGE:
 OPTIONS:
    --shared                           make this a globally shared namespace volume
    --passphrase value                 passphrase to use for the PBKDF2 function
-   --label value, -l value            list of comma-separated name=value pairs
+   --label pairs, -l pairs            list of comma-separated name=pairs pairs
    --size value, -s value             volume size in GB (default: 1)
    --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
    --block_size size, -b size         block size in Kbytes (default: 32)
