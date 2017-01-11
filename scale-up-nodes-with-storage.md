@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Scale-out an existig PX Cluster"
+title: "Scaling-out an existig PX Cluster"
 keywords: scale-up, storage, add new nodes
 sidebar: home_sidebar
 ---
