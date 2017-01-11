@@ -96,8 +96,11 @@ entries:
     - title: Upgrade Portworx
       url: /upgrade.html
       output: web
-    - title: Scale-Up Nodes
+    - title: Adding storage to a existing cluster
       url: /scale-up.html
+      output: web
+    - title: Scaling out an existing cluster
+      url: /scale-up-nodes-with-storage.html
       output: web
     - title: Scale-Down Nodes
       url: /scale-down.html
