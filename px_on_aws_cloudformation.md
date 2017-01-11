@@ -11,11 +11,6 @@ This guide shows you how you can easily deploy Portworx on the [**AWS CloudForma
 
 The [Portworx CloudFormation](/px_aws_coreos_cf.json) Template is based on the CoreOS Autoscaling cluster.
 
-The defaults are:
-
-+ cluster size = 3
-+ instance type = m3.medium
-+ single disk = 128GB
 
 This template is based on the CoreOS "Stable" Channel and includes the following to enable Portworx deployments:
 
