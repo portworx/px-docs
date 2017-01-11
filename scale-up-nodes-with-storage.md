@@ -1,14 +1,14 @@
 ---
 layout: page
-title: "Scale-Up Nodes with Storage"
+title: "Scale-out an existig PX Cluster"
 keywords: scale-up, storage, add new nodes
 sidebar: home_sidebar
 ---
 
 
-## Scale-up Nodes with Storage
+## Scaling out an existing PX Cluster
 
-This section illustrates how to add a new node with attached storage to a PX cluster 
+This document illustrates how to add a new node with attached storage to a PX cluster 
 
 ### Display current cluster status
 
