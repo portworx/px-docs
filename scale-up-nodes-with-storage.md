@@ -67,13 +67,13 @@ docker run --restart=always --name px-enterprise -d --net=host --privileged=true
 -m team0:0 -d team0 -s /dev/dm-1
 ```
 
-Not the -s /dev/dm-1 command which helps pick up the storage that come with the new node and the same cluster token 
+Note the -s /dev/dm-1 command which picks up the storage that comes with the new node and the same cluster token 
 ensures that the node is added to the same cluster. 
 
 
 ### Check cluster status
 
-As seen below, the 100G of additional capacity is available with total capacity of the cluster going to 620GB
+As seen below, the 100G of additional capacity is added to the cluster with total capacity of the cluster going to 620GB
 
 ```
 sudo /opt/pwx/bin/pxctl status
