@@ -96,7 +96,7 @@ entries:
     - title: Upgrade Portworx
       url: /upgrade.html
       output: web
-    - title: Adding storage to a existing cluster
+    - title: Adding storage to PX-cluster nodes
       url: /scale-up.html
       output: web
     - title: Scaling out an existing cluster
