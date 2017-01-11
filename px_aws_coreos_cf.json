@@ -258,6 +258,23 @@
         }
       }
     },
+    "Ingress9003": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "GroupName": {
+          "Ref": "CoreOSSecurityGroup"
+        },
+        "IpProtocol": "tcp",
+        "FromPort": "9003",
+        "ToPort": "9003",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "CoreOSSecurityGroup",
+            "GroupId"
+          ]
+        }
+      }
+    },
     "CoreOSServerAutoScale": {
       "Type": "AWS::AutoScaling::AutoScalingGroup",
       "Properties": {
