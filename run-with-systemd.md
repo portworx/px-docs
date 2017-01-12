@@ -37,7 +37,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true  \
   -v /usr/src:/usr/src                                      \
   --ipc=host                                                \
   --name=px			                                      	\
-  -d portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+  -d portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 KillMode=control-group
 ExecStop=/usr/bin/docker stop -t 10 px-enterprise
 
@@ -63,12 +63,12 @@ For example, you can provide this after the `-d px-enterprise` line in the above
 ```
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde -d eth0 -m eth1
    -t 06670ede-70af-11e6-beb9-0242fc110003 -s /dev/sdd -s /dev/sde
-   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:4001
+   -t 06670ede-70af-11e6-beb9-0242fc110003 -a -k etcd://10.0.0.123:2379
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f"
-   -c my_cluster_id -k etcd://my_etcd.domain.com:4001 -a -f"
-   -c my_cluster_id -k etcd://etcd1:4001,etcd://etcd2:4001 -a -f"
-   -c my_cluster_id -k consul://consul1:4001,consul://consul2:4001 -a -f"
+   -c my_cluster_id -k etcd://my_etcd.domain.com:2379 -a -f"
+   -c my_cluster_id -k etcd://etcd1:2379,etcd://etcd2:2379 -a -f"
+   -c my_cluster_id -k consul://consul1:2379,consul://consul2:2379 -a -f"
 
 ```
 
