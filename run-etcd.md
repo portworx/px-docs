@@ -15,7 +15,7 @@ We recommend that you run etcd in a container
 	--listen-client-urls 'http://0.0.0.0:2379'                          \
 	--advertise-client-urls 'http://<your ip>:2379'
 
-# curl -X GET http://127.0.0.1:2375/version
+# curl -X GET http://127.0.0.1:2379/version
 ```
 
 Note that the etcd port is 2379.

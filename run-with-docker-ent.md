@@ -64,7 +64,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  --ipc=host                                    \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 >**Note:**<br/>For Lighthouse users, when you create a cluster in the Lighthouse console, Lighthouse will craft the above command with the correct values for the KVDB and cluster ID.
@@ -145,7 +145,7 @@ For **CoreOS** and **VMWare Photon**, start the Portworx container with the foll
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 #### Optional - running with config.json
