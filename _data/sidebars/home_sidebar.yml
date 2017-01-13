@@ -222,4 +222,7 @@ entries:
     - title: Shared Volumes
       url: /video_shared_volumes.html
       output: web
+    - title: Multi-cloud High Availability
+      url: /video_multi_cloud.html
+      output: web
   
