@@ -210,5 +210,10 @@ entries:
     - title: Lighthouse On-Prem Release Notes
       url: /on-prem-lighthouse-release-notes.html
       output: web    
-      
-
+  - title: Video Demos
+    output: web
+    folderitems:
+    - title: Mesos, Mesosphere and Marathon
+      url: /video_mesos.html
+      output: web
+  
