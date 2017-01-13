@@ -10,5 +10,3 @@ Portworx is cloud-agnostic, allowing for a single data fabric to span multiple c
 ## Watch the video
 Here is a short video that shows how to configure and use Portworx Shared Volumes:
 {% include youtubePlayer.html id=page.youtubeId %}
-
->**Note** : Instructions for deploying Portworx through a Rancher Catalog can be found [here](https://github.com/portworx/rancher)
