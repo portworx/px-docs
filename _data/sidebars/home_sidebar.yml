@@ -219,4 +219,7 @@ entries:
     - title: Rancher
       url: /video_rancher.html
       output: web
+    - title: Shared Volumes
+      url: /video_shared_volumes.html
+      output: web
   
