@@ -227,5 +227,5 @@ entries:
       output: web
     - title: Portwork QuickStart Explainer
       url: /video_portworx_nutshell.html
-      output:web
+      output: web
   
