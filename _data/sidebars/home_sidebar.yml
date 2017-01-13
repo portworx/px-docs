@@ -216,4 +216,7 @@ entries:
     - title: Mesos, Mesosphere and Marathon
       url: /video_mesos.html
       output: web
+    - title: Rancher
+      url: /video_rancher.html
+      output: web
   
