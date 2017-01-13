@@ -225,4 +225,7 @@ entries:
     - title: Multi-cloud High Availability
       url: /video_multi_cloud.html
       output: web
+    - title: Portwork QuickStart Explainer
+      url: /video_portworx_nutshell.html
+      output:web
   
