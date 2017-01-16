@@ -183,7 +183,7 @@ entries:
     - title: Run Lighthouse with Secure etcd
       url: /run-lighthouse-with-secure-etcd.html
       output: web
-  - title: Troubleshooting
+  - title: Knowledge Base
     output: web
     folderitems:
     - title: Shared Mount Propogation
