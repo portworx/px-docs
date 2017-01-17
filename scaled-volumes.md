@@ -30,10 +30,10 @@ volume spec.
 ## pxctl CLI
 
 ```
-[root@osboxes porx]# pxctl volume create elk_vol --scale 10
+[root@porx]# pxctl volume create elk_vol --scale 10
 Volume successfully created: 232783593254518125
 
-[root@osboxes porx]# bin/pxctl volume list
+[root@porx]# pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 
@@ -41,13 +41,27 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 
 ## Docker CLI
 ```
-[root@osboxes porx]# docker volume create --driver pxd --name elk_vol --opt scale=10
-[root@osboxes porx]# bin/pxctl volume list
+[root@porx]# docker volume create --driver pxd --name elk_vol --opt scale=10
+[root@porx]# pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
 
 ## FAQ
+
+### Update scale factor after volume creation
+
+Volume scale factor can be modified after the volume is created
+
+```
+[root@porx]# pxctl volume update scale_vol --scale 12
+[root@porx]# pxctl volume list
+ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+232783593254518125      elk_vol         1 GiB        1       no      no              LOW             12      up - detached
+```
+
+Decreasing the scaled volume only affects future volumes - volumes created as result of scale will not be deleted.
+
 
 ### Can I attach more than one instance of a scaled volume on the same node?
 
@@ -61,7 +75,4 @@ At present all the instances of the scaled volume need to be deleted one by one.
 ### How do I request for a specific instance of a scaled volume
 
 You can always specify a spcecific instance of scaled volume to be used.
-
-
-
 
