@@ -48,7 +48,7 @@ Identify the storage devices you will be allocating to PX.  PX can run in a hete
 You can now run PX via the Docker CLI as follows:
 
 ```
-# sudo docker run --restart=always --name px -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host     \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
@@ -173,7 +173,7 @@ Example config.json:
 You can now start the Portworx container with the following run command:
 
 ```
-# sudo docker run --restart=always --name px -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host     \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
