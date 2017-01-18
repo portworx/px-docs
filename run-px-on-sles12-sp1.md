@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Install PX container on SLES (SuSe Enterprise Linux) 12SP1"
+title: "Running PX on SuSe Enterprise Linux 12SP1"
 keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP1
 sidebar: home_sidebar
 ---
