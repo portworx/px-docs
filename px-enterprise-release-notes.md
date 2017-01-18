@@ -4,6 +4,15 @@ title: "PX-Enterprise Release notes"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
+## 1.1.3 Release notes
+
+### Key Features
+
+* Shared volumes (or shared namespace support) [Shared Volumes](/shared-volumes.html)
+* Scale Volumes support - Create volumes in scale with single command
+* Sticky Volumes support - Create volumes with sticky bit so only a pxctl volume delete can delete it
+* Improvements in replication performance
+* Debian Linux distro and kernel support
 
 ## 1.1.2 Release notes
 
