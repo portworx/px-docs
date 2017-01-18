@@ -24,9 +24,10 @@ That command creates a volume to attach to the mysql_volume container, which sto
 To start the mysql container, run the following command. 
 
 ```
-# docker run -p 3306:3306 --volume-driver=pxd               \
-        --name pxmysql  --host                      \
-        -e MYSQL_ROOT_PASSWORD=password     \
+# docker run -p 3306:3306                           \
+        --host localhost                            \
+        --name pxmysql                              \
+        -e MYSQL_ROOT_PASSWORD=password             \
         -v mysql_volume:/var/lib/mysql -d mysql
 ```
 
