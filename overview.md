@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Architecture"
+title: "Deployment Overview"
 keywords: portworx, architecture, storage, container, cluster, server node
 sidebar: home_sidebar
 ---

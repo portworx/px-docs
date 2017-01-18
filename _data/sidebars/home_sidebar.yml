@@ -22,7 +22,7 @@ entries:
     output: web
     folderitems:
     - title: Overview
-      url: /architecture.html
+      url: /overview.html
       output: web
     - title: Run with Docker
       url: /run-with-docker.html
