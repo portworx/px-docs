@@ -8,9 +8,7 @@ You can use Portworx to implement storage for Kubernetes pods. Portworx pools yo
 
 >**Note:**<br/>We are tracking when shared mounts will be allowed within Kubernetes (K8s), which will allow Kubernetes to deploy PX-Developer.
 
-## Setup Portworx and Kubernetes
-
-### Step 1: Run the PX container
+## Step 1: Run the PX container
 
 Portworx can be deployed via K8s directly, or run on each host via docker or systemd directly.
 
@@ -36,7 +34,7 @@ To run the PX container using Docker, run the following command:
 
 Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
 
-### Step 2: Deploy Kubernetes
+## Step 2: Deploy Kubernetes
 
 * Start the K8s cluster. 
 
@@ -47,7 +45,7 @@ One way to start K8s for single node local setup is using the local-up-cluster.s
 # hack/local-up-cluster.sh
 ```
 
-* Set your cluster details.
+### Set your cluster details.
 
 ```
 # cluster/kubectl.sh config set-cluster local --server=http://127.0.0.1:8080 --insecure-skip-tls-verify=true
@@ -55,7 +53,7 @@ One way to start K8s for single node local setup is using the local-up-cluster.s
 # cluster/kubectl.sh config use-context local
 ```
 
-* Set the K8s volume plugin directory
+### Set the K8s volume plugin directory
 
 By default the K8s volume plugin directory is "/usr/libexec/kubernetes/kubelet-plugins/volume/exec". If you are starting kubelet service by hand then make sure that you set the --volume-plugin-dir correctly. This is the directory where kubelet tries to search for portworx's volume driver. Example kubelet commands:
 
@@ -91,9 +89,9 @@ kubelet-wrapper \
   
 * Note that the volume-plugin-dir is provided as a shared mount option in the docker run command for PX container.
 
-### Step 3: Include PX as a VolumeSpec
+## Try it out with NGINX
 
-Include PX as a volume spec in the K8s spec file.
+To use PX with your applications deployed via Kubernetes, include PX as a volume spec in the K8s spec file.
 
 Under the `spec` section of your spec yaml file, add a `volumes` section.  For example:
 
@@ -114,11 +112,9 @@ spec:
 * Specify the unique ID for the volume created in the PX-Developer container as the `volumeID` field.
 * Always set `osdDriver` to `pxd`. It indicates that the Flexvolume should use the px driver for managing volumes.
 
-### Step 4: Try it with NGINX
-
 After you specify PX as a volume type in your spec file, you can mount it by including a `volumeMounts` section under the `spec` section. This example shows how you can use it with nginx.
 
-Example pod spec file
+Example pod spec file for NGINX
 
 ``` yaml
 apiVersion: v1
