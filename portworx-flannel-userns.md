@@ -255,6 +255,7 @@ docker run --restart=always --name px -d --net=host            \
                  -v /opt/pwx/bin:/export_bin:shared            \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
+                 -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-enterprise -daemon -k etcd://10.1.2.3:12379 -c mypxcluster -a -f 
