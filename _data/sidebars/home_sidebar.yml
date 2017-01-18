@@ -33,15 +33,6 @@ entries:
     - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
-    - title: Run with User Namespaces
-      url: /run-with-user-namespace.html
-      output: web
-    - title: Run in 'Air-Gapped' Environments
-      url: /run-air-gap.html
-      output: web  
-    - title: Run in SLES 12 SP1 Environments
-      url: /run-px-on-sles12-sp1.html
-      output: web 
   - title: Manage Volumes
     output: web
     folderitems:
@@ -195,6 +186,12 @@ entries:
     - title: Devicemapper Thinpool setup
       url: /devicemapper-setup.html
       output: web
+    - title: Docker User Namespaces
+      url: /run-with-user-namespace.html
+      output: web
+    - title: Running with SLES 12 SP1
+      url: /run-px-on-sles12-sp1.html
+      output: web 
     - title: FAQs
       url: /px-faqs.html
       output: web

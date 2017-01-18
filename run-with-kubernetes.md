@@ -16,41 +16,22 @@ Portworx can be deployed via K8s directly, or run on each host via docker or sys
 
 To run the PX container using Docker, run the following command:
 
-For CentOS
-
 ```
-# sudo docker run --restart=always --name px -d --net=host
-    --privileged=true \
-    -v /run/docker/plugins:/run/docker/plugins \
-    -v /var/lib/osd:/var/lib/osd:shared \
-    -v /dev:/dev \
-    -v /etc/pwx:/etc/pwx \
-    -v /opt/pwx/bin:/export_bin \
+# sudo docker run --restart=always --name px -d --net=host \
+    --privileged=true                             \
+    -v /run/docker/plugins:/run/docker/plugins    \
+    -v /var/lib/osd:/var/lib/osd:shared           \
+    -v /dev:/dev                                  \
+    -v /etc/pwx:/etc/pwx                          \
+    -v /opt/pwx/bin:/export_bin                   \
     -v /usr/libexec/kubernetes/kubelet-plugins/volume/exec/px~flexvolume:/export_flexvolume:shared \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /var/cores:/var/cores \
-    -v /var/lib/kubelet:/var/lib/kubelet:shared \
-    --ipc=host \
+    -v /var/run/docker.sock:/var/run/docker.sock  \
+    -v /var/cores:/var/cores                      \
+    -v /var/lib/kubelet:/var/lib/kubelet:shared   \
+    -v /usr/src:/usr/src                          \
+    -v /lib/modules:/lib/modules                  \
+    --ipc=host                                    \
     portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
-```
-
-For CoreOS and VMWare Photon
-
-```
-sudo docker run --restart=always --name px -d --net=host \
-  --privileged=true                             \
-  -v /run/docker/plugins:/run/docker/plugins    \
-  -v /var/lib/osd:/var/lib/osd:shared           \
-  -v /dev:/dev                                  \
-  -v /etc/pwx:/etc/pwx                          \
-  -v /opt/pwx/bin:/export_bin:shared            \
-  -v /var/run/docker.sock:/var/run/docker.sock  \
-  -v /var/cores:/var/cores                      \
-  -v /lib/modules:/lib/modules                  \
-  -v /var/lib/kubelet:/var/lib/kubelet:shared \
-  -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \
-  --ipc=host                                    \
-  portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
 
 Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
@@ -84,7 +65,7 @@ For CentOS
 kubelet-wrapper \
   --api-servers=http://127.0.0.1:8080 \
   --network-plugin-dir=<network-plugin-dir> \
-  --network-plugin= <network-plugin-name>\
+  --network-plugin=<network-plugin-name>\
   --volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec \
   --allow-privileged=true \
   --config=/etc/kubernetes/manifests \
@@ -99,7 +80,7 @@ For CoreOS
 kubelet-wrapper \
   --api-servers=http://127.0.0.1:8080 \
   --network-plugin-dir=<network-plugin-dir> \
-  --network-plugin= <network-plugin-name>\
+  --network-plugin=<network-plugin-name>\
   --volume-plugin-dir=/etc/kubernetes/kubelet-plugins/volume/exec/ \
   --allow-privileged=true \
   --config=/etc/kubernetes/manifests \
@@ -116,7 +97,7 @@ Include PX as a volume spec in the K8s spec file.
 
 Under the `spec` section of your spec yaml file, add a `volumes` section.  For example:
 
-``` yaml
+```yaml
 spec:
   volumes:
     - name: test
@@ -224,18 +205,20 @@ Note the specific directive:  `"scheduler": "kubernetes"`
 Alternatively, you can also pass in the scheduler directive via the PX command line as follows:
 
 ```
-# sudo docker run --restart=always --name px -d --net=host
-    --privileged=true \
-    -v /run/docker/plugins:/run/docker/plugins \
-    -v /var/lib/osd:/var/lib/osd:shared \
-    -v /dev:/dev \
-    -v /etc/pwx:/etc/pwx \
-    -v /opt/pwx/bin:/export_bin \
+# sudo docker run --restart=always --name px -d --net=host  \
+    --privileged=true                                       \
+    -v /run/docker/plugins:/run/docker/plugins              \
+    -v /var/lib/osd:/var/lib/osd:shared                     \
+    -v /dev:/dev                                            \
+    -v /etc/pwx:/etc/pwx                                    \
+    -v /opt/pwx/bin:/export_bin                             \
     -v /usr/libexec/kubernetes/kubelet-plugins/volume/exec/px~flexvolume:/export_flexvolume:shared \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /var/cores:/var/cores \
-    -v /var/lib/kubelet:/var/lib/kubelet:shared \
-    --ipc=host \
+    -v /var/run/docker.sock:/var/run/docker.sock            \
+    -v /var/cores:/var/cores                                \
+    -v /var/lib/kubelet:/var/lib/kubelet:shared             \
+    -v /usr/src:/usr/src                                    \
+    -v /lib/modules:/lib/modules                            \
+    --ipc=host                                              \
     portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -x kubernetes
 ```
 
@@ -452,7 +435,6 @@ spec:
 
 For the nginx pods that will be a part of this PetSet we define a PersistentVolumeClaim which requests a storage of size 1Gi. The number of replicas defined in the PetSet spec is "2". Hence it is necessary that we have atleast two PersistentVolumes which can satisfy these claims. You can create a PetSet by running the following command
 
-
 ```
 $ kubectl create -f petsets.yaml
 service "nginx" created
@@ -493,5 +475,4 @@ Events:
   ---------	--------	-----	----	-------------	--------	------			-------
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-0
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-1
-
 ```

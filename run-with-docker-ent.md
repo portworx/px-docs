@@ -63,6 +63,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
+                 -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
 ```
@@ -131,23 +132,6 @@ The following Docker runtime command options are explained:
     > Exports the PX command line (**pxctl**) tool from the container to the host.
 ```
 
-For **CoreOS** and **VMWare Photon**, start the Portworx container with the following run command:
-
-```
-# sudo docker run --restart=always --name px -d --net=host \
-                 --privileged=true                             \
-                 -v /run/docker/plugins:/run/docker/plugins    \
-                 -v /var/lib/osd:/var/lib/osd:shared           \
-                 -v /dev:/dev                                  \
-                 -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
-                 -v /var/run/docker.sock:/var/run/docker.sock  \
-                 -v /var/cores:/var/cores                      \
-                 -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
-```
-
 #### Optional - running with config.json
 
 You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to pass the runtime parameters via the command line.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
@@ -206,6 +190,7 @@ You can now start the Portworx container with the following run command:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
+                 -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-enterprise
 ```
