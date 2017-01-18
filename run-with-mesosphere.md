@@ -109,6 +109,9 @@ The following is a sample JSON file that can be used to launch Portworx through 
                 "value": "/var/cores:/var/cores"
             }, {
                 "key": "volume",
+                "value": "/lib/modules:/lib/modules"
+            }, {
+                "key": "volume",
                 "value": "/usr/src:/usr/src"
             } ],
             "forcePullImage": false
@@ -222,4 +225,3 @@ To launch the application through Marathon directly:
 ```
 curl -X POST http://1.2.3.4:8080/v2/apps -d @mysql.json -H "Content-type: application/json"
 ```
-
