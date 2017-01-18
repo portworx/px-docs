@@ -18,15 +18,12 @@ entries:
     - title: Get Started with PX-Enterprise
       url: /get-started-px-enterprise.html
       output: web
-  - title: Architecture
-    output: web
-    folderitems:
-      - title: Overview
-        url: /architecture.html
-        output: web
   - title: Install and Run
     output: web
     folderitems:
+    - title: Overview
+      url: /architecture.html
+      output: web
     - title: Run with Docker
       url: /run-with-docker.html
       output: web
