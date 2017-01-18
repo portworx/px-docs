@@ -180,8 +180,8 @@ entries:
     - title: Shared Mount Propogation
       url: /os-config-shared-mounts.html
       output: web
-    - title: Troubleshooting
-      url: /troubleshooting.html
+    - title: SELinux
+      url: /selinux.html
       output: web
     - title: Devicemapper Thinpool setup
       url: /devicemapper-setup.html
