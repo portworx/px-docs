@@ -10,7 +10,7 @@ If you are creating a template image - be it an AWS AMI or a Virtual Machine Ima
 Create a file called
 
 ```
-/lib/systemd/system/px-enterprise.service
+/lib/systemd/system/portworx.service
 ```
 
 Add the following as the contents of that file:
@@ -20,30 +20,31 @@ Add the following as the contents of that file:
 Description=Portworx Container
 Wants=docker.service
 After=docker.service
-
 [Service]
+TimeoutStartSec=0
 Restart=always
-ExecStartPre=-/usr/bin/docker rm px-enterprise
-Type=forking
-ExecStart=/usr/bin/docker run --net=host --privileged=true  \
-  --cgroup-parent=/system.slice/px-enterprise.service       \
-  -v /run/docker/plugins:/run/docker/plugins                \
-  -v /var/lib/osd:/var/lib/osd:shared                       \
-  -v /dev:/dev                                              \
-  -v /etc/pwx:/etc/pwx                                      \
-  -v /opt/pwx/bin:/export_bin:shared                        \
-  -v /var/run/docker.sock:/var/run/docker.sock              \
-  -v /var/cores:/var/cores                                  \
-  -v /usr/src:/usr/src                                      \
-  --ipc=host                                                \
-  --name=px			                                      	\
-  -d portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+ExecStartPre=/usr/bin/bash -c "/usr/bin/systemctl set-environment HOSTDIR=`if uname -r | grep -i coreos > /dev/null; then echo /lib/modules; else echo /usr/src; fi`"
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm -f %n
+ExecStart=/usr/bin/docker run --net=host --privileged=true \
+      --cgroup-parent=/system.slice/px-enterprise.service \
+      -v /run/docker/plugins:/run/docker/plugins     \
+      -v /var/lib/osd:/var/lib/osd:shared            \
+      -v /dev:/dev                                   \
+      -v /etc/pwx:/etc/pwx                           \
+      -v /opt/pwx/bin:/export_bin:shared             \
+      -v /var/run/docker.sock:/var/run/docker.sock   \
+      -v /var/cores:/var/cores                       \
+      -v ${HOSTDIR}:${HOSTDIR}                       \
+      --ipc=host                                     \
+      --name=%n \
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -s /dev/xvdb
 KillMode=control-group
-ExecStop=/usr/bin/docker stop -t 10 px-enterprise
-
+ExecStop=/usr/bin/docker stop -t 10 %n
 [Install]
 WantedBy=multi-user.target
 ```
+
 
 You must edit the above template to provide the cluster and node initialization options.  Provide one of the following examples as command line arguments positioned after “px-enterprise”:
 
@@ -76,10 +77,11 @@ Once you create systemd unit file, be sure to enable this unit by running:
 
 ```
 systemctl daemon-reload
-systemctl enable px-enterprise
+systemctl enable portworx
 ```
 
 At this point your machine image is ready to be saved and cloned.  You can launch a multiple of these images and each initial execution of the machine will cause PX to initialize the node and join the provided cluster.  Subsequent boots will simply cause PX to join as an existing node.
 
 **Note - do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image and not portable to the clones.**
 
+**NOTE : If other systemd service contain "Wants=portworx.service", then those services will be restarted anytime that a restart is done on the portworx.service.   In order to avoid this, any dependent services should be launched through a scheduler such as Mesos or Kubernetes.
