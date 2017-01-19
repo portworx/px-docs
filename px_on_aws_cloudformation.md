@@ -7,7 +7,7 @@ sidebar: home_sidebar
 
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS CloudFormation**](https://aws.amazon.com/cloudformation/)
 
-Portworx has provided a complete CloudFormation stack, based on CoreOS 1235.4.0 that will bring up a 3-node **px-dev** stack in less than 5 minutes.
+Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 that will bring up a complete 3-node **px-dev** stack in **less than 10 minutes**.
 
 ### Step 1: Configure and Launch the Portworx stack
 
@@ -26,9 +26,9 @@ Specify the Discovery URL.  Copy the entire **output string** that is returned f
 
 Select the instance type from the list (default type is 'm3.medium')
 
-Select the volume size of the non-root volume (default size is 128 GB)
+Select the volume size of the non-root volume, configurable from **8GB** to **4TB** (default size is 128 GB)
 
-Select the name of your key-pair
+Select the name of your available key-pairs (assumed to be existing)
 
 You may see a message indicating AWS is "Unable to list IAM roles", which can be safely ignored.
 
@@ -47,7 +47,7 @@ aws --region ${REGION} ec2  describe-instances --filters "Name=tag:aws:cloudform
 
 Similarly, you can find all EC2 Instances named "PX-STACK" or whichever name was provided, and look for the IP or DNS addresses.
 
-Using the key provided for the template, you can now login to the nodes with the "core" user, and "sudo root" as needed.
+Using the key provided for the template, you can now login to the nodes as the **"core"** user, and **"sudo root"** as needed.
 
 ### Next Steps
 
