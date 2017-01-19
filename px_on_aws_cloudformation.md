@@ -18,21 +18,20 @@ This template is based on the CoreOS "Stable" Channel (version 1235.4.0) and inc
 
 <p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
 
-Pick a specific Name for the Stack.  (default = PX-STACK)
+- Pick a specific Name for the Stack.  (default = PX-STACK)
 
-Specify any restrictions on ssh access via "AllowSSHFrom" (default 0.0.0.0/0)
+- Specify any restrictions on ssh access via "AllowSSHFrom" (default 0.0.0.0/0)
 
-Specify the Discovery URL.  Copy the entire **output string** that is returned from [https://discovery.etcd.io/new?size=3](https://discovery.etcd.io/new?size=3)
+- Specify the Discovery URL.  Copy the entire **output string** that is returned from [https://discovery.etcd.io/new?size=3](https://discovery.etcd.io/new?size=3)
 
-Select the instance type from the list (default type is 'm3.medium')
+- Select the instance type from the list (default type is 'm3.medium')
 
-Select the volume size of the non-root volume, configurable from **8GB** to **4TB** (default size is 128 GB)
+- Select the volume size of the non-root volume, configurable from **8GB** to **4TB** (default size is 128 GB)
 
-Select the name of your available key-pairs (assumed to be existing)
-
+- Select the name of your available key-pairs (assumed to be existing)
 You may see a message indicating AWS is "Unable to list IAM roles", which can be safely ignored.
 
-Create the stack and wait for completion.
+- Create the stack and wait for completion.
 
 ### Step 2: List Instance IP Addrs
 
