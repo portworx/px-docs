@@ -18,7 +18,7 @@ This template is based on the CoreOS "Stable" Channel and includes the following
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003)
 
 
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3-external-1.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017006aMC-Portworx_CoreOS_Stack_v2sy5zdasfczjbltbig67n1att9" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
 
 Pick a specific Name for the Stack.
 
