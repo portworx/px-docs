@@ -40,7 +40,7 @@ Example:
 
 ```
 REGION=us-east-1
-STACK_NAME="My-CoreOS-Stack"
+STACK_NAME="PX-STACK"
 aws --region ${REGION} ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}' --output text
 ```
 
