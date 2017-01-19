@@ -9,14 +9,16 @@ These steps shows you how you can quickly and easily deploy Portworx on [**AWS C
 
 Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 that will bring up a complete 3-node **px-dev** stack in **less than 10 minutes**.
 
-### Step 1: Configure and Launch the Portworx stack
-
 This template is based on the CoreOS "Stable" Channel (version 1235.4.0) and includes the following to enable Portworx deployments:
 
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool of configurable size
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003)
 
+### Step 1: Configure and Launch the Portworx stack
+
 <p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+
+- Click the "Launch Stack" button above.  The Portworx Template is automatically loaded into CloudFormation.   Click **Next**
 
 - Pick a specific Name for the Stack.  (default = PX-STACK)
 
@@ -31,7 +33,7 @@ This template is based on the CoreOS "Stable" Channel (version 1235.4.0) and inc
 - Select the name of your available key-pairs (assumed to be existing)
 You may see a message indicating AWS is "Unable to list IAM roles", which can be safely ignored.
 
-- Create the stack and wait for completion.
+- Create the stack and wait for completion.  After the stack status is "CREATE COMPLETE", it may still be 5 minutes before Portworx is available.   
 
 ### Step 2: List Instance IP Addrs
 
@@ -50,4 +52,4 @@ Using the key provided for the template, you can now login to the nodes as the *
 
 ### Next Steps
 
-The Portworx CloudFormation Template is freely available and can be easily customized.   
+The Portworx CloudFormation Template is freely available and can be easily customized.  
