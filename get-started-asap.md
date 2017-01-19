@@ -35,21 +35,9 @@ You may see a message indicating AWS is "Unable to list IAM roles", which can be
 
 - Create the stack and wait for completion.  After the stack status is "CREATE COMPLETE", it may still be 5 minutes before Portworx is available.   
 
-### Step 2: List Instance IP Addrs
-
-Using the AWS CLI for a particular region, list the IP Addresses for the instances, based on the CloudFormation Stack Name
-Example:
-
-```
-REGION=us-east-1
-STACK_NAME="PX-STACK"
-aws --region ${REGION} ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}' --output text
-```
-
-Similarly, you can find all EC2 Instances named "PX-STACK" or whichever name was provided, and look for the IP or DNS addresses.
-
-Using the key provided for the template, you can now login to the nodes as the **"core"** user, and **"sudo root"** as needed.
 
 ### Next Steps
+
+Go use containers that require data persistence, high-availability, snapshots and other container-granular services.
 
 The Portworx CloudFormation Template is freely available and can be easily customized.  
