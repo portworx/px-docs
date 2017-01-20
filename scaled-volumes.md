@@ -1,11 +1,11 @@
 # Volume Scale
 
 Orchestration software such as kubernetes, mesos, etc. allow scaling the
-number of instances of the pod/application.  When these containers require data volumes, there is no way to link the containers to a volume.
+number of instances of pods/applications. However, when these pods/applications require data volumes, there is no way to associate instances to data volumes.
 
 Volume scale allows re-use of the same volume name for all container instances
 by performing on-demand creation of volumes as user containers get
-scheduled on different nodes.
+scheduled on different nodes. Each instance of a container gets a unique instance of a data volume.
 
 In runtime, a node may fail and applications get respawned on different nodes. With volume 
 scale, applications are re-associated with volumes regardless of where they are
@@ -17,8 +17,8 @@ convergent architectures.
 ## Implementation
 
 When a scaled volume is requested to be attached, an attempt is made to attach a volume
-that has data local to the node. If such volume is not found, then one is
-created.  An error is returned if a free volume is not found, or if no more volumes can be created.
+that has data local to the node. If such a volume is not found, then one is
+created using the volume spec of the scaled volume as a template.  An error is returned if a free volume is not found and no more volumes can be created.
 
 ## Usage
 
