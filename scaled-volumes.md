@@ -9,7 +9,7 @@ scheduled on different nodes.
 
 In runtime, a node may fail and applications get respawned on different nodes. With volume 
 scale, applications are re-associated with volumes regardless of where they are
-respawned  Because the association between a container and volume is done
+respawned. Because the association between a container and volume is done
 *after* the scheduler picks a node, the volume 
 chosen is a volume that has data local to the node, thus enabling hyper
 convergent architectures.
