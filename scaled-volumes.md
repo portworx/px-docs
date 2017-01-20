@@ -80,5 +80,5 @@ At present all the instances of the scaled volume need to be deleted one by one.
 
 ### How do I request for a specific instance of a scaled volume
 
-You can always specify by name a specific instance of scaled volume to be used.
+You can always specify a scaled volume instance by name.
 
