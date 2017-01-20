@@ -9,6 +9,16 @@ For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as yo
 * `docker ps` and get the CONTAINER ID for PX-Developer
 * `docker logs [CONTAINER_ID]`
 
+#### Failed initial deployment
+
+Upon the **initial** attempt to bring up a Portworx cluster, if the first attempt fails due to misconfiguration,
+then subsequent attempts may also fail, due to reusing incomplete/incorrect configuration information.
+Configuration for a given host is always stored in the **/etc/pwx** directory.
+If retrying a previously failed attempt to configure a node, then the **/etc/pwx** directory needs to be removed.
+
+>**Very Important:**<br/> **Never** change or remove **/etc/pwx** *except* when configuring a host for the **first** time.
+
+
 #### "No such file or directory" message when running on SELinux
 
  If you have `SELinux` enabled, you may get the following error message:
