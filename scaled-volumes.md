@@ -60,7 +60,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             12      up - detached
 ```
 
-Decreasing the scaled volume only affects future volumes - volumes created as result of scale will not be deleted.
+Decreasing the scaled volume only restricts creation of future volume. Decreasing scale will not delete any volumes.
 
 
 ### Can I attach more than one instance of a scaled volume on the same node?
