@@ -1,8 +1,7 @@
 # Volume Scale
 
 Orchestration software such as kubernetes, mesos, etc. allow scaling the
-number of instances of the pod/application.  When these containers are
-associated with volumes, there is no way to link the containers to a volume.
+number of instances of the pod/application.  When these containers require data volumes, there is no way to link the containers to a volume.
 
 Volume scale allows re-use of the same volume name for all container instances
 by performing on-demand creation of volumes as user containers get
