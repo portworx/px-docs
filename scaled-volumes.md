@@ -38,12 +38,14 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ```
 
 ## Docker CLI
+
 ```
 [root@porx]# docker volume create --driver pxd --name elk_vol --opt scale=10
 [root@porx]# pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
+
 ## Inline volume creation
 
 ```
@@ -54,7 +56,6 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 
 ```
-## FAQ
 
 ### Update scale factor after volume creation
 
@@ -68,6 +69,8 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ```
 
 Decreasing the scaled volume only restricts creation of future volumes. Decreasing scale will not delete any volumes.
+
+## FAQ
 
 ### Can I attach more than one instance of a scaled volume on the same node?
 
