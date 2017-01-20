@@ -5,14 +5,14 @@ number of intances of the pod/application.  When these containers are
 associated with volumes, there is no way to link the containers to a volume.
 
 Volume scale allows re-use of the same volume name for all container instances
-by performing on-demand creation of volumes as the user containers get
+by performing on-demand creation of volumes as  user containers get
 scheduled on a node.
 
 In runtime, a node may fail and applications get respawned. With volume 
 scale, applications are re-associated with volumes regardless of where they get
 spun up again.  Because the association between a container and volume is done
-*after* the scheduler picks a node to spin it up, the most optimal volume is
-chosen. This can be a volume that has data local to the node enable hyper
+*after* the scheduler picks a node to spin it up, the volume 
+chosen is a volume that has data local to the node enabling hyper
 convergent architectures.
 
 ## Implementation
