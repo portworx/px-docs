@@ -47,7 +47,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ## Inline volume creation
 
 ```
-[root@porx]# docker volume create -d pxd --name scale=10,size=1G,ha=1,name=elk_vol
+[root@porx]# docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
 
 [root@porx]# pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
