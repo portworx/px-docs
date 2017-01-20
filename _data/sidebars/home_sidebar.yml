@@ -198,6 +198,9 @@ entries:
     - title: FAQs
       url: /px-faqs.html
       output: web
+    - title: Troubleshooting
+      url: /troubleshooting.html
+      output: web
   - title: Release Notes
     output: web
     folderitems:
