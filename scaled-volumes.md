@@ -9,9 +9,9 @@ by performing on-demand creation of volumes as  user containers get
 scheduled on a node.
 
 In runtime, a node may fail and applications get respawned. With volume 
-scale, applications are re-associated with volumes regardless of where they get
+scale, applications are re-associated with volumes regardless of where they are
 spun up again.  Because the association between a container and volume is done
-*after* the scheduler picks a node to spin it up, the volume 
+*after* the scheduler picks a node, the volume 
 chosen is a volume that has data local to the node enabling hyper
 convergent architectures.
 
