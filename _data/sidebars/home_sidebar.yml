@@ -42,7 +42,7 @@ entries:
     - title: Shared Volumes
       url: /shared-volumes.html
       output: web
-    - title: Shared Volumes
+    - title: Scaled Volumes
       url: /scaled-volumes.html
       output: web
     - title: Class of Service
