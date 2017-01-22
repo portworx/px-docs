@@ -4,9 +4,11 @@ title: "Pre-requisites : Devicemapper setup"
 keywords: portworx, px-developer, devicemapper
 sidebar: home_sidebar
 ---
-Portworx recommends using devicemapper for the thinpool, rather than loopback devices.
+Portworx recommends using devicemapper as the default graph driver for container images.
 
-[This script](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/devicemapper-setup.sh) can be used to help with the basic thinpool and devicemapper setup.
+Please follow [these instructions](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper) to setup Device Mapper for your distribution.
+
+[This script](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/devicemapper-setup.sh) can also be used to help with the basic thinpool and devicemapper setup.
 
 Please note the following caveats:
 
