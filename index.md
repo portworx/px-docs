@@ -16,7 +16,7 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 
 **Try It Now!**
 
-<a href="http://docs.portworx.com/get-started-asap.html"><img src="http://www.staples-3p.com/s7/is/image/Staples/s0105150_sc7?$splssku$" width=10% height=10%></a>
+<a href="{{site.github.url}}/get-started-asap.html"><img src="http://www.staples-3p.com/s7/is/image/Staples/s0105150_sc7?$splssku$" width=10% height=10%></a>
 
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
