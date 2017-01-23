@@ -7,9 +7,9 @@ sidebar: home_sidebar
 
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS CloudFormation**](https://aws.amazon.com/cloudformation/)
 
-Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 that will bring up a complete 3-node **px-dev** stack in **less than 10 minutes**.
+Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 ("Stable") that will bring up a complete 3-node **px-dev** stack in **less than 10 minutes**.
 
-This template is based on the CoreOS "Stable" Channel (version 1235.4.0) and includes the following to enable Portworx deployments:
+This template includes the following to enable Portworx deployments:
 
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool of configurable size
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003)
