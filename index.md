@@ -14,6 +14,9 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 * Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
 * Is radically simple.
 
+**Try It Now!**
+<a href="http://docs.portworx.com/get-started-asap.html"><img style="" src="https://github.com/portworx/px-docs/blob/gh-pages/images/easy_button.png" width=10% height=10%></a>
+
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
 ## Join us on Slack!
