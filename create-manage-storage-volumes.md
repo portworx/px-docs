@@ -142,7 +142,7 @@ These inline specs can be passed in through the scheduler application template. 
 	},
 	{
 		"key": "volume",
-		"value": "size=100G,ha=3,cos=3,name=mysql_vol:/var/lib/mysql"
+		"value": "size=100G,repl=3,cos=3,name=mysql_vol:/var/lib/mysql"
 	}],
 ```
 
