@@ -17,7 +17,7 @@ This template includes the following to enable Portworx deployments:
 ### Configure and Launch the Portworx stack
 
 
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" target="_blank"></a></p>
 
 - Click the "Launch Stack" button above.  The Portworx Template is automatically loaded into CloudFormation.   Click **Next**
 
