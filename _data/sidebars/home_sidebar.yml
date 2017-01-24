@@ -135,6 +135,9 @@ entries:
     - title: Create PX volume for NFS share
       url: /share-vol-for-nfs.html
       output: web
+    - title: Object Storage with Portworx
+      url: /object-storage.html
+      output: web
   - title: Reference Architectures
     output: web
     folderitems:
