@@ -25,7 +25,7 @@ docker volume create -d pxd --name minio-export --opt size=30G --opt repl=3
 ```
 
 ## Launch Minio Object Storage Server
-To run the Minio Object Storage Server with the Portworx volumes created above:
+To run the Minio Object Storage Server with the Portworx persistent volumes created above:
 
 ```
 docker run -p 9000:9000 --name minio1 -d \
