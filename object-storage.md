@@ -15,7 +15,7 @@ service layer on top of Portworx data services.
 
 Both products complement each other with their stunning simplicity.
 
-## Object Storage Preparation
+## Create Portworx Persistent Volumes
 Minio requires 2 volumes:  one for configuration meta-data, and one for user data.
 For example:
 
