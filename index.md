@@ -9,13 +9,14 @@ sidebar: home_sidebar
 
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
 
+* Allows data services to be driven by DevOps. 
 * Provides data protection and container-granular management.
-* Enables companies to run multi-cloud with any scheduler.
+* Enables applications to run multi-cloud with any scheduler.
 * Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
 * Is radically simple.
 
 **Try It Now!**
-[![](/images/easy_button_favicon-96x96.png)](/get-started-asap.html)
+[![](/images/launch.png)](/get-started-asap.html)
 
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
