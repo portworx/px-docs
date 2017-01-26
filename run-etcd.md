@@ -10,12 +10,12 @@ sidebar: home_sidebar
 We recommend that you run etcd in a container
 
 ```
-# docker run -d --name etcd 					\
-	-v /var/lib/etcd:/var/lib/etcd				\
+# docker run -d --name etcd                     \ 
+	-v /var/lib/etcd:/var/lib/etcd              \
 	--net host --entrypoint=/usr/local/bin/etcd \
-	quay.io/coreos/etcd:latest 					\
-	--listen-peer-urls 'http://0.0.0.0:2380' 	\
-	--data-dir=/var/lib/etcd/					\
+	quay.io/coreos/etcd:latest                  \
+	--listen-peer-urls 'http://0.0.0.0:2380'    \
+	--data-dir=/var/lib/etcd/                   \
 	--listen-client-urls 'http://0.0.0.0:2379'  \
 	--advertise-client-urls 'http://<your ip>:2379'
 
