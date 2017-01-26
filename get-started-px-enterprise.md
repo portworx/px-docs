@@ -16,12 +16,12 @@ keywords: portworx, px-developer, container, storage, requirements
   * 4 CPU cores
   * 4 GB RAM
 * Recommended resources per server:
-  * 12 CPU cores
-  * 16 GB RAM
+  * 8 CPU cores
+  * 8 GB RAM
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
-  * 20 server nodes
+  * 1000 server nodes
 * Open network ports:
   * Ports 9000 - 9005 must be open for internal network traffic between nodes running PX
 
