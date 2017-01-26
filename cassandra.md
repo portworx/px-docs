@@ -63,4 +63,9 @@ Be sure to change the IP addresses in the following examples to the ones used by
     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
 ```
 
-It can take up to 30 seconds for Cassandra to start up on each node. To determine when your cluster is ready for use, view the logs. You should see messages that each node is part of the cluster.
+It is not recommended to start more than one node at a time. Advanced users may use auto_bootstrap: false setting to workaround that. It can take up to 30 seconds for Cassandra to start up on each node. To determine when your cluster is ready for use, view the logs. You should see messages that each node is part of the cluster.
+### `nodetool status` command for status of the cluster
+
+```
+    docker exec -it cassandra1 nodetool status
+```
