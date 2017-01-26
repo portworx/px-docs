@@ -10,7 +10,7 @@ sidebar: home_sidebar
 We recommend that you run etcd in a container
 
 ```
-docker run -d --name etcd 						\
+# docker run -d --name etcd 					\
 	-v /var/lib/etcd:/var/lib/etcd				\
 	--net host --entrypoint=/usr/local/bin/etcd \
 	quay.io/coreos/etcd:latest 					\
@@ -19,7 +19,7 @@ docker run -d --name etcd 						\
 	--listen-client-urls 'http://0.0.0.0:2379'  \
 	--advertise-client-urls 'http://<your ip>:2379'
 
-curl -X GET http://127.0.0.1:2379/version
+# curl -X GET http://127.0.0.1:2379/version
 ```
 
 Note that the etcd port is 2379.
