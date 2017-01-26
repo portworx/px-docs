@@ -10,7 +10,8 @@ sidebar: home_sidebar
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
 
 * Allows data services to be driven by DevOps. 
-* Provides data protection and container-granular management.
+* Provides container granular persistent data volumes.
+* Provides enterprise grade production features such as container granular HA, snapshots, encryption and shared namespaces.
 * Enables applications to run multi-cloud with any scheduler.
 * Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
 * Is radically simple.
