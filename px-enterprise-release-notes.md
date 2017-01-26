@@ -10,7 +10,6 @@ sidebar: home_sidebar
 ### Key issues addressed
 
 * Improved handling of node restarts and replication
-* etcd2 to etcd3 upgrade support
 
 ## 1.1.3 Release notes
 
