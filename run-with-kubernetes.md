@@ -29,7 +29,7 @@ To run the PX container using Docker, run the following command:
     -v /usr/src:/usr/src                          \
     -v /lib/modules:/lib/modules                  \
     --ipc=host                                    \
-    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
 Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
