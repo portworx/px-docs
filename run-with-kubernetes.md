@@ -34,9 +34,9 @@ For CentOS
 ```
 
 For CoreOS and VMWare Photon	
- 		
- ```		
- sudo docker run --restart=always --name px -d --net=host \		
+
+```
+# sudo docker run --restart=always --name px -d --net=host \		
    --privileged=true                             \		
    -v /run/docker/plugins:/run/docker/plugins    \		
    -v /var/lib/osd:/var/lib/osd:shared           \		
@@ -50,8 +50,7 @@ For CoreOS and VMWare Photon
    -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \		
    --ipc=host                                    \		
    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc		
- ```
-
+```
 
 Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
 
