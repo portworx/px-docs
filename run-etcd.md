@@ -8,7 +8,7 @@ sidebar: home_sidebar
 Portworx recommends running **etcd** in a container
 
 ```
-# docker run -d --name etcd                     \ 
+# docker run -d --name etcd                         \
 	-v /var/lib/etcd:/var/lib/etcd              \
 	--net=host --entrypoint=/usr/local/bin/etcd \
 	quay.io/coreos/etcd:latest                  \
