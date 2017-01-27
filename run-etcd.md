@@ -1,13 +1,11 @@
 ---
 layout: page
-title: "Run PX with Docker"
+title: "Run your own etcd server"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
 ---
 
-### Run your own etcd server
-
-We recommend that you run etcd in a container
+Portworx recommends running **etcd** in a container
 
 ```
 # docker run -d --name etcd                     \ 
