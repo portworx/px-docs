@@ -52,6 +52,7 @@ If using Apache Mesos:
 ```
 
 ## Step 3: Deploy Portworx
+
 ### Step 3a: Deploy Portworx through Universe
 Portworx is now available through the Mesosphere Universe catalog of services.
 ![Portworx on Universe](/images/universe.png)
