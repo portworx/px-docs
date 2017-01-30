@@ -51,7 +51,16 @@ If using Apache Mesos:
    systemctl status mesos-slave -l
 ```
 
-## Step 3: Deploy Portworx through Marathon
+## Step 3: Deploy Portworx
+### Step 3a: Deploy Portworx through Universe
+Portworx is now available through the Mesosphere Universe catalog of services.
+![Portworx on Universe](/images/universe.png)
+
+Deploying Portworx through Mesosphere Universe provides great ease of deployment.
+Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/1.8/portworx) 
+
+
+### Step 3b: Deploy Portworx through Marathon
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
 The pre-requisites for installing Portworx through Marathon include:
