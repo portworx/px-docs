@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Create Portworx-based Volume Stacks with Docker Compose"
+title: "Docker Compose, Wordpress and MySQL on Portworx"
 keywords: portworx, volume stack, application stack, docker compose
 sidebar: home_sidebar
 ---
