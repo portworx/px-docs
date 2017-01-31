@@ -123,7 +123,7 @@ entries:
     - title: Run Redis with Portworx
       url: /redis.html
       output: web
-    - title: Create Portworx-based Volume Stacks with Docker Compose
+    - title: Docker Compose, Wordpress, and MySQL on Portworx
       url: /docker-compose.html
       output: web
     - title: PostgreSQL with CrunchyData and Portworx
