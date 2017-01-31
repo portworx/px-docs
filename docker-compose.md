@@ -13,42 +13,44 @@ Here's a sample docker-compose.yml file that brings up a wordpress and mysql sta
 
 ```yaml
 version: '2'
+
 services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - sqlvol:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: wordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
 
-  wordpress:
-    image: wordpress
-    container_name: wordpress
-    working_dir: /var/www/html
-    volumes:
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     volumes:
       - wpvol:/var/www/html
-    links:
-      - db:mysql
-    ports:
-      - 8080:80
-    environment:
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_DB_HOST: <IPADDR>:3306
-
-  db:
-    image: mysql
-    container_name: mysql
-    network_mode: "host"
-    volumes:
-      - sqlvol:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_PASSWORD: wordpress
 volumes:
   wpvol:
     driver: pxd
     external: false
     driver_opts:
        size: 7
+       repl: 3
   sqlvol:
     driver: pxd
     external: false
     driver_opts:
        size: 6
+       repl: 3
 ```
 
 After `docker-compose up -d`, the following volumes are automatically created through docker-compose, through the existence of `external: false`. You can also create volumes out of band with `pxctl`, and reference them with `external: true`.
