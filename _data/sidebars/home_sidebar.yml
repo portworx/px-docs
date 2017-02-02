@@ -31,7 +31,7 @@ entries:
       url: /run-with-docker.html
       output: web
     - title: Run with CoreOS
-      url: /run-with-docker.html
+      url: /run-with-docker-coreos.html
       output: web
     - title: Run with Docker Compose
       url: /run-with-compose.html
