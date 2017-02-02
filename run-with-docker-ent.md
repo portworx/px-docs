@@ -65,10 +65,27 @@ You can now run PX via the Docker CLI as follows:
                  -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2 -d eth0 -m eth0
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
 ```
 
 >**Note:**<br/>For Lighthouse users, when you create a cluster in the Lighthouse console, Lighthouse will craft the above command with the correct values for the KVDB and cluster ID.
+
+>**Important:** CoreOS and VmWare Photon users run the command below:
+
+```
+# sudo docker run --restart=always --name px -d --net=host     \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                 -v /lib/modules:/lib/modules                  \
+                 --ipc=host                                    \
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
+```
 
 The following arguments are provided to the PX daemon:
 
