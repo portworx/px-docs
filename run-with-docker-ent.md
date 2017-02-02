@@ -70,7 +70,7 @@ You can now run PX via the Docker CLI as follows:
 
 >**Note:**<br/>For Lighthouse users, when you create a cluster in the Lighthouse console, Lighthouse will craft the above command with the correct values for the KVDB and cluster ID.
 
->**Important:** CoreOS and VmWare Photon users run the command below:
+>**Important:** CoreOS and VMWare Photon users run the command below:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host     \
