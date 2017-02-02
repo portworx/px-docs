@@ -14,7 +14,7 @@ Portworx can be deployed via K8s directly, or run on each host via docker or sys
 
 To run the PX container using Docker, run the following command:
 
-For CentOS
+For Redhat, Ubuntu and Debian distros:
 
 ```
 # sudo docker run --restart=always --name px -d --net=host \
@@ -77,7 +77,7 @@ One way to start K8s for single node local setup is using the local-up-cluster.s
 
 By default the K8s volume plugin directory is "/usr/libexec/kubernetes/kubelet-plugins/volume/exec". If you are starting kubelet service by hand then make sure that you set the --volume-plugin-dir correctly. This is the directory where kubelet tries to search for portworx's volume driver. Example kubelet commands:
 
-For CentOS
+For Redhat, Ubuntu, Debian distros:
 
 ```
 kubelet-wrapper \
@@ -92,7 +92,7 @@ kubelet-wrapper \
   --cluster-domain=cluster.local
 ```
 
-For CoreOS
+For CoreOS and VMWare Photon:
 
 ```
 kubelet-wrapper \

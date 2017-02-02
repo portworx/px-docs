@@ -1,9 +1,11 @@
 ---
 layout: page
-title: "Run PX with Docker"
+title: "Run PX with CoreOS"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
 ---
+These instructions are for CoreOS and VMWare Photon.
+
 To install and configure PX via the Docker CLI, use the command-line steps in this section.
 
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](run-etcd.md) for PX
@@ -57,7 +59,6 @@ You can now run PX via the Docker CLI as follows:
                  -v /opt/pwx/bin:/export_bin:shared            \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-                 -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
@@ -182,7 +183,6 @@ You can now start the Portworx container with the following run command:
                  -v /opt/pwx/bin:/export_bin:shared            \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-                 -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
                  --ipc=host                                    \
                 portworx/px-dev

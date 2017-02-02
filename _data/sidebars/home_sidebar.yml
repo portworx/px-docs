@@ -30,6 +30,9 @@ entries:
     - title: Run with Docker
       url: /run-with-docker.html
       output: web
+    - title: Run with CoreOS
+      url: /run-with-docker.html
+      output: web
     - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
