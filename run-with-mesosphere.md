@@ -67,7 +67,7 @@ This section assumes that Portworx will be installed on a set of homogeneously c
 The pre-requisites for installing Portworx through Marathon include:
 
 1. Determine the list of physical devices (disks and interfaces) for the agent/slave nodes
-2. If running PX-Enterprise in '**air-gapped**' mode, then follow instructions for [running a on-prem lighthouse](run-lighthouse-with-secure-etcd.html) and note the IPaddress and Port. 
+2. If running PX-Enterprise in '**air-gapped**' mode, then follow instructions for [running a on-prem lighthouse](run-lighthouse-with-secure-etcd.html) and note the IPaddress and Port of the etcd server. 
 3. If running PX-Enterprise, obtain your Lighthouse token.
 
 The following is a sample JSON file that can be used to launch Portworx through Marathon
