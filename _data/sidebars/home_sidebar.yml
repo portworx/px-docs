@@ -166,7 +166,7 @@ entries:
       url: /portworx-flannel-userns.html
       output: web
     - title: Portworx on AWS CloudFormation with CoreOS
-      url: /px_on_aws_cloudformation.html
+      url: /get-started-asap.html
       output: web
   - title: Enterprise Edition
     output: web
