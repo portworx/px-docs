@@ -266,6 +266,11 @@ Note:   The **'kvdb**' parameter refers to the IP:Port of the containerized ‘e
 Verify that the Portworx cluster is running via "/opt/pwx/bin/pxctl status".   
 All nodes should be present through the host IP address.
 
+### Start Applications
+
+When deploying an application that takes advantage of Portworx storage with User Namespaces , 
+containers must also run with `–userns=host`.  Failure to run applications with `-userns=host` will result in **Permission Denied** error.
+
 ### Reference Links:
                           
 [http://chunqi.li/2015/10/10/Flannel-for-Docker-Overlay-Network/](http://chunqi.li/2015/10/10/Flannel-for-Docker-Overlay-Network/)
