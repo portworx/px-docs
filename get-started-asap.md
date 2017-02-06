@@ -12,12 +12,12 @@ Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 ("Stable"
 This template includes the following to enable Portworx deployments:
 
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool of configurable size
-+ Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003)
++ Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003, 9004)
 
 ### Configure and Launch the Portworx stack
 
 
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/2017019oeI-Portworx_CoreOS_Stack_v36ky4q0o5aniv7nslr74f7mbo6r" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/Portworx_CoreOS_Stack_v1.2_Feb06_2017" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
 
 - Click the "Launch Stack" button above.  The Portworx Template is automatically loaded into CloudFormation.   Click **Next**
 
