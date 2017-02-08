@@ -105,6 +105,9 @@ The following arguments are provided to the PX daemon:
 -a
 	> Instructs PX to use any available, unused and unmounted drive.  PX will never use a drive that is mounted.
 
+-A
+    > Instructs PX to use any available, unused and unmounted drives or partitions.  PX will never use a drive or partition that is mounted.
+
 -f
 	> Optional.  Instructs PX to use an unmounted drive even if it has a filesystem on it.
 
