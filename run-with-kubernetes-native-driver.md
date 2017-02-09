@@ -73,7 +73,7 @@ For CoreOS and VMWare Photon
 Create a Volume using Portworx CLI.
 On one of the Kubernetes nodes with Portworx installed run the following command
 
-```bash
+```
 # /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
 ```
 
@@ -109,12 +109,12 @@ the ones that you used while creating the volume.
 
 Create the Pod.
 
-```bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pod.yaml
 ```
 Verify that pod is running:
 
-```bash
+```
 # kubectl.sh get pods
     NAME                       READY     STATUS    RESTARTS   AGE
     test-portworx-volume-pod   1/1       Running   0          16s
@@ -126,7 +126,7 @@ Verify that pod is running:
 
 You can create a persistent volume using the following command:
 
-``` bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
 ```
 Example:
@@ -153,7 +153,7 @@ the ones that you used while creating the volume.
 
 Verifying persistent volume is created:
 
-``` bash
+```
 # kubectl describe pv pv0001
     Name: 	        pv0001
     Labels:		<none>
@@ -175,7 +175,7 @@ Verifying persistent volume is created:
 
 You can create a persistent volume claim using the following command:
 
-``` bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
 ```
 Example:
@@ -196,7 +196,7 @@ Example:
 
 Verifying persistent volume claim is created:
 
-``` bash
+```
 # kubectl describe pvc pvc0001
     Name:		pvc0001
     Namespace:	        default
@@ -212,7 +212,7 @@ Verifying persistent volume claim is created:
 
 You can create a pod which uses the PVC by running the following command:
 
-``` bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
 ```
 
@@ -239,7 +239,7 @@ Example:
 
 Verifying pod is created:
 
-``` bash
+```
 # kubectl get pod pvpod
     NAME      READY     STATUS    RESTARTS   AGE
     pvpod       1/1     Running   0          48m        
@@ -270,7 +270,7 @@ Storage Class
 
 Create the storageclass:
 
-``` bash
+```
 # kubectl create -f
    examples/volumes/portworx/portworx-volume-sc-high.yaml
 ```
@@ -292,7 +292,7 @@ Example:
 
 Verifying storage class is created:
 
-``` bash
+```
 # kubectl describe storageclass portworx-io-priority-high
      Name: 	        	portworx-io-priority-high
      IsDefaultClass:	        No
@@ -306,7 +306,7 @@ Verifying storage class is created:
 
 Creating the persistent volume claim:
 
-``` bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
 ```
 
@@ -330,7 +330,7 @@ Example:
 
 Verifying persistent volume claim is created:
 
-``` bash
+```
 # kubectl describe pvc pvcsc001
     Name:	      	pvcsc001
     Namespace:      	default
@@ -346,7 +346,7 @@ Persistent Volume is automatically created and is bounded to this pvc.
 
 Verifying persistent volume claim is created:
 
-``` bash
+```
 # kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
     Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:        	<none>
@@ -367,7 +367,7 @@ Verifying persistent volume claim is created:
 
 Create the pod:
 
-``` bash
+```
 # kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
 ```
 
@@ -394,7 +394,7 @@ Example:
 
 Verifying pod is created:
 
-``` bash
+```
 # kubectl get pod pvpod
    NAME      READY     STATUS    RESTARTS   AGE
    pvpod       1/1     Running   0          48m        
