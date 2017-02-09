@@ -159,9 +159,9 @@ Verifying persistent volume is created:
 ``` bash
 # kubectl describe pv pv0001
     Name: 	        pv0001
-    Labels:			<none>
+    Labels:		<none>
     StorageClass:
-    Status:			Available
+    Status:		Available
     Claim:
     Reclaim Policy:	Retain
     Access Modes:	RWO
@@ -169,8 +169,8 @@ Verifying persistent volume is created:
     Message:
     Source:
     Type:	        PortworxVolume (a Portworx Persistent Volume resource)
-    VolumeID:	    pv0001
-    FSType:         ext4
+    VolumeID:	        pv0001
+    FSType:             ext4
     No events.
 ```
 
@@ -202,11 +202,11 @@ Verifying persistent volume claim is created:
 ``` bash
 # kubectl describe pvc pvc0001
     Name:		pvc0001
-    Namespace:	default
+    Namespace:	        default
     Status:		Bound
     Volume:		pv0001
     Labels:		<none>
-    Capacity:	2Gi
+    Capacity:	        2Gi
     Access Modes:	RWO
     No events.
 ```
@@ -298,7 +298,7 @@ Verifying storage class is created:
 ``` bash
 # kubectl describe storageclass portworx-io-priority-high
      Name: 	        	portworx-io-priority-high
-     IsDefaultClass:	No
+     IsDefaultClass:	        No
      Annotations:		<none>
      Provisioner:		kubernetes.io/portworx-volume
      Parameters:		io_priority=high,repl=1,snapshot_interval=70
@@ -335,15 +335,15 @@ Verifying persistent volume claim is created:
 
 ``` bash
 # kubectl describe pvc pvcsc001
-   Name:	      	pvcsc001
-   Namespace:      	default
-   StorageClass:   	portworx-io-priority-high
-   Status:	      	Bound
-   Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
-   Labels:	      	<none>
-   Capacity:	    2Gi
-   Access Modes:   	RWO
-   No Events.
+    Name:	      	pvcsc001
+    Namespace:      	default
+    StorageClass:   	portworx-io-priority-high
+    Status:	      	Bound
+    Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
+    Labels:	      	<none>
+    Capacity:	        2Gi
+    Access Modes:   	RWO
+    No Events.
 ```
 Persistent Volume is automatically created and is bounded to this pvc.
 
@@ -351,19 +351,19 @@ Verifying persistent volume claim is created:
 
 ``` bash
 # kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
-   Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
-   Labels:        	<none>
-   StorageClass:  	portworx-io-priority-high
-   Status:	      	Bound
-   Claim:	      	default/pvcsc001
-   Reclaim Policy: 	Delete
-   Access Modes:   	RWO
-   Capacity:	    2Gi
-   Message:
-   Source:
-   Type:	      	PortworxVolume (a Portworx Persistent Volume resource)
-   VolumeID:   		374093969022973811
-   No events.
+    Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
+    Labels:        	<none>
+    StorageClass:  	portworx-io-priority-high
+    Status:	      	Bound
+    Claim:	      	default/pvcsc001
+    Reclaim Policy: 	Delete
+    Access Modes:   	RWO
+    Capacity:	        2Gi
+    Message:
+    Source:
+    Type:	      	PortworxVolume (a Portworx Persistent Volume resource)
+    VolumeID:   	374093969022973811
+    No events.
 ```
 
 #### Step3: Create Pod which uses Persistent Volume Claim with storage class.
