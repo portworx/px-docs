@@ -127,6 +127,7 @@ Verify that pod is running:
 #### Step1: Create Persistent Volume.
 
 You can create a persistent volume using the following command:
+
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
 ```
@@ -175,6 +176,7 @@ Verifying persistent volume is created:
 #### Step2: Create Persistent Volume Claim.
 
 You can create a persistent volume claim using the following command:
+
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
 ```
@@ -211,6 +213,7 @@ Verifying persistent volume claim is created:
 #### Step3: Create Pod which uses Persistent Volume Claim.
 
 You can create a pod which uses the PVC by running the following command:
+
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
 ```
@@ -237,6 +240,7 @@ Example:
 [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
 Verifying pod is created:
+
 ``` bash
       $ kubectl get pod pvpod
       NAME      READY     STATUS    RESTARTS   AGE
@@ -268,10 +272,12 @@ Storage Class
 #### Step1: Create Storage Class.
 
 Create the storageclass:
+
 ``` bash
      $ kubectl create -f
      examples/volumes/portworx/portworx-volume-sc-high.yaml
 ```
+
 Example:
 
 ```yaml
@@ -298,6 +304,7 @@ Verifying storage class is created:
        Parameters:	io_priority=high,repl=1,snapshot_interval=70
        No events.
 ```
+
 #### Step2: Create Persistent Volume Claim.
 
 Creating the persistent volume claim:
