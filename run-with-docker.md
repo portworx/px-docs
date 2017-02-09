@@ -48,7 +48,8 @@ Identify the storage devices you will be allocating to PX.  PX can run in a hete
 You can now run PX via the Docker CLI as follows:
 
 ```
-# sudo docker run --restart=always --name px -d --net=host     \
+if `uname -r | grep coreos > /dev/null`; then HDRS="/lib/modules"; else HDRS="/usr/src"; fi
+sudo docker run --restart=always --name px -d --net=host       \
                  --privileged=true                             \
                  -v /run/docker/plugins:/run/docker/plugins    \
                  -v /var/lib/osd:/var/lib/osd:shared           \
@@ -57,8 +58,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /opt/pwx/bin:/export_bin:shared            \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-                 -v /usr/src:/usr/src                          \
-                 -v /lib/modules:/lib/modules                  \
+		  -v ${HDRS}:${HDRS}                           \
                  --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
 ```
