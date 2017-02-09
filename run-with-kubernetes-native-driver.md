@@ -75,17 +75,18 @@ sudo docker run --restart=always --name px -d --net=host \
   Create a Volume using Portworx CLI.
   On one of the Kubernetes nodes with Portworx installed run the following command
 
-  ```shell
-  /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
-  ```
+```
+/opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
 
-#### Running Pods
+```
+
+### Running Pods
 
    Create Pod which uses Portworx Volumes
 
    Example spec:
 
-   ```yaml
+```yaml
    apiVersion: v1
    kind: Pod
    metadata:
@@ -103,7 +104,7 @@ sudo docker run --restart=always --name px -d --net=host \
        portworxVolume:
          volumeID: "<vol-id>"
          fsType: "<fs-type>"
-   ```
+```
 
    [Download example](k8s-samples/portworx-volume-pod.yaml?raw=true)
 
@@ -112,25 +113,25 @@ sudo docker run --restart=always --name px -d --net=host \
 
    Create the Pod.
 
-   ``` bash
+``` bash
    $ kubectl create -f examples/volumes/portworx/portworx-volume-pod.yaml
-   ```
+```
 
    Verify that pod is running:
 
-   ```bash
+```bash
    $ kubectl.sh get pods
      NAME                       READY     STATUS    RESTARTS   AGE
      test-portworx-volume-pod   1/1       Running   0          16s
-   ```
+```
 
-#### Persistent Volumes
+### Persistent Volumes
 
   1. Create Persistent Volume.
 
       Example spec:
 
-      ```yaml
+```yaml
       apiVersion: v1
       kind: PersistentVolume
       metadata:
@@ -144,7 +145,7 @@ sudo docker run --restart=always --name px -d --net=host \
         portworxVolume:
           volumeID: "<vol-id>"
           fsType:   "<fs-type>"
-      ```
+```
 
       Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
       the ones that you used while creating the volume.
@@ -153,13 +154,13 @@ sudo docker run --restart=always --name px -d --net=host \
 
       Creating the persistent volume:
 
-      ``` bash
+``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
-      ```
+```
 
       Verifying persistent volume is created:
 
-      ``` bash
+``` bash
       $ kubectl describe pv pv0001
       Name: 	        pv0001
       Labels:		<none>
@@ -175,13 +176,13 @@ sudo docker run --restart=always --name px -d --net=host \
       VolumeID:	        pv0001
       FSType:           ext4
       No events.
-      ```
+```
 
   2. Create Persistent Volume Claim.
 
       Example spec:
 
-      ```yaml
+```yaml
       kind: PersistentVolumeClaim
       apiVersion: v1
       metadata:
@@ -192,7 +193,7 @@ sudo docker run --restart=always --name px -d --net=host \
         resources:
           requests:
             storage: <size>Gi
-      ```
+```
 
       [Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
 
@@ -254,12 +255,12 @@ sudo docker run --restart=always --name px -d --net=host \
       pvpod       1/1     Running   0          48m        
       ```
 
-### Using Dynamic Provisioning
+## Using Dynamic Provisioning
 
 Using Dynamic Provisioning and Storage Classes you don't need to
 create Portworx volumes out of band and they will be created automatically.
 
-#### Storage Class
+### Storage Classes
 
   Using Storage Classes objects an admin can define the different classes of Portworx Volumes
   that are offered in a cluster. Following are the different parameters that can be used to define a Portworx
