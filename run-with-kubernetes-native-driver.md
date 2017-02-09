@@ -266,13 +266,13 @@ create Portworx volumes out of band and they will be created automatically.
   that are offered in a cluster. Following are the different parameters that can be used to define a Portworx
   Storage Class
 
-  * `fs`: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-  * `block_size`: block size in Kbytes (default: `32`)
-  * `repl`: replication factor [1..3] (default: `1`)
-  * `io_priority`: IO Priority: [high|medium|low] (default: `low`)
-  * `snap_interval`: snapshot interval in minutes, 0 disables snaps (default: `0`)
-  * `aggregation_level`: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-  * `ephemeral`: ephemeral storage [true|false] (default `false`)
+  * fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
+  * block_size: block size in Kbytes (default: `32`)
+  * repl: replication factor [1..3] (default: `1`)
+  * io_priority: IO Priority: [high|medium|low] (default: `low`)
+  * snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
+  * aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
+  * ephemeral: ephemeral storage [true|false] (default `false`)
 
 
   1. Create Storage Class.
