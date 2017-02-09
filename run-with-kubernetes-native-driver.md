@@ -10,6 +10,7 @@ or cloud instances into converged, highly available compute and storage nodes.
 
 We have added native driver in Kubernetes that will integrate with PX to dynamically provision volumes for your Pods.
 The native portworx driver in Kubernetes supports the following features:
+
 1. Dynamic Volume Provisioning
 2. Storage Classes
 3. Persistent Volume Claims
