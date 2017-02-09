@@ -199,13 +199,13 @@ sudo docker run --restart=always --name px -d --net=host \
 
       Creating the persistent volume claim:
 
-      ``` bash
+``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
-      ```
+```
 
       Verifying persistent volume claim is created:
 
-      ``` bash
+``` bash
       $ kubectl describe pvc pvc0001
       Name:		pvc0001
       Namespace:	default
@@ -215,13 +215,13 @@ sudo docker run --restart=always --name px -d --net=host \
       Capacity:	2Gi
       Access Modes:	RWO
       No events.
-      ```
+```
 
   3. Create Pod which uses Persistent Volume Claim.
 
       See example:
 
-      ```yaml
+```yaml
       apiVersion: v1
       kind: Pod
       metadata:
@@ -237,23 +237,23 @@ sudo docker run --restart=always --name px -d --net=host \
         - name: test-volume
           persistentVolumeClaim:
             claimName: pvc0001
-      ```
+```
 
       [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
       Creating the pod:
 
-      ``` bash
+``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
-      ```
+```
 
       Verifying pod is created:
 
-      ``` bash
+``` bash
       $ kubectl get pod pvpod
       NAME      READY     STATUS    RESTARTS   AGE
       pvpod       1/1     Running   0          48m        
-      ```
+```
 
 ## Using Dynamic Provisioning
 
@@ -279,7 +279,7 @@ create Portworx volumes out of band and they will be created automatically.
 
      See example:
 
-     ```yaml
+```yaml
      kind: StorageClass
      apiVersion: storage.k8s.io/v1beta1
      metadata:
@@ -289,19 +289,20 @@ create Portworx volumes out of band and they will be created automatically.
        repl: "1"
        snap_interval:   "70"
        io_priority:  "high"
-     ```
+```
 
      [Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
 
      Creating the storageclass:
 
-     ``` bash
-     $ kubectl create -f examples/volumes/portworx/portworx-volume-sc-high.yaml
-     ```
+``` bash
+     $ kubectl create -f
+     examples/volumes/portworx/portworx-volume-sc-high.yaml
+```
 
      Verifying storage class is created:
 
-     ``` bash
+``` bash
      $ kubectl describe storageclass portworx-io-priority-high
        Name: 	        portworx-io-priority-high
        IsDefaultClass:	No
@@ -309,13 +310,13 @@ create Portworx volumes out of band and they will be created automatically.
        Provisioner:	kubernetes.io/portworx-volume
        Parameters:	io_priority=high,repl=1,snapshot_interval=70
        No events.
-     ```
+```
 
   2. Create Persistent Volume Claim.
 
      See example:
 
-     ```yaml
+```yaml
      kind: PersistentVolumeClaim
      apiVersion: v1
      metadata:
@@ -328,19 +329,19 @@ create Portworx volumes out of band and they will be created automatically.
        resources:
          requests:
            storage: 2Gi
-     ```
+```
 
      [Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
 
      Creating the persistent volume claim:
 
-     ``` bash
+``` bash
      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
-     ```
+```
 
      Verifying persistent volume claim is created:
 
-     ``` bash
+``` bash
      $ kubectl describe pvc pvcsc001
      Name:	      pvcsc001
      Namespace:      default
@@ -351,13 +352,13 @@ create Portworx volumes out of band and they will be created automatically.
      Capacity:	      2Gi
      Access Modes:   RWO
      No Events
-     ```
+```
 
      Persistent Volume is automatically created and is bounded to this pvc.
 
      Verifying persistent volume claim is created:
 
-     ``` bash
+``` bash
      $ kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
      Name: 	      pvc-e5578707-c626-11e6-baf6-08002729a32b
      Labels:         <none>
@@ -372,13 +373,13 @@ create Portworx volumes out of band and they will be created automatically.
          Type:	      PortworxVolume (a Portworx Persistent Volume resource)
 	 VolumeID:   374093969022973811
      No events.
-     ```
+```
 
   3. Create Pod which uses Persistent Volume Claim with storage class.
 
      See example:
 
-     ```yaml
+```yaml
      apiVersion: v1
      kind: Pod
      metadata:
@@ -394,21 +395,21 @@ create Portworx volumes out of band and they will be created automatically.
      - name: test-volume
        persistentVolumeClaim:
          claimName: pvcsc001
-     ```
+```
 
      [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
      Creating the pod:
 
-     ``` bash
+``` bash
      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
-     ```
+```
 
      Verifying pod is created:
 
-     ``` bash
+``` bash
      $ kubectl get pod pvpod
      NAME      READY     STATUS    RESTARTS   AGE
      pvpod       1/1     Running   0          48m        
-     ```
+```
 
