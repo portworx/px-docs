@@ -129,7 +129,7 @@ sudo docker run --restart=always --name px -d --net=host \
 
   1. Create Persistent Volume.
 
-      Example spec:
+     Example spec:
 
 ```yaml
       apiVersion: v1
@@ -147,18 +147,18 @@ sudo docker run --restart=always --name px -d --net=host \
           fsType:   "<fs-type>"
 ```
 
-      Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
-      the ones that you used while creating the volume.
+   Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
+   the ones that you used while creating the volume.
 
-      [Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
+   [Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
 
-      Creating the persistent volume:
+   Creating the persistent volume:
 
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
 ```
 
-      Verifying persistent volume is created:
+   Verifying persistent volume is created:
 
 ``` bash
       $ kubectl describe pv pv0001
@@ -180,7 +180,7 @@ sudo docker run --restart=always --name px -d --net=host \
 
   2. Create Persistent Volume Claim.
 
-      Example spec:
+     Example spec:
 
 ```yaml
       kind: PersistentVolumeClaim
@@ -194,16 +194,15 @@ sudo docker run --restart=always --name px -d --net=host \
           requests:
             storage: <size>Gi
 ```
+   [Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
 
-      [Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
-
-      Creating the persistent volume claim:
+   Creating the persistent volume claim:
 
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
 ```
 
-      Verifying persistent volume claim is created:
+   Verifying persistent volume claim is created:
 
 ``` bash
       $ kubectl describe pvc pvc0001
@@ -219,7 +218,7 @@ sudo docker run --restart=always --name px -d --net=host \
 
   3. Create Pod which uses Persistent Volume Claim.
 
-      See example:
+     See example:
 
 ```yaml
       apiVersion: v1
@@ -239,15 +238,15 @@ sudo docker run --restart=always --name px -d --net=host \
             claimName: pvc0001
 ```
 
-      [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
+   [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
-      Creating the pod:
+   Creating the pod:
 
 ``` bash
       $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
 ```
 
-      Verifying pod is created:
+   Verifying pod is created:
 
 ``` bash
       $ kubectl get pod pvpod
@@ -291,16 +290,16 @@ create Portworx volumes out of band and they will be created automatically.
        io_priority:  "high"
 ```
 
-     [Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
+   [Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
 
-     Creating the storageclass:
+   Creating the storageclass:
 
 ``` bash
      $ kubectl create -f
      examples/volumes/portworx/portworx-volume-sc-high.yaml
 ```
 
-     Verifying storage class is created:
+   Verifying storage class is created:
 
 ``` bash
      $ kubectl describe storageclass portworx-io-priority-high
@@ -331,15 +330,15 @@ create Portworx volumes out of band and they will be created automatically.
            storage: 2Gi
 ```
 
-     [Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
+   [Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
 
-     Creating the persistent volume claim:
+   Creating the persistent volume claim:
 
 ``` bash
      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
 ```
 
-     Verifying persistent volume claim is created:
+   Verifying persistent volume claim is created:
 
 ``` bash
      $ kubectl describe pvc pvcsc001
@@ -354,9 +353,9 @@ create Portworx volumes out of band and they will be created automatically.
      No Events
 ```
 
-     Persistent Volume is automatically created and is bounded to this pvc.
+   Persistent Volume is automatically created and is bounded to this pvc.
 
-     Verifying persistent volume claim is created:
+   Verifying persistent volume claim is created:
 
 ``` bash
      $ kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
@@ -397,19 +396,18 @@ create Portworx volumes out of band and they will be created automatically.
          claimName: pvcsc001
 ```
 
-     [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
+   [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
-     Creating the pod:
+   Creating the pod:
 
 ``` bash
      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
 ```
 
-     Verifying pod is created:
+   Verifying pod is created:
 
 ``` bash
      $ kubectl get pod pvpod
      NAME      READY     STATUS    RESTARTS   AGE
      pvpod       1/1     Running   0          48m        
 ```
-
