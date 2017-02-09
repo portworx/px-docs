@@ -62,8 +62,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /var/cores:/var/cores                      \
 		  -v ${HDRS}:${HDRS}                           \
                  --ipc=host                                    \
-                portworx/px-dev -daemon -k etcd://myetc.company.com:2379 \
-		-c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
+                portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
 ```
 
 Where the following arguments are provided to the PX daemon:
