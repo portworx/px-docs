@@ -70,21 +70,20 @@ sudo docker run --restart=always --name px -d --net=host \
    -MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
-## Using Pre-provisioned Portworx Volumes
+## Using Pre-provisioned Volumes
 
   Create a Volume using Portworx CLI.
   On one of the Kubernetes nodes with Portworx installed run the following command
 
 ```
-/opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
-
+$ /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
 ```
 
 ### Running Pods
 
-   Create Pod which uses Portworx Volumes
+Create Pod which uses Portworx Volumes
 
-   Example spec:
+Example:
 
 ```yaml
    apiVersion: v1
@@ -105,19 +104,17 @@ sudo docker run --restart=always --name px -d --net=host \
          volumeID: "<vol-id>"
          fsType: "<fs-type>"
 ```
+[Download example](k8s-samples/portworx-volume-pod.yaml?raw=true)
 
-   [Download example](k8s-samples/portworx-volume-pod.yaml?raw=true)
+Make sure to replace "vol-id" and "fs-type" in the above spec with
+the ones that you used while creating the volume.
 
-   Make sure to replace "vol-id" and "fs-type" in the above spec with
-   the ones that you used while creating the volume.
-
-   Create the Pod.
+Create the Pod.
 
 ``` bash
    $ kubectl create -f examples/volumes/portworx/portworx-volume-pod.yaml
 ```
-
-   Verify that pod is running:
+Verify that pod is running:
 
 ```bash
    $ kubectl.sh get pods
@@ -127,9 +124,13 @@ sudo docker run --restart=always --name px -d --net=host \
 
 ### Persistent Volumes
 
-   Create Persistent Volume.
+#### Step1: Create Persistent Volume.
 
-   Example spec:
+You can create a persistent volume using the following command:
+``` bash
+      $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
+```
+Example:
 
 ```yaml
       apiVersion: v1
@@ -146,19 +147,12 @@ sudo docker run --restart=always --name px -d --net=host \
           volumeID: "<vol-id>"
           fsType:   "<fs-type>"
 ```
+Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
+the ones that you used while creating the volume.
 
-   Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
-   the ones that you used while creating the volume.
+[Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
 
-   [Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
-
-   Creating the persistent volume:
-
-``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
-```
-
-   Verifying persistent volume is created:
+Verifying persistent volume is created:
 
 ``` bash
       $ kubectl describe pv pv0001
@@ -178,9 +172,13 @@ sudo docker run --restart=always --name px -d --net=host \
       No events.
 ```
 
-   Create Persistent Volume Claim.
+#### Step2: Create Persistent Volume Claim.
 
-   Example spec:
+You can create a persistent volume claim using the following command:
+``` bash
+      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
+```
+Example:
 
 ```yaml
       kind: PersistentVolumeClaim
@@ -194,15 +192,9 @@ sudo docker run --restart=always --name px -d --net=host \
           requests:
             storage: <size>Gi
 ```
-   [Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
+[Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
 
-   Creating the persistent volume claim:
-
-``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
-```
-
-   Verifying persistent volume claim is created:
+Verifying persistent volume claim is created:
 
 ``` bash
       $ kubectl describe pvc pvc0001
@@ -216,9 +208,14 @@ sudo docker run --restart=always --name px -d --net=host \
       No events.
 ```
 
-   Create Pod which uses Persistent Volume Claim.
+#### Step3: Create Pod which uses Persistent Volume Claim.
 
-   See example:
+You can create a pod which uses the PVC by running the following command:
+``` bash
+      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
+```
+
+Example:
 
 ```yaml
       apiVersion: v1
@@ -237,17 +234,9 @@ sudo docker run --restart=always --name px -d --net=host \
           persistentVolumeClaim:
             claimName: pvc0001
 ```
+[Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
-   [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
-
-   Creating the pod:
-
-``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
-```
-
-   Verifying pod is created:
-
+Verifying pod is created:
 ``` bash
       $ kubectl get pod pvpod
       NAME      READY     STATUS    RESTARTS   AGE
@@ -265,6 +254,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 that are offered in a cluster. Following are the different parameters that can be used to define a Portworx
 Storage Class
 
+```
 * fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
 * block_size: block size in Kbytes (default: `32`)
 * repl: replication factor [1..3] (default: `1`)
@@ -272,11 +262,17 @@ Storage Class
 * snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 * aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
 * ephemeral: ephemeral storage [true|false] (default `false`)
+```
 
 
-   Create Storage Class.
+#### Step1: Create Storage Class.
 
-   See example:
+Create the storageclass:
+``` bash
+     $ kubectl create -f
+     examples/volumes/portworx/portworx-volume-sc-high.yaml
+```
+Example:
 
 ```yaml
      kind: StorageClass
@@ -289,17 +285,9 @@ Storage Class
        snap_interval:   "70"
        io_priority:  "high"
 ```
+[Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
 
-   [Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
-
-   Creating the storageclass:
-
-``` bash
-     $ kubectl create -f
-     examples/volumes/portworx/portworx-volume-sc-high.yaml
-```
-
-   Verifying storage class is created:
+Verifying storage class is created:
 
 ``` bash
      $ kubectl describe storageclass portworx-io-priority-high
@@ -310,10 +298,15 @@ Storage Class
        Parameters:	io_priority=high,repl=1,snapshot_interval=70
        No events.
 ```
+#### Step2: Create Persistent Volume Claim.
 
-   Create Persistent Volume Claim.
+Creating the persistent volume claim:
 
-   See example:
+``` bash
+     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
+```
+
+Example:
 
 ```yaml
      kind: PersistentVolumeClaim
@@ -329,16 +322,9 @@ Storage Class
          requests:
            storage: 2Gi
 ```
+[Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
 
-   [Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
-
-   Creating the persistent volume claim:
-
-``` bash
-     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
-```
-
-   Verifying persistent volume claim is created:
+Verifying persistent volume claim is created:
 
 ``` bash
      $ kubectl describe pvc pvcsc001
@@ -352,10 +338,9 @@ Storage Class
      Access Modes:   RWO
      No Events
 ```
+Persistent Volume is automatically created and is bounded to this pvc.
 
-   Persistent Volume is automatically created and is bounded to this pvc.
-
-   Verifying persistent volume claim is created:
+Verifying persistent volume claim is created:
 
 ``` bash
      $ kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
@@ -374,9 +359,15 @@ Storage Class
      No events.
 ```
 
-   Create Pod which uses Persistent Volume Claim with storage class.
+#### Step3: Create Pod which uses Persistent Volume Claim with storage class.
 
-   See example:
+Create the pod:
+
+``` bash
+     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
+```
+
+Example:
 
 ```yaml
      apiVersion: v1
@@ -395,16 +386,9 @@ Storage Class
        persistentVolumeClaim:
          claimName: pvcsc001
 ```
+[Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
-   [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
-
-   Creating the pod:
-
-``` bash
-     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
-```
-
-   Verifying pod is created:
+Verifying pod is created:
 
 ``` bash
      $ kubectl get pod pvpod
