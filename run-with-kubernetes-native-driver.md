@@ -8,7 +8,7 @@ sidebar: home_sidebar
 Portworx can be used as a storage provider for your Kubernetes cluster. Portworx pools your servers capacity and turns your servers
 or cloud instances into converged, highly available compute and storage nodes.
 
-We have added native driver in Kubernetes that will integrate with PX to dynamically provision volumes for your Pods.
+We have added a native driver in Kubernetes that will integrate with PX to dynamically provision volumes for your Pods.
 The native portworx driver in Kubernetes supports the following features:
 
 1. Dynamic Volume Provisioning
@@ -36,7 +36,7 @@ You can use the following command:
 For CentOS
 
 ```
-sudo docker run --restart=always --name px -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host \
     --privileged=true                             \
     -v /run/docker/plugins:/run/docker/plugins    \
     -v /var/lib/osd:/var/lib/osd:shared           \
@@ -52,10 +52,10 @@ sudo docker run --restart=always --name px -d --net=host \
     MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
-For CoreOS
+For CoreOS and VMWare Photon
 
 ```
-sudo docker run --restart=always --name px -d --net=host \
+# sudo docker run --restart=always --name px -d --net=host \
    --privileged=true                             \
    -v /run/docker/plugins:/run/docker/plugins    \
    -v /var/lib/osd:/var/lib/osd:shared           \
@@ -73,11 +73,11 @@ sudo docker run --restart=always --name px -d --net=host \
 
 ## Using Pre-provisioned Volumes
 
-  Create a Volume using Portworx CLI.
-  On one of the Kubernetes nodes with Portworx installed run the following command
+Create a Volume using Portworx CLI.
+On one of the Kubernetes nodes with Portworx installed run the following command
 
-```
-$ /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
+```bash
+# /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
 ```
 
 ### Running Pods
@@ -112,15 +112,15 @@ the ones that you used while creating the volume.
 
 Create the Pod.
 
-``` bash
-   $ kubectl create -f examples/volumes/portworx/portworx-volume-pod.yaml
+```bash
+# kubectl create -f examples/volumes/portworx/portworx-volume-pod.yaml
 ```
 Verify that pod is running:
 
 ```bash
-   $ kubectl.sh get pods
-     NAME                       READY     STATUS    RESTARTS   AGE
-     test-portworx-volume-pod   1/1       Running   0          16s
+# kubectl.sh get pods
+    NAME                       READY     STATUS    RESTARTS   AGE
+    test-portworx-volume-pod   1/1       Running   0          16s
 ```
 
 ### Persistent Volumes
@@ -130,7 +130,7 @@ Verify that pod is running:
 You can create a persistent volume using the following command:
 
 ``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
+# kubectl create -f examples/volumes/portworx/portworx-volume-pv.yaml
 ```
 Example:
 
@@ -157,21 +157,21 @@ the ones that you used while creating the volume.
 Verifying persistent volume is created:
 
 ``` bash
-      $ kubectl describe pv pv0001
-      Name: 	        pv0001
-      Labels:		<none>
-      StorageClass:
-      Status:		Available
-      Claim:
-      Reclaim Policy:	Retain
-      Access Modes:	RWO
-      Capacity:	2Gi
-      Message:
-      Source:
-      Type:	        PortworxVolume (a Portworx Persistent Volume resource)
-      VolumeID:	        pv0001
-      FSType:           ext4
-      No events.
+# kubectl describe pv pv0001
+    Name: 	        pv0001
+    Labels:			<none>
+    StorageClass:
+    Status:			Available
+    Claim:
+    Reclaim Policy:	Retain
+    Access Modes:	RWO
+    Capacity:		2Gi
+    Message:
+    Source:
+    Type:	        PortworxVolume (a Portworx Persistent Volume resource)
+    VolumeID:	    pv0001
+    FSType:         ext4
+    No events.
 ```
 
 #### Step2: Create Persistent Volume Claim.
@@ -179,7 +179,7 @@ Verifying persistent volume is created:
 You can create a persistent volume claim using the following command:
 
 ``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
+# kubectl create -f examples/volumes/portworx/portworx-volume-pvc.yaml
 ```
 Example:
 
@@ -200,15 +200,15 @@ Example:
 Verifying persistent volume claim is created:
 
 ``` bash
-      $ kubectl describe pvc pvc0001
-      Name:		pvc0001
-      Namespace:	default
-      Status:		Bound
-      Volume:		pv0001
-      Labels:		<none>
-      Capacity:	2Gi
-      Access Modes:	RWO
-      No events.
+# kubectl describe pvc pvc0001
+    Name:		pvc0001
+    Namespace:	default
+    Status:		Bound
+    Volume:		pv0001
+    Labels:		<none>
+    Capacity:	2Gi
+    Access Modes:	RWO
+    No events.
 ```
 
 #### Step3: Create Pod which uses Persistent Volume Claim.
@@ -216,7 +216,7 @@ Verifying persistent volume claim is created:
 You can create a pod which uses the PVC by running the following command:
 
 ``` bash
-      $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
+# kubectl create -f examples/volumes/portworx/portworx-volume-pvcpod.yaml
 ```
 
 Example:
@@ -243,9 +243,9 @@ Example:
 Verifying pod is created:
 
 ``` bash
-      $ kubectl get pod pvpod
-      NAME      READY     STATUS    RESTARTS   AGE
-      pvpod       1/1     Running   0          48m        
+# kubectl get pod pvpod
+    NAME      READY     STATUS    RESTARTS   AGE
+    pvpod       1/1     Running   0          48m        
 ```
 
 ## Using Dynamic Provisioning
@@ -260,23 +260,22 @@ that are offered in a cluster. Following are the different parameters that can b
 Storage Class
 
 ```
-* fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-* block_size: block size in Kbytes (default: `32`)
-* repl: replication factor [1..3] (default: `1`)
-* io_priority: IO Priority: [high|medium|low] (default: `low`)
-* snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
-* aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-* ephemeral: ephemeral storage [true|false] (default `false`)
+- fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
+- block_size: block size in Kbytes (default: `32`)
+- repl: replication factor [1..3] (default: `1`)
+- io_priority: IO Priority: [high|medium|low] (default: `low`)
+- snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
+- aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
+- ephemeral: ephemeral storage [true|false] (default `false`)
 ```
-
 
 #### Step1: Create Storage Class.
 
 Create the storageclass:
 
 ``` bash
-     $ kubectl create -f
-     examples/volumes/portworx/portworx-volume-sc-high.yaml
+# kubectl create -f
+   examples/volumes/portworx/portworx-volume-sc-high.yaml
 ```
 
 Example:
@@ -297,13 +296,13 @@ Example:
 Verifying storage class is created:
 
 ``` bash
-     $ kubectl describe storageclass portworx-io-priority-high
-       Name: 	        portworx-io-priority-high
-       IsDefaultClass:	No
-       Annotations:	<none>
-       Provisioner:	kubernetes.io/portworx-volume
-       Parameters:	io_priority=high,repl=1,snapshot_interval=70
-       No events.
+# kubectl describe storageclass portworx-io-priority-high
+     Name: 	        	portworx-io-priority-high
+     IsDefaultClass:	No
+     Annotations:		<none>
+     Provisioner:		kubernetes.io/portworx-volume
+     Parameters:		io_priority=high,repl=1,snapshot_interval=70
+     No events.
 ```
 
 #### Step2: Create Persistent Volume Claim.
@@ -311,7 +310,7 @@ Verifying storage class is created:
 Creating the persistent volume claim:
 
 ``` bash
-     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
+# kubectl create -f examples/volumes/portworx/portworx-volume-pvcsc.yaml
 ```
 
 Example:
@@ -335,36 +334,36 @@ Example:
 Verifying persistent volume claim is created:
 
 ``` bash
-     $ kubectl describe pvc pvcsc001
-     Name:	      pvcsc001
-     Namespace:      default
-     StorageClass:   portworx-io-priority-high
-     Status:	      Bound
-     Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
-     Labels:	      <none>
-     Capacity:	      2Gi
-     Access Modes:   RWO
-     No Events
+# kubectl describe pvc pvcsc001
+   Name:	      	pvcsc001
+   Namespace:      	default
+   StorageClass:   	portworx-io-priority-high
+   Status:	      	Bound
+   Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
+   Labels:	      	<none>
+   Capacity:	    2Gi
+   Access Modes:   	RWO
+   No Events.
 ```
 Persistent Volume is automatically created and is bounded to this pvc.
 
 Verifying persistent volume claim is created:
 
 ``` bash
-     $ kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
-     Name: 	      pvc-e5578707-c626-11e6-baf6-08002729a32b
-     Labels:         <none>
-     StorageClass:   portworx-io-priority-high
-     Status:	      Bound
-     Claim:	      default/pvcsc001
-     Reclaim Policy: Delete
-     Access Modes:   RWO
-     Capacity:	      2Gi
-     Message:
-     Source:
-         Type:	      PortworxVolume (a Portworx Persistent Volume resource)
-	 VolumeID:   374093969022973811
-     No events.
+# kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
+   Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
+   Labels:        	<none>
+   StorageClass:  	portworx-io-priority-high
+   Status:	      	Bound
+   Claim:	      	default/pvcsc001
+   Reclaim Policy: 	Delete
+   Access Modes:   	RWO
+   Capacity:	    2Gi
+   Message:
+   Source:
+   Type:	      	PortworxVolume (a Portworx Persistent Volume resource)
+   VolumeID:   		374093969022973811
+   No events.
 ```
 
 #### Step3: Create Pod which uses Persistent Volume Claim with storage class.
@@ -372,7 +371,7 @@ Verifying persistent volume claim is created:
 Create the pod:
 
 ``` bash
-     $ kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
+# kubectl create -f examples/volumes/portworx/portworx-volume-pvcscpod.yaml
 ```
 
 Example:
@@ -399,7 +398,7 @@ Example:
 Verifying pod is created:
 
 ``` bash
-     $ kubectl get pod pvpod
-     NAME      READY     STATUS    RESTARTS   AGE
-     pvpod       1/1     Running   0          48m        
+# kubectl get pod pvpod
+   NAME      READY     STATUS    RESTARTS   AGE
+   pvpod       1/1     Running   0          48m        
 ```
