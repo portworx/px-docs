@@ -60,8 +60,11 @@ entries:
     - title: Run Portworx with Docker UCP
       url: /run-with-docker-ucp.html
       output: web
-    - title: Run Portworx with Kubernetes
-      url: /run-with-kubernetes.html
+    - title: Run Portworx with Kubernetes Flexvolume
+      url: /run-with-kubernetes-flexvolume.html
+      output: web
+    - title: Run Portworx with Kubernetes Native Driver
+      url: /run-with-kubernetes-native-driver.html
       output: web
     - title: Run Portworx with Mesos
       url: /run-with-mesosphere.html
