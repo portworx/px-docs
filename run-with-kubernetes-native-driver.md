@@ -108,7 +108,7 @@ sudo docker run --restart=always --name px -d --net=host \
 
    [Download example](k8s-samples/portworx-volume-pod.yaml?raw=true)
 
-   Make sure to replace <vol-id> and <fs-type> in the above spec with
+   Make sure to replace "vol-id" and "fs-type" in the above spec with
    the ones that you used while creating the volume.
 
    Create the Pod.
@@ -127,9 +127,9 @@ sudo docker run --restart=always --name px -d --net=host \
 
 ### Persistent Volumes
 
-  1. Create Persistent Volume.
+   Create Persistent Volume.
 
-     Example spec:
+   Example spec:
 
 ```yaml
       apiVersion: v1
@@ -178,9 +178,9 @@ sudo docker run --restart=always --name px -d --net=host \
       No events.
 ```
 
-  2. Create Persistent Volume Claim.
+   Create Persistent Volume Claim.
 
-     Example spec:
+   Example spec:
 
 ```yaml
       kind: PersistentVolumeClaim
@@ -216,9 +216,9 @@ sudo docker run --restart=always --name px -d --net=host \
       No events.
 ```
 
-  3. Create Pod which uses Persistent Volume Claim.
+   Create Pod which uses Persistent Volume Claim.
 
-     See example:
+   See example:
 
 ```yaml
       apiVersion: v1
@@ -261,22 +261,22 @@ create Portworx volumes out of band and they will be created automatically.
 
 ### Storage Classes
 
-  Using Storage Classes objects an admin can define the different classes of Portworx Volumes
-  that are offered in a cluster. Following are the different parameters that can be used to define a Portworx
-  Storage Class
+Using Storage Classes objects an admin can define the different classes of Portworx Volumes
+that are offered in a cluster. Following are the different parameters that can be used to define a Portworx
+Storage Class
 
-  * fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-  * block_size: block size in Kbytes (default: `32`)
-  * repl: replication factor [1..3] (default: `1`)
-  * io_priority: IO Priority: [high|medium|low] (default: `low`)
-  * snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
-  * aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-  * ephemeral: ephemeral storage [true|false] (default `false`)
+* fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
+* block_size: block size in Kbytes (default: `32`)
+* repl: replication factor [1..3] (default: `1`)
+* io_priority: IO Priority: [high|medium|low] (default: `low`)
+* snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
+* aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
+* ephemeral: ephemeral storage [true|false] (default `false`)
 
 
-  1. Create Storage Class.
+   Create Storage Class.
 
-     See example:
+   See example:
 
 ```yaml
      kind: StorageClass
@@ -311,9 +311,9 @@ create Portworx volumes out of band and they will be created automatically.
        No events.
 ```
 
-  2. Create Persistent Volume Claim.
+   Create Persistent Volume Claim.
 
-     See example:
+   See example:
 
 ```yaml
      kind: PersistentVolumeClaim
@@ -374,9 +374,9 @@ create Portworx volumes out of band and they will be created automatically.
      No events.
 ```
 
-  3. Create Pod which uses Persistent Volume Claim with storage class.
+   Create Pod which uses Persistent Volume Claim with storage class.
 
-     See example:
+   See example:
 
 ```yaml
      apiVersion: v1
