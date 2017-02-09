@@ -194,7 +194,7 @@ sudo docker run --restart=always --name px -d --net=host \
             storage: <size>Gi
       ```
 
-      [Download example](k8s-sample/portworx-volume-pvc.yaml?raw=true)
+      [Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
 
       Creating the persistent volume claim:
 
@@ -238,7 +238,7 @@ sudo docker run --restart=always --name px -d --net=host \
             claimName: pvc0001
       ```
 
-      [Download example](k8s-sample/portworx-volume-pvcpod.yaml?raw=true)
+      [Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
       Creating the pod:
 
@@ -290,7 +290,7 @@ create Portworx volumes out of band and they will be created automatically.
        io_priority:  "high"
      ```
 
-     [Download example](k8s-sample/portworx-volume-sc-high.yaml?raw=true)
+     [Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
 
      Creating the storageclass:
 
@@ -395,7 +395,7 @@ create Portworx volumes out of band and they will be created automatically.
          claimName: pvcsc001
      ```
 
-     [Download example](k8s-sample/portworx-volume-pvcscpod.yaml?raw=true)
+     [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
      Creating the pod:
 
