@@ -48,7 +48,7 @@ Identify the storage devices you will be allocating to PX.  PX can run in a hete
 You can now run PX via the Docker CLI as follows:
 
 ```
-if `uname -r | grep coreos > /dev/null`; \
+if `uname -r | grep -i coreos > /dev/null`; \
 then HDRS="/lib/modules"; \
 else HDRS="/usr/src"; fi
 sudo docker run --restart=always --name px -d --net=host       \
