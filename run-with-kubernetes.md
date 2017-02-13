@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
-# Deploy PX with Kubernetes
+## Deploy PX with Kubernetes
 >**Note:**<br/>You can run PX with Kubernetes using the PX native driver (preferred) or FlexVol.
 
 ### Kubernetes with the PX native driver
@@ -15,7 +15,7 @@ Use [these](run-with-kubernetes-native-driver.html) instructions to run Kubernet
 ### Kubernetes with FlexVol
 Use [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with FlexVol.
 
-# Enabling scheduler convergence
+## Enabling scheduler convergence
 You can configure PX to influence where Kubernetes schedules a container based on the container volume's data location.  When this mode is enabled, PX will communicate with Kubernetes and place host labels.  These labels will be used in influencing Kubernetes scheduling decisions.  To enable this mode, you must add a scheduler directive to the PX configuration as documented below.
 
 ### Provide access to kubernetes
