@@ -9,7 +9,7 @@ You can use Portworx to provide storage for your Kubernetes pods. Portworx pools
 >**Note:**<br/>You can run PX with Kubernetes using the PX native driver (preferred) or FlexVol.
 
 ## Kubernetes with the PX native driver
-Use [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with the PX native driver.
+Use [these](run-with-kubernetes-native-driver.html) instructions to run Kubernetes with the PX native driver.
 
 ## Kubernetes with FlexVol
-Use [these](run-with-kubernetes-native-driver.html) instructions to run Kubernetes with FlexVol.
+Use [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with FlexVol.
