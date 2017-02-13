@@ -38,7 +38,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       -v ${HOSTDIR}:${HOSTDIR}                       \
       --ipc=host                                     \
       --name=%n \
-      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -s /dev/xvdb
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -s /dev/xvdN
 KillMode=control-group
 ExecStop=/usr/bin/docker stop -t 10 %n
 [Install]
