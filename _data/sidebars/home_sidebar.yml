@@ -5,7 +5,6 @@ entries:
   product: Menu
   levels: one
   folders:
-
   - title: Get Started
     output: web
     folderitems:
@@ -57,17 +56,14 @@ entries:
   - title: Schedulers
     output: web
     folderitems:
-    - title: Run Portworx with Docker UCP
-      url: /run-with-docker-ucp.html
-      output: web
-    - title: Run Portworx with Kubernetes Flexvolume
-      url: /run-with-kubernetes-flexvolume.html
-      output: web
-    - title: Run Portworx with Kubernetes Native Driver
-      url: /run-with-kubernetes-native-driver.html
+    - title: Run Portworx with Kubernetes
+      url: /run-with-kubernetes.html
       output: web
     - title: Run Portworx with Mesos
       url: /run-with-mesosphere.html
+      output: web
+    - title: Run Portworx with Docker UCP
+      url: /run-with-docker-ucp.html
       output: web
     - title: Run Portworx with Rancher
       url: /run-with-rancher.html
