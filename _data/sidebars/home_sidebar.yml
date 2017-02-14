@@ -44,8 +44,8 @@ entries:
     - title: Shared Volumes
       url: /shared-volumes.html
       output: web
-    - title: Scaled Volumes
-      url: /scaled-volumes.html
+    - title: Volume Sets
+      url: /volume-sets.html
       output: web
     - title: Class of Service
       url: /cos.html
