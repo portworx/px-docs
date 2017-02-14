@@ -88,15 +88,10 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 
 1. Using [Amazon EC2](https://aws.amazon.com/ec2/), start your Amazon Linux instance (ie. `Amazon Linux AMI 2016.09.1, ami-f173cc91`), and SSH into it.
 2. Install or update the `docker` and `kernel` packages:
-
-    ```bash
+```
     sudo yum install kernel-devel docker
-    
-    # please also update kernel-package, to ensure it matches lates `kernel-devel` package version
-    sudo yum update kernel
-    # finally, after kernel upgrade, one must reboot the system
-    sudo reboot
-    ```
+    sudo yum update kernel && sudo reboot
+```
 3. Verify that your Docker version is 1.10 or later. In your SSH window, run:
 ```
     docker -v
@@ -105,21 +100,12 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 ```
     sudo mount --make-shared /
 ```
-5. Add the `--propagation shared` flags to the `/etc/init.d/docker` startup script:
-
-    ```diff
-    --- /etc/init.d/docker.orig	2017-02-14 20:26:26.761769136 +0000
-    +++ /etc/init.d/docker	2017-02-14 20:26:44.257695192 +0000
-    @@ -71,7 +71,7 @@
-             prestart
-             printf "Starting $prog:\t"
-             echo "\n$(date)\n" >> $logfile
-    -        "$unshare" -m -- nohup $exec ${OPTIONS} ${DOCKER_STORAGE_OPTIONS} >> $logfile 2>&1 &
-    +        "$unshare" -m --propagation shared -- nohup $exec ${OPTIONS} ${DOCKER_STORAGE_OPTIONS} >> $logfile 2>&1 &
-             pid=$!
-             touch $lockfile
-             tries=0
-    ```
+5. Add the `--propagation shared` flags to the docker startup script:
+```
+    sudo sed -i.bak -e \
+       's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:'
+       /etc/init.d/docker
+```
 6. Restart docker service:
 ```
     sudo service docker restart
