@@ -27,13 +27,14 @@ A kubernetes.yaml file is needed for allowing PX to communicate with Kubernetes.
 # cat /etc/pwx/kubernetes.yaml
 ```
 
-``` yaml
+```yaml
 apiVersion: v1
 kind: Config
 clusters:
 - cluster:
     api-version: v1
     server: http://<master-node-ip>:<api-server-port>
+    certificate-authority: /etc/pwx/my_cafile
 preferences:
   colors: true
 ```
