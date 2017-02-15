@@ -73,19 +73,22 @@ USAGE:
    pxctl volume create [command options] volume-name
 
 OPTIONS:
-   --shared                           make this a globally shared namespace volume
-   --passphrase value                 passphrase to use for the PBKDF2 function
-   --label pairs, -l pairs            list of comma-separated name=pairs pairs
-   --size value, -s value             volume size in GB (default: 1)
-   --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --block_size size, -b size         block size in Kbytes (default: 32)
-   --repl factor, -r factor           replication factor [1..3] (default: 1)
-   --io_priority value                IO Priority: [high|medium|low] (default: "low")
-   --snap_interval min, --si min      snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily hh:mm, --sd hh:mm          daily snapshot at specified hh:mm
-   --weekly value, --sw value         weekly snapshot at specified weekday@hh:mm
-   --monthly value, --sm value        monthly snapshot at specified day@hh:mm
-   --nodes value                      Comma seprated Node Id(s)
+   --shared                             make this a globally shared namespace volume
+   --passphrase value                   passphrase to use for the PBKDF2 function
+   --label pairs, -l pairs              list of comma-separated name=value pairs
+   --size value, -s value               volume size in GB (default: 1)
+   --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
+   --block_size size, -b size           block size in Kbytes (default: 32)
+   --repl factor, -r factor             replication factor [1..3] (default: 1)
+   --scale value, --sc value            auto scale to max number [1..1024] (default: 1)
+   --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
+   --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
+   --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
+   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
+   --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
+   --nodes value                        comma-separated Node Id(s)
 ```
 
 ### Create with Docker
