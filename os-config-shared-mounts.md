@@ -87,10 +87,9 @@ The following sections describe how to configure Docker for shared mounts on [Co
 NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org/linux/man-pages/man1/systemd.1.html) service, so the installation instructions are somewhat different:
 
 1. Using [Amazon EC2](https://aws.amazon.com/ec2/), start your Amazon Linux instance (ie. `Amazon Linux AMI 2016.09.1, ami-f173cc91`), and SSH into it.
-2. Install or update the `docker` and `kernel` packages:
+2. Install docker package:
 ```
-    sudo yum install kernel-devel docker
-    sudo yum update kernel && sudo reboot
+    sudo yum install docker
 ```
 3. Verify that your Docker version is 1.10 or later. In your SSH window, run:
 ```
@@ -103,7 +102,7 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 5. Add the `--propagation shared` flags to the docker startup script:
 ```
     sudo sed -i.bak -e \
-       's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:'
+       's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' \
        /etc/init.d/docker
 ```
 6. Restart docker service:
