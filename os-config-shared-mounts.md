@@ -108,7 +108,7 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
     sudo service docker restart
 ```
 
-### Quick and Dirty Test
+### Verify that shared mounts work
 
 Run the following command to verify that shared mounts are configured and running properly on your system:
 
