@@ -88,24 +88,32 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 
 1. Using [Amazon EC2](https://aws.amazon.com/ec2/), start your Amazon Linux instance (ie. `Amazon Linux AMI 2016.09.1, ami-f173cc91`), and SSH into it.
 2. Install docker package:
+
 ```
-    sudo yum install docker
+# sudo yum install docker
 ```
 3. Verify that your Docker version is 1.10 or later. In your SSH window, run:
+
 ```
-    docker -v
+# docker -v
 ```
+
 4. In your SSH window, run:
+
 ```
-    sudo mount --make-shared /
+# sudo mount --make-shared /
 ```
+
 5. Add the `--propagation shared` flags to the docker startup script:
+
 ```
-    sudo sed -i.bak -e 's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' /etc/init.d/docker
+# sudo sed -i.bak -e 's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' /etc/init.d/docker
 ```
+
 6. Restart docker service:
+
 ```
-    sudo service docker restart
+# sudo service docker restart
 ```
 
 ### Verify that shared mounts work
@@ -113,5 +121,5 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 Run the following command to verify that shared mounts are configured and running properly on your system:
 
 ```
-docker run -it -v /mnt:/mnt:shared busybox sh
+# docker run -it -v /mnt:/mnt:shared busybox sh
 ```
