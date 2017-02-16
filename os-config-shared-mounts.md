@@ -86,7 +86,7 @@ The following sections describe how to configure Docker for shared mounts on [Co
 
 NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org/linux/man-pages/man1/systemd.1.html) service, so the installation instructions are somewhat different:
 
-1. Using [Amazon EC2](https://aws.amazon.com/ec2/), start your Amazon Linux instance (ie. `Amazon Linux AMI 2016.09.1, ami-f173cc91`), and SSH into it.
+1. Using [Amazon EC2](https://aws.amazon.com/ec2/), start your Amazon Linux instance (`Amazon Linux AMI 2016.09.1, ami-f173cc91`), and SSH into it.
 2. Install docker package:
 ```
 # sudo yum install docker
