@@ -6,7 +6,7 @@ Here is the [Terraporx Repository](https://github.com/portworx/terraporx/tree/ma
 Use these scripts to quickly/easily get a 5-node cluster up in 10 minutes
 
 ## Deploy Kubernetes
-Follow [this guide](https://coreos.com/kubernetes/docs/latest/getting-started.html)
+Reference [this Kubernetes on CoreOS Guide](https://coreos.com/kubernetes/docs/latest/getting-started.html)
 
 Since this cluster is based on CoreOS, the `etcd` cluster comes pre-configured.
 
@@ -32,4 +32,23 @@ for (fqdn,ip) in zip(worker_fqdn, worker_ip):
                (ip, fqdn, fqdn, fqdn))```
 ```
 
+### Configure Kubernetes Master
+#### Copy over TLS Assets
+Before doing this, make sure your .pub key is in the master root/.ssh/authorized_keys
+
+```
+#!/bin/bash
+MASTER_IP=X.X.X.X
+
+ssh root@${MASTER_IP} "sudo mkdir -p /etc/kubernetes/ssl"
+scp ca.pem root@${MASTER_IP}:/etc/kubernetes/ssl/ca.pem
+scp apiserver.pem root@${MASTER_IP}:/etc/kubernetes/ssl/apiserver.pem
+scp apiserver-key.pem root@${MASTER_IP}:/etc/kubernetes/ssl/apiserver-key.pem
+ssh root@${MASTER_IP} "chmod 600 /etc/kubernetes/ssl/*-key.pem"
+ssh root@${MASTER_IP} "chown root:root /etc/kubernetes/ssl/*-key.pem"
+```
+
+#### Configure Flannel
+
+(TODO:  Finish, or find Ansible/CoreOS)
 
