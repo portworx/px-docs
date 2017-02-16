@@ -160,12 +160,12 @@ xvdn              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0
 #### Test a high CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-high:/test      \
-gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
---filename=test --ioengine=libaio --readwrite=randrw          \
---size=1G --name=test --verify=meta --do_verify=1             \
---verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1        \
---iodepth=128 --randrepeat=1  --end_fsync=1
+# docker run --rm --volume-driver=pxd -v test-high:/test          \
+	gourao/fio /usr/bin/fio --blocksize=16k -directory=/test      \
+	--filename=test --ioengine=libaio --readwrite=randrw          \
+	--size=1G --name=test --verify=meta --do_verify=1             \
+	--verify_pattern=0xDeadBeef --direct=1 --gtod_reduce=1        \
+	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
@@ -194,17 +194,17 @@ Disk stats (read/write):
 #### Test a medium CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-med:/test      \
-gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
---filename=test --ioengine=libaio --readwrite=randrw          \
---size=4G --name=test --direct=1 --gtod_reduce=1        \
---iodepth=128 --randrepeat=1  --end_fsync=1
+# docker run --rm --volume-driver=pxd -v test-med:/test            \
+	gourao/fio /usr/bin/fio --blocksize=16k -directory=/test       \
+	--filename=test --ioengine=libaio --readwrite=randrw           \
+	--size=4G --name=test --direct=1 --gtod_reduce=1               \
+	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
 
 ```
-t: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
+test: (g=0): rw=randread, bs=4K-4K/4K-4K/4K-4K, ioengine=libaio, iodepth=128
 fio-2.1.11
 Starting 1 process
 
@@ -227,11 +227,11 @@ Disk stats (read/write):
 #### Test a low CoS volume on EBS
 
 ```
-# docker run --rm --volume-driver=pxd -v test-low:/test      \
-gourao/fio /usr/bin/fio --blocksize=4k -directory=/test       \
---filename=test --ioengine=libaio --readwrite=randrw          \
---size=1G --name=test --direct=1 --gtod_reduce=1        \
---iodepth=128 --randrepeat=1  --end_fsync=1
+# docker run --rm --volume-driver=pxd -v test-low:/test           \
+	gourao/fio /usr/bin/fio --blocksize=4k -directory=/test       \
+	--filename=test --ioengine=libaio --readwrite=randrw          \
+	--size=1G --name=test --direct=1 --gtod_reduce=1              \
+	--iodepth=128 --randrepeat=1  --end_fsync=1
 ```
 
 Results:
