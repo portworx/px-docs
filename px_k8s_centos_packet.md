@@ -60,6 +60,10 @@ Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster.
 Terraporx automatically installs docker on all hosts, which runs in conflict with the contrib/ansible.
 For all the hosts run: `yum -y remove docker-engine docker-engine-selinux`
 
+## Adjust for secure API Port
+As per the [ansible README.md](https://github.com/kubernetes/contrib/blob/master/ansible/README.md#kubernetes-source-type), 
+edit `roles/kubernetes/defaults/main.yml` and set `kube_master_api_port` to `6443`
+
 ## Install Kubernetes via Ansible
 
 ```
@@ -73,8 +77,77 @@ kube-node-2                : ok=91   changed=26   unreachable=0    failed=0
 kube-node-3                : ok=91   changed=26   unreachable=0    failed=0
 ```
  
+## Update Kubernetes binaries with Portworx Patches
  
+**NB** : This step is only needed until [this Kubernetes PR](https://github.com/kubernetes/kubernetes/pull/39535) is merged
+ 
+###  Get the Kubernetes / Portworx distro
+ 
+```
+  wget http://yum.portworx.com/repo/rpms/kubernetes/kubernetes-portworx.tar.gz && \
+  tar xvf kubernetes-portworx.tar.gz
+```
 
+####  Update the Master
 
+```
+cd kubernetes/server/bin
+ssh root@kube-master-1 "systemctl stop kube-apiserver"
+ssh root@kube-master-1 "systemctl stop kube-controller-manager"
+ssh root@kube-master-1 "systemctl stop kube-scheduler"
+scp kube-apiserver kube-controller-manager kubectl kube-scheduler root@kube-master-1:/usr/bin
+```
 
+Make sure the API server is listening on port 6443:
 
+```
+grep KUBE_API_PORT /etc/kubernetes/apiserver
+```
+should show `KUBE_API_PORT="--secure-port=6443"`
+
+```
+ssh root@kube-master-1 "systemctl start kube-apiserver"
+ssh root@kube-master-1 "systemctl start kube-controller-manager"
+ssh root@kube-master-1 "systemctl start kube-scheduler"
+```
+
+#### Update the Minion/Nodes
+
+Go back to kubernetes/server/bin.
+Run a script of the following form:
+
+```
+#!/bin/bash
+
+NODES=3
+
+for i in `seq 1 $NODES`
+do
+  ssh root@kube-node-$i "systemctl stop kubelet"
+  ssh root@kube-node-$i "systemctl stop kube-proxy"
+  scp kubectl kubelet kube-proxy root@kube-node-$i:/usr/bin
+  ssh root@kube-node-$i "systemctl start kubelet"
+  ssh root@kube-node-$i "systemctl start kube-proxy"
+done
+```
+
+### Verify Cluster
+
+From the master node, run the following to verify the cluster is at the correct version
+and that all the nodes are up:
+
+```
+[root@px-k8s-centos-0 ~]# kubectl version
+Client Version: version.Info{Major:"1", Minor:"5+", GitVersion:"v1.5.3-beta.0.44+7f2055addfd186-dirty", GitCommit:"7f2055addfd1868a1fb041267c9a02f7ecff071b", GitTreeState:"dirty", BuildDate:"2017-01-25T18:06:46Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"5+", GitVersion:"v1.5.3-beta.0.44+7f2055addfd186-dirty", GitCommit:"7f2055addfd1868a1fb041267c9a02f7ecff071b", GitTreeState:"dirty", BuildDate:"2017-01-25T18:51:53Z", GoVersion:"go1.7.4", Compiler:"gc", Platform:"linux/amd64"}
+[root@px-k8s-centos-0 ~]# kubectl get nodes
+NAME          STATUS    AGE
+kube-node-1   Ready     22h
+kube-node-2   Ready     22h
+kube-node-3   Ready     22h
+```
+
+  
+  
+ 
+ 
