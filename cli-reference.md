@@ -72,17 +72,18 @@ USAGE:
    pxctl [global options] command [command options] [arguments...]
 
 VERSION:
-   0.9.0-208a8b1
+   1.1.4-6b35842
 
 COMMANDS:
      status       Show status summary
      volume, v    Manage volumes
      snap, s      Manage volume snapshots
      cluster, c   Manage the cluster
-     container    Display containers in the cluster
      service, sv  Service mode utilities
      host         Attach volumes to the host
+     upgrade      Upgrade PX
      eula         Show license agreement
+     help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --json, -j     output in json
@@ -90,6 +91,7 @@ GLOBAL OPTIONS:
    --raw, -r      raw CLI output for instrumentation
    --help, -h     show help
    --version, -v  print the version
+
 ```
 
 ## Manage storage volumes
