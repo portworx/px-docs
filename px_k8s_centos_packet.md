@@ -56,8 +56,6 @@ Run this for all hosts in the cluster.
 
 Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster. 
 
-```
-
 ## Adjust docker config on all hosts
 Terraporx automatically installs docker on all hosts, which runs in conflict with the contrib/ansible.
 For all the hosts run: `yum -y remove docker-engine docker-engine-selinux`
