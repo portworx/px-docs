@@ -1,5 +1,5 @@
 # Portworx with Kubernetes on CentOS with Packet.net
-This guide will get a Kubernetes Cluster installed with Port
+This guide will get a Kubernetes Cluster installed with Portworx on CentOS using packet.net
 
 ## Deploy Cluster via Terraform to Packet
 Use this [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) to deploy 
