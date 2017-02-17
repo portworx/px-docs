@@ -64,6 +64,13 @@ For all the hosts run: `yum -y remove docker-engine docker-engine-selinux`
 
 ```
 cd contrib/ansible/scripts
+./deploy-cluster.sh
+[...]
+PLAY RECAP *********************************************************************
+kube-master-1              : ok=180  changed=20   unreachable=0    failed=0
+kube-node-1                : ok=94   changed=26   unreachable=0    failed=0
+kube-node-2                : ok=91   changed=26   unreachable=0    failed=0
+kube-node-3                : ok=91   changed=26   unreachable=0    failed=0
 ```
  
  
