@@ -1,11 +1,15 @@
 # Portworx with Kubernetes on CentOS with Packet.net
+This guide will get a Kubernetes Cluster installed with Port
 
 ## Deploy Cluster via Terraform to Packet
-Use the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet)
+Use this [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) to deploy 
+Portworx on CentOS on [Packet.net](https://www.packet.net/)
 
 ## Install Ansible
-Think of Ansible as the "easy button" for installing Kubernetes.
-There are so many details that installing by hand is most un-advised.
+Think of Ansible as the "easy button" for easily installing and deploying Kubernetes.
+Steps to deploy are listed below.   Before starting, make sure you have Ansible installed
+on your **localmachine** via "yum", "apt-get", "brew", or whatever.
+
 
 ## Copy the Kubernetes Contrib Repo
 
@@ -25,7 +29,11 @@ grep network.0.address terraform.tfstate | awk '{print $2}' | sed -e 's/[",]//g'
 147.75.G.H
 ```
 
-Make sure you can login to all hosts without password prompting.   Run something like this:
+If you have not already done so, be sure to run `ssh-keygen` to setup your public/private keys for SSH.
+
+To make sure you can login to all hosts without password prompting, run something like this command, 
+which takes as one argument the name of the remote host whose `authorized_keys` file gets appended
+with your local public key.
 
 ```
 #!/bin/sh
@@ -52,9 +60,10 @@ ssh -i your_private.key root@$1 "mkdir ~/.ssh 2>/dev/null; chmod 700 ~/.ssh; ech
 echo "done!"
 ```
 
-Run this for all hosts in the cluster.
+Run the above command in a loop for all hosts in the cluster, to enable `ssh` commands without password prompting.
 
-Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster. 
+Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster, and make sure it too is copied to all
+hosts in the cluster.
 
 ## Adjust docker config on all hosts
 Terraporx automatically installs docker on all hosts, which runs in conflict with the contrib/ansible.
@@ -77,6 +86,16 @@ kube-node-2                : ok=91   changed=26   unreachable=0    failed=0
 kube-node-3                : ok=91   changed=26   unreachable=0    failed=0
 ```
  
+## Update Docker on all Nodes
+On all nodes, edit the file /etc/systemd/system/multi-user.target.wants/docker.service.
+Comment out or delete: `MountFlags=slave`
+Run the following:
+
+```
+systemctl daemon-reload
+systemctl restart docker
+```
+
 ## Update Kubernetes binaries with Portworx Patches
  
 **NB** : This step is only needed until [this Kubernetes PR](https://github.com/kubernetes/kubernetes/pull/39535) is merged
@@ -131,7 +150,7 @@ do
 done
 ```
 
-### Verify Cluster
+### Verify Kubernetes Cluster
 
 From the master node, run the following to verify the cluster is at the correct version
 and that all the nodes are up:
@@ -147,7 +166,32 @@ kube-node-2   Ready     22h
 kube-node-3   Ready     22h
 ```
 
-  
+## Install Portworx
+Since an earlier step required removing `docker`, Portworx will need to be reinstalled.
+The `kube-master` node should be running `etcd`.   To verify:
+
+```
+curl -XGET http://${KUBE-MASTER}:2379/version
+```
+
+Install Portworx on all minion/slave nodes:
+
+```
+docker run --restart=always --name px -d --net=host       \
+                 --privileged=true                             \
+                 -v /run/docker/plugins:/run/docker/plugins    \
+                 -v /var/lib/osd:/var/lib/osd:shared           \
+                 -v /dev:/dev                                  \
+                 -v /etc/pwx:/etc/pwx                          \
+                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /var/run/docker.sock:/var/run/docker.sock  \
+                 -v /var/cores:/var/cores                      \
+                  -v /usr/src:/usr/src                         \
+                 --ipc=host                                    \
+                portworx/px-dev -daemon -k etcd://kube-master-1:2379 -c MY_CLUSTER_ID -s /dev/dm-0 -d team0:0 -m team0:0
+```
+
+
   
  
  
