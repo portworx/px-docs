@@ -5,9 +5,9 @@ keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 ---
 
-* For this document, we will use the kafka container at https://hub.docker.com/r/ches/kafka/ *
+*For this document, we will use the kafka container at https://hub.docker.com/r/ches/kafka/*
 
-** Kafka uses Zookeeper as the KV store for configuration data. **
+**Kafka uses Zookeeper as the KV store for configuration data.**
 
 ```
 docker run -d --name zookeeper jplock/zookeeper:3.4.6
