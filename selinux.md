@@ -19,7 +19,8 @@ See 'docker run --help'.
 To resolve the issue:
 
 ```
-# docker run  --security-opt=label:disable  --name mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw  --volume-driver=pxd -v  sql_vol:/var/lib/mysql -d mysql
+# docker run  --security-opt=label:disable  --name mysql \
+	-e MYSQL_ROOT_PASSWORD=my-secret-pw  --volume-driver=pxd -v  sql_vol:/var/lib/mysql -d mysql
 ```
 
 You will not need to workaround this after [20834](https://github.com/docker/docker/pull/20834) is merged.
