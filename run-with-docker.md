@@ -12,7 +12,7 @@ To install and configure PX via the Docker CLI, use the command-line steps in th
 
 PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 
->**Important:**<br/>If you are runnig a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](os-config-shared-mounts.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+>**Important:**<br/>If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](os-config-shared-mounts.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ### Specify storage
 
