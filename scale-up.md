@@ -41,7 +41,7 @@ The above cluster has three nodes and 520GiB of total capacity.
 Below is an example of how to run PX in a new node so it joins an existing cluster. Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node
 
 ```
-docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src --ipc=host -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0
+docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0
 ```
 
 Here is how the cluster would look like after a new node is added without any storage
