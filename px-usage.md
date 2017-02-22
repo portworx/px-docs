@@ -35,7 +35,6 @@ Following the "docker run" command:
 -v /mnt:/mnt:shared \
 -v /var/cores:/var/cores \
 -v /usr/src:/usr/src \
---ipc=host \
 portworx/px-enterprise ...
 ```
 Provide one of the following examples as command line arguments positioned after "px-enterprise"
@@ -63,7 +62,6 @@ docker run --restart=always --name px-enterprise -d \
       -v /mnt:/mnt:shared \
       -v /var/cores:/var/cores \
       -v /usr/src:/usr/src \
-      --ipc=host  \
       -e API_SERVER=http://1.2.3.4 \
       portworx/px-enterprise -t token-8dc976f9-ab97-11e6-b3c8-0242ac110004 \
       -s /dev/sdX -m enp0s3 -d enp0s3
