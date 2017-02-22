@@ -29,7 +29,6 @@ For Redhat, Ubuntu and Debian distros:
     -v /var/cores:/var/cores                      \
     -v /var/lib/kubelet:/var/lib/kubelet:shared   \
     -v /usr/src:/usr/src                          \
-    --ipc=host                                    \
     portworx/px-dev:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
@@ -48,7 +47,6 @@ For CoreOS and VMWare Photon
    -v /lib/modules:/lib/modules                  \
    -v /var/lib/kubelet:/var/lib/kubelet:shared   \
    -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \
-   --ipc=host                                    \
    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
