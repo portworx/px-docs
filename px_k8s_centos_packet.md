@@ -187,7 +187,6 @@ docker run --restart=always --name px -d --net=host       \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                   -v /usr/src:/usr/src                         \
-                 --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://kube-master-1:2379 -c MY_CLUSTER_ID -s /dev/dm-0 -d team0:0 -m team0:0
 ```
 
