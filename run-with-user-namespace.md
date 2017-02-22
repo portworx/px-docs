@@ -23,6 +23,5 @@ You must enable the `--userns host` directive to Docker
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
 ```
