@@ -79,7 +79,6 @@ Alternatively, you can also pass in the scheduler directive via the PX command l
     -v /var/lib/kubelet:/var/lib/kubelet:shared             \
     -v /usr/src:/usr/src                                    \
     -v /lib/modules:/lib/modules                            \
-    --ipc=host                                              \
     portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -x kubernetes
 ```
 
