@@ -36,7 +36,6 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       -v /var/run/docker.sock:/var/run/docker.sock   \
       -v /var/cores:/var/cores                       \
       -v ${HOSTDIR}:${HOSTDIR}                       \
-      --ipc=host                                     \
       --name=%n \
       portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -s /dev/xvdN
 KillMode=control-group
