@@ -60,7 +60,6 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
 ```
 
@@ -187,7 +186,6 @@ You can now start the Portworx container with the following run command:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
                 portworx/px-dev
 ```
 
