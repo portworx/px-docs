@@ -128,7 +128,6 @@ The following is a sample JSON file that can be used to launch Portworx through 
     "ipAddress": {},
     "args": [
         "--name pxcluster.mesos",
-        "--ipc host",
         "-k etcd:http://1.2.3.4:4001",
         "-c mesos-demo1",
         "-s /dev/sdb",
