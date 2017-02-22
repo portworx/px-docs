@@ -118,7 +118,6 @@ In this example, we would be using the following local disks for PX-Enterprise s
   -v /var/run/docker.sock:/var/run/docker.sock  \
   -v /var/cores:/var/cores                      \
   -v /usr/src:/usr/src                          \
-  --ipc=host                                    \
   portworx/px-dev
   
 ```
