@@ -60,8 +60,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /opt/pwx/bin:/export_bin:shared            \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-		  -v ${HDRS}:${HDRS}                           \
-                 --ipc=host                                    \
+		 -v ${HDRS}:${HDRS}                            \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
 ```
 
@@ -189,7 +188,6 @@ You can now start the Portworx container with the following run command:
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
-                 --ipc=host                                    \
                 portworx/px-dev
 ```
 
