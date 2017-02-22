@@ -386,7 +386,6 @@
 		"                -v /var/run/docker.sock:/var/run/docker.sock        \\\n",
 		"                -v /var/cores:/var/cores                            \\\n",
 		"                -v ${HOSTDIR}:${HOSTDIR}                            \\\n",
-		"                --ipc=host                                          \\\n",
 		"                --name=%n                                           \\\n",
 		"                portworx/px-enterprise -s /dev/xvdb -d eth0 -m eth0 -k etcd://127.0.0.1:2379 -c px-cluster-coreos\n",
 		"         KillMode=control-group\n",
