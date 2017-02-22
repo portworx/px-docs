@@ -225,18 +225,18 @@ entries:
     output: web
     folderitems:
     - title: Mesos, Mesosphere and Marathon
-      url: /video_mesos.html
+      url: /video-mesos.html
       output: web
     - title: Rancher
-      url: /video_rancher.html
+      url: /video-rancher.html
       output: web
     - title: Shared Volumes
-      url: /video_shared_volumes.html
+      url: /video-shared-volumes.html
       output: web
     - title: Multi-cloud High Availability
-      url: /video_multi_cloud.html
+      url: /video-multi-cloud.html
       output: web
     - title: Portwork QuickStart Explainer
-      url: /video_portworx_nutshell.html
+      url: /video-portworx-nutshell.html
       output: web
   
