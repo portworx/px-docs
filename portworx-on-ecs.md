@@ -78,7 +78,6 @@ You will have to log into each of the ECS instances for this step.
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
-                 --ipc=host                                    \
                 portworx/px-dev -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -a -z -f
 ```
 
