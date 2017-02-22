@@ -9,6 +9,5 @@
                  -v /mnt:/mnt:shared                                        \
                  -v /var/cores:/var/cores                                   \
                  -v /usr/src:/usr/src                                       \
-                 --ipc=host                                                 \
                 portworx/px-enterprise -daemon -k etcd:http://myetcd.mycompany.com:2379 -c mycluster-01 -s /dev/vdb
 ```
