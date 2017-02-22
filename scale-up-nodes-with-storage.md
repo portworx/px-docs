@@ -62,7 +62,7 @@ Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-
 ```
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared \
--v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src --ipc=host \
+-v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src \
 -e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 \
 -m team0:0 -d team0 -s /dev/dm-1
 ```
