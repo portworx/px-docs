@@ -80,4 +80,4 @@ If the number of instances are scaled up, then the following happens:
 3. PX will join the cluster as a new node.
 
 ## Scaling the Cluster Down
-When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the `pxctl service drive add` command.
+When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the [`pxctl service drive add`](/scale-up.html) command.
