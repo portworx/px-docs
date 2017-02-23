@@ -33,21 +33,51 @@ For example, create two volumes as:
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
 ### Pass PX Config via Cloud-Init
-When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  This information will be provided by the [`cloud-init user data](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)`.
+When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  This information will be provided by the `user-data` in [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
-Specify the following information in the user-data section of your instance while creating the auto scaling group:
+Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
 
 ```bash
 #cloud-config
-clusterid: my-px-asg-cluster
-kvdb: etcd://myetc.company.com:2379
+px-cluster:
+  clusterid: my-px-asg-cluster
+  kvdb: etcd://myetc.company.com:2379
 storage:
-  - ebs vol-0055e5913b79fb49d
-  - ebs vol-0743df7bf5657dad8
+  ebs:
+    template: vol-0055e5913b79fb49d
+	max-count: 128
+  ebs:
+    template: vol-0743df7bf5657dad8
+	max-count: 32
+aws-credentialsi:
+  AWS_ACCESS_KEY_ID: XXX-YYY-ZZZ
+  AWS_SECRET_ACCESS_KEY: XXX-YYY-ZZZ
 ```
 
-PX will use the EBS volume IDs as volume template specs.  Note that each instance will reference the same EBS volume.  PX will figure out which actual EBS volume to use during runtime.
+PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one as long as the number of existing EBS volumes for this auto scale group is less than the `max` value specified in the `user-data`.  If the maximum number of EBS volumes have been reached, then PX will startup as a storage-consumer (storage-less) node.
+
+Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
 ## Scaling the Cluster Up
+For each instance in the auto scale group, the following process takes place on the first boot (Note that the `user-data` is made available only during the first boot of an instance):
+
+1. When a PX node starts for the first time, it inspects it's `user-data`.
+2. PX will also use the AWS credentials provided to query the status of the EBS volumes:
+   - If there exists an unattached EBS volume that matches the template in the `storage` section of the `user-data`, PX will assign that volume to this instance.
+   - If there does not exist an unattached EBS volume, then PX will create one that matches the template, as long as the total number of volumes in this scale group is less than the `max-count` parameter.
+   - If there are more than `max-count` EBS volumes, this PX instance will initialize itself as a `storage-less` node.
+3. PX will now join the cluster using the following scheme:
+   - If PX **created a new** EBS volume, then PX will then use the information provided in the `px-cluster` section of the `user-data` to join the cluster.  PX creates the `/etc/pwx/config.json` cluster config information **directly inside the EBS volume** for subsequent boots.
+   - On the other hand, if this PX instance was able to get an **existing** EBS volume, it will look for the PX cluster configuration information and use that to join the cluster as an existing node.
+
+If an instance is terminated, then the following happens:
+1. The EBS volume associated with that instance gets detached.
+2. A new EC2 instance from the AMI gets created and PX will be able to attach to the free EBS volumes and re-join the cluster with the existing information.
+
+If the number of instances are scaled up, then the following happens:
+1. PX on the new instance will detect that there are no free EBS volumes.
+2. PX will create a new EBS volume if it is within the `max-count` capacity limit.
+3. PX will join the cluster as a new node.
 
 ## Scaling the Cluster Down
+When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the `pxctl service drive add` command.
