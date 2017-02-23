@@ -81,7 +81,7 @@ entries:
       url: /portworx-on-ecs.html
       output: web
     - title: AWS Auto Scaling
-      url: /portworx-on-ecs.html
+      url: /portworx-on-aws-asg.html
       output: web
     - title: Azure
       url: /portworx-on-azure.html
