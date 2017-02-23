@@ -71,6 +71,27 @@ entries:
     - title: Run with systemd
       url: /run-with-systemd.html
       output: web
+  - title: Cloud Reference Guides
+    output: web
+    folderitems:
+    - title: AWS via Cloud Formation
+      url: /portworx-on-aws-cloudformation.html
+      output: web
+    - title: AWS ECS
+      url: /portworx-on-ecs.html
+      output: web
+    - title: AWS Auto Scaling
+      url: /portworx-on-ecs.html
+      output: web
+    - title: Azure
+      url: /portworx-on-azure.html
+      output: web
+    - title: SoftLayer
+      url: /portworx-on-softlayer.html
+      output: web 
+    - title: Packet.net
+      url: /portworx-on-packet.html
+      output: web
   - title: CLI and API Reference
     output: web
     folderitems:
@@ -146,29 +167,11 @@ entries:
   - title: Reference Architectures
     output: web
     folderitems:
-    - title: Portworx on GCE with Kubernetes
-      url: /gce-k8s-pwx.html
-      output: web
     - title: Portworx on Docker Data Center
       url: /portworx-on-ddc.html
       output: web
-    - title: Portworx on Packet.net Platform
-      url: /portworx-on-packet.html
-      output: web
-    - title: Portworx on ECS
-      url: /portworx-on-ecs.html
-      output: web
-    - title: Portworx on Azure
-      url: /portworx-on-azure.html
-      output: web
-    - title: Portworx on SoftLayer
-      url: /portworx-on-softlayer.html
-      output: web 
-    - title: Portworx on SDN with userns
+    - title: Running with an SDN
       url: /portworx-flannel-userns.html
-      output: web
-    - title: Portworx on AWS CloudFormation
-      url: /get-started-asap.html
       output: web
   - title: Enterprise Edition
     output: web

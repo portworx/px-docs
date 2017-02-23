@@ -127,3 +127,6 @@ spec:
 ```
 
 Note the new section called nodeSelector
+
+## Bill of Materials on Public Cloud Providers
+Use [this](/k8s-pwx-bom.html) guide to calculate the BOM for a complete Kubernetes with Portworx compute and storage environment for running stateful applications.

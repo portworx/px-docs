@@ -40,7 +40,7 @@ You may see a message indicating AWS is "Unable to list IAM roles", which can be
 Using the AWS CLI for a particular region, list the IP Addresses for the instances, based on the CloudFormation Stack Name
 Example:
 
-```
+```bash
 REGION=us-east-1
 STACK_NAME="PX-STACK"
 aws --region ${REGION} ec2  describe-instances --filters "Name=tag:aws:cloudformation:stack-name,Values=${STACK_NAME}" --query 'Reservations[*].Instances[*].{IP:PublicIpAddress,ID:InstanceId}' --output text
@@ -53,3 +53,4 @@ Using the key provided for the template, you can now login to the nodes as the *
 ### Next Steps
 
 The Portworx CloudFormation Template is freely available and can be easily customized.  
+
