@@ -14,8 +14,8 @@ This document explains specific functionality that Portworx provides to easily i
 ## Configure and Launch the Auto Scaling Group
 Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
 
-### Create an AMI with PX configured via systemd
-First, you will need to create a master AMI that you will associate with your auto scaling group.
+### Create an AMI 
+First, you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
@@ -32,7 +32,7 @@ For example, create two volumes as:
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-### Specify Runtime Parameters via Cloud-Init
+### Pass PX Config via Cloud-Init
 When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  This information will be provided by the [`cloud-init user data](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)`.
 
 Specify the following information in the user-data section of your instance while creating the auto scaling group:
