@@ -104,7 +104,7 @@ Run the following:
  
 ```
 # wget http://yum.portworx.com/repo/rpms/kubernetes/kubernetes-portworx.tar.gz && \
-# tar xvf kubernetes-portworx.tar.gz
+tar xvf kubernetes-portworx.tar.gz
 ```
 
 ####  Update the Master
