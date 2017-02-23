@@ -70,6 +70,12 @@ For each instance in the auto scale group, the following process takes place on 
    - If PX **created a new** EBS volume, then PX will then use the information provided in the `px-cluster` section of the `user-data` to join the cluster.  PX creates the `/etc/pwx/config.json` cluster config information **directly inside the EBS volume** for subsequent boots.
    - On the other hand, if this PX instance was able to get an **existing** EBS volume, it will look for the PX cluster configuration information and use that to join the cluster as an existing node.
 
+When PX creates an EBS volume, it adds labels on the volume so that the volume is associated with this cluster.  This is how multiple volumes from different clusters are kept seperate.  The labels will look like:
+```bash
+PWX_CLUSTER_ID=my-px-asg-cluster
+PWX_EBS_VOLUME_TEMPLATE=vol-0055e5913b79fb49d
+```
+
 If an instance is terminated, then the following happens:
 1. The EBS volume associated with that instance gets detached.
 2. A new EC2 instance from the AMI gets created and PX will be able to attach to the free EBS volumes and re-join the cluster with the existing information.
