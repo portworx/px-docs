@@ -11,7 +11,7 @@ Since Portworx instances are stateful, extra care must be taken when using `Auto
 
 This document explains specific functionality that Portworx provides to easily integrate your auto scaling environment with your PX cluster and optimally manage stateful applications across a variable number of nodes in the cluster.
 
-## Configure and Launch the Auto Scaling Group
+## Configure the Auto Scaling Group
 Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
 
 ### Create an AMI 
