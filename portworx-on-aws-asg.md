@@ -79,8 +79,8 @@ A final option is to create each instance such that it has the authority to crea
 ## Scaling the Cluster Up
 For each instance in the auto scale group, the following process takes place on the first boot (Note that the `user-data` is made available only during the first boot of an instance):
 
-1. When a PX node starts for the first time, it inspects it's `user-data`.
-2. PX will also use the AWS credentials provided to query the status of the EBS volumes:
+1. When a PX node starts for the first time, it inspects it's config information (passed in via `user-data` or env variables).
+2. PX will also use the AWS credentials provided (or instance priviledges) to query the status of the EBS volumes:
    - If there exists an unattached EBS volume that matches the template in the `storage` section of the `user-data`, PX will assign that volume to this instance.
    - If there does not exist an unattached EBS volume, then PX will create one that matches the template, as long as the total number of volumes in this scale group is less than the `max-count` parameter.
    - If there are more than `max-count` EBS volumes, this PX instance will initialize itself as a `storage-less` node.
