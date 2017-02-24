@@ -18,8 +18,7 @@ The following sections describe how to configure Docker for shared mounts on [Co
 ```
 2. Copy the docker.service file for editing:
 ```
-    sudo cp /usr/lib64/systemd/system/docker.service
-    /etc/systemd/system
+    sudo cp /usr/lib64/systemd/system/docker.service /etc/systemd/system
 ```
 3. Edit the docker service file for `systemd`:
 ```
