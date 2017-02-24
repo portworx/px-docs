@@ -5,6 +5,12 @@ keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
+## 1.1.4 Release notes
+
+### Key Changes
+
+Improve node failure and resync handling
+
 ## 1.1.3 Release notes
 
 ### Key Features
