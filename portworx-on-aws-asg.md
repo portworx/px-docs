@@ -35,7 +35,7 @@ Ensure that these EBS volumes are created in the same region as the auto scaling
 ### PX Config Data
 When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  
 
-There are three ways that PX can receive it's configuration (cluster ID, kvdb URL) information:
+There are three ways that PX can receive it's configuration (Cluster ID, KVDB) information:
 
 #### Option 1: Cloud-Init
 This information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
