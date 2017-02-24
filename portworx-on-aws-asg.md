@@ -21,7 +21,7 @@ First, you will need to create a master AMI that you will associate with your au
 2. Launch an instance from this AMI.
 3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.://aws.amazon.com/cloudformation
 
-This AMI will ensure that PX is able to launch on startup.  Subsequently, PX will receive it's runtime configuration via [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
+This AMI will ensure that PX is able to launch on startup.  Subsequently, PX will receive it's runtime configuration via [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) or via environment variables.
 
 ### Create EBS volume templates
 Create various EBS volume templates for PX to use.  PX will use these templates as a reference when creating new EBS volumes while scaling up.
@@ -32,8 +32,11 @@ For example, create two volumes as:
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-### Pass PX Config via Cloud-Init
-When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  This information will be provided by the `user-data` in [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
+### PX Config Data
+When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  There are two ways that PX can receive it's configuration (cluster ID, kvdb URL) information:
+
+#### Cloud-Init
+This information can be provided by the `user-data` in [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
 Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
 
@@ -57,6 +60,19 @@ aws-credentialsi:
 PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one as long as the number of existing EBS volumes for this auto scale group is less than the `max` value specified in the `user-data`.  If the maximum number of EBS volumes have been reached, then PX will startup as a storage-consumer (storage-less) node.
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
+
+#### Environment Variables
+This information can alternatively be provided by way of environment variables encoded into the `systemd` unit file.  While launching PX via the `docker run` command in the `systemd` unit file, specify the following additional options:
+
+```bash
+  -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ
+  -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ
+```
+
+This, along with the usual cluster ID and KVDB will ensure that PX has the needed credentials to join the cluster and allocate EBS volumes on behalf of the scaling group.
+
+#### Instance Priviledges
+A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method, the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
 
 ## Scaling the Cluster Up
 For each instance in the auto scale group, the following process takes place on the first boot (Note that the `user-data` is made available only during the first boot of an instance):
