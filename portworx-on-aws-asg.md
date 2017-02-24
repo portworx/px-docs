@@ -19,7 +19,7 @@ First, you will need to create a master AMI that you will associate with your au
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.://aws.amazon.com/cloudformation
+3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
 
 This AMI will ensure that PX is able to launch on startup.  Subsequently, PX will receive it's runtime configuration via [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) or via environment variables.
 
