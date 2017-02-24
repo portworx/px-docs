@@ -33,10 +33,12 @@ For example, create two volumes as:
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
 ### PX Config Data
-When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  There are two ways that PX can receive it's configuration (cluster ID, kvdb URL) information:
+When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  
 
-#### Cloud-Init
-This information can be provided by the `user-data` in [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
+There are three ways that PX can receive it's configuration (cluster ID, kvdb URL) information:
+
+#### Option 1: Cloud-Init
+This information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
 Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
 
@@ -61,7 +63,7 @@ PX will use the EBS volume IDs as volume template specs.  Each PX instance that 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-#### Environment Variables
+#### Option 2: Environment Variables
 This information can alternatively be provided by way of environment variables encoded into the `systemd` unit file.  While launching PX via the `docker run` command in the `systemd` unit file, specify the following additional options:
 
 ```bash
@@ -71,7 +73,7 @@ This information can alternatively be provided by way of environment variables e
 
 This, along with the usual cluster ID and KVDB will ensure that PX has the needed credentials to join the cluster and allocate EBS volumes on behalf of the scaling group.
 
-#### Instance Priviledges
+#### Option 3: Instance Priviledges
 A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method, the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
 
 ## Scaling the Cluster Up
