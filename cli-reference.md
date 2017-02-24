@@ -33,6 +33,36 @@ export PATH=/opt/pwx/bin:$PATH
 Now you can just type `pxctl` and you're ready to start.
 
 To view all Portworx commands, run [`pxctl help`](cli-reference.html#pxctl-command-line-help).
+## Volume Status
+To inspect the status of a given volume, use `pxctl volume inspect <VOLID>`.    Ex:
+
+```
+[root@px-k8s-centos-3 ~]# /opt//pwx/bin/pxctl v i fiovol
+Volume	:  922203020611857957
+	Name            	 :  fiovol
+	Size            	 :  300 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  Attached: e2441f84-246e-4517-84ad-cb1ae33617cd
+	Device Path     	 :  /dev/pxd/pxd922203020611857957
+	Reads           	 :  274
+	Reads MS        	 :  47
+	Bytes Read      	 :  1343488
+	Writes          	 :  2687248
+	Writes MS       	 :  46640947
+	Bytes Written   	 :  85384732672
+	IOs in progress 	 :  1
+	Bytes used      	 :  59 GiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.100.48.5
+```
+The fields "Reads MS" and "Write MS" refer to time spent reading or writing, as per [standard convention](https://www.kernel.org/doc/Documentation/ABI/testing/procfs-diskstats)
+
+The "replica sets" provides a list of nodes on which the volume data resides.
 
 ## Node and Cluster Status
 To see the total storage capacity, use `pxctl status`. In the example below, a three-node cluster has a global capacity of 413 GB. The node on which `pxctl` ran contributed 256 GB to that global capacity.
