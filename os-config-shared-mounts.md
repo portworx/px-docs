@@ -101,8 +101,8 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 5. Add the `--propagation shared` flags to the docker startup script:
 ```
 # sudo sed -i.bak -e \
-   's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' \
-   /etc/init.d/docker
+      's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' \
+      /etc/init.d/docker
 ```
 6. Restart docker service:
 ```
