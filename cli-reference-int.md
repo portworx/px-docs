@@ -71,6 +71,6 @@ Let's review each command, options available under command and an example of how
 
 ### Volume Operations
 
-Additional help on each command can be found via pxctl <command> help
+Additional help on each command can be found via pxctl {command name} help
 
 
