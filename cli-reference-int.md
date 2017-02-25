@@ -97,7 +97,42 @@ OPTIONS:
    --help, -h  show help
 ```
 
-#### TBD: Elaborate on each option here with example
+#### pxctl volume create
+
+'pxctl volume create' is used to create a container-granular volume that can later be attached to a host running a container run-time or can be attached to from a container. 
+
+It has the following options available. 
+
+```
+sudo /opt/pwx/bin/pxctl volume create --help
+NAME:
+   pxctl volume create - Create a volume
+
+USAGE:
+   pxctl volume create [command options] [arguments...]
+
+OPTIONS:
+   --shared                           Specify --shared to make this a globally shared namespace volume
+   --passphrase value                 passphrase to use for the PBKDF2 function
+   --label value, -l value            Comma separated name=value pairs, e.g name=sqlvolume,type=production
+   --size value, -s value             specify size in GB (default: 1)
+   --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
+   --seed value                       optional data that the volume should be seeded with
+   --block_size value, -b value       block size in Kbytes (default: 32)
+   --repl value, -r value             replication factor [1..3] (default: 1)
+   --scale value, --sc value          auto scale to max number [1..1024] (default: 1)
+   --io_priority value                IO Priority: [high|medium|low] (default: "low")
+   --sticky                           sticky volumes cannot be deleted until the flag is disabled
+   --snap_interval value, --si value  snapshot interval in minutes, 0 disables snaps (default: 0)
+   --nodes value                      Comma seprated Node Id(s)
+ ```
+ 
+ Here is an example of how to create a volume
+ 
+```
+sudo /opt/pwx/bin/pxctl volume create clitest1 --size=1 --repl=3
+```
+
 
 ### Snapshot Operations
 
