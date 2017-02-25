@@ -62,7 +62,6 @@ GLOBAL OPTIONS:
    --raw, -r      raw CLI output for instrumentation
    --help, -h     show help
    --version, -v  print the version
-
 ```
 
 'pxctl' provides capabilities to perform much more fine-grained control of the PX resources cluster-wide and as seen above offers capabilties to manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster
@@ -117,7 +116,6 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
-
 ```
 #### TBD: Elaborate on each option here with example
 
@@ -125,7 +123,6 @@ OPTIONS:
 ### Cluster Operations
 
 ```
-
 sudo /opt/pwx/bin/pxctl cluster --help
 NAME:
    pxctl cluster - Manage the cluster
@@ -144,7 +141,6 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
-   
 ```
 
 
@@ -153,7 +149,6 @@ OPTIONS:
 ### Service Operations 
 
 ```
-
 sudo /opt/pwx/bin/pxctl service --help
 NAME:
    pxctl service - Service mode utilities
@@ -175,11 +170,13 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
+```
 
 #### TBD: Elaborate on each option here with example
 
 ### Host related operations
 
+````
 sudo /opt/pwx/bin/pxctl host --help   
 NAME:
    pxctl host - Attach volumes to the host
@@ -198,7 +195,7 @@ OPTIONS:
 ```
 
 
-### Host operations
+### Upgrade related operations
 
 ```
 sudo /opt/pwx/bin/pxctl upgrade --help
