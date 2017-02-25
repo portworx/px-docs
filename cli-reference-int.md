@@ -31,3 +31,46 @@ export PATH=/opt/pwx/bin:$PATH
 ```
 
 Now you can just type `pxctl` and you're ready to start.
+
+To view all the commands offered by pxctl, type 'pxctl help'
+
+```
+sudo /opt/pwx/bin/pxctl help  
+NAME:
+   pxctl - px cli
+
+USAGE:
+   pxctl [global options] command [command options] [arguments...]
+   
+VERSION:
+   1.1.4-6b35842
+   
+COMMANDS:
+     status       Show status summary
+     volume, v    Manage volumes
+     snap, s      Manage volume snapshots
+     cluster, c   Manage the cluster
+     service, sv  Service mode utilities
+     host         Attach volumes to the host
+     upgrade      Upgrade PX
+     eula         Show license agreement
+     help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --json, -j     output in json
+   --color        output with color coding
+   --raw, -r      raw CLI output for instrumentation
+   --help, -h     show help
+   --version, -v  print the version
+
+```
+
+'pxctl' provides capabilities to perform much more fine-grained control of the PX resources cluster-wide and as seen above offers capabilties to manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster
+
+Let's review each command, options available under command and an example of how those options are used
+
+### Volume Operations
+
+Additional help on each command can be found via pxctl <command> help
+
+
