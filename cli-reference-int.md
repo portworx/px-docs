@@ -124,6 +124,8 @@ OPTIONS:
 
 ### Cluster Operations
 
+```
+
 sudo /opt/pwx/bin/pxctl cluster --help
 NAME:
    pxctl cluster - Manage the cluster
@@ -142,11 +144,15 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
+   
+```
 
 
 #### TBD: Elaborate on each option here with example
 
 ### Service Operations 
+
+```
 
 sudo /opt/pwx/bin/pxctl service --help
 NAME:
@@ -189,9 +195,12 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
+```
+
 
 ### Host operations
 
+```
 sudo /opt/pwx/bin/pxctl upgrade --help
 NAME:
    pxctl upgrade - Upgrade PX
@@ -202,6 +211,8 @@ USAGE:
 OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
    
+```
+
 
 
 
