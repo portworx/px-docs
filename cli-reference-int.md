@@ -441,9 +441,9 @@ Here is the output of the volume alerts.
 
 ```
 sudo /opt/pwx/bin/pxctl volume stats clitest
-TS			Bytes Read	Num Reads	Bytes Written	Num Writes	IOPS		IODepth		 Read Tput	Write Tput	Latency (ms)
-2017-2-26:23 Hrs	0 B		0		0 B		0	0                                                                                2017-2-26:23 Hrs        0 B             0               0 B             0      0
-```
+TS         		Bytes Read	Num Reads Bytes Written	Num Writes IOPS	 IODepth Read Tput Write Tput Latency (ms)
+2017-2-26:23 Hrs	504 kB		69	        4.1 kB		1      3    
+2017-2-26:23 Hrs        4.1 kB          1               17 MB           41     2                                                2017-2-26:23 Hrs        0 B             0               42 MB           88     4                                                2017-2-26:23 Hrs        0 B             0               25 MB           58     2                                                2017-2-26:23 Hrs        0 B             0               17 MB           38     1``
 
 #### pxctl volume requests
 
