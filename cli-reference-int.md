@@ -64,7 +64,7 @@ GLOBAL OPTIONS:
    --version, -v  print the version
 ```
 
-'pxctl' provides capabilities to perform much more fine-grained control of the PX resources cluster-wide and as seen above offers capabilties to manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster
+`pxctl` provides capabilities to perform much more fine-grained control of the PX resources cluster-wide and as seen above offers capabilties to manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster
 
 Let's review each command, options available under command and an example of how those options are used
 
@@ -99,7 +99,7 @@ OPTIONS:
 
 #### pxctl volume create
 
-'pxctl volume create' is used to create a container-granular volume that can later be attached to a host running a container run-time or can be attached to from a container. 
+`pxctl volume create`  is used to create a container-granular volume that can later be attached to a host running a container run-time or can be attached to from a container. 
 
 It has the following options available. 
 
