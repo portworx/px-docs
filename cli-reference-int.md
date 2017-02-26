@@ -299,6 +299,40 @@ Volume	:  970758537931791410
 
 As shown above, the volume is shown as `shared=yes` indicating that this is a shared volume
 
+For adding the `--sticky` attribute to a volume, use the following command. 
+
+```
+sudo /opt/pwx/bin/pxctl volume update clitest --sticky=on
+```
+
+Doing a subsequent inspect on the volume shows the `attributes` field set to `sticky`
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Creation time   	 :  Feb 26 08:17:20 UTC 2017
+	Shared          	 :  yes
+	Status          	 :  up
+	State           	 :  detached
+	Attributes      	 :  sticky
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+```
+
 
 #### pxctl volume ha-update
 
