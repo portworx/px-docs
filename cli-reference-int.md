@@ -138,6 +138,23 @@ If the command succeeds, it will print the following.
 Shared volume successfully created: 508499868375963168
 ```
 
+For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
+
+```
+sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --iopriority=high
+```
+If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
+
+```
+sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --sticky
+```
+
+For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven envrionments. 
+
+```
+sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --scale=100
+```
+
 #### pxctl volume list
 
 `pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
