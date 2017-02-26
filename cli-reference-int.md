@@ -127,10 +127,10 @@ OPTIONS:
    --nodes value                      Comma seprated Node Id(s)
  ```
  
- Here is an example of how to create a volume
+Here is an example of how to create a shared volume with replication factor set to 3
  
 ```
-sudo /opt/pwx/bin/pxctl volume create clitest1 --size=1 --repl=3
+sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
 
 
