@@ -191,10 +191,6 @@ OPTIONS:
  ```
  
 
-sudo /opt/pwx/bin/pxctl volume list
-ID			NAME	SIZE	HA	SHARED	ENCRYPTED	PRIORITSTATUS
-970758537931791410	clitest	1 GiB	1	no	no		LOW	u
-
 #### pxctl volume ha-update
 
 #### pxctl volume stats
