@@ -332,9 +332,70 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
-
-
 #### pxctl volume ha-update
+
+`pxctl volume ha-update` can be used to increase or decrease the replication factor for a given portworx volume. 
+
+The volume `clitest` shown in the previous example is a volume with replication factor set to 1. 
+
+Here are the nodes in the cluster.
+
+```
+sudo /opt/pwx/bin/pxctl cluster list
+
+Cluster ID: MY_CLUSTER_ID
+Status: OK
+
+Nodes in the cluster:
+ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
+fa18451d-9091-45b4-a241-d816357f634b	10.99.117.133	0.5		8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8	10.99.117.137	0.250313	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
+
+```
+Using `pxctl volume ha-update`, here is how to increase the replication factor. Note, the command below sets the volume to replicate to the node with NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+
+```
+sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+```
+Once the replication completes and the new node is added to the replication set, the `pxctl volume inspect` shows both the nodes.
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  2
+	IO Priority     	 :  LOW
+	Creation time   	 :  Feb 26 08:17:20 UTC 2017
+	Shared          	 :  yes
+	Status          	 :  up
+	State           	 :  detached
+	Attributes      	 :  sticky
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+			Node 	 :  10.99.117.137
+
+```
+`pxctl volume alerts` will show when the replication is complete
+
+```
+sudo /opt/pwx/bin/pxctl volume alerts
+AlertID	VolumeID		Timestamp			Severity	AlertType			Description
+25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
+
+```
+
 
 #### pxctl volume stats
 
