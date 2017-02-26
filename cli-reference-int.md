@@ -132,7 +132,21 @@ Here is an example of how to create a shared volume with replication factor set 
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
+If the command succeeds, it will print the following.
+
+```
+Shared volume successfully created: 508499868375963168
+```
+
 #### pxctl volume list
+
+`pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
+
+```
+sudo /opt/pwx/bin/pxctl volume list
+ID			NAME		SIZE	HA	SHARED	ENCRYPTED	PRIORITY	STATUS
+508499868375963168	clitest1	1 GiB	3	yes	no		LOW		up - detached
+```
 
 #### pxctl volume delete
 
