@@ -395,7 +395,45 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 
 ```
+The same command can also be used to reduce the replication factor as well.
 
+```
+sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+Update Volume Replication: Replication update started successfully for volume clitest
+```
+Here is the output of the volume inspect command after the replication factor has been reduced to 1
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Creation time   	 :  Feb 26 08:17:20 UTC 2017
+	Shared          	 :  yes
+	Status          	 :  up
+	State           	 :  detached
+	Attributes      	 :  sticky
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+```
+Here is the output of the volume alerts.
+
+```
+25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
+26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated 
+```
 
 #### pxctl volume stats
 
