@@ -132,6 +132,21 @@ Here is an example of how to create a shared volume with replication factor set 
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
+#### pxctl volume list
+
+#### pxctl volume delete
+
+#### pxctl volume update
+
+#### pxctl volume ha-update
+
+#### pxctl volume stats
+
+#### pxctl volume requests
+
+#### pxctl volume alerts
+
+#### pxctl volume import
 
 
 ### Snapshot Operations
