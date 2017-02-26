@@ -150,7 +150,50 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	PRIORITY	STATUS
 
 #### pxctl volume delete
 
+`pxctl volume delete` is used to delete a volume
+
+```
+sudo /opt/pwx/bin/pxctl volume delete --help
+NAME:
+   pxctl volume delete - Delete a volume
+
+USAGE:
+   pxctl volume delete [arguments...]
+   
+```
+
+The command can either take the volume name or the volume-id as an argument
+
+```
+sudo /opt/pwx/bin/pxctl volume delete clitest1
+Volume clitest1 successfully deleted
+```
+
+
 #### pxctl volume update
+
+`pxctl volume update` is used to update a specific parameter of the volume
+
+It has the following options.
+
+```
+sudo /opt/pwx/bin/pxctl volume update --help
+NAME:
+   pxctl volume update - Update volume settings
+
+USAGE:
+   pxctl volume update [command options] [arguments...]
+
+OPTIONS:
+   --shared value, -s value  set shared setting to on/off
+   --sticky on/off           set sticky setting to on/off
+   --scale factor            New scale factor [1...1024] (default: 0)
+ ```
+ 
+
+sudo /opt/pwx/bin/pxctl volume list
+ID			NAME	SIZE	HA	SHARED	ENCRYPTED	PRIORITSTATUS
+970758537931791410	clitest	1 GiB	1	no	no		LOW	u
 
 #### pxctl volume ha-update
 
