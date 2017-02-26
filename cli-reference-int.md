@@ -189,7 +189,33 @@ The command can either take the volume name or the volume-id as an argument
 sudo /opt/pwx/bin/pxctl volume delete clitest1
 Volume clitest1 successfully deleted
 ```
+#### pxctl volume inspect
 
+`pxctl volume inspect` help show the additional information about the volume configuration at a much more detailed level
+
+```
+/opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+```
 
 #### pxctl volume update
 
@@ -210,7 +236,69 @@ OPTIONS:
    --sticky on/off           set sticky setting to on/off
    --scale factor            New scale factor [1...1024] (default: 0)
  ```
- 
+
+Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
+
+For e.g., for the volume clitest, here is the output of volume inpsect.
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+```
+
+The `shared` field is shown as 'no' indicating that this is not a shared volume
+
+```
+sudo /opt/pwx/bin/pxctl volume update clitest --shared=on
+```
+
+Let's do a `pxctl volume inpsect` on the volume again.
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect clitest
+Volume	:  970758537931791410
+	Name            	 :  clitest
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Shared          	 :  yes
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+```
+
+As shown above, the volume is shown as `shared=yes` indicating that this is a shared volume
+
 
 #### pxctl volume ha-update
 
