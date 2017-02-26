@@ -437,6 +437,14 @@ Here is the output of the volume alerts.
 
 #### pxctl volume stats
 
+`pxctl volume stats` displays the current stats the in the volume. 
+
+```
+sudo /opt/pwx/bin/pxctl volume stats clitest
+TS			Bytes Read	Num Reads	Bytes Written	Num Writes	IOPS		IODepth		 Read Tput	Write Tput	Latency (ms)
+2017-2-26:23 Hrs	0 B		0		0 B		0	0                                                                                2017-2-26:23 Hrs        0 B             0               0 B             0      0
+```
+
 #### pxctl volume requests
 
 #### pxctl volume alerts
