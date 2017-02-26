@@ -141,18 +141,18 @@ Shared volume successfully created: 508499868375963168
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
 
 ```
-sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --iopriority=high
+sudo /opt/pwx/bin/pxctl volume create clihigh --shared --size=1 --repl=3 --iopriority=high
 ```
 If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 
 ```
-sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --sticky
+sudo /opt/pwx/bin/pxctl volume create cliscale --shared --size=1 --repl=3 --sticky
 ```
 
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven envrionments. 
 
 ```
-sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --scale=100
+sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
 
 #### pxctl volume list
@@ -162,7 +162,11 @@ sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3 --scal
 ```
 sudo /opt/pwx/bin/pxctl volume list
 ID			NAME		SIZE	HA	SHARED	ENCRYPTED	PRIORITY	STATUS
-508499868375963168	clitest1	1 GiB	3	yes	no		LOW		up - detached
+1130856252740468850	cliscale1	1 GiB	3	no	no		LOW		up - detached
+1131486256496535679	cliscale	1 GiB	3	no	no		LOW		up - detached
+970758537931791410	clitest		1 GiB	1	no	no		LOW		up - detached
+1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		up - detached
+2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		up - detached
 ```
 
 #### pxctl volume delete
