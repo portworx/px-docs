@@ -507,6 +507,33 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 ```
 #### pxctl volume import
 
+`pxctl volume import` enables import of existing data into a given portworx volume.
+
+The command syntax is as follows.
+
+```
+
+sudo /opt/pwx/bin/pxctl volume import --help
+NAME:
+   pxctl volume import - Import data into a volume
+
+USAGE:
+   pxctl volume import [command options] volume-name-or-ID
+
+OPTIONS:
+   --src path  Local source path for the data
+
+```
+Here is sample import of data from folder `/root/testtdata` into volume 'testimport'
+
+```
+sudo /opt/pwx/bin/pxctl volume import testimport --src /root/testdata
+Starting import of  data from /root/testdata into volume testimport...Beginning data transfer from /root/testdata testimport
+Imported Bytes :   0% [>---------------------------------------------------------------------------------------------------------------------------] 339ms
+
+
+Imported Files :   0% [>---------------------------------------------------------------------------------------------------------------------------] 257ms
+```
 
 ### Snapshot Operations
 
