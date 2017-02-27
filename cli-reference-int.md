@@ -447,8 +447,64 @@ TS 		Bytes Read  Num Reads Bytes Written  Num Writes IOPS	 IODepth   Read Tput	W
 
 #### pxctl volume requests
 
+This command displays all the pending requests to all the volumes in the cluster
+
+```
+sudo /opt/pwx/bin/pxctl volume requests
+Only support getting requests for all volumes.
+Active requests for all volumes: count = 11
+
+```
+
 #### pxctl volume alerts
 
+`pxctl volume alerts` shows all the alerts that are related to volumes including volume creation, deletion, resynchronization status and other replication factor changes. 
+
+```
+sudo /opt/pwx/bin/pxctl volume alerts --help
+NAME:
+   pxctl volume alerts - Show volume related alerts
+
+USAGE:
+   pxctl volume alerts [command options]  
+
+OPTIONS:
+   --sev value, -s value    Filter alerts based on severity : [WARN|NOTIFY|ALARM]
+   --start value, -t value  Time start : Jan 2 15:04:05 UTC 2006
+   --end value, -e value    Time end : Jan 2 15:04:05 UTC 2006
+   --all, -a                Specify --all to show cleared alerts in the output
+```
+
+`pxctl volume alerts` also can used to filer specific alerts based on the severity. Here are a few examples.
+
+Here is how to filter for alerts with the severity level `WARN`.
+```
+sudo /opt/pwx/bin/pxctl volume alerts --sev WARN
+AlertID	VolumeID		Timestamp			Severity	AlertType			Description
+24	970758537931791410	Feb 26 22:00:34 UTC 2017	WARN		Volume operation failure	Volume (Id: 970758537931791410 Name: clitest) HA update from 1 to 2 failed with error: Node 970758537931791410 doesn't exist
+```
+Here is how to filter for alerts with the severity level `ALARM`.
+```
+sudo /opt/pwx/bin/pxctl volume alerts --sev ALARM
+No volume alerts found 
+```
+
+Here is how to filter for alerts with the severity level `NOTIFY`.
+
+```
+sudo /opt/pwx/bin/pxctl volume alerts --sev NOTIFY
+AlertID	VolumeID		Timestamp			Severity	AlertType			Description
+
+36	415896631698061968	Feb 26 23:55:06 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) unmounted successfully
+37	415896631698061968	Feb 26 23:55:26 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) mounted successfully.
+38	415896631698061968	Feb 26 23:55:34 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) unmounted successfully
+39	415896631698061968	Feb 26 23:55:42 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) mounted successfully.
+40	415896631698061968	Feb 26 23:55:50 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) unmounted successfully
+41	415896631698061968	Feb 27 00:01:33 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) mounted successfully.
+42	415896631698061968	Feb 27 00:01:41 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) unmounted successfully
+43	415896631698061968	Feb 27 00:01:54 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) mounted successfully.
+44	415896631698061968	Feb 27 00:02:01 UTC 2017	NOTIFY		Volume operation success	Volume (Name: testvol Id: 415896631698061968 Path: /var/lib/osd/mounts/testvol) unmounted successfully
+```
 #### pxctl volume import
 
 
