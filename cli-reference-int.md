@@ -616,7 +616,6 @@ OPTIONS:
 #### TBD: Elaborate on each option here with example
 
 ### Host related operations
-
 ````
 sudo /opt/pwx/bin/pxctl host --help   
 NAME:
@@ -634,10 +633,55 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
-
+For the sake of these examples, let us use a volume by name "demovolume" that has just been created using a "volume create" CLI.
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
+```
+### Attach a volume
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host attach demovolume
+Volume successfully attached at: /dev/pxd/pxd772733390943400581
+```
+Running "volume list" will now show something like:
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
+* Data is not local to the node on which volume is attached.
+```
+Note: The volume was created on 2 different nodes than the one where it was attached in the above example. Hence the warning.
+### Detach a volume
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host detach demovolume
+Volume successfully detached
+```
+Running "volume list" will now show something like:
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
+```
+### Mount a volume on a path
+If a volume needs to be mounted locally on a node at a path, say /mnt/demodir
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host mount demovolume /mnt/demodir
+Volume demovolume successfully mounted at /mnt/demodir
+```
+Running "volume list" will now show something like:
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
+* Data is not local to the node on which volume is attached.
+```
+### Unmount a volume
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
+Volume demovolume successfully unmounted at /mnt/demodir
+```
 ### Upgrade related operations
-
 ```
 sudo /opt/pwx/bin/pxctl upgrade --help
 NAME:
@@ -650,7 +694,14 @@ OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
    
 ```
-
+Note: the container name also needs to be specified in the CLI.
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl upgrade --tag 1.1.6 my-px-enterprise
+Upgrading my-px-enterprise to version: portworx/px-enterprise:1.1.6
+Downloading PX portworx/px-enterprise:1.1.6 layers...
+<Output truncated>
+```
+It is recommended to upgrade the nodes in a staggered manner so as to maintain quorum and continuity of IOs.
 
 
 
