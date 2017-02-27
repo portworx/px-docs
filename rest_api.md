@@ -147,6 +147,32 @@ curl --unix-socket /var/run/docker.sock \
       -XDELETE http::/volumes/px7vol
 ```
 
+## Snapshot Lifecycle
+
+Snapshot calls use the `v1/osd-snapshot` endpoint
+
+### Snapshot Create
+
+Volumes must be attached to a host, prior to creating a snapshot.
+
+Example of `snapshot create`, where source volume ID is `922203020611857957` 
+and target snapshot name is `fiovol-snap`:
+
+```
+curl -XPOST -H "Content-Type: application/json" http://localhost:9001/v1/osd-snapshot -d '{ "ID": "922203020611857957", "locator":{"name": "fiovol-snap"}}'
+{"volume_create_response":{"id":"3946202556254170884","volume_response":{}}}
+```
+
+### Snapshot List
+
+To enumerate all snapshots:
+
+```
+curl -XGET http://localhost:9001/v1/osd-snapshot
+[{"id":"3214630156201222929","source":{"parent":"922203020611857957"},"locator":{"name":"922203020611857957.snap-2017-02-27T21:15:12.328514381Z"},"ctime":{"seconds":1488230112,"nanos":329027582},"spec":{"size":322122547200,"format":2,"block_size":65536,"ha_level":1,"cos":1,"aggregation_level":1},"usage":64146186240,"last_scan":{"seconds":1488230112,"nanos":329028332},"format":2,"status":2,"state":4,"replica_sets":[{"nodes":["e2441f84-246e-4517-84ad-cb1ae33617cd"]}]},{"id":"3946202556254170884","source":{"parent":"922203020611857957"},"locator":{"name":"fiovol-snap"},"ctime":{"seconds":1488230256,"nanos":810222572},"spec":{"size":322122547200,"format":2,"block_size":65536,"ha_level":1,"cos":1,"aggregation_level":1},"usage":64146186240,"last_scan":{"seconds":1488230256,"nanos":810223002},"format":2,"status":2,"state":4,"replica_sets":[{"nodes":["e2441f84-246e-4517-84ad-cb1ae33617cd"]}]}]
+...
+```
+
 ## Cluster Monitoring
 
 ### Cluster Status
