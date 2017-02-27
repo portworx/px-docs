@@ -132,6 +132,7 @@ Here is an example of how to create a shared volume with replication factor set 
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
+
 If the command succeeds, it will print the following.
 
 ```
@@ -179,8 +180,7 @@ NAME:
    pxctl volume delete - Delete a volume
 
 USAGE:
-   pxctl volume delete [arguments...]
-   
+   pxctl volume delete [arguments...]   
 ```
 
 The command can either take the volume name or the volume-id as an argument
@@ -189,6 +189,7 @@ The command can either take the volume name or the volume-id as an argument
 sudo /opt/pwx/bin/pxctl volume delete clitest1
 Volume clitest1 successfully deleted
 ```
+
 #### pxctl volume inspect
 
 `pxctl volume inspect` help show the additional information about the volume configuration at a much more detailed level
@@ -332,6 +333,7 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
+
 #### pxctl volume ha-update
 
 `pxctl volume ha-update` can be used to increase or decrease the replication factor for a given portworx volume. 
@@ -351,13 +353,14 @@ ID					DATA IP		CPU		MEM TOTAL	MEM FREE	CONTAINERS	VERSION		STATUS
 fa18451d-9091-45b4-a241-d816357f634b	10.99.117.133	0.5		8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
 b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8	10.99.117.137	0.250313	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
 bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		1.1.6-a879596	Online
-
 ```
+
 Using `pxctl volume ha-update`, here is how to increase the replication factor. Note, the command below sets the volume to replicate to the node with NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
 
 ```
 sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
 ```
+
 Once the replication completes and the new node is added to the replication set, the `pxctl volume inspect` shows both the nodes.
 
 ```
@@ -385,16 +388,16 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 			Node 	 :  10.99.117.137
-
 ```
+
 `pxctl volume alerts` will show when the replication is complete
 
 ```
 sudo /opt/pwx/bin/pxctl volume alerts
 AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
-
 ```
+
 The same command can also be used to reduce the replication factor as well.
 
 ```
@@ -428,6 +431,7 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
+
 Here is the output of the volume alerts.
 
 ```
@@ -453,7 +457,6 @@ This command displays all the pending requests to all the volumes in the cluster
 sudo /opt/pwx/bin/pxctl volume requests
 Only support getting requests for all volumes.
 Active requests for all volumes: count = 11
-
 ```
 
 #### pxctl volume alerts
@@ -478,12 +481,15 @@ OPTIONS:
 `pxctl volume alerts` also can used to filer specific alerts based on the severity. Here are a few examples.
 
 Here is how to filter for alerts with the severity level `WARN`.
+
 ```
 sudo /opt/pwx/bin/pxctl volume alerts --sev WARN
 AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 24	970758537931791410	Feb 26 22:00:34 UTC 2017	WARN		Volume operation failure	Volume (Id: 970758537931791410 Name: clitest) HA update from 1 to 2 failed with error: Node 970758537931791410 doesn't exist
 ```
+
 Here is how to filter for alerts with the severity level `ALARM`.
+
 ```
 sudo /opt/pwx/bin/pxctl volume alerts --sev ALARM
 No volume alerts found 
@@ -512,7 +518,6 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 The command syntax is as follows.
 
 ```
-
 sudo /opt/pwx/bin/pxctl volume import --help
 NAME:
    pxctl volume import - Import data into a volume
@@ -522,7 +527,6 @@ USAGE:
 
 OPTIONS:
    --src path  Local source path for the data
-
 ```
 Here is sample import of data from folder `/root/testtdata` into volume 'testimport'
 
