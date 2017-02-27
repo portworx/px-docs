@@ -5,7 +5,7 @@ keywords: zero storage
 sidebar: home_sidebar
 ---
 
-PX-Enterprise can be run in a client-only mode such that the storage availale in a PX-Cluster can be consumed by apps that are running on nodes that have no storage. This enables deployments to be able to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
+PX-Enterprise can be run in a client-only mode such that the storage available in a PX-Cluster can be consumed by apps that are running on nodes that have no storage. This enables deployments to leverage the powerful PX-Enterprise features from any node without having to rely on legacy protocols and adopt containerization faster.
 
 ## Add a new node PX Cluster with no storage
 
@@ -48,7 +48,9 @@ docker run --restart=always --name px-enterprise -d --net=host --privileged=true
 -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0 -z
 ```
 
-Note the -z option in the command above that starts this node as a zero storage node
+NOTE: the -z option in the command above starts this node as a zero storage node
+
+NOTE: if you already have config.json in /etc/pwx/ then the config.json settings will take precedence over the -z option. If your deployment/automation scripts place the file on every node, please make sure to remove it, in order for -z option to take effect.
 
 ### Display the cluster node list 
 
