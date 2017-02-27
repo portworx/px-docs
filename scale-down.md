@@ -7,7 +7,7 @@ sidebar: home_sidebar
 
 ## Scale-down Nodes 
 
-How to remove an offline node from a cluster
+How to remove an offline node from a cluster. For information on nodes with no storage that have been offline for an extended period, peruse the section titled "Automatic decommission of storage less nodes"
 
 ### Identify the cluster that needs to be managed
 
@@ -202,3 +202,8 @@ If any node hosts a volume with replication factor = 1, then we disallow decommi
 One possible workaround to go through with the decommission of such a node is to increase the replication of single replica volumes by running "volume ha-update".
 
 Once completely replicated onto another node, then re-attempt the node decommission. This time, the volume already has another replica on another node and so decommissioning the node will reduce the replication factor of the volume and remove the node.
+
+## Automatic decommission of storage less nodes
+Storage less nodes that are initialized and added to the cluster may not be needed once they complete their tasks (for ex in a scheduler workflow). If they are taken offline/destroyed, the cluster will still retain the nodes and mark them as offline.
+If eventually a majority of such nodes exist, the cluster won't have quorum nodes that are online. The solution is to run cluster delete commands and remove such nodes. This gets more laborious with more such nodes or frequency of such nodes added and taken down.
+To help with this, PX waits until a grace period of 10 min. After this period offline nodes with no storage will be removed from the cluster. There is no CLI command needed to turn on or trigger this feature.
