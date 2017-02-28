@@ -5,7 +5,7 @@ keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Load Balancer, ECS, 
 sidebar: home_sidebar
 ---
 
-These steps shows you how you can quickly and easily deploy Portworx on [**AWS Auto Scaling**](https://aws.amazon.com/autoscaling/)
+This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
 
 # Configure the Auto Scaling Group
 Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
