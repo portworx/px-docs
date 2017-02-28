@@ -678,7 +678,7 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 ```
 and running "volume inspect" on this volume will show something like:
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl v i demovolume
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume inspect demovolume
 Volume  :  772733390943400581
         Name                     :  demovolume
         Size                     :  5.0 GiB
