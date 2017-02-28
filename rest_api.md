@@ -417,3 +417,61 @@ curl -XGET http://localhost:9001/v1/cluster/enumerate | python -mjson.tool
     "Status": 2
 }
 ```
+
+## Maintenance and Operations
+
+### Enter Maintenance Mode
+
+```
+[root@px-k8s-centos-0 ~]# curl -XGET http://localhost:9001/entermaintenance
+curl: (52) Empty reply from server
+[root@px-k8s-centos-0 ~]# pxctl status
+PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
+Node ID: f067e2ed-b81f-4120-bb72-a20d73f76af0
+	IP: 147.75.64.189
+ 	Local Storage Pool: 1 pool
+	Pool	IO_Priority	Size	Used	Status	Zone	Region
+	0	LOW		100 GiB	2.0 GiB	Online	default	default
+	Local Storage Devices: 0 device
+	Device	Path	Media Type	Size		Last-Scan
+	No storage device
+	total		-	0 B
+Cluster Summary
+	Cluster ID: MY_CLUSTER_ID
+	Node IP: 10.100.48.11 - Node ID: f067e2ed-b81f-4120-bb72-a20d73f76af0 In Maintenance
+Global Storage Pool
+	Total Used    	:  0 B
+	Total Capacity	:  0 B
+
+AlertID	Resource	ResourceID				Timestamp			Severity	AlertType		Description
+44	NODE		f067e2ed-b81f-4120-bb72-a20d73f76af0	Feb 28 16:59:39 UTC 2017	ALARM		Cluster manager failure	Cluster Manager Failure: Entering Maintenance Mode because of Storage Maintenance Mode
+```
+
+### Exit Maintainance Mode
+
+```
+[root@px-k8s-centos-0 ~]# curl -XGET http://localhost:9001/exitmaintenance
+{"Status":"Exit maintenance mode.","Version":"v1"}
+[root@px-k8s-centos-0 ~]# pxctl status
+Status: PX is operational
+Node ID: f067e2ed-b81f-4120-bb72-a20d73f76af0
+	IP: 147.75.64.189
+ 	Local Storage Pool: 1 pool
+	Pool	IO_Priority	Size	Used	Status	Zone	Region
+	0	LOW		100 GiB	1.0 GiB	Online	default	default
+	Local Storage Devices: 1 device
+	Device	Path				Media Type		Size		Last-Scan
+	0:1	/dev/mapper/volume-75c30fde	STORAGE_MEDIUM_SSD	100 GiB		28 Feb 17 17:00 UTC
+	total					-			100 GiB
+Cluster Summary
+	Cluster ID: MY_CLUSTER_ID
+	Node IP: 10.100.48.9 - Capacity: 1.0 GiB/100 GiB Online
+	Node IP: 10.100.48.5 - Capacity: 61 GiB/100 GiB Online
+	Node IP: 10.100.48.11 - Capacity: 1.0 GiB/100 GiB Online (This node)
+	Node IP: 10.100.48.1 - Capacity: 1.1 GiB/100 GiB Online
+Global Storage Pool
+	Total Used    	:  64 GiB
+	Total Capacity	:  400 GiB
+      
+```
+
