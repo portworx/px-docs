@@ -84,7 +84,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       -v /etc/pwx:/etc/pwx                           \
       -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ               \
       -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ           \
-	  -e EBS_TEMPLATE=vol-0743df7bf5657dad8,vol-0055e5913b79fb49d \
+      -e EBS_TEMPLATE=vol-0743df7bf5657dad8,vol-0055e5913b79fb49d \
       -v /opt/pwx/bin:/export_bin:shared             \
       -v /var/run/docker.sock:/var/run/docker.sock   \
       -v /var/cores:/var/cores                       \
