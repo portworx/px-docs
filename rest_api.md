@@ -492,26 +492,25 @@ Then exit from maintenance mode, as below.
 ```
 [root@px-k8s-centos-0 ~]# curl -XGET http://localhost:9001/exitmaintenance
 {"Status":"Exit maintenance mode.","Version":"v1"}
-[root@px-k8s-centos-0 ~]# pxctl status
 Status: PX is operational
 Node ID: f067e2ed-b81f-4120-bb72-a20d73f76af0
 	IP: 147.75.64.189
  	Local Storage Pool: 1 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
-	0	LOW		100 GiB	1.0 GiB	Online	default	default
-	Local Storage Devices: 1 device
+	0	LOW		200 GiB	1.0 GiB	Online	default	default
+	Local Storage Devices: 2 devices
 	Device	Path				Media Type		Size		Last-Scan
-	0:1	/dev/mapper/volume-75c30fde	STORAGE_MEDIUM_SSD	100 GiB		28 Feb 17 17:00 UTC
-	total					-			100 GiB
+	0:1	/dev/mapper/volume-75c30fde	STORAGE_MEDIUM_SSD	100 GiB		28 Feb 17 17:41 UTC
+	0:2	/dev/mapper/volume-d8ddd678	STORAGE_MEDIUM_SSD	100 GiB		28 Feb 17 17:41 UTC
+	total					-			200 GiB
 Cluster Summary
 	Cluster ID: MY_CLUSTER_ID
-	Node IP: 10.100.48.9 - Capacity: 1.0 GiB/100 GiB Online
+	Node IP: 10.100.48.11 - Capacity: 1.0 GiB/200 GiB Online (This node)
 	Node IP: 10.100.48.5 - Capacity: 61 GiB/100 GiB Online
-	Node IP: 10.100.48.11 - Capacity: 1.0 GiB/100 GiB Online (This node)
 	Node IP: 10.100.48.1 - Capacity: 1.1 GiB/100 GiB Online
+	Node IP: 10.100.48.9 - Capacity: 1.0 GiB/100 GiB Online
 Global Storage Pool
 	Total Used    	:  64 GiB
-	Total Capacity	:  400 GiB
+	Total Capacity	:  500 GiB
       
 ```
-
