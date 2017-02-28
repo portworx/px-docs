@@ -17,7 +17,7 @@ Automatically scaling these PX instances up or down do not require any special c
 
 To have your stateless PX nodes join a cluster, you need to create a master AMI from which you autoscale your instances.
 
-## Create an AMI 
+### Create a stateless AMI
 You will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
 1. Select a base AMI from the AWS market place.
@@ -59,7 +59,7 @@ For example, create two volumes as:
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-### Create an AMI 
+### Create a stateful AMI 
 Now you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
 The `stateful` PX instances need some additional information to properly operate in an autoscale environment:
