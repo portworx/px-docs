@@ -651,7 +651,7 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
 * Data is not local to the node on which volume is attached.
 ```
-Note: The volume was created on 2 different nodes than the one where it was attached in the above example. Hence the warning.
+Note: The volume resides on 2 different nodes than the one where it was attached in the above example. Hence the warning.
 ### Detach a volume
 ```
 [root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host detach demovolume
@@ -675,6 +675,33 @@ Running "volume list" will now show something like:
 ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
 * Data is not local to the node on which volume is attached.
+```
+and running "volume inspect" on this volume will show something like:
+```
+[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl v i demovolume
+Volume  :  772733390943400581
+        Name                     :  demovolume
+        Size                     :  5.0 GiB
+        Format                   :  ext4
+        HA                       :  2
+        IO Priority              :  LOW
+        Creation time            :  Feb 27 22:27:36 UTC 2017
+        Shared                   :  no
+        Status                   :  up
+        State                    :  Attached: 5f8b8417-af2b-4ea7-930e-0027f6bbcbd1
+        Device Path              :  /dev/pxd/pxd772733390943400581
+        Reads                    :  65
+        Reads MS                 :  57
+        Bytes Read               :  487424
+        Writes                   :  1
+        Writes MS                :  1
+        Bytes Written            :  4096
+        IOs in progress          :  0
+        Bytes used               :  211 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  172.31.35.130
+                        Node     :  172.31.39.201
 ```
 ### Unmount a volume
 ```
