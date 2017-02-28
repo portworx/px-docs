@@ -59,7 +59,7 @@ For example, create two volumes as:
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-## Create a stateful AMI 
+## Create a stateful AMI
 Now you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
 The `stateful` PX instances need some additional information to properly operate in an autoscale environment:
@@ -95,7 +95,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
 
 >**Note:**There are 3 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and EBS_TEMPLATE.  The `-a` option instructs PX to use any available EBS volume on that instance.
 
-#### Cloud-Init
+### Cloud-Init
 Optionally, the AWS access credentials and EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
 Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
@@ -118,7 +118,7 @@ PX will use the EBS volume IDs as volume template specs.  Each PX instance that 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-#### Instance Priviledges
+### Instance Priviledges
 A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
 
 ## Scaling the Cluster Up
