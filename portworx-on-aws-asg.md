@@ -41,7 +41,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -z
 ```
 
->**Note:**The `-z` option instructs PX to come up as a stateless node.**
+>**Note:**The `-z` option instructs PX to come up as a stateless node.
 
 At this point, these nodes will be able to join and leave the cluster dynamically.
 
@@ -62,13 +62,6 @@ Ensure that these EBS volumes are created in the same region as the auto scaling
 ### Create an AMI 
 Now you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
-1. Select a base AMI from the AWS market place.
-2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
-
-This AMI will ensure that PX is able to launch on startup.
-
-### EBS Template Data
 The `stateful` PX instances need some additional information to properly operate in an autoscale environment:
 
 1. AWS access credentials
@@ -76,10 +69,34 @@ The `stateful` PX instances need some additional information to properly operate
 
 The PX instance that is launching will use the above information to either allocate an existing EBS volume to the instance, or create a new one based on the template.  The exact procedure for how the PX instance assignes itself an EBS volume is described further below.
 
-The AWS credentials and EBS template information can be provided via one of the following methods:
+1. Select a base AMI from the AWS market place.
+2. Launch an instance from this AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
 
-#### Option 1: Cloud-Init
-This information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
+This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
+
+```bash
+ExecStart=/usr/bin/docker run --net=host --privileged=true \
+      --cgroup-parent=/system.slice/px-enterprise.service \
+      -v /run/docker/plugins:/run/docker/plugins     \
+      -v /var/lib/osd:/var/lib/osd:shared            \
+      -v /dev:/dev                                   \
+      -v /etc/pwx:/etc/pwx                           \
+      -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ               \
+      -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ           \
+	  -e EBS_TEMPLATE=vol-0743df7bf5657dad8,vol-0055e5913b79fb49d \
+      -v /opt/pwx/bin:/export_bin:shared             \
+      -v /var/run/docker.sock:/var/run/docker.sock   \
+      -v /var/cores:/var/cores                       \
+      -v ${HOSTDIR}:${HOSTDIR}                       \
+      --name=%n \
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -a
+```
+
+>**Note:**There are 3 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and EBS_TEMPLATE.  The `-a` option instructs PX to use any available EBS volume on that instance.
+
+#### Cloud-Init
+Optionally, the AWS access credentials and EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
 Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
 
@@ -101,19 +118,7 @@ PX will use the EBS volume IDs as volume template specs.  Each PX instance that 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-#### Option 2: Systemd
-The PX cluster information can alternatively be provided by way of environment variables encoded into the `systemd` unit file.
-
-While launching PX via the `docker run` command in the `systemd` unit file, specify the following additional options:
-
-```bash
-  -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ
-  -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ
-```
-
-This, along with the usual cluster ID and KVDB will ensure that PX has the needed credentials to join the cluster and allocate EBS volumes on behalf of the scaling group.
-
-#### Option 3: Instance Priviledges
+#### Instance Priviledges
 A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
 
 ## Scaling the Cluster Up

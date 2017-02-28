@@ -80,6 +80,6 @@ Once you create systemd unit file, be sure to enable this unit by running:
 
 At this point your machine image is ready to be saved and cloned.  You can launch a multiple of these images and each initial execution of the machine will cause PX to initialize the node and join the provided cluster.  Subsequent boots will simply cause PX to join as an existing node.
 
->**Note:**Do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image and not portable to the clones.**
+>**Note:**Do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image and not portable to the clones.
 
 >**Note:**If other systemd service contain "Wants=portworx.service", then those services will be restarted anytime that a restart is done on the portworx.service.   In order to avoid this, any dependent services should be launched through a scheduler such as Mesos or Kubernetes.
