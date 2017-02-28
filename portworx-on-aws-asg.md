@@ -7,27 +7,48 @@ sidebar: home_sidebar
 
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS Auto Scaling**](https://aws.amazon.com/autoscaling/)
 
+# Configure the Auto Scaling Group
+Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
+
 # Stateless Autoscaling
-When your Portworx instances do not have any local storage, they are called `head-only` or `storageless` nodes.  They still participate in the PX cluster and can provide volumes to any client container on that node.  However, they strictly consume storage from other stateful PX instances.
+When your Portworx instances do not have any local storage, they are called `head-only` or `stateless` nodes.  They still participate in the PX cluster and can provide volumes to any client container on that node.  However, they strictly consume storage from other stateful PX instances.
 
 Automatically scaling these PX instances up or down do not require any special care, since they do not have any local storage.  They can join and leave the cluster without any manual intervention or administrative action.
 
-# Stateful Autoscaling
-Since these Portworx instances are stateful, extra care must be taken when using `Auto Scaling`.  As instances get allocated, new EBS volumes may need to be allocated.  Similarly as instances as scaled down, care must be taken so that the EBS volumes are not deleted.
+To have your stateless PX nodes join a cluster, you need to create a master AMI from which you autoscale your instances.
 
-This section explains specific functionality that Portworx provides to easily integrate your auto scaling environment with your PX cluster and optimally manage stateful applications across a variable number of nodes in the cluster.
-
-## Configure the Auto Scaling Group
-Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
-
-### Create an AMI 
-First, you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
+## Create an AMI 
+You will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
 3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
 
-This AMI will ensure that PX is able to launch on startup.  Subsequently, PX will receive it's runtime configuration via [`cloud-init`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) or via environment variables.
+This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
+
+```bash
+ExecStart=/usr/bin/docker run --net=host --privileged=true \
+      --cgroup-parent=/system.slice/px-enterprise.service \
+      -v /run/docker/plugins:/run/docker/plugins     \
+      -v /var/lib/osd:/var/lib/osd:shared            \
+      -v /dev:/dev                                   \
+      -v /etc/pwx:/etc/pwx                           \
+      -v /opt/pwx/bin:/export_bin:shared             \
+      -v /var/run/docker.sock:/var/run/docker.sock   \
+      -v /var/cores:/var/cores                       \
+      -v ${HOSTDIR}:${HOSTDIR}                       \
+      --name=%n \
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -z
+```
+
+>**Note:**The `-z` option instructs PX to come up as a stateless node.**
+
+At this point, these nodes will be able to join and leave the cluster dynamically.
+
+# Stateful Autoscaling
+When your Portworx instances have storage associated with them, they are called `stateful` nodes and extra care must be taken when using `Auto Scaling`.  As instances get allocated, new EBS volumes may need to be allocated.  Similarly as instances as scaled down, care must be taken so that the EBS volumes are not deleted.
+
+This section explains specific functionality that Portworx provides to easily integrate your auto scaling environment with your stateful PX nodes and optimally manage stateful applications across a variable number of nodes in the cluster.
 
 ### Create EBS volume templates
 Create various EBS volume templates for PX to use.  PX will use these templates as a reference when creating new EBS volumes while scaling up.
@@ -38,10 +59,24 @@ For example, create two volumes as:
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
-### PX Config Data
-When instances are launched via the auto scaling group, they must use the AMI created above.  The PX instances will need to get cluster information when they launch.  
+### Create an AMI 
+Now you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
 
-There are three ways that PX can receive it's configuration (Cluster ID, KVDB) information:
+1. Select a base AMI from the AWS market place.
+2. Launch an instance from this AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
+
+This AMI will ensure that PX is able to launch on startup.
+
+### EBS Template Data
+The `stateful` PX instances need some additional information to properly operate in an autoscale environment:
+
+1. AWS access credentials
+2. EBS template information created above
+
+The PX instance that is launching will use the above information to either allocate an existing EBS volume to the instance, or create a new one based on the template.  The exact procedure for how the PX instance assignes itself an EBS volume is described further below.
+
+The AWS credentials and EBS template information can be provided via one of the following methods:
 
 #### Option 1: Cloud-Init
 This information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
@@ -50,9 +85,6 @@ Specify the following information in the `user-data` section of your instance wh
 
 ```bash
 #cloud-config
-px-cluster:
-  clusterid: my-px-asg-cluster
-  kvdb: etcd://myetc.company.com:2379
 storage:
   ebs:
     template: vol-0055e5913b79fb49d
@@ -69,8 +101,10 @@ PX will use the EBS volume IDs as volume template specs.  Each PX instance that 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-#### Option 2: Environment Variables
-This information can alternatively be provided by way of environment variables encoded into the `systemd` unit file.  While launching PX via the `docker run` command in the `systemd` unit file, specify the following additional options:
+#### Option 2: Systemd
+The PX cluster information can alternatively be provided by way of environment variables encoded into the `systemd` unit file.
+
+While launching PX via the `docker run` command in the `systemd` unit file, specify the following additional options:
 
 ```bash
   -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ
@@ -80,7 +114,7 @@ This information can alternatively be provided by way of environment variables e
 This, along with the usual cluster ID and KVDB will ensure that PX has the needed credentials to join the cluster and allocate EBS volumes on behalf of the scaling group.
 
 #### Option 3: Instance Priviledges
-A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method, the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
+A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided.
 
 ## Scaling the Cluster Up
 For each instance in the auto scale group, the following process takes place on the first boot (Note that the `user-data` is made available only during the first boot of an instance):
