@@ -16,7 +16,7 @@ The native portworx driver in Kubernetes supports the following features:
 3. Persistent Volume Claims
 4. Persistent Volumes
 
->**Note:**<br/>The native driver will be available publicly with the upcoming Kubernetes 1.6 release.  Currently e have backported the native driver with the existing Kubernetes 1.5 release.  To try out the Kubernetes native driver [contact us](https://portworx.com/contact-us/) and we will provide you with a tar ball which has the pre-compiled kubernetes binaries linked with the Portworx native driver.
+>**Note:**<br/>The native driver will be available publicly with the upcoming Kubernetes 1.6 release.  Currently Portworx has backported the native driver with the existing Kubernetes 1.5 release.  To try out the Kubernetes native driver [contact us](https://portworx.com/contact-us/) and we will provide you with a tar ball which has the pre-compiled kubernetes binaries linked with the Portworx native driver.
 
 ## Prerequisites
 
