@@ -541,7 +541,6 @@ Imported Files :   0% [>--------------------------------------------------------
 ```
 
 ### Snapshot Operations
-
 ```
 sudo /opt/pwx/bin/pxctl snap --help
 NAME:
@@ -558,8 +557,40 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-#### TBD: Elaborate on each option here with example
-
+To create a snapshot of a volume use the create option with the volume name/ID. The different options and ways to use are shown below:
+```
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap1_on_vQuorum1 --label temp=true,cluster=devops
+Volume successfully snapped: 376113877104406866
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap2_on_vQuorum1 --label temp=true,cluster=production
+Volume successfully snapped: 1097649911014990908
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap3_on_vQuorum1 --label temp=false,cluster=production --readonly
+Volume successfully snapped: 118252956373660375
+```
+ * Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
+ * Example 3 shows how to make a snapshot readonly
+To list all snapshots see below:
+```
+ [root@BaseVM ~]# /opt/pwx/bin/pxctl snap list
+ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+118252956373660375      Snap3_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+```
+To list snapshots based on filter values:
+```
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap list --label temp=true
+ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap list --label cluster=devops
+ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
+```
+To delete snapshots, make sure they are detached (through host commands). Then:
+```
+[root@BaseVM ~]# /opt/pwx/bin/pxctl snap delete Snap3_on_vQuorum1
+Snapshot Snap3_on_vQuorum1 successfully deleted.
+```
 
 ### Cluster Operations
 
