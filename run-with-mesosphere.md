@@ -13,6 +13,8 @@ The Marathon service maps options through the Docker command line to reference t
 Here is a short video that shows how to configure and run Portworx with Mesosphere:
 {% include youtubePlayer.html id=page.youtubeId %}
 
+And here is a detailed [Blogpost](https://portworx.com/mesosphere-universe-portworx-dcos/) on deploying Portworx through DC/OS Universe
+
 
 ## Step 1: Install Mesosphere DC/OS CLI or Apache Mesos
 For Mesosphere, follow the instructions for installing [Mesosphere DC/OS](https://dcos.io/install) and the [DC/OS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
