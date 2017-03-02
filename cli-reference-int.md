@@ -643,9 +643,8 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
 #### pxctl service info
-
+Displays all Version info 
 ```
 [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service info
 PX Version:  1.1.4-6b35842
@@ -728,7 +727,8 @@ This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
 
-
+####pxctl service drive
+You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 ```
 [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive
 NAME:
@@ -746,7 +746,10 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
+To rebalance the storage across the drives, use pxctl service drive rebalance. This is useful after prolonged operation of a node.
 
+#### pxctl service drive show
+You can use pxctl service drive show to display drive information on the server
 ```   
 [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive show
 PX drive configuration:
@@ -757,9 +760,10 @@ Pool ID: 0
 	Has meta data: Yes
 	Drives:
 	1: /dev/mapper/volume-e85a42ca, 1.0 GiB allocated of 100 GiB, Online
+```	
 	
-	
-	
+You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command.  To do so the server must be in maintenance mode. 
+```
 	[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive add --help
 NAME:
    pxctl service drive add - Add storage
@@ -767,8 +771,13 @@ NAME:
 USAGE:
    pxctl service drive add [arguments...]
 ```
-
-   
+```
+[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl  service drive add /dev/mapper/volume-3bfa72dd
+Adding device  /dev/mapper/volume-3bfa72dd ...
+Drive add  successful. Requires restart (Exit maintenance mode).
+```
+####pxctl service scan
+You can use pxctl service scan to scan for bad blocks on a drive
 ```   
    [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service scan
 NAME:
@@ -788,7 +797,8 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
+####pxctl service alerts
+pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.  
 ```
 [root@jj-demo-01 log]# /opt/pwx/bin/pxctl service alerts
 NAME:
@@ -807,10 +817,15 @@ OPTIONS:
 ```
 
 ```
-[root@jj-demo-01 log]# /opt/pwx/bin/pxctl service alerts show
-No alerts found 
-```
+[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service alerts show
+AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													Description
+17	NODE			492596eb-94f3-4422-8cb8-bc72878d4be5	Mar 2 18:52:47 UTC 2017	ALARM		Cluster manager failure	[CLEARED] Cluster Manager Failure: 	Entering Maintenance Mode because of Storage Maintenance Mode
+18	NODE			/dev/mapper/volume-3bfa72dd				Mar 2 18:54:24 UTC 2017	NOTIFY		Drive operation success	Drive added succesfully: 			/dev/mapper/volume-3bfa72dd
+19	CLUSTER			8ed1d365-fd1b-11e6-b01d-0242ac110002	Mar 2 19:35:10 UTC 2017	NOTIFY		Node start success	PX is ready on Node: 492596eb-94f3-4422-8cb8-bc72878d4be5. CLI accessible at /opt/pwx/bin/pxctl.
 
+```
+#### pxctl service stats
+Use pxctl service stats to show storage and network stats cluster wide.
 ```
 [root@jj-demo-01 log]# /opt/pwx/bin/pxctl service stats
 NAME:
@@ -835,6 +850,9 @@ Node	Bytes Sent	Bytes Received
 1	0 B		0 B
 2	0 B		0 B
 ```
+
+
+
 
 
 
