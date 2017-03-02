@@ -665,7 +665,7 @@ USAGE:
 [root@jj-demo-01 ~]# sudo /opt/pwx/bin/pxctl service call-home enable
 Call home feature successfully enabled
 ```
-pxctl service logs
+#### pxctl service logs
 Displays the pxctl logs on the system
 ```
 [root@jj-demo-01 log]# /opt/pwx/bin/pxctl service logs --help
@@ -727,7 +727,7 @@ This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
 
-####pxctl service drive
+#### pxctl service drive
 You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 ```
 [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive
@@ -776,7 +776,7 @@ USAGE:
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
-####pxctl service scan
+#### pxctl service scan
 You can use pxctl service scan to scan for bad blocks on a drive
 ```   
    [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service scan
@@ -797,7 +797,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-####pxctl service alerts
+#### pxctl service alerts
 pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.  
 ```
 [root@jj-demo-01 log]# /opt/pwx/bin/pxctl service alerts
