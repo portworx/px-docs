@@ -668,7 +668,7 @@ Call home feature successfully enabled
 ```
 pxctl service logs
 Displays the pxctl logs on the system
-,,,
+```
 [root@jj-demo-01 log]# /opt/pwx/bin/pxctl service logs --help
 NAME:
    pxctl service logs - Display PX logs
