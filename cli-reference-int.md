@@ -646,145 +646,6 @@ OPTIONS:
 
 #### pxctl service info
 
-'''
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service info
-PX Version:  1.1.4-6b35842
-PX Build Version:  6b358427202f19c3174ba14fe65b44cc43a3f5fc
-PX Kernel Module Version:  C3141A5E02664E50B5AA5EF
-'''
-#### pxctl service call-home
-You can use this command to enable and disable the call home feature
-'''
-[root@jj-demo-01 ~]# sudo /opt/pwx/bin/pxctl service call-home --help
-NAME:
-   pxctl service call-home - Enable or disable the call home feature
-
-USAGE:
-   pxctl service call-home [arguments...]
-'''
-'''   
-[root@jj-demo-01 ~]# sudo /opt/pwx/bin/pxctl service call-home enable
-Call home feature successfully enabled
-'''
-pxctl service logs
-Displays the pxctl logs on the system
-,,,
-[root@jj-demo-01 log]# /opt/pwx/bin/pxctl service logs --help
-NAME:
-   pxctl service logs - Display PX logs
-
-USAGE:
-   pxctl service logs [arguments...]
-'''
-   
-
-
-#### pxctl service diags
-Using this command will gather all the necessary logs for Portworx support staff to trouble shoot issues.
-'''
-[root@jj-demo-01 log]# /opt/pwx/bin/pxctl service diags --help
-NAME:
-   pxctl service diags - creates a new tgz package with minimal essential diagnostic information.
-
-USAGE:
-   pxctl service diags [command options] [arguments...]
-
-OPTIONS:
-   --output value, -o value  output file name (default: "/tmp/diags.tar.gz")
-   --dockerhost value        docker host daemon (default: "unix:///var/run/docker.sock")
-   --container value         PX container ID
-   --host                    PX running on host
-   --live, -l                gets diags from running px
-   --upload, -u              upload diags to cloud
-   --profile, -p             only dump profile
-   --all, -a                 creates a new tgz package with all the available diagnostic information.
-'''   
-'''
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service diags --container px-enterprise
-PX container name provided:  px-enterprise
-INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock 
-Getting diags files...
-Generated diags: /tmp/diags.tar.gz
-'''
-#### pxctl service maintenance
-Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
-'''
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service maintenance
-Maintenance: : Missing option: --exit or --enter
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service maintenance --help
-NAME:
-   pxctl service maintenance - Maintenance mode operations
-
-USAGE:
-   pxctl service maintenance [command options] [arguments...]
-
-OPTIONS:
-   --exit, -x   exit maintenance mode
-   --enter, -e  enter maintenance mode
-'''
-'''   
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service maintenance --enter 
-This is a disruptive operation, PX will restart in maintenance mode.
-Are you sure you want to proceed ? (Y/N): y
-'''
-
-
-'''
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive
-NAME:
-   pxctl service drive - Storage drive maintenance
-
-USAGE:
-   pxctl service drive command [command options] [arguments...]
-
-COMMANDS:
-     show           Show drives
-     add            Add storage
-     replace        Replace source drive with target drive
-     rebalance, rs  Rebalance storage
-
-OPTIONS:
-   --help, -h  show help
-'''
-
-'''   
-[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive show
-PX drive configuration:
-Pool ID: 0
-	IO_Priority: LOW
-	Size: 100 GiB
-	Status: Online
-	Has meta data: Yes
-	Drives:
-	1: /dev/mapper/volume-e85a42ca, 1.0 GiB allocated of 100 GiB, Online
-	
-	
-	
-	[root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service drive add --help
-NAME:
-   pxctl service drive add - Add storage
-
-USAGE:
-   pxctl service drive add [arguments...]
-'''
-
-   
-'''   
-   [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service scan
-NAME:
-   pxctl service scan - scan for bad blocks
-
-USAGE:
-   pxctl service scan command [command options] [arguments...]
-
-COMMANDS:
-     start     start scan
-     resume    resume paused scan
-     pause     pause running scan
-     cancel    cancel running scan
-     status    scan status
-#### pxctl service info
-
 ```
 [root@jj-demo-01 ~]# /opt/pwx/bin/pxctl service info
 PX Version:  1.1.4-6b35842
@@ -974,6 +835,9 @@ Node	Bytes Sent	Bytes Received
 1	0 B		0 B
 2	0 B		0 B
 ```
+
+
+
 
 
 ### Host related operations
