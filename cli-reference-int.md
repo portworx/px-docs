@@ -619,6 +619,14 @@ OPTIONS:
 #### pxctl cluster list
 Shows all nodes in the portworx cluster
 ```
+sudo /opt/pwx/bin/pxctl cluster list --help
+NAME:
+   pxctl cluster list - List nodes in the cluster
+
+USAGE:
+   pxctl cluster list [arguments...]
+```
+```
 sudo /opt/pwx/bin/pxctl cluster list
 Cluster ID: 8ed1d365-fd1b-11e6-b01d-0242ac110002
 Status: OK
