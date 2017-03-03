@@ -638,7 +638,7 @@ bf9eb27d-415e-41f0-8c0d-4782959264bc	147.75.99.243	0.125078	34 GB		33 GB		N/A		1
 492596eb-94f3-4422-8cb8-bc72878d4be5	147.75.99.189	0.125078	34 GB		33 GB		N/A		1.1.4-6b35842	Online
 ```
 #### pxctl cluster inspect
-pxctl cluster inspect 
+Use pxctl cluser inspect to get information on a node in the cluster.  
 ```
 sudo /opt/pwx/bin/pxctl cluster inspect --help
 NAME:
