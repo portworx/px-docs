@@ -16,7 +16,7 @@ Here is a short video that shows how to configure and run Portworx with Mesosphe
 
 
 
->**NB**<br/>And here is a detailed [Blogpost](https://portworx.com/mesosphere-universe-portworx-dcos/) on deploying Portworx through DC/OS Universe
+><br/>And here is a detailed [Blogpost](https://portworx.com/mesosphere-universe-portworx-dcos/) on deploying Portworx through DC/OS Universe
 
 
 ## Step 1: Install Mesosphere DC/OS CLI or Apache Mesos
@@ -72,19 +72,20 @@ The pre-requisites for installing Portworx through Marathon include:
 2. If running PX-Enterprise in '**air-gapped**' mode, then follow instructions for [running a on-prem lighthouse](run-lighthouse-with-secure-etcd.html) and note the IPaddress and Port of the etcd server. 
 3. If running PX-Enterprise, obtain your Lighthouse token.
 
-The following is a sample JSON file that can be used to launch Portworx through Marathon
+The following is a sample JSON file that can be used to launch Portworx through Marathon.
+The example below assumes the hosts are running CoreOS with an implicit (localhost) etcd.
+For all other OS's, please refer to the `etcd` or `consul` instance, and change all references of `/lib/modules` to `/usr/src`.
 
->**Important:**<br/> If you are deploying Portworx on all nodes in the cluster, then you should omit the *"pxfabric"* constraint.
+>**Important:**<br/> If you are not deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.
 
 ```json
 {
     "id": "pxcluster1",
-    "cpus": 4,
-    "mem": 4096.0,
+    "cpus": 2,
+    "mem": 2048.0,
     "instances": 3,
     "constraints": [
-        ["hostname", "UNIQUE"],
-        ["pxfabric", "LIKE", "pxclust1"]
+        ["hostname", "UNIQUE"]
     ],
     "container": {
         "type": "DOCKER",
@@ -122,9 +123,6 @@ The following is a sample JSON file that can be used to launch Portworx through 
             }, {
                 "key": "volume",
                 "value": "/lib/modules:/lib/modules"
-            }, {
-                "key": "volume",
-                "value": "/usr/src:/usr/src"
             } ],
             "forcePullImage": false
         }
@@ -133,24 +131,22 @@ The following is a sample JSON file that can be used to launch Portworx through 
     "ipAddress": {},
     "args": [
         "--name pxcluster.mesos",
-        "-k etcd:http://1.2.3.4:4001",
+        "-k etcd:http://localhost:2379",
         "-c mesos-demo1",
         "-s /dev/sdb",
-        "-m enp0s3",
-        "-d enp0s3"
+        "-m bond0",
+        "-d bond0"
     ],
     "healthChecks": [
-     {
-       "protocol": "COMMAND",
-       "command": { "value": "curl -X GET http://$HOST:9001/status"},
-       "portIndex": 0,
-       "gracePeriodSeconds": 300,
-       "intervalSeconds": 60,
-       "timeoutSeconds": 20,
-       "maxConsecutiveFailures": 3,
-       "ignoreHttp1xx": false
-   }
-  ]
+    {
+        "protocol": "HTTP",
+        "port": 9001,
+        "path": "/status",
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 60,
+        "timeoutSeconds": 20,
+        "maxConsecutiveFailures": 3
+    }]
 }
 ```
 
