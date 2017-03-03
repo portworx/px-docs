@@ -156,7 +156,7 @@ If running PX-Enterprise with Lighthouse (SaaS or on-prem), then both the "**-c*
 
 Each physical device must be listed with its own "**-s**" argument.
 
-In this example a single network interface ("enp0s3") is used for both management and data traffic.
+In this example a single network interface ("bond0") is used for both management and data traffic.
 
 For all command line options, please see [px-enterprise-usage](/px-usage.html)
 
