@@ -672,7 +672,7 @@ USAGE:
 
 ```
 sudo /opt/pwx/bin/pxctl cluster delete bf9eb27d-415e-41f0-8c0d-4782959264bc
-node bf9eb27d-415e-41f0-8c0d-4782959264bc deleted succesfully
+node bf9eb27d-415e-41f0-8c0d-4782959264bc deleted successfully
 ```
 
 #### pxctl cluster alerts
