@@ -557,20 +557,22 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-To create a snapshot of a volume use the create option with the volume name/ID. The different options and ways to use are shown below:
+#### pxctl snapshot create
+`pxctl snapshot create` creates a snapshot of a volume. The different options and ways to use are shown below:
 ```
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap1_on_vQuorum1 --label temp=true,cluster=devops
+sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap1_on_vQuorum1 --label temp=true,cluster=devops
 Volume successfully snapped: 376113877104406866
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap2_on_vQuorum1 --label temp=true,cluster=production
+sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap2_on_vQuorum1 --label temp=true,cluster=production
 Volume successfully snapped: 1097649911014990908
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap3_on_vQuorum1 --label temp=false,cluster=production --readonly
+sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap3_on_vQuorum1 --label temp=false,cluster=production --readonly
 Volume successfully snapped: 118252956373660375
 ```
  * Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
  * Example 3 shows how to make a snapshot readonly
-To list all snapshots see below:
+#### pxctl snapshot list
+`pxctl snapshot list` lists all snapshots:
 ```
- [root@BaseVM ~]# /opt/pwx/bin/pxctl snap list
+sudo /opt/pwx/bin/pxctl snap list
 ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
 1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
@@ -578,17 +580,18 @@ ID                      NAME                    SIZE    HA      SHARED  ENCRYPTE
 ```
 To list snapshots based on filter values:
 ```
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap list --label temp=true
+sudo /opt/pwx/bin/pxctl snap list --label temp=true
 ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
 1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap list --label cluster=devops
+sudo /opt/pwx/bin/pxctl snap list --label cluster=devops
 ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
 ```
-To delete snapshots, make sure they are detached (through host commands). Then:
+#### pxctl snapshot delete
+`pxctl snapshot delete` deletes snapshots (make sure they are detached through host commands):
 ```
-[root@BaseVM ~]# /opt/pwx/bin/pxctl snap delete Snap3_on_vQuorum1
+sudo /opt/pwx/bin/pxctl snap delete Snap3_on_vQuorum1
 Snapshot Snap3_on_vQuorum1 successfully deleted.
 ```
 
@@ -1019,50 +1022,52 @@ OPTIONS:
 ```
 For the sake of these examples, let us use a volume by name "demovolume" that has just been created using a "volume create" CLI.
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+sudo /opt/pwx/bin/pxctl volume list
 ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
 ```
-### Attach a volume
+#### pxctl host attach
+`pxctl host attach` command is used to attach a volume to a host
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host attach demovolume
+sudo /opt/pwx/bin/pxctl host attach demovolume
 Volume successfully attached at: /dev/pxd/pxd772733390943400581
 ```
 Running "volume list" will now show something like:
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+sudo /opt/pwx/bin/pxctl volume list
 ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
 * Data is not local to the node on which volume is attached.
 ```
 Note: The volume resides on 2 different nodes than the one where it was attached in the above example. Hence the warning.
-### Detach a volume
+#### pxctl host detach
+`pxctl host detach` command is used to detach a volume from a host
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host detach demovolume
+sudo /opt/pwx/bin/pxctl host detach demovolume
 Volume successfully detached
 ```
 Running "volume list" will now show something like:
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+sudo /opt/pwx/bin/pxctl volume list
 ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
 ```
-### Mount a volume on a path
-If a volume needs to be mounted locally on a node at a path, say /mnt/demodir
+#### pxctl host mount
+`pxctl host mount` mounts a volume locally on a node at a path, say /mnt/demodir
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host mount demovolume /mnt/demodir
+sudo /opt/pwx/bin/pxctl host mount demovolume /mnt/demodir
 Volume demovolume successfully mounted at /mnt/demodir
 ```
 Running "volume list" will now show something like:
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume list
+sudo /opt/pwx/bin/pxctl volume list
 ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - attached on 172.31.46.119 *
 * Data is not local to the node on which volume is attached.
 ```
 and running "volume inspect" on this volume will show something like:
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl volume inspect demovolume
+sudo /opt/pwx/bin/pxctl volume inspect demovolume
 Volume  :  772733390943400581
         Name                     :  demovolume
         Size                     :  5.0 GiB
@@ -1087,9 +1092,10 @@ Volume  :  772733390943400581
                         Node     :  172.31.35.130
                         Node     :  172.31.39.201
 ```
-### Unmount a volume
+### pxctl host unmount
+`pxctl host unmount` unmounts a volume from a host
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
+sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
 Volume demovolume successfully unmounted at /mnt/demodir
 ```
 ### Upgrade related operations
@@ -1105,9 +1111,10 @@ OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
    
 ```
-Note: the container name also needs to be specified in the CLI.
+#### pxctl upgrade
+`pxctl upgrade` upgrades the PX version on a node. Note: the container name also needs to be specified in the CLI.
 ```
-[root@ip-172-31-46-119 ~]# /opt/pwx/bin/pxctl upgrade --tag 1.1.6 my-px-enterprise
+sudo /opt/pwx/bin/pxctl upgrade --tag 1.1.6 my-px-enterprise
 Upgrading my-px-enterprise to version: portworx/px-enterprise:1.1.6
 Downloading PX portworx/px-enterprise:1.1.6 layers...
 <Output truncated>
