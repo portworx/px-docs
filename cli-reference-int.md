@@ -567,8 +567,9 @@ Volume successfully snapped: 1097649911014990908
 sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap3_on_vQuorum1 --label temp=false,cluster=production --readonly
 Volume successfully snapped: 118252956373660375
 ```
- * Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
- * Example 3 shows how to make a snapshot readonly
+* Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
+* Example 3 shows how to make a snapshot readonly
+
 #### pxctl snapshot list
 `pxctl snapshot list` lists all snapshots:
 ```
@@ -1092,7 +1093,7 @@ Volume  :  772733390943400581
                         Node     :  172.31.35.130
                         Node     :  172.31.39.201
 ```
-### pxctl host unmount
+#### pxctl host unmount
 `pxctl host unmount` unmounts a volume from a host
 ```
 sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
