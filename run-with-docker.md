@@ -102,7 +102,7 @@ The following Docker runtime command options are explained:
 
 ```
 --privileged
-    > Sets PX to be a privileged container. Required to export block  device and for other functions.
+    > Sets PX to be a privileged container. Required to export block device and for other functions.
 
 --net=host
     > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
