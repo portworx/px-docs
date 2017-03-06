@@ -9,6 +9,14 @@ For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as yo
 * `docker ps` and get the CONTAINER ID for PX-Developer
 * `docker logs [CONTAINER_ID]`
 
+#### docker: Error response from daemon: Cannot start container XXX: Path /opt/pwx/bin is mounted on / but it is not a shared mount.
+
+If you get this error, the most likely reason is that you are using systemd to start Docker and and have MountFlags set to slave (this is the default configuration).
+
+Use "systemctl status docker" to find the location of the docker.service file.
+Unset or comment out "MountFlags=slave".
+Perform "systemctl daemon-reload && systemctl restart docker"
+
 #### Failed initial deployment
 
 Upon the **initial** attempt to bring up a Portworx cluster, if the first attempt fails due to misconfiguration,
