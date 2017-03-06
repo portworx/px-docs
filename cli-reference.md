@@ -854,8 +854,6 @@ Generated diags: /tmp/diags.tar.gz
 #### pxctl service maintenance
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
 ```
- /opt/pwx/bin/pxctl service maintenance
-Maintenance: : Missing option: --exit or --enter
  /opt/pwx/bin/pxctl service maintenance --help
 NAME:
    pxctl service maintenance - Maintenance mode operations
