@@ -4,7 +4,7 @@ title: "Run Converged Kubernetes and Portworx"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
->**Note:**<br/>**This is experimental!.**
+>**Note:**<br/>**This is experimental!**
 
 `px-kube` is a converged Portworx with Kubernetes container image.  You can use this to deploy a joint Kubernetes with Portworx cluster for stateful containers.  There are two modes in which this image runs:
 
