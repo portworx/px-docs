@@ -16,7 +16,7 @@ Note that running these container images will automatically start both Kubernete
 ## Deploy Kube Master
 Run the following command on a server that you will designate as the Kubernetes master node.  Note the various `-v` options.  It is critical that the `/var/lib/etcd` is properly mapped to a persistent location.
 
-```bash
+```
 # docker run --restart=always                                     \
       --name kube -d --net=host                                   \
       --privileged=true                                           \
@@ -42,7 +42,7 @@ Note the option `--kube-master`.  This instructs the px-kube container to start 
 ## Deploy Kube Agent
 Run the following command on each server that you want to be a Kubernetes minion node:
 
-```bash
+```
 # docker run --restart=always                                     \
       --name kube -d --net=host                                   \
       --privileged=true                                           \
