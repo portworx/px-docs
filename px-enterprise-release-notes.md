@@ -14,7 +14,7 @@ sidebar: home_sidebar
 * Self Node Decommission provides ability to for node decommission operations from the node itself
 * Automatic decomission of storage-less nodes when they join and leave the cluster as part of a auto-scaling group
 * Volume auto-attach and detach for fine grained background processing of volume maintenance operations
-* Support rack-aware replication to replicate across racks and volume aggregation within a rack.
+* Support rack-aware replication to replicate across racks and volume aggregation within a rack
 
 ### Key Issues Addressed
 
