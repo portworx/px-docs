@@ -5,6 +5,28 @@ keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
+
+## 1.1.6 Release notes
+
+### Key Features
+
+* Volume Aggregation across multiple nodes to provide scale-out performance
+* Self Node Decommission provides ability to for node decommission operations from the node itself
+* Automatic decomission of storage-less nodes when they join and leave the cluster as part of a auto-scaling group
+* Volume auto-attach and detach for fine grained background processing of volume maintenance operations
+* Support rack-aware replication to replicate across racks and volume aggregation within a rack.
+
+### Key Issues Addressed
+
+* Support PX Volume snapshots via docker volume plugin
+* Improved stability and tighter integration for Consul based environments
+* Latest Amazon Linux and Debian support
+* Rancher catalog support for CoreOS
+
+### Key notes
+* COS is now referenced as IO Priority
+
+
 ## 1.1.4 Release notes
 
 ### Key Changes
