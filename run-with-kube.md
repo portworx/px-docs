@@ -142,9 +142,9 @@ spec:
     volumeMounts:
     - name: test-volume
       mountPath: /var/run/mysqld/
-	env:
-	  - name: MYSQL_ROOT_PASSWORD
-	    value: password
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: password
   volumes:
   - name: test-volume
     persistentVolumeClaim:
