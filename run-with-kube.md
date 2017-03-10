@@ -17,7 +17,7 @@ Note that running these container images will automatically start both Kubernete
 ## Open Ports
 The following ports must be opened:
 
-1. Cluster KV Database    - Port 9007
+1. Cluster KV Database    - Port 9000
 2. Kubernetes API server  - Port 8080
 3. Portworx               - Port 9001 - 9004
 
