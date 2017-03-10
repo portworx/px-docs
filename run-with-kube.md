@@ -75,3 +75,81 @@ Run the following command on each server that you want to be a Kubernetes minion
 ```
 
 Note the option `--kube-agent`.  This instructs the px-kube container to start as a minion node.  It joins the master at the IP specified in the `-km` option.  Specify the storage devices as you would to a regular PX container.
+
+## Test it
+To test it, we create a storage class, then create a Kubernetes PVC (persistent volume claim) from that storage class and finally launch a POD with that PVC.
+
+### Create a storage class
+
+Create a file `px-sc.yaml`:
+
+```yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+   name: portworx-io-priority-high
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
+  snap_interval:   "70"
+  io_priority:  "high"
+```
+
+Now use `kubectl` from the master node to create this class:
+
+```bash
+# /etc/pwx/bin/kubectl create -f px-sc.yaml
+```
+
+### Create a PVC
+
+Create a file called `px-pvc.yaml`:
+
+```yaml
+ kind: PersistentVolumeClaim
+ apiVersion: v1
+ metadata:
+   name: pvcsc001
+   annotations:
+     volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+ spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 2Gi
+```
+
+Use `kubectl` from the master node to create this PVC
+
+```bash
+# /etc/pwx/bin/kubectl create -f px-pvc.yaml
+```
+
+### Create a POD
+
+In this test, we will start `mysql` with  this PVC.  Create a file called `mysql.yaml`:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvpod
+spec:
+  containers:
+  - name: test-container
+    image: gcr.io/google_containers/test-webserver
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-portworx-volume
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: pvcsc001
+```
+
+Use `kubectl` from the master node to create this POD
+
+```bash
+# /etc/pwx/bin/kubectl create -f mysql.yaml
+```
