@@ -38,13 +38,18 @@ dcos package install --yes etcd
 Note the 'etcd' service URL:
 
 ```
-echo "etcd://$(dcos task | grep etcd-server | tail -n 1 | awk '{print $6}'):$(dcos task | grep etcd-server | tail -n 1 | awk '{print $8}')"
+dcos task | grep etcd-server | tail -n 1 | awk '{printf "etcd://%s:%s\n", $6, $8}'
 ```
 
 ## Step 3: Launch Portworx through Mesosphere Universe
 Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/1.8/portworx)
-The `cmdargs` value should be:  `-c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>` where `IP:PORT` corresponds
-to the 'etcd' service endpoint from Step 2.
+The `cmdargs` value should be:  
+
+```
+-c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>
+``` 
+
+where `IP:PORT` corresponds to the 'etcd' service URL from Step 2.
 
 
 # Install Portworx Manually
