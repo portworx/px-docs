@@ -33,7 +33,7 @@ Note the 'etcd' service URL.
 
 ## Step 3: Launch Portworx through Mesosphere Universe
 Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/1.8/portworx)
-The commandargs value should be:  `-c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>` where `IP:PORT` corresponds
+The `cmdargs` value should be:  `-c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>` where `IP:PORT` corresponds
 to the 'etcd' service endpoint.
 
 
