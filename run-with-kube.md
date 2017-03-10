@@ -14,7 +14,7 @@ sidebar: home_sidebar
 Note that running these container images will automatically start both Kubernetes and the Portworx components.  The cluster will also automatically configure itself, so there are no extra steps that need to be taken to start using Kubernetes or Portworx.
 
 
-## Ports
+## Open Ports
 The following ports must be opened:
 
 1. ETCD - Port 2379
