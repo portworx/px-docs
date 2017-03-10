@@ -48,7 +48,7 @@ Run the following command on a server that you will designate as the Kubernetes 
       portworx/px-kube --kube-master -c MY_CLUSTER_ID -z
 ```
 
-Note the option `--kube-master`.  This instructs the px-kube container to start as a master node.  Chose a cluster ID for the `-c` option.  The first time this container is started, it will create a **new** cluster with the given cluster ID.  The `-z` option tells Portworx to not allocate any storage on the master node.  This is optional however, you can also request the master node to participate as a storage node by using the `-s /dev/sdb` option.
+Note the option `--kube-master`.  This instructs the px-kube container to start as a master node.  Chose a cluster ID for the `-c` option.  The first time this container is started, it will create a **new** cluster with the given cluster ID.  The `-z` option tells Portworx to not allocate any storage on the master node.  This is optional however; you can also request the master node to participate as a storage node by using the `-s /dev/sdb` option.
 
 ## Deploy Kube Agent
 Run the following command on each server that you want to be a Kubernetes minion node:
