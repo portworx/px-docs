@@ -17,9 +17,9 @@ Note that running these container images will automatically start both Kubernete
 ## Open Ports
 The following ports must be opened:
 
-1. ETCD - Port 2379
-2. Kubernetes - Port 8080
-3. Portworx - Ports 9001 - 9004
+1. Cluster KV Database    - Port 9007
+2. Kubernetes API server  - Port 8080
+3. Portworx               - Port 9001 - 9004
 
 ## Deploy Kube Master
 
