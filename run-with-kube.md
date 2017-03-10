@@ -141,7 +141,7 @@ spec:
     image: mariadb
     volumeMounts:
     - name: test-volume
-      mountPath: /var/run/mysqld/
+      mountPath: /var/lib/mysql
     env:
       - name: MYSQL_ROOT_PASSWORD
         value: password
