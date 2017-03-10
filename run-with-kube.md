@@ -128,7 +128,7 @@ Use `kubectl` from the master node to create this PVC
 
 ### Create a POD
 
-In this test, we will start `mysql` with  this PVC.  Create a file called `mysql.yaml`:
+In this test, we will start `mariadb` with  this PVC.  Create a file called `mariadb.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -137,11 +137,14 @@ metadata:
   name: pvpod
 spec:
   containers:
-  - name: test-container
-    image: gcr.io/google_containers/test-webserver
+  - name: test-db
+    image: mariadb
     volumeMounts:
     - name: test-volume
-      mountPath: /test-portworx-volume
+      mountPath: /var/run/mysqld/
+	env:
+	  - name: MYSQL_ROOT_PASSWORD
+	    value: password
   volumes:
   - name: test-volume
     persistentVolumeClaim:
@@ -151,5 +154,5 @@ spec:
 Use `kubectl` from the master node to create this POD
 
 ```bash
-# /etc/pwx/bin/kubectl create -f mysql.yaml
+# /etc/pwx/bin/kubectl create -f mariadb.yaml
 ```
