@@ -23,18 +23,28 @@ Portworx now provides an AWS CloudFormation Template that deploys a Portworx-rea
 
 ## Step 1:  Launch DC/OS CloudFormation Template 
 Click Here:  
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/px-ready-dcos-cf-template-03092017" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/px-ready-dcos/px-ready-dcos-cf-template-03102017" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
 Specify the EC2 instance type for the Mesos slaves, and the size of the volume (8GB - 4TB) that each slave will contribute
 to the Portworx storage pool.
 
-## Step 2: Launch 'etcd'
-From the DC/OS GUI or CLI, launch an 'etcd' service.  
-Note the 'etcd' service URL.
+## Step 2: Download the DC/OS CLI
+
+## Step 3: Launch 'etcd'
+From the DC/OS CLI, launch an 'etcd' service:
+```
+dcos package install --yes etcd
+```
+
+Note the 'etcd' service URL:
+
+```
+echo "etcd://$(dcos task | grep etcd-server | tail -n 1 | awk '{print $6}'):$(dcos task | grep etcd-server | tail -n 1 | awk '{print $8}')"
+```
 
 ## Step 3: Launch Portworx through Mesosphere Universe
 Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/1.8/portworx)
 The `cmdargs` value should be:  `-c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>` where `IP:PORT` corresponds
-to the 'etcd' service endpoint.
+to the 'etcd' service endpoint from Step 2.
 
 
 # Install Portworx Manually
