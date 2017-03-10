@@ -27,7 +27,11 @@ Click Here:
 Specify the EC2 instance type for the Mesos slaves, and the size of the volume (8GB - 4TB) that each slave will contribute
 to the Portworx storage pool.
 
+Select the CloudFormation Stack from the AWS console and wait for "CREATE COMPLETE" state.
+Then go to the "Outputs" tab below to select the "DnsAddress" of the Master Node to access the DC/OS GUI.
+
 ## Step 2: Download the DC/OS CLI
+Navigate to the bottom of the left-side navigation pane of the GUI, and follow the directions. 
 
 ## Step 3: Launch 'etcd'
 From the DC/OS CLI, launch an 'etcd' service:
