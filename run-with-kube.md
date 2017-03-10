@@ -14,6 +14,9 @@ sidebar: home_sidebar
 Note that running these container images will automatically start both Kubernetes and the Portworx components.  The cluster will also automatically configure itself, so there are no extra steps that need to be taken to start using Kubernetes or Portworx.
 
 ## Deploy Kube Master
+
+>**Note:**<br/>**ETCD must NOT be running on the host... px-kube will run etcd internally on port 2379 and this port must be open**
+
 Run the following command on a server that you will designate as the Kubernetes master node.  Note the various `-v` options.  It is critical that the `/var/lib/etcd` is properly mapped to a persistent location.
 
 ```
