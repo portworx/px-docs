@@ -106,18 +106,18 @@ Now use `kubectl` from the master node to create this class:
 Create a file called `px-pvc.yaml`:
 
 ```yaml
- kind: PersistentVolumeClaim
- apiVersion: v1
- metadata:
-   name: pvcsc001
-   annotations:
-     volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
- spec:
-   accessModes:
-     - ReadWriteOnce
-   resources:
-     requests:
-       storage: 2Gi
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvcsc001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
 ```
 
 Use `kubectl` from the master node to create this PVC
