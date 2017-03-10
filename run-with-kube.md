@@ -97,7 +97,7 @@ parameters:
 
 Now use `kubectl` from the master node to create this class:
 
-```bash
+```
 # /etc/pwx/bin/kubectl create -f px-sc.yaml
 ```
 
@@ -122,7 +122,7 @@ spec:
 
 Use `kubectl` from the master node to create this PVC
 
-```bash
+```
 # /etc/pwx/bin/kubectl create -f px-pvc.yaml
 ```
 
@@ -153,6 +153,6 @@ spec:
 
 Use `kubectl` from the master node to create this POD
 
-```bash
+```
 # /etc/pwx/bin/kubectl create -f mariadb.yaml
 ```
