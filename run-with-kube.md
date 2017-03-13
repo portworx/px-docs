@@ -156,3 +156,47 @@ Use `kubectl` from the master node to create this POD
 ```
 # /etc/pwx/bin/kubectl create -f mariadb.yaml
 ```
+
+Verify that the `mariadb` container is functional:
+
+```
+# /etc/pwx/bin/kubectl get pods
+NAME                       READY     STATUS              RESTARTS   AGE
+pvpod                      1/1       Running             0          1m
+```
+
+### Try a snapshot
+
+In this test, we will create a snapshot of the `mariadb` database.  Connect to the `mariadb` instance and create a test database.  Next, create a snapshot of that volume:
+
+```
+# /etc/pwx/bin/pxctl snap create --name db-snap <volumdID>
+```
+
+Create a new POD called `dbsnap.yaml`:
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: test-portworx-volume-pod
+spec:
+  containers:
+  - name: test-db
+    image: mariadb
+    volumeMounts:
+    - name: db-snap
+      mountPath: /var/lib/mysql
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: password
+  volumes:
+  - name: db-snap
+    portworxVolume:
+      volumeID: db-snap
+```
+
+Use `kubectl` from the master node to create this POD
+```
+# /etc/pwx/bin/kubectl create -f mariadb.yaml
+```
