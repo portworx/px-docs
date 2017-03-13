@@ -34,7 +34,7 @@ This template includes the following to enable Portworx deployments:
 - Select the name of your available key-pairs (assumed to be existing)
 You may see a message indicating AWS is "Unable to list IAM roles", which can be safely ignored.
 
-- Create the stack and wait for completion.  After the stack status is "CREATE COMPLETE", it may still be 5 minutes before Portworx is available.   You can use [this script](https://gist.githubusercontent.com/jsilberm/4fad7ac0496c0a651d1a240ec8dcf5c8/raw/a8bcd1cbe934926ee70489b0352864881336b71e/PX%2520Stack%2520Query) to query the instances IP address
+- Create the stack and wait for completion.  After the stack status is "CREATE COMPLETE", it may still be 5 minutes before Portworx is available.   You can use [this script](https://gist.githubusercontent.com/jsilberm/4fad7ac0496c0a651d1a240ec8dcf5c8/raw/a8bcd1cbe934926ee70489b0352864881336b71e/PX%2520Stack%2520Query) to query the instances IP address, via `ssh -i pub.key core@IPaddr`, where `pub.key` is the key selected from the Template drop-down and `IPaddr` is one of the addresses returned from the above script.
 
 
 ### Next Steps
