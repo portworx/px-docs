@@ -43,7 +43,7 @@ Run the following command on a server that you will designate as the Kubernetes 
       -v /etc/kubernetes:/etc/kubernetes                          \
       -v /var/lib/docker:/var/lib/docker                          \
       -v /var/lib/docker:/var/lib/docker                          \
-      -v /var/lib/kubelet:/var/lib/kubelet                        \
+      -v /var/lib/kubelet:/var/lib/kubelet:shared                 \
       -v /sys/fs/cgroup:/sys/fs/cgroup                            \
       portworx/px-kube --kube-master -c MY_CLUSTER_ID -z
 ```
@@ -69,7 +69,7 @@ Run the following command on each server that you want to be a Kubernetes minion
       -v /etc/kubernetes:/etc/kubernetes                          \
       -v /var/lib/docker:/var/lib/docker                          \
       -v /var/lib/docker:/var/lib/docker                          \
-      -v /var/lib/kubelet:/var/lib/kubelet                        \
+      -v /var/lib/kubelet:/var/lib/kubelet:shared                 \
       -v /sys/fs/cgroup:/sys/fs/cgroup                            \
       portworx/px-kube --kube-agent -c MY_CLUSTER_ID -km 172.31.8.91 -s /dev/xvdb -s /dev/xvdc
 ```
