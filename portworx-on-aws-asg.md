@@ -54,8 +54,10 @@ This section explains specific functionality that Portworx provides to easily in
 Create various EBS volume templates for PX to use.  PX will use these templates as a reference when creating new EBS volumes while scaling up.
 
 For example, create two volumes as:
-1. vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
-2. vol-0055e5913b79fb49d: 1000 GiB GP2
+```
+vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
+vol-0055e5913b79fb49d: 1000 GiB GP2
+```
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group.
 
@@ -84,16 +86,19 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       -v /etc/pwx:/etc/pwx                           \
       -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ               \
       -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ           \
-      -e EBS_TEMPLATE=vol-0743df7bf5657dad8,vol-0055e5913b79fb49d \
+      -s vol-0743df7bf5657dad8                       \
+      -s vol-0055e5913b79fb49d                       \
       -v /opt/pwx/bin:/export_bin:shared             \
       -v /var/run/docker.sock:/var/run/docker.sock   \
       -v /var/cores:/var/cores                       \
       -v ${HOSTDIR}:${HOSTDIR}                       \
       --name=%n \
-      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -a
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379
 ```
 
->**Note:**There are 3 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and EBS_TEMPLATE.  The `-a` option instructs PX to use any available EBS volume on that instance.
+>**Note:**There are 2 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
+
+>**Note:** -s vol-0743df7bf5657dad8 and -s vol-0055e5913b79fb49d - you can pass multiple EBS volumes to use as templates. If these volumes are unavailable, then volumes identical to these will be automatically created.
 
 ### Cloud-Init
 Optionally, the AWS access credentials and EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
