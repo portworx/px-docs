@@ -193,6 +193,31 @@ You can now start the Portworx container with the following run command:
 
 At this point, Portworx should be running on your system. To verify, run `docker ps`.
 
+#### Authenticated `etcd` and `consul`
+To use `etcd` with authentication and a cafile, use this in your `config.json`:
+
+```json
+"kvdb": [
+   "etcd:https://<ip1>:<port>",
+   "etcd:https://<ip2>:<port>"
+ ],
+ "username": "root",
+ "password": "xxx",
+ "cafile": "/etc/pwx/cafile",
+```
+
+To use `consul` with authentication and a cafile, use this in your `config.json`:
+
+```json
+"kvdb": [
+   "consul:https://<ip1>:<port>",
+   "consul:https://<ip2>:<port>"
+ ],
+ "username": "root",
+ "password": "xxx",
+ "cafile": "/etc/pwx/cafile",
+```
+
 ### Access the pxctl CLI
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
 
