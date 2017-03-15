@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-portworx-snapped-volume-pod
+spec:
+  containers:
+  - image: mysql:5.6
+    name: mysql-snap
+    env:
+      # Use secret in real usage
+    - name: MYSQL_ROOT_PASSWORD
+      value: password
+    ports:
+    - containerPort: 3306
+      name: mysql
+    volumeMounts:
+    - name: snap-01
+      mountPath: /var/lib/mysql
+  volumes:
+  - name: snap-01
+    # This Portworx volume must already exist.
+    portworxVolume:
+      volumeID: "vol1"
