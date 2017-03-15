@@ -92,7 +92,7 @@ entries:
     - title: Packet.net
       url: /portworx-on-packet.html
       output: web
-     - title: Rackspace
+    - title: Rackspace
       url: /portworx-on-rackspace.html
       output: web
   - title: CLI and API Reference
