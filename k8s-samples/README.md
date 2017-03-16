@@ -379,7 +379,7 @@ create Portworx volumes out of band and they will be created automatically.
 # kubectl create -f portworx-mysql-sc.yaml
 ````
 
-Example portworx-mysql-sc.yaml
+[Download example](portworx-mysql-sc.yaml?raw=true)
 ````
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
@@ -410,7 +410,8 @@ No events.
 # kubectl create -f portworx-mysql-statefulset.yaml
 ````
 
-Example of portworx-mysql-statefulset.yaml
+[Download example](portworx-mysql-statefulset.yaml?raw=true)
+
 ````
 ---
 apiVersion: v1
@@ -492,7 +493,7 @@ You can verify that the pvc and pet were created
 ### Create a snapshot and mount the snapshot to a new mysql pod
 #### Using the pxctl CLI to create snaps of your mysql volume
 
-To demonsrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
+To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
 
 First create a database and a demo table in your mysql container.
 ````
@@ -532,7 +533,7 @@ Now you can create a mysql Pod to mount the snapshot
 ````
 kubectl create -f portworx-mysql-snap-pod.yaml
 ````
-Example of portworx-mysql-snap-pod.yaml
+[Download example](portworx-mysql-snap-pod.yaml?raw=true)
 ````
 apiVersion: v1
 kind: Pod
