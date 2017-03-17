@@ -98,7 +98,7 @@ parameters:
 Now use `kubectl` from the master node to create this class:
 
 ```
-# /etc/pwx/bin/kubectl create -f px-sc.yaml
+# /opt/pwx/bin/kubectl create -f px-sc.yaml
 ```
 
 ### Create a PVC
