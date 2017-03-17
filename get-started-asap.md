@@ -14,6 +14,8 @@ This template includes the following to enable Portworx deployments:
 + An additional non-root device called "/dev/xvdb" for the global shared storage pool of configurable size
 + Opened ports for 'etcd', 'ssh', and 'portworx' management services (2379, 2380, 4001, 9001, 9002, 9003, 9004)
 
+>**Important:**<br/>Your AWS account settings must allow you to create SecurityGroup resources, otherwise you will not be able to use this.
+
 ### Configure and Launch the Portworx stack
 
 
