@@ -123,7 +123,7 @@ spec:
 Use `kubectl` from the master node to create this PVC
 
 ```
-# /etc/pwx/bin/kubectl create -f px-pvc.yaml
+# /opt/pwx/bin/kubectl create -f px-pvc.yaml
 ```
 
 ### Create a POD
@@ -154,13 +154,13 @@ spec:
 Use `kubectl` from the master node to create this POD
 
 ```
-# /etc/pwx/bin/kubectl create -f mariadb.yaml
+# /opt/pwx/bin/kubectl create -f mariadb.yaml
 ```
 
 Verify that the `mariadb` container is functional:
 
 ```
-# /etc/pwx/bin/kubectl get pods
+# /opt/pwx/bin/kubectl get pods
 NAME                       READY     STATUS              RESTARTS   AGE
 pvpod                      1/1       Running             0          1m
 ```
@@ -170,7 +170,7 @@ pvpod                      1/1       Running             0          1m
 In this test, we will create a snapshot of the `mariadb` database.  Connect to the `mariadb` instance and create a test database.  Next, create a snapshot of that volume:
 
 ```
-# /etc/pwx/bin/pxctl snap create --name db-snap <volumdID>
+# /opt/pwx/bin/pxctl snap create --name db-snap <volumdID>
 ```
 
 Create a new POD called `dbsnap.yaml`:
@@ -198,5 +198,5 @@ spec:
 
 Use `kubectl` from the master node to create this POD
 ```
-# /etc/pwx/bin/kubectl create -f mariadb.yaml
+# /opt/pwx/bin/kubectl create -f mariadb.yaml
 ```
