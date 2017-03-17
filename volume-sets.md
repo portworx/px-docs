@@ -59,6 +59,73 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 
 Decreasing the scaled volume only restricts creation of future volumes. Decreasing scale will not delete any volumes.
 
+## Mesos/Marathon Guidelines
+When taking advantage of `volume-sets`, users of Mesos/Marathon **MUST** ensure that "hostname UNIQUE" constraints are set
+in the application.json file.  Failing to do so may cause inconsistent results in the event that Marathon relaunches or 
+reschedules an application upon failure, with the possibility of multiple instances landing on the same host.
+
+### Mesos/Marathon Examples
+Following is an example that takes advantage of `volume-sets`
+
+```
+{
+   "id":"/minio",
+   "cpus": 2.0,
+   "mem": 128,
+   "instances": 2,
+   "maxLaunchDelaySeconds":36000,
+   "args":[
+      "server",
+      "/export"
+   ],
+   "constraints": [
+        ["hostname", "UNIQUE"]
+    ],
+   "container":{
+      "type":"DOCKER",
+      "docker":{
+         "image":"minio/minio:RELEASE.2016-11-26T02-23-47Z",
+         "network":"BRIDGE",
+         "parameters": [
+           {
+            "key": "volume-driver",
+            "value": "pxd"
+           },
+           {
+            "key": "volume",
+            "value": "name=minio_exp,size=10,repl=3,scale=3:/export"
+           },
+           {
+            "key": "volume",
+            "value": "name=minio_cfg,size=2,repl=3,scale=3:/root/.minio"
+           }
+         ],
+         "portMappings":[
+            {
+               "containerPort":9000,
+               "hostPort":0,
+               "servicePort":0
+            }
+         ],
+         "privileged":true,
+         "forcePullImage":true
+      }
+   },
+   "healthChecks": [
+        {
+            "protocol": "HTTP",
+            "path": "/minio/index.html",
+            "portIndex": 0,
+            "gracePeriodSeconds": 300,
+            "intervalSeconds": 60,
+            "timeoutSeconds": 20,
+            "maxConsecutiveFailures": 3
+        }
+   ]
+}
+```
+
+
 ## FAQ
 
 ### Can I attach more than one instance of a `volume-set` on the same node?
