@@ -71,7 +71,7 @@ Run the following command on each server that you want to be a Kubernetes minion
       -v /var/lib/docker:/var/lib/docker                          \
       -v /var/lib/kubelet:/var/lib/kubelet:shared                 \
       -v /sys/fs/cgroup:/sys/fs/cgroup                            \
-      portworx/px-kube --kube-agent -c MY_CLUSTER_ID -km 172.31.8.91 -s /dev/xvdb -s /dev/xvdc
+      portworx/px-kube --kube-agent -c MY_CLUSTER_ID -km 172.31.8.91 -s /dev/xvdb -s /dev/xvdc -d eth0 -m eth0
 ```
 
 Note the option `--kube-agent`.  This instructs the px-kube container to start as a minion node.  It joins the master at the IP specified in the `-km` option.  Specify the storage devices as you would to a regular PX container.
