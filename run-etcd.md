@@ -27,7 +27,7 @@ docker run --net=host \
    --initial-cluster-state new \
    --auto-compaction-retention 1
 
-# curl -X GET http://127.0.0.1:2379/version
+# curl -X GET http://${HostIP}:2379/version
 ```
 
 Note that the etcd port is 2379.
