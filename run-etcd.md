@@ -8,14 +8,24 @@ sidebar: home_sidebar
 Portworx recommends running **etcd** in a container
 
 ```
-# docker run -d --name etcd                         \
-	-v /var/lib/etcd:/var/lib/etcd              \
-	--net=host --entrypoint=/usr/local/bin/etcd \
-	quay.io/coreos/etcd:latest                  \
-	--listen-peer-urls 'http://0.0.0.0:2380'    \
-	--data-dir=/var/lib/etcd/                   \
-	--listen-client-urls 'http://0.0.0.0:2379'  \
-	--advertise-client-urls 'http://<your ip>:2379'
+export HostIP="YOUR IP ADDRESS"
+````
+````
+docker run --net=host \
+   -d --name etcd-v3.1.3 \
+   --volume=/tmp/etcd-data:/etcd-data \
+   quay.io/coreos/etcd:v3.1.3 \
+   /usr/local/bin/etcd \
+   --name my-etcd-1 \
+   --data-dir /etcd-data \
+   --listen-client-urls http://0.0.0.0:2379 \
+   --advertise-client-urls http://${HostIP}:2379 \
+   --listen-peer-urls http://0.0.0.0:2380 \
+   --initial-advertise-peer-urls http://${HostIP}:2380 \
+   --initial-cluster my-etcd-1=http://${HostIP}:2380 \
+   --initial-cluster-token my-etcd-token \
+   --initial-cluster-state new \
+   --auto-compaction-retention 1
 
 # curl -X GET http://127.0.0.1:2379/version
 ```
