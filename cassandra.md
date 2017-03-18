@@ -7,23 +7,43 @@ sidebar: home_sidebar
 Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across commodity servers.
 
 # Advantages of Cassandra with Portworx
-Cassandra has built-in replication, so a usual question is where high-availability should be handled.  This guide is aimed at helping answer how to deploy Cassandra with a highly available, denser storage layer like Portworx.
+Cassandra has built-in replication, so a usual question is: where should high-availability be handled?.  This guide is aimed at helping answer how to deploy Cassandra with a highly available, denser storage layer like Portworx.
 
-## Achieving Faster Recovery Times
+Cassandra is designed for bare-metal deployments with a Cassandra instance tied to a physical server.  This creates a problem when deploying multiple containerized instances of Cassandra via your scheduling software.  To understand how to deploy Cassandra with your scheduler and a virtualized software storage solution like Portworx, it is important to understand how Cassandra's replication works.
+
 Cassandra has two strategies for placing replicas: 
 
 `SimpleStrategy`: 
+SimpleStrategy places the first replica on a node determined by the partitioner.  Additional replicas are placed on the next nodes clockwise in the ring without considering topology (rack or data center location).
 
 `NetworkTopologyStrategy`:
+NetworkTopologyStrategy places replicas in the same data center by walking the ring clockwise until reaching the first node in another rack.  NetworkTopologyStrategy attempts to place replicas on distinct racks because nodes in the same rack (or similar physical grouping) often fail at the same time due to power, cooling, or network issues.
+
+The first thing to note is that the `SimpleStrategy` does not offer reasonable (datacenter aware) HA guarantees.  So the most common deployment strategy for Cassandra has typically been the NetworkTopologyStrategy.  However, NetworkTopologyStrategy is suitable for bare-metal deployments, where Cassandra is pinned to a set of physical nodes.  This strategy is hard to implement when you (or your end users of your platform) are deploying multiple Cassandra instances via a scheduler like Kubernetes or Marathon.
+
+The benefits of running Cassandra with Portworx are:
+
+1) Achieve higher density by running multiple Cassandra instances from different rings on the same nodes.  This way, you are not allocating a whole node to just one Cassandra instance.
+2) Allow your users to deploy Cassandra using the  SimpleStrategy and also achieve the resiliency of the NetworkTopologyStrategy, since your end users who are deploying Cassandra may typically not know the network topology of the data center.
+3) Achieve faster recovery times during a failure.  The ability for a block-replicated solution like Portworx to recover from a failure of a node is much faster than deferring to an application like Cassandra to do it's own recovery.  This in turn will allow your end users and applications to have a much higher level of application availablity (measured by 9's).
+
+## Achieving Faster Recovery Times
+When deciding how many replicas to configure in each data center, the two primary considerations are:
+1. Being able to satisfy reads locally, without incurring cross data-center latency.
+2. Failure scenarios.
+
+The two most common ways to configure multiple data center clusters are:
+
+* Two replicas in each data center: This configuration tolerates the failure of a single node per replication group and still allows local reads at a consistency level of ONE.
+* Three replicas in each data center: This configuration tolerates either the failure of a one node per replication group at a strong consistency level of LOCAL_QUORUM or multiple node failures per data center using consistency level ONE.
+Asymmetrical replication groupings are also possible. For example, you can have three replicas in one data center to serve real-time application requests and use a single replica elsewhere for running analytics.
 
 ## Achieving Higher Density
 
 ## Simplified Deployment via Schedulers
 
-Setting up a Cassandra cluster with Portworx storage takes only a few commands.
-
 # Deploying Cassandra with Portworx
-The following example scenario creates a three-node Cassandra cluster with Portworx.
+Setting up a Cassandra cluster with Portworx storage takes only a few commands.  The following example scenario creates a three-node Cassandra cluster with Portworx.
 
 * 10.0.0.1 is created in Step 1 and is the seed for Cassandra
 * 10.0.0.2 is created in Step 3a
