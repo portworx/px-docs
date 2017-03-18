@@ -22,7 +22,8 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
 ## Join us on Slack!
-Join us on Slack[![](/images/slack.png)](http://slack.portworx.com)
+
+[![](/images/slack.png)](http://slack.portworx.com)
 
 ## PX-Developer
 
