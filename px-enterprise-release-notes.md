@@ -15,7 +15,7 @@ sidebar: home_sidebar
 * Automatic decomission of storage-less nodes when they join and leave the cluster as part of a auto-scaling group
 * Volume auto-attach and detach for fine grained background processing of volume maintenance operations
 * Support rack-aware replication to replicate across racks
-* volume aggregation within a rack
+* Volume aggregation within a rack
 
 ### Key Issues Addressed
 
