@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Scale a Cassandra Database with PX-Developer"
+title: "Deploy Cassandra Clusters with Portworx"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 ---

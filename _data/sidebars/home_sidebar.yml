@@ -140,7 +140,7 @@ entries:
     - title: Manage MySQL Database Volumes with Portworx
       url: /mysql.html
       output: web
-    - title: Scale a Cassandra Database with Portworx
+    - title: Cassandra Clusters with Portworx
       url: /cassandra.html
       output: web
     - title: Run the Docker Registry with High Availability
