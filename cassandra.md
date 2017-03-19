@@ -23,7 +23,7 @@ The first thing to note is that the SimpleStrategy does not offer reasonable (da
 
 The benefits of running Cassandra with Portworx are:
 
-1. Achieve faster recovery times during a failure.  The ability for a block-replicated solution like Portworx to recover from a failure of a node is much faster than deferring to an application like Cassandra to do it's own recovery.  This in turn will allow your end users and applications to have a much higher level of application availablity (measured by 9's).
+1. Achieve faster recovery times during a failure.  The ability for a block-replicated solution like Portworx to recover from a failure of a node is much faster than deferring to an application like Cassandra to do its own recovery.  This in turn will allow your end users and applications to have a much higher level of application availablity (measured by 9's).
 1. Achieve higher density by running multiple Cassandra instances from different rings on the same nodes.  This way, you are not allocating a whole node to just one Cassandra instance.
 2. Allow your users to deploy Cassandra using the SimpleStrategy and also achieve the resiliency of the NetworkTopologyStrategy, since your end users who are deploying Cassandra may typically not know the network topology of the data center.
 
