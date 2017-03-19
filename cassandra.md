@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across commodity servers.
 
-# Advantages of Cassandra with Portworx
+## Advantages of Cassandra with Portworx
 Cassandra has built-in replication, so a usual question is: where should high-availability be handled?.  This guide is aimed at helping answer how to deploy Cassandra with a highly available, denser storage layer like Portworx.
 
 Cassandra is designed for bare-metal deployments with a Cassandra instance tied to a physical server.  This creates a problem when deploying multiple containerized instances of Cassandra via your scheduling software.  To understand how to deploy Cassandra with your scheduler and a virtualized software storage solution like Portworx, it is important to understand how Cassandra's replication works.
@@ -27,12 +27,12 @@ The benefits of running Cassandra with Portworx are:
 1. Achieve higher density by running multiple Cassandra instances from different rings on the same nodes.  This way, you are not allocating a whole node to just one Cassandra instance.
 2. Allow your users to deploy Cassandra using the SimpleStrategy and also achieve the resiliency of the NetworkTopologyStrategy, since your end users who are deploying Cassandra may typically not know the network topology of the data center.
 
-### Portworx Data Placement Strategies
+#### Portworx Data Placement Strategies
 Portworx will keep a Cassandra instance's data local to where the Cassandra instance is deployed.  This retains Cassandra's converged performance goals.  Portworx accomplishes this by placing scheduler constraints, such that the scheduler will deploy the Cassandra instance on a node that holds the instance's data.
 
 When deploying a Cassandra ring (multiple Cassandra instances part of the same cluster), Portworx will place each instance's data on nodes such that they are seperated by racks (fault domains).  This ensures that the data placement automatically achieves the `NetworkTopologyStrategy` without end user configuration.  This feature becomes important when your end users deploy Cassandra clusters themselves without knowledge of the data center topology.
 
-## Achieving Faster Recovery Times
+### Achieving Faster Recovery Times
 When deciding how many replicas to configure in each data center, the two primary considerations are:
 1. Being able to satisfy reads locally, without incurring cross data-center latency.
 2. Failure scenarios.
@@ -46,18 +46,20 @@ Asymmetrical replication groupings are also possible. For example, you can have 
 
 When three replicas are required, Portworx recommends using a Portworx replication factor of 2.  This allows you to achieve **faster recovery times** on instance or node failures with a space utilization overhead of 30%.  The secondary replicated copies are also placed on nodes such that it meets the NetworkTopologyStrategy constraints.  That is, the data replicated by Portworx itself is on a node in a different rack.
 
-## Achieving Higher Density
+### Achieving Higher Density
 A Portworx volume is mounted at `/var/lib/cassandra` in a Cassandra instance.  This volume and it's namespace is isolated from another Dockerized Cassandra instance running on the same host.  By leveraging such volume isolation, you can run multiple Cassandra instances (that are part of different clusters) on the same node.
 
 By running multiple Cassandra instances of different rings on the same node, you can achieve higher server and storage utilization.  Portworx pools the local storage drives into one large RAID group.  Each Cassandra volume's data will utilize all spindles on a node.  That is, subsets of a server's drives are not statically allocated to each instance.  Instead, the entire RAID group is made available to each instance running on that server.  This ensure maximum (and fair) bandwidth and IOPS to each Cassandra instance.
 
 Portworx will make sure that no two Cassandra instances of the same cluster end up on the same server.
 
-## Simplified Deployment via Schedulers
+### Simplified Deployment via Schedulers
 Portworx abstracts the data center topology and underlying drives to the infrastructure software deploying the Cassandra clusters.  This in turn lets your end users deploy Cassandra clusters without having to worry about what topology strategy should be used, or how the drives need to be allocated to the various instances of Cassandra.  In effect, there is no static allocation of physical resources to the Cassandra clusters, allowing for programmatic and automated deployments.
 
-# Deploying Cassandra with Portworx
-Setting up a Cassandra cluster with Portworx storage takes only a few commands.  The following example scenario creates a three-node Cassandra cluster with Portworx.
+## Deploying Cassandra with Portworx
+Setting up a Cassandra cluster with Portworx storage takes only a few commands.  The following example scenario creates a three-node Cassandra cluster with Portworx by manually starting Cassandra on each node with Docker.
+
+>**Note:**<br/>The example described here below is typically accomplished by launching all instances of Cassandra in a cluster via a scheduler like Kubernetes of Mesosphere.
 
 * 10.0.0.1 is created in Step 1 and is the seed for Cassandra
 * 10.0.0.2 is created in Step 3a
@@ -65,7 +67,7 @@ Setting up a Cassandra cluster with Portworx storage takes only a few commands. 
 
 When creating these servers in a public cloud, such as AWS, you can specify the each instance's private IP address in place of the 10.0.0.[1-3].
 
-## Step 1: Create storage volumes for each instance
+Step 1: Create storage volumes for each instance
 To create storage volumes for each instance, run the following command on each server.  Note that `size=4` specifies 4 GB.
 
 >**Note:**<br/>Chose a Portworx replication factor based on the strategies listed above.
@@ -75,7 +77,7 @@ To create storage volumes for each instance, run the following command on each s
     size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4
 ```
 
-## Step 2: Start the Cassandra Docker image on node 1
+Step 2: Start the Cassandra Docker image on node 1
 
 Use the Docker `-v` option to assign the volume created with `docker volume create`.
 
@@ -90,13 +92,13 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
     -v cassandra_volume:/var/lib/cassandra cassandra:latest
 ```
 
-## Step 3: Start Docker on the other nodes
+Step 3: Start Cassandra on the other nodes
 
 To create a new volume for the Cassandra instance on the other nodes, run `docker volume create` on each node, as shown in Step 1. Then, the only difference from the previous `docker run` command is the addition of the `-e CASSANDRA_SEEDS=10.0.0.1` parameter. This is a pointer to the IP address of the first Cassandra node.  
 
 Be sure to change the IP addresses in the following examples to the ones used by your instances.
 
-### `docker run` command for Cassandra node 2
+Start Cassandra on node 2
 
 ```
 # docker run --name cassandra2 -d \
@@ -106,7 +108,7 @@ Be sure to change the IP addresses in the following examples to the ones used by
     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
 ```
 
-### `docker run` command for Cassandra node 3
+Start Cassandra on node 3
 
 ```
 # docker run --name cassandra3 -d \
@@ -115,8 +117,6 @@ Be sure to change the IP addresses in the following examples to the ones used by
     -e CASSANDRA_SEEDS=10.0.0.1 \
     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
 ```
-
-### `nodetool status` command for status of the cluster
 
 Use the `nodetool` atatus command to determine the state of your Cassandra cluster.
 
