@@ -19,7 +19,7 @@ SimpleStrategy places the first replica on a node determined by the partitioner.
 `NetworkTopologyStrategy`:
 NetworkTopologyStrategy places replicas in the same data center by walking the ring clockwise until reaching the first node in another rack.  NetworkTopologyStrategy attempts to place replicas on distinct racks because nodes in the same rack (or similar physical grouping) often fail at the same time due to power, cooling, or network issues.
 
-The first thing to note is that the SimpleStrategy does not offer reasonable (datacenter aware) HA guarantees.  So the most common deployment strategy for Cassandra has typically been the NetworkTopologyStrategy.  However, NetworkTopologyStrategy is suitable for bare-metal deployments, where Cassandra is pinned to a set of physical nodes.  This strategy is hard to implement when you (or your end users of your platform) are deploying multiple Cassandra instances via a scheduler like Kubernetes or Marathon.
+The first thing to note is that the SimpleStrategy does not offer reasonable (datacenter aware) HA guarantees.  So the most common deployment strategy for Cassandra has typically been the NetworkTopologyStrategy.  But NetworkTopologyStrategy was intended for bare-metal deployments, where Cassandra is pinned to a set of physical nodes.  Correspondingly, NetworkTopologyStrategy is hard to implement when deploying multiple Cassandra container instances via a scheduler like Kubernetes or Marathon
 
 The benefits of running Cassandra with Portworx are:
 
@@ -44,7 +44,7 @@ The two most common ways to configure multiple data center clusters are:
 * Three replicas in each data center: This configuration tolerates either the failure of a one node per replication group at a strong consistency level of LOCAL_QUORUM or multiple node failures per data center using consistency level ONE.
 Asymmetrical replication groupings are also possible. For example, you can have three replicas in one data center to serve real-time application requests and use a single replica elsewhere for running analytics.
 
-When three replicas are required, Portworx recommends using a Portworx replication factor of 2.  This allows you to achieve **faster recovery times** on instance or node failures with a space utilization overhead of 30%.  The secondary replicated copies are also placed on nodes such that it meets the NetworkTopologyStrategy constraints.  That is, the data replicated by Portworx itself is on a node in a different rack.
+When three replicas are required, Portworx recommends using a Portworx replication factor of 2.  This allows you to achieve **faster recovery times** on instance or node failures with a space utilization overhead of 30%.  The secondary portworx-replicated copies are also placed on nodes such that it meets the NetworkTopologyStrategy constraints.  That is, the data replicated by Portworx itself is on a node in a different rack.
 
 ### Achieving Higher Density
 A Portworx volume is mounted at `/var/lib/cassandra` in a Cassandra instance.  This volume and it's namespace is isolated from another Dockerized Cassandra instance running on the same host.  By leveraging such volume isolation, you can run multiple Cassandra instances (that are part of different clusters) on the same node.
@@ -118,7 +118,7 @@ Start Cassandra on node 3
     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
 ```
 
-Use the `nodetool` atatus command to determine the state of your Cassandra cluster.
+Use the `nodetool` status command to determine the state of your Cassandra cluster.
 
 ```
 # docker exec -it cassandra1 nodetool status
