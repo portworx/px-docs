@@ -27,7 +27,7 @@ The benefits of running Cassandra with Portworx are:
 1. Achieve higher density by running multiple Cassandra instances from different rings on the same nodes.  This way, you are not allocating a whole node to just one Cassandra instance.
 2. Allow your users to deploy Cassandra using the SimpleStrategy and also achieve the resiliency of the NetworkTopologyStrategy, since your end users who are deploying Cassandra may typically not know the network topology of the data center.
 
-#### Portworx Data Placement Strategies
+### Portworx Data Placement Strategies
 Portworx will keep a Cassandra instance's data local to where the Cassandra instance is deployed.  This retains Cassandra's converged performance goals.  Portworx accomplishes this by placing scheduler constraints, such that the scheduler will deploy the Cassandra instance on a node that holds the instance's data.
 
 When deploying a Cassandra ring (multiple Cassandra instances part of the same cluster), Portworx will place each instance's data on nodes such that they are seperated by racks (fault domains).  This ensures that the data placement automatically achieves the `NetworkTopologyStrategy` without end user configuration.  This feature becomes important when your end users deploy Cassandra clusters themselves without knowledge of the data center topology.
