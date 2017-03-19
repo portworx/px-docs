@@ -7,7 +7,7 @@ sidebar: home_sidebar
 Apache Cassandra is an open source distributed database management system designed to handle large amounts of data across commodity servers.
 
 ## Advantages of Cassandra with Portworx
-Cassandra has built-in replication, so a usual question is: where should high-availability be handled?.  This guide is aimed at helping answer how to deploy Cassandra with a highly available, denser storage layer like Portworx.
+Cassandra has built-in replication, so a usual question is: where should high-availability be handled? This guide is aimed at helping answer how to deploy Cassandra with a highly available, denser storage layer like Portworx.
 
 Cassandra is designed for bare-metal deployments with a Cassandra instance tied to a physical server.  This creates a problem when deploying multiple containerized instances of Cassandra via your scheduling software.  To understand how to deploy Cassandra with your scheduler and a virtualized software storage solution like Portworx, it is important to understand how Cassandra's replication works.
 
@@ -30,7 +30,7 @@ The benefits of running Cassandra with Portworx are:
 ### Portworx Data Placement Strategies
 Portworx will keep a Cassandra instance's data local to where the Cassandra instance is deployed.  This retains Cassandra's converged performance goals.  Portworx accomplishes this by placing scheduler constraints, such that the scheduler will deploy the Cassandra instance on a node that holds the instance's data.
 
-When deploying a Cassandra ring (multiple Cassandra instances part of the same cluster), Portworx will place each instance's data on nodes such that they are seperated by racks (fault domains).  This ensures that the data placement automatically achieves the `NetworkTopologyStrategy` without end user configuration.  This feature becomes important when your end users deploy Cassandra clusters themselves without knowledge of the data center topology.
+When deploying a Cassandra ring (multiple Cassandra instances part of the same cluster), Portworx will place each instance's data on nodes such that they are separated by racks (fault domains).  This ensures that the data placement automatically achieves the `NetworkTopologyStrategy` without end user configuration.  This feature becomes important when your end users deploy Cassandra clusters themselves without knowledge of the data center topology.
 
 ### Achieving Faster Recovery Times
 When deciding how many replicas to configure in each data center, the two primary considerations are:
