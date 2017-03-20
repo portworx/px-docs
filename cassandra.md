@@ -80,6 +80,7 @@ Portworx abstracts the datacenter topology and underlying drives from the infras
 ## Deploying Cassandra with Portworx
 Setting up a Cassandra cluster with Portworx storage takes only a few commands.  The following example scenario creates a three-node Cassandra cluster with Portworx by manually starting Cassandra on each node with Docker.
 
+
 >**Note:**<br/>The example described here below is typically accomplished by launching all instances of Cassandra in a cluster via a scheduler like Kubernetes of Mesosphere. Manual scheduling is shown simply for clarity.
 
 * 10.0.0.1 is created in Step 1 and is the seed for Cassandra

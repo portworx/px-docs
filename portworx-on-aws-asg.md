@@ -86,14 +86,12 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
       -v /etc/pwx:/etc/pwx                           \
       -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ               \
       -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ           \
-      -s vol-0743df7bf5657dad8                       \
-      -s vol-0055e5913b79fb49d                       \
       -v /opt/pwx/bin:/export_bin:shared             \
       -v /var/run/docker.sock:/var/run/docker.sock   \
       -v /var/cores:/var/cores                       \
       -v ${HOSTDIR}:${HOSTDIR}                       \
       --name=%n \
-      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379
+      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s vol-0743df7bf5657dad8 -s vol-0055e5913b79fb49d   
 ```
 
 >**Note:**There are 2 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.

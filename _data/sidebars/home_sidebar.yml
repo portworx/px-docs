@@ -137,25 +137,25 @@ entries:
   - title: Application Solutions
     output: web
     folderitems:
-    - title: Manage MySQL Database Volumes with Portworx
+    - title: MySQL Database with Portworx
       url: /mysql.html
       output: web
     - title: Cassandra Clusters with Portworx
       url: /cassandra.html
       output: web
-    - title: Run the Docker Registry with High Availability
+    - title: Docker Registry with High Availability
       url: /registry.html
       output: web
-    - title: Run Redis with Portworx
+    - title: Redis with Portworx
       url: /redis.html
       output: web
     - title: Docker Compose, Wordpress, and MySQL on Portworx
       url: /docker-compose.html
       output: web
-    - title: PostgreSQL with CrunchyData and Portworx
+    - title: PostgreSQL and CrunchyData with Portworx
       url: /postgres.html
       output: web
-    - title: Deploying Jenkins with Portworx
+    - title: Jenkins with Portworx
       url: /jenkins.html
       output: web
     - title: Create PX volume for NFS share
@@ -164,7 +164,7 @@ entries:
     - title: Object Storage with Portworx
       url: /object-storage.html
       output: web
-    - title: Run Kafka on Portworx Volumes
+    - title: Kafka with Portworx
       url: /run-kafka-on-px.html
       output: web    
   - title: Reference Architectures
