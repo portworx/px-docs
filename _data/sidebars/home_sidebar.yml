@@ -78,7 +78,7 @@ entries:
       url: /portworx-on-aws-cloudformation.html
       output: web
     - title: AWS ECS
-      url: /portworx-on-ecs.html
+      url: /portworx-on-ecs2.html
       output: web
     - title: AWS Auto Scaling
       url: /portworx-on-aws-asg.html
