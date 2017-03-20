@@ -126,7 +126,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
 
 
-  4. From your ECS CLI workstation which has ecs-cli command; setup and launch ECS task definition with previously created PX volume.  
+  4. From your ECS CLI workstation which has ecs-cli command; setup and launch ECS task definition with previously created PX volume. Create a task definition file "redis.yml" which will launch two containers: redis based on redis image, and web based on binocarlos/moby-counter. Then use ecs-cli command to post this task definition and launch it.
 
          $ cat redis.yml
          web:
