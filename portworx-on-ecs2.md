@@ -104,25 +104,25 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
   
-        $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-        $ sudo chmod +x /usr/local/bin/ecs-cli
+         $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+         $ sudo chmod +x /usr/local/bin/ecs-cli
 
   2. Configure AWS ECS CLI on your workstation
      
-        $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
-        $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
-        $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
+         $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
+         $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
+         $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
 
   3. Create a 1GB PX volume using the Docker CLI.  Ssh into one of the ECS instances and create this PX volumes.
 
 
-        $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
-        $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true 
-        demovol
+         $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
+         $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true 
+         demovol
 
-        $ docker volume ls
-        DRIVER              VOLUME NAME
-        pxd                 demovol
+         $ docker volume ls
+         DRIVER              VOLUME NAME
+         pxd                 demovol
 
 
 
@@ -186,7 +186,7 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
 
   1. Ssh into one of the EC2 instance and create a new PX volume using Docker CLI. 
 
-        $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
+          $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
 
 
   2. In AWS ECS console, choose the previously created cluster ```ecs-demo1```; then create a new task definition.
