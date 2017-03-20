@@ -7,7 +7,7 @@ sidebar: home_sidebar
 ## Introduction
 [Apache Cassandra](http://cassandra.apache.org/), first developed at Facebook, is an open source distributed database management system designed to handle large amounts of data across commodity servers.
 
-Cassandra has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level, a typical question is: should I ensure high-availability of my database through Cassandra itself, or through my storage? This Production  Operations Guide to Running Cassandra is aimed at helping answer this question by showing how to deploy Cassandra with a highly available, high density storage layer like Portworx.
+Cassandra has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level, a typical question is: should I ensure high-availability of my database through Cassandra itself, through my storage, or a combination of the two? This Production Operations Guide to Running Cassandra is aimed at helping answer this question by showing how to use Cassandra replication alongside Portworx to speed up recovery times, increase density and simply operations.
 
 ## Background on Cassandra replication
 Cassandra is designed for bare-metal deployments with a Cassandra instance tied to a physical server.  This architecture creates a problem when deploying multiple containerized instances of Cassandra via your scheduling software like Kubernetes, Mesos or Docker Swarm since Cassandra containers can be scheduled on hosts that do not have the appropriate data.  We will see how to solve this below, but it is first important to understand how Cassandra's replication works.
