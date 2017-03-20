@@ -26,16 +26,13 @@ The first thing to note is that the SimpleStrategy does not offer reasonable (da
 
 The benefits of running Cassandra with Portworx are:
 
-1. Faster recovery times during a failure.  
-
+1. *Faster recovery times during a failure.*  
 The ability for a block-replicated solution like Portworx to recover from a failure of a node is much faster than deferring to an application like Cassandra to do its own recovery.  This in turn will allow your end users and applications to have a much higher level of application availability (measured by 9's).
 
-2. Higher density
-
+2. *Higher density.*  
 Achieve higher density by running multiple Cassandra instances from different rings on the same nodes.  This way, you are not allocating a whole node to just one Cassandra instance.
 
-3. Simplified deployments
-
+3. *Simplified deployments.*  
 Allow your users to deploy Cassandra using the SimpleStrategy while achieving the resiliency of the NetworkTopologyStrategy.  Your end users deploying containerized applications typically do not know the network topology of the data center but Portworx does and can automate the placement of nodes in the ring.
 
 We will look at how to achieve each of these benefits in more detail below.  First, let's look at how Portworx places data.
@@ -43,26 +40,27 @@ We will look at how to achieve each of these benefits in more detail below.  Fir
 ### Portworx Data Placement Strategies
 Portworx is able to ensure performance of a Cassandra cluster due to two key architectural concepts: hyperconvergence and fault domains.
 
-* Hyperconvergence
+* Hyperconvergence  
 Cassandra runs best when the instance and its data are on the same host.  This is called hyperconvergence.  Portworx runs hyperconverged by keeping a Cassandra instance's data local to where the Cassandra instance is deployed, ensuring the best performance possible. Portworx accomplishes this by placing scheduler constraints, such that the scheduler will deploy the Cassandra instance on a node that holds the instance's data.
 
-* Fault domains
+* Fault domains  
 When deploying a Cassandra ring, Portworx will automatically place each instance's data on nodes such that they are separated by racks (fault domains).  This ensures that the data placement automatically achieves the `NetworkTopologyStrategy` without end user configuration.  This feature becomes important when your end users deploy Cassandra clusters themselves without knowledge of the data center topology.
 
 With a general understanding of data placement, let's look at how to achieve the fast recovery times, higher density and simplified deployments outlined above.
 
 ### Achieving Faster Recovery Times
 When deciding how many replicas to configure in each data center, the two primary considerations are:
+
 1. Can I satisfy reads locally, without incurring cross-datacenter latency?
 2. Can I support a variety of failure scenarios?
 
 The two most common ways to configure multi-datacenter clusters are:
 
-* Two replicas in each datacenter
+#### Two replicas in each datacenter
 
 This configuration tolerates the failure of a single node per replication group and still allows local reads at a consistency level of ONE.  In this mode, we recommend setting the Portworx volume replication to a factor of 1.  Portworx will guarantee that the data is placed locally to the node on which the Cassandra instance is deployed.  Furthermore, Portworx will place the data associated with different instances of a cluster on nodes that satisfy the NetworkTopologyStrategy automatically.
 
-* Three replicas in each datacenter
+#### Three replicas in each datacenter
 
 This configuration tolerates either the failure of a one node per replication group at a strong consistency level of LOCAL_QUORUM or multiple node failures per datacenter using consistency level ONE.
 Asymmetrical replication groupings are also possible. For example, you can have three replicas in one data center to serve real-time application requests and use a single replica elsewhere for running analytics.
