@@ -14,6 +14,7 @@ To get access to Portworx PX-Lighthouse docker repository, contact us at support
 * Improved performance charting in dashboard and performance page
 * Shortcuts to performance page from node and volume pages
 * Added alerting fade-aways to give better feedback for user actions
+* Faster response time for page transitions
 
 
 ## Lighthouse 1.1.3 Release notes
