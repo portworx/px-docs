@@ -7,6 +7,15 @@ sidebar: home_sidebar
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
+## Lighthouse 1.1.6 Release notes
+
+* Updated dashboard with better representation of different IO Priority pools
+* Dashboard updates for node status and cluster map
+* Improved performance charting in dashboard and performance page
+* Shortcuts to performance page from node and volume pages
+* Added alerting fade-aways to give better feedback for user actions
+
+
 ## Lighthouse 1.1.3 Release notes
 
 In order to use Lighthouse 1.1.3 with authentication, please download and install PX-Enterprise 1.1.2 as well. 
