@@ -233,6 +233,9 @@ entries:
     - title: Mesos, Mesosphere and Marathon
       url: /video-mesos.html
       output: web
+	- title: DCOS with Portworx
+	  url: /video-dcos.html
+	  output: web
     - title: Rancher
       url: /video-rancher.html
       output: web
