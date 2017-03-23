@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
             </button>
              <img src="images/px-logo.png" height=50 width=138 style=margin-top:20px />
-             <!--<a href="https://portworx.github.io/px-docs"><img src="images/px-logo.png" height=50 width=138 style=margin-top:20px/></a>--> 
+             <!--<a href="https://portworx.github.io/px-docs"><img src="images/px-logo.png" height=50 width=138 style=margin-top:20px/></a>-->
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -48,6 +48,27 @@
                 {% if site.feedback_disable == null or site.feedback_disable == false %}
 			{% include feedback.html %}
 		{% endif %}
+
+    <!-- at the end of the HEAD -->
+    <!--comment out this block if you want to hide search-->
+<li>
+<!--start search-->
+<div id="search-demo-container">
+<input type="text" id="search-input" placeholder="{{site.data.strings.search_placeholder_text}}">
+<ul id="results-container"></ul>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<!-- at the end of the BODY -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '94701e6663ea3899bf379b1609403bf9',
+indexName: 'portworx',
+inputSelector: '#search-input',
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<!--end search-->
+                </li>
             </ul>
         </div>
         </div>
