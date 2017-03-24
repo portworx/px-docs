@@ -188,6 +188,8 @@ For all other OS's, please refer to the `etcd` or `consul` instance, and change 
     }]
 }
 ```
+[Download example](/px-marathon.json?raw=true)
+
 
 This example illustrates running PX-Enterprise in an "air-gapped" environment, as noted by the "**-c mesos-demo1**" cluster argument and the "**-k etcd**" argument for the key-value database.
 
@@ -245,6 +247,8 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
       "maximumOverCapacity" : 0.0
 }
 ```
+
+[Download example](/px-marathon-mysql.json?raw=true)
 
 * Notice the Docker `parameters` clause as the way to reference the `pxd` volume driver as well as the volume itself.
 * The referenced volume can be a volume name, a volume ID, or a snapshot ID.   If the volume name does not previously exist, it gets created in-band with default settings.
