@@ -50,7 +50,7 @@ Portworx can now be deployed through the [Mesosphere Universe](https://github.co
 The `cmdargs` value should be:  
 
 ```
--c mypxcluster -s /dev/xvdc -d eth0 -m eth0 -k etcd://<IP>:<PORT>
+-c mypxcluster -s /dev/xvdc -k etcd://<IP>:<PORT>
 ``` 
 
 where `IP:PORT` corresponds to the 'etcd' service URL from Step 2.

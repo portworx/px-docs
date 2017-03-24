@@ -10,14 +10,14 @@ Here is a three-minute video that shows how to set up a three-node cluster for m
 
 ## Step 1: Create a storage volume for mysql
 
-To create a storage volume for mysql, run the following command and note the returned volume ID. You will need the volume ID when you start the mysql container in the next step.
+To create a highly available storage volume for mysql, run the following command and note the returned volume ID. You will need the volume ID when you start the mysql container in the next step.
 
 ```
 # docker volume create -d pxd --name mysql_volume --opt \
-        size=4 --opt block_size=64 --opt repl=1 --opt fs=ext4
+        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4
 ```
 
-That command creates a volume to attach to the mysql_volume container, which stores its data in the /var/lib/mysql directory. Use the Docker `-v` option to attach the Portworx volume to this directory.
+That command creates a volume called `mysql_volume`.  This volume has a replication factor of 3, which means that the data will be protected on 3 seperate nodes.  We will use this volume to protect the `mysql` instances data.
 
 ## Step 2: Start the mysql container
 
@@ -30,6 +30,8 @@ To start the mysql container, run the following command.
         -e MYSQL_ROOT_PASSWORD=password             \
         -v mysql_volume:/var/lib/mysql -d mysql
 ```
+
+Note the volume binding done via `-v mysql_volume:/var/lib/mysql`.  This causes the Portworx `mysql_volume` to get bind mounted at `/var/lib/mysql`, which is where the `mysql` Docker container stores it's data.
 
 Your mysql container is now available for use at port 3306.
 

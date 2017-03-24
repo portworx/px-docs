@@ -45,7 +45,7 @@ Run the following command on a server that you will designate as the Kubernetes 
       -v /var/lib/docker:/var/lib/docker                          \
       -v /var/lib/kubelet:/var/lib/kubelet:shared                 \
       -v /sys/fs/cgroup:/sys/fs/cgroup                            \
-      portworx/px-kube --kube-master -c MY_CLUSTER_ID -z -d eth0 -m eth0
+      portworx/px-kube --kube-master -c MY_CLUSTER_ID -z
 ```
 
 Note the option `--kube-master`.  This instructs the px-kube container to start as a master node.  Chose a cluster ID for the `-c` option.  The first time this container is started, it will create a **new** cluster with the given cluster ID.  The `-z` option tells Portworx to not allocate any storage on the master node.  This is optional however; you can also request the master node to participate as a storage node by using the `-s /dev/sdb` option.
@@ -71,7 +71,7 @@ Run the following command on each server that you want to be a Kubernetes minion
       -v /var/lib/docker:/var/lib/docker                          \
       -v /var/lib/kubelet:/var/lib/kubelet:shared                 \
       -v /sys/fs/cgroup:/sys/fs/cgroup                            \
-      portworx/px-kube --kube-agent -c MY_CLUSTER_ID -km 172.31.8.91 -s /dev/xvdb -s /dev/xvdc -d eth0 -m eth0
+      portworx/px-kube --kube-agent -c MY_CLUSTER_ID -km 172.31.8.91 -s /dev/xvdb -s /dev/xvdc
 ```
 
 Note the option `--kube-agent`.  This instructs the px-kube container to start as a minion node.  It joins the master at the IP specified in the `-km` option.  Specify the storage devices as you would to a regular PX container.

@@ -64,7 +64,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
 >**Note:**<br/>For Lighthouse users, when you create a cluster in the Lighthouse console, Lighthouse will craft the above command with the correct values for the KVDB and cluster ID.
@@ -82,7 +82,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
-                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
+                portworx/px-enterprise -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
 The following arguments are provided to the PX daemon:

@@ -60,7 +60,7 @@ You can now run PX via the Docker CLI as follows:
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /lib/modules:/lib/modules                  \
-                portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc -d eth0 -m eth0
+                portworx/px-dev -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
 Where the following arguments are provided to the PX daemon:
