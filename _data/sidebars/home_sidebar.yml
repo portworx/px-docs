@@ -95,6 +95,9 @@ entries:
     - title: Rackspace
       url: /portworx-on-rackspace.html
       output: web
+    - title: Terraform and Terraporx
+      url: /terraporx.html
+      output: web
   - title: CLI and API Reference
     output: web
     folderitems:
