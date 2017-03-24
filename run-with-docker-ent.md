@@ -154,8 +154,8 @@ The following Docker runtime command options are explained:
 
 You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to pass the runtime parameters via the command line.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
 
-1. Download the sample config.json file:
-https://raw.githubusercontent.com/portworx/px-enterprise/master/conf/config.json
+1. Download the sample [config.json file](https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json)
+
 2. Create a directory for the configuration file.
 
    ```
