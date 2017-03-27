@@ -107,14 +107,10 @@ Specify the following information in the `user-data` section of your instance wh
 #cloud-config
 portworx:
   config:
-    clusterid: my_cluster_id
-    kvdb:
-    - etcd://mykvdb1.mycompany.com:4001
-    - etcd://mykvdb2.mycompany.com:4001
     storage:
       devices:
+      - vol-0743df7bf5657dad8
       - vol-0055e5913b79fb49d
-      - vol-00893b79fb49daaaa
 ```
 
 PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one as long as the number of existing EBS volumes for this auto scale group is less than the `max` value specified in the `user-data`.  If the maximum number of EBS volumes have been reached, then PX will startup as a storage-consumer (storage-less) node.
