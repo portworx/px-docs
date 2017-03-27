@@ -108,13 +108,10 @@ Specify the following information in the `user-data` section of your instance wh
 portworx:
   config:
     clusterid: my_cluster_id
-    mgtiface: ""
-    dataiface: ""
     kvdb:
     - etcd://mykvdb1.mycompany.com:4001
-    - etcd://mykvbb2.mycompany.com:4001
+    - etcd://mykvdb2.mycompany.com:4001
     storage:
-      devices_md: []
       devices:
       - vol-0055e5913b79fb49d
       - vol-00893b79fb49daaaa
