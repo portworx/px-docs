@@ -5,7 +5,7 @@ keywords: portworx, cloud-config, yaml, config.json, reference
 sidebar: home_sidebar
 ---
 
-This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`
+This is the schema definition for a valid yaml file. For AWS, this file is passed in through user-data. 
 
 ```
 portworx:
