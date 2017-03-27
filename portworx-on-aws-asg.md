@@ -117,7 +117,7 @@ PX will use the EBS volume IDs as volume template specs.  Each PX instance that 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-### Instance Priviledges
+### Instance Privileges
 A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided. Instead you can associate an AWS IAM role with the ec2 instances that are spun in your ASG. More details about creating such an EC2 IAM role and corresponding AWS policy can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
 
 Following is an example policy that has all the required permissions
