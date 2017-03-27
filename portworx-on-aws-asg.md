@@ -105,16 +105,19 @@ Specify the following information in the `user-data` section of your instance wh
 
 ```bash
 #cloud-config
-storage:
-  ebs:
-    template: vol-0055e5913b79fb49d
-	max-count: 128
-  ebs:
-    template: vol-0743df7bf5657dad8
-	max-count: 32
-aws-credentialsi:
-  AWS_ACCESS_KEY_ID: XXX-YYY-ZZZ
-  AWS_SECRET_ACCESS_KEY: XXX-YYY-ZZZ
+portworx:
+  config:
+    clusterid: my_cluster_id
+    mgtiface: ""
+    dataiface: ""
+    kvdb:
+    - etcd://mykvdb1.mycompany.com:4001
+    - etcd://mykvbb2.mycompany.com:4001
+    storage:
+      devices_md: []
+      devices:
+      - vol-0055e5913b79fb49d
+      - vol-00893b79fb49daaaa
 ```
 
 PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one as long as the number of existing EBS volumes for this auto scale group is less than the `max` value specified in the `user-data`.  If the maximum number of EBS volumes have been reached, then PX will startup as a storage-consumer (storage-less) node.
