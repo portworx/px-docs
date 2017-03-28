@@ -101,7 +101,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
 ### Cloud-Init
 Optionally, the AWS access credentials and EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
-Specify the following information in the `user-data` section of your instance while creating the auto scaling group:
+Specify the following information in the `user-data` section of your instance while creating the launch configuration for your auto scaling group:
 
 ```bash
 #cloud-config
