@@ -13,6 +13,7 @@ Other supported bare metal cloud providers are
 * Digital Ocean
 * Rackspace
 
+**NB:** For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts. 
 
 ### Step 1: Provision Server 
 When chosing an instance, verify that you meet the [minimum requirements](get-started-px-enterprise.html#step-1-verify-requirements)
