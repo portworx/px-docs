@@ -72,6 +72,15 @@ Where the following arguments are provided to the PX daemon:
 
 -k
 	> Points to your key value database, such as an etcd cluster or a consul cluster.
+	
+-userpwd
+       > username and password for ETCD authentication in the form <user_name>:<passwd>
+ 
+-ca
+       > location of CA file for ETCD authentication
+       
+-cert 
+	> location of certificate for ETCD authentication 
 
 -c
 	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
