@@ -622,7 +622,6 @@ export MYSQLPOD=$(kubectl get pods -l app=mysql --no-headers | awk '{print $1}')
 kubectl logs $MYSQLPOD
 kubectl exec -ti $MYSQLPOD -- bash
 mysql --user=root --password=password
-create database TEST_1234;
 show databases;
 exit
 exit
