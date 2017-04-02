@@ -128,8 +128,5 @@ spec:
 
 Note the new section called nodeSelector
 
-## Run with PX-Kube
-`px-kube` is an **experimental** converged container that has Kubernetes and Portworx integrated into one, easy-to-deploy container.  Follow [these](/run-with-kube.html) to deploy `px-kube`. 
-
 ## Bill of Materials on Public Cloud Providers
 Use [this](/k8s-pwx-bom.html) guide to calculate the BOM for a complete Kubernetes with Portworx compute and storage environment for running stateful applications.
