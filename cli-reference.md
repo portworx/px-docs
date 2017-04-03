@@ -1040,7 +1040,7 @@ Node	Bytes Sent	Bytes Received
 
 
 ### Host related operations
-````
+```
 sudo /opt/pwx/bin/pxctl host --help   
 NAME:
    pxctl host - Attach volumes to the host
