@@ -112,19 +112,24 @@ USAGE:
    pxctl volume create [command options] [arguments...]
 
 OPTIONS:
-   --shared                           Specify --shared to make this a globally shared namespace volume
-   --passphrase value                 passphrase to use for the PBKDF2 function
-   --label value, -l value            Comma separated name=value pairs, e.g name=sqlvolume,type=production
-   --size value, -s value             specify size in GB (default: 1)
-   --fs value                         filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --seed value                       optional data that the volume should be seeded with
-   --block_size value, -b value       block size in Kbytes (default: 32)
-   --repl value, -r value             replication factor [1..3] (default: 1)
-   --scale value, --sc value          auto scale to max number [1..1024] (default: 1)
-   --io_priority value                IO Priority: [high|medium|low] (default: "low")
-   --sticky                           sticky volumes cannot be deleted until the flag is disabled
-   --snap_interval value, --si value  snapshot interval in minutes, 0 disables snaps (default: 0)
-   --nodes value                      Comma seprated Node Id(s)
+   --shared                             make this a globally shared namespace volume
+   --secure                             encrypt this volume using AES-256
+   --secret_key value                   secret_key to use to fetch secret_data for the PBKDF2 function
+   --use_cluster_secret                 Use cluster wide secret key to fetch secret_data
+   --label pairs, -l pairs              list of comma-separated name=value pairs
+   --size value, -s value               volume size in GB (default: 1)
+   --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
+   --block_size size, -b size           block size in Kbytes (default: 32)
+   --repl factor, -r factor             replication factor [1..3] (default: 1)
+   --scale value, --sc value            auto scale to max number [1..1024] (default: 1)
+   --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
+   --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
+   --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
+   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
+   --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
+   --nodes value                        comma-separated Node Id(s)
  ```
  
 Here is an example of how to create a shared volume with replication factor set to 3
@@ -156,18 +161,24 @@ For volumes that get created as volume sets, use --scale parameter. This paramet
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
 
+If you want to create an encrypted volume, use the following command. If the node is not already authenticated creation will fail.
+```
+sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
+```
+
 #### pxctl volume list
 
 `pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
 
 ```
 sudo /opt/pwx/bin/pxctl volume list
-ID			NAME		SIZE	HA	SHARED	ENCRYPTED	PRIORITY	STATUS
-1130856252740468850	cliscale1	1 GiB	3	no	no		LOW		up - detached
-1131486256496535679	cliscale	1 GiB	3	no	no		LOW		up - detached
-970758537931791410	clitest		1 GiB	1	no	no		LOW		up - detached
-1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		up - detached
-2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		up - detached
+ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
+1130856252740468850	cliscale1	1 GiB	3	no	no		LOW		100	up - detached
+1131486256496535679	cliscale	1 GiB	3	no	no		LOW		1	up - detached
+970758537931791410	clitest1	1 GiB	3	yes	no		LOW		1	up - detached
+1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		1	up - detached
+2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
+1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
 ```
 
 #### pxctl volume delete
@@ -296,6 +307,33 @@ Volume	:  970758537931791410
 	Replica sets on nodes:
 		Set  0
 			Node 	 :  10.99.117.133
+```
+For an encrypted volume,
+```
+sudo /opt/pwx/bin/pxctl v i cliencr
+Volume  :  1013237432577873530
+        Name                     :  cliencr
+        Size                     :  2.0 GiB
+        Format                   :  ext4
+        HA                       :  2
+        IO Priority              :  LOW
+        Creation time            :  Apr 3 21:11:43 UTC 2017
+        Shared                   :  no
+        Status                   :  up
+        State                    :  detached
+        Attributes               :  encrypted
+        Reads                    :  0
+        Reads MS                 :  0
+        Bytes Read               :  0
+        Writes                   :  0
+        Writes MS                :  0
+        Bytes Written            :  0
+        IOs in progress          :  0
+        Bytes used               :  33 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  172.31.62.60
+                        Node     :  172.31.55.8
 ```
 
 As shown above, the volume is shown as `shared=yes` indicating that this is a shared volume
@@ -1039,6 +1077,12 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 * Data is not local to the node on which volume is attached.
 ```
 Note: The volume resides on 2 different nodes than the one where it was attached in the above example. Hence the warning.
+In the case of an encrypted volume, if the node was already authenticated using the cluster secret then the attach command is the same as for a non-encrypted volume. If the volume was encrypted using a per-volume key or the node was authenticated using a one-time login then you have to pass the key in the attach command
+```
+sudo /opt/pwx/bin/pxctl host attach cliencr --secret_key test-key
+Volume successfully attached at: /dev/mapper/pxd-enc1013237432577873530
+```
+
 #### pxctl host detach
 `pxctl host detach` command is used to detach a volume from a host
 ```
