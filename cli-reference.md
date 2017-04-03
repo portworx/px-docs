@@ -247,6 +247,7 @@ OPTIONS:
    --shared value, -s value  set shared setting to on/off
    --sticky on/off           set sticky setting to on/off
    --scale factor            New scale factor [1...1024] (default: 0)
+   --size value              New size for the volume (GiB)
  ```
 
 Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
