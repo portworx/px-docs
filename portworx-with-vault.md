@@ -24,7 +24,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                 portworx/px-enterprise:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s \
 		/dev/sdb -s /dev/sdc -secret_type vault -cluster_secret_key <secret-id>
 ```
- All the arguments to the docker run command are explained [here](run-with-docker.html). The two new arguments related to Vault are:
+All the arguments to the docker run command are explained [here](run-with-docker.html). The two new arguments related to Vault are:
 
 ```
 - secret_type
@@ -52,7 +52,7 @@ All the above Vault related fields as well as the cluster secret key can be set 
 
 ### Authenticating with Vault using PX CLI
 
-If you do not wish to set Vault environment variables, you can autenticate PX with Vault using PX CLI. Run the following commands:
+If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
 
 ```
 # /opt/pwx/bin/pxctl secrets login
@@ -76,7 +76,7 @@ __Important: Make sure that the secret key has been created in Vault__
 
 If the CLI is used to authenticate with Vault, for every restart of PX container it needs to be re-authenticated with Vault by running the `login` command.
 
-### Encryted Volumes
+### Encrypted Volumes
 
 #### Using cluster wide secret key
 
