@@ -1,12 +1,15 @@
 ---
 layout: page
-title: "Run Portworx with Kubernetes Flexvolume"
+title: "Run Portworx with Kubernetes Flexvolume for k8s 1.5 and earlier"
 keywords: portworx, PX-Developer, container, Kubernetes, storage
 sidebar: home_sidebar
 ---
+
+These instructions are recommended only if you are running a version of Kubernetes before 1.6.  Otherwise, see instructions [here](#insert-link)
+
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
->**Note:**<br/>We are tracking when shared mounts will be allowed within Kubernetes (K8s), which will allow Kubernetes to deploy PX-Developer.
+>**Note:**<br/>We are tracking when shared mounts will be allowed within Kubernetes (K8s), which will allow Kubernetes to deploy PX.
 
 ## Step 1: Run the PX container
 
@@ -373,3 +376,16 @@ Events:
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-0
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-1
 ```
+
+Read on for detailed instructions on running stateful services on Kubernetes.
+
+* [Install PX into an Kubernetes 1.6 cluster]()
+* [Force Kubernetes to schedule pods on hosts with your data](/kubernetes-convergence.html)
+* [Create Kubernetes Storage Class](/kubernetes-define-storage-class.html)
+* [Using pre-provisioned volumes with Kubernetes](/kubernetes-preprovisioned-volumes.html)
+* [Dynamically provision volumes with Kubernetes](/kubernetes-dynamically-provisioned-volumes.html)
+* [Using Stateful sets](/kubernetes-stateful-sets.html)
+* [Running a pod from a snapshot](/kubernetes-running-a-pod-from-snapshot.html)
+* [Failover a database using Kubernetes](kubernetes-database-failover.html)
+* [Install PX on Kubernetes < 1.6](/kubernetes-run-with-flexvolume.html)
+* [Cost calculator for converged container cluster using Kubernetes and Portworx](kubernetes-infrastructure-cost-calculator.html)
