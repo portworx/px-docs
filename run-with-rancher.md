@@ -72,4 +72,3 @@ elasticsearch:
 * Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
 *The referenced volume can be a volume name, a volume ID, or a snapshot ID.  
 
->**Note:**<br/>At this time, Rancher supports docker-compose v1 syntax, but not v2 syntax.
