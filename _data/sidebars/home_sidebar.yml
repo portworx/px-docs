@@ -59,6 +59,9 @@ entries:
     - title: Run Portworx with Kubernetes
       url: /run-with-kubernetes.html
       output: web
+    - title: Run Portworx with Docker Swarm
+      url: /run-with-docker-swarm.html
+      output: web
     - title: Run Portworx with Mesos
       url: /run-with-mesosphere.html
       output: web
