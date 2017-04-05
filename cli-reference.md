@@ -41,20 +41,23 @@ NAME:
 
 USAGE:
    pxctl [global options] command [command options] [arguments...]
-   
+
 VERSION:
-   1.1.4-6b35842
-   
+   1.2.0-91bd9d3
+
 COMMANDS:
-     status       Show status summary
-     volume, v    Manage volumes
-     snap, s      Manage volume snapshots
-     cluster, c   Manage the cluster
-     service, sv  Service mode utilities
-     host         Attach volumes to the host
-     upgrade      Upgrade PX
-     eula         Show license agreement
-     help, h      Shows a list of commands or help for one command
+     status         Show status summary
+     volume, v      Manage volumes
+     snap, s        Manage volume snapshots
+     cluster, c     Manage the cluster
+     service, sv    Service mode utilities
+     host           Attach volumes to the host
+     secrets        Manage Secrets
+     upgrade        Upgrade PX
+     eula           Show license agreement
+     cloudsnap, cs  Backup and restore snapshots to/from cloud
+     objectstore    Manage the object store
+     help, h        Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --json, -j     output in json
@@ -1164,6 +1167,100 @@ Downloading PX portworx/px-enterprise:1.1.6 layers...
 ```
 It is recommended to upgrade the nodes in a staggered manner so as to maintain quorum and continuity of IOs.
 
+### Cloudsnap operations
+Help for specific cloudsnap commands can be found by running the following command
 
+#### pxctl cloudsnap --help
+```
+sudo /opt/pwx/bin/pxctl cloudsnap --help
+NAME:
+   pxctl cloudsnap - Backup and restore snapshots to/from cloud
 
+USAGE:
+   pxctl cloudsnap command [command options] [arguments...]
 
+COMMANDS:
+     backup, b          Backup a snapshot to cloud
+     restore, r         Restore volume to a cloud snapshot
+     list, l            List snapshot in cloud
+     status, s          Report status of active backups/restores
+     schedule, sc       Update cloud-snap schedule
+     credentials, cred  Manage cloud-snap credentials
+
+OPTIONS:
+   --help, -h  show help
+```
+
+#### pxctl cloudsnap credentials
+```
+sudo /opt/pwx/bin/pxctl cloudsnap credentials
+NAME:
+   pxctl cloudsnap credentials - Manage cloud-snap credentials
+
+USAGE:
+   pxctl cloudsnap credentials command [command options] [arguments...]
+
+COMMANDS:
+     create, c    Create a credential for cloud-snap
+     list, l      List all credentials for cloud-snap
+     delete, d    Delete a credential for cloud-snap
+     validate, v  Validate a credential for cloud-snap
+
+OPTIONS:
+   --help, -h  show help
+```
+#### pxctl cloudsnap credentials
+```
+sudo /opt/pwx/bin/pxctl cloudsnap credentials list
+
+S3 Credentials
+UUID						REGION			ENDPOINT			ACCESS KEY			SSL ENABLED	ENCRYPTION
+ffffffff-ffff-ffff-1111-ffffffffffff		us-east-1		s3.amazonaws.com		AAAAAAAAAAAAAAAAAAAA		false		false
+
+Azure Credentials
+UUID						ACCOUNT NAME		ENCRYPTION
+ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
+```
+#### pxctl cloudsnap create
+<TODO>
+
+#### pxctl cloudsnap delete
+<TODO>
+
+#### pxctl cloudsnap validate
+<TODO>
+
+#### pxctl cloudsnap list
+```
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
+SOURCEVOLUME 			CLOUD-SNAP-ID					CREATED-TIME				STATUS
+vol1				1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
+vol1				1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+vol1				672309757369665802-604730680636428095		Wed, 05 Apr 2017 21:13:55 UTC		Done
+volshared1			13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
+```
+Filtering on cluster ID or volume ID is available and can be done as follows:
+```
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --src vol1
+SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
+vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
+vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --cluster cs25
+SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
+vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
+vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+volshared1		13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
+```
+
+#### pxctl cloudsnap status
+Check the status of cloudsnap operations
+```
+/opt/pwx/bin/pxctl cloudsnap status
+SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			ERROR
+1040525385624900824	Restore-Done	11753581193	8m32.231744596s		Wed, 05 Apr 2017 06:57:08 UTC
+1137394071301823388	Backup-Done	11753581193	1m46.023734966s		Wed, 05 Apr 2017 05:03:42 UTC
+13292162184271348	Backup-Done	27206221391	4m25.740022954s		Wed, 05 Apr 2017 22:39:41 UTC
+454969905909227504	Backup-Active	91944386560	4h8m19.283242837s	Wed, 05 Apr 2017 22:39:41 UTC
+827276927130532677	Restore-Failed	0									Failed to authenticate creds ID
+```
