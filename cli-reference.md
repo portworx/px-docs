@@ -113,6 +113,9 @@ USAGE:
 
 OPTIONS:
    --shared                             make this a globally shared namespace volume
+   --secure                             encrypt this volume using AES-256
+   --secret_key value                   secret_key to use to fetch secret_data for the PBKDF2 function
+   --use_cluster_secret                 Use cluster wide secret key to fetch secret_data
    --label pairs, -l pairs              list of comma-separated name=value pairs
    --size value, -s value               volume size in GB (default: 1)
    --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
@@ -158,6 +161,11 @@ For volumes that get created as volume sets, use --scale parameter. This paramet
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
 
+If you want to create an encrypted volume, use the following command. If the node is not already authenticated creation will fail.
+```
+sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
+```
+
 #### pxctl volume list
 
 `pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
@@ -170,6 +178,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 970758537931791410	clitest1	1 GiB	3	yes	no		LOW		1	up - detached
 1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		1	up - detached
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
+1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
 ```
 
 #### pxctl volume delete
@@ -219,6 +228,33 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
+For an encrypted volume,
+```
+sudo /opt/pwx/bin/pxctl v i cliencr
+Volume  :  1013237432577873530
+        Name                     :  cliencr
+        Size                     :  2.0 GiB
+        Format                   :  ext4
+        HA                       :  2
+        IO Priority              :  LOW
+        Creation time            :  Apr 3 21:11:43 UTC 2017
+        Shared                   :  no
+        Status                   :  up
+        State                    :  detached
+        Attributes               :  encrypted
+        Reads                    :  0
+        Reads MS                 :  0
+        Bytes Read               :  0
+        Writes                   :  0
+        Writes MS                :  0
+        Bytes Written            :  0
+        IOs in progress          :  0
+        Bytes used               :  33 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  172.31.62.60
+                        Node     :  172.31.55.8
+```
 
 #### pxctl volume update
 
@@ -238,7 +274,8 @@ OPTIONS:
    --shared value, -s value  set shared setting to on/off
    --sticky on/off           set sticky setting to on/off
    --scale factor            New scale factor [1...1024] (default: 0)
- ```
+   --size value              New size for the volume (GiB)
+```
 
 Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
 
@@ -793,7 +830,7 @@ OPTIONS:
 #### pxctl service info
 Displays all Version info 
 ```
- /opt/pwx/bin/pxctl service info
+sudo /opt/pwx/bin/pxctl service info
 PX Version:  1.1.4-6b35842
 PX Build Version:  6b358427202f19c3174ba14fe65b44cc43a3f5fc
 PX Kernel Module Version:  C3141A5E02664E50B5AA5EF
@@ -801,7 +838,7 @@ PX Kernel Module Version:  C3141A5E02664E50B5AA5EF
 #### pxctl service call-home
 You can use this command to enable and disable the call home feature
 ```
- sudo /opt/pwx/bin/pxctl service call-home --help
+sudo /opt/pwx/bin/pxctl service call-home --help
 NAME:
    pxctl service call-home - Enable or disable the call home feature
 
@@ -812,10 +849,10 @@ USAGE:
  sudo /opt/pwx/bin/pxctl service call-home enable
 Call home feature successfully enabled
 ```
-pxctl service logs
+#### pxctl service logs
 Displays the pxctl logs on the system
 ```
- /opt/pwx/bin/pxctl service logs --help
+sudo /opt/pwx/bin/pxctl service logs --help
 NAME:
    pxctl service logs - Display PX logs
 
@@ -826,7 +863,7 @@ USAGE:
 #### pxctl service diags
 When there is an operational failure, you can use pxctl service diags <name-of-px-container> to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
 ```
- /opt/pwx/bin/pxctl service diags --help
+sudo /opt/pwx/bin/pxctl service diags --help
 NAME:
    pxctl service diags - creates a new tgz package with minimal essential diagnostic information.
 
@@ -843,17 +880,19 @@ OPTIONS:
    --profile, -p             only dump profile
    --all, -a                 creates a new tgz package with all the available diagnostic information.
 ```   
+Collecting diags
 ```
- /opt/pwx/bin/pxctl service diags --container px-enterprise
+sudo /opt/pwx/bin/pxctl service diags --container px-enterprise
 PX container name provided:  px-enterprise
 INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock 
 Getting diags files...
 Generated diags: /tmp/diags.tar.gz
 ```
+   
 #### pxctl service maintenance
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
 ```
- /opt/pwx/bin/pxctl service maintenance --help
+sudo /opt/pwx/bin/pxctl service maintenance --help
 NAME:
    pxctl service maintenance - Maintenance mode operations
 
@@ -864,16 +903,23 @@ OPTIONS:
    --exit, -x   exit maintenance mode
    --enter, -e  enter maintenance mode
 ```
+Entering maintenance mode
 ```   
- /opt/pwx/bin/pxctl service maintenance --enter 
+sudo /opt/pwx/bin/pxctl service maintenance --enter 
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
+```
+
+Exiting maintenance mode
+```   
+sudo /opt/pwx/bin/pxctl service maintenance --exit 
+Exiting maintenance mode...
 ```
 
 #### pxctl service drive
 You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 ```
- /opt/pwx/bin/pxctl service drive
+sudo /opt/pwx/bin/pxctl service drive
 NAME:
    pxctl service drive - Storage drive maintenance
 
@@ -894,7 +940,7 @@ To rebalance the storage across the drives, use pxctl service drive rebalance. T
 #### pxctl service drive show
 You can use pxctl service drive show to display drive information on the server
 ```   
- /opt/pwx/bin/pxctl service drive show
+sudo /opt/pwx/bin/pxctl service drive show
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -907,7 +953,7 @@ Pool ID: 0
 	
 You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command.  To do so the server must be in maintenance mode. 
 ```
-	 /opt/pwx/bin/pxctl service drive add --help
+sudo /opt/pwx/bin/pxctl service drive add --help
 NAME:
    pxctl service drive add - Add storage
 
@@ -915,14 +961,14 @@ USAGE:
    pxctl service drive add [arguments...]
 ```
 ```
- /opt/pwx/bin/pxctl  service drive add /dev/mapper/volume-3bfa72dd
+sudo /opt/pwx/bin/pxctl service drive add /dev/mapper/volume-3bfa72dd
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 #### pxctl service scan
 You can use pxctl service scan to scan for bad blocks on a drive
 ```   
-    /opt/pwx/bin/pxctl service scan
+sudo /opt/pwx/bin/pxctl service scan
 NAME:
    pxctl service scan - scan for bad blocks
 
@@ -943,7 +989,7 @@ OPTIONS:
 #### pxctl service alerts
 pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.  
 ```
- /opt/pwx/bin/pxctl service alerts
+sudo /opt/pwx/bin/pxctl service alerts
 NAME:
    pxctl service alerts - System alerts
 
@@ -958,9 +1004,9 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
+#### pxctl service alerts show
 ```
- /opt/pwx/bin/pxctl service alerts show
+sudo /opt/pwx/bin/pxctl service alerts show
 AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													Description
 17	NODE			492596eb-94f3-4422-8cb8-bc72878d4be5	Mar 2 18:52:47 UTC 2017	ALARM		Cluster manager failure	[CLEARED] Cluster Manager Failure: 	Entering Maintenance Mode because of Storage Maintenance Mode
 18	NODE			/dev/mapper/volume-3bfa72dd				Mar 2 18:54:24 UTC 2017	NOTIFY		Drive operation success	Drive added succesfully: 			/dev/mapper/volume-3bfa72dd
@@ -970,7 +1016,7 @@ AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													D
 #### pxctl service stats
 Use pxctl service stats to show storage and network stats cluster wide.
 ```
- /opt/pwx/bin/pxctl service stats
+sudo /opt/pwx/bin/pxctl service stats
 NAME:
    pxctl service stats - System stats
 
@@ -984,20 +1030,15 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
+#### pxctl service stats
 ```
- /opt/pwx/bin/pxctl service stats network
+sudo /opt/pwx/bin/pxctl service stats network
 Hourly Stats
 Node	Bytes Sent	Bytes Received
 0	17 TB		278 GB
 1	0 B		0 B
 2	0 B		0 B
 ```
-
-
-
-
-
 
 
 ### Host related operations
@@ -1091,12 +1132,14 @@ Volume  :  772733390943400581
                         Node     :  172.31.35.130
                         Node     :  172.31.39.201
 ```
+
 #### pxctl host unmount
 `pxctl host unmount` unmounts a volume from a host
 ```
 sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
 Volume demovolume successfully unmounted at /mnt/demodir
 ```
+
 ### Upgrade related operations
 ```
 sudo /opt/pwx/bin/pxctl upgrade --help
@@ -1110,6 +1153,7 @@ OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
    
 ```
+
 #### pxctl upgrade
 `pxctl upgrade` upgrades the PX version on a node. Note: the container name also needs to be specified in the CLI.
 ```
