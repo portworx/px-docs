@@ -1221,13 +1221,13 @@ Azure Credentials
 UUID						ACCOUNT NAME		ENCRYPTION
 ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 ```
-#### pxctl cloudsnap create
+#### pxctl cloudsnap credentials create
 <TODO>
 
-#### pxctl cloudsnap delete
+#### pxctl cloudsnap credentials delete
 <TODO>
 
-#### pxctl cloudsnap validate
+#### pxctl cloudsnap credentials validate
 <TODO>
 
 #### pxctl cloudsnap list
@@ -1264,3 +1264,9 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			ERROR
 454969905909227504	Backup-Active	91944386560	4h8m19.283242837s	Wed, 05 Apr 2017 22:39:41 UTC
 827276927130532677	Restore-Failed	0									Failed to authenticate creds ID
 ```
+
+#### pxctl cloudsnap backup
+<TODO>
+
+#### pxctl cloudsnap restore
+<TODO>
