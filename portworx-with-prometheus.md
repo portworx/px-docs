@@ -11,25 +11,25 @@ These stats are exported at port 9001, so if your application listens to http://
 ### Integration with prometheus
 
 ## Step 1: Configuring prometheus to watch px node
-You can add your px node as a target in prometheus config file as the following:
+Add your px node as a target in prometheus config file:
 
 ![Prometheus Config File](images/prometheus-config.png "Prometheus Config File")
 
-In the example above, our node has IP address of 54.173.138.1, so prometheus is watching 54.173.138.1:9001 as it's target.
+In the example above, our node has IP address of 54.173.138.1, so prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the PX cluster.
 
 ## Step 2: PX metrics to watch and building graphs with prometheus
 
-Once prometheus starts watching px node, you will be able to see new portworx related metrix being added to prometheus. 
+Once prometheus starts watching px node, you will be able to see new portworx related metrics added to prometheus. 
 
 ![PX Metrics in Prometheus](images/px-metrics-in-prometheus.png "PX Metrics in Prometheus")
 
-You can build graphs as the following:
+You can now build graphs:
 
 ![Building a Graph with Prometheus](images/building-a-graph-with-prometheus.png "Building a Graph with Prometheus")
 
 **Note**
 
-If you make a curl request on port 9001, then also you should be able to see these stats as the following.
+A curl request on port 9001 also shows the stats:
 
 ![Curl Request on 9001](images/curl-request-on-9001.png "Curl Request on 9001")
 
