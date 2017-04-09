@@ -136,30 +136,30 @@ OPTIONS:
  ```
  
 Here is an example of how to create a shared volume with replication factor set to 3
- 
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
-
 If the command succeeds, it will print the following.
-
 ```
 Shared volume successfully created: 508499868375963168
 ```
 
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
-
 ```
 sudo /opt/pwx/bin/pxctl volume create clihigh --shared --size=1 --repl=3 --iopriority=high
 ```
-If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 
+For creating an aggregated volume, use the following command.
+```
+sudo /opt/pwx/bin/pxctl volume create cliaggr --size=1 --repl=2 --aggregation_level=3
+```
+
+If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale --shared --size=1 --repl=3 --sticky
 ```
 
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven envrionments. 
-
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
@@ -182,6 +182,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		1	up - detached
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
 1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
+570354879481121709	cliaggr		1 GiB	2	no	no		LOW		1	up - detached
 ```
 
 #### pxctl volume delete
@@ -230,6 +231,34 @@ Volume	:  970758537931791410
 	Replica sets on nodes:
 		Set  0
 			Node 	 :  10.99.117.133
+```
+For an aggregated volume,
+```
+/opt/pwx/bin/pxctl volume inspect cliaggr
+Volume	:  570354879481121709
+	Name            	 :  cliaggr
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  2
+	IO Priority     	 :  LOW
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+			Node	 :  10.99.118.140
+		Set  1
+			Node	 :  10.99.117.134
+			Mode	 :  10.99.118.141
 ```
 For an encrypted volume,
 ```
