@@ -41,23 +41,20 @@ NAME:
 
 USAGE:
    pxctl [global options] command [command options] [arguments...]
-
+   
 VERSION:
-   1.2.0-91bd9d3
-
+   1.1.4-6b35842
+   
 COMMANDS:
-     status         Show status summary
-     volume, v      Manage volumes
-     snap, s        Manage volume snapshots
-     cluster, c     Manage the cluster
-     service, sv    Service mode utilities
-     host           Attach volumes to the host
-     secrets        Manage Secrets
-     upgrade        Upgrade PX
-     eula           Show license agreement
-     cloudsnap, cs  Backup and restore snapshots to/from cloud
-     objectstore    Manage the object store
-     help, h        Shows a list of commands or help for one command
+     status       Show status summary
+     volume, v    Manage volumes
+     snap, s      Manage volume snapshots
+     cluster, c   Manage the cluster
+     service, sv  Service mode utilities
+     host         Attach volumes to the host
+     upgrade      Upgrade PX
+     eula         Show license agreement
+     help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --json, -j     output in json
@@ -116,9 +113,6 @@ USAGE:
 
 OPTIONS:
    --shared                             make this a globally shared namespace volume
-   --secure                             encrypt this volume using AES-256
-   --secret_key value                   secret_key to use to fetch secret_data for the PBKDF2 function
-   --use_cluster_secret                 Use cluster wide secret key to fetch secret_data
    --label pairs, -l pairs              list of comma-separated name=value pairs
    --size value, -s value               volume size in GB (default: 1)
    --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
@@ -164,11 +158,6 @@ For volumes that get created as volume sets, use --scale parameter. This paramet
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
 
-If you want to create an encrypted volume, use the following command. If the node is not already authenticated creation will fail.
-```
-sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
-```
-
 #### pxctl volume list
 
 `pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
@@ -183,6 +172,7 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
 1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
 570354879481121709	cliaggr		1 GiB	2	no	no		LOW		1	up - detached
+
 ```
 
 #### pxctl volume delete
@@ -210,7 +200,7 @@ Volume clitest1 successfully deleted
 `pxctl volume inspect` help show the additional information about the volume configuration at a much more detailed level
 
 ```
-/opt/pwx/bin/pxctl volume inspect clitest
+sudo /opt/pwx/bin/pxctl volume inspect clitest
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -232,9 +222,10 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
+
 For an aggregated volume,
 ```
-/opt/pwx/bin/pxctl volume inspect cliaggr
+sudo /opt/pwx/bin/pxctl volume inspect cliaggr
 Volume	:  570354879481121709
 	Name            	 :  cliaggr
 	Size            	 :  1.0 GiB
@@ -309,8 +300,7 @@ OPTIONS:
    --shared value, -s value  set shared setting to on/off
    --sticky on/off           set sticky setting to on/off
    --scale factor            New scale factor [1...1024] (default: 0)
-   --size value              New size for the volume (GiB)
-```
+ ```
 
 Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
 
@@ -471,7 +461,7 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 ```
 
-The same command can also be used to reduce the replication factor as well.
+The ha-update command can also be used to reduce the replication factor as well.
 
 ```
 sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
@@ -517,7 +507,7 @@ Here is the output of the volume alerts.
 `pxctl volume stats` displays the current stats the in the volume. 
 
 ```
-@px-centos-7-1 ~]# sudo /opt/pwx/bin/pxctl volume stats testvol
+sudo /opt/pwx/bin/pxctl volume stats testvol
 TS 		Bytes Read  Num Reads Bytes Written  Num Writes IOPS	 IODepth   Read Tput	Write Tput	Latency (ms)
 2017-2-26:23 Hrs  315 MB      19242      4.1 kB          1       9621      0         158 MB/s     2.0 kB/s        113     
 ```
@@ -773,9 +763,9 @@ OPTIONS:
 sudo /opt/pwx/bin/pxctl cluster alerts
 AlertID	ClusterID	Timestamp	Severity	AlertType	Description
 ```
+
 #### pxctl cluster node-alerts
 Shows node alerts 
-
 ```
 sudo /opt/pwx/bin/pxctl cluster node-alerts --help
 NAME:
@@ -796,9 +786,9 @@ sudo /opt/pwx/bin/pxctl cluster node-alerts
 AlertID	NodeID					Timestamp		Severity	AlertType		Description
 20	7d97f9ea-a4ff-4969-9ee8-de2699fa39b4	Mar 3 20:20:20 UTC 2017	ALARM		Cluster manager failure	Cluster Manager Failure: Entering Maintenance Mode because of Storage Maintenance Mode
 ```
+
 #### pxctl cluster provision-status
 Shows nodes in the cluster based on IO Priority high, medium and low.  
-
 ```
 sudo /opt/pwx/bin/pxctl cluster provision-status --help
 NAME:
@@ -821,7 +811,6 @@ bf9eb27d-415e-41f0-8c0d-4782959264bc	Online		0	Online		LOW		150 GiB	149 GiB		1.0
 
 #### pxctl cluster drive-alerts
 Shows cluster wide drive alerts
-
 ```
 sudo /opt/pwx/bin/pxctl cluster drive-alerts --help
 NAME:
@@ -838,7 +827,6 @@ OPTIONS:
 ```   
 
 ### Service Operations 
-
 ```
 sudo /opt/pwx/bin/pxctl service --help
 NAME:
@@ -862,6 +850,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
+
 #### pxctl service info
 Displays all Version info 
 ```
@@ -870,6 +859,7 @@ PX Version:  1.1.4-6b35842
 PX Build Version:  6b358427202f19c3174ba14fe65b44cc43a3f5fc
 PX Kernel Module Version:  C3141A5E02664E50B5AA5EF
 ```
+
 #### pxctl service call-home
 You can use this command to enable and disable the call home feature
 ```
@@ -915,7 +905,6 @@ OPTIONS:
    --profile, -p             only dump profile
    --all, -a                 creates a new tgz package with all the available diagnostic information.
 ```   
-Collecting diags
 ```
 sudo /opt/pwx/bin/pxctl service diags --container px-enterprise
 PX container name provided:  px-enterprise
@@ -923,7 +912,6 @@ INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock
 Getting diags files...
 Generated diags: /tmp/diags.tar.gz
 ```
-   
 #### pxctl service maintenance
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
 ```
@@ -938,17 +926,10 @@ OPTIONS:
    --exit, -x   exit maintenance mode
    --enter, -e  enter maintenance mode
 ```
-Entering maintenance mode
 ```   
 sudo /opt/pwx/bin/pxctl service maintenance --enter 
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
-```
-
-Exiting maintenance mode
-```   
-sudo /opt/pwx/bin/pxctl service maintenance --exit 
-Exiting maintenance mode...
 ```
 
 #### pxctl service drive
@@ -996,14 +977,14 @@ USAGE:
    pxctl service drive add [arguments...]
 ```
 ```
-sudo /opt/pwx/bin/pxctl service drive add /dev/mapper/volume-3bfa72dd
+sudo /opt/pwx/bin/pxctl  service drive add /dev/mapper/volume-3bfa72dd
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 #### pxctl service scan
 You can use pxctl service scan to scan for bad blocks on a drive
 ```   
-sudo /opt/pwx/bin/pxctl service scan
+ sudo /opt/pwx/bin/pxctl service scan
 NAME:
    pxctl service scan - scan for bad blocks
 
@@ -1039,7 +1020,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-#### pxctl service alerts show
+
 ```
 sudo /opt/pwx/bin/pxctl service alerts show
 AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													Description
@@ -1048,6 +1029,7 @@ AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													D
 19	CLUSTER			8ed1d365-fd1b-11e6-b01d-0242ac110002	Mar 2 19:35:10 UTC 2017	NOTIFY		Node start success	PX is ready on Node: 492596eb-94f3-4422-8cb8-bc72878d4be5. CLI accessible at /opt/pwx/bin/pxctl.
 
 ```
+
 #### pxctl service stats
 Use pxctl service stats to show storage and network stats cluster wide.
 ```
@@ -1065,7 +1047,6 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-#### pxctl service stats
 ```
 sudo /opt/pwx/bin/pxctl service stats network
 Hourly Stats
@@ -1074,7 +1055,6 @@ Node	Bytes Sent	Bytes Received
 1	0 B		0 B
 2	0 B		0 B
 ```
-
 
 ### Host related operations
 ```
@@ -1167,14 +1147,12 @@ Volume  :  772733390943400581
                         Node     :  172.31.35.130
                         Node     :  172.31.39.201
 ```
-
 #### pxctl host unmount
 `pxctl host unmount` unmounts a volume from a host
 ```
 sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
 Volume demovolume successfully unmounted at /mnt/demodir
 ```
-
 ### Upgrade related operations
 ```
 sudo /opt/pwx/bin/pxctl upgrade --help
@@ -1188,7 +1166,6 @@ OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
    
 ```
-
 #### pxctl upgrade
 `pxctl upgrade` upgrades the PX version on a node. Note: the container name also needs to be specified in the CLI.
 ```
@@ -1336,3 +1313,4 @@ vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Do
 vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
 volshared1		13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
 ```
+
