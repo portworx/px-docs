@@ -130,30 +130,30 @@ OPTIONS:
  ```
  
 Here is an example of how to create a shared volume with replication factor set to 3
- 
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
 ```
-
 If the command succeeds, it will print the following.
-
 ```
 Shared volume successfully created: 508499868375963168
 ```
 
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
-
 ```
 sudo /opt/pwx/bin/pxctl volume create clihigh --shared --size=1 --repl=3 --iopriority=high
 ```
-If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 
+For creating an aggregated volume, use the following command.
+```
+sudo /opt/pwx/bin/pxctl volume create cliaggr --size=1 --repl=2 --aggregation_level=3
+```
+
+If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale --shared --size=1 --repl=3 --sticky
 ```
 
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven envrionments. 
-
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
 ```
@@ -170,6 +170,9 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 970758537931791410	clitest1	1 GiB	3	yes	no		LOW		1	up - detached
 1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		1	up - detached
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
+1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
+570354879481121709	cliaggr		1 GiB	2	no	no		LOW		1	up - detached
+
 ```
 
 #### pxctl volume delete
@@ -197,7 +200,7 @@ Volume clitest1 successfully deleted
 `pxctl volume inspect` help show the additional information about the volume configuration at a much more detailed level
 
 ```
-/opt/pwx/bin/pxctl volume inspect clitest
+sudo /opt/pwx/bin/pxctl volume inspect clitest
 Volume	:  970758537931791410
 	Name            	 :  clitest
 	Size            	 :  1.0 GiB
@@ -218,6 +221,65 @@ Volume	:  970758537931791410
 	Replica sets on nodes:
 		Set  0
 			Node 	 :  10.99.117.133
+```
+
+For an aggregated volume,
+```
+sudo /opt/pwx/bin/pxctl volume inspect cliaggr
+Volume	:  570354879481121709
+	Name            	 :  cliaggr
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  2
+	IO Priority     	 :  LOW
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  33 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  10.99.117.133
+			Node	 :  10.99.118.140
+		Set  1
+			Node	 :  10.99.117.134
+			Mode	 :  10.99.118.141
+		Set  2
+			Node	 :  10.99.117.135
+			Mode	 :  10.99.118.142		
+```
+For an encrypted volume,
+```
+sudo /opt/pwx/bin/pxctl v i cliencr
+Volume  :  1013237432577873530
+        Name                     :  cliencr
+        Size                     :  2.0 GiB
+        Format                   :  ext4
+        HA                       :  2
+        IO Priority              :  LOW
+        Creation time            :  Apr 3 21:11:43 UTC 2017
+        Shared                   :  no
+        Status                   :  up
+        State                    :  detached
+        Attributes               :  encrypted
+        Reads                    :  0
+        Reads MS                 :  0
+        Bytes Read               :  0
+        Writes                   :  0
+        Writes MS                :  0
+        Bytes Written            :  0
+        IOs in progress          :  0
+        Bytes used               :  33 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  172.31.62.60
+                        Node     :  172.31.55.8
 ```
 
 #### pxctl volume update
@@ -399,7 +461,7 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 ```
 
-The same command can also be used to reduce the replication factor as well.
+The ha-update command can also be used to reduce the replication factor as well.
 
 ```
 sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
@@ -445,7 +507,7 @@ Here is the output of the volume alerts.
 `pxctl volume stats` displays the current stats the in the volume. 
 
 ```
-@px-centos-7-1 ~]# sudo /opt/pwx/bin/pxctl volume stats testvol
+sudo /opt/pwx/bin/pxctl volume stats testvol
 TS 		Bytes Read  Num Reads Bytes Written  Num Writes IOPS	 IODepth   Read Tput	Write Tput	Latency (ms)
 2017-2-26:23 Hrs  315 MB      19242      4.1 kB          1       9621      0         158 MB/s     2.0 kB/s        113     
 ```
@@ -701,9 +763,9 @@ OPTIONS:
 sudo /opt/pwx/bin/pxctl cluster alerts
 AlertID	ClusterID	Timestamp	Severity	AlertType	Description
 ```
+
 #### pxctl cluster node-alerts
 Shows node alerts 
-
 ```
 sudo /opt/pwx/bin/pxctl cluster node-alerts --help
 NAME:
@@ -724,9 +786,9 @@ sudo /opt/pwx/bin/pxctl cluster node-alerts
 AlertID	NodeID					Timestamp		Severity	AlertType		Description
 20	7d97f9ea-a4ff-4969-9ee8-de2699fa39b4	Mar 3 20:20:20 UTC 2017	ALARM		Cluster manager failure	Cluster Manager Failure: Entering Maintenance Mode because of Storage Maintenance Mode
 ```
+
 #### pxctl cluster provision-status
 Shows nodes in the cluster based on IO Priority high, medium and low.  
-
 ```
 sudo /opt/pwx/bin/pxctl cluster provision-status --help
 NAME:
@@ -749,7 +811,6 @@ bf9eb27d-415e-41f0-8c0d-4782959264bc	Online		0	Online		LOW		150 GiB	149 GiB		1.0
 
 #### pxctl cluster drive-alerts
 Shows cluster wide drive alerts
-
 ```
 sudo /opt/pwx/bin/pxctl cluster drive-alerts --help
 NAME:
@@ -766,7 +827,6 @@ OPTIONS:
 ```   
 
 ### Service Operations 
-
 ```
 sudo /opt/pwx/bin/pxctl service --help
 NAME:
@@ -790,18 +850,20 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
+
 #### pxctl service info
 Displays all Version info 
 ```
- /opt/pwx/bin/pxctl service info
+sudo /opt/pwx/bin/pxctl service info
 PX Version:  1.1.4-6b35842
 PX Build Version:  6b358427202f19c3174ba14fe65b44cc43a3f5fc
 PX Kernel Module Version:  C3141A5E02664E50B5AA5EF
 ```
+
 #### pxctl service call-home
 You can use this command to enable and disable the call home feature
 ```
- sudo /opt/pwx/bin/pxctl service call-home --help
+sudo /opt/pwx/bin/pxctl service call-home --help
 NAME:
    pxctl service call-home - Enable or disable the call home feature
 
@@ -812,10 +874,10 @@ USAGE:
  sudo /opt/pwx/bin/pxctl service call-home enable
 Call home feature successfully enabled
 ```
-pxctl service logs
+#### pxctl service logs
 Displays the pxctl logs on the system
 ```
- /opt/pwx/bin/pxctl service logs --help
+sudo /opt/pwx/bin/pxctl service logs --help
 NAME:
    pxctl service logs - Display PX logs
 
@@ -826,7 +888,7 @@ USAGE:
 #### pxctl service diags
 When there is an operational failure, you can use pxctl service diags <name-of-px-container> to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
 ```
- /opt/pwx/bin/pxctl service diags --help
+sudo /opt/pwx/bin/pxctl service diags --help
 NAME:
    pxctl service diags - creates a new tgz package with minimal essential diagnostic information.
 
@@ -844,7 +906,7 @@ OPTIONS:
    --all, -a                 creates a new tgz package with all the available diagnostic information.
 ```   
 ```
- /opt/pwx/bin/pxctl service diags --container px-enterprise
+sudo /opt/pwx/bin/pxctl service diags --container px-enterprise
 PX container name provided:  px-enterprise
 INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock 
 Getting diags files...
@@ -853,7 +915,7 @@ Generated diags: /tmp/diags.tar.gz
 #### pxctl service maintenance
 Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
 ```
- /opt/pwx/bin/pxctl service maintenance --help
+sudo /opt/pwx/bin/pxctl service maintenance --help
 NAME:
    pxctl service maintenance - Maintenance mode operations
 
@@ -865,7 +927,7 @@ OPTIONS:
    --enter, -e  enter maintenance mode
 ```
 ```   
- /opt/pwx/bin/pxctl service maintenance --enter 
+sudo /opt/pwx/bin/pxctl service maintenance --enter 
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
@@ -873,7 +935,7 @@ Are you sure you want to proceed ? (Y/N): y
 #### pxctl service drive
 You can manage the physical storage drives on a node using the pxctl service drive sub menu.
 ```
- /opt/pwx/bin/pxctl service drive
+sudo /opt/pwx/bin/pxctl service drive
 NAME:
    pxctl service drive - Storage drive maintenance
 
@@ -894,7 +956,7 @@ To rebalance the storage across the drives, use pxctl service drive rebalance. T
 #### pxctl service drive show
 You can use pxctl service drive show to display drive information on the server
 ```   
- /opt/pwx/bin/pxctl service drive show
+sudo /opt/pwx/bin/pxctl service drive show
 PX drive configuration:
 Pool ID: 0
 	IO_Priority: LOW
@@ -907,7 +969,7 @@ Pool ID: 0
 	
 You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command.  To do so the server must be in maintenance mode. 
 ```
-	 /opt/pwx/bin/pxctl service drive add --help
+sudo /opt/pwx/bin/pxctl service drive add --help
 NAME:
    pxctl service drive add - Add storage
 
@@ -915,14 +977,14 @@ USAGE:
    pxctl service drive add [arguments...]
 ```
 ```
- /opt/pwx/bin/pxctl  service drive add /dev/mapper/volume-3bfa72dd
+sudo /opt/pwx/bin/pxctl  service drive add /dev/mapper/volume-3bfa72dd
 Adding device  /dev/mapper/volume-3bfa72dd ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 #### pxctl service scan
 You can use pxctl service scan to scan for bad blocks on a drive
 ```   
-    /opt/pwx/bin/pxctl service scan
+ sudo /opt/pwx/bin/pxctl service scan
 NAME:
    pxctl service scan - scan for bad blocks
 
@@ -943,7 +1005,7 @@ OPTIONS:
 #### pxctl service alerts
 pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.  
 ```
- /opt/pwx/bin/pxctl service alerts
+sudo /opt/pwx/bin/pxctl service alerts
 NAME:
    pxctl service alerts - System alerts
 
@@ -960,17 +1022,18 @@ OPTIONS:
 ```
 
 ```
- /opt/pwx/bin/pxctl service alerts show
+sudo /opt/pwx/bin/pxctl service alerts show
 AlertID	Resource	ResourceID								Timestamp				Severity	AlertType													Description
 17	NODE			492596eb-94f3-4422-8cb8-bc72878d4be5	Mar 2 18:52:47 UTC 2017	ALARM		Cluster manager failure	[CLEARED] Cluster Manager Failure: 	Entering Maintenance Mode because of Storage Maintenance Mode
 18	NODE			/dev/mapper/volume-3bfa72dd				Mar 2 18:54:24 UTC 2017	NOTIFY		Drive operation success	Drive added succesfully: 			/dev/mapper/volume-3bfa72dd
 19	CLUSTER			8ed1d365-fd1b-11e6-b01d-0242ac110002	Mar 2 19:35:10 UTC 2017	NOTIFY		Node start success	PX is ready on Node: 492596eb-94f3-4422-8cb8-bc72878d4be5. CLI accessible at /opt/pwx/bin/pxctl.
 
 ```
+
 #### pxctl service stats
 Use pxctl service stats to show storage and network stats cluster wide.
 ```
- /opt/pwx/bin/pxctl service stats
+sudo /opt/pwx/bin/pxctl service stats
 NAME:
    pxctl service stats - System stats
 
@@ -984,21 +1047,14 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-
 ```
- /opt/pwx/bin/pxctl service stats network
+sudo /opt/pwx/bin/pxctl service stats network
 Hourly Stats
 Node	Bytes Sent	Bytes Received
 0	17 TB		278 GB
 1	0 B		0 B
 2	0 B		0 B
 ```
-
-
-
-
-
-
 
 ### Host related operations
 ```
@@ -1120,6 +1176,141 @@ Downloading PX portworx/px-enterprise:1.1.6 layers...
 ```
 It is recommended to upgrade the nodes in a staggered manner so as to maintain quorum and continuity of IOs.
 
+### Cloudsnap operations
+Help for specific cloudsnap commands can be found by running the following command
 
+Note: All cloudsnap operations requires secrets login to configured endpoint with/without encryption. Please refer pxctl secrets cmd help.
+#### pxctl cloudsnap --help
+```
+sudo /opt/pwx/bin/pxctl cloudsnap --help
+NAME:
+   pxctl cloudsnap - Backup and restore snapshots to/from cloud
 
+USAGE:
+   pxctl cloudsnap command [command options] [arguments...]
+
+COMMANDS:
+     backup, b          Backup a snapshot to cloud
+     restore, r         Restore volume to a cloud snapshot
+     list, l            List snapshot in cloud
+     status, s          Report status of active backups/restores
+     schedule, sc       Update cloud-snap schedule
+     credentials, cred  Manage cloud-snap credentials
+
+OPTIONS:
+   --help, -h  show help
+```
+
+#### pxctl cloudsnap credentials
+This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used for cloudsnap of volume to the cloud.
+```
+sudo /opt/pwx/bin/pxctl cloudsnap credentials
+NAME:
+   pxctl cloudsnap credentials - Manage cloud-snap credentials
+
+USAGE:
+   pxctl cloudsnap credentials command [command options] [arguments...]
+
+COMMANDS:
+     create, c    Create a credential for cloud-snap
+     list, l      List all credentials for cloud-snap
+     delete, d    Delete a credential for cloud-snap
+     validate, v  Validate a credential for cloud-snap
+
+OPTIONS:
+   --help, -h  show help
+```
+
+#### pxctl cloudsnap credentials list
+`pxctl cloudsnap credentials list` is used to list all configured credential keys
+```
+sudo /opt/pwx/bin/pxctl cloudsnap credentials list
+
+S3 Credentials
+UUID						REGION			ENDPOINT			ACCESS KEY			SSL ENABLED	ENCRYPTION
+ffffffff-ffff-ffff-1111-ffffffffffff		us-east-1		s3.amazonaws.com		AAAAAAAAAAAAAAAAAAAA		false		false
+
+Azure Credentials
+UUID						ACCOUNT NAME		ENCRYPTION
+ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
+```
+
+#### pxctl cloudsnap credentials create
+`pxctl cloudsnap credentials create` is used to create/configure credentials for various cloud providers
+```
+sudo /opt/pwx/bin/pxctl cloudsnap cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
+Credentials created successfully
+```
+
+#### pxctl cloudsnap credentials delete
+`pxctl cloudsnap credentials delete` is used to delete the credentials from the cloud providers.
+```
+sudo /opt/pwx/bin/pxctl cloudsnap cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+Credential deleted successfully
+```
+
+#### pxctl cloudsnap credentials validate
+`pxctl cloudsnap credentials validate` validates the existing credentials
+```
+sudo /opt/pwx/bin/pxctl cloudsnap cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+Credential validated successfully
+```
+
+#### pxctl cloudsnap backup
+`pxctl cloudsnap backup` command is used to backup a single volume to the configured cloud provider through credential command line. 
+If it will be the first backup for the volume a full backup of the volume is generated. If it is not the first backup, it only generates an incremental backup from the previous full/incremental backup.
+If a single cloud provider credential is created then there is no need to specify the credentials on the command line.
+```
+sudo /opt/pwx/bin/pxctl cloudsnap backup vol1
+Cloudsnap backup started successfully
+```
+If multiple cloud providers credentials are created then need to specify the credential to use for backup on command line
+```
+sudo /opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff 
+Cloudsnap backup started successfully
+```
+Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
+
+#### pxctl cloudsnap restore
+`pxctl cloudsnap restore` command is used to restore a successful backup from cloud. (Use cloudsnap list command to get the cloudsnap Id). It requires cloudsnap Id (to be restored) and credentials. 
+Restore happens on any node in the cluster where storage can be provisioned. In this release, restored volume will be of replication factor 1. 
+This volume can be updated to different repl factors using volume ha-update command.
+```
+sudo /opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
+Cloudsnap restore started successfully: 315244422215869148
+```
+Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
+
+#### pxctl cloudsnap status
+`pxctl cloudsnap status` can be used to check the status of cloudsnap operations
+```
+sudo /opt/pwx/bin/pxctl cloudsnap status
+SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			          ERROR
+1040525385624900824	Restore-Done	11753581193	8m32.231744596s		Wed, 05 Apr 2017 06:57:08 UTC
+1137394071301823388	Backup-Done	11753581193	1m46.023734966s		    Wed, 05 Apr 2017 05:03:42 UTC
+13292162184271348	Backup-Done	27206221391	4m25.740022954s		    Wed, 05 Apr 2017 22:39:41 UTC
+454969905909227504	Backup-Active	91944386560	4h8m19.283242837s
+827276927130532677	Restore-Failed	0									             Failed to authenticate creds ID
+```
+
+#### pxctl cloudsnap list
+`pxctl cloudsnap list` is used to list all the cloud snapshots
+```
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
+SOURCEVOLUME 			CLOUD-SNAP-ID									CREATED-TIME				STATUS
+vol1			gossip12/181112018587037740-545317760526242886		Sun, 09 Apr 2017 14:35:28 UTC		Done
+```
+Filtering on cluster ID or volume ID is available and can be done as follows:
+```
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --src vol1
+SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
+vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
+vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+
+sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --cluster cs25
+SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
+vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
+vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
+volshared1		13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
+```
 
