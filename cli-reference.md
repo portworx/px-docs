@@ -1193,10 +1193,9 @@ OPTIONS:
 ```
 
 #### pxctl cloudsnap credentials
-```
 This command is used to create/list/validate/delete the credentials for cloud providers. 
 These credentials will be used for cloudsnap of volume to the cloud.
-
+```
 sudo /opt/pwx/bin/pxctl cloudsnap credentials
 NAME:
    pxctl cloudsnap credentials - Manage cloud-snap credentials
@@ -1225,62 +1224,57 @@ Azure Credentials
 UUID						ACCOUNT NAME		ENCRYPTION
 ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 ```
+
 #### pxctl cloudsnap credentials create
 ```
-
 sudo /opt/pwx/bin/pxctl cloudsnap cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
 Credentials created successfully
+```
 
 #### pxctl cloudsnap credentials delete
-```
 This command is used to delete the credentials from the cloud providers.
+```
 sudo /opt/pwx/bin/pxctl cloudsnap cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential deleted successfully
+```
 
 #### pxctl cloudsnap credentials validate
-```
 Validate the existing credentials
+```
 sudo /opt/pwx/bin/pxctl cloudsnap cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential validated successfully
 ```
 
 #### pxctl cloudsnap backup
-Take cloudsnap of a volume
-```
 This command is used to backup a single volume to the configured cloud provider through credential command line. 
-This command decides to take full / incremental backup depending on the existing backups for the volume. 
-If it is first backup for the volume it takes full backup of the volume. 
-If its not the first backup it takes incremental backup from the previous full/incremental backup.
-
-If single cloud provider credential is created then no need to specify the creds on the command line
-
+If it will be the first backup for the volume a full backup of the volume is generated. If it is not the first backup, it only generates an incremental backup from the previous full/incremental backup.
+If a single cloud provider credential is created then there is no need to specify the credentials on the command line.
+```
 sudo /opt/pwx/bin/pxctl cloudsnap backup vol1
 Cloudsnap backup started successfully
-
+```
 If multiple cloud providers credentials are created then need to specify the credential to use for backup on command line
-
+```
 sudo /opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff 
 Cloudsnap backup started successfully
-
+```
 Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
-```
+
 #### pxctl cloudsnap restore
-```
 This command is used to restore a successful backup from cloud.(Use cloudsnap list command to get the cloudsnap Id) 
 It requires cloudsnap Id which can be used to restore and credentials. 
 Restore happens on any node in cluster where storage can be provisioned. In this release restored volume will be of replication factor 1. 
 This volume can be updated to different repl factors using volume ha-update command.
-
-/opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
-Cloudsnap restore started successfully: 315244422215869148
-
-Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
 ```
+sudo /opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
+Cloudsnap restore started successfully: 315244422215869148
+```
+Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
 
 #### pxctl cloudsnap status
 Check the status of cloudsnap operations
 ```
-/opt/pwx/bin/pxctl cloudsnap status
+sudo /opt/pwx/bin/pxctl cloudsnap status
 SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			          ERROR
 1040525385624900824	Restore-Done	11753581193	8m32.231744596s		Wed, 05 Apr 2017 06:57:08 UTC
 1137394071301823388	Backup-Done	11753581193	1m46.023734966s		    Wed, 05 Apr 2017 05:03:42 UTC
