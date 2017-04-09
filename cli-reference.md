@@ -1170,6 +1170,7 @@ It is recommended to upgrade the nodes in a staggered manner so as to maintain q
 ### Cloudsnap operations
 Help for specific cloudsnap commands can be found by running the following command
 
+Note: All cloudsnap operations requires secrets login to configured endpoint with/without encryption. Please refer pxctl secrets cmd help.
 #### pxctl cloudsnap --help
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap --help
@@ -1193,6 +1194,9 @@ OPTIONS:
 
 #### pxctl cloudsnap credentials
 ```
+This command is used to create/list/validate/delete the credentials for cloud providers. 
+These credentials will be used for cloudsnap of volume to the cloud.
+
 sudo /opt/pwx/bin/pxctl cloudsnap credentials
 NAME:
    pxctl cloudsnap credentials - Manage cloud-snap credentials
@@ -1222,22 +1226,74 @@ UUID						ACCOUNT NAME		ENCRYPTION
 ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 ```
 #### pxctl cloudsnap credentials create
-<TODO>
+```
+
+sudo /opt/pwx/bin/pxctl cloudsnap cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
+Credentials created successfully
 
 #### pxctl cloudsnap credentials delete
-<TODO>
+```
+This command is used to delete the credentials from the cloud providers.
+sudo /opt/pwx/bin/pxctl cloudsnap cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+Credential deleted successfully
 
 #### pxctl cloudsnap credentials validate
-<TODO>
+```
+Validate the existing credentials
+sudo /opt/pwx/bin/pxctl cloudsnap cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+Credential validated successfully
+```
+
+#### pxctl cloudsnap backup
+Take cloudsnap of a volume
+```
+This command is used to backup a single volume to the configured cloud provider through credential command line. 
+This command decides to take full / incremental backup depending on the existing backups for the volume. 
+If it is first backup for the volume it takes full backup of the volume. 
+If its not the first backup it takes incremental backup from the previous full/incremental backup.
+
+If single cloud provider credential is created then no need to specify the creds on the command line
+
+sudo /opt/pwx/bin/pxctl cloudsnap backup vol1
+Cloudsnap backup started successfully
+
+If multiple cloud providers credentials are created then need to specify the credential to use for backup on command line
+
+sudo /opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff 
+Cloudsnap backup started successfully
+
+Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
+```
+#### pxctl cloudsnap restore
+```
+This command is used to restore a successful backup from cloud.(Use cloudsnap list command to get the cloudsnap Id) 
+It requires cloudsnap Id which can be used to restore and credentials. 
+Restore happens on any node in cluster where storage can be provisioned. In this release restored volume will be of replication factor 1. 
+This volume can be updated to different repl factors using volume ha-update command.
+
+/opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
+Cloudsnap restore started successfully: 315244422215869148
+
+Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
+```
+
+#### pxctl cloudsnap status
+Check the status of cloudsnap operations
+```
+/opt/pwx/bin/pxctl cloudsnap status
+SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			          ERROR
+1040525385624900824	Restore-Done	11753581193	8m32.231744596s		Wed, 05 Apr 2017 06:57:08 UTC
+1137394071301823388	Backup-Done	11753581193	1m46.023734966s		    Wed, 05 Apr 2017 05:03:42 UTC
+13292162184271348	Backup-Done	27206221391	4m25.740022954s		    Wed, 05 Apr 2017 22:39:41 UTC
+454969905909227504	Backup-Active	91944386560	4h8m19.283242837s
+827276927130532677	Restore-Failed	0									             Failed to authenticate creds ID
+```
 
 #### pxctl cloudsnap list
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
-SOURCEVOLUME 			CLOUD-SNAP-ID					CREATED-TIME				STATUS
-vol1				1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
-vol1				1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
-vol1				672309757369665802-604730680636428095		Wed, 05 Apr 2017 21:13:55 UTC		Done
-volshared1			13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
+SOURCEVOLUME 			CLOUD-SNAP-ID									CREATED-TIME				STATUS
+vol1			gossip12/181112018587037740-545317760526242886		Sun, 09 Apr 2017 14:35:28 UTC		Done
 ```
 Filtering on cluster ID or volume ID is available and can be done as follows:
 ```
@@ -1252,21 +1308,3 @@ vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Do
 vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
 volshared1		13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
 ```
-
-#### pxctl cloudsnap status
-Check the status of cloudsnap operations
-```
-/opt/pwx/bin/pxctl cloudsnap status
-SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			ERROR
-1040525385624900824	Restore-Done	11753581193	8m32.231744596s		Wed, 05 Apr 2017 06:57:08 UTC
-1137394071301823388	Backup-Done	11753581193	1m46.023734966s		Wed, 05 Apr 2017 05:03:42 UTC
-13292162184271348	Backup-Done	27206221391	4m25.740022954s		Wed, 05 Apr 2017 22:39:41 UTC
-454969905909227504	Backup-Active	91944386560	4h8m19.283242837s	Wed, 05 Apr 2017 22:39:41 UTC
-827276927130532677	Restore-Failed	0									Failed to authenticate creds ID
-```
-
-#### pxctl cloudsnap backup
-<TODO>
-
-#### pxctl cloudsnap restore
-<TODO>
