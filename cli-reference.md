@@ -1193,8 +1193,7 @@ OPTIONS:
 ```
 
 #### pxctl cloudsnap credentials
-This command is used to create/list/validate/delete the credentials for cloud providers. 
-These credentials will be used for cloudsnap of volume to the cloud.
+This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used for cloudsnap of volume to the cloud.
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap credentials
 NAME:
@@ -1212,7 +1211,9 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-#### pxctl cloudsnap credentials
+
+#### pxctl cloudsnap credentials list
+`pxctl cloudsnap credentials list` is used to list all configured credential keys
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap credentials list
 
@@ -1226,27 +1227,28 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 ```
 
 #### pxctl cloudsnap credentials create
+`pxctl cloudsnap credentials create` is used to create/configure credentials for various cloud providers
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
 Credentials created successfully
 ```
 
 #### pxctl cloudsnap credentials delete
-This command is used to delete the credentials from the cloud providers.
+`pxctl cloudsnap credentials delete` is used to delete the credentials from the cloud providers.
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential deleted successfully
 ```
 
 #### pxctl cloudsnap credentials validate
-Validate the existing credentials
+`pxctl cloudsnap credentials validate` validates the existing credentials
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential validated successfully
 ```
 
 #### pxctl cloudsnap backup
-This command is used to backup a single volume to the configured cloud provider through credential command line. 
+`pxctl cloudsnap backup` command is used to backup a single volume to the configured cloud provider through credential command line. 
 If it will be the first backup for the volume a full backup of the volume is generated. If it is not the first backup, it only generates an incremental backup from the previous full/incremental backup.
 If a single cloud provider credential is created then there is no need to specify the credentials on the command line.
 ```
@@ -1261,9 +1263,8 @@ Cloudsnap backup started successfully
 Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
 
 #### pxctl cloudsnap restore
-This command is used to restore a successful backup from cloud.(Use cloudsnap list command to get the cloudsnap Id) 
-It requires cloudsnap Id which can be used to restore and credentials. 
-Restore happens on any node in cluster where storage can be provisioned. In this release restored volume will be of replication factor 1. 
+`pxctl cloudsnap restore` command is used to restore a successful backup from cloud. (Use cloudsnap list command to get the cloudsnap Id). It requires cloudsnap Id (to be restored) and credentials. 
+Restore happens on any node in the cluster where storage can be provisioned. In this release, restored volume will be of replication factor 1. 
 This volume can be updated to different repl factors using volume ha-update command.
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
@@ -1272,7 +1273,7 @@ Cloudsnap restore started successfully: 315244422215869148
 Note: All cloudsnap backup/Restores can be monitored through CloudSnap status command which is described in following sections
 
 #### pxctl cloudsnap status
-Check the status of cloudsnap operations
+`pxctl cloudsnap status` can be used to check the status of cloudsnap operations
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap status
 SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			          ERROR
@@ -1284,6 +1285,7 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			          ERROR
 ```
 
 #### pxctl cloudsnap list
+`pxctl cloudsnap list` is used to list all the cloud snapshots
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
 SOURCEVOLUME 			CLOUD-SNAP-ID									CREATED-TIME				STATUS
