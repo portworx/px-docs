@@ -259,6 +259,9 @@ Volume	:  570354879481121709
 		Set  1
 			Node	 :  10.99.117.134
 			Mode	 :  10.99.118.141
+		Set  2
+			Node	 :  10.99.117.135
+			Mode	 :  10.99.118.142		
 ```
 For an encrypted volume,
 ```
