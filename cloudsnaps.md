@@ -195,9 +195,65 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
 ```
 
+#### Restore from a Cloud Backup
 
+Use `pxctl cloudsnap restore` to restore from a cloud backup. 
 
+Here is the command syntax.
 
+```
+pxctl cloudsnap restore
 
+NAME:
+   pxctl cloudsnap restore - Restore volume to a cloud snapshot
 
+USAGE:
+   pxctl cloudsnap restore [command options] [arguments...]
 
+OPTIONS:
+   --snap value, -s value         Cloud-snap id
+   --node value, -n value         Optional node ID for provisioning restore volume storage
+   --cred-uuid value, --cr value  Cloud credentials ID to be used for the restore
+   
+```
+
+This command is used to restore a successful backup from cloud. It requires cloudsnap Id which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will be of replication factor 1. This volume can be updated to different repl factors using volume ha-update command.
+
+The command usage is as follows.
+```
+pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332​
+```
+
+Upon successful start of the command it returns the volume id created to restore the cloud snap
+If the command fails to succeed, it shows the failure reason.
+
+The restored volume will not be attached or mounted automatically.
+
+Example:
+
+1. Use `pxctl cloudsnap list` to list the available backups.
+
+`pxctl cloudsnap list` helps enumerate the list of available backups in the cloud. This command assumes that you have all the credentials setup properly. If the credentials are not setup, then the backups available in those clouds won't be listed by this command.
+
+```
+pxctl cloudsnap list
+SOURCEVOLUME 		CLOUD-SNAP-ID						CREATED-TIME				STATUS
+dvol			pqr9-cl1/520877607140844016-50466873928636534		Fri, 07 Apr 2017 20:22:43 UTC		Done
+NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:21 UTC		Done
+```
+
+2. Choose one of them to restore
+```
+pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
+Cloudsnap restore started successfully: 622390253290820715
+```
+
+`pxctl cloudsnap status` gives the status of the restore processes as well.
+
+```
+pxctl cloudsnap status
+SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
+622390253290820715	Restore-Active	99614720	10.144539084s
+980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
+538316104266867971	Backup-Done	1979809411	2m39.761333366s	Sat, 08 Apr 2017 05:20:01 UTC
+```
