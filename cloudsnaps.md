@@ -7,7 +7,7 @@ sidebar: home_sidebar
 #WIP DOCUMENT
 ## Multi-Cloud Backup and Recovery of PX Volumes
 
-This document outlines how PX volumes can be backed up to different cloud provider's object storage or any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
+This document outlines how PX volumes can be backed up to different cloud providers object storage or any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
 
 
 ### Supported Cloud Providers
@@ -83,23 +83,23 @@ OPTIONS:
 For Azure:
 
 ```
-pxctl cloudsnap credentials create --provider=azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
+pxctl cloudsnap credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
 ```
 
 For AWS:
 
 ```
-pxctl cloudsnap credentials create --provider=s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint mybucket.s3-us-west-1.amazonaws.com:5555 
+pxctl cloudsnap credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
 ```
 
 For Google Cloud:
 
 ```
-TODO
+pxctl cloudsnap credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
 ```
 `pxctl cloudsnap credentials create` enables the user to configure the credentials for each supported cloud provider.
 
-These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, these secrets part of the credentials will not be displayed. 
+These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
 
 #### List the credentials to verify ####
 
@@ -115,9 +115,14 @@ UUID                                         REGION            ENDPOINT         
 Azure Credentials
 UUID                                        ACCOUNT NAME        ENCRYPTION
 c0e559a7-8d96-4f28-9556-7d01b2e4df33        portworxtest        false
+
+Google Credentials
+UUID						PROJECT ID     ENCRYPTION
+8bd266b5-da9f-4114-84a2-309bbb3838c6		px-test        false
+
 ```
 
-`pxctl cloudsnap credentials list`  only displays non-secret values part of the credentials.Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer `pxctl secrets` help for more information.
+`pxctl cloudsnap credentials list`  only displays non-secret values part of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer `pxctl secrets` help for more information.
 
 #### Perform Cloud Backup ####
 
@@ -140,19 +145,19 @@ OPTIONS:
 ```
 
 This command is used to backup a single volume to the configured cloud provider through credential command line. 
-This command decides to take full or incremental backup depending on the existing backups for the volume. 
-If it is the first backup for the volume it takes full backup of the volume. If its not the first backup, it takes incremental backup from the previous full/incremental backup.
+This command decides whether to take a full or incremental backup depending on the existing backups for the volume. 
+If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
 ```
 pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
 ```
 
-User can force the full backup any time by giving option --full.
-If only one credential is configured, then it may be skipped on command line.
+Users can force the full backup any time by giving the --full option.
+If only one credential is configured, then it may be skipped on the command line.
 
 Here are a few steps to perform cloud backups successfully
 
-* List the available volumes to choose the volume to backup
+* List all the available volumes to choose the volume to backup
 
 ```
 pxctl volume list
@@ -182,14 +187,14 @@ Successful Login to Secrets Endpoint!
 
 * Now issue the backup command 
 
-Note that in this particular example,  since only one credential is configured, no need to specify the credentials on the command line
+Note that in this particular example,  since only one credential is configured, there is no need to specify the credentials on the command line
 
 ```
 pxctl cloudsnap backup NewVol
 Cloudsnap backup started successfully
 ```
 
-* Watch the status
+* Watch the status of the backup
 
 ```
 pxctl cloudsnap status
@@ -198,7 +203,7 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
 ```
 
-Once te volume is backed up to the cloud successfully,  lisitng the remote cloudsnap will display the backup that just completed.
+Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that just completed.
 
 * List the backups in cloud
 
@@ -229,7 +234,7 @@ OPTIONS:
    
 ```
 
-This command is used to restore a successful backup from cloud. It requires cloudsnap Id which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will be of replication factor 1. This volume can be updated to different repl factors using volume ha-update command.
+This command is used to restore a successful backup from cloud. It requires the cloudsnap ID which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will have a replication factor of 1. This volume can be updated to different replication factors using `pxctl volume ha-update` command.
 
 The command usage is as follows.
 ```
