@@ -99,7 +99,9 @@ pxctl cloudsnap credentials create --provider google --google-project-id px-test
 ```
 `pxctl cloudsnap credentials create` enables the user to configure the credentials for each supported cloud provider.
 
-An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
+An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly. 
+
+These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
 
 #### List the credentials to verify ####
 
@@ -234,7 +236,7 @@ OPTIONS:
    
 ```
 
-This command is used to restore a successful backup from cloud. It requires the cloudsnap ID which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will have a replication factor of 1. This volume can be updated to different replication factors using `pxctl volume ha-update` command.
+This command is used to restore a successful backup from cloud. It requires the cloudsnap ID which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will have a replication factor of 1. The restored volume can be updated to different replication factors using `pxctl volume ha-update` command.
 
 The command usage is as follows.
 ```
