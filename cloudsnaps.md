@@ -61,13 +61,13 @@ OPTIONS:
 For Azure:
 
 ```
-pxctl cloudsnaps credentials create --provider=azure --azure-account-name AZWTERTEVBHJKI --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
+pxctl cloudsnaps credentials create --provider=azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
 ```
 
 For AWS:
 
 ```
-pxctl cloudsnaps credentials create --provider=s3  --s3-access-key AWPOZBNHYSE --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-west-1 --s3-endpoint mybucket.s3-us-west-1.amazonaws.com:5555 
+pxctl cloudsnaps credentials create --provider=s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint mybucket.s3-us-west-1.amazonaws.com:5555 
 ```
 
 For Google Cloud:
@@ -77,8 +77,22 @@ TODO
 ```
 `pxctl cloudsnaps credentials create' enables the user to configure the credentials for each supported cloud provider.
 
-These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, these credentials cannot be displayed. 
+These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, these secrets part of the credentials will not be displayed. 
 
+### List the credentials to verify
 
+Use 'pxctl cloudsnaps credentials list' to verify the credentials supplied. 
+
+```
+pxctl cloudsnaps credentials list
+
+S3 Credentials
+UUID                                         REGION            ENDPOINT                ACCESS KEY            SSL ENABLED        ENCRYPTION
+5c69ca53-6d21-4086-85f0-fb423327b024        us-east-1        s3.amazonaws.com        AKIAJ7CDD7XGRWVZ7A        true           false
+
+Azure Credentials
+UUID                                        ACCOUNT NAME        ENCRYPTION
+c0e559a7-8d96-4f28-9556-7d01b2e4df33        portworxtest        false
+```
 
 
