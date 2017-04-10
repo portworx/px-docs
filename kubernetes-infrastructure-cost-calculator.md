@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Create a scaleout converged container cluster using Kubernetes and Portworx in GCE"
+title: "Cost calculator for converged container cluster using Kubernetes and Portworx in GCE"
 keywords: portworx, PaaS, IaaS, docker, kubernetes, converged, bare metal
 sidebar: home_sidebar
 ---
@@ -85,3 +85,16 @@ The total monthly cost to run this in GCE was:
 |Storage|$1912.50|
 |Compute|$4320.0|
 |Total|$6232.50|
+
+Read on for detailed instructions on running stateful services on Kubernetes.
+
+* [Install PX into an Kubernetes 1.6 cluster]()
+* [Force Kubernetes to schedule pods on hosts with your data](/kubernetes-convergence.html)
+* [Create Kubernetes Storage Class](/kubernetes-define-storage-class.html)
+* [Using pre-provisioned volumes with Kubernetes](/kubernetes-preprovisioned-volumes.html)
+* [Dynamically provision volumes with Kubernetes](/kubernetes-dynamically-provisioned-volumes.html)
+* [Using Stateful sets](/kubernetes-stateful-sets.html)
+* [Running a pod from a snapshot](/kubernetes-running-a-pod-from-snapshot.html)
+* [Failover a database using Kubernetes](kubernetes-database-failover.html)
+* [Install PX on Kubernetes < 1.6](/kubernetes-run-with-flexvolume.html)
+* [Cost calculator for converged container cluster using Kubernetes and Portworx](kubernetes-infrastructure-cost-calculator.html)

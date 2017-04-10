@@ -35,6 +35,36 @@ entries:
     - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
+  - title: Kubernetes
+    output: web
+    folderitems:
+    - title: Introduction
+      url: "/kubernetes-introduction.html"
+      output: web
+    - title: Run pods converged with data
+      url: "kubernetes-convergence.html"
+      output: web
+    - title: Define storage class
+      url: "/kubernetes-define-storage-class.html"
+      output: web
+    - title: Run pods with pre-provisioned volumes
+      url: "/kubernetes-preprovisioned-volumes.html"
+      output: web
+    - title: Dynamically provision volumes
+      url: "/kubernetes-dynamically-provisioned-volumes.html"
+      output: web
+    - title: Stateful sets
+      url: "/kubernetes-stateful-sets.html"
+      output: web
+    - title: Run pod with volume snapshot
+      url: "/kubernetes-running-a-pod-from-snapshot.html"
+      output: web
+    - title: Database failover
+      url: "kubernetes-database-failover.html"
+      output: web
+    - title: Install PX on Kubernetes < 1.6
+      url: "kubernetes-infrastructure-cost-calculator.html"
+      output: web
   - title: Manage Volumes
     output: web
     folderitems:
@@ -257,4 +287,3 @@ entries:
     - title: Portwork QuickStart Explainer
       url: /video-portworx-nutshell.html
       output: web
-  

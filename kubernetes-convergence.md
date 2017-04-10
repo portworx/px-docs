@@ -1,20 +1,9 @@
 ---
 layout: page
-title: "Run Portworx with Kubernetes"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+title: "Run pods converged with data volumes"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pv claim, persistent disk
 sidebar: home_sidebar
 ---
-You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
-
-## Deploy PX with Kubernetes
->**Note:**<br/>You can run PX with Kubernetes using the PX native driver (preferred) or FlexVol.
-
-### Kubernetes with the PX native driver (for Kubernetes versions 1.6 and above)
-Use [these](run-with-kubernetes-native-driver.html) instructions to run Kubernetes with the PX native driver.
-
-### Kubernetes with FlexVol
-Use [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with FlexVol.
-
 ## Enabling scheduler convergence
 You can configure PX to influence where Kubernetes schedules a container based on the container volume's data location.  When this mode is enabled, PX will communicate with Kubernetes and place host labels.  These labels will be used in influencing Kubernetes scheduling decisions.  To enable this mode, you must add a scheduler directive to the PX configuration as documented below.
 
@@ -126,7 +115,18 @@ spec:
         osdDriver: "pxd"
 ```
 
-Note the new section called nodeSelector
+Note the new section called nodeSelector.
 
-## Bill of Materials on Public Cloud Providers
-Use [this](/k8s-pwx-bom.html) guide to calculate the BOM for a complete Kubernetes with Portworx compute and storage environment for running stateful applications.
+Read on for detailed instructions on running stateful services on Kubernetes.
+
+* [Install PX into an Kubernetes 1.6 cluster]()
+* [Force Kubernetes to schedule pods on hosts with your data](/kubernetes-convergence.html)
+* [Create Kubernetes Storage Class](/kubernetes-define-storage-class.html)
+* [Using pre-provisioned volumes with Kubernetes](/kubernetes-preprovisioned-volumes.html)
+* [Dynamically provision volumes with Kubernetes](/kubernetes-dynamically-provisioned-volumes.html)
+* [Using Stateful sets](/kubernetes-stateful-sets.html)
+* [Running a pod from a snapshot](/kubernetes-running-a-pod-from-snapshot.html)
+* [Failover a database using Kubernetes](kubernetes-database-failover.html)
+* [Install PX on Kubernetes < 1.6](/kubernetes-run-with-flexvolume.html)
+* [Cost calculator for converged container cluster using Kubernetes and Portworx](kubernetes-infrastructure-cost-calculator.html)
+
