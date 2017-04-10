@@ -4,7 +4,7 @@ title: "Multi-Cloud Backup and Recovery of PX Volumes"
 keywords: cloud, backup, restore, snapshot, disaster recovery
 sidebar: home_sidebar
 ---
-#WIP DOCUMENT
+
 ## Multi-Cloud Backup and Recovery of PX Volumes
 
 This document outlines how PX volumes can be backed up to different cloud providers object storage including any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
