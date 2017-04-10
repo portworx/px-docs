@@ -232,7 +232,6 @@ If the command fails to succeed, it shows the failure reason.
 
 The restored volume will not be attached or mounted automatically.
 
-Example:
 
 * Use `pxctl cloudsnap list` to list the available backups.
 
