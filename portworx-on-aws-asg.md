@@ -113,11 +113,12 @@ portworx:
       - vol-0055e5913b79fb49d
 ```
 
-PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one as long as the number of existing EBS volumes for this auto scale group is less than the `max` value specified in the `user-data`.  If the maximum number of EBS volumes have been reached, then PX will startup as a storage-consumer (storage-less) node.
+PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one. 
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
 ### Instance Privileges
+
 A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided. Instead you can associate an AWS IAM role with the ec2 instances that are spun in your ASG. More details about creating such an EC2 IAM role and corresponding AWS policy can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
 
 Following is an example policy that has all the required permissions
@@ -168,13 +169,13 @@ PWX_CLUSTER_ID=my-px-asg-cluster
 PWX_EBS_VOLUME_TEMPLATE=vol-0055e5913b79fb49d
 ```
 
-If an instance is terminated, then the following happens:
+If an instance is terminated by EC2 ASG, then the following happens:
 1. The EBS volume associated with that instance gets detached.
-2. A new EC2 instance from the AMI gets created and PX will be able to attach to the free EBS volumes and re-join the cluster with the existing information.
+2. A new EC2 instance from the AMI gets created by ASG and PX will be able to attach to the free EBS volumes and re-join the cluster with the existing information.
 
 If the number of instances are scaled up, then the following happens:
 1. PX on the new instance will detect that there are no free EBS volumes.
-2. PX will create a new EBS volume if it is within the `max-count` capacity limit.
+2. PX will create a new EBS volume.
 3. PX will join the cluster as a new node.
 
 ## Scaling the Cluster Down
