@@ -7,16 +7,14 @@ sidebar: home_sidebar
 
 ## Multi-Cloud Backup and Recovery of PX Volumes
 
-This document outlines how PX volumes can be backed up to different cloud providers object storage including any S3-compatible object storage. If user wishes to restore any of the backups, they can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
-
+This document outlines how PX volumes can be backed up to different cloud provider's object storage including any S3-compatible object storage. If a user wishes to restore any of the backups, they can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely backup their mission critical database volumes to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
 
 ### Supported Cloud Providers
 
 Portworx PX-Enterprise supports the following cloud providerss
-1. Amazon S3
+1. Amazon S3 and any S3-compatible Object Storage
 2. Azure Blob Storage
 3. Google Cloud Storage
-4. Any S3-compatible Object Storage
 
 ### Backing up a PX Volume to cloud storage
 
