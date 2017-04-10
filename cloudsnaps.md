@@ -189,7 +189,8 @@ pxctl cloudsnap backup NewVol
 Cloudsnap backup started successfully
 ```
 
-5. Watch the status
+* Watch the status
+
 ```
 pxctl cloudsnap status
 SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
