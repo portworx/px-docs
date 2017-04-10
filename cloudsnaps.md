@@ -7,14 +7,14 @@ sidebar: home_sidebar
 #WIP DOCUMENT
 ## Multi-Cloud Backup and Recovery of PX Volumes
 
-This document outlines how PX volumes can be backed up to different cloud providers object storage or any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
+This document outlines how PX volumes can be backed up to different cloud providers object storage including any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
 
 
 ### Supported Cloud Providers
 
 Portworx PX-Enterprise supports the following cloud providerss
 1. Amazon S3
-2. Azure Blobstore
+2. Azure Blob Storage
 3. Google Cloud Storage
 4. Any S3-compatible Object Storage
 
@@ -25,7 +25,7 @@ After 6 incremental backups, every 7th backup is a full backup.
 
 ### Restoring a PX Volume from cloud storage
 
-Any PX Volume backup can be restored to a PX Volume in the cluster. The restored volume inherits the attributes such as file system, size and block size from the backup. Replication level and aggregation level of the restored volume defaults to 1 irrespective of the replication and aggregation level of the backup volume. Users can increase replication or aggregation level level once the restore is complete on the restored volume.  
+Any PX Volume backup can be restored to a PX Volume in the cluster. The restored volume inherits the attributes such as file system, size and block size from the backup. Replication level and aggregation level of the restored volume defaults to 1 irrespective of the replication and aggregation level of the volume that was backed up. Users can increase replication or aggregation level level once the restore is complete on the restored volume.  
 
 ### Performing Cloud Backups of a PX Volume
 
@@ -99,7 +99,7 @@ pxctl cloudsnap credentials create --provider google --google-project-id px-test
 ```
 `pxctl cloudsnap credentials create` enables the user to configure the credentials for each supported cloud provider.
 
-These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
+An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
 
 #### List the credentials to verify ####
 
@@ -122,7 +122,7 @@ UUID						PROJECT ID     ENCRYPTION
 
 ```
 
-`pxctl cloudsnap credentials list`  only displays non-secret values part of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer `pxctl secrets` help for more information.
+`pxctl cloudsnap credentials list`  only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer to `pxctl secrets` help for more information.
 
 #### Perform Cloud Backup ####
 
@@ -144,7 +144,7 @@ OPTIONS:
 
 ```
 
-This command is used to backup a single volume to the configured cloud provider through credential command line. 
+This command is used to backup a single volume to the cloud provider using the specified credentials. 
 This command decides whether to take a full or incremental backup depending on the existing backups for the volume. 
 If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
@@ -153,7 +153,7 @@ pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
 ```
 
 Users can force the full backup any time by giving the --full option.
-If only one credential is configured, then it may be skipped on the command line.
+If only one credential is configured on the cluster, then the cred-uuid option may be skipped on the command line.
 
 Here are a few steps to perform cloud backups successfully
 
