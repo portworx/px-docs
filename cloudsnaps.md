@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Multi-Cloud Backup and Recovery of PX Volumes"
-keywords: cloud, backup, restore, snapshot, disaster recovery
+keywords: cloud, backup, restore, snapshot, DR
 sidebar: home_sidebar
 ---
 
