@@ -98,7 +98,7 @@ entries:
     - title: Rackspace
       url: /portworx-on-rackspace.html
       output: web
-    - title: Cloud Backup and Recovery of PX Volumes
+    - title: Cloud Backup and Recovery
       url: /cloudsnaps.html
       output: web
    - title: Terraform and Terraporx
