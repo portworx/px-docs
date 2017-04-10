@@ -53,7 +53,7 @@ entries:
     - title: Snapshots
       url: /snapshot.html
       output: web
-   - title: Cloud Backups
+    - title: Cloud Backups
       url: /cloudsnaps.html
       output: web
   - title: Schedulers
