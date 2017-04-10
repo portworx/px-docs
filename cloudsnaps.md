@@ -139,7 +139,9 @@ OPTIONS:
 
 ```
 
-This command is used to backup a single volume to the configured cloud provider through credential command line. This command decides to take full or incremental backup depending on the existing backups for the volume. If it is the first backup for the volume it takes full backup of the volume. If its not the first backup, it takes incremental backup from the previous full/incremental backup.
+This command is used to backup a single volume to the configured cloud provider through credential command line. 
+This command decides to take full or incremental backup depending on the existing backups for the volume. 
+If it is the first backup for the volume it takes full backup of the volume. If its not the first backup, it takes incremental backup from the previous full/incremental backup.
 
 ```
 pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
@@ -152,7 +154,7 @@ Here are a few steps to perform cloud backups successfully
 
 Authenticate the nodes where the storage for volume to be backed up is provisioned.
 
-1. List the available volumes
+* List the available volumes
 
 ```
 pxctl volume list
@@ -161,7 +163,7 @@ ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
 ```
 
-2. List the configured credentials
+* List the configured credentials
 
 ```
 pxctl cloudsnap credentials list
@@ -169,18 +171,19 @@ pxctl cloudsnap credentials list
 Azure Credentials
 UUID						ACCOUNT NAME		ENCRYPTION
 ef092623-f9ba-4697-aeb5-0d5d6d9b5742		portworxtest		false
-
 ```
 
-3. Login to the secrets database to use encryption in-flight
-
+* Login to the secrets database to use encryption in-flight
 
 ```
 pxctl secrets kvdb login
 Successful Login to Secrets Endpoint!
 ```
 
-4. Now issue the backup command. Note that in this particular example,  since only one credential is configured, no need to specify the credentials on the command line
+* Now issue the backup command 
+
+Note that in this particular example,  since only one credential is configured, no need to specify the credentials on the command line
+
 ```
 pxctl cloudsnap backup NewVol
 Cloudsnap backup started successfully
@@ -230,7 +233,7 @@ The restored volume will not be attached or mounted automatically.
 
 Example:
 
-1. Use `pxctl cloudsnap list` to list the available backups.
+* Use `pxctl cloudsnap list` to list the available backups.
 
 `pxctl cloudsnap list` helps enumerate the list of available backups in the cloud. This command assumes that you have all the credentials setup properly. If the credentials are not setup, then the backups available in those clouds won't be listed by this command.
 
@@ -241,7 +244,7 @@ dvol			pqr9-cl1/520877607140844016-50466873928636534		Fri, 07 Apr 2017 20:22:43 
 NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:21 UTC		Done
 ```
 
-2. Choose one of them to restore
+* Choose one of them to restore
 ```
 pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
 Cloudsnap restore started successfully: 622390253290820715
