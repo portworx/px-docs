@@ -246,6 +246,7 @@ NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:2
 ```
 
 * Choose one of them to restore
+
 ```
 pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
 Cloudsnap restore started successfully: 622390253290820715
