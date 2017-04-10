@@ -43,18 +43,21 @@ USAGE:
    pxctl [global options] command [command options] [arguments...]
    
 VERSION:
-   1.1.4-6b35842
+   1.2.0-75d0dbb
    
 COMMANDS:
-     status       Show status summary
-     volume, v    Manage volumes
-     snap, s      Manage volume snapshots
-     cluster, c   Manage the cluster
-     service, sv  Service mode utilities
-     host         Attach volumes to the host
-     upgrade      Upgrade PX
-     eula         Show license agreement
-     help, h      Shows a list of commands or help for one command
+     status         Show status summary
+     volume, v      Manage volumes
+     snap, s        Manage volume snapshots
+     cluster, c     Manage the cluster
+     service, sv    Service mode utilities
+     host           Attach volumes to the host
+     secrets        Manage Secrets
+     upgrade        Upgrade PX
+     eula           Show license agreement
+     cloudsnap, cs  Backup and restore snapshots to/from cloud
+     objectstore    Manage the object store
+     help, h        Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --json, -j     output in json
@@ -67,6 +70,26 @@ GLOBAL OPTIONS:
 `pxctl` provides capabilities to perform much more fine-grained control of the PX resources cluster-wide and as seen above offers capabilties to manage volumes, snapshots, cluster resources, hosts in the cluster and software upgrade in the cluster
 
 Let's review each command, options available under command and an example of how those options are used
+
+### Login/Authentication
+`pxctl secrets` can be used to configure authentication credentials and endpoints - Vault, Amazon KMS, KVDB are currently supported.
+Vault example
+```
+sudo /opt/pwx/bin/pxctl secrets vault login
+Enter VAULT_ADDRESS: http://myvault.myorg.com
+Enter VAULT_TOKEN: ***
+Successfully authenticated with Vault.
+```
+AWS KMS example
+```
+sudo /opt/pwx/bin/pxctl secrets aws login
+Enter AWS_ACCESS_KEY_ID [Hit Enter to ignore]: ***
+Enter AWS_SECRET_ACCESS_KEY [Hit Enter to ignore]: ***
+Enter AWS_SECRET_TOKEN_KEY [Hit Enter to ignore]: ***
+Enter AWS_CMK [Hit Enter to ignore]: mykey
+Enter AWS_REGION [Hit Enter to ignore]: us-east-1b
+Successfully authenticated with AWS.
+```
 
 ### Volume Operations
 
