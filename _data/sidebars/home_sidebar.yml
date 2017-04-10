@@ -53,9 +53,6 @@ entries:
     - title: Snapshots
       url: /snapshot.html
       output: web
-    - title: Cloud Backups
-      url: /cloudsnaps.html
-      output: web
   - title: Schedulers
     output: web
     folderitems:
@@ -103,6 +100,9 @@ entries:
       output: web
     - title: Terraform and Terraporx
       url: /terraporx.html
+      output: web
+    - title: Cloud Backups
+      url: /cloudsnaps.html
       output: web
   - title: CLI and API Reference
     output: web
