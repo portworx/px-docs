@@ -32,7 +32,7 @@ Any PX Volume backup can be restored to a PX Volume in the cluster. The restored
 Performing cloud backups of a PX Volume is available via `pxctl cloudsnap` command. This command has the following operations available for the full lifecycle management of cloud backups.
 
 ```
-pxctl cloudsnap
+# pxctl cloudsnap
 NAME:
    pxctl cloudsnap - Backup and restore snapshots to/from cloud
 
@@ -57,7 +57,7 @@ OPTIONS:
 For this, we will use `pxctl cloudsnap credentials create` command.
 
 ```
-pxctl cloudsnap credentials create 
+# pxctl cloudsnap credentials create 
 
 NAME:
    pxctl cloudsnap credentials create - Create a credential for cloud-snap
@@ -83,19 +83,19 @@ OPTIONS:
 For Azure:
 
 ```
-pxctl cloudsnap credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
+# pxctl cloudsnap credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
 ```
 
 For AWS:
 
 ```
-pxctl cloudsnap credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
+# pxctl cloudsnap credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
 ```
 
 For Google Cloud:
 
 ```
-pxctl cloudsnap credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
+# pxctl cloudsnap credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
 ```
 `pxctl cloudsnap credentials create` enables the user to configure the credentials for each supported cloud provider.
 
@@ -108,7 +108,7 @@ These credentials can only be created once and cannot be modified. In order to m
 Use `pxctl cloudsnap credentials list` to verify the credentials supplied. 
 
 ```
-pxctl cloudsnap credentials list
+# pxctl cloudsnap credentials list
 
 S3 Credentials
 UUID                                         REGION            ENDPOINT                ACCESS KEY            SSL ENABLED        ENCRYPTION
@@ -131,7 +131,7 @@ UUID						PROJECT ID     ENCRYPTION
 The actual backup of the PX Volume is done via the `pxctl cloudsnap backup` command
 
 ```
-pxctl cloudsnap backup 
+# pxctl cloudsnap backup 
 
 NAME:
    pxctl cloudsnap backup - Backup a snapshot to cloud
@@ -151,7 +151,7 @@ This command decides whether to take a full or incremental backup depending on t
 If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
 ```
-pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
+# pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
 ```
 
 Users can force the full backup any time by giving the --full option.
@@ -162,7 +162,7 @@ Here are a few steps to perform cloud backups successfully
 * List all the available volumes to choose the volume to backup
 
 ```
-pxctl volume list
+# pxctl volume list
 ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 538316104266867971	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
@@ -171,7 +171,7 @@ ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 * List the configured credentials
 
 ```
-pxctl cloudsnap credentials list
+# pxctl cloudsnap credentials list
 
 Azure Credentials
 UUID						ACCOUNT NAME		ENCRYPTION
@@ -183,7 +183,7 @@ Authenticate the nodes where the storage for volume to be backed up is provision
 * Login to the secrets database to use encryption in-flight
 
 ```
-pxctl secrets kvdb login
+# pxctl secrets kvdb login
 Successful Login to Secrets Endpoint!
 ```
 
@@ -192,14 +192,14 @@ Successful Login to Secrets Endpoint!
 Note that in this particular example,  since only one credential is configured, there is no need to specify the credentials on the command line
 
 ```
-pxctl cloudsnap backup NewVol
+# pxctl cloudsnap backup NewVol
 Cloudsnap backup started successfully
 ```
 
 * Watch the status of the backup
 
 ```
-pxctl cloudsnap status
+# pxctl cloudsnap status
 SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 538316104266867971	Backup-Active	62914560	20.620429615s
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
@@ -222,7 +222,7 @@ Use `pxctl cloudsnap restore` to restore from a cloud backup.
 Here is the command syntax.
 
 ```
-pxctl cloudsnap restore
+# pxctl cloudsnap restore
 
 NAME:
    pxctl cloudsnap restore - Restore volume to a cloud snapshot
@@ -241,7 +241,7 @@ This command is used to restore a successful backup from cloud. It requires the 
 
 The command usage is as follows.
 ```
-pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332​
+# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332​
 ```
 
 Upon successful start of the command it returns the volume id created to restore the cloud snap
@@ -255,7 +255,7 @@ The restored volume will not be attached or mounted automatically.
 `pxctl cloudsnap list` helps enumerate the list of available backups in the cloud. This command assumes that you have all the credentials setup properly. If the credentials are not setup, then the backups available in those clouds won't be listed by this command.
 
 ```
-pxctl cloudsnap list
+# pxctl cloudsnap list
 SOURCEVOLUME 		CLOUD-SNAP-ID						CREATED-TIME				STATUS
 dvol			pqr9-cl1/520877607140844016-50466873928636534		Fri, 07 Apr 2017 20:22:43 UTC		Done
 NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:21 UTC		Done
@@ -264,13 +264,13 @@ NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:2
 * Choose one of them to restore
 
 ```
-pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
+# pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
 Cloudsnap restore started successfully: 622390253290820715
 ```
 `pxctl cloudsnap status` gives the status of the restore processes as well.
 
 ```
-pxctl cloudsnap status
+# pxctl cloudsnap status
 SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 622390253290820715	Restore-Active	99614720	10.144539084s
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
