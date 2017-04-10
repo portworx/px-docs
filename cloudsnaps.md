@@ -7,7 +7,7 @@ sidebar: home_sidebar
 #WIP DOCUMENT
 ## Multi-Cloud Backup and Recovery of PX Volumes
 
-This document outlines how PX volumes can be backed up to different cloud providers' object storage or any S3-compatible object storage. If the user wishes to restore any of the backups, they can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
+This document outlines how PX volumes can be backed up to different cloud provider's object storage or any S3-compatible object storage. If user wishes to restore any of the backups, he/she can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely back their mission critical database volumes up to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
 
 
 ### Supported Cloud Providers
@@ -152,9 +152,7 @@ If only one credential is configured, then it may be skipped on command line.
 
 Here are a few steps to perform cloud backups successfully
 
-Authenticate the nodes where the storage for volume to be backed up is provisioned.
-
-* List the available volumes
+* List the available volumes to choose the volume to backup
 
 ```
 pxctl volume list
@@ -172,6 +170,8 @@ Azure Credentials
 UUID						ACCOUNT NAME		ENCRYPTION
 ef092623-f9ba-4697-aeb5-0d5d6d9b5742		portworxtest		false
 ```
+
+Authenticate the nodes where the storage for volume to be backed up is provisioned.
 
 * Login to the secrets database to use encryption in-flight
 
@@ -197,6 +197,15 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 538316104266867971	Backup-Active	62914560	20.620429615s
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
 ```
+
+Once te volume is backed up to the cloud successfully,  lisitng the remote cloudsnap will display the backup that just completed.
+
+* List the backups in cloud
+
+# bin/pxctl cs l
+SOURCEVOLUME 		CLOUD-SNAP-ID						CREATED-TIME				STATUS
+evol			pqr9-cl1/980081626967128253-941778877687318172		Sat, 08 Apr 2017 05:09:49 UTC		Done
+NewVol		pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:21 UTC		Done
 
 #### Restore from a Cloud Backup
 
