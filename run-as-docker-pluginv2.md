@@ -49,6 +49,7 @@ To install Portworx as V2 Docker plugin follow these steps
 $ mkdir -p /etc/pwx
 $ mkdir -p /opt/pwx/bin
 $ mkdir -p /var/lib/osd
+$ mkdir -p /var/cores
 ```
 
 We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
