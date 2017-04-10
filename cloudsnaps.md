@@ -208,6 +208,7 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that just completed.
 
 * List the backups in cloud
+
 ```
 # pxctl cloudsnap list
 SOURCEVOLUME		CLOUD-SNAP-ID						CREATED-TIME				STATUS
