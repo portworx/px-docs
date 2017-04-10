@@ -113,6 +113,9 @@ USAGE:
 
 OPTIONS:
    --shared                             make this a globally shared namespace volume
+   --secure                             encrypt this volume using AES-256
+   --secret_key value                   secret_key to use to fetch secret_data for the PBKDF2 function
+   --use_cluster_secret                 Use cluster wide secret key to fetch secret_data
    --label pairs, -l pairs              list of comma-separated name=value pairs
    --size value, -s value               volume size in GB (default: 1)
    --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
@@ -122,9 +125,6 @@ OPTIONS:
    --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
    --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
    --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
-   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
-   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
    --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
    --nodes value                        comma-separated Node Id(s)
  ```
@@ -153,9 +153,15 @@ If you want to create a volume that cannot be deleted via other methods and can 
 sudo /opt/pwx/bin/pxctl volume create cliscale --shared --size=1 --repl=3 --sticky
 ```
 
-For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven envrionments. 
+For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven environments. 
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
+```
+
+
+For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cluster secret key. A different key maybe passed too.
+```
+sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
 ```
 
 #### pxctl volume list
@@ -1169,6 +1175,12 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 * Data is not local to the node on which volume is attached.
 ```
 Note: The volume resides on 2 different nodes than the one where it was attached in the above example. Hence the warning.
+
+For an encrypted volume, if you are not using the cluster secret pass in '--secret_key <key>'. Otherwise the cluster secret key will be used.
+```
+sudo /opt/pwx/bin/pxctl host attach cliencr
+Volume successfully attached at: /dev/mapper/pxd-enc1013237432577873530
+```
 
 #### pxctl host detach
 `pxctl host detach` command is used to detach a volume from a host
