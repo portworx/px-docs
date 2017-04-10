@@ -209,9 +209,9 @@ Once the volume is backed up to the cloud successfully, listing the remote cloud
 
 ```
 # pxctl cloudsnap list
-SOURCEVOLUME	CLOUD-SNAP-ID					CREATED-TIME				STATUS
-evol		pqr9-cl1/980081626967128253-941778877687318172	Sat, 08 Apr 2017 05:09:49 UTC		Done
-NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC		Done
+SOURCEVOLUME	CLOUD-SNAP-ID					CREATED-TIME			STATUS
+evol		pqr9-cl1/980081626967128253-941778877687318172	Sat, 08 Apr 2017 05:09:49 UTC	Done
+NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
 ```
 
 #### Restore from a Cloud Backup ####
@@ -255,9 +255,9 @@ The restored volume will not be attached or mounted automatically.
 
 ```
 # pxctl cloudsnap list
-SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME				STATUS
-dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC		Done
-NewVol	pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC		Done
+SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
+dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
+NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
 ```
 
 * Choose one of them to restore
