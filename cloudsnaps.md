@@ -215,7 +215,7 @@ evol			pqr9-cl1/980081626967128253-941778877687318172		Sat, 08 Apr 2017 05:09:49
 NewVol			pqr9-cl1/538316104266867971-807625803401928868		Sat, 08 Apr 2017 05:17:21 UTC		Done
 ```
 
-#### Restore from a Cloud Backup
+#### Restore from a Cloud Backup ####
 
 Use `pxctl cloudsnap restore` to restore from a cloud backup. 
 
