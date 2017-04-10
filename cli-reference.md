@@ -300,6 +300,7 @@ OPTIONS:
    --shared value, -s value  set shared setting to on/off
    --sticky on/off           set sticky setting to on/off
    --scale factor            New scale factor [1...1024] (default: 0)
+   --size value              New size for the volume (GiB)
  ```
 
 Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
@@ -395,6 +396,80 @@ Volume	:  970758537931791410
 	Replica sets on nodes:
 		Set  0
 			Node 	 :  10.99.117.133
+```
+Here is an example of how to update size of an existing volume. Let's create a volume with default parameters. This will create a volume of size 1 GB. We can verify this with volume inspect.
+```
+sudo /opt/pwx/bin/pxctl volume create vol_resize_test
+Volume successfully created: 485002114762355071
+
+sudo /opt/pwx/bin/pxctl volume inspect vol_resize_test
+Volume	:  485002114762355071
+	Name            	 :  vol_resize_test
+	Size            	 :  1.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Creation time   	 :  Apr 10 18:53:11 UTC 2017
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  detached
+	Reads           	 :  0
+	Reads MS        	 :  0
+	Bytes Read      	 :  0
+	Writes          	 :  0
+	Writes MS       	 :  0
+	Bytes Written   	 :  0
+	IOs in progress 	 :  0
+	Bytes used      	 :  32 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  172.31.55.104
+```
+In order to update the size of the volume, a non-shared volume needs to be mounted on one of PX nodes. If it's a shared volume, then this operation can be done from any of the nodes where the volume is attached.
+
+```
+sudo /opt/pwx/bin/pxctl host attach vol_resize_test
+Volume successfully attached at: /dev/pxd/pxd485002114762355071
+
+sudo mkdir /mnt/voldir
+
+sudo /opt/pwx/bin/pxctl host mount vol_resize_test /mnt/voldir
+Volume vol_resize_test successfully mounted at /mnt/voldir
+```
+
+Let's update size of this volume to 5 GB. 
+
+```
+sudo /opt/pwx/bin/pxctl volume update vol_resize_test --size=5
+Update Volume: Volume update successful for volume vol_resize_test
+```
+
+We can verify this with volume inspect command.
+
+```
+sudo /opt/pwx/bin/pxctl volume inspect vol_resize_test
+Volume	:  485002114762355071
+	Name            	 :  vol_resize_test
+	Size            	 :  5.0 GiB
+	Format          	 :  ext4
+	HA              	 :  1
+	IO Priority     	 :  LOW
+	Creation time   	 :  Apr 10 18:53:11 UTC 2017
+	Shared          	 :  no
+	Status          	 :  up
+	State           	 :  Attached: 43109685-e98a-448f-9805-293128e2d78b
+	Device Path     	 :  /dev/pxd/pxd485002114762355071
+	Reads           	 :  138
+	Reads MS        	 :  108
+	Bytes Read      	 :  974848
+	Writes          	 :  161
+	Writes MS       	 :  1667
+	Bytes Written   	 :  68653056
+	IOs in progress 	 :  0
+	Bytes used      	 :  97 MiB
+	Replica sets on nodes:
+		Set  0
+			Node 	 :  172.31.55.104
 ```
 
 #### pxctl volume ha-update
