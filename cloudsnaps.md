@@ -52,9 +52,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
- 
-
-#### Set the required cloud credentials
+#### Set the required cloud credentials ####
 
 For this, we will use `pxctl cloudsnap credentials create` command.
 
@@ -103,7 +101,7 @@ TODO
 
 These credentials can also be enabled with encryption which makes each backup/restore to/from cloud to use the encryption passphrase given. These credentials can only be created once and cannot be modified. In order to maintain security, once configured, these secrets part of the credentials will not be displayed. 
 
-#### List the credentials to verify
+#### List the credentials to verify ####
 
 Use `pxctl cloudsnap credentials list` to verify the credentials supplied. 
 
@@ -121,7 +119,7 @@ c0e559a7-8d96-4f28-9556-7d01b2e4df33        portworxtest        false
 
 `pxctl cloudsnap credentials list`  only displays non-secret values part of the credentials.Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer `pxctl secrets` help for more information.
 
-#### Perform Cloud Backup
+#### Perform Cloud Backup ####
 
 The actual backup of the PX Volume is done via the `pxctl cloudsnap backup` command
 
@@ -162,6 +160,7 @@ ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 538316104266867971	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
 980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
 ```
+
 2. List the configured credentials
 
 ```
