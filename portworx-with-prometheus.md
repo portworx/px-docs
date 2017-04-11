@@ -8,8 +8,6 @@ sidebar: home_sidebar
 PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
 These stats are exported at port 9001; your application can poll http://<IP_ADDRESS>:9001/metrics to get their runtime values.
 
-## Integration with Prometheus
-
 ### Step 1: Configuring Prometheus to watch px node
 Add your px node as a target in Prometheus config file:
 
