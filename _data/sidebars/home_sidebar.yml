@@ -59,6 +59,9 @@ entries:
     - title: Volume Update
       url: /volume-update.html
       output: web
+    - title: Encrypted Volumes
+      url: /encrypted-volumes.html
+      output: web     
   - title: Schedulers
     output: web
     folderitems:
