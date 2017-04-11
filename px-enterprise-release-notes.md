@@ -9,7 +9,7 @@ sidebar: home_sidebar
 
 ### Key Features
 
-* AWS Auto-scaling integration with Portworx managing EBS volumes for EC2 instances in a AWS ASG [PX on ASG](/portworx-on-aws-asg.html)
+* AWS Auto-scaling integration with Portworx managing EBS volumes for EC2 instances in AWS ASG [PX on ASG](/portworx-on-aws-asg.html)
 * Multi-cloud Volume Backup and Restore of Portworx Volumes [PX Cloud Backup](/cloudsnaps.html)
 * Encrypted Volumes (Data-at-rest and Data-in-flight) encryption
 * Security updates improve PX container security
