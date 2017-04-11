@@ -5,7 +5,7 @@ keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 ---
 
-#### pxctl volume update
+### pxctl volume update
 
 `pxctl volume update` is used to update a specific parameter of the volume
 
@@ -25,6 +25,7 @@ OPTIONS:
    --scale factor            New scale factor [1...1024] (default: 0)
    --size value              New size for the volume (GiB)
  ```
+#### Change Shared Option ####
 
 Using the `--shared` flag, the volume namespace sharing across multiple volumes can be turned on or off.
 
@@ -89,6 +90,8 @@ As shown above, the volume is shown as `shared=yes` indicating that this is a sh
 
 For adding the `--sticky` attribute to a volume, use the following command. 
 
+#### Change Volume Sticky Option ####
+
 ```
 sudo /opt/pwx/bin/pxctl volume update clitest --sticky=on
 ```
@@ -120,6 +123,8 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 ```
+#### Increase Volume Size ####
+
 Here is an example of how to update size of an existing volume. Let's create a volume with default parameters. This will create a volume of size 1 GB. We can verify this with volume inspect.
 ```
 sudo /opt/pwx/bin/pxctl volume create vol_resize_test
@@ -195,7 +200,7 @@ Volume	:  485002114762355071
 			Node 	 :  172.31.55.104
 ```
 
-#### pxctl volume ha-update
+#### Update the Volume Replication Level ####
 
 `pxctl volume ha-update` can be used to increase or decrease the replication factor for a given portworx volume. 
 
