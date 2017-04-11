@@ -17,7 +17,7 @@ sidebar: home_sidebar
 * Dynamically Resize a PX Volumes with no application downtime
 * Hashicrop Vault and AWS KMS integration
 * Docker V2 Plugin Support [Docker Plugin](/run-as-docker-pluginv2.html)
-* Prometheus Integeration
+* Prometheus Integeration [PX and Prometheus](/portworx-with-prometheus.html)
 
 
 ### Key Issues Addressed
