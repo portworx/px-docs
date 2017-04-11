@@ -12,7 +12,7 @@ sidebar: home_sidebar
 * AWS Auto-scaling integration with Portworx managing EBS volumes for EC2 instances in AWS ASG 
   [PX on ASG](/portworx-on-aws-asg.html)
 * Multi-cloud Backup and Restore of Portworx Volumes [PX Cloud Backup](/cloudsnaps.html)
-* Encrypted Volumes (Data-at-rest and Data-in-flight) encryption
+* Encrypted Volumes (Data-at-rest and Data-in-flight) encryption [Encrypted Volumes](/encrypted-volumes.html)
 * Security updates improve PX container security
 * Dynamically resize PX Volumes with no application downtime
 * Hashicorp Vault and AWS KMS integration
