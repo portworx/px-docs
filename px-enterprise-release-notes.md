@@ -11,10 +11,10 @@ sidebar: home_sidebar
 
 * AWS Auto-scaling integration with Portworx managing EBS volumes for EC2 instances in AWS ASG 
   [PX on ASG](/portworx-on-aws-asg.html)
-* Multi-cloud Volume Backup and Restore of Portworx Volumes [PX Cloud Backup](/cloudsnaps.html)
+* Multi-cloud Backup and Restore of Portworx Volumes [PX Cloud Backup](/cloudsnaps.html)
 * Encrypted Volumes (Data-at-rest and Data-in-flight) encryption
 * Security updates improve PX container security
-* Dynamically Resize a PX Volumes with no application downtime
+* Dynamically resize PX Volumes with no application downtime
 * Hashicorp Vault and AWS KMS integration
 * Docker V2 Plugin Support [Docker Plugin](/run-as-docker-pluginv2.html)
 * Prometheus Integeration [PX and Prometheus](/portworx-with-prometheus.html)
