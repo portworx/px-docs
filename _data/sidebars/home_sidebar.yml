@@ -146,6 +146,9 @@ entries:
     - title: Maintenance Mode
       url: /maintenance.html
       output: web
+    - title: Portworx integration with Prometheus
+      url: /portworx-with-prometheus.html
+      output: web
   - title: Application Solutions
     output: web
     folderitems:
