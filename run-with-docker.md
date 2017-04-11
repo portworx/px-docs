@@ -57,7 +57,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
                  -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /opt/pwx/bin:/export_bin                   \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
 		 -v ${HDRS}:${HDRS}                            \
@@ -134,7 +134,7 @@ The following Docker runtime command options are explained:
 -v /var/lib/osd:/var/lib/osd:shared
     > Location of the exported container mounts. This must be a shared mount.
 
--v /opt/pwx/bin:/export_bin:shared
+-v /opt/pwx/bin:/export_bin
     > Exports the PX command line (**pxctl**) tool from the container to the host.
 ```
 
@@ -192,7 +192,7 @@ You can now start the Portworx container with the following run command:
                  -v /var/lib/osd:/var/lib/osd:shared           \
                  -v /dev:/dev                                  \
                  -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
+                 -v /opt/pwx/bin:/export_bin                   \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
