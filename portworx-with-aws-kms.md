@@ -1,3 +1,11 @@
+---
+layout: page
+title: "Run PX with AWS KMS"
+keywords: portworx, px-developer, px-enterprise, plugin, install,
+configure, container, storage, encryption
+sidebar: home_sidebar
+---
+
 # Portworx with AWS KMS
 This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS will  be used to encrypt Portworx Volumes.
 
