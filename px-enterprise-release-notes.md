@@ -32,8 +32,6 @@ sidebar: home_sidebar
 
 ### Key notes
 
-* Customers running PX 1.1.4 are recommended to upgrade to PX 1.1.6 before upgrading to PX 1.2
-
 
 
 ## 1.1.6 Release notes
