@@ -9,14 +9,14 @@ sidebar: home_sidebar
 
 ### Key Features
 
-* [AWS Auto-scaling integration with Portworx](/portworx-on-aws-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
-* [Multi-cloud Backup and Restore](/cloudsnaps.html) of Portworx Volumes 
-* [Encrypted Volumes](/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
-* [Docker V2 Plugin Support](/run-as-docker-pluginv2.html)
-* [Prometheus Integeration](/portworx-with-prometheus.html)
-* [Hashicorp Vault](\portworx-with-vault.html), [AWS KMS integration](\portworx-with-aws-kms.html) and 
+* [AWS Auto-scaling integration with Portworx](https://docs.portworx.com/portworx-on-aws-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
+* [Multi-cloud Backup and Restore](https://docs.portworx.com/cloudsnaps.html) of Portworx Volumes 
+* [Encrypted Volumes](https://docs.portworx.com/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
+* [Docker V2 Plugin Support](https://docs.portworx.com/run-as-docker-pluginv2.html)
+* [Prometheus Integeration](https://docs.portworx.com/portworx-with-prometheus.html)
+* [Hashicorp Vault](https://docs.portworx.com/portworx-with-vault.html), [AWS KMS integration](https://docs.portworx.com/portworx-with-aws-kms.html) and 
   Docker Secrets Integeration
-* [Dynamically resize](\volume-update.html#increase-volume-size) PX Volumes with no application downtime
+* [Dynamically resize](https://docs.portworx.com/volume-update.html#increase-volume-size) PX Volumes with no application downtime
 * Security updates improve PX container security
 
 ### Key Issues Addressed
