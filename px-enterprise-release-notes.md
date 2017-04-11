@@ -14,9 +14,10 @@ sidebar: home_sidebar
 * [Encrypted Volumes](/encrypted-volumes.html) Data-at-rest and Data-in-flight encryption
 * [Docker V2 Plugin Support](/run-as-docker-pluginv2.html)
 * [Prometheus Integeration](/portworx-with-prometheus.html)
+* [Hashicorp Vault](\portworx-with-vault.html), [AWS KMS integration](\portworx-with-aws-kms.html) and 
+  Docker Secrets Integeration
+* [Dynamically resize](\volume-update.html#increase-volume-size) PX Volumes with no application downtime
 * Security updates improve PX container security
-* Dynamically resize PX Volumes with no application downtime
-* Hashicorp Vault and AWS KMS integration
 
 ### Key Issues Addressed
 
