@@ -35,6 +35,9 @@ entries:
     - title: Run with Docker Compose
       url: /run-with-compose.html
       output: web
+    - title: Run with Docker Compose
+      url: /run-as-docker-pluginv2.html
+      output: web   
   - title: Manage Volumes
     output: web
     folderitems:
