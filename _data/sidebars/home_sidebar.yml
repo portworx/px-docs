@@ -56,6 +56,9 @@ entries:
     - title: Snapshots
       url: /snapshot.html
       output: web
+    - title: Volume Update
+      url: /volume-update.html
+      output: web
   - title: Schedulers
     output: web
     folderitems:
