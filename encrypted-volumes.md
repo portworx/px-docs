@@ -7,7 +7,7 @@ All the encrypted volumes are protected by a key. Portworx uses a passphrase as 
 To setup Portworx to work with a Vault endpoint follow these [instructions](portworx-with-vault.html)
 
 2. AWS KMS
-To setup Portworx to work with AWS KMS follow these [instructions](portworx-with-kms.html)
+To setup Portworx to work with AWS KMS follow these [instructions](portworx-with-aws-kms.html)
 
 ## Creating and using encrypted volumes
 

@@ -55,8 +55,7 @@ All the above Vault related fields as well as the cluster secret key can be set 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
 
 ```
-# /opt/pwx/bin/pxctl secrets login
-Enter Secrets Endpoint Type: [kvdb|vault|aws]: vault
+# /opt/pwx/bin/pxctl secrets vault login
 Enter VAULT_ADDRESS: <vault-endpoint-address>
 Enter VAULT_TOKEN: ********
 Successfully authenticated with Vault.
