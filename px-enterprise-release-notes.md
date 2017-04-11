@@ -30,9 +30,6 @@ sidebar: home_sidebar
 * Allow pxctl to run as normal user
 * Improved pxctl help text for commands like pxctl service
 
-### Key notes
-
-
 
 ## 1.1.6 Release notes
 
