@@ -5,6 +5,35 @@ keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 ---
 
+## 1.2 Release notes
+
+### Key Features
+
+* AWS Auto-scaling integration with Portworx managing EBS volumes for EC2 instances in a AWS ASG [PX on ASG](//portworx-on-aws-asg.html)
+* Multi-cloud Volume Backup and Restore of Portworx Volumes [PX Cloud Backup](/cloudsnaps.html)
+* Encrypted Volumes (Data-at-rest and Data-in-flight) encryption
+* Security updates improve PX container security
+* Dynamically Resize a PX Volumes with no application downtime
+* Hashicrop Vault and AWS KMS integration
+* Docker V2 Plugin Support [Docker Plugin](//run-as-docker-pluginv2.html)
+* Prometheus Integeration
+
+
+### Key Issues Addressed
+
+* Issues with volume auto-attach
+* Improved network diagnostics on PX container start
+* Added an alert when volume state transitions to read-only due to loss of quorum
+* Display multiple attached hosts on shared volumes
+* Improve shared volume container attach when volume is in resync state
+* Allow pxctl to run as normal user
+* Improved pxctl help text for commands like pxctl service
+
+### Key notes
+
+* Customers running PX 1.1.4 are recommended to upgrade to PX 1.1.6 before upgrading to PX 1.2
+
+
 
 ## 1.1.6 Release notes
 
