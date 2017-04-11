@@ -11,7 +11,7 @@ sidebar: home_sidebar
 
 * [AWS Auto-scaling integration with Portworx](/portworx-on-aws-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
 * [Multi-cloud Backup and Restore](/cloudsnaps.html) of Portworx Volumes 
-* [Encrypted Volumes](/encrypted-volumes.html) Data-at-rest and Data-in-flight encryption
+* [Encrypted Volumes](/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
 * [Docker V2 Plugin Support](/run-as-docker-pluginv2.html)
 * [Prometheus Integeration](/portworx-with-prometheus.html)
 * [Hashicorp Vault](\portworx-with-vault.html), [AWS KMS integration](\portworx-with-aws-kms.html) and 
