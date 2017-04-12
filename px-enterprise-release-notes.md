@@ -31,8 +31,6 @@ sidebar: home_sidebar
 
 ### Key Notes
 
-Portworx recommends customers running 1.1.4 or below to upgrade to 1.1.6 before moving to 1.2 for zero-downtime upgrades
-
 ## 1.1.6 Release notes
 
 ### Key Features
