@@ -262,7 +262,7 @@ spec:
       claimName: pv-claim
 ```
 
-## Using PetSets
+## Using PetSets (Pre StatefulSets)
 In Kubernetes pods are treated as stateless units, and if one of them is unhealthy or gets superseded by a newer version, the system just disposes it. Replication controllers provide some sort of a weak guarantee that 'N' set of pods will be kept running at a time.
 
 In contrast a PetSet, is a group of stateful pods that are backed by a strong notion of identity. Kubernetes refers to such group of pods as 'clustered applications'. Traditionally clustered applications are deployed by leveraging the fact that nodes are stable and long-lived entities with persistent storage and static ips. The goal of PetSets is to decouple this dependency and assign identites to individual instances of applications irrespective of the underlying physical infrastructure.
