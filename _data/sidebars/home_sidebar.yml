@@ -212,6 +212,9 @@ entries:
     - title: Run Lighthouse with Secure etcd
       url: /run-lighthouse-with-secure-etcd.html
       output: web
+    - title: Add Existing PX Node to Lighthouse
+      url: /add-existing-px-node-to-lighthouse.html
+      output: web
   - title: Knowledge Base
     output: web
     folderitems:
