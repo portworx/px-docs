@@ -15,7 +15,7 @@ sidebar: home_sidebar
 * [Docker V2 Plugin Support](https://docs.portworx.com/run-as-docker-pluginv2.html)
 * [Prometheus Integeration](https://docs.portworx.com/portworx-with-prometheus.html)
 * [Hashicorp Vault](https://docs.portworx.com/portworx-with-vault.html), [AWS KMS integration](https://docs.portworx.com/portworx-with-aws-kms.html) and 
-  Docker Secrets Integeration
+  Docker Secrets Integration
 * [Dynamically resize](https://docs.portworx.com/volume-update.html#increase-volume-size) PX Volumes with no application downtime
 * Security updates improve PX container security
 
