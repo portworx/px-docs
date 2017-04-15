@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Cluster Alerting Preserences"
+title: "Cluster Alerting Preferences"
 keywords: lighthouse
 sidebar: home_sidebar
 ---
