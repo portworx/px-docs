@@ -4,10 +4,10 @@ title: "Run Portworx with Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
-Portworx can run alongside Kubernetes and provide Volumes and Persistent Volumes to other applications running on Kubernetes. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
+Portworx can run alongside Kubernetes and provide Persistent Volumes to other applications running on Kubernetes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
 ## Deploy PX with Kubernetes
-From Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) portworx added native driver support which allows Dynamic Volume Provisioning. 
+Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
 For previous Kubernetes releases you can use the flexvolume approach to use Portworx Volumes as Persistent Volumes in Kubernetes. Follow [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
 
 The native portworx driver in Kubernetes supports the following features:
@@ -86,7 +86,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 Create the storageclass:
 
 ```
-# kubectl create -f
+# kubectl create -f \
    examples/volumes/portworx/portworx-volume-sc-high.yaml
 ```
 
