@@ -235,10 +235,10 @@ Example:
          volumeMounts:
          - name: test-volume
            mountPath: /test-portworx-volume
-     volumes:
-     - name: test-volume
-       persistentVolumeClaim:
-         claimName: pvcsc001
+       volumes:
+       - name: test-volume
+         persistentVolumeClaim:
+           claimName: pvcsc001
 ```
 [Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
