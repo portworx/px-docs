@@ -18,16 +18,16 @@ The native portworx driver in Kubernetes supports the following features:
 
 ## Prerequisites
 
-#### Prerequisite #1
+### Prerequisite #1
 A running Kubernetes Cluster
 
-#### Prerequisite #2
+### Prerequisite #2
 A running Portworx Cluster
 
 You need to run a Portworx instance on all of your Kubernetes nodes (master and slave). The command to run PX is provided in the next section.
 >**Note:**<br/>We recommend running a storage less node on Kubernetes master as no pods will be scheduled on that node.
 
-#### Prerequisite #3
+### Prerequisite #3
 Enable Scheduler Convergence
 
 You can configure PX to influence where Kubernetes schedules a container based on the container volume's data location.  When this mode is enabled, PX will communicate with Kubernetes and place host labels.These labels will be used in influencing Kubernetes scheduling decisions.
