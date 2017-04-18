@@ -33,26 +33,37 @@ A curl request on port 9001 also shows the stats:
 
 ![Curl Request on 9001](images/curl-request-on-9001.png "Curl Request on 9001")
 
-### Storage and Network stats
+## Storage and Network stats
+
+### Cluster stats:
 
 ```
 px_cluster_cpu_percent: average CPU usage for the PX cluster nodes in percentage 
 px_cluster_disk_available_bytes: available storage in px cluster in bytes
 px_cluster_disk_utilized_bytes: used storage in px cluster in bytes
 px_cluster_memory_utilized_percent: average memory usage for the px cluster nodes
-px_cluster_pendingio: 
-px_network_io_bytessent:
-px_network_io_received_bytes:
-px_volume_depth_io:
-px_volume_iops:
-px_volume_latency_seconds:
-px_volume_read_bytes:
-px_volume_reads:
-px_volume_readthroughput:
-px_volume_writes:
-px_colume_writethroughput:
-px_volume_written_bytes:
+px_cluster_pendingio: total bytes (read/write) being currently processed
+```
 
+### Node stats
+
+```
+px_network_io_bytessent: bytes sent by this node to other nodes
+px_network_io_received_bytes: bytes received by this node from other nodes
+```
+
+### Volume stats
+
+```
+px_volume_depth_io:number of i/o operations being served at once
+px_volume_iops: operations per second
+px_volume_latency_seconds: time spent by
+px_volume_read_bytes: total bytes read from volume
+px_volume_reads: number of read operations served by the volume
+px_volume_readthroughput: bytes read per second
+px_volume_writes: number of write operations served by the volume
+px_colume_writethroughput:bytes written per second
+px_volume_written_bytes: total bytes written to the volume 
 ```
 
 
