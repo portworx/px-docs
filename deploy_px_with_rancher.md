@@ -18,7 +18,7 @@ For availability zone, use either "West N. California", or "East N. Virginia".  
 * For US-East (N. Virginia), use **ami-d0651bc7** as the AMI image name.
 * Specify **128GB** as the root size
 
-![Configuring Instance](images/rancherpx.png "Depoloying Portworx with Rancher")
+![Configuring Instance](images/rancherpx.png "Depoloying Portworx with Rancher"){:height="2426px" width="904px"}
 
 ### Step 3 : Advanced Options
 
