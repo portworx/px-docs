@@ -19,7 +19,7 @@ Follow the instuctions from Azure documentation [How to attach a data disk to a 
 Your deployment will look something like following:
 
 
-![Azure Add Disk](images/azure-add-disk.png "Add Disk")
+![Azure Add Disk](images/azure-add-disk.png "Add Disk"){:width="1483px" height="477px"}
 
 ### Step 3: Install Docker for the appropriate OS Version 
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
@@ -36,10 +36,10 @@ Alternatively, you can either run the 'px_bootstrap' script from curl, or constr
 
 From the server node running px-enterprise container, you should see the following status:
 
-![PX-Cluster on Azure](images/azure-pxctl-status.png "PX-Cluster on Azure")
+![PX-Cluster on Azure](images/azure-pxctl-status.png "PX-Cluster on Azure"){:width="807px" height="443px"}
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
 
-![Azure-Cluster on Lighthouse](images/azure-cluster-on-lighthouse-updated.png "Azure-Cluster on Lighthouse")
+![Azure-Cluster on Lighthouse](images/azure-cluster-on-lighthouse-updated.png "Azure-Cluster on Lighthouse"){:width="1404px" height="601px"}
 
