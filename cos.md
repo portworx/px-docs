@@ -27,10 +27,10 @@ Here is an example output from [fio](https://github.com/axboe/fio) when measurin
 The graph below shows the sequential and random read and write performance on high and low CoS volume types:
 
 ### Random Read and Writes
-![CoS Random](images/cos-random.png)
+![CoS Random](images/cos-random.png){:height="2230px" width="726px"}
 
 ### Sequential Read and Writes
-![CoS Sequential](images/cos-seq.png)
+![CoS Sequential](images/cos-seq.png){:height="1204px" width="376px"}
 
 ## Try it out on Amazon
 
@@ -41,7 +41,7 @@ Here, we create volumes of 3 different volume types in AWS.  Refer to [AWS EBS v
 * Create one 100GB standard volume
 * Create one 1000GB IO optimized volume
 
-![EBS Volumes](images/cos.png)
+![EBS Volumes](images/cos.png){:height="1004px" width="246px"}
 
 Here is what you should see when you list your block devices:
 
