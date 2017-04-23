@@ -25,7 +25,7 @@ docker run -d -p 49001:8080 -v jenkins_vol1:/var/jenkins_home:z -t jenkins
 Bring up a browser to the host where you launched Jenkins on port 49001.
 You should see 
 
-![jenkins1](images/jenkins1.png){:height="1998px" width="1170px"}
+![jenkins1](images/jenkins1.png){:width="1998px" height="1170px"}
 
 Run "docker ps" to find the CONTAINER ID of the Jenkins container:
 
@@ -45,12 +45,12 @@ docker exec -it 9dfa72c4328c cat /var/jenkins_home/secrets/initialAdminPassword
 
 Install the Suggested Plugins
 
-![Install Suggested Plugins](images/jenkins2.png){:height="1998px" width="1184px"}
+![Install Suggested Plugins](images/jenkins2.png){:width="1998px" height="1184px"}
 
 Configure the Admin User
 
-![Configure Admin User](images/jenkins3.png){:height="1992px" width="1156px"}
+![Configure Admin User](images/jenkins3.png){:width="1992px" height="1156px"}
 
 Start Using Jenkins
 
-![Start Using Jenkins](images/jenkins4.png){:height="2560px" width="1258px"}
+![Start Using Jenkins](images/jenkins4.png){:width="2560px" height="1258px"}
