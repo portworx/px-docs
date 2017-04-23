@@ -35,4 +35,4 @@ PWX_KVDB_USER_PWD           Username and password for etcd2 as username:password
 ./pwreset 
 ```
 
-![LH-UPDATE-PASSWORD](images/lh-update-password.png "Update Password")
+![LH-UPDATE-PASSWORD](images/lh-update-password.png "Update Password"){:width="1374px" height="986px"}

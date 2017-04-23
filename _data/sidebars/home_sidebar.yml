@@ -215,7 +215,7 @@ entries:
     - title: Add Existing PX Node to Lighthouse
       url: /add-existing-px-node-to-lighthouse.html
       output: web
-    - title: Cluster Alerting Preserences 
+    - title: Cluster Alerting Preferences 
       url: /Lighthouse-Manage-Clusters.html
       output: web
   - title: Knowledge Base

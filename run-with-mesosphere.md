@@ -5,7 +5,7 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storag
 sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 ---
-You can use Portworx to provide docker volumes for Mesos and Mesosphere through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
+You can use Portworx to provide docker volumes for Mesos and Mesosphere through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7, 1.8, 1.9.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
 
 The Marathon service maps options through the Docker command line to reference the Portworx volume driver and associated volume.
 
@@ -23,7 +23,7 @@ Portworx now provides an AWS CloudFormation Template that deploys a Portworx-rea
 
 ## Step 1:  Launch DC/OS CloudFormation Template 
 Click Here:  
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/px-ready-dcos/px-ready-dcos-cf-template-03102017" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/portworx-dcos-templates/dcos1.9.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
 Specify the EC2 instance type for the Mesos slaves, and the size of the volume (8GB - 4TB) that each slave will contribute
 to the Portworx storage pool.
 
@@ -50,7 +50,7 @@ Portworx can now be deployed through the [Mesosphere Universe](https://github.co
 The `cmdargs` value should be:  
 
 ```
--c mypxcluster -s /dev/xvdc -k etcd://<IP>:<PORT>
+-c mypxcluster -s /dev/sdc -k etcd://<IP>:<PORT>
 ``` 
 
 where `IP:PORT` corresponds to the 'etcd' service URL from Step 2.
@@ -98,7 +98,7 @@ You can deploy Portworx using the Mesosphere universe or through Marathon.  Foll
 
 ### To Deploy Portworx through Universe:
 Portworx is now available through the Mesosphere Universe catalog of services.
-![Portworx on Universe](/images/universe.png)
+![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
 
 Deploying Portworx through Mesosphere Universe provides great ease of deployment.
 Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/1.8/portworx) 
