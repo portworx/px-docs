@@ -75,6 +75,6 @@ docker  run -d -P -e constraint:pxfabric==px-cluster1 --name db mysql
 
 
 Or, from the UCP GUI for launching a container, specify a constraint for `pxfabric` as follows:
-![UCP GUI constraints](images/constraints.png)
+![UCP GUI constraints](images/constraints.png){:width="791px" height="148px"}
 
 For more information on Docker Filters and Constraints, see [Swarm filters](https://docs.docker.com/swarm/scheduler/filter/).

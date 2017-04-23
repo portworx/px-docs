@@ -98,7 +98,7 @@ You can deploy Portworx using the Mesosphere universe or through Marathon.  Foll
 
 ### To Deploy Portworx through Universe:
 Portworx is now available through the Mesosphere Universe catalog of services.
-![Portworx on Universe](/images/universe.png)
+![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
 
 Deploying Portworx through Mesosphere Universe provides great ease of deployment.
 Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/1.8/portworx) 
