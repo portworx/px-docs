@@ -17,6 +17,8 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 font-size: 2em;
     float: right;
     padding-right: 30px;
+        background: none;
+    border: 0;
 }
 #sidebar {
 	padding:10px;
@@ -57,6 +59,17 @@ padding:0;
 	background: #F15A22;
 }
 
+amp-img{
+ max-width: 100%;
+}
+
+.launch-icon {
+max-width:64px
+}
+.slack-icon {
+max-width:48px;
+}
+
     </style>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 
@@ -86,7 +99,7 @@ padding:0;
 </h1>
 
 {{ content | 
-   replace: '<img', '<amp-img layout="responsive" ' 
+   replace: '<img', '<amp-img layout="responsive" '
 }}
 </div>
 
