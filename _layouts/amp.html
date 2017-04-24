@@ -93,9 +93,18 @@ max-width:48px;
   {% if content contains "<!-- Vimeo -->" %}
     <script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>
   {% endif %}
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://docs.portworx.com{{ page.url }}" />
+  </noscript>
   </head>
   <body>
 
+<noscript>
+Javascript required for AMP version of Portworx documentation. Redirecting to standard documentation.
+<br/>
+<br/>
+If you are not redirected, <a href="https://docs.portworx.com{{ page.url }}">click here.</a>
+</noscript>
           {% include amp-sidebar.html %}
 
 
