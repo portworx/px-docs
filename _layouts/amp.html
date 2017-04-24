@@ -82,8 +82,12 @@ max-width:48px;
     <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
   <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
-  <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
-
+  {% if content contains "<!-- Youtube -->" %}
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+  {% endif %}
+  {% if content contains "<!-- Vimeo -->" %}
+    <script async custom-element="amp-vimeo" src="https://cdn.ampproject.org/v0/amp-vimeo-0.1.js"></script>
+  {% endif %}
   </head>
   <body>
 
@@ -107,6 +111,7 @@ max-width:48px;
 {{ content | 
    replace: '<img', '<amp-img layout="responsive" '
 }}
+
 </div>
 
 </body>
