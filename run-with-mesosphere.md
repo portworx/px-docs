@@ -23,7 +23,7 @@ Portworx now provides an AWS CloudFormation Template that deploys a Portworx-rea
 
 ## Step 1:  Launch DC/OS CloudFormation Template 
 Click Here:  
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/portworx-dcos-templates/dcos1.9.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/portworx-dcos-templates/dcos1.9.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" width="144px" height="27px"></a></p>
 Specify the EC2 instance type for the Mesos slaves, and the size of the volume (8GB - 4TB) that each slave will contribute
 to the Portworx storage pool.
 
