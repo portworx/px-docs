@@ -17,13 +17,13 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 * Is radically simple.
 
 **Try It Now!**
-[![](/images/launch.png){:height="64px" width="64px"}](/get-started-asap.html)
+[![](/images/launch.png){:height="64px" width="64px" .launch-icon}](/get-started-asap.html)
 
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
 ## Join us on Slack!
 
-[![](/images/slack.png){:height="48px" width="48px"}](http://slack.portworx.com)
+[![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
 
 ## PX-Developer
 
