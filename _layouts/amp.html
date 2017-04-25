@@ -72,6 +72,10 @@ amp-img{
  max-width: 100%;
 }
 
+amp-img > img{
+  object-fit: contain;
+}
+
 .launch-icon {
 max-width:64px
 }
@@ -154,7 +158,7 @@ Javascript required for AMP version of Portworx documentation. <a href="https://
 </h1>
 
 {{ content | 
-   replace: '<img', '<amp-img layout="responsive" '
+   replace: '<img', '<amp-img layout="" '
 }}
 
 </div>
