@@ -21,14 +21,14 @@ Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher
 
 >**Note** : Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.
 
-For trial/demo purposes, we have created "PX-ready" AMI images in AWS:
+For trial/demo purposes, Portworx has created "PX-ready" AMI images in AWS:
 * If deploying on AWS in US-East-2, then use this AMI : ami-c64a6da3
 * If deploying on AWS in US-West-2, then use this AMI : ami-767fe016
 
 If not deploying in AWS, the customers must ensure that each host has at least one non-root disk or partition.
 
 For the the AWS security group (SG), make sure the standard Rancher ports are open as per 
-https://docs.rancher.com/rancher/v1.2/en/hosts/amazon/.
+[Rancher requirements](https://docs.rancher.com/rancher/v1.2/en/hosts/amazon/).
 In addition, the following inbound TCP ports should be opened in the SG:  2379, 2380, 9001 - 9005, 
 or for simplicity you could open up all TCP ports for the given SG.    
 
@@ -47,7 +47,7 @@ Set "Enable Backups" and "Debug" to False.
 Look through the logs to note the published client URL, and make note of that. 
 The client URL will have the following form:
 ```
-etcdserver: published {Name:10-42-207-178 ClientURLs:[http://10.42.207.178:2379]} to cluster 1a809f61d71fe85a
+etcdserver: published {Name:10-42-207-178 ClientURLs:[http://10.42.207.178:2379]} ...
 ```
 
 ## Step 4: Launch Portworx
@@ -60,6 +60,9 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
 ## Step 5: Label hosts that run Portworx
+
+If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
+so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
 
 If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
 
