@@ -1,6 +1,16 @@
 {% include custom/sidebarconfigs.html %}
 
 <amp-sidebar id="sidebar" layout="nodisplay" side="right">
+
+  <amp-img class="amp-close-image"
+    src="/images/ic_close_black_18dp_2x.png"
+    width="20"
+    height="20"
+    alt="close sidebar"
+    on="tap:sidebar.close"
+    role="button"
+    tabindex="0"></amp-img>
+
     <h3>Portworx Documentation</h3>
     <amp-accordion>
     {% for entry in sidebar %}
