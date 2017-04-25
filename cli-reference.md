@@ -950,6 +950,7 @@ COMMANDS:
      scan            scan for bad blocks
      alerts          System alerts
      stats           System stats
+     logging-url, l  Cluster wide logging-url settings
 
 OPTIONS:
    --help, -h  show help
@@ -1158,6 +1159,44 @@ Node	Bytes Sent	Bytes Received
 0	17 TB		278 GB
 1	0 B		0 B
 2	0 B		0 B
+```
+
+#### pxctl service logging-url
+Use pxctl service logging-url to show, set and reset logging-url cluster wide.
+```
+sudo /opt/pwx/bin/pxctl service logging-url
+NAME:
+   pxctl service logging-url - Cluster wide logging-url settings
+
+USAGE:
+   pxctl service logging-url command [command options] [arguments...]
+
+COMMANDS:
+     show, l   Shows currently configured logging-url
+     set, s    Sets the logging-url for the cluster
+     reset, r  Resets the logging-url for the cluster
+
+OPTIONS:
+   --help, -h  show help
+```
+```
+sudo /opt/pwx/bin/pxctl service logging-url set http://www.statspoint.com
+Setting logging-url  http://www.statspoint.com ...
+Successfully updated logging-url to http://www.statspoint.com
+```
+```
+sudo /opt/pwx/bin/pxctl service logging-url show
+logging-url: http://www.statspoint.com
+```
+```
+sudo /opt/pwx/bin/pxctl service logging-url reset
+Resetting logging-url ...
+Successfully reset logging-url
+```
+```
+Reset will remove the configured logging-url.
+sudo /opt/pwx/bin/pxctl service logging-url show
+logging-url: Not configured.
 ```
 
 ### Host related operations
@@ -1423,4 +1462,5 @@ vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Do
 vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
 volshared1		13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
 ```
+
 
