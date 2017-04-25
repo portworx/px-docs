@@ -328,7 +328,7 @@ Example:
           volumeID: "<vol-id>"
           fsType:   "<fs-type>"
 ```
-Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
+Make sure to replace &lt;vol-id&gt;, &lt;size&gt; and &lt;fs-type&gt; in the above spec with
 the ones that you used while creating the volume.
 
 [Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
