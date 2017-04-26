@@ -5,3 +5,5 @@ install:
  - bundle install
 script:
  - "./build/deploy.sh"
+notifications:
+  email: false
