@@ -6,6 +6,9 @@ BASE="${DIR}/.."
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "gh-pages" ]; then
     cd ${BASE}
     rm -rf "${BASE}/_site"
+
+    mv ${BASE}/_layouts/amp.html ${BASE}/_layouts/page.html
+
     bundle exec jekyll build
 
     cd "${BASE}/_site"
