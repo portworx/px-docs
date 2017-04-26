@@ -7,7 +7,7 @@ sidebar: home_sidebar
 ## Introduction
 [Apache Cassandra](http://cassandra.apache.org/), first developed at Facebook, is an open source distributed database management system designed to handle large amounts of data across commodity servers.
 
-Cassandra has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level, a typical question is: should I ensure high-availability of my database through Cassandra itself, through my storage, or a combination of the two? This Production Operations Guide to Running Cassandra is aimed at helping answer this question by showing how to use Cassandra replication alongside Portworx to speed up recovery times, increase density and simplify operations.
+Cassandra has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level by Portworx, a typical question is: should I ensure high-availability of my database through Cassandra itself, through my storage, or a combination of the two? This Production Operations Guide to Running Cassandra is aimed at helping answer this question by showing how to use Cassandra replication alongside Portworx to speed up recovery times, increase density and simplify operations.
 
 ## Background on Cassandra replication
 Cassandra is designed for bare-metal deployments with a Cassandra instance tied to a physical server.  This architecture creates a problem when deploying multiple containerized instances of Cassandra via your scheduling software like Kubernetes, Mesos or Docker Swarm since Cassandra containers can be scheduled on hosts that do not have the appropriate data.  We will see how to solve this below, but it is first important to understand how Cassandra's replication works.
@@ -58,14 +58,14 @@ The two most common ways to configure multi-datacenter clusters are:
 
 #### Two replicas in each datacenter
 
-This configuration tolerates the failure of a single node per replication group and still allows local reads at a consistency level of ONE.  In this mode, we recommend setting the Portworx volume replication to a factor of 1.  Portworx will guarantee that the data is placed locally to the node on which the Cassandra instance is deployed.  Furthermore, Portworx will place the data associated with different instances of a cluster on nodes that satisfy the NetworkTopologyStrategy automatically.
+This configuration uses only Cassandra replication and tolerates the failure of a single node per replication group, while still allowing local reads at a consistency level of ONE.  In this mode, we recommend setting the Portworx volume replication to a factor of 1, which means that Portworx will not replicate the volume.  However, you should still use Portworx, because it will guarantee that the data is placed locally to the node on which the Cassandra instance is deployed by influencing the scheduling decision.  Furthermore, Portworx will place the data associated with different instances of a cluster on nodes that satisfy the NetworkTopologyStrategy automatically, alllowing you to get the benefits of the NetworkTopologyStrategy with the ease of the SimpleStrategy.
 
 #### Three replicas in each datacenter
 
-This configuration tolerates either the failure of a one node per replication group at a strong consistency level of LOCAL_QUORUM or multiple node failures per datacenter using consistency level ONE.
+This confirguation uses both Cassandra replication and Portworx replication together and tolerates either the failure of a one node per replication group at a strong consistency level of LOCAL_QUORUM or multiple node failures per datacenter using consistency level ONE.
 Asymmetrical replication groupings are also possible. For example, you can have three replicas in one data center to serve real-time application requests and use a single replica elsewhere for running analytics.
 
-When three replicas are required, Portworx recommends using a Portworx replication factor of 2.  This allows you to achieve **faster recovery times** on instance or node failures with a space utilization overhead of 30%.  The secondary Portworx-replicated copies are also placed on nodes such that it meets the NetworkTopologyStrategy constraints.  That is, the data replicated by Portworx itself is on a node in a different rack.
+When three replicas are required, Portworx recommends using a Portworx replication factor of 2.  This means that for any volume, Cassandra will replicate it once (as in the Two replica example above), and Portworx will also replicate the volume once.  This allows you to achieve **faster recovery times** on instance or node failures with a space utilization overhead of only 30%.  The secondary Portworx-replicated copies are also placed on nodes such that it meets the NetworkTopologyStrategy constraints.  That is, the data replicated by Portworx itself is on a node in a different rack.
 
 ### Achieving Higher Density
 A Portworx volume is mounted at `/var/lib/cassandra` in a Cassandra instance.  This volume and its namespace is isolated from other Dockerized Cassandra instances running on the same host.  By leveraging such volume isolation, you can run multiple Cassandra instances (that are part of different clusters) on the same node.

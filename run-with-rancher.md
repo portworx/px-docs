@@ -17,14 +17,52 @@ Here is a short video that shows how to configure and run Portworx with Rancher:
 
 Follow the instructions for installing [Rancher](http://docs.rancher.com/rancher/latest/en/quick-start-guide/).
 
-If deploying PX-Enterprise, then you will need to add a "custom catalog" from the Rancher Admin->Settings menu.
-For PX-Enterprise, please add https://github.com/portworx/rancher.git as the catalog.
-You will also need to contact "support@portworx.com" to obtain a Lighthouse Cluster token.
+## Step 2: Create/Configure PX-Ready Rancher Hosts
 
-If deploying on AWS in US-East, then use the AMI rancher-100g-9-19 (ami-d0651bc7)
+>**Note** : Portworx requires that Rancher hosts have at least one non-root disk or partition to contribute.
 
+For trial/demo purposes, Portworx has created "PX-ready" AMI images in AWS:
+* If deploying on AWS in US-East-2, then use this AMI : ami-c64a6da3
+* If deploying on AWS in US-West-2, then use this AMI : ami-767fe016
 
-## Step 2: Label hosts that run Portworx
+If not deploying in AWS, the customers must ensure that each host has at least one non-root disk or partition.
+
+For the the AWS security group (SG), make sure the standard Rancher ports are open as per 
+[Rancher requirements](https://docs.rancher.com/rancher/v1.2/en/hosts/amazon/).
+In addition, the following inbound TCP ports should be opened in the SG:  2379, 2380, 9001 - 9005, 
+or for simplicity you could open up all TCP ports for the given SG.    
+
+In general, Portworx will require ports 2379, 2380, 9001-9005 to be open for inbound traffic.
+
+When configuring the Rancher hosts using the provided AMI:
+* The number of instances should be min(3)
+* The type of instance should be min(t2.medium)   
+* The root size should be min(128)    
+* The 'ssh' user should be "ubuntu"
+
+## Step 3: Launch an 'etcd' stack
+
+Launch an instance of the 'etcd' stack.
+Set "Enable Backups" and "Debug" to False.
+Look through the logs to note the published client URL, and make note of that. 
+The client URL will have the following form:
+```
+etcdserver: published {Name:10-42-207-178 ClientURLs:[http://10.42.207.178:2379]} ...
+```
+
+## Step 4: Launch Portworx
+
+From the Library Catalog, select the Portworx volume plugin driver.  Configure with the following parameters:
+* Volume Driver Name: pxd
+* Cluster ID: user-defined/arbitrary
+* Key-Value Database: of the form:  "etcd://10.42.207.178:2379", where the URL come from the above etcdserver
+* Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](run-with-docker.html#run-px)
+* Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
+
+## Step 5: Label hosts that run Portworx
+
+If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
+so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
 
 If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
 
@@ -42,7 +80,7 @@ sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
 
 * Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric called "px-cluster1".
 
-## Step 3: Launch jobs, specifying host affinity
+## Step 4: Launch jobs, specifying host affinity
 
 When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host (Ex: "px-fabric=px-cluster1)".
 
