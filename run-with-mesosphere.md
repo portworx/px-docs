@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "Run Portworx with Mesos and Mesosphere"
+title: "Run Portworx with Mesosphere/DCOS"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage
 sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 ---
-You can use Portworx to provide docker volumes for Mesos and Mesosphere through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7, 1.8, 1.9.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
+You can use Portworx to provide docker volumes for Mesos and Mesosphere/DCOS through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7, 1.8, 1.9.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
 
 The Marathon service maps options through the Docker command line to reference the Portworx volume driver and associated volume.
 
@@ -46,7 +46,7 @@ dcos task | grep etcd-server | tail -n 1 | awk '{printf "etcd://%s:%s\n", $6, $8
 ```
 
 ## Step 3: Launch Portworx through Mesosphere Universe
-Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/1.8/portworx)
+Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/portworx)
 The `cmdargs` value should be:  
 
 ```
@@ -58,9 +58,9 @@ where `IP:PORT` corresponds to the 'etcd' service URL from Step 2.
 
 # Install Portworx Manually
 
-## Step 1: Install Mesosphere DC/OS CLI or Apache Mesos
-For Mesosphere, follow the instructions for installing [Mesosphere DC/OS](https://dcos.io/install) and the [DC/OS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
-Use the DC/OS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
+## Step 1: Install Mesosphere DCOS CLI or Apache Mesos
+For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
+Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
 
@@ -101,7 +101,7 @@ Portworx is now available through the Mesosphere Universe catalog of services.
 ![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
 
 Deploying Portworx through Mesosphere Universe provides great ease of deployment.
-Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/1.8/portworx) 
+Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx) 
 
 ### To Deploy Portworx through Marathon:
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
