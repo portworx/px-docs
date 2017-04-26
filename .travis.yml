@@ -1,7 +1,8 @@
 language: ruby
+rvm:
+ - 2.2
 cache: bundler
 install:
- - gem install activesupport -v '5.0.2'
  - bundle install
 script:
  - "./build/deploy.sh"
