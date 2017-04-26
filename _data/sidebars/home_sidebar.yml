@@ -65,7 +65,7 @@ entries:
   - title: Schedulers
     output: web
     folderitems:
-     - title: Run Portworx with Mesosphere DCOS
+    - title: Run Portworx with Mesosphere DCOS
       url: /run-with-mesosphere.html
       output: web
     - title: Run Portworx with Kubernetes
