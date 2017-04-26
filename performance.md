@@ -40,14 +40,14 @@ from PCSD - Product Collaboration Systems Division
   * PX-Enterprise v1.0.8
 
 ### Random read performance overhead
-![Perf Read](images/perf-read.png)
+![Perf Read](images/perf-read.png){:width="655px" height="199px"}
 
 ### Random write performance overhead
-![Perf Write](images/perf-write.png)
+![Perf Write](images/perf-write.png){:width="633px" height="186px"}
 
 ### mysql performance overhead
 In this example, we measure the performance as measured by running a `mysql` workload against the baremetal server and then against a PX volume on that same server.
-![Perf mysql](images/perf-mysql.png)
+![Perf mysql](images/perf-mysql.png){:width="664px" height="199px"}
 
 ## Containerized NoSQL Workloads: Cassandra performance gains with running PX-Enterprise
 
@@ -62,21 +62,21 @@ The Read OPS/sec and Write OPS/sec improvements graphs show how running with PX-
 
 ### Cassandra with PX-Enterprise - Read OPS/sec improvements
 
-![Cassandra Reads Ops](images/Cassandra-PX Read OPS.png)
+![Cassandra Reads Ops](images/Cassandra-PX Read OPS.png){:width="1056px" height="648px"}
 
 ### Cassandra with PX-Enterprise - Write OPS/sec improvements
 
-![Cassandra Writes Ops](images/Cassandra-PX Write Ops.png)
+![Cassandra Writes Ops](images/Cassandra-PX Write Ops.png){:width="1056px" height="648px"}
 
 The latency graphs below demonstrate the network-optimized replication performance of PX-Enterprise as it accelerates cassandra performance by delivering IO at very low latencies to the Cassandra Container
 
 ### Cassandra with PX-Enterprise - Read Latency improvements
 
-![Cassandra Read Lats](images/Cassandra-PX Read Latencies.png)
+![Cassandra Read Lats](images/Cassandra-PX Read Latencies.png){:width="1066px" height="650px"}
 
 ### Cassandra with PX-Enterprise - Write Latency improvements
 
-![Cassandra Write Lats](images/Cassandra-PX Write latencies.png)
+![Cassandra Write Lats](images/Cassandra-PX Write latencies.png){:width="1054px" height="696px"}
 
 
 

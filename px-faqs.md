@@ -78,4 +78,4 @@ Please see the [config-json file definition](/config-json.html ).
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
 
 ## Did we miss your question? 
-If so, please let us know here: <a class="email" title="Submit feedback" href="#" onclick="javascript:window.location='mailto:{{site.feedback_email}}?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page: ' + window.location.href;"><i class="fa fa-envelope-o"></i> Feedback</a>
+If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:{{site.feedback_email}}?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>

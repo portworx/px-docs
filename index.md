@@ -5,7 +5,7 @@ keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
 ---
 
-<a href="https://github.com/portworx/px-docs"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/portworx/px-docs"><img class="topfork" width="149px" height="149px" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
 Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
 
@@ -17,13 +17,13 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 * Is radically simple.
 
 **Try It Now!**
-[![](/images/launch.png)](/get-started-asap.html)
+[![](/images/launch.png){:height="64px" width="64px" .launch-icon}](/get-started-asap.html)
 
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
 ## Join us on Slack!
 
-[![](/images/slack.png)](http://slack.portworx.com)
+[![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
 
 ## PX-Developer
 
@@ -38,9 +38,7 @@ PX-Developer features:
 * Support for up three servers per cluster and 1 TB per volume
 * Requires an etcd or Consul key/value store
 
-<FORM METHOD="LINK" ACTION="get-started-px-developer.html">
-<INPUT TYPE="submit" VALUE="Get Started with PX-Developer">
-</FORM>
+<a href="get-started-px-developer.html" class="btn btn-primary">Get Started with PX-Developer</a>
 <br/>
 
 ## PX-Enterprise
@@ -60,9 +58,7 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 * Command-line interface
 * RESTful API for automation and statistics
 
-<FORM METHOD="LINK" ACTION="get-started-px-enterprise.html">
-<INPUT TYPE="submit" VALUE="Get Started with PX-Enterprise">
-</FORM>
+<a href="get-started-px-enterprise.html" class="btn btn-primary">Get Started with PX-Enterprise</a>
 
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.

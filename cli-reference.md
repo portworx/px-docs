@@ -990,7 +990,7 @@ USAGE:
 ```
    
 #### pxctl service diags
-When there is an operational failure, you can use pxctl service diags <name-of-px-container> to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
+When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
 ```
 sudo /opt/pwx/bin/pxctl service diags --help
 NAME:
@@ -1199,7 +1199,7 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 ```
 Note: The volume resides on 2 different nodes than the one where it was attached in the above example. Hence the warning.
 
-For an encrypted volume, if you are not using the cluster secret pass in '--secret_key <key>'. Otherwise the cluster secret key will be used.
+For an encrypted volume, if you are not using the cluster secret pass in '--secret_key &lt;key&gt;'. Otherwise the cluster secret key will be used.
 ```
 sudo /opt/pwx/bin/pxctl host attach cliencr
 Volume successfully attached at: /dev/mapper/pxd-enc1013237432577873530
