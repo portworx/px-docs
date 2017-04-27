@@ -11,7 +11,7 @@ amp: true
         <link rel="amphtml" href="https://amp-docs.portworx.com{{ page.url }}">
         <link rel="canonical" href="https://docs.portworx.com{{ page.url }}">
 
-        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1">
 
         <style amp-custom>
             {% include amp.bootstrap.css %}
@@ -56,8 +56,8 @@ amp: true
 
         {% include amp-sidebar.html %}
 
-        <div class="row portworx-logo">
-            <div class="col-xs-6">
+        <div class="row portworx-top">
+            <div class="col-xs-6 portworx-logo">
                 <a href="/">
                     <amp-img src="images/px-logo.png" height="50px" width="138px">
                 </a>
