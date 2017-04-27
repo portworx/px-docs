@@ -23,4 +23,4 @@ The `px_etcd.json` file assumes that :
 * The same network interfaces will be used for `mgmt` and `data` traffic
 
 If customization is needed here, then users should update the `args` section for the `portworx` definition
-to provide more specific [command line arguments](/run-with-docker.html#run-px).   
+to provide more specific [command line arguments](https://docs.portworx.com/run-with-docker.html#run-px).   
