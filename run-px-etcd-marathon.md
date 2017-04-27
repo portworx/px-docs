@@ -14,7 +14,7 @@ definition can be used.
 To deploy the converged Portworx/etcd application group:
 
 * Download the DCOS CLI
-* Download the px_etcd.json file
+* Download the [px_etcd.json file](/px_etcd.json?raw=true)
 * Run the command : `dcos marathon group add px_etcd.json`
 
 The `px_etcd.json` file assumes that :
