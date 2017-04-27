@@ -6,6 +6,9 @@ install:
  - bundle install
 script:
  - "./build/deploy.sh"
+branches:
+  only:
+   - gh-pages
 notifications:
   email: false
 
