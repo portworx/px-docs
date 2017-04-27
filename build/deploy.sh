@@ -16,6 +16,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "gh-pages" ]; 
     echo "amp-docs.portworx.com" > CNAME
 
     git init
+
+    git config --global user.email "no-reply@portworx.com"
+    git config --global user.name "Build Slave"
+
     git add .
     git commit -am 'AMP generated site'
 
