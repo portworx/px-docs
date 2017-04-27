@@ -1,0 +1,276 @@
+{
+    "id": "/portwrx",
+    "apps": [
+        {
+            "args": [
+                "-advertise-client-urls",
+                "http://etcd1.marathon.l4lb.thisdcos.directory:5001",
+                "-listen-client-urls",
+                "http://0.0.0.0:5001"
+            ],
+            "backoffFactor": 1.15,
+            "backoffSeconds": 1,
+            "cmd": null,
+            "constraints": [],
+            "container": {
+                "docker": {
+                    "forcePullImage": false,
+                    "image": "quay.io/coreos/etcd:v2.2.0",
+                    "network": "BRIDGE",
+                    "parameters": [],
+                    "portMappings": [
+                        {
+                            "containerPort": 5001,
+                            "hostPort": 5001,
+                            "labels": {
+                                "VIP_0": "/etcd1:5001"
+                            },
+                            "name": "etcd5001",
+                            "protocol": "tcp",
+                            "servicePort": 10108
+                        },
+                        {
+                            "containerPort": 12380,
+                            "hostPort": 12380,
+                            "labels": {
+                                "VIP_1": "/etcd1:12380"
+                            },
+                            "name": "etcd12380",
+                            "protocol": "tcp",
+                            "servicePort": 10109
+                        },
+                        {
+                            "containerPort": 12379,
+                            "hostPort": 12379,
+                            "labels": {
+                                "VIP_2": "/etcd1:12379"
+                            },
+                            "name": "etcd12379",
+                            "protocol": "tcp",
+                            "servicePort": 10110
+                        }
+                    ],
+                    "privileged": false
+                },
+                "type": "DOCKER",
+                "volumes": [
+                    {
+                        "containerPath": "var",
+                        "mode": "RW",
+                        "persistent": {
+                            "constraints": [],
+                            "size": 256,
+                            "type": "root"
+                        }
+                    }
+                ]
+            },
+            "cpus": 0.3,
+            "dependencies": [],
+            "deployments": [],
+            "disk": 0,
+            "env": {},
+            "executor": "",
+            "fetch": [],
+            "gpus": 0,
+            "healthChecks": [
+                {
+                    "delaySeconds": 15,
+                    "gracePeriodSeconds": 300,
+                    "intervalSeconds": 60,
+                    "maxConsecutiveFailures": 3,
+                    "path": "/health",
+                    "portIndex": 0,
+                    "protocol": "MESOS_HTTP",
+                    "timeoutSeconds": 20
+                }
+            ],
+            "id": "/portwrx/etcd1",
+            "instances": 1,
+            "ipAddress": null,
+            "killSelection": "YOUNGEST_FIRST",
+            "labels": {},
+            "maxLaunchDelaySeconds": 3600,
+            "mem": 256,
+            "portDefinitions": [
+                {
+                    "labels": {},
+                    "name": "default",
+                    "port": 10108,
+                    "protocol": "tcp"
+                },
+                {
+                    "labels": {},
+                    "port": 10109,
+                    "protocol": "tcp"
+                },
+                {
+                    "labels": {},
+                    "port": 10110,
+                    "protocol": "tcp"
+                }
+            ],
+            "ports": [
+                10108,
+                10109,
+                10110
+            ],
+            "readinessChecks": [],
+            "requirePorts": true,
+            "residency": {
+                "relaunchEscalationTimeoutSeconds": 3600,
+                "taskLostBehavior": "WAIT_FOREVER"
+            },
+            "secrets": {},
+            "storeUrls": [],
+            "taskKillGracePeriodSeconds": null,
+            "tasksHealthy": 1,
+            "tasksRunning": 1,
+            "tasksStaged": 0,
+            "tasksUnhealthy": 0,
+            "unreachableStrategy": "disabled",
+            "upgradeStrategy": {
+                "maximumOverCapacity": 0,
+                "minimumHealthCapacity": 0.5
+            },
+            "uris": [],
+            "user": null,
+            "version": "2017-04-21T22:55:32.114Z",
+            "versionInfo": {
+                "lastConfigChangeAt": "2017-04-21T22:55:32.114Z",
+                "lastScalingAt": "2017-04-21T22:55:32.114Z"
+            }
+        },
+        {
+            "args": [
+                "--name pxcluster.mesos",
+                "-k etcd://etcd1.marathon.l4lb.thisdcos.directory:5001 -c px1234 -a -f"
+            ],
+            "backoffFactor": 1.15,
+            "backoffSeconds": 1,
+            "cmd": null,
+            "constraints": [
+                [
+                    "hostname",
+                    "UNIQUE"
+                ]
+            ],
+            "container": {
+                "docker": {
+                    "forcePullImage": true,
+                    "image": "portworx/px-dev:dcos-1.8",
+                    "network": "HOST",
+                    "parameters": [
+                        {
+                            "key": "volume",
+                            "value": "/run/docker/plugins:/run/docker/plugins"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/etc/pwx:/etc/pwx"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/var/lib/osd:/var/lib/osd:shared"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/dev:/dev"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/opt/pwx/bin:/export_bin:shared"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/var/run/docker.sock:/var/run/docker.sock"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/var/cores:/var/cores"
+                        },
+                        {
+                            "key": "volume",
+                            "value": "/lib/modules:/lib/modules"
+                        }
+                    ],
+                    "portMappings": [],
+                    "privileged": true
+                },
+                "type": "DOCKER",
+                "volumes": []
+            },
+            "cpus": 1,
+            "dependencies": [],
+            "deployments": [],
+            "disk": 0,
+            "env": {},
+            "executor": "",
+            "fetch": [],
+            "gpus": 0,
+            "healthChecks": [
+                {
+                    "gracePeriodSeconds": 300,
+                    "ignoreHttp1xx": false,
+                    "intervalSeconds": 60,
+                    "maxConsecutiveFailures": 3,
+                    "path": "/status",
+                    "port": 9001,
+                    "protocol": "HTTP",
+                    "timeoutSeconds": 20
+                }
+            ],
+            "id": "/portwrx/portworx",
+            "instances": 3,
+            "ipAddress": null,
+            "killSelection": "YOUNGEST_FIRST",
+            "labels": {
+                "DCOS_PACKAGE_IS_FRAMEWORK": "true",
+                "DCOS_PACKAGE_METADATA": "eyJwYWNrYWdpbmdWZXJzaW9uIjoiMy4wIiwibmFtZSI6InBvcnR3b3J4IiwidmVyc2lvbiI6IjEuMS42LTMuMCIsIm1haW50YWluZXIiOiJzdXBwb3J0QHBvcnR3b3J4LmNvbSIsImRlc2NyaXB0aW9uIjoiUG9ydHdvcnggUFggcHJvdmlkZXMgc2NoZWR1bGVyIGludGVncmF0ZWQgZGF0YSBzZXJ2aWNlcyBmb3IgY29udGFpbmVycywgc3VjaCBhcyBkYXRhIHBlcnNpc3RlbmNlLCBtdWx0aS1ub2RlIHJlcGxpY2F0aW9uLCBjbG91ZC1hZ25vc3RpYyBzbmFwc2hvdHMgYW5kIGRhdGEgZW5jcnlwdGlvbi4gUG9ydHdvcnggaXRzZWxmIGlzIGRlcGxveWVkIGFzIGEgY29udGFpbmVyIGFuZCBpcyBzdWl0YWJsZSBmb3IgYm90aCBjbG91ZCBhbmQgb24tcHJlbSBkZXBsb3ltZW50cy4gIFBvcnR3b3J4IGVuYWJsZXMgY29udGFpbmVyaXplZCBhcHBsaWNhdGlvbnMgdG8gYmUgcGVyc2lzdGVudCwgcG9ydGFibGUgYW5kIHByb3RlY3RlZC4gIEZvciBEQ09TIGV4YW1wbGVzIG9mIFBvcnR3b3J4LCBwbGVhc2Ugc2VlIGh0dHBzOi8vZ2l0aHViLmNvbS9kY29zL2V4YW1wbGVzL3RyZWUvbWFzdGVyLzEuOC9wb3J0d29yeCBhbmQgaHR0cDovL2RvY3MucG9ydHdvcnguY29tL3J1bi13aXRoLW1lc29zcGhlcmUuaHRtbCIsInRhZ3MiOlsicG9ydHdvcngiLCJzdG9yYWdlIiwiZGF0YSIsImNsb3VkIiwidm9sdW1lIiwiZW5jcnlwdGlvbiIsInMzIiwiZGF0YWJhc2UiXSwic2VsZWN0ZWQiOmZhbHNlLCJzY20iOiJodHRwczovL2dpdGh1Yi5jb20vcG9ydHdvcngvcHgtZGV2Iiwid2Vic2l0ZSI6Imh0dHA6Ly93d3cucG9ydHdvcnguY29tLyIsImZyYW1ld29yayI6dHJ1ZSwicHJlSW5zdGFsbE5vdGVzIjoiVGhpcyBEQy9PUyBTZXJ2aWNlIGlzIGN1cnJlbnRseSBpbiBwcmV2aWV3LiBQbGVhc2UgdmlzaXQgaHR0cDovL2RvY3MucG9ydHdvcnguY29tL3J1bi13aXRoLW1lc29zcGhlcmUuaHRtbCBmb3IgZGV0YWlsZWQgaW5zdHJ1Y3Rpb25zIiwicG9zdEluc3RhbGxOb3RlcyI6IlRvIHNlZSBob3cgUG9ydG9yeCBkYXRhIHNlcnZpY2VzIGludGVncmF0ZSB3aXRoIGNvbW1vbiBhcHBsaWNhdGlvbnMgYW5kIHNlcnZpY2VzLCB0byB2aWV3IHRoZSBhcHBsaWNhdGlvbiBzb2x1dGlvbnMgYW5kIHRvIHZpZXcgUG9ydHdvcnggcmVmZXJlbmNlIGFyY2hpdGVjdHVyZXMsICBwbGVhc2UgdmlzaXQgaHR0cDovL2RvY3MucG9ydHdvcnguY29tIiwicG9zdFVuaW5zdGFsbE5vdGVzIjoiU2VydmljZSB1bmluc3RhbGxlZC4gTm90ZSB0aGF0IGFueSBwZXJzaXN0aW5nIGRhdGEgc3RpbGwgZXhpc3RzIGFuZCB3aWxsIG5lZWQgdG8gYmUgbWFudWFsbHkgcmVtb3ZlZC4iLCJsaWNlbnNlcyI6W3sibmFtZSI6IkFwYWNoZSAyLjAgTGljZW5zZSIsInVybCI6Imh0dHBzOi8vd3d3LmFwYWNoZS5vcmcvbGljZW5zZXMvTElDRU5TRS0yLjAifV0sImltYWdlcyI6eyJpY29uLXNtYWxsIjoiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BvcnR3b3J4L3B4LWRldi9tYXN0ZXIvaW1hZ2VzL3B4LXNtYWxsLnBuZyIsImljb24tbWVkaXVtIjoiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BvcnR3b3J4L3B4LWRldi9tYXN0ZXIvaW1hZ2VzL3B4LW1lZGl1bS5wbmciLCJpY29uLWxhcmdlIjoiaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3BvcnR3b3J4L3B4LWRldi9tYXN0ZXIvaW1hZ2VzL3B4LWxhcmdlLnBuZyJ9fQ==",
+                "DCOS_PACKAGE_NAME": "portworx",
+                "DCOS_PACKAGE_REGISTRY_VERSION": "3.0",
+                "DCOS_PACKAGE_RELEASE": "1",
+                "DCOS_PACKAGE_SOURCE": "https://universe.mesosphere.com/repo",
+                "DCOS_PACKAGE_VERSION": "1.1.6-3.0"
+            },
+            "maxLaunchDelaySeconds": 3600,
+            "mem": 2048,
+            "portDefinitions": [
+                {
+                    "labels": {},
+                    "name": "default",
+                    "port": 10000,
+                    "protocol": "tcp"
+                }
+            ],
+            "ports": [
+                10000
+            ],
+            "readinessChecks": [],
+            "requirePorts": false,
+            "residency": null,
+            "secrets": {},
+            "storeUrls": [],
+            "taskKillGracePeriodSeconds": null,
+            "tasksHealthy": 3,
+            "tasksRunning": 3,
+            "tasksStaged": 0,
+            "tasksUnhealthy": 0,
+            "unreachableStrategy": {
+                "expungeAfterSeconds": 600,
+                "inactiveAfterSeconds": 300
+            },
+            "upgradeStrategy": {
+                "maximumOverCapacity": 1,
+                "minimumHealthCapacity": 1
+            },
+            "uris": [],
+            "user": null,
+            "version": "2017-04-21T22:55:32.311Z",
+            "versionInfo": {
+                "lastConfigChangeAt": "2017-04-21T22:55:32.311Z",
+                "lastScalingAt": "2017-04-21T22:55:32.311Z"
+            }
+        }
+    ]
+}
