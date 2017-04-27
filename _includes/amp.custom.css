@@ -7,7 +7,12 @@
 }
 
 .portworx-logo {
+    margin-left: -20px;
+}
+
+.portworx-top {
     padding: 25px 0 20px 30px;
+    margin: 0;
     background: #ccc;
 }
 
@@ -19,9 +24,9 @@ amp-sidebar {
 .portworx-menu-btn {
     font-size: 2em;
     float: right;
-    padding-right: 30px;
     background: none;
     border: 0;
+    padding: 0;
 }
 
 #sidebar {
