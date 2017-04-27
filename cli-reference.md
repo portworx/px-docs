@@ -1312,7 +1312,9 @@ OPTIONS:
 ```
 
 #### pxctl cloudsnap credentials
-This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used for cloudsnap of volume to the cloud.
+This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used for cloudsnap of volume to the cloud.  
+
+Note: It will create a bucket with the portworx cluster ID to use for the backups
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap credentials
 NAME:
