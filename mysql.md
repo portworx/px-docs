@@ -6,7 +6,8 @@ sidebar: home_sidebar
 ---
 ## Watch the video
 Here is a three-minute video that shows how to set up a three-node cluster for mysql and add more capacity on the fly:
-<iframe src="https://player.vimeo.com/video/163637386" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+{% include vimeoPlayer.html id='163637386' %}
+
 
 ## Step 1: Create a storage volume for mysql
 

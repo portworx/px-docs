@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+ - 2.2
+cache: bundler
+install:
+ - bundle install
+script:
+ - "./build/deploy.sh"
+notifications:
+  email: false

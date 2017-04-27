@@ -1,0 +1,107 @@
+.topfork {
+    position: absolute;
+    top: 75px;
+    right: 0;
+    border: 0;
+    display: none;
+}
+
+.portworx-logo {
+    padding: 25px 0 20px 30px;
+    background: #ccc;
+}
+
+amp-sidebar {
+    width: 250px;
+    padding-right: 10px;
+}
+
+.portworx-menu-btn {
+    font-size: 2em;
+    float: right;
+    padding-right: 30px;
+    background: none;
+    border: 0;
+}
+
+#sidebar {
+    padding: 10px;
+    background: #fff;
+    color: #333;
+    font-size: 0.9em;
+}
+
+#sidebar h4 {
+    border: 0;
+    background: #f1f1f1;
+    padding: 7px;
+    margin-bottom: 1px;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+#sidebar h3 {
+    color: #F15A22;
+    font-weight: 100;
+    margin-top: 5px;
+}
+
+#sidebar h4:after {
+    content: '\25be';
+    float: right;
+}
+
+#sidebar ul.drop {
+    padding: 0;
+}
+
+#sidebar ul.drop li {
+    list-style-type: none;
+    background: #FAFAFA;
+    margin-top: 1px;
+    padding: 7px;
+}
+
+#sidebar section[expanded] h4 {
+    color: #fff;
+    background: #F15A22;
+}
+
+amp-img {
+    max-width: 100%;
+}
+
+amp-img > img {
+    object-fit: contain;
+}
+
+.launch-icon {
+    max-width: 64px
+}
+
+.slack-icon {
+    max-width: 48px;
+}
+
+.cf-stack {
+    max-width: 144px;
+}
+
+.amp-close-image {
+    float: right;
+}
+
+.google-search {
+    padding-bottom: 10px;
+}
+
+.google-search input {
+    font-size: 0.9em;
+    height: 25px;
+    padding: 5px;
+    background-image: url(https://www.google.com/favicon.ico);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: 3px;
+    padding-left: 22px;
+}
