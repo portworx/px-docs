@@ -104,6 +104,12 @@ Deploying Portworx through Mesosphere Universe provides great ease of deployment
 Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx) 
 
 ### To Deploy Portworx through Marathon:
+
+><br/>**NEW!**
+For simple deployment with DCOS, please follow [these instructions](/run-px-etcd-marathon.html) for creating
+Portworx and etcd together as a converged application group.
+
+
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
 The pre-requisites for installing Portworx through Marathon include:
 
