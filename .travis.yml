@@ -8,3 +8,4 @@ script:
  - "./build/deploy.sh"
 notifications:
   email: false
+
