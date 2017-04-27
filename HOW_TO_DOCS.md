@@ -12,7 +12,10 @@ Most important things to know:
 
   + For now, the content is all flat.   All 'md' files are at this top level directory.   There are no subdirectories
   + The main sidebar is _data/sidebars/home_sidebar.yml.   If you create a new page, find an appropriate header under which to place it.  As of now, this is the only sidebar being used
-  + All images must include a width and height in order to be valid on the AMP version of the documentation
+  + All images must include a width and height in order to be valid on the AMP version of the documentation. For example:
+```
+![Configure Admin User](images/jenkins3.png){:width="1992px" height="1156px"}
+```
   + Local references to files in this directory take the following form:  
  ```
  
@@ -25,7 +28,7 @@ Note the reference to a **".html"** file, which gets generated automatically by 
 ## AMP Version
 
 There is an AMP version of the documentation which is effectively a drop in replacement for the `page.html` layout. 
-When you wish to generate the AMP documentation, you must replace the `page.html` file in `_layouts/` with `amp.html` - this process may change in the future.
+When you wish to generate the AMP documentation manually (production generation and deployment is automated), you must replace the `page.html` file in `_layouts/` with `amp.html` - this process may change in the future.
 
 Documentation for AMP is built using Travis and is pushed to the `portworx/px-docs-amp` repository on Github. 
 This repository is accessible at [https://docs-amp.portworx.com/](https://docs-amp.portworx.com/). 
