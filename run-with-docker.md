@@ -86,7 +86,7 @@ Where the following arguments are provided to the PX daemon:
 	> location of certificate key for ETCD authentication
 
 -acltoken 
-	> ACL token value used for ETCD authentication
+	> ACL token value used for Consul authentication
 
 -c
 	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
