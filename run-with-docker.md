@@ -210,9 +210,9 @@ To use `etcd` with authentication and a cafile, use this in your `config.json`:
    "etcd:https://<ip1>:<port>",
    "etcd:https://<ip2>:<port>"
  ],
- "username": "root",
- "password": "xxx",
- "cafile": "/etc/pwx/cafile",
+ "cafile": "/etc/pwx/pwx-ca.crt",
+ "certfile": "/etc/pwx/pwx-user-cert.crt",
+ "certkey": "/etc/pwx/pwx-user-key.key",
 ```
 
 To use `consul` with authentication and a cafile, use this in your `config.json`:
@@ -222,6 +222,14 @@ To use `consul` with authentication and a cafile, use this in your `config.json`
    "consul:https://<ip1>:<port>",
    "consul:https://<ip2>:<port>"
  ],
+ "cafile": "/etc/pwx/pwx-ca.crt",
+ "certfile": "/etc/pwx/pwx-user-cert.crt",
+ "certkey": "/etc/pwx/pwx-user-key.key",
+```
+
+Alternatively, you could specify and explicit username and password as follows:
+
+```
  "username": "root",
  "password": "xxx",
  "cafile": "/etc/pwx/cafile",
