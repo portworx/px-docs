@@ -73,6 +73,9 @@ For all the hosts run: `yum -y remove docker-engine docker-engine-selinux`
 As per the [ansible README.md](https://github.com/kubernetes/contrib/blob/master/ansible/README.md#kubernetes-source-type), 
 edit `roles/kubernetes/defaults/main.yml` and set `kube_master_api_port` to `6443`
 
+## Create the Ansible hosts 'inventory'
+Create the inventory file on which hosts Kubernetes will be installed, as per the [README](https://github.com/kubernetes/contrib/blob/master/ansible/README.md)
+
 ## Install Kubernetes via Ansible
 
 ```
