@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Deploy Cassandra Clusters with Portworx"
+title: "Cassandra and Docker Deployments: A production Ops Guide""
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 ---
