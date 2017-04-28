@@ -60,7 +60,9 @@ ssh -i your_private.key root@$1 "mkdir ~/.ssh 2>/dev/null; chmod 700 ~/.ssh; ech
 echo "done!"
 ```
 
+Be sure to change the value of "your_private.key" (!)
 Run the above command in a loop for all hosts in the cluster, to enable `ssh` commands without password prompting.
+
 
 Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster, and make sure it too is copied to all
 hosts in the cluster.
