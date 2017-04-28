@@ -215,16 +215,14 @@ To use `etcd` with authentication and a cafile, use this in your `config.json`:
  "certkey": "/etc/pwx/pwx-user-key.key",
 ```
 
-To use `consul` with authentication and a cafile, use this in your `config.json`:
+To use `consul` with an acltoken, use this in your `config.json`:
 
 ```json
 "kvdb": [
-   "consul:https://<ip1>:<port>",
-   "consul:https://<ip2>:<port>"
+   "consul:http://<ip1>:<port>",
+   "consul:http://<ip2>:<port>"
  ],
- "cafile": "/etc/pwx/pwx-ca.crt",
- "certfile": "/etc/pwx/pwx-user-cert.crt",
- "certkey": "/etc/pwx/pwx-user-key.key",
+ "acltoken": "<token>",
 ```
 
 Alternatively, you could specify and explicit username and password as follows:
