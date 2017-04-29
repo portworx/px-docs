@@ -8,8 +8,6 @@ TODO: Will generate cleaner links in S3
 TODO: Will see if it’s possible to add one repo with all the services available from there
 TODO: Update screenshots which shows <Service>-PX as the name of the package
 
-# Cassandra on DCOS with Portworx
-
 This guide will help you to install the Cassandra service on your DCOS cluster backed by PX volumes for persistent storage.
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
@@ -52,13 +50,13 @@ Click on “Review and Install” and then “Install” to start the installati
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-<Insert Screenshot of Services page>
+{InsertScreenshot of Services page}
 
 If you click on the Cassandra-PX service you should be able to look at the status of the nodes being created. There will be
 one service for the scheduler and one service each for the Cassandra nodes. When the Scheduler service as well as the
 Cassandra nodes are in Running (green) status, you should be ready to start using the Cassandra cluster.
 
-<Insert screenshot of running Cassandra cluster>
+{Insert screenshot of running Cassandra cluster}
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided
 during install, one for each node of the Cassandra cluster.
