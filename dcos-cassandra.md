@@ -13,13 +13,13 @@ This guide will help you to install the Cassandra service on your DCOS cluster b
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
 
-The source code for these services can be found here: https://github.com/libopenstorage/dcos-commons
+The source code for these services can be found here: https://github.com/portworx/dcos-commons
 
-## Adding Service repository:
+## Adding the repository for the service:
 
-Login to a node which has dcos cli installed and is authenticated to your DCOS cluster.
+For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
 
-Run the following command to add the repository:
+Run the following command to add the repository to your DCOS cluster:
 
 ```
 $ dcos package repo add --index=0 cassandra-px https://disrani-cassandra.s3.amazonaws.com/autodelete7d/cassandra/20170427-193540-K1Ec66NZm1SDuIIg/stub-universe-cassandra.zip
