@@ -27,7 +27,7 @@ $ dcos package repo add --index=0 cassandra-px https://disrani-cassandra.s3.amaz
 
 Once you have run the above command you should see the Cassandra-PX service available in your universe
 
-![Cassandra-PS in DCOS Universe](images/dcos-cassandra-unviverse.png){:width="655px" height="199px"}
+![Cassandra-PX in DCOS Universe](images/dcos-cassandra-universe.png){:width="655px" height="199px"}
 
 ## Installation
 ### Default Install
