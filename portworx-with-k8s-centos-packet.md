@@ -60,7 +60,9 @@ ssh -i your_private.key root@$1 "mkdir ~/.ssh 2>/dev/null; chmod 700 ~/.ssh; ech
 echo "done!"
 ```
 
+Be sure to change the value of "your_private.key" (!)
 Run the above command in a loop for all hosts in the cluster, to enable `ssh` commands without password prompting.
+
 
 Then append `/etc/hosts` with hostname/IPs for all hosts in the cluster, and make sure it too is copied to all
 hosts in the cluster.
@@ -72,6 +74,9 @@ For all the hosts run: `yum -y remove docker-engine docker-engine-selinux`
 ## Adjust for secure API Port
 As per the [ansible README.md](https://github.com/kubernetes/contrib/blob/master/ansible/README.md#kubernetes-source-type), 
 edit `roles/kubernetes/defaults/main.yml` and set `kube_master_api_port` to `6443`
+
+## Create the Ansible hosts 'inventory'
+Create the inventory file on which hosts Kubernetes will be installed, as per the [README](https://github.com/kubernetes/contrib/blob/master/ansible/README.md)
 
 ## Install Kubernetes via Ansible
 

@@ -176,7 +176,7 @@ Example:
          requests:
            storage: 2Gi
 ```
-[Download example](k8s-sample/portworx-volume-pvcsc.yaml?raw=true)
+[Download example](k8s-samples/portworx-volume-pvcsc.yaml?raw=true)
 
 Verifying persistent volume claim is created:
 
