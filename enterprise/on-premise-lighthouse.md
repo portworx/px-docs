@@ -210,7 +210,7 @@ Runtime command options
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
 
-![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login"){:width="983px" height="707px"}
+![LH-ON-PREM-FIRST-LOGIN](/images/lh-on-prem-first-login-updated_2.png "First Login"){:width="983px" height="707px"}
 
 
 ### Upgrading PX-Lighthouse
@@ -249,6 +249,6 @@ PX-Lighthouse repository is located [here](https://hub.docker.com/r/portworx/px-
 
 * Make sure you have set inbound security rule to 'Allow' for port 80.
 
-![AZURE-SECURITY-RULES](images/azure-inbound-security-rules.png "Azure Inbound Security Settings"){:width="557px" height="183px"}
+![AZURE-SECURITY-RULES](/images/azure-inbound-security-rules.png "Azure Inbound Security Settings"){:width="557px" height="183px"}
 
 * Access the web console in browser at http://{public-ip-address}:80

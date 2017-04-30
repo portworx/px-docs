@@ -21,7 +21,7 @@ Follow the instuctions from Rackspace documentation [Create and attach a Cloud B
 
 Your deployment will look something like the following:
 
-![Rackspace Add Block Storage Volumes](images/rackspace-add-disk.png "Add Block Storage"){:width="1632px" height="1172px"} 
+![Rackspace Add Block Storage Volumes](/images/rackspace-add-disk.png "Add Block Storage"){:width="1632px" height="1172px"} 
 
 
 Note: Volume cannot not be attached until the server is available
@@ -45,12 +45,12 @@ Alternatively, you can either run the 'px_bootstrap' script from curl, or constr
 
 From the server node running px-enterprise container, you should see the following status:
 
-![PX-Cluster on Rackspace](images/rackspace-pxctl-status.png "PX-Cluster on Azure"){:width="1560px" height="586px"}
+![PX-Cluster on Rackspace](/images/rackspace-pxctl-status.png "PX-Cluster on Azure"){:width="1560px" height="586px"}
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
 
-![Rackspace-Cluster on Lighthouse](images/rackspace-cluster-on-lighthouse-updated.png "Rackspace-Cluster on Lighthouse"){:width="2552px" height="1180px"}
+![Rackspace-Cluster on Lighthouse](/images/rackspace-cluster-on-lighthouse-updated.png "Rackspace-Cluster on Lighthouse"){:width="2552px" height="1180px"}
 
 
 

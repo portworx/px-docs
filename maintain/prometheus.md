@@ -13,7 +13,7 @@ These stats are exported at port 9001; your application can poll http://&lt;IP_A
 ### Step 1: Configuring Prometheus to watch px node
 Add your px node as a target in Prometheus config file:
 
-![Prometheus Config File](images/prometheus-config.png "Prometheus Config File"){:width="1702px" height="970px"}
+![Prometheus Config File](/images/prometheus-config.png "Prometheus Config File"){:width="1702px" height="970px"}
 
 In the example above, our node has IP address of 54.173.138.1, so Prometheus is watching 54.173.138.1:9001 as its target. This can be any node in the PX cluster.
 
@@ -21,17 +21,17 @@ In the example above, our node has IP address of 54.173.138.1, so Prometheus is 
 
 Once Prometheus starts watching px node, you will be able to see new portworx related metrics added to Prometheus. 
 
-![PX Metrics in Prometheus](images/px-metrics-in-prometheus.png "PX Metrics in Prometheus"){:width="1110px" height="618px"}
+![PX Metrics in Prometheus](/images/px-metrics-in-prometheus.png "PX Metrics in Prometheus"){:width="1110px" height="618px"}
 
 You can now build graphs:
 
-![Building a Graph with Prometheus](images/building-a-graph-with-prometheus.png "Building a Graph with Prometheus"){:width="2006px" height="1154px"}
+![Building a Graph with Prometheus](/images/building-a-graph-with-prometheus.png "Building a Graph with Prometheus"){:width="2006px" height="1154px"}
 
 **Note**
 
 A curl request on port 9001 also shows the stats:
 
-![Curl Request on 9001](images/curl-request-on-9001.png "Curl Request on 9001"){:width="1856px" height="1372px"}
+![Curl Request on 9001](/images/curl-request-on-9001.png "Curl Request on 9001"){:width="1856px" height="1372px"}
 
 ## Storage and Network stats
 

@@ -16,7 +16,7 @@ Portworx recommends a minimum cluster size of 3 nodes.
 
 SoftLayer lets you choose either local disk or SAN disk. If your environment have nodes with both of these, make sure that there is network connectivity between the nodes.
 
-![SoftLayer Add Disk](images/softlayer-add-disk.png "Add Disk"){:width="777px" height="637px"}
+![SoftLayer Add Disk](/images/softlayer-add-disk.png "Add Disk"){:width="777px" height="637px"}
 
 ### Step 3: Install Docker for the appropriate OS Version 
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
@@ -33,10 +33,10 @@ Alternatively, you can either run the 'px_bootstrap' script from curl, or constr
 
 From the server node running px-enterprise container, you should see the following status:
 
-![PX-Cluster on SoftLayer](images/softlayer-pxctl-status-updated.png "PX-Cluster on SoftLayer"){:width="854px" height="543px"}
+![PX-Cluster on SoftLayer](/images/softlayer-pxctl-status-updated.png "PX-Cluster on SoftLayer"){:width="854px" height="543px"}
 
 
 You should also be able to monitor cluster from PX-Enterprise console:
 
-![SoftLayer-Cluster on Lighthouse](images/softlayer-cluster-on-lighthouse-updated.png "SoftLayer-Cluster on Lighthouse"){:width="1362px" height="586px"}
+![SoftLayer-Cluster on Lighthouse](/images/softlayer-cluster-on-lighthouse-updated.png "SoftLayer-Cluster on Lighthouse"){:width="1362px" height="586px"}
 

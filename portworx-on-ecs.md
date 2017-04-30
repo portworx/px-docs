@@ -19,14 +19,14 @@ Note that Portworx recommends a minimum cluster size of 3 nodes.
 #### Create the cluster in the console
 Log into the ECS console and create an ecs cluster called "ecs-demo".
 
-![ecs-clust-create](images/ecs-clust-create.png "ecs"){:width="1162px" height="457px"}.
+![ecs-clust-create](/images/ecs-clust-create.png "ecs"){:width="1162px" height="457px"}.
 
 We will use the name `ecs-demo` to configure your EC2 instances and the `ecs-cli`.
 
 #### Create your EC2 instances
 Your EC2 instances must have the correct IAM role set.  Follow these [IAM instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html).
 
-![IAM](images/iam-role.png "IAM"){:width="935px" height="592px"}
+![IAM](/images/iam-role.png "IAM"){:width="935px" height="592px"}
 
 #### Add storage capacity to each instance
 You will need to provision storage to these instances by creating new EBS volumes and attaching it to the instances.  Portworx will be using these volumes to provision storage to your containers.
@@ -130,7 +130,7 @@ redis:
 
 You can view the task in the ECS console.
 
-![task](images/ecs-task.png "task"){:width="1512px" height="763px"}
+![task](/images/ecs-task.png "task"){:width="1512px" height="763px"}
 
 #### Creating a task via the console
 
@@ -144,11 +144,11 @@ Create a new docker volume like we did in step 4.
 
 Go to AWS ECS console, On the same cluster "ecs-demo"; create a new task definition.
 
-![task](images/aws-ecs-image00.PNG){:width="1164px" height="845px"}
+![task](/images/aws-ecs-image00.PNG){:width="1164px" height="845px"}
 
 On the new task definition screen; first add a volume for your container.  Both the name and the source path must be the name of the Portworx volume.
-![task](images/aws-ecs-image02.PNG){:width="1135px" height="631px"}
+![task](/images/aws-ecs-image02.PNG){:width="1135px" height="631px"}
 
 Then add a new container - In the new container configuration page, go to the advanced container configuration.  Under the section of Storage and Logging, define your mount points and the volume path.  Click the drop down selection next to "Mount Points" and choose volume-0. Then enter the path for that mount points, for example `/data`.
 
-![task](images/aws-ecs-image03.PNG){:width="738px" height="372px"}
+![task](/images/aws-ecs-image03.PNG){:width="738px" height="372px"}

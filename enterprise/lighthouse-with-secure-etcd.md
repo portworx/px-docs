@@ -128,4 +128,4 @@ PWX_INFLUXPW                Influx password
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
 
-![LH-ON-PREM-FIRST-LOGIN](images/lh-on-prem-first-login-updated_2.png "First Login"){:width="983px" height="707px"}
+![LH-ON-PREM-FIRST-LOGIN](/images/lh-on-prem-first-login-updated_2.png "First Login"){:width="983px" height="707px"}

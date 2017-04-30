@@ -12,7 +12,7 @@ Each server has the Portworx container and the Docker daemon.
 Servers join a cluster and share configuration through PX-Enterprise or the key/value store, such as etcd.
 The Portworx container pools the capacity of the storage media residing on the server. You easily select storage media through the [config.json](https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json) file.
 
-![Portworx cluster architecture](images/cluster-architecture.png "Portworx cluster architecture"){:width="442px" height="492px"}
+![Portworx cluster architecture](/images/cluster-architecture.png "Portworx cluster architecture"){:width="442px" height="492px"}
 
 Storage volumes are thinly provisioned, using capacity only as an application consumes it. Volumes are replicated across the nodes within the cluster, per a volume’s configuration, to ensure high availability.
 
@@ -22,7 +22,7 @@ Using MySQL as an example, a Portworx storage cluster has the following characte
 * This data gets stored in the container’s volume, managed by Portworx.
 * Portworx synchronously and automatically replicates writes to the volume across the cluster.
 
-![Portworx cluster architecture with MySQL](images/cluster-architecture-example-mysql.png "Portworx cluster architecture with MySQL"){:width="839px" height="276px"}
+![Portworx cluster architecture with MySQL](/images/cluster-architecture-example-mysql.png "Portworx cluster architecture with MySQL"){:width="839px" height="276px"}
 
 Each volume specifies its request of resources (such as its max capacity and IOPS) and its individual requirements (such as ext4 as the file system and block size).
 
