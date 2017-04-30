@@ -427,6 +427,11 @@ ul#mysidebar {
     border-top:1px solid whitesmoke;
     padding-left:10px;
 }
+
+ul.nav li>ul li a {
+    padding: 2px 5px 2px 8px;
+}
+
 /* end sidebar */
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
