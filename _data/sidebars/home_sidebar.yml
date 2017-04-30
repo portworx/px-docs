@@ -1,278 +1,186 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
 
-entries:
-- title: Sidebar
-  product: Menu
-  levels: one
-  folders:
   - title: Get Started
-    output: web
     folderitems:
     - title: Welcome to Portworx Docs
-      url: /index.html
-      output: web
+      url: /
     - title: Get Started ASAP
-      url: /get-started-asap.html
-      output: web
+      url: /getting-started/asap.html
     - title: Get Started with PX-Developer
-      url: /get-started-px-developer.html
-      output: web
+      url: /getting-started/px-developer.html
     - title: Get Started with PX-Enterprise
-      url: /get-started-px-enterprise.html
-      output: web
+      url: /getting-started/px-enterprise.html
+    - title: Test
+      folderitems:
+      - title: test 2
+        url: /
   - title: Install and Run
-    output: web
     folderitems:
     - title: Overview
-      url: /overview.html
-      output: web
+      url: /install/
     - title: Run with Docker
-      url: /run-with-docker.html
-      output: web
+      url: /install/docker.html
     - title: Run with CoreOS
-      url: /run-with-docker-coreos.html
-      output: web
+      url: /install/coreos.html
     - title: Run with Docker Compose
-      url: /run-with-compose.html
-      output: web
+      url: /install/docker-compose.html
     - title: Run as a Docker Plugin 
-      url: /run-as-docker-pluginv2.html
-      output: web   
+      url: /install/docker-plugin.html
   - title: Manage Volumes
-    output: web
     folderitems:
     - title: Create and Manage Storage Volumes
-      url: /create-manage-storage-volumes.html
-      output: web
+      url: /manage/create-and-manage.html
     - title: Shared Volumes
-      url: /shared-volumes.html
-      output: web
+      url: /manage/shared-volumes.html
     - title: Volume Sets
-      url: /volume-sets.html
-      output: web
+      url: /manage/volume-sets.html
     - title: Class of Service
-      url: /cos.html
-      output: web
+      url: /manage/class-of-service.html
     - title: Snapshots
-      url: /snapshot.html
-      output: web
+      url: /manage/snapshots.html
     - title: Volume Update
-      url: /volume-update.html
-      output: web
+      url: /manage/volume-update.html
     - title: Encrypted Volumes
-      url: /encrypted-volumes.html
-      output: web     
+      url: /manage/encrypted-volumes.html
   - title: Schedulers
-    output: web
     folderitems:
     - title: Run Portworx with Mesosphere DCOS
-      url: /run-with-mesosphere.html
-      output: web
+      url: /run/mesosphere-dcos.html
     - title: Run Portworx with Kubernetes
-      url: /run-with-kubernetes.html
-      output: web
+      url: /run/kubernetes.html
     - title: Run Portworx with Docker Swarm
-      url: /run-with-docker-swarm.html
-      output: web
+      url: /run/docker-swarm.html
     - title: Run Portworx with Docker UCP
-      url: /run-with-docker-ucp.html
-      output: web
+      url: /run/docker-ucp.html
     - title: Run Portworx with Rancher
-      url: /run-with-rancher.html
-      output: web
+      url: /run/rancher.html
     - title: Run with systemd
-      url: /run-with-systemd.html
-      output: web
+      url: /run/systemd.html
   - title: Cloud Reference Guides
-    output: web
     folderitems:
     - title: AWS via Cloud Formation
-      url: /portworx-on-aws-cloudformation.html
-      output: web
+      url: /cloud/aws-cloudformation.html
     - title: AWS ECS
-      url: /portworx-on-ecs2.html
-      output: web
+      url: /cloud/aws-ecs.html
     - title: AWS Auto Scaling
-      url: /portworx-on-aws-asg.html
-      output: web
+      url: /cloud/aws-ec2-asg.html
     - title: Azure
-      url: /portworx-on-azure.html
-      output: web
+      url: /cloud/azure.html
     - title: SoftLayer
-      url: /portworx-on-softlayer.html
-      output: web 
+      url: /cloud/softlayer.html
     - title: Packet.net
-      url: /portworx-on-packet.html
-      output: web
+      url: /cloud/packet.html
     - title: Rackspace
-      url: /portworx-on-rackspace.html
-      output: web
+      url: /cloud/rackspace.html
     - title: Terraform and Terraporx
-      url: /terraporx.html
-      output: web
+      url: /cloud/terraform.html
     - title: Cloud Backups
-      url: /cloudsnaps.html
-      output: web
+      url: /cloud/backups.html
   - title: CLI and API Reference
-    output: web
     folderitems:
     - title: CLI Reference
-      url: /cli-reference.html
-      output: web
+      url: /control/cli.html
     - title: Understanding config.json
-      url: /config-json.html
-      output: web
+      url: /control/config-json.html
     - title: REST API Reference
-      url: /rest_api.html
-      output: web
+      url: /control/rest-api.html
   - title: Operate and Maintain
-    output: web
     folderitems:
     - title: Performance
-      url: /performance.html
-      output: web
+      url: /maintain/performance.html
     - title: Manage Users and Groups
-      url: /manage-users-groups.html
-      output: web
+      url: /maintain/users-groups.html
     - title: Upgrade Portworx
-      url: /upgrade.html
-      output: web
+      url: /maintain/upgrade.html
     - title: Adding storage to PX cluster nodes
-      url: /scale-up.html
-      output: web
+      url: /maintain/scale-up.html
     - title: Scaling out an existing cluster
-      url: /scale-up-nodes-with-storage.html
-      output: web
+      url: /maintain/scale-out.html
     - title: Scale-Down Nodes
-      url: /scale-down.html
-      output: web
+      url: /maintain/scale-down.html
     - title: Storage less Nodes
-      url: /add-nodes-no-storage.html
-      output: web
+      url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
-      url: /maintenance.html
-      output: web
+      url: /maintain/maintenance-mode.html
     - title: Portworx integration with Prometheus
-      url: /portworx-with-prometheus.html
-      output: web
+      url: /maintain/prometheus.html
   - title: Application Solutions
-    output: web
     folderitems:
     - title: MySQL Database with Portworx
-      url: /mysql.html
-      output: web
+      url: /applications/mysql.html
     - title: Cassandra Clusters with Portworx
-      url: /cassandra.html
-      output: web
+      url: /applications/cassandra.html
     - title: Docker Registry with High Availability
-      url: /registry.html
-      output: web
+      url: /applications/docker-registry.html
     - title: Redis with Portworx
-      url: /redis.html
-      output: web
+      url: /applications/redis.html
     - title: Docker Compose, Wordpress, and MySQL on Portworx
-      url: /docker-compose.html
-      output: web
+      url: /applications/docker-compose.html
     - title: PostgreSQL and CrunchyData with Portworx
-      url: /postgres.html
-      output: web
+      url: /applications/postgres.html
     - title: Jenkins with Portworx
-      url: /jenkins.html
-      output: web
+      url: /applications/jenkins.html
     - title: Create PX volume for NFS share
-      url: /share-vol-for-nfs.html
-      output: web
+      url: /applications/nfs.html
     - title: Object Storage with Portworx
-      url: /object-storage.html
-      output: web
+      url: /applications/object-storage.html
     - title: Kafka with Portworx
-      url: /run-kafka-on-px.html
-      output: web    
+      url: /applications/kafka.html
   - title: Reference Architectures
-    output: web
     folderitems:
     - title: Portworx on Docker Data Center
-      url: /portworx-on-ddc.html
-      output: web
+      url: /reference-architecture/docker-datacenter.html
     - title: Running with an SDN
-      url: /portworx-flannel-userns.html
-      output: web
+      url: /reference-architecture/sdn.html
   - title: Enterprise Edition
-    output: web
     folderitems:
     - title: Run PX-Enterprise
-      url: /get-started-px-enterprise.html
-      output: web
+      url: /getting-started/px-enterprise.html
     - title: Launch PX via Lighthouse
-      url: /launch-via-lighthouse.html
-      output: web
+      url: /enterprise/portworx-via-lighthouse.html
     - title: On Prem Lighthouse
-      url: /run-lighthouse.html
-      output: web
+      url: /enterprise/on-premise-lighthouse.html
     - title: Run Lighthouse with Secure etcd
-      url: /run-lighthouse-with-secure-etcd.html
-      output: web
+      url: /enterprise/lighthouse-with-secure-etcd.html
     - title: Add Existing PX Node to Lighthouse
-      url: /add-existing-px-node-to-lighthouse.html
-      output: web
+      url: /enterprise/add-existing-px-node-to-lighthouse.html
     - title: Cluster Alerting Preferences 
-      url: /Lighthouse-Manage-Clusters.html
-      output: web
+      url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
-    output: web
     folderitems:
     - title: Shared Mount Propogation
-      url: /os-config-shared-mounts.html
-      output: web
+      url: /knowledgebase/shared-mount-propogation.html
     - title: SELinux
-      url: /selinux.html
-      output: web
+      url: /knowledgebase/selinux.html
     - title: Devicemapper Thinpool setup
-      url: /devicemapper-setup.html
-      output: web
+      url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces
-      url: /run-with-user-namespace.html
-      output: web
+      url: /knowledgebase/docker-user-namespace.html
     - title: Running with SLES 12 SP1
-      url: /run-px-on-sles12-sp1.html
-      output: web 
+      url: /knowledgebase/sles-12-sp1.html
     - title: FAQs
-      url: /px-faqs.html
-      output: web
+      url: /knowledgebase/faqs.html
     - title: Troubleshooting
-      url: /troubleshooting.html
-      output: web
+      url: /knowledgebase/troubleshooting.html
   - title: Release Notes
-    output: web
     folderitems:
     - title: About 1.x
-      url: /about-1-x.html
-      output: web
+      url: /release-notes/portworx-1.x.html
     - title: PX-Enterprise Release Notes
-      url: /px-enterprise-release-notes.html
-      output: web 
+      url: /release-notes/portworx-enterprise.html
     - title: Lighthouse On-Prem Release Notes
-      url: /on-prem-lighthouse-release-notes.html
-      output: web    
+      url: /release-notes/on-premise-lighthouse.html
   - title: Video Demos
-    output: web
     folderitems:
     - title: Mesos, Mesosphere and Marathon
-      url: /video-mesos.html
-      output: web
+      url: /video/mesos.html
     - title: DCOS with Portworx
-      url: /video-dcos.html
-      output: web
+      url: /video/dcos.html
     - title: Rancher
-      url: /video-rancher.html
-      output: web
+      url: /video/rancher.html
     - title: Shared Volumes
-      url: /video-shared-volumes.html
-      output: web
+      url: /video/shared-volumes.html
     - title: Multi-cloud High Availability
-      url: /video-multi-cloud.html
-      output: web
+      url: /video/multi-cloud.html
     - title: Portwork QuickStart Explainer
-      url: /video-portworx-nutshell.html
-      output: web
-  
+      url: /video/quickstart.html
