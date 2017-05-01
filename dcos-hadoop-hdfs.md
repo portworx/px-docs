@@ -66,7 +66,7 @@ provided during install, one for each of the Journal, Name and Data nodes.
 
 TODO: Add dcos cli command to check status of service
 
-## Scaling the number of Data Nodes
+## Scaling the Data Nodes
 You do not need to create additional volumes of perform to scale up your cluster. 
 Just go to the Hadoop service page, click on the three dots on the top right corner of the page, select “Data”, scroll
 down and increase the nodes parameter to the desired nodes.
