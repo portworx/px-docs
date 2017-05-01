@@ -3,6 +3,7 @@ layout: page
 title: "About PX 1.x"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
+redirect_from: "/about-1-x.html"
 ---
 
 ### Portworx released PX-Enterprise 1.0 on September 15, 2016.

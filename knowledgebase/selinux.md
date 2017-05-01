@@ -3,6 +3,7 @@ layout: page
 title: "PX with SELinux"
 keywords: portworx, troubleshooting, logs, issue
 sidebar: home_sidebar
+redirect_from: "/selinux.html"
 ---
 
 ## "No such file or directory" message when running on SELinux

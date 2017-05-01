@@ -3,6 +3,7 @@ layout: page
 title: "Volume Sets"
 keywords: portworx, jenkins
 sidebar: home_sidebar
+redirect_from: "/volume-sets.html"
 ---
 
 Orchestration software such as mesos allow scaling the number of instances of pods/applications. However, when these pods/applications require data volumes, there is no way to associate instances to data volumes.

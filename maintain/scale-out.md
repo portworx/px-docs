@@ -3,6 +3,7 @@ layout: page
 title: "Scaling-out an existig PX Cluster"
 keywords: scale-up, storage, add new nodes
 sidebar: home_sidebar
+redirect_from: "/scale-up-nodes-with-storage.html"
 ---
 
 

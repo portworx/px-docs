@@ -3,6 +3,7 @@ layout: page
 title: "Run Kafka on Portworx Volumes for Topic Persistence"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
+redirect_from: "/run-kafka-on-px.html"
 ---
 
 *For this document, we will use the kafka container at https://hub.docker.com/r/ches/kafka/*

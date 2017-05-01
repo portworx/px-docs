@@ -3,6 +3,7 @@ layout: page
 title: "config.json reference"
 keywords: portworx, config.json, reference
 sidebar: home_sidebar
+redirect_from: "/config-json.html"
 ---
 
 This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`

@@ -3,6 +3,7 @@ layout: page
 title: "Maintenance Mode"
 keywords: maintenance, drive removal, drive replacement
 sidebar: home_sidebar
+redirect_from: "/maintenance.html"
 ---
 
 Maintenance Mode is useful for cases where a node needs to be physically decommissioned.

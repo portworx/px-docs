@@ -3,6 +3,7 @@ layout: page
 title: "Shared Volumes"
 keywords: portworx, shared volumes, global namespace
 sidebar: home_sidebar
+redirect_from: "/shared-volumes.html"
 ---
 Through shared volumes (also known as a **global namespace**), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 

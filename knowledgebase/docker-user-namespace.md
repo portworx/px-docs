@@ -3,6 +3,7 @@ layout: page
 title: "Run PX with Docker User Namespaces"
 keywords: portworx, install, configure, container, user, namespaces, namespace, security
 sidebar: home_sidebar
+redirect_from: "/run-with-user-namespace.html"
 ---
 To install and configure PX with Docker user namespaces enabled, use the command-line steps in this section.
 

@@ -3,6 +3,7 @@ layout: page
 title: "PX-Enterprise Release notes"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
+redirect_from: "/px-enterprise-release-notes.html"
 ---
 
 ## 1.2 Release notes

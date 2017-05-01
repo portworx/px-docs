@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on Rackspace"
 keywords: portworx, rackspace, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
+redirect_from: "/portworx-on-rackspace.html"
 ---
 
 This guide show you how you can easily deploy Portworx on [**Rackspace**](http://https://www.rackspace.com/login)

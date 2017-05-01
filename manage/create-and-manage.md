@@ -3,6 +3,7 @@ layout: page
 title: "Create and Manage Storage Volumes"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume
 sidebar: home_sidebar
+redirect_from: "/create-manage-storage-volumes.html"
 ---
 
 To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.

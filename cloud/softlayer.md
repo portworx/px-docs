@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on SoftLayer"
 keywords: portworx, softlayer, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
+redirect_from: "/portworx-on-softlayer.html"
 ---
 
 This guide shows you how you can easily deploy Portworx on [**SoftLayer**](http://www.softlayer.com/)

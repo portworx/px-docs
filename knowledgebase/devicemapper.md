@@ -3,6 +3,7 @@ layout: page
 title: "Pre-requisites : Devicemapper setup"
 keywords: portworx, px-developer, devicemapper
 sidebar: home_sidebar
+redirect_from: "/devicemapper-setup.html"
 ---
 Portworx recommends using devicemapper as the default graph driver for container images.
 

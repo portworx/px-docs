@@ -3,6 +3,7 @@ layout: page
 title: "Scale-Down Nodes"
 keywords: scale-down
 sidebar: home_sidebar
+redirect_from: "/scale-down.html"
 ---
 
 ## Removing offline Nodes 

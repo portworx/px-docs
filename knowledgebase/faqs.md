@@ -3,6 +3,7 @@ layout: page
 title: "FAQs"
 keywords: portworx, faqs
 sidebar: home_sidebar
+redirect_from: "/px-faqs.html"
 ---
 
 ### Can Portworx run in the cloud?   On premise?   Both?

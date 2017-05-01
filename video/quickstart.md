@@ -3,6 +3,7 @@ layout: page
 title: "Portworx in a Nutshell"
 keywords: portworx, mysql, storage
 sidebar: home_sidebar
+redirect_from: "/video-portworx-nutshell.html"
 ---
 Portworx provides Data Services for Containers, and is be deployed with amazing simplicity.
 

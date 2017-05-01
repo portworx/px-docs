@@ -3,6 +3,7 @@ layout: page
 title: "Object Storage with Portworx"
 keywords: portworx, minio, object, cluster, storage
 sidebar: home_sidebar
+redirect_from: "/object-storage.html"
 ---
 
 [Minio](http://minio.io) is a distributed object storage server built for cloud applications and devops.

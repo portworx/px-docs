@@ -3,6 +3,7 @@ layout: page
 title: "Manage Users"
 keywords: portworx, px-enterprise, users, user admin
 sidebar: home_sidebar
+redirect_from: "/manage-users-groups.html"
 ---
 To create users, click the gear icon in the upper-right corner of the console and choose **Manage Users**.
 

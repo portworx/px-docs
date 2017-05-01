@@ -3,6 +3,7 @@ layout: page
 title: "Adding storage to existing PX Cluster Nodes"
 keywords: scale-up
 sidebar: home_sidebar
+redirect_from: "/scale-up.html"
 ---
 
 ## Adding Storage to exising PX Cluster Nodes 

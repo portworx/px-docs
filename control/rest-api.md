@@ -3,6 +3,7 @@ layout: page
 title: "REST API Reference"
 keywords: portworx, REST, API
 sidebar: home_sidebar
+redirect_from: "/rest_api.html"
 ---
 
 ## Portworx REST API

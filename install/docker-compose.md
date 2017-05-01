@@ -3,6 +3,7 @@ layout: page
 title: "Run PX-Developer with Docker Compose"
 keywords: portworx, PX-Developer, container, Docker Compose, storage
 sidebar: home_sidebar
+redirect_from: "/run-with-compose.html"
 ---
 You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) to create a storage cluster for containers, as follows:
 

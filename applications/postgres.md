@@ -3,6 +3,7 @@ layout: page
 title: "PostgreSQL"
 keywords: portworx, postgres, postgresql
 sidebar: home_sidebar
+redirect_from: "/postgres.html"
 ---
 
 ## Running PostgreSQL from CrunchyData on Portworx 

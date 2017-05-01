@@ -3,6 +3,7 @@ layout: page
 title: "Get Started ASAP"
 keywords: portworx, AWS, CloudFormation
 sidebar: home_sidebar
+redirect_from: "/get-started-asap.html"
 ---
 
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS CloudFormation**](https://aws.amazon.com/cloudformation/)

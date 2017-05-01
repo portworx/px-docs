@@ -3,6 +3,7 @@ layout: page
 title: "Class of Service"
 keywords: portworx, cos, class of service, production
 sidebar: home_sidebar
+redirect_from: "/cos.html"
 ---
 Through class of service (also known as a `CoS`), a single volume's class of service can be controlled and mapped to specific underlying storage infrastructure capabilities.
 

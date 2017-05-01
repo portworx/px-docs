@@ -3,6 +3,7 @@ layout: page
 title: "Run Portworx on Docker Datacenter"
 keywords: portworx, PX-Developer, container, docker datacenter, docker ucp, docker universal control plane, storage
 sidebar: home_sidebar
+redirect_from: "/portworx-on-ddc.html"
 ---
 
 Portworx has been qualified to work with [Docker Datacenter](https://www.docker.com/products/docker-datacenter)

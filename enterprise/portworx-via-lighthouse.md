@@ -3,6 +3,7 @@ layout: page
 title: "Launch PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
+redirect_from: "/launch-via-lighthouse.html"
 ---
 Lighthouse is a management and GUI service that allows you to create PX clusters and launch PX nodes to join your clusters.  You can then manage your PX clusters via the Lighthouse web interface.
 

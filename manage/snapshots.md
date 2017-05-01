@@ -3,6 +3,7 @@ layout: page
 title: "Snapshot Reference"
 keywords: portworx, pxctl, snapshot, reference
 sidebar: home_sidebar
+redirect_from: "/snapshot.html"
 ---
 
 Snapshots are efficient point-in-time copies of volumes that can

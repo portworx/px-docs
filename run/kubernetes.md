@@ -3,6 +3,7 @@ layout: page
 title: "Run Portworx with Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
+redirect_from: "/run-with-kubernetes.html"
 ---
 Portworx can run alongside Kubernetes and provide Persistent Volumes to other applications running on Kubernetes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 

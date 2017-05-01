@@ -3,6 +3,7 @@ layout: page
 title: "Portworx AWS CloudFormation"
 keywords: portworx, AWS, CloudFormation
 sidebar: home_sidebar
+redirect_from: "/portworx-on-aws-cloudformation.html"
 ---
 
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS CloudFormation**](https://aws.amazon.com/cloudformation/)

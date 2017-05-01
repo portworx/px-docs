@@ -3,6 +3,7 @@ layout: page
 title: "Cluster Alerting Preferences"
 keywords: lighthouse
 sidebar: home_sidebar
+redirect_from: "/Lighthouse-Manage-Clusters.html"
 ---
 
 You can setup alerting preferences for your cluster as the following.

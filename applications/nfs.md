@@ -3,6 +3,7 @@ layout: page
 title: "Create PX volume for NFS share"
 keywords: portworx, px-developer, px-enterprise, install, configure, nfs, storage, share, volume
 sidebar: home_sidebar
+redirect_from: "/share-vol-for-nfs.html"
 ---
 
 This guide demonstrate creating a shared docker volume from PX and share it via NFS.

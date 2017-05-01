@@ -3,6 +3,7 @@ layout: page
 title: "Volume Update"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
+redirect_from: "/volume-update.html"
 ---
 
 ### pxctl volume update

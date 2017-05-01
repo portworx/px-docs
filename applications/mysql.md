@@ -3,6 +3,7 @@ layout: page
 title: "Manage MySQL Database Volumes with Portworx"
 keywords: portworx, container, mysql, storage
 sidebar: home_sidebar
+redirect_from: "/mysql.html"
 ---
 ## Watch the video
 Here is a three-minute video that shows how to set up a three-node cluster for mysql and add more capacity on the fly:

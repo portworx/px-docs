@@ -4,6 +4,7 @@ title: "Shared Volume Video"
 keywords: portworx, PX-Developer, container, Shared Volume, storage
 sidebar: home_sidebar
 youtubeId: AIVABlClYAU
+redirect_from: "/video-shared-volumes.html"
 ---
 Portworx Shared Volumes provides the following unique capabilities:
 

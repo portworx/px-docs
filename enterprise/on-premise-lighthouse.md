@@ -3,6 +3,7 @@ layout: page
 title: "Run Lighthouse"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
 sidebar: home_sidebar
+redirect_from: "/run-lighthouse.html"
 ---
 
 Portworx offers a SaaS service called Lighthouse.  Lighthouse can monitor and manage your PX clusters and storage.  However you can also run your own Lighthouse.

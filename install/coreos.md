@@ -3,6 +3,7 @@ layout: page
 title: "Run PX with CoreOS"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
+redirect_from: "/run-with-docker-coreos.html"
 ---
 These instructions are for CoreOS and VMWare Photon.
 

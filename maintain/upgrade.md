@@ -3,6 +3,7 @@ layout: page
 title: "Upgrade Portworx"
 keywords: upgrade
 sidebar: home_sidebar
+redirect_from: "/upgrade.html"
 ---
 
 ## Upgrading Portworx 

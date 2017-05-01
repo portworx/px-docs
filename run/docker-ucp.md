@@ -3,6 +3,7 @@ layout: page
 title: "Run Portworx with Docker UCP"
 keywords: portworx, PX-Developer, container, docker ucp, docker universal control plane, storage
 sidebar: home_sidebar
+redirect_from: "/run-with-docker-ucp.html"
 ---
 
 You can use Portworx to implement storage for Docker Universal Control Plane (UCP). This section is qualified using Docker 1.11 and Universal Control Plane 1.1.2.

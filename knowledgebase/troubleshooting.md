@@ -3,6 +3,7 @@ layout: page
 title: "Troubleshooting"
 keywords: portworx, troubleshooting, logs, issue
 sidebar: home_sidebar
+redirect_from: "/troubleshooting.html"
 ---
 For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as you do for any other Docker container. For example:
 

@@ -3,6 +3,7 @@ layout: page
 title: "Run PX as a Docker V2 Plugin"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, add nodes
 sidebar: home_sidebar
+redirect_from: "/run-as-docker-pluginv2.html"
 ---
 To install and configure PX via the Docker Plugin CLI, use the command-line steps in this section.
 

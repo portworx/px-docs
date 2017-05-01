@@ -3,6 +3,7 @@ layout: page
 title: "Portworx integration with prometheus"
 keywords: prometheus, graph, stats
 sidebar: home_sidebar
+redirect_from: "/portworx-with-prometheus.html"
 ---
 
 PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.

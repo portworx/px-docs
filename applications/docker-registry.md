@@ -3,6 +3,7 @@ layout: page
 title: "Run the Docker Registry with High Availability"
 keywords: portworx, docker registry, storage
 sidebar: home_sidebar
+redirect_from: "/registry.html"
 ---
 The Docker Registry is a server-side application that stores and lets you distribute Docker images. The following instructions use Docker Registry version 2.3.0.
 

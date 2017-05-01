@@ -3,6 +3,7 @@ layout: page
 title: "Performance"
 keywords: portworx, cos, class of service, production, performance, overhead
 sidebar: home_sidebar
+redirect_from: "/performance.html"
 ---
 Portworx operates typically within less than 3% overhead of the underlying storage hardware.
 

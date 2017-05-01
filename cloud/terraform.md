@@ -3,6 +3,7 @@ layout: page
 title: "Terraform"
 keywords: terraform, automation, terraporx, cloud
 sidebar: home_sidebar
+redirect_from: "/terraporx.html"
 ---
 
 To facilitate automation, Portworx has open-sourced the **Terraporx** repository, containing

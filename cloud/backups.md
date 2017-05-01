@@ -3,6 +3,7 @@ layout: page
 title: "Multi-Cloud Backup and Recovery of PX Volumes"
 keywords: cloud, backup, restore, snapshot, DR
 sidebar: home_sidebar
+redirect_from: "/cloudsnaps.html"
 ---
 
 ## Multi-Cloud Backup and Recovery of PX Volumes

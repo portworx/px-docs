@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on the Packet.net Hosted Platform"
 keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
 sidebar: home_sidebar
+redirect_from: "/portworx-on-packet.html"
 ---
 
 This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](http://packet.net)

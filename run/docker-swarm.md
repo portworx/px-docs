@@ -3,6 +3,7 @@ layout: page
 title: "Run Portworx with Docker Swarm"
 keywords: portworx, container, storage, Docker, swarm
 sidebar: home_sidebar
+redirect_from: "/run-with-docker-swarm.html"
 ---
 You can use Portworx to provide storage for your Docker Swarm services. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Docker Swarm cluster and have PX provide highly available volumes to any application deployed via Docker Swarm.
 

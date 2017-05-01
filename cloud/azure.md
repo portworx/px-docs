@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on Azure"
 keywords: portworx, azure, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
+redirect_from: "/portworx-on-azure.html"
 ---
 
 This guide shows you how you can easily deploy Portworx on [**Azure**](https://azure.microsoft.com/en-us/)

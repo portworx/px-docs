@@ -3,6 +3,7 @@ layout: page
 title: "On-Prem Lighthouse Release Notes"
 keywords: portworx, px-enterprise, px-lighthouse, release notes
 sidebar: home_sidebar
+redirect_from: "/on-prem-lighthouse-release-notes.html"
 ---
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.

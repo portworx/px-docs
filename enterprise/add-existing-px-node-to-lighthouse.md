@@ -3,6 +3,7 @@ layout: page
 title: "Add Existing PX Node to Lighthouse"
 keywords: portworx, lighthouse, px, config.json
 sidebar: home_sidebar
+redirect_from: "/add-existing-px-node-to-lighthouse.html"
 ---
 
 ```

@@ -3,6 +3,7 @@ layout: page
 title: "Portworx AWS Auto Scaling"
 keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Load Balancer, ECS, EC2
 sidebar: home_sidebar
+redirect_from: "/portworx-on-aws-asg.html"
 ---
 
 This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
