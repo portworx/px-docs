@@ -51,7 +51,7 @@ Click on “Review and Install” and then “Install” to start the installati
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Hadoop-PX on services page](images/dcos-hadoop-px-service.png){:width="655px" height="200px"}
+![Hadoop-PX on services page](images/dcos-hadoop-px-service.png)
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be
 one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes. 
@@ -67,9 +67,9 @@ Hadoop cluster.
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options
 provided during install, one for each of the Journal, Name and Data nodes.
 
-![Hadoop-PX volumes](images/dcos-hadoop-px-volume-list.png){:width="655px"}
+![Hadoop-PX volumes](images/dcos-hadoop-px-volume-list.png){:width="655px" height="200px"}
 
-If you run the "dcos service" command you should see th hadoop-px service in ACTIVE state with 13 running tasks
+If you run the "dcos service" command you should see the hadoop-px service in ACTIVE state with 13 running tasks
 
 ```
 $ dcos service
