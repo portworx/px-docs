@@ -55,13 +55,14 @@ Once you have started the install you can go to the Services page to monitor the
 {InsertScreenshot of Services page}
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be
-one service for the scheduler and . When the Scheduler service as well as all the
-Hadoop containers nodes are in Running (green) status, you should be ready to start using the Hadoop cluster.
+one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes.. When the Scheduler
+service as well as all the Hadoop containers nodes are in Running (green) status, you should be ready to start using the
+Hadoop cluster.
 
 {Insert screenshot of running Hadoop cluster}
 
-If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided
-during install, one for each Journal Node, Name Node and Data Node.
+If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options
+provided during install, one for each of the Journal, Name and Data nodes.
 
 TODO: Add dcos cli command to check status of service
 
