@@ -1,12 +1,11 @@
 ---
 layout: page
 title: "Hadoop on DCOS with Portworx"
-keywords: portworx, container, Mesos, Mesosphere, hadoop, Cassandra
+keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
 ---
 
 TODO: Will generate cleaner links in S3
 TODO: Will see if it’s possible to add one repo with all the services available from there
-TODO: Update screenshots which shows <Service>-PX as the name of the package
 
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.
 It will create 2 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes.
@@ -29,7 +28,7 @@ $ dcos package repo add --index=0 hdfs-aws https://disrani-cassandra.s3.amazonaw
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
 
-![Hadoop-PX in DCOS Universe](images/dcos-hadoop-universe.png){:width="655px" height="199px"}
+![Hadoop-PX in DCOS Universe](images/dcos-hadoop-px-universe.png){:width="655px" height="200px"}
 
 ## Installation
 ### Default Install
@@ -52,14 +51,18 @@ Click on “Review and Install” and then “Install” to start the installati
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-{InsertScreenshot of Services page}
+![Hadoop-PX on services page](images/dcos-hadoop-px-service.png){:width="655px" height="200px"}
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be
-one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes.. When the Scheduler
+one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes. 
+
+![Hadoop-PX install finished](images/dcos-hadoop-px-started-install.png){:width="655px" height="200px"}
+
+When the Scheduler
 service as well as all the Hadoop containers nodes are in Running (green) status, you should be ready to start using the
 Hadoop cluster.
 
-{Insert screenshot of running Hadoop cluster}
+![Hadoop-PX install started](images/dcos-hadoop-px-finished-install.png){:width="655px" height="200px"}
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options
 provided during install, one for each of the Journal, Name and Data nodes.
