@@ -67,6 +67,8 @@ provided during install, one for each node of the Cassandra cluster.
 
 ![Cassandra-PX volumes](images/dcos-cassandra-px-volume-list.png)
 
+If you run the “dcos service” command you should see the cassandra-px service in ACTIVE state with 3 running tasks, one for each cassandra node.
+
 ```
  $ dcos service           
 NAME                            HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID                                         
