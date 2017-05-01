@@ -180,3 +180,4 @@ If the number of instances are scaled up, then the following happens:
 
 ## Scaling the Cluster Down
 When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the [`pxctl service drive add`](/scale-up.html) command.
+In the case of ASG, if you want to scale down your PX cluster, you will not be able to use methods mentioned in [Scale-Down Nodes](https://docs.portworx.com/scale-down.html#removing-a-functional-node-from-a-cluster). You can still reduce the size of your Auto Scaling Group, while making sure to maintain PX cluster quorum.
