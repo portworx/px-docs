@@ -45,17 +45,17 @@
   - title: Schedulers
     folderitems:
     - title: Run Portworx with Mesosphere DCOS
-      url: /run/mesosphere-dcos.html
+      url: /scheduler/mesosphere-dcos.html
     - title: Run Portworx with Kubernetes
-      url: /run/kubernetes.html
+      url: /scheduler/kubernetes.html
     - title: Run Portworx with Docker Swarm
-      url: /run/docker-swarm.html
+      url: /scheduler/docker-swarm.html
     - title: Run Portworx with Docker UCP
-      url: /run/docker-ucp.html
+      url: /scheduler/docker-ucp.html
     - title: Run Portworx with Rancher
-      url: /run/rancher.html
+      url: /scheduler/rancher.html
     - title: Run with systemd
-      url: /run/systemd.html
+      url: /scheduler/systemd.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS via Cloud Formation
