@@ -67,6 +67,8 @@ Hadoop cluster.
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options
 provided during install, one for each of the Journal, Name and Data nodes.
 
+![Hadoop-PX volumes](images/dcos-hadoop-px-volume-list.png){:width="655px"}
+
 TODO: Add dcos cli command to check status of service
 
 ## Scaling the Data Nodes
