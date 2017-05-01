@@ -27,7 +27,7 @@ $ dcos package repo add --index=0 cassandra-px https://disrani-cassandra.s3.amaz
 
 Once you have run the above command you should see the Cassandra-PX service available in your universe
 
-![Cassandra-PX in DCOS Universe](images/dcos-cassandra-universe.png){:width="655px" height="199px"}
+![Cassandra-PX in DCOS Universe](images/dcos-cassandra-px-universe.png)
 
 ## Installation
 ### Default Install
@@ -50,16 +50,22 @@ Click on “Review and Install” and then “Install” to start the installati
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-{InsertScreenshot of Services page}
+![Cassandra-PX on services page](images/dcos-cassandra-px-service.png)
 
 If you click on the Cassandra-PX service you should be able to look at the status of the nodes being created. There will be
-one service for the scheduler and one service each for the Cassandra nodes. When the Scheduler service as well as the
+one service for the scheduler and one service each for the Cassandra nodes. 
+
+![Cassandra-PX install finished](images/dcos-cassandra-px-started-install.png)
+
+When the Scheduler service as well as the
 Cassandra nodes are in Running (green) status, you should be ready to start using the Cassandra cluster.
 
-{Insert screenshot of running Cassandra cluster}
+![Cassandra-PX install started](images/dcos-cassandra-px-finished-install.png)
 
-If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options provided
-during install, one for each node of the Cassandra cluster.
+If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options 
+provided during install, one for each node of the Cassandra cluster.
+
+![Cassandra-PX volumes](images/dcos-cassandra-px-volume-list.png){:width="655px" height="200px"}
 
 TODO: Add dcos cli command to check status of service
 
