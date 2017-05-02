@@ -4,9 +4,6 @@ title: "Hadoop on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
 ---
 
-TODO: Will generate cleaner links in S3
-TODO: Will see if it’s possible to add one repo with all the services available from there
-
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.
 It will create 2 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes.
 The Data and Yarn nodes will be co-located on the same physical host.
@@ -23,7 +20,7 @@ For this step you will need to login to a node which has the dcos cli installed 
 Run the following command to add the repository to your DCOS cluster:
 
 ```
-$ dcos package repo add --index=0 hdfs-aws https://disrani-cassandra.s3.amazonaws.com/autodelete7d/hdfs/20170430-122331-NmBRyMXX9HZ86H0H/stub-universe-hdfs.zip
+$dcos package repo add --index=0 hadoop-px-aws https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
 ```
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
