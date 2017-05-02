@@ -20,7 +20,7 @@ For this step you will need to login to a node which has the dcos cli installed 
 Run the following command to add the repository to your DCOS cluster:
 
 ```
-$dcos package repo add --index=0 hadoop-px-aws https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
+$ dcos package repo add --index=0 hadoop-px-aws https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
 ```
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
@@ -42,6 +42,8 @@ If you want to modify the default, click on the “Install” button next to the
 Here you have the option to change the service name, volume name, volume size, and provide any additional options that you
 want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including
 the number of Data and Yarn nodes for the Hadoop clsuter.
+
+![Hadoop-PX install options](images/dcos-hadoop-px-install-options.png)
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
