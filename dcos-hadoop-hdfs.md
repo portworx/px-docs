@@ -12,6 +12,9 @@ Since the stateful services in DCOS universe do not have support for external vo
 repositories to your DCOS cluster to install the services mentioned here. 
 
 The source code for these services can be found here: https://github.com/portworx/dcos-commons
+This is a fork from [Mesos DCOS-commons framework](https://github.com/mesosphere/dcos-commons) and we will pull in updates from there regularly.
+
+Please make sure you have installed [Portworx on DCOS](run-with-mesosphere.md) before proceeding further.
 
 ## Adding the repository for the service:
 
@@ -43,14 +46,14 @@ Here you have the option to change the service name, volume name, volume size, a
 want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including
 the number of Data and Yarn nodes for the Hadoop clsuter.
 
-![Hadoop-PX install options](images/dcos-hadoop-px-install-options.png)
+![Hadoop-PX install options](images/dcos-hadoop-px-install-options.png) {:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Hadoop-PX on services page](images/dcos-hadoop-px-service.png)
+![Hadoop-PX on services page](images/dcos-hadoop-px-service.png){:width="655px" height="200px"}
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be
 one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes. 
