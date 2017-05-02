@@ -41,6 +41,8 @@ Here you have the option to change the service name, volume name, volume size,an
 want to pass to the docker volume driver. You can also configure other Cassandra related parameters on this page including
 the number of Cassandra nodes.
 
+![Cassandra-PX install options](images/dcos-cassandra-px-install-options.png)
+
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
 ## Install Status
