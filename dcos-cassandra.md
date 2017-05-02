@@ -4,10 +4,6 @@ title: "Cassandra on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 ---
 
-TODO: Will generate cleaner links in S3
-TODO: Will see if it’s possible to add one repo with all the services available from there
-TODO: Update screenshots which shows <Service>-PX as the name of the package
-
 This guide will help you to install the Cassandra service on your DCOS cluster backed by PX volumes for persistent storage.
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
@@ -22,7 +18,7 @@ For this step you will need to login to a node which has the dcos cli installed 
 Run the following command to add the repository to your DCOS cluster:
 
 ```
-$ dcos package repo add --index=0 cassandra-px https://disrani-cassandra.s3.amazonaws.com/autodelete7d/cassandra/20170427-193540-K1Ec66NZm1SDuIIg/stub-universe-cassandra.zip
+$ dcos package repo add --index=0 cassandra-px-aws https://px-dcos.s3.amazonaws.com/v1/cassandra-px/cassandra-px.zip
 ```
 
 Once you have run the above command you should see the Cassandra-PX service available in your universe
