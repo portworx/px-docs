@@ -432,6 +432,10 @@ ul.nav li>ul li a {
     padding: 2px 5px 2px 8px;
 }
 
+.nav a.selected {
+    background: darkgrey;
+    color: white;
+}
 /* end sidebar */
 
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
