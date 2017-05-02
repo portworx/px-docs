@@ -61,7 +61,7 @@ Throughput is controlled per container and can be shared. Volumes have fine-grai
  * Policies enforce how the volume is replicated across the cluster, IOPs priority, filesystem, blocksize, and additional parameters described below.
  * Policies are specified at create time and can be applied to existing volumes.
 
-Set policies on a volume through the options parameter.  These options can also be passed in through the scheduler or using the [inline volume spec](create-manage-storage-volumes.html#inline-volume-spec).
+Set policies on a volume through the options parameter.  These options can also be passed in through the scheduler or using the [inline volume spec](#inline-volume-spec).
 
 Show the available options through the --help command, as shown below:
 
@@ -151,7 +151,7 @@ These inline specs can be passed in through the scheduler application template. 
 ```
 
 ## Global Namespace (Shared Volumes)
-To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](shared-volumes.html).
+To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](/manage/shared-volumes.html).
 
 ## Inspect volumes
 Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.

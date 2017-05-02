@@ -17,4 +17,4 @@ Here is a short video that shows how to configure and use Portworx Shared Volume
 {% include youtubePlayer.html id=page.youtubeId %}
 
 ## See the Documentation
-Get started with [Shared Volumes](/shared-volumes.html)
+Get started with [Shared Volumes](/manage/shared-volumes.html)

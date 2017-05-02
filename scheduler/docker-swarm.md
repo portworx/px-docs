@@ -10,7 +10,7 @@ You can use Portworx to provide storage for your Docker Swarm services. Portworx
 Below steps demonstrate how to set up a three-node cluster for mysql.
 
 ### Deploy PX container
-Refer to [Run with Docker](run-with-docker.html) to deploy the Portworx container & create a cluster.
+Refer to [Run with Docker](/install/docker.html) to deploy the Portworx container & create a cluster.
 
 ### Create a volume
 ```

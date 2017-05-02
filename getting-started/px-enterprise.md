@@ -34,15 +34,15 @@ See our quick start guides:
 
 Run Portworx with schedulers:
 
-* [Run Portworx with Kubernetes](run-with-kubernetes.html)
-* [Run Portworx with Mesosphere](run-with-mesosphere.html)
-* [Run Portworx with Rancher](run-with-rancher.html)
+* [Run Portworx with Kubernetes](/scheduler/kubernetes.html)
+* [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos.html)
+* [Run Portworx with Rancher](/scheduler/rancher.html)
 
 Run stateful containers with Docker volumes:
 
 * [Application Solutions](application-solutions.html)
 
-Use **pxctl** ([CLI Reference](cli-reference.html)) to directly:
+Use **pxctl** ([CLI Reference](/control/cli.html)) to directly:
 
 * View the cluster global capacity and health
 * Create, inspect, and delete storage volumes
@@ -50,8 +50,8 @@ Use **pxctl** ([CLI Reference](cli-reference.html)) to directly:
 
 If you run into an issue:
 
-* [Troubleshooting](troubleshooting.html)
+* [Troubleshooting](/knowledgebase/troubleshooting.html)
 
 As you use PX-Enterprise, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
 
-If your requirements extend beyond the scope of PX-Enterprise, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise. You can take a tour of the PX-Enterprise console [here](get-started-px-enterprise.html#step-3-take-a-tour-of-the-px-enterprise-web-console).
+If your requirements extend beyond the scope of PX-Enterprise, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise. You can take a tour of the PX-Enterprise console [here](#step-3-take-a-tour-of-the-px-enterprise-web-console).

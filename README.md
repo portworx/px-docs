@@ -36,7 +36,7 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 * Command-line interface
 * RESTful API for automation and statistics
 
-<FORM METHOD="LINK" ACTION="get-started-px-enterprise.html">
+<FORM METHOD="LINK" ACTION="/getting-started/px-enterprise.html">
 <INPUT TYPE="submit" VALUE="Get Started with PX-Enterprise">
 </FORM>
 
@@ -54,7 +54,7 @@ PX-Developer features:
 * Support for up three servers per cluster and 1 TB per volume
 * Requires an etcd or Consul key/value store
 
-<FORM METHOD="LINK" ACTION="get-started-px-developer.html">
+<FORM METHOD="LINK" ACTION="/getting-started/px-developer.html">
 <INPUT TYPE="submit" VALUE="Get Started with PX-Developer">
 </FORM>
 <br/>

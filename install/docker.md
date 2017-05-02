@@ -13,7 +13,7 @@ To install and configure PX via the Docker CLI, use the command-line steps in th
 
 PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 
->**Important:**<br/>If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](os-config-shared-mounts.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+>**Important:**<br/>If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ### Specify storage
 
@@ -283,7 +283,7 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
-For more on using **pxctl**, see the [CLI Reference](cli-reference.html).
+For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
 You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](application-solutions.html).
 
@@ -295,5 +295,5 @@ To add nodes to increase capacity and enable high availability, simply repeat th
 
 After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
 
-* [Scale a Cassandra Database with PX](/cassandra.html)
-* [Run the Docker Registry with High Availability](/registry.html)
+* [Scale a Cassandra Database with PX](/applications/cassandra.html)
+* [Run the Docker Registry with High Availability](/applications/docker-registry.html)

@@ -23,7 +23,7 @@ You will need to create a master AMI that you will associate with your auto scal
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
 
 This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
 
@@ -74,7 +74,7 @@ The PX instance that is launching will use the above information to either alloc
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/run-with-systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
 
 This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
 
@@ -180,9 +180,9 @@ If the number of instances are scaled up, then the following happens:
 3. PX will join the cluster as a new node.
 
 ## Scaling the Cluster Down
-When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the [`pxctl service drive add`](/scale-up.html) command.
+When you scale the cluster down, the EBS volume (if any) associated with this instance simply gets released back into the EBS pool.  Any other PX instance can optionally be instructed to use this volume on another PX node using the [`pxctl service drive add`](/maintain/scale-up.html) command.
 
-In the case of ASG, if you want to scale down your PX cluster, you will not be able to use methods mentioned in [Scale-Down Nodes](https://docs.portworx.com/scale-down.html#removing-a-functional-node-from-a-cluster). You can still reduce the size of your Auto Scaling Group, while making sure to maintain PX cluster quorum.
+In the case of ASG, if you want to scale down your PX cluster, you will not be able to use methods mentioned in [Scale-Down Nodes](/maintain/scale-down.html#removing-a-functional-node-from-a-cluster). You can still reduce the size of your Auto Scaling Group, while making sure to maintain PX cluster quorum.
 
 ## Note
 

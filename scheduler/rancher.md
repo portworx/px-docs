@@ -57,7 +57,7 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Volume Driver Name: pxd
 * Cluster ID: user-defined/arbitrary
 * Key-Value Database: of the form:  "etcd://10.42.207.178:2379", where the URL come from the above etcdserver
-* Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](run-with-docker.html#run-px)
+* Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install/docker.html#run-px)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
 ## Step 5: Label hosts that run Portworx

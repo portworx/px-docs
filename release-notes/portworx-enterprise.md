@@ -10,14 +10,14 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ### Key Features
 
-* [AWS Auto-scaling integration with Portworx](https://docs.portworx.com/portworx-on-aws-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
-* [Multi-cloud Backup and Restore](https://docs.portworx.com/cloudsnaps.html) of Portworx Volumes 
-* [Encrypted Volumes](https://docs.portworx.com/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
-* [Docker V2 Plugin Support](https://docs.portworx.com/run-as-docker-pluginv2.html)
-* [Prometheus Integeration](https://docs.portworx.com/portworx-with-prometheus.html)
+* [AWS Auto-scaling integration with Portworx](/cloud/aws-ec2-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
+* [Multi-cloud Backup and Restore](/cloud/backups.html) of Portworx Volumes 
+* [Encrypted Volumes](/manage/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
+* [Docker V2 Plugin Support](/install/docker-plugin.html)
+* [Prometheus Integeration](/maintain/prometheus.html)
 * [Hashicorp Vault](https://docs.portworx.com/portworx-with-vault.html), [AWS KMS integration](https://docs.portworx.com/portworx-with-aws-kms.html) and 
   Docker Secrets Integration
-* [Dynamically resize](https://docs.portworx.com/volume-update.html#increase-volume-size) PX Volumes with no application downtime
+* [Dynamically resize](/manage/volume-update.html#increase-volume-size) PX Volumes with no application downtime
 * Security updates improve PX container security
 
 ### Key Issues Addressed
@@ -64,7 +64,7 @@ Improve node failure and resync handling
 
 ### Key Features
 
-* Shared volumes (or shared namespace support) [Shared Volumes](/shared-volumes.html)
+* Shared volumes (or shared namespace support) [Shared Volumes](/manage/shared-volumes.html)
 * Scale Volumes support - Create volumes in scale with single command
 * Sticky Volumes support - Create volumes with sticky bit so only a pxctl volume delete can delete it
 * Improvements in replication performance
@@ -91,8 +91,8 @@ Improve node failure and resync handling
 ## 1.1.0 Release notes
 
 ### Key Features
-* Class of Service Support. Refer to [CoS](/cos.html)
-* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/run-lighthouse.html)
+* Class of Service Support. Refer to [CoS](/manage/class-of-service.html)
+* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/enterprise/on-premise-lighthouse.html)
 * Scale up to 125 nodes
 
 

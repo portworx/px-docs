@@ -24,7 +24,7 @@ In order to use Lighthouse 1.1.3 with authentication, please download and instal
 
 ### Key Features
 
-* Support for authenticated etcd2. Refer to [Lighthouse with Secure etcd] (/run-lighthouse-with-secure-etcd.html)
+* Support for authenticated etcd2. Refer to [Lighthouse with Secure etcd](/enterprise/lighthouse-with-secure-etcd.html)
 
 ### Known issues
 

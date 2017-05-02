@@ -95,7 +95,7 @@ Labels:
 
 ## Step 4: Install Portworx 
 
-Follow the instructions for [Getting Started with Portworx Enterprise](get-started-px-enterprise.html)
+Follow the instructions for [Getting Started with Portworx Enterprise](/getting-started/px-enterprise.html)
 
 Follow the instructions for [Creating a PX-Enterprise Cluster](create-px-enterprise-cluster.html)
 

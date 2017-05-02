@@ -254,7 +254,7 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
-For more on using **pxctl**, see the [CLI Reference](cli-reference.html).
+For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
 You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](application-solutions.html).
 
@@ -266,5 +266,5 @@ To add nodes to increase capacity and enable high availability, simply repeat th
 
 After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
 
-* [Scale a Cassandra Database with PX](/cassandra.html)
-* [Run the Docker Registry with High Availability](/registry.html)
+* [Scale a Cassandra Database with PX](/applications/cassandra.html)
+* [Run the Docker Registry with High Availability](/applications/docker-registry.html)

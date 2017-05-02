@@ -106,7 +106,7 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
 
 * Be sure to substitute your IP address for the 10.0.0.1 placeholder in the `CASSANDRA_BROADCAST_ADDRESS` parameter.
 
->**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](troubleshooting.html) parameter between `run` and `--name`.
+>**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](/knowledgebase/troubleshooting.html) parameter between `run` and `--name`.
 
 ```
 # docker run --name cassandra1 -d \

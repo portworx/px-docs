@@ -19,4 +19,4 @@ OR, if you have a custom [px configuration file](https://github.com/portworx/px-
 # docker-compose up -d
 ```
 
-You now have a scale-out storage cluster for containers. To continue, refer to the resources listed in [Get Started with PX-Developer](get-started-px-developer.html).
+You now have a scale-out storage cluster for containers. To continue, refer to the resources listed in [Get Started with PX-Developer](/getting-started/px-developer.html).
