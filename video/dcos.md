@@ -14,5 +14,5 @@ Here is a short video that shows how to configure and run Portworx with DCOS:
 
 
 ## See the Documentation
-Get started now with running [Portworx on Mesos](/scheduler/mesosphere-dcos.html)
+Get started now with running [Portworx on Mesos](/scheduler/mesosphere-dcos/install.html)
 

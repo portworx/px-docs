@@ -40,10 +40,10 @@
       url: /manage/encrypted-volumes.html
   - title: Schedulers
     folderitems:
-    - title: Run Portworx with Mesosphere DCOS
-      url: /scheduler/mesosphere-dcos.html
-    - title: DC/OS
+    - title: Mesosphere DCOS
       folderitems:
+      - title: Install
+        url: /scheduler/mesosphere-dcos/install.html
       - title: Cassandra
         url: /scheduler/mesosphere-dcos/cassandra.html
       - title: Hadoop &amp; HDFS

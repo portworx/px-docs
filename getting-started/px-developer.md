@@ -36,7 +36,7 @@ See our quick start guides:
 Run Portworx with schedulers:
 
 * [Run Portworx with Kubernetes](/scheduler/kubernetes.html)
-* [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos.html)
+* [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
 * [Run Portworx with Rancher](/scheduler/rancher.html)
 
 Run stateful containers with Docker volumes:
