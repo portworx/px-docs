@@ -10,10 +10,6 @@
       url: /getting-started/px-developer.html
     - title: Get Started with PX-Enterprise
       url: /getting-started/px-enterprise.html
-    - title: Test
-      folderitems:
-      - title: test 2
-        url: /
   - title: Install and Run
     folderitems:
     - title: Overview
@@ -46,6 +42,12 @@
     folderitems:
     - title: Run Portworx with Mesosphere DCOS
       url: /scheduler/mesosphere-dcos.html
+    - title: DC/OS
+      folderitems:
+      - title: Cassandra
+        url: /scheduler/mesosphere-dcos/cassandra.html
+      - title: Hadoop &amp; HDFS
+        url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
     - title: Run Portworx with Kubernetes
       url: /scheduler/kubernetes.html
     - title: Run Portworx with Docker Swarm
