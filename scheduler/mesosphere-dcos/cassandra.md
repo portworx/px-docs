@@ -44,29 +44,29 @@ Here you have the option to change the service name, volume name, volume size,an
 want to pass to the docker volume driver. You can also configure other Cassandra related parameters on this page including
 the number of Cassandra nodes.
 
-![Cassandra-PX install options](images/dcos-cassandra-px-install-options.png){:width="655px" height="200px"}
+![Cassandra-PX install options](/images/dcos-cassandra-px-install-options.png){:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Cassandra-PX on services page](images/dcos-cassandra-px-service.png){:width="655px" height="200px"}
+![Cassandra-PX on services page](/images/dcos-cassandra-px-service.png){:width="655px" height="200px"}
 
 If you click on the Cassandra-PX service you should be able to look at the status of the nodes being created. There will be
 one service for the scheduler and one service each for the Cassandra nodes. 
 
-![Cassandra-PX install started](images/dcos-cassandra-px-started-install.png){:width="655px" height="200px"}
+![Cassandra-PX install started](/images/dcos-cassandra-px-started-install.png){:width="655px" height="200px"}
 
 When the Scheduler service as well as the
 Cassandra nodes are in Running (green) status, you should be ready to start using the Cassandra cluster.
 
-![Cassandra-PX install finished](images/dcos-cassandra-px-finished-install.png){:width="655px" height="200px"}
+![Cassandra-PX install finished](/images/dcos-cassandra-px-finished-install.png){:width="655px" height="200px"}
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options 
 provided during install, one for each node of the Cassandra cluster.
 
-![Cassandra-PX volumes](images/dcos-cassandra-px-volume-list.png){:width="655px" height="200px"}
+![Cassandra-PX volumes](/images/dcos-cassandra-px-volume-list.png){:width="655px" height="200px"}
 
 If you run the “dcos service” command you should see the cassandra-px service in ACTIVE state with 3 running tasks, one for each cassandra node.
 

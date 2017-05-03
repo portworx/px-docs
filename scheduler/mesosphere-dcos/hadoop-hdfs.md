@@ -28,7 +28,7 @@ $ dcos package repo add --index=0 hadoop-px-aws https://px-dcos.s3.amazonaws.com
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
 
-![Hadoop-PX in DCOS Universe](images/dcos-hadoop-px-universe.png){:width="655px" height="200px"}
+![Hadoop-PX in DCOS Universe](/images/dcos-hadoop-px-universe.png){:width="655px" height="200px"}
 
 ## Installation
 ### Default Install
@@ -46,30 +46,30 @@ Here you have the option to change the service name, volume name, volume size, a
 want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including
 the number of Data and Yarn nodes for the Hadoop clsuter.
 
-![Hadoop-PX install options](images/dcos-hadoop-px-install-options.png) {:width="655px" height="200px"}
+![Hadoop-PX install options](/images/dcos-hadoop-px-install-options.png) {:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
 ## Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-![Hadoop-PX on services page](images/dcos-hadoop-px-service.png){:width="655px" height="200px"}
+![Hadoop-PX on services page](/images/dcos-hadoop-px-service.png){:width="655px" height="200px"}
 
 If you click on the Hadoop-PX service you should be able to look at the status of the nodes being created. There will be
 one service for the scheduler and one each for the Journal, Name, Zookeeper, Data and Yarn nodes. 
 
-![Hadoop-PX install finished](images/dcos-hadoop-px-started-install.png){:width="655px" height="200px"}
+![Hadoop-PX install finished](/images/dcos-hadoop-px-started-install.png){:width="655px" height="200px"}
 
 When the Scheduler
 service as well as all the Hadoop containers nodes are in Running (green) status, you should be ready to start using the
 Hadoop cluster.
 
-![Hadoop-PX install started](images/dcos-hadoop-px-finished-install.png){:width="655px" height="200px"}
+![Hadoop-PX install started](/images/dcos-hadoop-px-finished-install.png){:width="655px" height="200px"}
 
 If you check your Portworx cluster, you should see multiple volumes that were automatically created using the options
 provided during install, one for each of the Journal, Name and Data nodes.
 
-![Hadoop-PX volumes](images/dcos-hadoop-px-volume-list.png){:width="655px" height="200px"}
+![Hadoop-PX volumes](/images/dcos-hadoop-px-volume-list.png){:width="655px" height="200px"}
 
 If you run the "dcos service" command you should see the hadoop-px service in ACTIVE state with 13 running tasks
 
