@@ -10,8 +10,8 @@ There are lots of files from the original template that have been left here for 
 
 Most important things to know:
 
-  + For now, the content is all flat.   All 'md' files are at this top level directory.   There are no subdirectories
   + The main sidebar is _data/sidebars/home_sidebar.yml.   If you create a new page, find an appropriate header under which to place it.  As of now, this is the only sidebar being used
+  + Links should not be relative as files can be moved around (all links should have a leading slash).
   + All images must include a width and height in order to be valid on the AMP version of the documentation. For example:
 ```
 ![Configure Admin User](/images/jenkins3.png){:width="1992px" height="1156px"}
@@ -23,6 +23,15 @@ Most important things to know:
  
  ```
 Note the reference to a **".html"** file, which gets generated automatically by jekyll from the **".md"** file.
+
+
+## Navigation
+
+The sidebar for both the normal and AMP documentation is generated based on the contents of the menu datafile located at `_data/sidebars/home_sidebar.yml`. 
+It is possible to nest (indefinitely) the contents of the navigation.
+
+In order to have a new submenu rather than a link in a submenu the item must contain `folderitems`. 
+Refer to the existing yaml file for more information.
 
 
 ## AMP Version
