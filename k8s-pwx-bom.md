@@ -25,7 +25,7 @@ Supported bare metal cloud providers are
 * Rackspace
 * Packet.io
 
-When chosing an instance, verify that you meet the minimum requirements available at [http://docs.portworx.com/get-started-px-enterprise.html#step-1-verify-requirements](http://docs.portworx.com/get-started-px-enterprise.html#step-1-verify-requirements)
+When chosing an instance, verify that you meet the minimum requirements available on [the Portworx enterpris getting started guide.](/getting-started/px-enterprise.html#step-1-verify-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
@@ -40,12 +40,12 @@ A recent enough Linux distribution is typically all that is needed.  We recommen
 
 Next, install Docker.  Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
-Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  If you are running Docker without shared mounts, please follow the steps listed at http://docs.portworx.com/os-config-shared-mounts.html.
+Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  If you are running Docker without shared mounts, please follow the steps listed on the Portworx [shared mount propogation documentation](/knowledgebase/shared-mount-propogation.html).
 
 ## Step 3: Deploy PX with Kubernetes
 At this point, you have everything you need to deploy Portworx with Kubernetes to create a hyperconverged compute with storage cluster.
 
-Visit [Run Portworx with Kubernetes](/run-with-kubernetes.html) to get portworx and kubernetes running on all the nodes in your cluster.
+Visit [Run Portworx with Kubernetes](/scheduler/kubernetes.html) to get portworx and kubernetes running on all the nodes in your cluster.
 
 ## An example BOM
 In an example deployment, we used GCE to deploy a 30 node Portworx with Kubernetes cluster.  The cost breakdown (minus the Portworx Enterprise licence fees) to run this 30 node cluster per hour was as follows:

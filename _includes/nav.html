@@ -1,17 +1,19 @@
 {% assign navurl = page.url | remove: 'index.html' %}
-<ul>
+<ul id="mysidebar" class="nav">
 {% for item in include.nav %}
     <li>
-        <a href="{{ item.url }}">
+        <a href="{% if item.url %}{{ item.url }}{% else %}#{% endif %}" 
+            {% if item.url == navurl %}class="selected"{% endif %}>
             {% if item.url == navurl %}
-                <b>{{ item.text }}</b>
+                <b>{{ item.title }}</b>
             {% else %}
-                {{ item.text }}
+                {{ item.title }}
             {% endif %}
         </a>
+
+        {% if item.folderitems %}
+            {% include nav.html nav=item.folderitems %}
+        {% endif %}
     </li>
-    {% if item.subitems and navurl contains item.url %}
-        {% include nav.html nav=item.subitems %}
-    {% endif %}
 {% endfor %}
 </ul>

@@ -111,4 +111,5 @@ google_analytics: UA-64247527-1
 
 # Endless thanks for this incredible Theme!  http://idratherbewriting.com/documentation-theme-jekyll/
 
-
+gems:
+  - jekyll-redirect-from

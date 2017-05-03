@@ -17,7 +17,7 @@ Portworx provides scale-out storage for containers. Portworx storage is delivere
 * Is radically simple.
 
 **Try It Now!**
-[![](/images/launch.png){:height="64px" width="64px" .launch-icon}](/get-started-asap.html)
+[![](/images/launch.png){:height="64px" width="64px" .launch-icon}](/getting-started/asap.html)
 
 Portworx technology is available as PX-Developer and PX-Enterprise.
 
@@ -38,7 +38,7 @@ PX-Developer features:
 * Support for up three servers per cluster and 1 TB per volume
 * Requires an etcd or Consul key/value store
 
-<a href="get-started-px-developer.html" class="btn btn-primary">Get Started with PX-Developer</a>
+<a href="/getting-started/px-developer.html" class="btn btn-primary">Get Started with PX-Developer</a>
 <br/>
 
 ## PX-Enterprise
@@ -58,7 +58,7 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 * Command-line interface
 * RESTful API for automation and statistics
 
-<a href="get-started-px-enterprise.html" class="btn btn-primary">Get Started with PX-Enterprise</a>
+<a href="/getting-started/px-enterprise.html" class="btn btn-primary">Get Started with PX-Enterprise</a>
 
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.

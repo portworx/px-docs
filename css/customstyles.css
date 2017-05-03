@@ -391,7 +391,6 @@ background-color: #347DBE;
 }
 
 .nav > li > a {
-    font-size: 14px;
     line-height: 20px;
     padding: 4px 10px;
 }
@@ -427,6 +426,15 @@ ul#mysidebar {
 .nav ul li a {
     border-top:1px solid whitesmoke;
     padding-left:10px;
+}
+
+ul.nav li>ul li a {
+    padding: 2px 5px 2px 8px;
+}
+
+.nav a.selected {
+    background: darkgrey;
+    color: white;
 }
 /* end sidebar */
 
