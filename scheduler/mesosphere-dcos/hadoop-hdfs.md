@@ -2,6 +2,7 @@
 layout: page
 title: "Hadoop on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
+redirect_from: "/dcos-hadoop-hdfs.html"
 ---
 
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.

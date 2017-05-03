@@ -2,6 +2,7 @@
 layout: page
 title: "Cassandra on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+redirect_from: "/dcos-cassandra.html"
 ---
 
 This guide will help you to install the Cassandra service on your DCOS cluster backed by PX volumes for persistent storage.
