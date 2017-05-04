@@ -104,7 +104,7 @@ description: "Intended as a documentation theme based on Jekyll for technical wr
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only
-url: http://portworx.com
+url: https://docs.portworx.com
 
 # Google services
 google_analytics: UA-64247527-1
