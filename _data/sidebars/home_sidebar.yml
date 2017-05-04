@@ -14,11 +14,11 @@
     folderitems:
     - title: Deploy Portworx
       folderitems:
-      - title:     Overview
+      - title: &amp;&amp;&amp;&amp;Overview
         url: /install/index.html
-      - title:     Install
+      - title: &amp;&amp;&amp;&amp;Install
         url: /install/docker.html
-      - title:     systemd
+      - title: &amp;&amp;&amp;&amp;systemd
         url: /install/systemd.html
     - title: CoreOS
       url: /install/coreos.html
@@ -46,11 +46,11 @@
     folderitems:
     - title: Mesosphere DCOS
       folderitems:
-      - title:     Install
+      - title: &amp;&amp;&amp;&amp;Install
         url: /scheduler/mesosphere-dcos/install.html
-      - title:     Cassandra
+      - title: &amp;&amp;&amp;&amp;Cassandra
         url: /scheduler/mesosphere-dcos/cassandra.html
-      - title:     Hadoop &amp; HDFS
+      - title: &amp;&amp;&amp;&amp;Hadoop &amp; HDFS
         url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
     - title: Kubernetes
       url: /scheduler/kubernetes.html
