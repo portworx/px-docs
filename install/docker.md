@@ -285,7 +285,7 @@ Global Storage Pool
 
 For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
-You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](application-solutions.html).
+You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
 
 ### Adding Nodes
 

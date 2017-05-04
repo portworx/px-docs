@@ -11,7 +11,7 @@ To install and configure PX via the Docker CLI, use the command-line steps in th
 ### Lighthouse
 If you are using the SaaS version of the PX-Enterprise Lighthouse, then we are hosting your metadata for cloud analytics and a GUI interface to manage your cluster.  Please make sure you received the correct token from support@portworx.com.
 
->**Important:**<br/>If you are *NOT* using the Portworx hosted SaaS service for management, then note that PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](run-etcd.md) for PX
+>**Important:**<br/>If you are *NOT* using the Portworx hosted SaaS service for management, then note that PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX
 
 ### Install and configure Docker
 
@@ -284,7 +284,7 @@ Global Storage Pool
 
 For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
-You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](application-solutions.html).
+You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
 
 ### Adding Nodes
 
