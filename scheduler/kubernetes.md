@@ -9,7 +9,7 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 
 ## Deploy PX with Kubernetes
 Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
-For previous Kubernetes releases you can use the flexvolume approach to use Portworx Volumes as Persistent Volumes in Kubernetes. Follow [these](run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
+For previous Kubernetes releases you can use the flexvolume approach to use Portworx Volumes as Persistent Volumes in Kubernetes. Follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
 
 The native portworx driver in Kubernetes supports the following features:
 1. Dynamic Volume Provisioning
@@ -177,7 +177,7 @@ Example:
          requests:
            storage: 2Gi
 ```
-[Download example](k8s-samples/portworx-volume-pvcsc.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pvcsc.yaml?raw=true)
 
 Verifying persistent volume claim is created:
 
@@ -241,7 +241,7 @@ Example:
          persistentVolumeClaim:
            claimName: pvcsc001
 ```
-[Download example](k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pvcscpod.yaml?raw=true)
 
 Verifying pod is created:
 
@@ -285,7 +285,7 @@ Example:
          volumeID: "<vol-id>"
          fsType: "<fs-type>"
 ```
-[Download example](k8s-samples/portworx-volume-pod.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pod.yaml?raw=true)
 
 Make sure to replace "vol-id" and "fs-type" in the above spec with
 the ones that you used while creating the volume.
@@ -332,7 +332,7 @@ Example:
 Make sure to replace &lt;vol-id&gt;, &lt;size&gt; and &lt;fs-type&gt; in the above spec with
 the ones that you used while creating the volume.
 
-[Download example](k8s-samples/portworx-volume-pv.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pv.yaml?raw=true)
 
 Verifying persistent volume is created:
 
@@ -375,7 +375,7 @@ Example:
           requests:
             storage: <size>Gi
 ```
-[Download example](k8s-samples/portworx-volume-pvc.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pvc.yaml?raw=true)
 
 Verifying persistent volume claim is created:
 
@@ -418,7 +418,7 @@ Example:
           persistentVolumeClaim:
             claimName: pvc0001
 ```
-[Download example](k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-pvcpod.yaml?raw=true)
 
 Verifying pod is created:
 
