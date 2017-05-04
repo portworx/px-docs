@@ -8,7 +8,7 @@ sidebar: home_sidebar
 ## Pre-requisites
 You need a running Portworx and Kubernetes cluster.
 
-Follow [this](run-with-kubernetes.html) guide to setup a Portworx and Kubernetes.
+Follow [this](/scheduler/kubernetes.html) guide to setup a Portworx and Kubernetes.
 
 ## Create a mysql Statefulset 
 

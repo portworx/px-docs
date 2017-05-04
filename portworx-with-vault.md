@@ -32,7 +32,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                 portworx/px-enterprise:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s \
 		/dev/sdb -s /dev/sdc -secret_type vault -cluster_secret_key <secret-id>
 ```
-All the arguments to the docker run command are explained [here](run-with-docker.html). The two new arguments related to Vault are:
+All the arguments to the docker run command are explained [here](/install/docker.html). The two new arguments related to Vault are:
 
 ```
 - secret_type

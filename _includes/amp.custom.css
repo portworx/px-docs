@@ -67,9 +67,13 @@ amp-sidebar {
     padding: 7px;
 }
 
-#sidebar section[expanded] h4 {
+#sidebar section[expanded]>h4 {
     color: #fff;
     background: #F15A22;
+}
+
+#sidebar li.nopadd {
+    padding: 0 0 0 7px !important;
 }
 
 amp-img {
