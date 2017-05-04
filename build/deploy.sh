@@ -9,6 +9,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "gh-pages" ]; 
 
     mv ${BASE}/_layouts/amp.html ${BASE}/_layouts/page.html
 
+    sed -i'' 's/docs.portworx.com/amp-docs.portworx.com/' ${BASE}/_config.yml
+
     bundle exec jekyll build
 
     cd "${BASE}/_site"
