@@ -72,8 +72,8 @@ amp-sidebar {
     background: #F15A22;
 }
 
-#sidebar li.nopadd {
-    padding: 0 0 0 7px !important;
+ul#mysidebar>li.nopadd {
+    padding: 0 0 0 7px;
 }
 
 amp-img {
