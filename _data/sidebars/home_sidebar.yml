@@ -14,7 +14,7 @@
     folderitems:
     - title: Deploy Portworx
       folderitems:
-      - title: &amp;&amp;&amp;&amp; Overview
+      - title: Overview
         url: /install/index.html
       - title: Install
         url: /install/docker.html
