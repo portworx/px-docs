@@ -10,54 +10,13 @@ You can use Portworx to provide docker volumes for Mesos and Mesosphere/DCOS thr
 
 The Marathon service maps options through the Docker command line to reference the Portworx volume driver and associated volume.
 
-## Watch the video
-Here is a short video that shows how to configure and run Portworx with Mesosphere:
-{% include youtubePlayer.html id=page.youtubeId %}
-
-><br/>And here is a detailed [Blogpost](https://portworx.com/mesosphere-universe-portworx-dcos/) on deploying Portworx through DC/OS Universe
 
 ><br/>**NEW!**
 Getting Portworx up and running with Mesosphere/DCOS has never been easier.
 Portworx now provides an AWS CloudFormation Template that deploys a Portworx-ready cluster.
 
-# AWS DC/OS Quickstart
 
-## Step 1:  Launch DC/OS CloudFormation Template 
-Click Here:  
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-DCOS-STACK&amp;templateURL=https://s3.amazonaws.com/portworx-dcos-templates/dcos1.9.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" width="144px" height="27px" class="cf-stack"></a></p>
-Specify the EC2 instance type for the Mesos slaves, and the size of the volume (8GB - 4TB) that each slave will contribute
-to the Portworx storage pool.
-
-Select the CloudFormation Stack from the AWS console and wait for "CREATE COMPLETE" state.
-Then go to the "Outputs" tab below to select the "DnsAddress" of the Master Node to access the DC/OS GUI.
-
-## Step 2: Download the DC/OS CLI
-Navigate to the bottom of the left-side navigation pane of the GUI, and follow the directions. 
-
-## Step 3: Launch 'etcd'
-From the DC/OS CLI, launch an 'etcd' service:
-```
-dcos package install --yes etcd
-```
-
-Note the 'etcd' service URL:
-
-```
-dcos task | grep etcd-server | tail -n 1 | awk '{printf "etcd://%s:%s\n", $6, $8}'
-```
-
-## Step 3: Launch Portworx through Mesosphere Universe
-Portworx can now be deployed through the [Mesosphere Universe](https://github.com/dcos/examples/tree/master/portworx)
-The `cmdargs` value should be:  
-
-```
--c mypxcluster -s /dev/sdc -k etcd://<IP>:<PORT>
-``` 
-
-where `IP:PORT` corresponds to the 'etcd' service URL from Step 2.
-
-
-# Install Portworx Manually
+# Install Portworx
 
 ## Step 1: Install Mesosphere DCOS CLI or Apache Mesos
 For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
@@ -107,11 +66,13 @@ Please follow the published [Mesosphere/DCOS Examples for deploying Portworx thr
 ### To Deploy Portworx through Marathon:
 
 ><br/>**NEW!**
+
 For simple deployment with DCOS, please follow [these instructions](/run-px-etcd-marathon.html) for creating
 Portworx and etcd together as a converged application group.
 
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
+
 The pre-requisites for installing Portworx through Marathon include:
 
 1. Determine the list of physical devices (disks and interfaces) for the agent/slave nodes
