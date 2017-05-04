@@ -22,8 +22,8 @@ This section assumes that Portworx will be installed on a set of homogeneously c
 The pre-requisites for installing Portworx through Marathon include:
 
 1. Determine the list of physical devices (disks and interfaces) for the agent/slave nodes
-2. If running PX-Enterprise in '**air-gapped**' mode, then follow instructions for [running a on-prem lighthouse](/enterprise/lighthouse-with-secure-etcd.html) and note the IPaddress and Port of the etcd server. 
-3. If running PX-Enterprise, obtain your Lighthouse token.
+2. Determine the IPaddress and Port of the etcd server. 
+3. If using Lighthouse, obtain your Lighthouse token.
 
 The following is a sample JSON file that can be used to launch Portworx through Marathon.
 The example below assumes the hosts are running CoreOS with an implicit (localhost) etcd.
@@ -184,8 +184,7 @@ Portworx is now available through the Mesosphere Universe catalog of services.
 ![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
 
 Deploying Portworx through Mesosphere Universe provides great ease of deployment.
-Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx) 
-
+Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx/1.9) 
 
 
 ### Launch the application through Marathon
