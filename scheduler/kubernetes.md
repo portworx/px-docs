@@ -139,7 +139,7 @@ Example:
        snap_interval:   "70"
        io_priority:  "high"
 ```
-[Download example](k8s-samples/portworx-volume-sc-high.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-sc-high.yaml?raw=true)
 
 Verifying storage class is created:
 
@@ -520,7 +520,7 @@ a pre-provisioned volume and not a PVC you will replace the key with PV name lik
 
 ## Additional examples of Kubernetes and Portworx
 
-* [Portworx with mysql Statefulsets](portworx-with-mysql-statefulsets.html)
+* [Portworx with mysql Statefulsets](/portworx-with-mysql-statefulsets.html)
 
 ## Bill of Materials on Public Cloud Providers
 Use [this](/k8s-pwx-bom.html) guide to calculate the BOM for a complete Kubernetes with Portworx compute and storage environment for running stateful applications.
