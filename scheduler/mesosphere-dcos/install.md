@@ -16,7 +16,7 @@ Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluste
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
 
-### Add constraints slave nodes (optional)
+### Add constraints oni slave nodes (optional)
 If the size of your Mesos cluster is larger than the maximum number of nodes supported for a Portworx release,
 then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
 on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
