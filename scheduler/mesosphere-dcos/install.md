@@ -115,8 +115,12 @@ In this example a single network interface ("bond0") is used for both management
 
 For all command line options, please see [px-enterprise-usage](/px-usage.html)
 
-## Try it our with an example 
-Try the PX deployment out with a simple example.
+### To Deploy Portworx through Universe:
+Portworx is now available through the Mesosphere Universe catalog of services.
+![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
+
+Deploying Portworx through Mesosphere Universe provides great ease of deployment.
+Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx/1.9) 
 
 ### Reference PX volumes through the Marathon configuration file
 
@@ -178,14 +182,6 @@ For example:
   ...
   ```
   
-
-### To Deploy Portworx through Universe:
-Portworx is now available through the Mesosphere Universe catalog of services.
-![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
-
-Deploying Portworx through Mesosphere Universe provides great ease of deployment.
-Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx/1.9) 
-
 
 ### Launch the application through Marathon
 
