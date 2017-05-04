@@ -43,7 +43,7 @@ The following is a sample JSON file that can be used to launch Portworx through 
 The example below assumes the hosts are running CoreOS with an implicit (localhost) etcd.
 For all other OS's, please refer to the `etcd` or `consul` instance, and change all references of `/lib/modules` to `/usr/src`.
 
->**Important:**<br/> If you are not deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.
+>**Important:**<br/> If you are not deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.  Please see [Portworx with Mesos constraints](/scheduler/mesosphere-dcos/px_with_constraints.html)
 
 ```json
 {
