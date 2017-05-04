@@ -14,7 +14,7 @@ You can deploy Portworx through Marathon or through the Mesosphere Universe cata
 
 ### To Deploy Portworx through Marathon:
 
-For simple deployment with DCOS, please follow [these instructions](/run-px-etcd-marathon.html) for creating
+For simple deployment with DCOS, please follow [these instructions](/scheduler/mesosphere-dcos/px_etcd_marathon.html) for creating
 Portworx and ```etcd``` together as a converged application group.
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
