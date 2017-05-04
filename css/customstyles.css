@@ -432,7 +432,7 @@ ul.nav li>ul li a {
     padding: 2px 5px 2px 8px;
 }
 
-li.submenu li.submenu ul {
+ul.nav li li>ul {
     border-left: 7px solid white;
 }
 
