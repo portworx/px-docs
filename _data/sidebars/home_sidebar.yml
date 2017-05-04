@@ -26,8 +26,6 @@
       url: /install/docker-compose.html
     - title: Run as a Docker Plugin 
       url: /install/docker-plugin.html
-    - title: systemd
-      url: /scheduler/systemd.html
   - title: Manage Volumes
     folderitems:
     - title: Create and Manage Storage Volumes
