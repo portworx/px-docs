@@ -54,5 +54,81 @@ If using Apache Mesos:
 
 
 ## Deploy Portworx
-Follow the documentation to deploy Portworx either through [Universe](/scheduler/mesosphere-dcos/install.html#deploy-portworx)
-or through [Marathon](/scheduler/mesosphere-dcos/install.html#to-deploy-portworx-through-marathon)
+Deploy Portworx through Marathon, using appropriate constraints, so that Portworx only runs
+on agent nodes where the "pxfabric" attribute is set.   For example:
+
+```json
+{
+    "id": "pxcluster1",
+    "cpus": 2,
+    "mem": 2048.0,
+    "instances": 3,
+    "constraints": [
+        ["hostname", "UNIQUE"],
+        ["pxfabric", "LIKE", "pxclust1"]
+    ],
+    "container": {
+        "type": "DOCKER",
+        "volumes": [],
+        "docker": {
+            "image": "portworx/px-enterprise",
+            "network": "HOST",
+            "portmappings": [{
+                "containerPort": 0,
+                "hostPort": 0,
+                "protocol": "tcp"
+            }],
+            "privileged": true,
+            "parameters": [{
+                "key": "volume",
+                "value": "/run/docker/plugins:/run/docker/plugins"
+            }, {
+                "key": "volume",
+                "value": "/var/lib/osd:/var/lib/osd:shared"
+            }, {
+                "key": "volume",
+                "value": "/dev:/dev"
+            }, {
+                "key": "volume",
+                "value": "/etc/pwx:/etc/pwx"
+            }, {
+                "key": "volume",
+                "value": "/opt/pwx/bin:/export_bin:shared"
+            }, {
+                "key": "volume",
+                "value": "/var/run/docker.sock:/var/run/docker.sock"
+            }, {
+                "key": "volume",
+                "value": "/var/cores:/var/cores"
+            }, {
+                "key": "volume",
+                "value": "/lib/modules:/lib/modules"
+            } ],
+            "forcePullImage": false
+        }
+    },
+    "portDefinitions": [],
+    "ipAddress": {},
+    "args": [
+        "--name pxcluster.mesos",
+        "-k etcd:http://localhost:2379",
+        "-c mesos-demo1",
+        "-s /dev/sdb",
+        "-m bond0",
+        "-d bond0"
+    ],
+    "healthChecks": [
+    {
+        "protocol": "HTTP",
+        "port": 9001,
+        "path": "/status",
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 60,
+        "timeoutSeconds": 20,
+        "maxConsecutiveFailures": 3
+    }]
+}
+```
+
+[Download example](/px-marathon-constraints.json?raw=true)
+
