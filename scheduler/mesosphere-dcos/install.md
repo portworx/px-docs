@@ -6,25 +6,21 @@ sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 redirect_from: "/run-with-mesosphere.html"
 ---
-You can use Portworx to provide docker volumes for Mesos and Mesosphere/DCOS through Marathon. Portworx pools your servers' capacity and is deployed as a container. Mesosphere has been qualified using DC/OS 1.7, 1.8, 1.9.   Mesos has been qualified using Mesos 1.0.1.   Marathon has been qualified, using version 1.3.6.
-
-The Marathon service maps options through the Docker command line to reference the Portworx volume driver and associated volume.
-
+Portworx communicated with DCOS through either the Docker Volume Driver Interface (DVDI) or, directly through CSI.
 
 ><br/>**NEW!**
 Getting Portworx up and running with Mesosphere/DCOS has never been easier.
 Portworx now provides an AWS CloudFormation Template that deploys a Portworx-ready cluster.
 
-
 # Install Portworx
 
-## Step 1: Install Mesosphere DCOS CLI or Apache Mesos
+## Install Mesosphere DCOS CLI or Apache Mesos
 For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
 Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
 
-## Step 2: Add Mesos constraints to Mesos-slave Nodes (optional)
+### Add Mesos constraints to Mesos-slave Nodes (optional)
 If the size of your Mesos cluster is larger than the maximum number of nodes supported for a Portworx release,
 then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
 on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
@@ -53,7 +49,7 @@ If using Apache Mesos:
 # systemctl status mesos-slave -l
 ```
 
-## Step 3: Deploy Portworx
+## Deploy Portworx
 You can deploy Portworx using the Mesosphere universe or through Marathon.  Follow one of the two options below.
 
 ### To Deploy Portworx through Universe:
@@ -169,7 +165,10 @@ In this example a single network interface ("bond0") is used for both management
 
 For all command line options, please see [px-enterprise-usage](/px-usage.html)
 
-## Step 4: Reference PX volumes through the Marathon configuration file
+## Try it our with an example 
+Try the PX deployment out with a simple example.
+
+### Reference PX volumes through the Marathon configuration file
 
 Portworx passes the `pxd` docker volume driver and any associated volumes to Marathon as Docker parameters. The following example is for `mysql`.
 
@@ -224,7 +223,7 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
 
 >**Important:**<br/> If you are deploying Portworx on all nodes in the cluster, then you should omit the *"pxfabric"* constraint.
 
-## Step 5: Launch the application through Marathon
+### Launch the application through Marathon
 
 To launch the application through the DC/OS CLI:
 
