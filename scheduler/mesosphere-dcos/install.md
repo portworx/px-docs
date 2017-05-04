@@ -8,10 +8,6 @@ redirect_from: "/run-with-mesosphere.html"
 ---
 Portworx communicated with DCOS through either the Docker Volume Driver Interface (DVDI) or, directly through CSI.
 
-><br/>**NEW!**
-Getting Portworx up and running with Mesosphere/DCOS has never been easier.
-Portworx now provides an AWS CloudFormation Template that deploys a Portworx-ready cluster.
-
 # Install Portworx
 
 ## Install Mesosphere DCOS CLI or Apache Mesos
