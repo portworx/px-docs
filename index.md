@@ -26,10 +26,6 @@ Here is a short video that shows how Portworx provides an entire platform of ser
 
 Portworx technology is available as PX-Enterprise and PX-Developer.
 
-## Join us on Slack!
-
-[![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
-
 ## PX-Developer
 
 PX-Developer is free, easy-to-deploy scale-out storage for developers. If you're running workloads under your desk and want to be free of managing hardware or need container-granular storage, check out PX-Developer.
@@ -65,5 +61,8 @@ PX-Enterprise is for DevOps and IT ops teams managing storage for containerized 
 
 <a href="/getting-started/px-enterprise.html" class="btn btn-primary">Get Started with PX-Enterprise</a>
 
+
+## Join us on Slack!
+[![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.
