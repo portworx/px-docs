@@ -10,7 +10,7 @@ Portworx communicated with DCOS through either the Docker Volume Driver Interfac
 
 # Install Portworx
 
-## Install Mesosphere DCOS CLI or Apache Mesos
+## Install DCOS CLI or Apache Mesos
 For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
 Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
 
