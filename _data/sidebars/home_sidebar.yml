@@ -10,24 +10,6 @@
       url: /getting-started/px-developer.html
     - title: Get Started with PX-Enterprise
       url: /getting-started/px-enterprise.html
-  - title: Install and Run
-    folderitems:
-    - title: Deploy Portworx
-      folderitems:
-      - title: Overview
-        url: /install/
-      - title: Install
-        url: /install/docker.html
-      - title: `systemd`
-        url: /install/systemd.html
-    - title: CoreOS
-      url: /install/coreos.html
-    - title: Docker Compose
-      url: /install/docker-compose.html
-    - title: Run as a Docker Plugin 
-      url: /install/docker-plugin.html
-    - title: systemd
-      url: /scheduler/systemd.html
   - title: Manage Volumes
     folderitems:
     - title: Create and Manage Storage Volumes
