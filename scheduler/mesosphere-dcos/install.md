@@ -16,35 +16,6 @@ Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluste
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
 
-### Add constraints on slave nodes (optional)
-If the size of your Mesos cluster is larger than the maximum number of nodes supported for a Portworx release,
-then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
-on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
-Otherwise, Portworx recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
-
-The following steps are required only for configuring and using "constraints".
-
-For each Mesosphere Agent node or Mesos-slave that is participating in the PX cluster, specify Mesos attributes that allow for affinity of tasks to nodes that are part of the Portworx cluster.
-
-If using Mesosphere/DCOS:
-
-```
-# echo MESOS_ATTRIBUTES=pxfabric:pxclust1 >> /var/lib/dcos/mesos-slave-common
-# rm -f /var/lib/mesos/slave/meta/slaves/latest
-# systemctl restart dcos-mesos-slave.service
-# systemctl status dcos-mesos-slave.service -l
-```
-
-If using Apache Mesos:
-
-```
-# mkdir -p /etc/default/mesos-slave/attributes
-# echo pxclust1 > /etc/default/mesos-slave/attributes/pxfabric
-# rm -f /var/lib/mesos/slave/meta/slaves/latest
-# systemctl restart mesos-slave
-# systemctl status mesos-slave -l
-```
-
 ## Deploy Portworx
 You can deploy Portworx using the Mesosphere universe or through Marathon.  Follow one of the two options below.
 
@@ -57,11 +28,8 @@ Please follow the published [Mesosphere/DCOS Examples for deploying Portworx thr
 
 ### To Deploy Portworx through Marathon:
 
-><br/>**NEW!**
-
 For simple deployment with DCOS, please follow [these instructions](/run-px-etcd-marathon.html) for creating
 Portworx and etcd together as a converged application group.
-
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
 
