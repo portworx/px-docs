@@ -3,23 +3,28 @@ layout: page
 title: "Welcome to Portworx Docs"
 keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
+youtubeId : 0zTjOly0vkA
 ---
 
 <a href="https://github.com/portworx/px-docs"><img class="topfork" width="149px" height="149px" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 
-Portworx provides scale-out storage for containers. Portworx storage is delivered as a container that is installed on your servers. Portworx technology:
+Portworx is a software defined persistent storage solution designed and purpose built for containers.  Portworx is a clustered block storage solution deployed itself as a container and provides a Cloud-Native storage solution where applications can programmatically consume stateful services directly through schedulers such as Kubernetes, Mesos and Swarm.
+Portworx storage is delivered as a container that gets installed on your servers that run stateful applications. 
 
-* Allows data services to be driven by DevOps. 
-* Provides container granular persistent data volumes.
-* Provides enterprise grade production features such as container granular HA, snapshots, encryption and shared namespaces.
-* Enables applications to run multi-cloud with any scheduler.
-* Manages storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
-* Is radically simple.
+Portworx technology:
 
-**Try It Now!**
-[![](/images/launch.png){:height="64px" width="64px" .launch-icon}](/getting-started/asap.html)
+* Provides virtual, container-granular data volumes to applications running in containers.
+* Is scheduler aware - provides data persistence and HA across multiple nodes, cloud instances, regions, data centers or even clouds.
+* Is application aware - applications like Cassandra are deployed as a set of containers, and Portworx is aware of the entire stack.  Data placement and management is done at an application POD level.
+* Manages physical storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
+* Provides programmatic control on your storage resources - volumes and other stateful services can be created and consumed directly via the scheduler and orchestration software tool chain.
+* Is radically simple - Portworx is deployed just like any other container - and managed by your scheduler of choice.
 
-Portworx technology is available as PX-Developer and PX-Enterprise.
+## Watch the video
+Here is a short video that shows how Portworx provides an entire platform of services for managing stateful containerized applications in any Cloud or On-Prem data center:
+{% include youtubePlayer.html id=page.youtubeId %}
+
+Portworx technology is available as PX-Enterprise and PX-Developer.
 
 ## Join us on Slack!
 
