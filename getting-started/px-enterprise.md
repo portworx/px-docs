@@ -30,7 +30,7 @@ redirect_from: "/get-started-px-enterprise.html"
 
 See our quick start guides:
 
-* [Run PX-Enterprise with Docker](run-with-docker-ent.html)
+* [Run PX-Enterprise with Docker](/run-with-docker-ent.html)
 
 Run Portworx with schedulers:
 
