@@ -7,7 +7,7 @@ redirect_from: "/run-with-docker.html"
 ---
 To install and configure PX via the Docker CLI, use the command-line steps in this section.
 
->**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](run-etcd.md) for PX
+>**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX
 
 ### Install and configure Docker
 
