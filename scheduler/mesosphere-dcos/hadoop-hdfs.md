@@ -6,8 +6,10 @@ redirect_from: "/dcos-hadoop-hdfs.html"
 ---
 
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.
-It will create 2 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes.
-The Data and Yarn nodes will be co-located on the same physical host.
+It will create 3 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes.
+The Data and Yarn nodes will be co-located on the same physical host. 
+
+The number of Data and Yarn nodes can be set during install. They can also be updated after install to scale the service.
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
