@@ -9,6 +9,9 @@ sidebar: home_sidebar
 # Portworx with Vault
 This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
 
+### Setting up Vault
+Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.html) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
+
 ### Deploying Portworx
 
 You can start PX on a node via the Docker CLI as follows
