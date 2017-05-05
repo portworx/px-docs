@@ -91,7 +91,13 @@
   - title: Operate and Maintain
     folderitems:
     - title: Performance
-      url: /maintain/performance.html
+      folderitems:
+      - title: FIO
+        url: /maintain/performance/fio.html
+      - title: SQL
+        url: /maintain/performance/sql.html
+      - title: NOSQL
+        url: /maintain/performance/nosql.html
     - title: Manage Users and Groups
       url: /maintain/users-groups.html
     - title: Upgrade Portworx
