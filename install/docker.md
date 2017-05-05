@@ -171,12 +171,16 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
 Example config.json:
 
+
 ```
    {
       "clusterid": "make this unique in your k/v store",
+      "dataiface": "bond0",
       "kvdb": [
           "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
         ],
+      "mgtiface": "bond0",
+      “loggingurl”: “http://dummy:80“,
       "storage": {
         "devices": [
           "/dev/xvdb",
