@@ -171,12 +171,16 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
 Example config.json:
 
+
 ```
    {
       "clusterid": "make this unique in your k/v store",
+      "dataiface": "bond0",
       "kvdb": [
           "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
         ],
+      "mgtiface": "bond0",
+      “loggingurl”: “http://dummy:80“,
       "storage": {
         "devices": [
           "/dev/xvdb",
@@ -186,9 +190,9 @@ Example config.json:
     }
 ```
 
-
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
+Please also ensure "logginurl:" is specificed in config.json. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like Prometheus
 
 You can now start the Portworx container with the following run command:
 
@@ -285,7 +289,7 @@ Global Storage Pool
 
 For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
-You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](application-solutions.html).
+You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
 
 ### Adding Nodes
 

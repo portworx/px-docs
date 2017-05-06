@@ -3,7 +3,6 @@ layout: page
 title: "Run Portworx and 'etcd' on Marathon"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage
 sidebar: home_sidebar
-youtubeId : 02yMYE-CEdw
 ---
 Portworx version through 1.2 depend on an external key-value datastore (e.g. etcd or consul) for cluster topology.
 To simplify deployment of Mesosphere/DCOS for these environments, the following converged Marathon application group

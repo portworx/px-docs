@@ -74,7 +74,7 @@ Let's review each command, options available under command and an example of how
 
 ### Login/Authentication
 `pxctl secrets` can be used to configure authentication credentials and endpoints - Vault, Amazon KMS, KVDB are currently supported.
-Vault example
+Vault example (Note: To install and configure Vault, peruse [this link](https://www.vaultproject.io/intro/getting-started/install.html))
 ```
 sudo /opt/pwx/bin/pxctl secrets vault login
 Enter VAULT_ADDRESS: http://myvault.myorg.com

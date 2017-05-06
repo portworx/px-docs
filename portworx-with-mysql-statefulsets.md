@@ -18,7 +18,7 @@ Follow [this](/scheduler/kubernetes.html) guide to setup a Portworx and Kubernet
 # kubectl create -f portworx-mysql-sc.yaml
 ````
 
-[Download example](portworx-mysql-sc.yaml?raw=true)
+[Download example](/k8s-samples/portworx-mysql-sc.yaml?raw=true)
 ````
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
@@ -49,7 +49,7 @@ No events.
 # kubectl create -f portworx-mysql-statefulset.yaml
 ````
 
-[Download example](portworx-mysql-statefulset.yaml?raw=true)
+[Download example](/k8s-samples/portworx-mysql-statefulset.yaml?raw=true)
 
 ````
 ---
@@ -173,7 +173,7 @@ Now you can create a mysql Pod to mount the snapshot
 ````
 kubectl create -f portworx-mysql-snap-pod.yaml
 ````
-[Download example](portworx-mysql-snap-pod.yaml?raw=true)
+[Download example](/k8s-samples/portworx-mysql-snap-pod.yaml?raw=true)
 ````
 apiVersion: v1
 kind: Pod

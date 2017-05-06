@@ -41,7 +41,7 @@ Run Portworx with schedulers:
 
 Run stateful containers with Docker volumes:
 
-* [Application Solutions](application-solutions.html)
+* [Application Solutions](/application-solutions.html)
 
 Use **pxctl** ([CLI Reference](/control/cli.html)) to directly:
 

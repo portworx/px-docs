@@ -30,7 +30,7 @@ redirect_from: "/get-started-px-enterprise.html"
 
 See our quick start guides:
 
-* [Run PX-Enterprise with Docker](run-with-docker-ent.html)
+* [Run PX-Enterprise with Docker](/run-with-docker-ent.html)
 
 Run Portworx with schedulers:
 
@@ -40,7 +40,7 @@ Run Portworx with schedulers:
 
 Run stateful containers with Docker volumes:
 
-* [Application Solutions](application-solutions.html)
+* [Application Solutions](/application-solutions.html)
 
 Use **pxctl** ([CLI Reference](/control/cli.html)) to directly:
 

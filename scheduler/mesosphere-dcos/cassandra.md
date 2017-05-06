@@ -13,7 +13,7 @@ repositories to your DCOS cluster to install the services mentioned here.
 The source code for these services can be found here: https://github.com/portworx/dcos-commons
 This is a fork from [Mesos DCOS-commons framework](https://github.com/mesosphere/dcos-commons) and we will pull in updates from there regularly.
 
-Please make sure you have installed [Portworx on DCOS](run-with-mesosphere.md) before proceeding further.
+Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
 ## Adding the repository for the service:
 

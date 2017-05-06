@@ -8,28 +8,42 @@ redirect_from: "/run-with-mesosphere.html"
 ---
 Portworx communicates with DCOS through either the Docker Volume Driver Interface (DVDI) or, directly through CSI.
 
-## Deploy Portworx
-You can deploy Portworx through Marathon or through the Mesosphere Universe catalog.  Follow one of the two options below.
+# Install Portworx
 
+## Install DCOS CLI or Apache Mesos
+For Mesosphere, follow the instructions for installing [Mesosphere DCOS](https://dcos.io/install) and the [DCOS CLI](https://docs.mesosphere.com/1.7/usage/cli/install).
+Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluster are the Agent nodes.
+
+If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon. 
+
+## Deploy Portworx
+You can deploy Portworx using the Mesosphere universe or through Marathon.  Follow one of the two options below.
+
+### To Deploy Portworx through Universe:
+Portworx is now available through the Mesosphere Universe catalog of services.
+![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
+
+Deploying Portworx through Mesosphere Universe provides great ease of deployment.
+Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx) 
 
 ### To Deploy Portworx through Marathon:
 
-For simple deployment with DCOS, please follow [these instructions](/scheduler/mesosphere-dcos/px_etcd_marathon.html) for creating
-Portworx and ```etcd``` together as a converged application group.
+For simple deployment with DCOS, please follow [these instructions](/run-px-etcd-marathon.html) for creating
+Portworx and etcd together as a converged application group.
 
 This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
 
 The pre-requisites for installing Portworx through Marathon include:
 
 1. Determine the list of physical devices (disks and interfaces) for the agent/slave nodes
-2. Determine the IPaddress and Port of the etcd server. 
-3. If using Lighthouse, obtain your Lighthouse token.
+2. If running PX-Enterprise in '**air-gapped**' mode, then follow instructions for [running a on-prem lighthouse](/enterprise/lighthouse-with-secure-etcd.html) and note the IPaddress and Port of the etcd server. 
+3. If running PX-Enterprise, obtain your Lighthouse token.
 
 The following is a sample JSON file that can be used to launch Portworx through Marathon.
 The example below assumes the hosts are running CoreOS with an implicit (localhost) etcd.
 For all other OS's, please refer to the `etcd` or `consul` instance, and change all references of `/lib/modules` to `/usr/src`.
 
->**Important:**<br/> If you are **not** deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.  Please see [Portworx with Mesos constraints](/scheduler/mesosphere-dcos/px_with_constraints.html)
+>**Important:**<br/> If you are not deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.  Please see [Portworx with Mesos constraints](/scheduler/mesosphere-dcos/px_with_constraints.html)
 
 ```json
 {
@@ -115,12 +129,8 @@ In this example a single network interface ("bond0") is used for both management
 
 For all command line options, please see [px-enterprise-usage](/px-usage.html)
 
-### To Deploy Portworx through Universe:
-Portworx is now available through the Mesosphere Universe catalog of services.
-![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
-
-Deploying Portworx through Mesosphere Universe provides great ease of deployment.
-Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx/1.9) 
+## Try it our with an example 
+Try the PX deployment out with a simple example.
 
 ### Reference PX volumes through the Marathon configuration file
 
@@ -155,6 +165,12 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
                 ]
         }
     },
+    "constraints": [
+            [
+              "pxfabric",
+              "LIKE",
+              "pxclust1"
+            ]],
     "env": {
         "MYSQL_ROOT_PASSWORD": "password"
     },
@@ -169,19 +185,7 @@ Portworx passes the `pxd` docker volume driver and any associated volumes to Mar
 * The referenced volume can be a volume name, a volume ID, or a snapshot ID.   If the volume name does not previously exist, it gets created in-band with default settings.
 * The `constraints` clause, restricts this task to running only on Agent nodes that are part of a given Portworx cluster.
 
->**Important:**<br/> If you are **not** deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.
-For example:
-
-```json
- "constraints": [
-            [
-              "pxfabric",
-              "LIKE",
-              "pxclust1"
-            ]]
-  ...
-  ```
-  
+>**Important:**<br/> If you are deploying Portworx on all nodes in the cluster, then you should omit the *"pxfabric"* constraint.
 
 ### Launch the application through Marathon
 
