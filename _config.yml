@@ -113,3 +113,13 @@ google_analytics: UA-64247527-1
 
 gems:
   - jekyll-redirect-from
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: true
+  startings: [head, body]
+
+sass:
+  style: compressed
