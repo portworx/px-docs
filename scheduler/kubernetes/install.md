@@ -71,3 +71,10 @@ Examples including optional parameters:
 ``` 
 # kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
 ```
+
+### To Uninstall
+To Uninstall the PX daemon set, just delete it as follows:
+
+```
+kubectl delete -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
+```
