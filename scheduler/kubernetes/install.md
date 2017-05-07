@@ -16,14 +16,10 @@ The native portworx driver in Kubernetes supports the following features:
 3. Persistent Volume Claims
 4. Persistent Volumes
 
->**Deprecated: **<br/>If you are running a version of Kubernetes earlier than 1.6, Follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
-
 ## Prerequisites
+You must have a running Kubernetes 1.6+ Cluster.  If you do not have a 1.6 or higher Kubernetes cluster, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
 
-### Prerequisite #1
-A running Kubernetes 1.6 Cluster
-
-### Prerequisite #2
+#### Optional
 To enable Scheduler Convergence, you need to provide PX with the Kubernetes configuration and certificate files.
 
 A `kubernetes.yaml` file is needed for allowing PX to communicate with Kubernetes. This configuration file primarily consists of the kubernetes cluster information and the kubernetes master node's IP and port where the kube-apiserver is running. This file, and any kubernetes certificates, need to be located at 
@@ -46,15 +42,14 @@ preferences:
   colors: true
 ```
 
->**Note: **<br/>The above kubernetes.yaml file is exactly same as the kubelet config file usually named as admin.conf. You need to just copy that file into /etc/pwx/ and rename it to kubernetes.yaml
+>**Note:**<br/>The above kubernetes.yaml file is exactly same as the kubelet config file usually named as admin.conf. You need to just copy that file into /etc/pwx/ and rename it to kubernetes.yaml
 
 ## Install
-Portworx needs to run on the kubernetes master node (_This requirement will be removed soon_). To allow that, run the following command.
-```
-kubectl taint nodes --all node-role.kubernetes.io/master-
-```
+Portworx deploys as a Daemon Set.
 
-Now deploy Portworx:
+>**Note:**<br/>Currently, Portworx needs to run on the kubernetes master node (_This requirement will be removed soon_). To allow that, run the following command: `kubectl taint nodes --all node-role.kubernetes.io/master-`
+
+Deploy the Portworx: Daemon Set:
 ```
 kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
 ```
@@ -67,7 +62,7 @@ Above command fetches the YAML spec from the web service and gives it to kubectl
 
 Examples including optional parameters:
 
-### To specify drive
+### To specify drives
 ```
 # kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&drive=/dev/sdb"
 ```
