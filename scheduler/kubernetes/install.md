@@ -19,7 +19,7 @@ The native portworx driver in Kubernetes supports the following features:
 ## Prerequisites
 You must have a running Kubernetes 1.6+ Cluster.  If you do not have a 1.6 or higher Kubernetes cluster, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
 
-#### Optional
+### Optional
 To enable Scheduler Convergence, you need to provide PX with the Kubernetes configuration and certificate files.
 
 A `kubernetes.yaml` file is needed for allowing PX to communicate with Kubernetes. This configuration file primarily consists of the kubernetes cluster information and the kubernetes master node's IP and port where the kube-apiserver is running. This file, and any kubernetes certificates, need to be located at 
