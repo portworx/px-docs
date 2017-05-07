@@ -53,7 +53,13 @@
       - title: Hadoop &amp; HDFS
         url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
     - title: Kubernetes
-      url: /scheduler/kubernetes.html
+      folderitems:
+      - title: Install
+        url: /scheduler/kubernetes/install.html
+      - title: Stateful Sets
+        url: /scheduler/kubernetes/statefulsets.html
+      - title: MYSQL
+        url: /scheduler/kubernetes/mysql.html
     - title: Docker Swarm
       url: /scheduler/docker-swarm.html
     - title: Docker UCP
