@@ -5,6 +5,7 @@
 {% include nav.html nav=site.data.sidebars.home_sidebar %}
 
 <script>
+window.addEventListener('DOMContentLoaded', function() {
     $('#mysidebar b').parents('li').addClass("active");
-    $('#mysidebar b').closest('li').removeClass("active");
+});
 </script>
