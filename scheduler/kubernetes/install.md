@@ -17,7 +17,7 @@ The native portworx driver in Kubernetes supports the following features:
 4. Persistent Volumes
 
 ## Prerequisites
-You must have a running Kubernetes 1.6+ Cluster.  If you do not have a 1.6 or higher Kubernetes cluster, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
+You must have a running Kubernetes 1.6+ Cluster.  If your Kubernetes cluster is older than 1.6, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
 
 ### Optional
 To enable Scheduler Convergence, you need to provide PX with the Kubernetes configuration and certificate files.
