@@ -1,14 +1,12 @@
 ---
 layout: page
-title: "Portworx with mysql stateful sets
-keywords: portworx, PX-Developer, container, Kubernetes, storage
+title: "Run Portworx with Kubernetes"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
+redirect_from: "/run-with-kubernetes.html"
 ---
 
-## Pre-requisites
-You need a running Portworx and Kubernetes cluster.
-
-Follow [this](/scheduler/kubernetes.html) guide to setup a Portworx and Kubernetes.
+This is an example of running MYSQL as a StatefulSet using Kubernetes and PX.
 
 ## Create a mysql Statefulset 
 
