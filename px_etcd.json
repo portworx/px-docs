@@ -81,7 +81,7 @@
                     "maxConsecutiveFailures": 3,
                     "path": "/health",
                     "portIndex": 0,
-                    "protocol": "MESOS_HTTP",
+                    "protocol": "HTTP",
                     "timeoutSeconds": 20
                 }
             ],
