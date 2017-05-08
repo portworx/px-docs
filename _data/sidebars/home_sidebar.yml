@@ -71,7 +71,7 @@
       url: /scheduler/rancher.html
   - title: Cloud Reference Guides
     folderitems:
-    - title: Cloud
+    - title: AWS
       folderitems:
       - title:
         url: /cloud/aws/cloudformation.html
