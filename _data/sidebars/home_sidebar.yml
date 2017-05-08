@@ -71,12 +71,14 @@
       url: /scheduler/rancher.html
   - title: Cloud Reference Guides
     folderitems:
-    - title: AWS via Cloud Formation
-      url: /cloud/aws-cloudformation.html
-    - title: AWS ECS
-      url: /cloud/aws-ecs.html
-    - title: AWS Auto Scaling
-      url: /cloud/aws-ec2-asg.html
+    - title: Cloud
+      folderitems:
+      - title:
+        url: /cloud/aws/cloudformation.html
+      - title: ECS
+        url: /cloud/aws/ecs.html
+      - title: Auto Scaling
+        url: /cloud/aws/asg.html
     - title: Azure
       url: /cloud/azure.html
     - title: SoftLayer
@@ -111,12 +113,14 @@
       url: /maintain/users-groups.html
     - title: Upgrade Portworx
       url: /maintain/upgrade.html
-    - title: Adding storage to PX cluster nodes
-      url: /maintain/scale-up.html
-    - title: Scaling out an existing cluster
-      url: /maintain/scale-out.html
-    - title: Scale-Down Nodes
-      url: /maintain/scale-down.html
+    - title: Capacity Management
+      folderitems:
+      - title: Add storage to nodes
+        url: /maintain/scale-up.html
+      - title: Scale up an existing cluster
+        url: /maintain/scale-out.html
+      - title: Scale down an existing cluster
+        url: /maintain/scale-down.html
     - title: Storage less Nodes
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
