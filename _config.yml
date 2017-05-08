@@ -113,6 +113,7 @@ google_analytics: UA-64247527-1
 
 gems:
   - jekyll-redirect-from
+  - jekyll-sitemap
 
 compress_html:
   clippings: all

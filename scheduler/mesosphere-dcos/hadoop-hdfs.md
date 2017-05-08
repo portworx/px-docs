@@ -2,7 +2,7 @@
 layout: page
 title: "Hadoop on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
-redirect_from: "/dcos-hadoop-hdfs.html"
+youtubeId : qp6i8kYq-iQ
 ---
 
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.
@@ -49,7 +49,7 @@ Here you have the option to change the service name, volume name, volume size, a
 want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including
 the number of Data and Yarn nodes for the Hadoop clsuter.
 
-![Hadoop-PX install options](/images/dcos-hadoop-px-install-options.png) {:width="655px" height="200px"}
+![Hadoop-PX install options](/images/dcos-hadoop-px-install-options.png){:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
@@ -83,6 +83,10 @@ hadoop-px                 10.0.0.135                  True     13   9.0  32768.0
 marathon                  10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001  
 metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000  
 ```
+
+## Watch the video
+Here is a short video that shows Hadoop on DCOS with Portworx:
+{% include youtubePlayer.html id=page.youtubeId %}
 
 ## Scaling the Data Nodes
 You do not need to create additional volumes of perform to scale up your cluster. 
