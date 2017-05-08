@@ -49,7 +49,7 @@ Here you have the option to change the service name, volume name, volume size, a
 want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including
 the number of Data and Yarn nodes for the Hadoop clsuter.
 
-![Hadoop-PX install options](/images/dcos-hadoop-px-install-options.png) {:width="655px" height="200px"}
+![Hadoop-PX install options](/images/dcos-hadoop-px-install-options.png){:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
