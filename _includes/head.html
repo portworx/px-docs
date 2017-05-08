@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="/css/bundle.css" />
 </noscript>
 
+<style type="text/css">
+    {% capture include_to_scssify %}
+        {% include critical.css %}
+    {% endcapture %}
+    {{ include_to_scssify | scssify  }}
+</style>
+
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
