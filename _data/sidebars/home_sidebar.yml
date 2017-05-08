@@ -57,10 +57,20 @@
       folderitems:
       - title: Install
         url: /scheduler/kubernetes/install.html
-      - title: Stateful Sets
-        url: /scheduler/kubernetes/statefulsets.html
-      - title: MYSQL
-        url: /scheduler/kubernetes/mysql.html
+      - title: Storage Class
+        url: /scheduler/kubernetes/storage-class.html
+      - title: Dynamic Provisioning
+        url: /scheduler/kubernetes/dynamic-provisioning.html
+      - title: Preprovisioned Volumes
+        url: /scheduler/kubernetes/preprovisioned-volumes.html
+      - title: Mount Snapshot to Pod
+        url: /scheduler/kubernetes/mount-snapshot-to-pod.html
+      - title: Failover
+        url: /scheduler/kubernetes/failover.html
+      - title: Scheduler Convergence
+        url: /scheduler/kubernetes/scheduler-convergence.html
+      - title: Statefulsets
+        url: /scheduler/kubernetes/statefulsets.html    
     - title: Docker Swarm
       url: /scheduler/docker-swarm.html
     - title: Docker UCP
