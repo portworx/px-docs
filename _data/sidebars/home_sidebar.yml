@@ -121,7 +121,7 @@
         url: /maintain/scale-out.html
       - title: Scale down an existing cluster
         url: /maintain/scale-down.html
-    - title: Storage less Nodes
+    - title: Storage-less Nodes
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
