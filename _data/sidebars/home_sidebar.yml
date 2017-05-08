@@ -207,3 +207,5 @@
       url: /video/multi-cloud.html
     - title: Portwork QuickStart Explainer
       url: /video/quickstart.html
+    - title: Hadoop on Portworx on DCOS
+      url: /video/hadoop_px_dcos.html
