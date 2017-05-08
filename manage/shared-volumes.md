@@ -5,6 +5,10 @@ keywords: portworx, shared volumes, global namespace
 sidebar: home_sidebar
 redirect_from: "/shared-volumes.html"
 ---
+
+* TOC
+{:toc}
+
 Through shared volumes (also known as a **global namespace**), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 
 A typical pattern is for a single container to have one or more volumes. Conversely, many scenarios would benefit from multiple containers being able to access the same volume, possibly from different hosts. Accordingly, the shared volume feature enables a single volume to be read/write accessible by multiple containers. Example use cases include:

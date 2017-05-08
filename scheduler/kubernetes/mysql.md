@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/run-with-kubernetes.html"
 ---
 
+* TOC
+{:toc}
+
 This is an example of running MYSQL as a StatefulSet using Kubernetes and PX.
 
 ## Create a mysql Statefulset 

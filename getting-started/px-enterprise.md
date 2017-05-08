@@ -5,6 +5,10 @@ title: "Get Started with PX-Enterprise"
 keywords: portworx, px-developer, container, storage, requirements
 redirect_from: "/get-started-px-enterprise.html"
 ---
+
+* TOC
+{:toc}
+
 ## Step 1: Verify requirements
 
 * Linux kernel 3.10 or greater

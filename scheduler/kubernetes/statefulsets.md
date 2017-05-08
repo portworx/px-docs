@@ -5,6 +5,9 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 sidebar: home_sidebar
 ---
 
+* TOC
+{:toc}
+
 This document describes how to create a PX StorageClass and a PVC using that storage class to launch a StatefulSet via Kubernetes.
 
 ## Using Dynamic Provisioning
