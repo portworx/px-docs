@@ -51,7 +51,7 @@ Portworx deploys as a Daemon Set.
 
 Deploy the Portworx: Daemon Set:
 ```
-kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
+kubectl create -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
 ```
 
 Above command fetches the YAML spec from the web service and gives it to kubectl to create a Portworx monitor DaemonSet.
@@ -64,17 +64,17 @@ Examples including optional parameters:
 
 ### To specify drives
 ```
-# kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&drive=/dev/sdb"
+# kubectl create -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&drive=/dev/sdb"
 ```
 
 ### To specify data and management interfaces
 ``` 
-# kubectl create -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
+# kubectl create -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
 ```
 
 ### To Uninstall
 To Uninstall the PX daemon set, just delete it as follows:
 
 ```
-kubectl delete -f "http://35.185.236.78?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
+kubectl delete -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
 ```
