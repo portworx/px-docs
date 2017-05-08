@@ -45,6 +45,7 @@
   - title: Schedulers
     folderitems:
     - title: Mesosphere DCOS
+      url: /scheduler/mesosphere-dcos/
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
