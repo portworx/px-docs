@@ -58,7 +58,7 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install/docker.html#run-px)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
-## Step 5: Label hosts that run Portworx
+## Step 5: Label hosts that run Portworx (optional)
 
 If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
 so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
