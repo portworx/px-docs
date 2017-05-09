@@ -15,7 +15,7 @@
     - title: Deploy Portworx
       folderitems:
       - title: Overview
-        url: /install/index.html
+        url: /install/
       - title: Install
         url: /install/docker.html
       - title: systemd
@@ -73,7 +73,7 @@
     folderitems:
     - title: AWS
       folderitems:
-      - title:
+      - title: CloudFormation
         url: /cloud/aws/cloudformation.html
       - title: ECS
         url: /cloud/aws/ecs.html
