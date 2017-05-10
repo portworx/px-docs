@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/snapshot.html"
 ---
 
+* TOC
+{:toc}
+
 Snapshots are efficient point-in-time copies of volumes that can
 be either read-write or read-only.  Each snapshot is a volume in its
 own right and can be used freely by applications.  They are implemented

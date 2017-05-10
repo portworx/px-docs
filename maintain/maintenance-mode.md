@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/maintenance.html"
 ---
 
+* TOC
+{:toc}
+
 Maintenance Mode is useful for cases where a node needs to be physically decommissioned.
 The most common cases would be for Disk/DIMM/NIC replacement.
 

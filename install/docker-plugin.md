@@ -5,6 +5,10 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 sidebar: home_sidebar
 redirect_from: "/run-as-docker-pluginv2.html"
 ---
+
+* TOC
+{:toc}
+
 To install and configure PX via the Docker Plugin CLI, use the command-line steps in this section.
 
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.md) for PX

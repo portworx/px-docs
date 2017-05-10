@@ -6,6 +6,10 @@ sidebar: home_sidebar
 youtubeId : qp6i8kYq-iQ
 redirect_from: "/video-dcos-hadoop.html"
 ---
+
+* TOC
+{:toc}
+
 Portworx can be used as the HDFS layer for Hadoop, deployed through the Mesosphere DCOS wUniverse.
 
 ## Watch the video

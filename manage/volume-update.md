@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/volume-update.html"
 ---
 
+* TOC
+{:toc}
+
 ### pxctl volume update
 
 `pxctl volume update` is used to update a specific parameter of the volume

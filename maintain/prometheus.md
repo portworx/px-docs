@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-with-prometheus.html"
 ---
 
+* TOC
+{:toc}
+
 PX storage and network stats can easily be integrated with [**prometheus**](https://prometheus.io) or similar applications.
 These stats are exported at port 9001; your application can poll http://&lt;IP_ADDRESS&gt;:9001/metrics to get their runtime values.
 

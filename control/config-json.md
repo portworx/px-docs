@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/config-json.html"
 ---
 
+* TOC
+{:toc}
+
 This is the schema definition for a valid PX configuration file.  This file is expected to be available at `/etc/pwx/config.json`
 
 ```

@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/create-manage-storage-volumes.html"
 ---
 
+* TOC
+{:toc}
+
 To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.
 
 ```

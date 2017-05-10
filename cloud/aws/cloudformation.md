@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-aws-cloudformation.html"
 ---
 
+* TOC
+{:toc}
+
 These steps shows you how you can quickly and easily deploy Portworx on [**AWS CloudFormation**](https://aws.amazon.com/cloudformation/)
 
 Portworx has provided a CloudFormation stack, based on CoreOS 1235.4.0 that will bring up a complete 3-node **px-dev** stack in **less than 10 minutes**.

@@ -5,6 +5,10 @@ keywords: portworx, docker registry, storage
 sidebar: home_sidebar
 redirect_from: "/registry.html"
 ---
+
+* TOC
+{:toc}
+
 The Docker Registry is a server-side application that stores and lets you distribute Docker images. The following instructions use Docker Registry version 2.3.0.
 
 ## Step 1: Create a storage volume for the Docker Registry

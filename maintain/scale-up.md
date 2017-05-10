@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/scale-up.html"
 ---
 
+* TOC
+{:toc}
+
 ## Adding Storage to exising PX Cluster Nodes 
 
 This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added

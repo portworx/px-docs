@@ -3,8 +3,10 @@ layout: page
 title: "StatefulSets"
 keywords: portworx, stateful sets, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
-
 ---
+
+* TOC
+{:toc}
 
 [StatefulSets](https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/) are a feature of Kubernetes that are  valuable for applications that require one or more of the following:
 

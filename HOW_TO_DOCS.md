@@ -34,6 +34,18 @@ In order to have a new submenu rather than a link in a submenu the item must con
 Refer to the existing yaml file for more information.
 
 
+## Table of Contents
+
+Each Markdown page can have its own table of contents (a list which will anchor to every header in the document).
+
+To add this to the documentation, add the following where you would like the list:
+
+```
+* TOC
+{:toc}
+```
+
+
 ## AMP Version
 
 There is an AMP version of the documentation which is effectively a drop in replacement for the `page.html` layout. 
