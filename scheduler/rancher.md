@@ -3,20 +3,18 @@ layout: page
 title: "Run Portworx with Rancher"
 keywords: portworx, PX-Developer, container, Rancher, storage
 sidebar: home_sidebar
-youtubeId: m7Zsm1P9G2g
+youtubeId: yGjDxDLyS78
 redirect_from: "/run-with-rancher.html"
 ---
 
 * TOC
 {:toc}
 
-You can use PX-Developer to implement storage for Rancher. Portworx pools your servers' capacity and is deployed as a container. This section, qualified using Rancher v1.1.2, Cattle v0.165.8, describes how to use Portworx within Rancher.
+You can use PX-Developer to implement storage for Rancher. Portworx pools your servers' capacity and is deployed as a container. This section, qualified using Rancher v1.5.5, Cattle v0.178.3, describes how to use Portworx within Rancher.
 
 ## Watch the video
 Here is a short video that shows how to configure and run Portworx with Rancher:
 {% include youtubePlayer.html id=page.youtubeId %}
-
->**Note** : Instructions for deploying Portworx through a Rancher Catalog can be found [here](https://github.com/portworx/rancher)
 
 ## Step 1: Install Rancher
 
@@ -64,7 +62,7 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install/docker.html#run-px)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
-## Step 5: Label hosts that run Portworx
+## Step 5: Label hosts that run Portworx (optional)
 
 If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
 so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
