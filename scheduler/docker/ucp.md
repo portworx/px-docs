@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/run-with-docker-ucp.html"
 ---
 
+* TOC
+{:toc}
+
 You can use Portworx to implement storage for Docker Universal Control Plane (UCP). This section is qualified using Docker 1.11 and Universal Control Plane 1.1.2.
 
 ## Step 1: Install and license Docker UCP

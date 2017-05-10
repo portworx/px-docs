@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/share-vol-for-nfs.html"
 ---
 
+* TOC
+{:toc}
+
 This guide demonstrate creating a shared docker volume from PX and share it via NFS.
 In this setup, PX containers are running on three nodes suse01, suse04, suse05.
 And the nfs clients are kabo1, kabo2. 

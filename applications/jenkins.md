@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/jenkins.html"
 ---
 
+* TOC
+{:toc}
+
 Portworx can easily be used to simplify the deployment of Jenkins running as a container, as shown by the example below
 
 ## Create Portworx Volume

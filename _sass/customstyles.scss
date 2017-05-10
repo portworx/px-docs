@@ -253,12 +253,12 @@ ul#results-container a:hover {
     margin: 3px;
 }
 
-div#toc ul li {
+ul#markdown-toc li {
     margin: 8px 0px 8px 22px;
     font-size: 90%;
     list-style: square;
 }
-div#toc ul {
+ul#markdown-toc {
     background-color: whitesmoke;
     padding: 5px;
     border-radius: 5px;
@@ -267,16 +267,12 @@ div#toc ul {
 /*    float: right;     JSS 08/16/16 */
 }
 
-div#toc ul li ul {
+ul#markdown-toc li ul {
     padding-left:8px;
 
 }
 
-div#toc ul li ul li::before {
-    content: "–  ";
-}
-
-div#toc >ul::before {
+ul#markdown-toc::before {
     content: "On this page";
     font-weight: 500;
     color: #555;

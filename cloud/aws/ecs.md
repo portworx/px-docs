@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-ecs2.html"
 ---
 
+* TOC
+{:toc}
+
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)
 
 ### Step 1: Create an ECS cluster

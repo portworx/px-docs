@@ -5,6 +5,10 @@ keywords: portworx, troubleshooting, logs, issue
 sidebar: home_sidebar
 redirect_from: "/troubleshooting.html"
 ---
+
+* TOC
+{:toc}
+
 For troubleshooting help, get logs for PX-Enterprise or PX-Developer, just as you do for any other Docker container. For example:
 
 * `docker ps` and get the CONTAINER ID for PX-Developer

@@ -16,6 +16,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" == "gh-pages" ]; 
     cd "${BASE}/_site"
 
     echo "amp-docs.portworx.com" > CNAME
+    touch .nojekyll
 
     git init
 

@@ -5,6 +5,10 @@ keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
 redirect_from: "/launch-via-lighthouse.html"
 ---
+
+* TOC
+{:toc}
+
 Lighthouse is a management and GUI service that allows you to create PX clusters and launch PX nodes to join your clusters.  You can then manage your PX clusters via the Lighthouse web interface.
 
 This section walks through installing and configuring a PX-Enterprise cluster via Lighthouse. In this example, you run the PX-Enterprise Docker container on server nodes. Running the container enables PX-Enterprise to aggregate storage capacity and monitor hardware for degradation and failure. Server nodes are joined into a cluster for the sake of high availability. You can use direct attached disks, storage arrays, or cloud volumes for the underlying storage.

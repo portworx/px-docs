@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-packet.html"
 ---
 
+* TOC
+{:toc}
+
 This guide shows you how you can easily deploy Portworx on the [**packet.net** hosting service](http://packet.net)
 
 Other supported bare metal cloud providers are

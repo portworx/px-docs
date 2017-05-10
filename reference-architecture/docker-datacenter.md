@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-ddc.html"
 ---
 
+* TOC
+{:toc}
+
 Portworx has been qualified to work with [Docker Datacenter](https://www.docker.com/products/docker-datacenter)
 
 Docker Datacenter (DDC) has 3 major components:

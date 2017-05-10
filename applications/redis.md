@@ -5,6 +5,10 @@ keywords: portworx, container, redis, storage
 sidebar: home_sidebar
 redirect_from: "/redis.html"
 ---
+
+* TOC
+{:toc}
+
 You can use Redis as a cache, database, or for messaging. Here is an example of durable storage for containers with container-granular controls.
 
 This example shows how to create a volume for Redis, run and write to Redis, and then snapshot just that Redis volume's state. Portworx snapshots are thinly provisioned and copy on write.

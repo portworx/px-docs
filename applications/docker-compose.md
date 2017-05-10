@@ -5,6 +5,7 @@ keywords: portworx, volume stack, application stack, docker compose
 sidebar: home_sidebar
 redirect_from: "/docker-compose.html"
 ---
+
 Docker Compose provides a simple powerful way of quickly deploying application stacks. Version 2 of Compose provides the ability to use PX volume drivers in one of the following ways:
 
 * Create new volumes on the fly

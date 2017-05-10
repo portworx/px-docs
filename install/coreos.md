@@ -5,6 +5,10 @@ keywords: portworx, px-developer, px-enterprise, install, configure, container, 
 sidebar: home_sidebar
 redirect_from: "/run-with-docker-coreos.html"
 ---
+
+* TOC
+{:toc}
+
 These instructions are for CoreOS and VMWare Photon.
 
 To install and configure PX via the Docker CLI, use the command-line steps in this section.

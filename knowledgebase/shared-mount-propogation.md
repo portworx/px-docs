@@ -5,6 +5,10 @@ keywords: portworx, px-developer, shared mounts
 sidebar: home_sidebar
 redirect_from: "/os-config-shared-mounts.html"
 ---
+
+* TOC
+{:toc}
+
 Portworx requires Docker to allow shared mounts.
 
 >**Important:**<br/>This section is only for Docker versions earlier than 1.12.

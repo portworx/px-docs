@@ -5,6 +5,9 @@ keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
 youtubeId : qp6i8kYq-iQ
 ---
 
+* TOC
+{:toc}
+
 This guide will help you to install the Hadoop service on your DCOS cluster backed by PX volumes for persistent storage.
 It will create 3 Journal Nodes, 2 Name Nodes, 2 Nodes for the Zookeeper Failover Controller, 3 Data Nodes and 3 Yarn Nodes.
 The Data and Yarn nodes will be co-located on the same physical host. 

@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-softlayer.html"
 ---
 
+* TOC
+{:toc}
+
 This guide shows you how you can easily deploy Portworx on [**SoftLayer**](http://www.softlayer.com/)
 
 ### Step 1: Provision Virtual Machine

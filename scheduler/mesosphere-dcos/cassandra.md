@@ -5,6 +5,9 @@ keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 redirect_from: "/dcos-cassandra.html"
 ---
 
+* TOC
+{:toc}
+
 This guide will help you to install the Cassandra service on your DCOS cluster backed by PX volumes for persistent storage.
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
