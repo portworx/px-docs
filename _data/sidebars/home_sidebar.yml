@@ -45,14 +45,15 @@
   - title: Schedulers
     folderitems:
     - title: Mesosphere DCOS
-      url: /scheduler/mesosphere-dcos/
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
-      - title: Cassandra
-        url: /scheduler/mesosphere-dcos/cassandra.html
-      - title: Hadoop &amp; HDFS
-        url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
+      - title: Examples
+        folderitmes:
+        - title: Cassandra
+          url: /scheduler/mesosphere-dcos/cassandra.html
+        - title: Hadoop &amp; HDFS
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
     - title: Kubernetes
       folderitems:
       - title: Install
