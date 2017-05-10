@@ -6,6 +6,8 @@ sidebar: home_sidebar
 redirect_from: "/scale-up-nodes-with-storage.html"
 ---
 
+* TOC
+{:toc}
 
 ## Scaling out an existing PX Cluster
 

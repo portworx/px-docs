@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/px-enterprise-release-notes.html"
 ---
 
+* TOC
+{:toc}
+
 ## 1.2.1 Release notes
 
 ### Key Features

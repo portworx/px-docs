@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/run-kafka-on-px.html"
 ---
 
+* TOC
+{:toc}
+
 *For this document, we will use the kafka container at https://hub.docker.com/r/ches/kafka/*
 
 **Kafka uses Zookeeper as the KV store for configuration data.**

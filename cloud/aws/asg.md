@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-aws-asg.html"
 ---
 
+* TOC
+{:toc}
+
 This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
 
 # Configure the Auto Scaling Group

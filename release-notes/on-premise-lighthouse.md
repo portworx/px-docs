@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/on-prem-lighthouse-release-notes.html"
 ---
 
+* TOC
+{:toc}
+
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
 ## Lighthouse 1.1.6 Release notes

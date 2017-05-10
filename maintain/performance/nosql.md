@@ -4,6 +4,10 @@ title: "Performance"
 keywords: portworx, cos, class of service, production, performance, overhead
 sidebar: home_sidebar
 ---
+
+* TOC
+{:toc}
+
 ## Containerized NoSQL Workloads: Cassandra performance gains with running PX-Enterprise
 
 In this example, we show how PX-Enterprise's network-optimized 3-way replication out-performs Cassandra's 3-way replication when running on a 3-node cluster. We compared the performance between the following two configuration and ran these tests on the same servers as the tests above.

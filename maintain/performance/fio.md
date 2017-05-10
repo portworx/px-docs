@@ -4,6 +4,10 @@ title: "Performance"
 keywords: portworx, cos, class of service, production, performance, overhead, fio
 sidebar: home_sidebar
 ---
+
+* TOC
+{:toc}
+
 Portworx operates typically within less than 3% overhead of the underlying storage hardware.
 
 Note that Portworx recommends the following:

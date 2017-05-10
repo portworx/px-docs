@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/run-lighthouse.html"
 ---
 
+* TOC
+{:toc}
+
 Portworx offers a SaaS service called Lighthouse.  Lighthouse can monitor and manage your PX clusters and storage.  However you can also run your own Lighthouse.
 
 This guide shows you how you can run [Lighthouse](http://lighthouse.portworx.com/) locally.

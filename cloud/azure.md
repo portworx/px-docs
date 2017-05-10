@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/portworx-on-azure.html"
 ---
 
+* TOC
+{:toc}
+
 This guide shows you how you can easily deploy Portworx on [**Azure**](https://azure.microsoft.com/en-us/)
 
 ### Step 1: Provision Virtual Machine

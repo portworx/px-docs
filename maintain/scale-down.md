@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/scale-down.html"
 ---
 
+* TOC
+{:toc}
+
 ## Removing offline Nodes 
 
 How to remove an offline node from a cluster. For information on nodes with no storage that have been offline for an extended period, peruse the section titled "Automatic decommission of storage less nodes"

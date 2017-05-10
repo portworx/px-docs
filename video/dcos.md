@@ -6,6 +6,10 @@ sidebar: home_sidebar
 youtubeId : hQojYux3ono
 redirect_from: "/video-dcos.html"
 ---
+
+* TOC
+{:toc}
+
 Portworx is available in the DCOS Universe.
 
 ## Watch the video

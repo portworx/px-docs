@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/object-storage.html"
 ---
 
+* TOC
+{:toc}
+
 [Minio](http://minio.io) is a distributed object storage server built for cloud applications and devops.
 
 Portworx perfectly compliments Minio object storage by providing an elastic, scalable, 

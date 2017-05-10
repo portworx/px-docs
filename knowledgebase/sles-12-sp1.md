@@ -6,6 +6,9 @@ sidebar: home_sidebar
 redirect_from: "/run-px-on-sles12-sp1.html"
 ---
 
+* TOC
+{:toc}
+
 ### Check btrfs kernel module
 Ensure btrfs kernel module allow unsupported features.
 
