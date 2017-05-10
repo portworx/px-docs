@@ -119,5 +119,12 @@ NOTE that Amazon Linux EC2 images do not have the [`systemd(1)`](http://man7.org
 Run the following command to verify that shared mounts are configured and running properly on your system:
 
 ```
-# docker run -it -v /mnt:/mnt:shared busybox sh
+# docker run -it -v /mnt:/mnt:shared busybox sh -c /bin/date
 ```
+
+If shared mounts are not working correctly, then the following error will be thrown
+
+```
+docker: Error response from daemon: linux mounts: Path /mnt is mounted on / but it is not a shared mount.
+```
+
