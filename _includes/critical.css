@@ -15,8 +15,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.fa-lg {
+  font-size: 1.33333333em;
+  line-height: .75em;
+  vertical-align: -15%;
+}
+
 .fa-envelope-o:before {
   content: "\f003";
+}
+
+.fa-github:before {
+  content: "\f09b";
 }
 
 html,
@@ -40,6 +50,11 @@ html {
 
 body {
   margin: 0;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
 b {
@@ -127,6 +142,25 @@ img {
   border: 0;
 }
 
+p {
+  margin: 0 0 10px;
+}
+
+h1 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
 ul {
   margin-top: 0;
   margin-bottom: 10px;
@@ -189,6 +223,7 @@ ul ul {
 }
 
 .col-md-3,
+.col-md-9,
 .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -207,12 +242,17 @@ ul ul {
     max-width: 970px;
   }
 
-  .col-md-3 {
+  .col-md-3,
+  .col-md-9 {
     float: left;
   }
 
   .col-md-3 {
     width: 25%;
+  }
+
+  .col-md-9 {
+    width: 75%;
   }
 }
 
@@ -224,6 +264,26 @@ ul ul {
   .col-lg-12 {
     width: 100%;
   }
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.btn-default {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
 }
 
 .collapse {
@@ -504,6 +564,22 @@ body {
   font-size: 15px;
 }
 
+body h1 {
+  margin-top: 40px;
+}
+
+.post-content img {
+  margin: 12px 0px 3px 0px;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.post-content ul li {
+  margin: 10px 0px;
+}
+
 #search-demo-container ul#results-container {
   list-style: none;
   font-size: 12px;
@@ -527,6 +603,33 @@ body {
   box-sizing: border-box;
   float: right;
   margin-top: 10px;
+}
+
+ul#markdown-toc li {
+  margin: 8px 0px 8px 22px;
+  font-size: 90%;
+  list-style: square;
+}
+
+ul#markdown-toc {
+  background-color: whitesmoke;
+  padding: 5px;
+  border-radius: 5px;
+  max-width: 300px;
+  color: gray;
+}
+
+ul#markdown-toc::before {
+  content: "On this page";
+  font-weight: 500;
+  color: #555;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
 }
 
 .nav,
@@ -610,6 +713,10 @@ ul.nav li li>ul {
   background-color: #FAFAFA;
 }
 
+.githubEditButton {
+  margin-bottom: 7px;
+}
+
 @media (max-width: 990px) {
   #mysidebar {
     position: relative;
@@ -628,6 +735,11 @@ ul.nav li li>ul {
   }
 }
 
+.col-md-9 img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 a[href^="http://"]:after,
 a[href^="https://"]:after {
   content: "\f08e";
@@ -637,6 +749,17 @@ a[href^="https://"]:after {
   display: inline-block;
   text-decoration: none;
   padding-left: 3px;
+}
+
+.btn-default {
+  margin-bottom: 10px;
+}
+
+.topfork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
 }
 
 div.sidebarTitle {
@@ -673,6 +796,11 @@ a {
 
 b {
   font-weight: bold;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
 img {
@@ -763,6 +891,28 @@ img {
   border: 0;
 }
 
+
+
+h1 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
 ul {
   margin-top: 0;
   margin-bottom: 10px;
@@ -809,6 +959,7 @@ ul ul {
 }
 
 .col-md-3,
+.col-md-9,
 .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -817,8 +968,13 @@ ul ul {
 }
 
 @media (min-width: 780px) {
-  .col-md-3 {
+  .col-md-3,
+  .col-md-9 {
     float: left;
+  }
+
+  .col-md-9 {
+    width: 75%;
   }
 
   .col-md-3 {
@@ -834,6 +990,28 @@ ul ul {
   .col-lg-12 {
     width: 100%;
   }
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
 }
 
 .collapse {
@@ -1067,6 +1245,16 @@ body {
 
 i {
   font-size: inherit !important;
+}
+
+h1 {
+  font-size: 39px;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
 }
 
 .navbar-default {

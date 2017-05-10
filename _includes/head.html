@@ -15,11 +15,9 @@
     <link rel="stylesheet" href="/css/bundle.css" />
 </noscript>
 
+<!-- This needs some minification -->
 <style type="text/css">
-    {% capture include_to_scssify %}
-        {% include critical.css %}
-    {% endcapture %}
-    {{ include_to_scssify | scssify  }}
+    {% include critical.css %}
 </style>
 
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
