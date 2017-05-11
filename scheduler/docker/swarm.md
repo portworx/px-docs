@@ -11,33 +11,34 @@ redirect_from: "/run-with-docker-swarm.html"
 
 You can use Portworx to provide storage for your Docker Swarm services. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Docker Swarm cluster and have PX provide highly available volumes to any application deployed via Docker Swarm.
 
-Below steps demonstrate how to set up a three-node cluster for mysql.
+Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/).
 
 ### Deploy PX container
 Refer to [Run with Docker](/install/docker.html) to deploy the Portworx container & create a cluster.
 
 ### Create a volume
 ```
-docker volume create -d pxd --name mysql_volume --opt \
-        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4
+docker volume create -d pxd --name jenkins_vol --opt \
+        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4 --opt shared=true
 ```
-* This command creates a volume called _mysql_volume_.
+* This command creates a volume called _jenkins_vol_.
 * This volume has a replication factor of _3_, which means that the data will be protected on 3 separate nodes.
+* Also the volume is shared so multiple swarm nodes can have shared access
 
 ### Add labels on Swarm nodes
 
-First, get the replica set for the _mysql_volume_ using the `pxctl` CLI.
+First, get the replica set for the _jenkins_vol_ using the `pxctl` CLI.
 ```
-sudo /opt/pwx/bin/pxctl volume inspect mysql_volume
+sudo /opt/pwx/bin/pxctl volume inspect jenkins_vol
 
     Volume : 27052673284397061
-    Name : mysql_volume
+    Name : jenkins_vol
     Size : 4.0 GiB
     Format : ext4
     HA : 3
     IO Priority : LOW
     Creation time : Apr 4 22:23:32 UTC 2017
-    Shared : no
+    Shared : yes
     Status : up
     State : detached
     Reads : 0
@@ -61,27 +62,34 @@ For each node you see in the replica sets section of the above output, find the 
 
 Once you find the nodes, add a label to each of those nodes as below.
 ```
-docker node update --label-add mysql_volume=true <node_id>
+docker node update --label-add jenkins_vol=true <node_id>
 ```
-The label `mysql_volume=true` implies that the node hosts volume _mysql_volume's_ data.
+The label `jenkins_vol=true` implies that the node hosts volume _jenkins_vol's_ data.
 
 ### Create a service
-We will now create a mysql service using the newly created volume.
+We will now create a Jenkins service using the newly created volume.
 
 We will use service constraints to influence on which worker node Swarm schedules a container (task) based on the container volume's data location.
 ```
-docker service create \
-    -p 3306:3306 \
-    -e MYSQL_ROOT_PASSWORD=password \
-    --name=pxmysql \
-    --replicas 3 \
-    --mount type=volume,source=mysql_volume,target=/var/lib/mysql \
-    --constraint 'node.labels.mysql_volume == true' \
-    mysql
+docker service create --name jenkins \
+         --replicas 3 \
+         --publish 8082:8080 \
+         --publish 50000:50000 \
+         -e JENKINS_OPTS="--prefix=/jenkins" \
+         --reserve-memory 300m \
+         --mount "type=volume,source=jenkins_vol,target=/var/jenkins_home" \
+         --constraint 'node.labels.jenkins_vol == true' \
+         jenkins
 ```
-* Note how the volume binding is done via `--mount`. This causes the Portworx `mysql_volume` to get bind mounted at `/var/lib/mysql`, which is where the mysql Docker container stores it’s data.
-* Also note how we put a constraint using `--constraint 'node.labels.mysql_volume == true'`.
+* Note how the volume binding is done via `--mount`. This causes the Portworx `jenkins_vol` to get bind mounted at `/var/jenkins_home`, which is where the jenkins Docker container stores it’s data.
+* Also note how we put a constraint using `--constraint 'node.labels.jenkins_vol == true'`.
 
-Now Docker Swarm will place the mysql container _only_ on Swarm nodes that contain our volume's data locally leading to great I/O performance.
+Now Docker Swarm will place the jenkins container _only_ on Swarm nodes that contain our volume's data locally leading to great I/O performance.
 
-You can read more about Swarm service creation [here](https://docs.docker.com/engine/reference/commandline/service_create/).
+### Verify Service
+Use following command to verify if various tasks for the service came up.
+```
+docker service ps jenkins
+```
+
+Read more about Portworx Docker Swarm demo [here](https://portworx.com/highly-resilient-jenkins-using-docker-swarm/).
