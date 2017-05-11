@@ -73,10 +73,12 @@
           url: /scheduler/kubernetes/scheduler-convergence.html
         - title: Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
-    - title: Docker Swarm
-      url: /scheduler/docker-swarm.html
-    - title: Docker UCP
-      url: /scheduler/docker-ucp.html
+    - title: Docker
+      folderitems:
+      - title: Swarm
+        url: /scheduler/docker/swarm.html
+      - title: UCP
+      url: /scheduler/docker/ucp.html
     - title: Rancher
       url: /scheduler/rancher.html
   - title: Cloud Reference Guides
