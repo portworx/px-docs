@@ -1,5 +1,5 @@
 
-$('#mysidebar').height($(".nav").height());
+//$('#mysidebar').height($(".nav").height());
 
 
 $( document ).ready(function() {
