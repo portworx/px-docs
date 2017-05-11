@@ -57,14 +57,17 @@
 <input type="text" id="search-input" placeholder="{{site.data.strings.search_placeholder_text}}">
 <ul id="results-container"></ul>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+<link rel="preload" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" as="style" onload="this.rel='stylesheet'"/>
 <!-- at the end of the BODY -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
-<script type="text/javascript"> docsearch({
-apiKey: '94701e6663ea3899bf379b1609403bf9',
-indexName: 'portworx',
-inputSelector: '#search-input',
-debug: false // Set debug to true if you want to inspect the dropdown
+<script defer type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+<script type="text/javascript"> 
+window.addEventListener('DOMContentLoaded', function() {
+    docsearch({
+        apiKey: '94701e6663ea3899bf379b1609403bf9',
+        indexName: 'portworx',
+        inputSelector: '#search-input',
+        debug: false /* Set debug to true if you want to inspect the dropdown */
+    });
 });
 </script>
 <!--end search-->
