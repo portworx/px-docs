@@ -44,15 +44,16 @@
       url: /manage/encrypted-volumes.html
   - title: Schedulers
     folderitems:
-    - title: Mesosphere DCOS
-      url: /scheduler/mesosphere-dcos/
+    - title: Mesosphere DC/OS
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
-      - title: Cassandra
-        url: /scheduler/mesosphere-dcos/cassandra.html
-      - title: Hadoop &amp; HDFS
-        url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
+      - title: Stateful frameworks
+        folderitems:
+        - title: Cassandra
+          url: /scheduler/mesosphere-dcos/cassandra.html
+        - title: HDFS & Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
     - title: Kubernetes
       folderitems:
       - title: Install
