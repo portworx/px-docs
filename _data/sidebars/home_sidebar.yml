@@ -108,7 +108,7 @@
     folderitems:
     - title: CLI
       folderitems:
-      - title: Status
+      - title: Basics
         url: /control/status.html
       - title: Volume
         url: /control/volume.html
