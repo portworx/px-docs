@@ -124,7 +124,7 @@
         url: /control/host.html
     - title: REST API
       url: /control/rest-api.html
-    - title: Understanding config.json
+    - title: Node config data
       url: /control/config-json.html
   - title: Operate and Maintain
     folderitems:
