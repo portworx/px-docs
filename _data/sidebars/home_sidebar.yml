@@ -156,26 +156,34 @@
       url: /maintain/prometheus.html
   - title: Application Solutions
     folderitems:
-    - title: MySQL Database with Portworx
-      url: /applications/mysql.html
-    - title: Cassandra Clusters with Portworx
-      url: /applications/cassandra.html
-    - title: Docker Registry with High Availability
-      url: /applications/docker-registry.html
-    - title: Redis with Portworx
-      url: /applications/redis.html
-    - title: Docker Compose, Wordpress, and MySQL on Portworx
-      url: /applications/docker-compose.html
-    - title: PostgreSQL and CrunchyData with Portworx
-      url: /applications/postgres.html
-    - title: Jenkins with Portworx
-      url: /applications/jenkins.html
-    - title: Create PX volume for NFS share
-      url: /applications/nfs.html
-    - title: Object Storage with Portworx
-      url: /applications/object-storage.html
-    - title: Kafka with Portworx
-      url: /applications/kafka.html
+    - title: Databases
+      folderitems:
+      - title: MySQL
+        url: /applications/mysql.html
+      - title: Cassandra
+        url: /applications/cassandra.html
+      - title: PostgreSQL
+        url: /applications/postgres.html
+    - title: Messaging 
+      folderitems:
+      - title: Redis
+        url: /applications/redis.html
+      - title: Kafka
+        url: /applications/kafka.html
+    - title: External Access
+      folderitems:
+      - title: NFS
+        url: /applications/nfs.html
+      - title: Object Storage
+        url: /applications/object-storage.html
+    - title: Applications
+      folderitems:
+      - title: Docker Registry
+        url: /applications/docker-registry.html
+      - title: Wordpress
+        url: /applications/docker-compose.html
+      - title: Jenkins with Portworx
+        url: /applications/jenkins.html
   - title: Reference Architectures
     folderitems:
     - title: Portworx on Docker Data Center
