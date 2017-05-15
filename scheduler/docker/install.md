@@ -216,7 +216,7 @@ You can now start the Portworx container with the following run command:
 
 At this point, Portworx should be running on your system. To verify, run `docker ps`.
 
-#### Authenticated `etcd` and `consul`
+#### Optional - Authenticated `etcd` and `consul`
 To use `etcd` with authentication and a cafile, use this in your `config.json`:
 
 ```json
@@ -246,6 +246,55 @@ Alternatively, you could specify and explicit username and password as follows:
  "password": "xxx",
  "cafile": "/etc/pwx/cafile",
 ```
+
+#### Optional - Run via Compose
+You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) to create a storage cluster for containers, as follows:
+
+```
+# git clone https://github.com/portworx/px-dev.git
+# cd px-dev/quick-start
+# docker-compose run portworx -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
+```
+
+OR, if you have a custom [px configuration file](https://github.com/portworx/px-dev/edit/master/quick-start/config.json) at `/etc/pwx/config.json`, you can start PX-Developer as follows:
+
+```
+# docker-compose up -d
+```
+
+#### Optional - Run as a Plugin
+PX V2 plugin requires a minimum of Docker version 1.12 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
+
+To install Portworx as V2 Docker plugin follow these steps:
+
+```
+$ mkdir -p /etc/pwx
+$ mkdir -p /opt/pwx/bin
+$ mkdir -p /var/lib/osd
+$ mkdir -p /var/cores
+```
+
+We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
+
+```
+$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
+Plugin "portworx/px:latest" is requesting the following
+privileges:
+ - network: [host]
+ - mount: [/dev]
+ - mount: [/etc/pwx]
+ - mount: [/var/lib/osd]
+ - mount: [/opt/pwx/bin]
+ - mount: [/var/run/docker.sock]
+ - mount: [/lib/modules]
+ - mount: [/usr/src]
+ - mount: [/var/cores]
+ - allow-all-devices: [true]
+ - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
+Do you grant the above permissions? [y/N] y
+```
+
+You will need to grant the above set of permissions for the plugin to be installed.
 
 ### Access the pxctl CLI
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
@@ -297,55 +346,6 @@ You have now completed setup of Portworx on your first server. To increase capac
 ### Adding Nodes
 
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
-
-#### Optional - Install via Compose
-You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) to create a storage cluster for containers, as follows:
-
-```
-# git clone https://github.com/portworx/px-dev.git
-# cd px-dev/quick-start
-# docker-compose run portworx -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/nbd1 -s /dev/nbd2
-```
-
-OR, if you have a custom [px configuration file](https://github.com/portworx/px-dev/edit/master/quick-start/config.json) at `/etc/pwx/config.json`, you can start PX-Developer as follows:
-
-```
-# docker-compose up -d
-```
-
-#### Optional - Install as a Plugin
-PX V2 plugin requires a minimum of Docker version 1.12 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
-
-To install Portworx as V2 Docker plugin follow these steps:
-
-```
-$ mkdir -p /etc/pwx
-$ mkdir -p /opt/pwx/bin
-$ mkdir -p /var/lib/osd
-$ mkdir -p /var/cores
-```
-
-We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
-
-```
-$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
-Plugin "portworx/px:latest" is requesting the following
-privileges:
- - network: [host]
- - mount: [/dev]
- - mount: [/etc/pwx]
- - mount: [/var/lib/osd]
- - mount: [/opt/pwx/bin]
- - mount: [/var/run/docker.sock]
- - mount: [/lib/modules]
- - mount: [/usr/src]
- - mount: [/var/cores]
- - allow-all-devices: [true]
- - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
-Do you grant the above permissions? [y/N] y
-```
-
-You will need to grant the above set of permissions for the plugin to be installed.
 
 ### Application Examples
 
