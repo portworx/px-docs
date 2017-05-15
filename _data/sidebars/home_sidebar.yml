@@ -176,10 +176,8 @@
       url: /reference-architecture/docker-datacenter.html
     - title: Running with an SDN
       url: /reference-architecture/sdn.html
-  - title: Enterprise Edition
+  - title: Lighthouse
     folderitems:
-    - title: Run PX-Enterprise
-      url: /getting-started/px-enterprise.html
     - title: Launch PX via Lighthouse
       url: /enterprise/portworx-via-lighthouse.html
     - title: On Prem Lighthouse
