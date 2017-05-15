@@ -298,7 +298,7 @@ You have now completed setup of Portworx on your first server. To increase capac
 
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
 
-#### Optional - Deploy via Compose
+#### Optional - Install via Compose
 You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) to create a storage cluster for containers, as follows:
 
 ```

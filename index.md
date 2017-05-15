@@ -54,6 +54,11 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
 ## Install
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 
+* [Install on Kubernetes](/scheduler/kubernetes/install.html)
+* [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
+* [Install on Docker](/scheduler/docker/install.html)
+* [Install on Rancher](/scheduler/rancher/install.html)
+
 ## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
 
