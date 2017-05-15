@@ -189,5 +189,6 @@ In the case of ASG, if you want to scale down your PX cluster, you will not be a
 
 ## Note
 
-When starting a PX cluster with AWS Auto Scaling, you will not be able to use this cluster's configuraion on any other nodes which are not started by ASG.
+1. When starting a PX cluster with AWS Auto Scaling, you will not be able to use this cluster's configuraion on any other nodes which are not started by ASG.
+2. If PX is unable to attach an ESB volume, it will retry, during which node index might get increased. This should be okay and should not affect any cluster, volume operations.
 
