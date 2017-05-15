@@ -38,7 +38,7 @@ This Digital Ocean repository currently supports 3 different Linux OS flavors:
 * Ubuntu16
 * CentOS7
 
-Select the OS distro of your choice.
+Select and `cd` into the OS distro of your choice.
 
 The scripts for Ubuntu and CentOS will both install the current version 
 of **'docker-ce'** and launch a single **'etcd'** container for the Portworx required 'kvdb'.
@@ -47,10 +47,10 @@ CoreOS will configure **user_data** to launch the internal **'etcd2'** service a
 
 ### Step 4: Configure your Terraform variables
 
-The following variable definitions are required in the `vars.tf` file:
+The following variable definitions are required in the `vars.tf` file in the corresponding OS directory:
 
 * 'do_token'  : Your Digital Ocean API key.  Obtain or generate your token from here [https://cloud.digitalocean.com/settings/api/tokens](https://cloud.digitalocean.com/settings/api/tokens)
-* 'region'    : These scripts require block storage, which is only available in the regions **FRA1, NYC1, SFO2 and SGP1**
+* 'region'    : These scripts require block storage, which is only available in these regions **fra1, nyc1, sfo2 and sgp1**
 * 'size'      : These are the valid instance sizes (strings) : **"2gb", "4gb", "8gb", "16gb", "32gb", "48gb", "64gb"**
 * 'volsize'   : These are the valid external volume sizes (integer in GB):  **100, 250, 500, 1000, 2000**
 * 'prefix'    : An arbitrary distinguishing name for your cluster prefix
@@ -60,6 +60,9 @@ The following variable definitions are required in the `vars.tf` file:
 
 In addition for CoreOS, you will need to supply a *'discovery_url'* for the 'etcd' service,
 which can be best obtained from the output of `curl http://discovery.etcd.io/new?size=3`
+
+Make sure the SSH key variables correspond to a valid SSH key in your Digital Ocean profile
+in the Security settings for your account [https://cloud.digitalocean.com/settings/security](https://cloud.digitalocean.com/settings/security)
 
 ### Step 5: Create your cluster
 
