@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Deployment Overview"
+title: "Deploy Portworx with Docker"
 keywords: portworx, architecture, storage, container, cluster, install, docker, compose, systemd, plugin
 sidebar: home_sidebar
 ---

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Run Portworx with Kubernetes"
+title: "Deploy Portworx on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---

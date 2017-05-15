@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx with Mesosphere DCOS"
+title: "Deploy Portworx on Mesosphere DCOS"
 keywords: portworx, mesos, mesosphere, dcos
 sidebar: home_sidebar
 ---
