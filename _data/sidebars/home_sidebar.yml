@@ -2,7 +2,7 @@
 
   - title: Get Started
     folderitems:
-    - title: Welcome to Portworx Docs
+    - title: Install
       url: /#install
     - title: Quick Start
       url: /getting-started/asap.html
