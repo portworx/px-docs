@@ -27,43 +27,32 @@ Portworx technology:
 Here is a short video that shows how Portworx provides an entire platform of services for managing stateful containerized applications in any Cloud or On-Prem data center:
 {% include youtubePlayer.html id=page.youtubeId %}
 
-Portworx technology is available as PX-Enterprise and PX-Developer.
+Portworx storage is deployed as a container and runs on a cluster of servers. Application containers provision storage directly through the Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f) API or the Docker [command-line](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f). Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (**pxctl**) and then set storage policies using the PX-Enterprise web console.
 
-## PX-Developer
+Portworx storage runs in a cluster of server nodes.
 
-PX-Developer is free, easy-to-deploy scale-out storage for developers. If you're running workloads under your desk and want to be free of managing hardware or need container-granular storage, check out PX-Developer.
+Each server has the Portworx container and the Docker daemon.
+Servers join a cluster and share configuration through PX-Enterprise or the key/value store, such as etcd.
+The Portworx container pools the capacity of the storage media residing on the server. You easily select storage media through the [config.json](https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json) file.
 
-PX-Developer features:
+![Portworx cluster architecture](/images/cluster-architecture.png "Portworx cluster architecture"){:width="442px" height="492px"}
 
-* Scale-out storage deployed as a container
-* Container-granular controls
-* Distributed file access
-* Command-line interface
-* Support for up three servers per cluster and 1 TB per volume
-* Requires an etcd or Consul key/value store
+Storage volumes are thinly provisioned, using capacity only as an application consumes it. Volumes are replicated across the nodes within the cluster, per a volume’s configuration, to ensure high availability.
 
-<a href="/getting-started/px-developer.html" class="btn btn-primary">Get Started with PX-Developer</a>
-<br/>
+Using MySQL as an example, a Portworx storage cluster has the following characteristics:
 
-## PX-Enterprise
+* MySQL is unchanged and continues to write its data to /var/lib/mysql.
+* This data gets stored in the container’s volume, managed by Portworx.
+* Portworx synchronously and automatically replicates writes to the volume across the cluster.
 
-PX-Enterprise is for DevOps and IT ops teams managing storage for containerized workloads. PX-Enterprise provides multi-cluster and multi-cloud support, where storage under management can be on-premise or in a public cloud like AWS.
+![Portworx cluster architecture with MySQL](/images/cluster-architecture-example-mysql.png "Portworx cluster architecture with MySQL"){:width="839px" height="276px"}
 
-* Scale-out storage deployed as a container
-* Shared volumes, where multiple containers can share a single filesystem
-* Container granular storage operations that work on any cloud, such as
-  * Container volume granular snapshots
-  * Container volume granular CoS
-  * Container volume granular encryption
-  * Container volume granular access controls and quota management
-* Multi-cluster visibility and management
-* Distributed file access
-* Web management console with role-based access
-* Command-line interface
-* RESTful API for automation and statistics
+Each volume specifies its request of resources (such as its max capacity and IOPS) and its individual requirements (such as ext4 as the file system and block size).
 
-<a href="/getting-started/px-enterprise.html" class="btn btn-primary">Get Started with PX-Enterprise</a>
+Using IOPS as an example, a team can choose to set the MySQL container to have a higher IOPS than an offline batch processing container. Thus, a container scheduler can move containers, without losing storage and while protecting the user experience.
 
+## Install
+Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 
 ## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)

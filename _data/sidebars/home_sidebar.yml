@@ -6,54 +6,8 @@
       url: /
     - title: Get Started ASAP
       url: /getting-started/asap.html
-    - title: Get Started with PX-Developer
-      url: /getting-started/px-developer.html
-    - title: Get Started with PX-Enterprise
-      url: /getting-started/px-enterprise.html
-  - title: Install and Run
-    folderitems:
-    - title: Deploy Portworx
-      folderitems:
-      - title: Overview
-        url: /install/
-      - title: Install
-        url: /install/docker.html
-      - title: systemd
-        url: /install/systemd.html
-    - title: CoreOS
-      url: /install/coreos.html
-    - title: Docker Compose
-      url: /install/docker-compose.html
-    - title: Run as a Docker Plugin 
-      url: /install/docker-plugin.html
-  - title: Manage Volumes
-    folderitems:
-    - title: Create and Manage Storage Volumes
-      url: /manage/create-and-manage.html
-    - title: Shared Volumes
-      url: /manage/shared-volumes.html
-    - title: Volume Sets
-      url: /manage/volume-sets.html
-    - title: Class of Service
-      url: /manage/class-of-service.html
-    - title: Snapshots
-      url: /manage/snapshots.html
-    - title: Volume Update
-      url: /manage/volume-update.html
-    - title: Encrypted Volumes
-      url: /manage/encrypted-volumes.html
   - title: Schedulers
     folderitems:
-    - title: Mesosphere DC/OS
-      folderitems:
-      - title: Install
-        url: /scheduler/mesosphere-dcos/install.html
-      - title: Stateful frameworks
-        folderitems:
-        - title: Cassandra
-          url: /scheduler/mesosphere-dcos/cassandra.html
-        - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
     - title: Kubernetes
       folderitems:
       - title: Install
@@ -74,14 +28,42 @@
           url: /scheduler/kubernetes/scheduler-convergence.html
         - title: Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
+    - title: Mesosphere DC/OS
+      folderitems:
+      - title: Install
+        url: /scheduler/mesosphere-dcos/install.html
+      - title: Stateful frameworks
+        folderitems:
+        - title: Cassandra
+          url: /scheduler/mesosphere-dcos/cassandra.html
+        - title: HDFS & Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
     - title: Docker
       folderitems:
+      - title: Install
+        url: /scheduler/docker/install.html
       - title: Swarm
         url: /scheduler/docker/swarm.html
       - title: UCP
         url: /scheduler/docker/ucp.html
     - title: Rancher
-      url: /scheduler/rancher.html
+      url: /scheduler/rancher/install.html
+  - title: Manage Volumes
+    folderitems:
+    - title: Create and Manage Storage Volumes
+      url: /manage/create-and-manage.html
+    - title: Shared Volumes
+      url: /manage/shared-volumes.html
+    - title: Volume Sets
+      url: /manage/volume-sets.html
+    - title: Class of Service
+      url: /manage/class-of-service.html
+    - title: Snapshots
+      url: /manage/snapshots.html
+    - title: Volume Update
+      url: /manage/volume-update.html
+    - title: Encrypted Volumes
+      url: /manage/encrypted-volumes.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS
