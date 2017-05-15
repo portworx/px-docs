@@ -64,33 +64,18 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /opt/pwx/bin:/export_bin                   \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-		 -v ${HDRS}:${HDRS}                            \
+                 -v ${HDRS}:${HDRS}                            \
                 portworx/px-dev -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
-Where the following arguments are provided to the PX daemon:
+>**Enterprise Users:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.
+
+
+The following arguments are provided to the PX daemon:
 
 ```
--daemon
-	> Instructs PX to start in daemon mode.  Other modes are for service users only.
-
 -k
 	> Points to your key value database, such as an etcd cluster or a consul cluster.
-	
--userpwd
-       > username and password for ETCD authentication in the form <user_name>:<passwd>
- 
--ca
-       > location of CA file for ETCD authentication
-       
--cert 
-	> location of certificate for ETCD authentication
-
--key 
-	> location of certificate key for ETCD authentication
-
--acltoken 
-	> ACL token value used for Consul authentication
 
 -c
 	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
@@ -109,6 +94,21 @@ Where the following arguments are provided to the PX daemon:
 
 -z
 	> Optional.  Instructs PX to run in zero storage mode.  In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes.
+	
+-userpwd
+       > username and password for ETCD authentication in the form <user_name>:<passwd>
+ 
+-ca
+       > location of CA file for ETCD authentication
+       
+-cert 
+	> location of certificate for ETCD authentication
+
+-key 
+	> location of certificate key for ETCD authentication
+
+-acltoken 
+	> ACL token value used for Consul authentication
 
 -d
 	> Optional.  Specifies the data interface.
@@ -216,7 +216,7 @@ You can now start the Portworx container with the following run command:
 
 At this point, Portworx should be running on your system. To verify, run `docker ps`.
 
-#### Optional - Authenticated `etcd` and `consul`
+#### Optional - Authenticated KVDB
 To use `etcd` with authentication and a cafile, use this in your `config.json`:
 
 ```json
