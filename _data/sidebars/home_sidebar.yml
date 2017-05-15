@@ -47,7 +47,9 @@
       - title: UCP
         url: /scheduler/docker/ucp.html
     - title: Rancher
-      url: /scheduler/rancher/install.html
+      folderitems:
+      - title: Install
+        url: /scheduler/rancher/install.html
   - title: Manage Volumes
     folderitems:
     - title: Create and Manage Storage Volumes
