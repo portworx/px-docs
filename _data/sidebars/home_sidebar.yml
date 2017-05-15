@@ -98,6 +98,8 @@
       url: /cloud/softlayer.html
     - title: Packet.net
       url: /cloud/packet.html
+    - title: Digital Ocean
+      url: /cloud/digital_ocean.html
     - title: Rackspace
       url: /cloud/rackspace.html
     - title: Terraform and Terraporx
