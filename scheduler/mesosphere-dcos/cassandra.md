@@ -13,7 +13,7 @@ This guide will help you to install the Cassandra service on your DCOS cluster b
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
 
-The source code for these services can be found here: [Portworx Fork of DCOS-Commons Fraemwork](https://github.com/portworx/dcos-commons)
+The source code for these services can be found here: [Portworx Fork of DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 This is a fork from [Mesos DCOS-commons framework](https://github.com/mesosphere/dcos-commons) and we will pull in updates from there regularly.
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
