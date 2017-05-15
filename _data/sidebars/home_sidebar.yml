@@ -3,8 +3,8 @@
   - title: Get Started
     folderitems:
     - title: Welcome to Portworx Docs
-      url: /
-    - title: Get Started ASAP
+      url: /#install
+    - title: Quick Start
       url: /getting-started/asap.html
   - title: Schedulers
     folderitems:
