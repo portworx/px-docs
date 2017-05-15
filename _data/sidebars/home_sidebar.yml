@@ -178,7 +178,7 @@
       url: /reference-architecture/sdn.html
   - title: Lighthouse
     folderitems:
-    - title: Launch PX via Lighthouse
+    - title: Manage PX via Lighthouse
       url: /enterprise/portworx-via-lighthouse.html
     - title: On Prem Lighthouse
       url: /enterprise/on-premise-lighthouse.html

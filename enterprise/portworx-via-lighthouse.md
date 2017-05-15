@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Launch PX-Enterprise via Lighthouse"
+title: "Manage PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
 redirect_from: "/launch-via-lighthouse.html"
