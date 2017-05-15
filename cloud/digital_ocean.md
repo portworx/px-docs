@@ -66,7 +66,7 @@ in the Security settings for your account [https://cloud.digitalocean.com/settin
 
 ### Step 5: Create your cluster
 
-Run `terraform apply`
+Run `terraform apply` .
 If all variables have been properly specified then after a few minutes, the following output will appear:
 
 ```
@@ -114,4 +114,7 @@ Global Storage Pool
 ### Step 6: (optional)  Tear down your cluster
 
 To teardown the cluster, use `terraform destroy` or `terraform destroy --force`
+
+
+
 
