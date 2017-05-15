@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Run Lighthouse"
+title: "Run Lighthouse On Prem"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
 sidebar: home_sidebar
 redirect_from: "/run-lighthouse.html"

@@ -180,7 +180,7 @@
     folderitems:
     - title: Manage PX via Lighthouse
       url: /enterprise/portworx-via-lighthouse.html
-    - title: On Prem Lighthouse
+    - title: Run Lighthouse on-prem
       url: /enterprise/on-premise-lighthouse.html
     - title: Run Lighthouse with Secure etcd
       url: /enterprise/lighthouse-with-secure-etcd.html
