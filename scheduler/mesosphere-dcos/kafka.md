@@ -60,8 +60,8 @@ If you click on the Kafka service you should be able to look at the status of th
 
 ![Kafka-PX install started](/images/dcos-kafka-px-started-install.png){:width="655px" height="200px"}
 
-When the Scheduler service as well as all the Kafka services are in Running (green) status, you should be ready to start using the
-Kafka service.
+When the Scheduler service as well as all the Kafka services are in Running (green) status, you should be ready to start 
+using the Kafka service.
 
 ![Kafka-PX install finished](/images/dcos-kafka-px-finished-install.png){:width="655px" height="200px"}
 
