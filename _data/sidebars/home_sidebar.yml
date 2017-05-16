@@ -31,7 +31,7 @@
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
-        url: /scheduler/mesosphere-dcos/install.html
+        url: /scheduler/mesosphere-dcos/framework_install.html
       - title: Stateful frameworks
         folderitems:
         - title: Cassandra
