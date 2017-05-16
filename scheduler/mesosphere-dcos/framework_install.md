@@ -22,10 +22,12 @@ For this step you will need to login to a node which has the dcos cli installed 
 Run the following command to add the repository to your DCOS cluster:
 
 ```
-$ dcos package repo add --index=0 portworx-aws https://px-dcos.s3.amazonaws.com/v1/portworx/portworx.zip
+$ dcos package repo add --index=0 portworx https://px-dcos.s3.amazonaws.com/v1/portworx/portworx.zip
 ```
 
 Once you have run the above command you should see the Portworx service available in your universe
+
+![Portworx in DCOS Universe](/images/dcos-px-universe.png){:width="655px" height="200px"}
 
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
@@ -43,6 +45,17 @@ If you want to modify the default, click on the “Install” button next to the
 Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to
 disable etcd (if you have an external etcd service) as well as disable the Lighthouse service in case you do not want to
 use the WebUI.
+
+### Portworx Options
+Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
+is enabled this config value will be ignored
+![Portworx Install options](/images/dcos-px-install-options-1.png){:width="655px" height="200px"}
+
+### Etcd Options
+![Portworx ETCD Install options](/images/dcos-px-install-options-2.png){:width="655px" height="200px"}
+
+### Lighthouse options
+![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
 
 You can also change the number of etcd nodes in the etcd cluster.
 
@@ -66,7 +79,7 @@ on the DCOS UI.
 ## Accessing Lighthouse
 
 Since Lighthouse is deployed on a private agent it might not be accessible from outside your network depending on your
-network configuration. To access Lighthouse from an external network you can deploy the Repoxy service to redirect traffic
+network configuration. To access Lighthouse from an external network you can deploy the [Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic
 from one of the public agents.
 
 To do so, run the following marathon application
