@@ -25,6 +25,6 @@ Read on for how to install Portworx into your DC/OS cluster and use it with [DC/
 
 ## Using Portworx with Mesosphere DCOS
 
- * [Install Portworx for Mesosphere/DCOS](/scheduler/mesosphere-dcos/framework_install.html)
+ * [Install Portworx for Mesosphere/DCOS](/scheduler/mesosphere-dcos/install.html)
  * [Cassandra on DCOS with Portworx](/scheduler/mesosphere-dcos/cassandra.html)
  * [Hadoop on DCOS with Portworx](/scheduler/mesosphere-dcos/hadoop-hdfs.html)

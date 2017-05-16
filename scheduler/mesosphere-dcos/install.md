@@ -1,202 +1,137 @@
 ---
 layout: page
 title: "Run Portworx with Mesosphere/DCOS"
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storage
-sidebar: home_sidebar
-youtubeId : 02yMYE-CEdw
-redirect_from: "/run-with-mesosphere.html"
+keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
 ---
 
 * TOC
 {:toc}
 
-Portworx communicates with DCOS through either the Docker Volume Driver Interface (DVDI) or, directly through CSI.
+This DCOS service will deploy Portworx as well as all the dependencies and additional services to manage the Portworx
+cluster. This includes a highly available etcd cluster, influxdb to store statistics and the Lighthouse service, which is
+the Web UI for Portworx.
+
+Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly through
+CSI.
 
 ## Deploy Portworx
-You can deploy Portworx through Marathon or through the Mesosphere Universe catalog.  Follow one of the two options below.
+### Adding the repository for the service:
 
+For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
 
-### To Deploy Portworx through Marathon:
+Run the following command to add the repository to your DCOS cluster:
 
-For simple deployment with DCOS, please follow [these instructions](/scheduler/mesosphere-dcos/px_etcd_marathon.html) for creating
-Portworx and ```etcd``` together as a converged application group.
+```
+$ dcos package repo add --index=0 portworx https://px-dcos.s3.amazonaws.com/v1/portworx/portworx.zip
+```
 
-This section assumes that Portworx will be installed on a set of homogeneously configured machines (which is not a general requirement for Portworx).
+Once you have run the above command you should see the Portworx service available in your universe
 
-The pre-requisites for installing Portworx through Marathon include:
+![Portworx in DCOS Universe](/images/dcos-px-universe.png){:width="655px" height="200px"}
 
-1. Determine the list of physical devices (disks and interfaces) for the agent/slave nodes
-2. Determine the IPaddress and Port of the etcd server. 
-3. If using Lighthouse, obtain your Lighthouse token.
+### Default Install
+If you want to use the defaults, you can now run the dcos command to install the service
+```
+$ dcos package install --yes portworx
+```
+You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
-The following is a sample JSON file that can be used to launch Portworx through Marathon.
-The example below assumes the hosts are running CoreOS with an implicit (localhost) etcd.
-For all other OS's, please refer to the `etcd` or `consul` instance, and change all references of `/lib/modules` to `/usr/src`.
+This will install all the pre-requisites and start the Portworx service on 3 private agents.
 
->**Important:**<br/> If you are **not** deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.  Please see [Portworx with Mesos constraints](/scheduler/mesosphere-dcos/px_with_constraints.html)
+### Advanced Install
+If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on
+“Advanced Installation”
 
-```json
+Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to
+disable etcd (if you have an external etcd service) as well as disable the Lighthouse service in case you do not want to
+use the WebUI.
+
+### Portworx Options
+Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
+is enabled this config value will be ignored.
+![Portworx Install options](/images/dcos-px-install-options-1.png){:width="655px" height="200px"}
+
+### Etcd Options
+You can also change the number of etcd nodes in the etcd cluster.
+![Portworx ETCD Install options](/images/dcos-px-install-options-2.png){:width="655px" height="200px"}
+
+### Lighthouse options
+By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
+
+![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
+
+Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the
+service.
+
+## Install Status
+
+Once you have started the install you can go to the Services page to monitor the status of the installation.
+
+If you click on the Portworx service you should be able to look at the status of the services being created. 
+
+In a default install there will be one service for the framework scheduler, 5 services for etcd (one for the etcd scheduler,
+3 etcd nodes and one etcd proxy), one service for influxdb and one service for lighthouse.
+
+![Portworx Install finished](/images/dcos-px-install-finished.png){:width="655px" height="200px"}
+
+The install for Portworx on the agent nodes will also run as a service but they will "Finish" once the installation is done.
+
+You can check the nodes where Portworx is installed and the status of the Portworx service by clicking on the Components
+link on the DCOS UI.
+![Portworx in DCOS Compenents](/images/dcos-px-components.png){:width="655px" height="200px"}
+
+## Accessing Lighthouse
+
+Since Lighthouse is deployed on a private agent it might not be accessible from outside your network depending on your
+network configuration. To access Lighthouse from an external network you can deploy the [Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic
+from one of the public agents.
+
+To do so, run the following marathon application
+
+```
 {
-    "id": "pxcluster1",
-    "cpus": 2,
-    "mem": 2048.0,
-    "instances": 3,
-    "constraints": [
-        ["hostname", "UNIQUE"]
-    ],
-    "container": {
-        "type": "DOCKER",
-        "volumes": [],
-        "docker": {
-            "image": "portworx/px-enterprise",
-            "network": "HOST",
-            "portmappings": [{
-                "containerPort": 0,
-                "hostPort": 0,
-                "protocol": "tcp"
-            }],
-            "privileged": true,
-            "parameters": [{
-                "key": "volume",
-                "value": "/run/docker/plugins:/run/docker/plugins"
-            }, {
-                "key": "volume",
-                "value": "/var/lib/osd:/var/lib/osd:shared"
-            }, {
-                "key": "volume",
-                "value": "/dev:/dev"
-            }, {
-                "key": "volume",
-                "value": "/etc/pwx:/etc/pwx"
-            }, {
-                "key": "volume",
-                "value": "/opt/pwx/bin:/export_bin:shared"
-            }, {
-                "key": "volume",
-                "value": "/var/run/docker.sock:/var/run/docker.sock"
-            }, {
-                "key": "volume",
-                "value": "/var/cores:/var/cores"
-            }, {
-                "key": "volume",
-                "value": "/lib/modules:/lib/modules"
-            } ],
-            "forcePullImage": false
-        }
+  "id": "/repoxy",
+  "cpus": 1,
+  "acceptedResourceRoles": [
+      "slave_public"
+  ],
+  "instances": 1,
+  "mem": 512,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mesosphere/repoxy:2.0.0"
     },
-    "portDefinitions": [],
-    "ipAddress": {},
-    "args": [
-        "--name pxcluster.mesos",
-        "-k etcd:http://localhost:2379",
-        "-c mesos-demo1",
-        "-s /dev/sdb",
-        "-m bond0",
-        "-d bond0"
-    ],
-    "healthChecks": [
+    "volumes": [
+      {
+        "containerPath": "/opt/mesosphere",
+        "hostPath": "/opt/mesosphere",
+        "mode": "RO"
+      }
+    ]
+  },
+  "cmd": "/proxyfiles/bin/start portworx $PORT0",
+  "portDefinitions": [
     {
-        "protocol": "HTTP",
-        "port": 9001,
-        "path": "/status",
-        "gracePeriodSeconds": 300,
-        "intervalSeconds": 60,
-        "timeoutSeconds": 20,
-        "maxConsecutiveFailures": 3
-    }]
-}
-```
-[Download example](/px-marathon.json?raw=true)
-
-
-This example illustrates running PX-Enterprise in an "air-gapped" environment, as noted by the "**-c mesos-demo1**" cluster argument and the "**-k etcd**" argument for the key-value database.
-
-If running PX-Enterprise with Lighthouse (SaaS or on-prem), then both the "**-c**" and "**-k**" options would be replaced with a single "**-t**" option indiciating the Lighthouse token-ID.
-
-Each physical device must be listed with its own "**-s**" argument.
-
-In this example a single network interface ("bond0") is used for both management and data traffic.
-
-For all command line options, please see [px-enterprise-usage](/px-usage.html)
-
-### To Deploy Portworx through Universe:
-Portworx is now available through the Mesosphere Universe catalog of services.
-![Portworx on Universe](/images/universe.png){:width="2047px" height="884px"}
-
-Deploying Portworx through Mesosphere Universe provides great ease of deployment.
-Please follow the published [Mesosphere/DCOS Examples for deploying Portworx through Universe](https://github.com/dcos/examples/tree/master/portworx/1.9) 
-
-### Reference PX volumes through the Marathon configuration file
-
-Portworx passes the `pxd` docker volume driver and any associated volumes to Marathon as Docker parameters. The following example is for `mysql`.
-
-```json
-{
-    "id": "mysql",
-    "cpus": 0.5,
-    "mem": 256,
-    "instances": 1,
-    "container": {
-        "type": "DOCKER",
-        "docker": {
-            "image": "mysql:5.6.27",
-            "parameters": [
-                    {
-                       "key": "volume-driver",
-                       "value": "pxd"
-                    },
-                    {
-                       "key": "volume",
-                       "value": "mysql_vol:/var/lib/mysql"
-                    }],
-            "network": "BRIDGE",
-              "portMappings": [
-                {
-                  "containerPort": 3306,
-                  "hostPort": 32000,
-                  "protocol": "tcp"
-                }
-                ]
-        }
+      "port": 0,
+      "protocol": "tcp"
     },
-    "env": {
-        "MYSQL_ROOT_PASSWORD": "password"
-    },
-      "minimumHealthCapacity" :0,
-      "maximumOverCapacity" : 0.0
+    {
+      "port": 0,
+      "protocol": "tcp"
+    }
+  ],
+  "env": {
+    "PROXY_ENDPOINT_0": "Lighthouse,http,lighthouse-0-start,mesos,80,/,/"
+  }
 }
 ```
 
-[Download example](/px-marathon-mysql.json?raw=true)
-
-* Notice the Docker `parameters` clause as the way to reference the `pxd` volume driver as well as the volume itself.
-* The referenced volume can be a volume name, a volume ID, or a snapshot ID.   If the volume name does not previously exist, it gets created in-band with default settings.
-* The `constraints` clause, restricts this task to running only on Agent nodes that are part of a given Portworx cluster.
-
->**Important:**<br/> If you are **not** deploying Portworx on all nodes in the cluster, then you should include a *"pxfabric"* constraint.
-For example:
-
-```json
- "constraints": [
-            [
-              "pxfabric",
-              "LIKE",
-              "pxclust1"
-            ]]
-  ...
-  ```
-  
-
-### Launch the application through Marathon
-
-To launch the application through the DC/OS CLI:
-
+Once the app is running, look at the logs for the service. You should see a message similar to the following:
 ```
-# dcos marathon app add mysql.json
+The proxy is listening on port: 20174
+
+Lighthouse: 54.89.188.212:20174/
 ```
 
-To launch the application through Marathon directly:
-
-```
-# curl -X POST http://1.2.3.4:8080/v2/apps -d @mysql.json -H "Content-type: application/json"
-```
+You can then use that URL to access the Lighthouse WebUI
