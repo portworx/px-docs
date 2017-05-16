@@ -48,16 +48,17 @@ use the WebUI.
 
 ### Portworx Options
 Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
-is enabled this config value will be ignored
+is enabled this config value will be ignored.
 ![Portworx Install options](/images/dcos-px-install-options-1.png){:width="655px" height="200px"}
 
 ### Etcd Options
+You can also change the number of etcd nodes in the etcd cluster.
 ![Portworx ETCD Install options](/images/dcos-px-install-options-2.png){:width="655px" height="200px"}
 
 ### Lighthouse options
-![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
+By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
 
-You can also change the number of etcd nodes in the etcd cluster.
+![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
 
 Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the
 service.
@@ -71,10 +72,13 @@ If you click on the Portworx service you should be able to look at the status of
 In a default install there will be one service for the framework scheduler, 5 services for etcd (one for the etcd scheduler,
 3 etcd nodes and one etcd proxy), one service for influxdb and one service for lighthouse.
 
+![Portworx Install finished](/images/dcos-px-install-finished.png){:width="655px" height="200px"}
+
 The install for Portworx on the agent nodes will also run as a service but they will "Finish" once the installation is done.
 
-You can check the nodes where Portworx is installed and the status of the Portworx service by clicking on the Components link
-on the DCOS UI.
+You can check the nodes where Portworx is installed and the status of the Portworx service by clicking on the Components
+link on the DCOS UI.
+![Portworx in DCOS Compenents](/images/dcos-px-components.png){:width="655px" height="200px"}
 
 ## Accessing Lighthouse
 
