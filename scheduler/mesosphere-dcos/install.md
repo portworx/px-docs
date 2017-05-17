@@ -11,8 +11,8 @@ This DCOS service will deploy Portworx as well as all the dependencies and addit
 cluster. This includes a highly available etcd cluster, influxdb to store statistics and the Lighthouse service, which is
 the Web UI for Portworx.
 
-Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly through
-CSI.
+Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly 
+through CSI.
 
 ## Deploy Portworx
 ### Adding the repository for the service:
@@ -83,8 +83,9 @@ link on the DCOS UI.
 ## Accessing Lighthouse
 
 Since Lighthouse is deployed on a private agent it might not be accessible from outside your network depending on your
-network configuration. To access Lighthouse from an external network you can deploy the [Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic
-from one of the public agents.
+network configuration. To access Lighthouse from an external network you can deploy the
+[Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic from one of the public 
+agents.
 
 To do so, run the following marathon application
 
