@@ -38,6 +38,8 @@
           url: /scheduler/mesosphere-dcos/cassandra.html
         - title: HDFS & Hadoop
           url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
+      - title: Scaling Stateful Applications
+        url: /manage/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
       - title: Install
@@ -50,19 +52,17 @@
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
-  - title: Manage Volumes
+  - title: Data Volumes
     folderitems:
-    - title: Create and Manage Storage Volumes
+    - title: Create and Manage Data Volumes
       url: /manage/create-and-manage.html
     - title: Shared Volumes
       url: /manage/shared-volumes.html
-    - title: Volume Sets
-      url: /manage/volume-sets.html
     - title: Class of Service
       url: /manage/class-of-service.html
     - title: Snapshots
       url: /manage/snapshots.html
-    - title: Volume Update
+    - title: Updating Volumes
       url: /manage/volume-update.html
     - title: Encrypted Volumes
       url: /manage/encrypted-volumes.html

@@ -1,15 +1,14 @@
 ---
 layout: page
-title: "Volume Sets"
+title: "Volume Scaling with DCOS"
 keywords: portworx, jenkins
 sidebar: home_sidebar
-redirect_from: "/volume-sets.html"
 ---
 
 * TOC
 {:toc}
 
-Orchestration software such as mesos allow scaling the number of instances of pods/applications. However, when these pods/applications require data volumes, there is no way to associate instances to data volumes.
+DCOS via Marathon allows scaling the number of instances of applications. However, when these applications require data volumes, there is no way to associate instances to data volumes.
 
 `volume-sets` allows re-use of the same volume name for all container instances by performing on-demand creation of volumes as user containers get scheduled on different nodes. Each instance of a container gets a unique instance of a data volume.
 
@@ -19,6 +18,11 @@ In runtime, a node may fail and applications get respawned on different nodes. W
 ## Implementation
 When a `volume-set` is requested to be attached, an attempt is made to attach a volume that has data local to the node. If such a volume is not found, then one is
 created using the volume spec of the scaled volume as a template.  An error is returned if a free volume in the set is not found and no more volumes can be created as per the `volume-set` `scale` limit.
+
+>**Important:**<br/>You **must** use DCOS constraints when using PX volume sets:
+>```json
+>"constraints": [["hostname", "UNIQUE"]]
+>```
 
 ## Usage
 A `volume-set` can be created using the pxctl CLI, docker CLI, or inline volume spec.  This can be done via the `pxctl` cli, or docker directly as follows:
@@ -45,10 +49,10 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ```
 
 ## Inline `volume-set` creation
-This is useful when creating volumes through a scheduler.
+This is useful when creating volumes through DCOS.
 
 ```
-#docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
+# docker volume create -d pxd --name scale=10,size=1G,repl=1,name=elk_vol
 
 # pxctl volume list
 ID                      NAME            SIZE         HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
