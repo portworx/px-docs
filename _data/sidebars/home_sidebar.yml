@@ -172,12 +172,6 @@
         url: /applications/docker-compose.html
       - title: Jenkins with Portworx
         url: /applications/jenkins.html
-  - title: Reference Architectures
-    folderitems:
-    - title: Portworx on Docker Data Center
-      url: /reference-architecture/docker-datacenter.html
-    - title: Running with an SDN
-      url: /reference-architecture/sdn.html
   - title: Lighthouse
     folderitems:
     - title: Manage PX via Lighthouse
@@ -192,6 +186,8 @@
       url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
     folderitems:
+    - title: Running with an SDN
+      url: /reference-architecture/sdn.html
     - title: Shared Mount Propogation
       url: /knowledgebase/shared-mount-propogation.html
     - title: SELinux
