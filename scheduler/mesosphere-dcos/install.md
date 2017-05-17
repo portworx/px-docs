@@ -36,7 +36,7 @@ $ dcos package install --yes portworx
 ```
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
-This will install all the pre-requisites and start the Portworx service on 3 private agents.
+This will install all the prerequisites and start the Portworx service on 3 private agents.
 
 ### Advanced Install
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on
@@ -135,3 +135,5 @@ Lighthouse: 54.89.188.212:20174/
 ```
 
 You can then use that URL to access the Lighthouse WebUI
+
+
