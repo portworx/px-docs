@@ -129,7 +129,7 @@ To do so, run the following marathon application
 }
 ```
 
-You can then access the Lighthouse WebUI on http://<public_agent_IP>:9998.
+You can then access the Lighthouse WebUI on http://\<public_agent_IP\>:9998.
 If your public agent is behind a firewall you will also need to open up two ports, 9998 and 9999.
 
 
