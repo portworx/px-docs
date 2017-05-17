@@ -56,7 +56,7 @@
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
-  - title: Manage Data Volumes
+  - title: About Data Volumes
     folderitems:
     - title: Shared Volumes
       url: /manage/shared-volumes.html
