@@ -15,7 +15,7 @@
       - title: How To
         folderitems:
         - title: Create PVCs
-        folderitems:
+          folderitems:
           - title: Dynamic Provisioning
             url: /scheduler/kubernetes/dynamic-provisioning.html
           - title: Using Pre-provisioned Volumes
