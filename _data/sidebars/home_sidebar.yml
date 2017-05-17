@@ -39,7 +39,7 @@
         - title: HDFS & Hadoop
           url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
       - title: Scaling Stateful Applications
-        url: /manage/mesosphere-dcos/volume-scaling.html
+        url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
       - title: Install
