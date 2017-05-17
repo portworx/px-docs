@@ -14,20 +14,20 @@
         url: /scheduler/kubernetes/install.html
       - title: How To
         folderitems:
-        - title: Using Storage Classes
-          url: /scheduler/kubernetes/storage-class.html
-        - title: Dynamic Provisioning
-          url: /scheduler/kubernetes/dynamic-provisioning.html
-        - title: Using Pre-provisioned Volumes
-          url: /scheduler/kubernetes/preprovisioned-volumes.html
+        - title: Create PVCs
+        folderitems:
+          - title: Dynamic Provisioning
+            url: /scheduler/kubernetes/dynamic-provisioning.html
+          - title: Using Pre-provisioned Volumes
+            url: /scheduler/kubernetes/preprovisioned-volumes.html
+        - title: Run Statefulsets
+          url: /scheduler/kubernetes/statefulsets.html    
         - title: Mounting a Snapshot to a Pod
           url: /scheduler/kubernetes/mount-snapshot-to-pod.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
-        - title: Run Statefulsets
-          url: /scheduler/kubernetes/statefulsets.html    
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -46,28 +46,28 @@
       folderitems:
       - title: Install
         url: /scheduler/docker/install.html
-      - title: Swarm
-        url: /scheduler/docker/swarm.html
-      - title: UCP
-        url: /scheduler/docker/ucp.html
+      - title: How To
+      folderitems:
+        - title: Create and Manage Data Volumes
+          url: /scheduler/docker/volumes.html
+        - title: Test with Swarm
+          url: /scheduler/docker/swarm.html
     - title: Rancher
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
-  - title: Data Volumes
+  - title: Manage Data Volumes
     folderitems:
-    - title: Create and Manage Data Volumes
-      url: /manage/create-and-manage.html
     - title: Shared Volumes
       url: /manage/shared-volumes.html
-    - title: Class of Service
-      url: /manage/class-of-service.html
     - title: Snapshots
       url: /manage/snapshots.html
     - title: Updating Volumes
       url: /manage/volume-update.html
     - title: Encrypted Volumes
       url: /manage/encrypted-volumes.html
+    - title: Class of Service
+      url: /manage/class-of-service.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS

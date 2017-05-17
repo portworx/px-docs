@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Mount snapshot to pod"
+title: "Mounting snapshots to a pod"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---

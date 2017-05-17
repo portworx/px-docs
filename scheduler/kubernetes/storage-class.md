@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Storage class"
+title: "Using Storage Classes"
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
