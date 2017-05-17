@@ -23,9 +23,9 @@ For this step you will need to login to a node which has the dcos cli installed 
 
 Run the following command to add the repository to your DCOS cluster:
 
-```
-$ dcos package repo add --index=0 kafka-px https://px-dcos.s3.amazonaws.com/v1/kafka/kafka.zip
-```
+
+     $ dcos package repo add --index=0 kafka-px https://px-dcos.s3.amazonaws.com/v1/kafka/kafka.zip
+
 
 Once you have run the above command you should see the Kafka service available in your universe
 
@@ -34,9 +34,9 @@ Once you have run the above command you should see the Kafka service available i
 ## Installation
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
-```
-$ dcos package install --yes kafka-px
-```
+
+     $ dcos package install --yes kafka-px
+
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
 ### Advanced Install
@@ -72,12 +72,65 @@ provided during install, one for each of the Brokers.
 
 If you run the "dcos service" command you should see the kafka-px service in ACTIVE state with 3 running tasks
 
-```
-$ dcos service
-NAME                  HOST             ACTIVE  TASKS  CPU   MEM      DISK   ID                                         
-kafka      ip-10-0-3-116.ec2.internal   True     3    3.0  6144.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0038  
-marathon           10.0.7.49            True     2    2.0  2048.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0001  
-metronome          10.0.7.49            True     0    0.0   0.0      0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0000  
-portworx   ip-10-0-1-127.ec2.internal   True     4    3.3  4096.0    25.0   66d598b0-2f90-4d0a-9567-8468a9979190-0031  
-portworx   ip-10-0-2-42.ec2.internal    True     3    1.2  3168.0  12288.0  66d598b0-2f90-4d0a-9567-8468a9979190-0032
-```
+
+     $ dcos service
+     NAME                  HOST             ACTIVE  TASKS  CPU   MEM      DISK   ID                                         
+     kafka      ip-10-0-3-116.ec2.internal   True     3    3.0  6144.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0038  
+     marathon           10.0.7.49            True     2    2.0  2048.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0001  
+     metronome          10.0.7.49            True     0    0.0   0.0      0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0000  
+     portworx   ip-10-0-1-127.ec2.internal   True     4    3.3  4096.0    25.0   66d598b0-2f90-4d0a-9567-8468a9979190-0031  
+     portworx   ip-10-0-2-42.ec2.internal    True     3    1.2  3168.0  12288.0  66d598b0-2f90-4d0a-9567-8468a9979190-0032
+
+
+## Verify Setup
+
+From the DCOS client; install the new command for kafka-px
+
+      docs package install kafka-px --cli
+
+Find out all the kafka broker endpoints
+
+     [root@ip-172-31-35-3 DCOS_CF]# dcos kafka endpoints broker
+     {
+       "address": [
+        "10.0.2.82:1025",
+        "10.0.0.49:1025",
+        "10.0.3.101:1029"
+       ],
+      "dns": [
+      "kafka-2-broker.kafka.mesos:1025",
+      "kafka-0-broker.kafka.mesos:1025",
+      "kafka-1-broker.kafka.mesos:1029"
+       ],
+      "vip": "broker.kafka.l4lb.thisdcos.directory:9092"
+      }
+
+Find out the zookeeper endpoint for the create kafka service
+
+     [root@ip-172-31-35-3 DCOS_CF]# dcos kafka endpoints zookeeper
+     master.mesos:2181/dcos-service-kafka
+
+
+Create a topic, from the DCOS client use dcos command to create a test topic ``test-one`` with replication set to three
+
+    [root@ip-172-31-35-3 DCOS_CF]# dcos kafka topic create test-one --partitions 1 --replication 3
+    {
+        "message": "Output: Created topic \"test-one\".\n"
+    }
+
+Connect to the master node and launch a kafka client container. 
+   
+    [root@ip-172-31-35-3 DCOS_CF]# dcos node ssh --master-proxy --leader
+    
+    core@ip-10-0-6-66 ~ $ docker run -it mesosphere/kafka-client
+    root@d19258d46fd3:/bin#
+   
+Produce a message and send to all kafka brokers
+
+   
+     root@d19258d46fd3:/bin#  echo "Hello, World." | ./kafka-console-producer.sh --broker-list 10.0.2.82:1025,10.0.0.49:1025,10.0.3.101:1029 --topic test-one
+
+Consume the message
+
+    root@d19258d46fd3:/bin# ./kafka-console-consumer.sh --zookeeper master.mesos:2181/dcos-service-kafka --topic test-one --from-beginning
+    Hello, World.
