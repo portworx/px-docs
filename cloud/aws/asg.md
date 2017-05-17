@@ -103,7 +103,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
 >**Note:** -s vol-0743df7bf5657dad8 and -s vol-0055e5913b79fb49d - you can pass multiple EBS volumes to use as templates. If these volumes are unavailable, then volumes identical to these will be automatically created.
 
 ### Cloud-Init
-Optionally, the AWS access credentials and EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
+Optionally, EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
 
 Specify the following information in the `user-data` section of your instance while creating the launch configuration for your auto scaling group:
 
