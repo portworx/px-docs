@@ -38,8 +38,10 @@
           url: /scheduler/mesosphere-dcos/cassandra.html
         - title: HDFS & Hadoop
           url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
-      - title: Scaling Stateful Applications
-        url: /scheduler/mesosphere-dcos/volume-scaling.html
+      - title: Examples
+        folderitems:
+        - title: Scaling stateful applications
+          url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
       - title: Install
