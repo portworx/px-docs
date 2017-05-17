@@ -93,12 +93,12 @@ To do so, run the following marathon application
 ```
 {
   "id": "/repoxy",
-  "cpus": 1,
+  "cpus": 0.1,
   "acceptedResourceRoles": [
       "slave_public"
   ],
   "instances": 1,
-  "mem": 512,
+  "mem": 128,
   "container": {
     "type": "DOCKER",
     "docker": {
