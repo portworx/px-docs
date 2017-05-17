@@ -86,12 +86,12 @@ If you run the "dcos service" command you should see the kafka-px service in ACT
 
 From the DCOS client; install the new command for kafka-px
 
-      docs package install kafka-px --cli
+      $ docs package install kafka-px --cli
 
 Find out all the kafka broker endpoints
 
-     [root@ip-172-31-35-3 DCOS_CF]# dcos kafka endpoints broker
-     {
+      $ dcos kafka endpoints broker
+      {
        "address": [
         "10.0.2.82:1025",
         "10.0.0.49:1025",
@@ -107,30 +107,30 @@ Find out all the kafka broker endpoints
 
 Find out the zookeeper endpoint for the create kafka service
 
-     [root@ip-172-31-35-3 DCOS_CF]# dcos kafka endpoints zookeeper
+     $ dcos kafka endpoints zookeeper
      master.mesos:2181/dcos-service-kafka
 
 
 Create a topic, from the DCOS client use dcos command to create a test topic ``test-one`` with replication set to three
 
-    [root@ip-172-31-35-3 DCOS_CF]# dcos kafka topic create test-one --partitions 1 --replication 3
+    $ dcos kafka topic create test-one --partitions 1 --replication 3
     {
         "message": "Output: Created topic \"test-one\".\n"
     }
 
 Connect to the master node and launch a kafka client container. 
    
-    [root@ip-172-31-35-3 DCOS_CF]# dcos node ssh --master-proxy --leader
+     $ dcos node ssh --master-proxy --leader
     
-    core@ip-10-0-6-66 ~ $ docker run -it mesosphere/kafka-client
-    root@d19258d46fd3:/bin#
+     core@ip-10-0-6-66 ~ $ docker run -it mesosphere/kafka-client
+     root@d19258d46fd3:/bin#
    
 Produce a message and send to all kafka brokers
 
    
-     root@d19258d46fd3:/bin#  echo "Hello, World." | ./kafka-console-producer.sh --broker-list 10.0.2.82:1025,10.0.0.49:1025,10.0.3.101:1029 --topic test-one
+     $  echo "Hello, World." | ./kafka-console-producer.sh --broker-list 10.0.2.82:1025,10.0.0.49:1025,10.0.3.101:1029 --topic test-one
 
 Consume the message
 
-    root@d19258d46fd3:/bin# ./kafka-console-consumer.sh --zookeeper master.mesos:2181/dcos-service-kafka --topic test-one --from-beginning
-    Hello, World.
+     $ ./kafka-console-consumer.sh --zookeeper master.mesos:2181/dcos-service-kafka --topic test-one --from-beginning
+     Hello, World.
