@@ -30,7 +30,7 @@ You can also trigger a new snapshot on a runnig POD by creating a PersitentVolum
 kind: PersistentVolumeClaim
      apiVersion: v1
      metadata:
-       name: name=snap001,source=pvcsc001
+       name: name.snap001-source.pvcsc001
        annotations:
          volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
      spec:
@@ -57,7 +57,7 @@ To rollback a POD or a StatefulSet back to a previous snapshot, create a new Per
 kind: PersistentVolumeClaim
      apiVersion: v1
      metadata:
-       name: name=rollback001,source=snap001
+       name: name.rollback001-source.snap001
        annotations:
          volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
      spec:
