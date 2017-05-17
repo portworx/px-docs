@@ -49,7 +49,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 232783593254518125      elk_vol         1 GiB        1       no      no              LOW             10      up - detached
 ```
 
-## Inline `volume-set` creation
+## Inline `volume-set` creation through DCOS
 This is useful when creating volumes through DCOS.
 
 ```
@@ -73,7 +73,7 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 
 Decreasing the scaled volume only restricts creation of future volumes. Decreasing scale will not delete any volumes.
 
-### Mesos/Marathon Examples
+### Examples
 Following is an example that takes advantage of `volume-sets`
 
 ```
