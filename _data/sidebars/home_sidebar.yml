@@ -22,8 +22,8 @@
             url: /scheduler/kubernetes/preprovisioned-volumes.html
         - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
-        - title: Mounting a Snapshot to a Pod
-          url: /scheduler/kubernetes/mount-snapshot-to-pod.html
+        - title: Create a PVC from a snapshot
+          url: /scheduler/kubernetes/snaps.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
