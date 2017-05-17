@@ -23,6 +23,7 @@ created using the volume spec of the scaled volume as a template.  An error is r
 >```json
 >"constraints": [["hostname", "UNIQUE"]]
 >```
+>Failing to do so may cause inconsistent results in the event that Marathon relaunches or reschedules an application upon failure, with the possibility of multiple instances landing on the same host.
 
 ## Usage
 A `volume-set` can be created using the pxctl CLI, docker CLI, or inline volume spec.  This can be done via the `pxctl` cli, or docker directly as follows:
@@ -71,11 +72,6 @@ ID                      NAME            SIZE         HA      SHARED  ENCRYPTED  
 ```
 
 Decreasing the scaled volume only restricts creation of future volumes. Decreasing scale will not delete any volumes.
-
-## Mesos/Marathon Guidelines
-When taking advantage of `volume-sets`, users of Mesos/Marathon **MUST** ensure that "hostname UNIQUE" constraints are set
-in the application.json file.  Failing to do so may cause inconsistent results in the event that Marathon relaunches or 
-reschedules an application upon failure, with the possibility of multiple instances landing on the same host.
 
 ### Mesos/Marathon Examples
 Following is an example that takes advantage of `volume-sets`
