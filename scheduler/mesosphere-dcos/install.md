@@ -130,11 +130,24 @@ To do so, run the following marathon application
 
 Once the app is running, look at the logs for the service. You should see a message similar to the following:
 ```
-The proxy is listening on port: 20174
+Registered docker executor on 10.0.6.142
+Starting task repoxy.46463593-3a8f-11e7-b954-7e4f13662bc3
+[portworx /proxyfiles/bin/configure.py]: loading endpoints
+[portworx /proxyfiles/bin/configure.py]: detected endpoint environment variables: ['PROXY_ENDPOINT_0']
+[portworx /proxyfiles/bin/configure.py]: allocated_ports: ['10002']
+[portworx /proxyfiles/bin/configure.py]: endpoint: {name=Lighthouse, bprot=http, task=lighthouse-0-start, dnse=mesos, bport=80, rfrom=/, rto=/, fport=10002}
+This is the public IP reported by /opt/mesosphere/bin/detect_ip_public: 54.89.188.212
 
-Lighthouse: 54.89.188.212:20174/
+If no IP was printed above, this best-effort attempt to detect the public IP failed.
+
+The proxy is listening on port: 10001
+
+Lighthouse: 54.89.188.212:10001/
+
 ```
 
-You can then use that URL to access the Lighthouse WebUI
+You can then use that URL to access the Lighthouse WebUI.
+If your public agent is behind a firewall you will also need to open up two ports mentioned in the log, 10001 and 10002 in
+this case.
 
 
