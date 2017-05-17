@@ -37,7 +37,9 @@
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
         - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html   
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
+        - title: Kafka
+          url: /scheduler/mesosphere-dcos/kafka.html   
       - title: Examples
         folderitems:
         - title: Scaling stateful applications
