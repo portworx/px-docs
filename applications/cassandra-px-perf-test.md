@@ -12,7 +12,7 @@ sidebar: home_sidebar
 This guide is to measure the performance of running Cassandra with PX volumes.  We use Docker directly on EC2 instances.  You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment (Kubernetes, Mesosphere or Swarm).
 
 # Testing Cassandra on PX
-Below are the instructions to test and verify Cassandra's Performance with PX volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for PX cluster. 
+Below are the instructions to test and verify Cassandra's Performance with PX volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for the PX cluster. 
 
 ## Setup for the test
 
@@ -112,32 +112,32 @@ Run Cassandra stress ``write`` testing with 10K inserts into the target keyspace
 
 On Node 1
 ```
-    $ docker exec -it cass-`hostname` cassandra-stress write n=10000                 \
-      cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"  \
-      "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log    \
-      -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress write n=10000                 \
+  cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"  \
+  "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log    \
+  -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
 On Node 2
 ```
-    $ docker exec -it cass-`hostname` cassandra-stress write n=10000                  \
-      cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"   \
-      "replication(factor=2)" -pop seq=10001..20000 -log file=~/Test_10Kwrite_002.log \ 
-      -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress write n=10000                  \
+  cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"   \
+  "replication(factor=2)" -pop seq=10001..20000 -log file=~/Test_10Kwrite_002.log \ 
+  -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
 On Node 3
 ```
-    $ docker exec -it cass-`hostname` cassandra-stress write n=10000                   \
-      cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01" \
-      "replication(factor=2)" -pop seq=20001..30000 -log file=~/Test_10Kwrite_003.log  \
-      -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress write n=10000                   \
+  cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01" \
+  "replication(factor=2)" -pop seq=20001..30000 -log file=~/Test_10Kwrite_003.log  \
+  -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
 The output of result on each node should be similar below:
 
 ```
-      $ docker exec -it cass-`hostname` cassandra-stress write n=10000 cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE" "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress write n=10000 cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE" "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
       ******************** Stress Settings ********************
       Command:
       Type: write
@@ -261,19 +261,19 @@ If the above Cassandra test is OK and completed without any issue, the number of
 Below is an example to insert 10 million objects into the target keyspace with threads ``>= 72``. When using threads ``>=72``, Cassandra Stress will run several cycles in threads 72, 108, 162, 243, 364, 546 and 819
 
 ```
-    $ docker exec -it cass-`hostname` cassandra-stress write n=10000000                 \
-      cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
-      "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mwrite_001.log    \
-      -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress write n=10000000                 \
+  cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
+  "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mwrite_001.log    \
+  -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
 After a write test, you can do a mixed test which is write/read; however a write test must be done before any mixed test:
 
 ```
-    $ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000                 \
-      cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
-      "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mmixed_001.log    \
-      -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+$ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000                 \
+  cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
+  "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mmixed_001.log    \
+  -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
 Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace, use different sequence to separate between each containers operation on the same keyspace.
