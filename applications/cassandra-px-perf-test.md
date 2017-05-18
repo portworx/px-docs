@@ -8,10 +8,11 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-# Testing Cassandra on PX
+# About this Guide
 This guide is to measure the performance of running Cassandra with PX volumes.  We use Docker directly on EC2 instances.  You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment (Kubernetes, Mesosphere or Swarm).
 
-Below is the instruction to test and verify Cassandra Performance with PX volumes in Docker environment without scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for PX cluster. 
+# Testing Cassandra on PX
+Below are the instructions to test and verify Cassandra's Performance with PX volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for PX cluster. 
 
 ## Setup for the test
 
