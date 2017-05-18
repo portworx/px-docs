@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Cassandra and Docker Deployments: A production Ops Guide"
+title: "A production Ops Guide to Deploying Cassandra"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/cassandra.html"
