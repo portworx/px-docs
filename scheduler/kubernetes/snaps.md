@@ -39,7 +39,7 @@ kind: PersistentVolumeClaim
            storage: 100Gi
 ```
 
-Note the bold faced “source” field.  This references the parent persistent volume claim.
+Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<old_volume_name>`.  This references the parent (source) persistent volume claim.
 
 Now run: 
 ```
@@ -47,7 +47,7 @@ Now run:
 ```
 
 ### Start a new POD or StatefulSet from a snapshot taken on demand
-Similar to the section above, you can also create a POD or a StatefulSet from a PVC that references another PVC with the  “source” parameter.  Doing so will create a new POD or StatefulSet that resumes the application from a snapshot of the current volume.
+Similar to the section above, you can also create a POD or a StatefulSet from a PVC that references another PVC with the “source” parameter.  Doing so will create a new POD or StatefulSet that resumes the application from a snapshot of the current volume.
 Rolling a POD or StatefulSet back  to an existing or previously taken snapshot.
 
 ### Rolling a POD back to a snapshot
@@ -66,7 +66,7 @@ kind: PersistentVolumeClaim
            storage: 100Gi   
 ```
 
-Note the bold faced “source” field.  This references a previous snapshot.  Now when you create a POD or a StatefulSet from this PVC, it will resume the application from a rolled back version.
+Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<snap_name>`.  This references a previous snapshot.  Now when you create a POD or a StatefulSet from this PVC, it will resume the application from a rolled back version.
 You can also create a POD or a StatefulSet that directly references a PV created from a snapshot via kubectl.
 
 ## Managing snapshots through `pxctl`

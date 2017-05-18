@@ -10,6 +10,7 @@ redirect_from: "/cli-reference.html"
 {:toc}
 
 ### Volume Operations
+You would normally use your scheduler, such as Kubernetes via `kubectl`, DCOS or Docker to create and manage your volumes.  However, `pxctl` provides a more storage-administrator centric way of performing operations on the volumes in your cluster.
 
 Additional help on each command can be found via pxctl {command name} help
 
