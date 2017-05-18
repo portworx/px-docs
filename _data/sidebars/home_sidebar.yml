@@ -42,6 +42,8 @@
           url: /scheduler/mesosphere-dcos/kafka.html   
       - title: How To
         folderitems:
+        - title: Dynamically creating volumes
+          url: /scheduler/mesosphere-dcos/inline.html
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
