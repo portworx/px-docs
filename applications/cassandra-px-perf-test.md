@@ -1,4 +1,15 @@
+---
+layout: page
+title: "Cassandra Stress Test with Portworx"
+keywords: portworx, px-enterprise, cassandra, databases, performance
+sidebar: home_sidebar
+---
+
+* TOC
+{:toc}
+
 # Running Cassandra Stress Test with Portworx
+This guide is to measure the performance of running Cassandra with PX volumes.  We use Docker directly on EC2 instances.  You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment (Kubernetes, Mesosphere or Swarm).
 
 Below is the instruction to test and verify Cassandra Performance with PX volumes in Docker environment without scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for PX cluster. 
 
@@ -6,75 +17,84 @@ Below is the instruction to test and verify Cassandra Performance with PX volume
 
 In each of the AWS instance launch PX container and specify the etcd IP e.g. ``172.31.45.219`` and disk volume e.g.`` /dev/xvdb``
 
-       $ docker run --restart=always --name px -d --net=host      \
-                    --privileged=true                             \
-                    -v /run/docker/plugins:/run/docker/plugins    \
-                    -v /var/lib/osd:/var/lib/osd:shared           \
-                    -v /dev:/dev                                  \
-                    -v /etc/pwx:/etc/pwx                          \
-                    -v /opt/pwx/bin:/export_bin:shared            \
-                    -v /var/run/docker.sock:/var/run/docker.sock  \
-                    -v /var/cores:/var/cores                      \
-                    -v /usr/src:/usr/src                          \
-                    --ipc=host                                    \
-                    portworx/px-enterprise -daemon -k etcd://172.31.45.219:4001 -c PXCassTest001 -s /dev/xvdb
-
-
+```
+$ docker run --restart=always --name px -d --net=host      \
+             --privileged=true                             \
+             -v /run/docker/plugins:/run/docker/plugins    \
+             -v /var/lib/osd:/var/lib/osd:shared           \
+             -v /dev:/dev                                  \
+             -v /etc/pwx:/etc/pwx                          \
+             -v /opt/pwx/bin:/export_bin:shared            \
+             -v /var/run/docker.sock:/var/run/docker.sock  \
+             -v /var/cores:/var/cores                      \
+             -v /usr/src:/usr/src                          \
+             --ipc=host                                    \
+             portworx/px-enterprise -daemon -k etcd://172.31.45.219:4001 -c PXCassTest001 -s /dev/xvdb
+```
     
-Once PX cluster created; create three PX volumes with size=60GB that is local to each node. On each of the AWS instance run pxctl command
+Once the PX cluster is created, create three PX volumes with `size=60GB` that is local to each node. On each of the AWS instance run the following `pxctl` command:
+```
+$ /opt/pwx/bin/pxctl volume create CVOL-`hostname` --size 60 --nodes LocalNode
+```
 
-         
-      $ /opt/pwx/bin/pxctl volume create CVOL-`hostname` --size 60 --nodes LocalNode
+Verify the created PX volumes:
+```
+$ /opt/pwx/bin/pxctl volume list
+ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
+999260470129557090      CVOL-ip-172-31-32-188   60 GiB  1       no      no              LOW             1       up - detached
+973892635505817385      CVOL-ip-172-31-45-219   60 GiB  1       no      no              LOW             1       up - detached
+446982770798983273      CVOL-ip-172-31-47-121   60 GiB  1       no      no              LOW             1       up - detached
+```
 
-Verify the created PX volumes
+Create Cassandra container(s) using the created PX volumes. In our test case; we have three AWS instances.
 
-      $ /opt/pwx/bin/pxctl v l
-      ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-      999260470129557090      CVOL-ip-172-31-32-188   60 GiB  1       no      no              LOW             1       up - detached
-      973892635505817385      CVOL-ip-172-31-45-219   60 GiB  1       no      no              LOW             1       up - detached
-      446982770798983273      CVOL-ip-172-31-47-121   60 GiB  1       no      no              LOW             1       up - detached
+Set IP addresse variables of the three nodes on each instance:
+```
+$ NODE_1_IP=172.31.32.188
+$ NODE_2_IP=172.31.45.219
+$ NODE_3_IP=172.31.47.121
+```
 
-Create Cassandra container(s) using the created PX volumes. In our test case; we have three AWS instances. 
-Set IP addresse variables of the three nodes on each instance.
+>**Note:**<br/>Download [the ``cassandra_conf.tar`` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000 instead of 7000.  The reason to use custom cassandra.yaml file is because as of this writing, PX is occupying the port 7000, and the default Cassandra data and storage port is also on port 7000. Use this custom cassandra configuration to avoid this conflict.  Download the cassandra_conf.tar file and extract it on ``/etc`` folder.
+>This step is not required if you are running with Kubernets or Mesosphere.
 
-     $ NODE_1_IP=172.31.32.188
-     $ NODE_2_IP=172.31.45.219
-     $ NODE_3_IP=172.31.47.121
+For each AWS instance do a docker run and launch the Cassandra latest version Docker container.
 
-Download [the ``cassandra_conf.tar`` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) which includes cassandra.yaml file which is using TCP port 17000  instead of 7000. The reason to use custom cassandra.yaml file is because as of this writing, portworx px-ns is occupying the port 7000, and default Cassandra data and storage port is also on port 7000. The px-ns will soon change to a different port; but to continue the testing, use the custom cassandra conf folder. Download the cassandra_conf.tar file and extract it on ``/etc`` folder
+On Node 1:
 
-For each AWS instance do docker run and launch the Cassandra latest version Docker container.
+```
+$ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
+              -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
+              -v /etc/cassandra:/etc/cassandra                                         \
+              -v CVOL-`hostname`:/var/lib/cassandra                                    \
+              -d cassandra:latest
+```
 
-On Node 1
+On Node 2:
+```
+$ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
+              -e CASSANDRA_SEEDS=${NODE_1_IP}                                          \
+              -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
+              -v /etc/cassandra:/etc/cassandra                                         \ 
+              -v CVOL-`hostname`:/var/lib/cassandra                                    \
+              -d cassandra:latest
+```
 
-      $ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
-                    -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
-                    -v /etc/cassandra:/etc/cassandra                                         \
-                    -v CVOL-`hostname`:/var/lib/cassandra                                    \
-                    -d cassandra:latest
-
-On Node 2
-
-      $ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
-                    -e CASSANDRA_SEEDS=${NODE_1_IP}                                          \
-                    -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
-                    -v /etc/cassandra:/etc/cassandra                                         \ 
-                    -v CVOL-`hostname`:/var/lib/cassandra                                    \
-                    -d cassandra:latest
-
-On Node 3
-
-      $ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
-                    -e CASSANDRA_SEEDS=${NODE_1_IP},${NODE_3_IP}                             \
-                    -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
-                    -v /etc/cassandra:/etc/cassandra                                         \
-                    -v CVOL-`hostname`:/var/lib/cassandra                                    \
-                    -d cassandra:latest
+On Node 3:
+```
+$ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
+              -e CASSANDRA_SEEDS=${NODE_1_IP},${NODE_3_IP}                             \
+              -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
+              -v /etc/cassandra:/etc/cassandra                                         \
+              -v CVOL-`hostname`:/var/lib/cassandra                                    \
+              -d cassandra:latest
+```
 
 
-After all three Cassandra containers started, verify the status from one of the node by ``nodetool status``
+After all three Cassandra containers started, verify the status from one of the nodes by running ``nodetool status``
 
-     $ docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
+```
+$ docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
      Datacenter: datacenter1
      =======================
      Status=Up/Down
@@ -83,36 +103,39 @@ After all three Cassandra containers started, verify the status from one of the 
      UN  172.31.32.188  108.65 KiB  256          65.7%             7aa8a83e-1378-4aa1-b9d2-3008b3550b69  rack1
      UN  172.31.45.219  84.33 KiB  256           66.0%             b455c82e-9649-4724-adf1-dae09ec2c616  rack1
      UN  172.31.47.121  108.29 KiB  256          68.3%             26ffac02-2975-4921-b5d0-54f3274bfe84  rack1
+```
 
 ## Running the test
 
 Run Cassandra stress ``write`` testing with 10K inserts into the target keyspace ``TestKEYSPACE`` and 4 threads ``-rate threads=4``. On each node, start the Cassandra stress test about the same time. Below each node's Cassandra container is inserting object into the same keyspace but at different sequence `` e.g. 1 .. 10000``.
 
-
 On Node 1
-
+```
     $ docker exec -it cass-`hostname` cassandra-stress write n=10000                 \
       cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"  \
       "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log    \
       -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+```
 
 On Node 2
-
+```
     $ docker exec -it cass-`hostname` cassandra-stress write n=10000                  \
       cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE01"   \
       "replication(factor=2)" -pop seq=10001..20000 -log file=~/Test_10Kwrite_002.log \ 
       -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+```
 
 On Node 3
-
+```
     $ docker exec -it cass-`hostname` cassandra-stress write n=10000                   \
       cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01" \
       "replication(factor=2)" -pop seq=20001..30000 -log file=~/Test_10Kwrite_003.log  \
       -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+```
 
+The output of result on each node should be similar below:
 
-The output of result on each node should be similar like below
-
+```
       $ docker exec -it cass-`hostname` cassandra-stress write n=10000 cl=quorum -mode native cql3 -rate threads=4 -schema keyspace="TestKEYSPACE" "replication(factor=2)" -pop seq=1..10000 -log file=~/Test_10Kwrite_001.log -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
       ******************** Stress Settings ********************
       Command:
@@ -230,27 +253,26 @@ The output of result on each node should be similar like below
     Total operation time      : 00:00:03
 
     END
-
+```
 
 If the above Cassandra test is OK and completed without any issue, the number of inserted objects and threads can be adjusted in such way to produce more accurate result.
 
-
 Below is an example to insert 10 million objects into the target keyspace with threads ``>= 72``. When using threads ``>=72``, Cassandra Stress will run several cycles in threads 72, 108, 162, 243, 364, 546 and 819
 
+```
     $ docker exec -it cass-`hostname` cassandra-stress write n=10000000                 \
       cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
       "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mwrite_001.log    \
       -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
+```
 
-After a write test, you can do a mixed test which is write/read; however a write test must be done before any mixed test
+After a write test, you can do a mixed test which is write/read; however a write test must be done before any mixed test:
 
+```
     $ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000                 \
       cl=quorum -mode native cql3 -rate threads\>=72 -schema keyspace="TestKEYSPACE01"  \
       "replication(factor=2)" -pop seq=1..10000000 -log file=~/Test_10Mmixed_001.log    \
       -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
-
+```
 
 Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace, use different sequence to separate between each containers operation on the same keyspace.
-
-
-
