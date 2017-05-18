@@ -12,22 +12,22 @@
       folderitems:
       - title: Install
         url: /scheduler/kubernetes/install.html
-      - title: Examples
+      - title: How To
         folderitems:
-        - title: Storage Class
-          url: /scheduler/kubernetes/storage-class.html
-        - title: Dynamic Provisioning
-          url: /scheduler/kubernetes/dynamic-provisioning.html
-        - title: Preprovisioned Volumes
-          url: /scheduler/kubernetes/preprovisioned-volumes.html
-        - title: Mount Snapshot to Pod
-          url: /scheduler/kubernetes/mount-snapshot-to-pod.html
-        - title: Failover
-          url: /scheduler/kubernetes/failover.html
-        - title: Scheduler Convergence
-          url: /scheduler/kubernetes/scheduler-convergence.html
-        - title: Statefulsets
+        - title: Create PVCs
+          folderitems:
+          - title: Dynamic Provisioning
+            url: /scheduler/kubernetes/dynamic-provisioning.html
+          - title: Using Pre-provisioned Volumes
+            url: /scheduler/kubernetes/preprovisioned-volumes.html
+        - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
+        - title: Create a PVC from a snapshot
+          url: /scheduler/kubernetes/snaps.html
+        - title: Test Failover
+          url: /scheduler/kubernetes/failover.html
+        - title: Run Hyper Converged
+          url: /scheduler/kubernetes/scheduler-convergence.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -40,7 +40,7 @@
           url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html   
-      - title: Examples
+        - title: How To
         folderitems:
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
@@ -48,28 +48,30 @@
       folderitems:
       - title: Install
         url: /scheduler/docker/install.html
-      - title: Swarm
-        url: /scheduler/docker/swarm.html
-      - title: UCP
-        url: /scheduler/docker/ucp.html
+      - title: How To
+        folderitems:
+        - title: Create and Manage Data Volumes
+          url: /scheduler/docker/volumes.html
+        - title: Test with Swarm
+          url: /scheduler/docker/swarm.html
+        - title: Starting PX via systemd
+          url: /scheduler/docker/systemd.html
     - title: Rancher
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
-  - title: Data Volumes
+  - title: About Data Volumes
     folderitems:
-    - title: Create and Manage Data Volumes
-      url: /manage/create-and-manage.html
     - title: Shared Volumes
       url: /manage/shared-volumes.html
-    - title: Class of Service
-      url: /manage/class-of-service.html
     - title: Snapshots
       url: /manage/snapshots.html
     - title: Updating Volumes
       url: /manage/volume-update.html
     - title: Encrypted Volumes
       url: /manage/encrypted-volumes.html
+    - title: Class of Service
+      url: /manage/class-of-service.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS
@@ -151,7 +153,11 @@
       - title: MySQL
         url: /applications/mysql.html
       - title: Cassandra
-        url: /applications/cassandra.html
+        folderitems:
+        - title: Deployment
+          url: /applications/cassandra.html
+        - title: Measuring Performance
+          url: /applications/cassandra-px-perf-test.html
       - title: PostgreSQL
         url: /applications/postgres.html
     - title: Messaging 
@@ -174,12 +180,6 @@
         url: /applications/docker-compose.html
       - title: Jenkins with Portworx
         url: /applications/jenkins.html
-  - title: Reference Architectures
-    folderitems:
-    - title: Portworx on Docker Data Center
-      url: /reference-architecture/docker-datacenter.html
-    - title: Running with an SDN
-      url: /reference-architecture/sdn.html
   - title: Lighthouse
     folderitems:
     - title: Manage PX via Lighthouse
@@ -194,6 +194,8 @@
       url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
     folderitems:
+    - title: Running with an SDN
+      url: /knowledgebase/sdn.html
     - title: Shared Mount Propogation
       url: /knowledgebase/shared-mount-propogation.html
     - title: SELinux

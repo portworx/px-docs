@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Run Portworx with Docker Swarm"
+title: "Deploy stateful applications with Docker Swarm"
 keywords: portworx, container, storage, Docker, swarm
 sidebar: home_sidebar
 redirect_from: "/run-with-docker-swarm.html"
@@ -13,9 +13,6 @@ You can use Portworx to provide storage for your Docker Swarm services. Portworx
 
 Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/).
 
-### Deploy PX container
-Refer to [Run with Docker](/install/docker.html) to deploy the Portworx container & create a cluster.
-
 ### Create a volume
 ```
 docker volume create -d pxd --name jenkins_vol --opt \
@@ -25,11 +22,9 @@ docker volume create -d pxd --name jenkins_vol --opt \
 * This volume has a replication factor of _3_, which means that the data will be protected on 3 separate nodes.
 * Also the volume is shared so multiple swarm nodes can have shared access
 
-### Add labels on Swarm nodes
-
-First, get the replica set for the _jenkins_vol_ using the `pxctl` CLI.
+You can inspect the _jenkins_vol_ volume using the `pxctl` CLI:
 ```
-sudo /opt/pwx/bin/pxctl volume inspect jenkins_vol
+# sudo /opt/pwx/bin/pxctl volume inspect jenkins_vol
 
     Volume : 27052673284397061
     Name : jenkins_vol
@@ -56,13 +51,10 @@ sudo /opt/pwx/bin/pxctl volume inspect jenkins_vol
             Node : 192.168.56.105
 ```
 
-For each node you see in the replica sets section of the above output, find the corresponding Docker Swarm node. You can use 
-`docker node ls` and `docker node inspect` commands for this purpose.
+You can see that PX has now placed node labels on the nodes where this volume can be used in hyperconverged mode (where the container runs local to it's data volume):
 
-
-Once you find the nodes, add a label to each of those nodes as below.
 ```
-docker node update --label-add jenkins_vol=true <node_id>
+# docker node ls
 ```
 The label `jenkins_vol=true` implies that the node hosts volume _jenkins_vol's_ data.
 
@@ -71,7 +63,7 @@ We will now create a Jenkins service using the newly created volume.
 
 We will use service constraints to influence on which worker node Swarm schedules a container (task) based on the container volume's data location.
 ```
-docker service create --name jenkins \
+# docker service create --name jenkins \
          --replicas 3 \
          --publish 8082:8080 \
          --publish 50000:50000 \

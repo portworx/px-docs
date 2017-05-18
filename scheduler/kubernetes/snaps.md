@@ -1,15 +1,75 @@
 ---
 layout: page
-title: "Mount snapshot to pod"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+title: "Creating a PVC from a Snapshot"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots
 sidebar: home_sidebar
 ---
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.  It uses MySQL as an example. 
 
-## Create a snapshot and mount the snapshot to a new mysql pod
+## Managing snapshots through `kubectl`
 
-### Using the pxctl CLI to create snaps of your mysql volume
+### Taking periodic snapshots on a running POD
+When you create the Storage Class, you can specify a snapshot schedule on the volume as specified below:
+```yaml
+    kind: StorageClass
+     apiVersion: storage.k8s.io/v1beta1
+     metadata:
+       name: portworx-io-priority-high
+     provisioner: kubernetes.io/portworx-volume
+     parameters:
+       repl: "1"
+       snap_interval:   "24"
+       io_priority:  "high"
+```
+
+### Creating a snapshot on demand
+You can also trigger a new snapshot on a runnig POD by creating a PersitentVolumeClaim as specified in the following `snap.yaml`:
+
+```yaml
+kind: PersistentVolumeClaim
+     apiVersion: v1
+     metadata:
+       name: name.snap001-source.pvcsc001
+       annotations:
+         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+     spec:
+       resources:
+         requests:
+           storage: 100Gi
+```
+
+Note the bold faced “source” field.  This references the parent persistent volume claim.
+
+Now run: 
+```
+# kubectl create -f snap.yaml
+```
+
+### Start a new POD or StatefulSet from a snapshot taken on demand
+Similar to the section above, you can also create a POD or a StatefulSet from a PVC that references another PVC with the  “source” parameter.  Doing so will create a new POD or StatefulSet that resumes the application from a snapshot of the current volume.
+Rolling a POD or StatefulSet back  to an existing or previously taken snapshot.
+
+### Rolling a POD back to a snapshot
+To rollback a POD or a StatefulSet back to a previous snapshot, create a new Persistent Volume Claim as follows:
+
+```yaml
+kind: PersistentVolumeClaim
+     apiVersion: v1
+     metadata:
+       name: name.rollback001-source.snap001
+       annotations:
+         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+     spec:
+       resources:
+         requests:
+           storage: 100Gi   
+```
+
+Note the bold faced “source” field.  This references a previous snapshot.  Now when you create a POD or a StatefulSet from this PVC, it will resume the application from a rolled back version.
+You can also create a POD or a StatefulSet that directly references a PV created from a snapshot via kubectl.
+
+## Managing snapshots through `pxctl`
 
 To demonstrate the capabilities of the SAN like functionality offered by portworx, try creating a snapshot of your mysql volume.
 

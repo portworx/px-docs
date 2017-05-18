@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Cassandra and Docker Deployments: A production Ops Guide"
+title: "A Production Ops Guide to Deploying Cassandra"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/cassandra.html"
@@ -99,10 +99,10 @@ To create storage volumes for each instance, run the following command on each s
 
 >**Note:**<br/>Chose a Portworx replication factor based on the strategies listed above.
 
-```
-# docker volume create -d pxd --name cassandra_volume --opt \
-    size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4
-```
+
+     # docker volume create -d pxd --name cassandra_volume --opt \
+     size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4
+
 
 Step 2: Start the Cassandra Docker image on node 1
 
@@ -112,12 +112,12 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
 
 >**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](/knowledgebase/troubleshooting.html) parameter between `run` and `--name`.
 
-```
-# docker run --name cassandra1 -d \
-    -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
-    -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.1 \
-    -v cassandra_volume:/var/lib/cassandra cassandra:latest
-```
+
+      # docker run --name cassandra1 -d \
+      -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
+      -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.1 \
+      -v cassandra_volume:/var/lib/cassandra cassandra:latest
+
 
 Step 3: Start Cassandra on the other nodes
 
@@ -127,26 +127,23 @@ Be sure to change the IP addresses in the following examples to the ones used by
 
 Start Cassandra on node 2
 
-```
-# docker run --name cassandra2 -d \
-    -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
-    -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.2 \
-    -e CASSANDRA_SEEDS=10.0.0.1 \
-    -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
-```
+      # docker run --name cassandra2 -d \
+     -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
+     -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.2 \
+     -e CASSANDRA_SEEDS=10.0.0.1 \
+     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
+
 
 Start Cassandra on node 3
 
-```
-# docker run --name cassandra3 -d \
-    -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
-    -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.3 \
-    -e CASSANDRA_SEEDS=10.0.0.1 \
-    -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
-```
+      # docker run --name cassandra3 -d \
+     -p 7000:7000 -p 7001:7001 -p 9042:9042 -p 9160:9160 \
+     -e CASSANDRA_BROADCAST_ADDRESS=10.0.0.3 \
+     -e CASSANDRA_SEEDS=10.0.0.1 \
+     -v [DOCKER_CREATE_VOLUME_ID]:/var/lib/cassandra cassandra:latest
+
 
 Use the `nodetool` status command to determine the state of your Cassandra cluster.
 
-```
-# docker exec -it cassandra1 nodetool status
-```
+      # docker exec -it cassandra1 nodetool status
+

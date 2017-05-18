@@ -45,7 +45,6 @@ ExecStop=/usr/bin/docker stop -t 10 %n
 WantedBy=multi-user.target
 ```
 
-
 You must edit the above template to provide the cluster and node initialization options.  Provide one of the following examples as command line arguments positioned after “px-enterprise”:
 
 ```bash

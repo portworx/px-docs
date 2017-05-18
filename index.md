@@ -33,7 +33,7 @@ Portworx storage runs in a cluster of server nodes.
 
 Each server has the Portworx container and the Docker daemon.
 Servers join a cluster and share configuration through PX-Enterprise or the key/value store, such as etcd.
-The Portworx container pools the capacity of the storage media residing on the server. You easily select storage media through the [config.json](https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json) file.
+The Portworx container pools the capacity of the storage media residing on the server.
 
 ![Portworx cluster architecture](/images/cluster-architecture.png "Portworx cluster architecture"){:width="442px" height="492px"}
 
@@ -50,6 +50,28 @@ Using MySQL as an example, a Portworx storage cluster has the following characte
 Each volume specifies its request of resources (such as its max capacity and IOPS) and its individual requirements (such as ext4 as the file system and block size).
 
 Using IOPS as an example, a team can choose to set the MySQL container to have a higher IOPS than an offline batch processing container. Thus, a container scheduler can move containers, without losing storage and while protecting the user experience.
+
+## Minimum Requirements
+
+* Linux kernel 3.10 or greater
+* Docker 1.10 or greater.
+* Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
+  * Run sudo mount --make-shared / in your SSH window
+  * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
+* A key/value store such as Etcd 2.0 or Consul 0.7.0
+* Minimum resources per server:
+  * 4 CPU cores
+  * 4 GB RAM
+* Recommended resources per server:
+  * 12 CPU cores
+  * 16 GB RAM
+  * 128 GB Storage
+  * 10 GB Ethernet NIC
+* Maximum nodes per cluster:
+  * Unlimited for the Enterprise License
+  * 3 for the Developer License
+* Open network ports:
+  * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
 
 ## Install
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
