@@ -20,10 +20,10 @@
             url: /scheduler/kubernetes/dynamic-provisioning.html
           - title: Using Pre-provisioned Volumes
             url: /scheduler/kubernetes/preprovisioned-volumes.html
+          - title: Create PVCs from snapshots
+            url: /scheduler/kubernetes/snaps.html
         - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
-        - title: Create a PVC from a snapshot
-          url: /scheduler/kubernetes/snaps.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
@@ -40,10 +40,10 @@
           url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html   
-        - title: How To
-          folderitems:
-          - title: Scaling stateful applications
-            url: /scheduler/mesosphere-dcos/volume-scaling.html
+      - title: How To
+        folderitems:
+        - title: Scaling stateful applications
+          url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
       - title: Install
