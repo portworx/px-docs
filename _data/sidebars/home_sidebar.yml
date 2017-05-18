@@ -151,7 +151,11 @@
       - title: MySQL
         url: /applications/mysql.html
       - title: Cassandra
-        url: /applications/cassandra.html
+        folderitems:
+        - title: Deployment
+          url: /applications/cassandra.html
+        - title: Measuring Performance
+          url: /applications/cassandra-px-perf-test.html
       - title: PostgreSQL
         url: /applications/postgres.html
     - title: Messaging 
