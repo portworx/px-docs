@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A production Ops Guide to Deploying Cassandra"
+title: "A Production Ops Guide to Deploying Cassandra"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/cassandra.html"
