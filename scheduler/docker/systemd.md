@@ -1,9 +1,8 @@
 ---
 layout: page
-title: "PX-Enterprise deployment via templates and 'systemd'"
+title: "Start PX via 'systemd' and templates"
 keywords: systemd automate
 sidebar: home_sidebar
-redirect_from: "/run-with-systemd.html"
 ---
 
 If you are creating a template image - be it an AWS AMI or a Virtual Machine Image - This reference outlines the best practices to automate the provisioning of a multinode PX cluster by creating a base image via `systemd`:
@@ -80,6 +79,6 @@ Once you create systemd unit file, be sure to enable this unit by running:
 
 At this point your machine image is ready to be saved and cloned.  You can launch a multiple of these images and each initial execution of the machine will cause PX to initialize the node and join the provided cluster.  Subsequent boots will simply cause PX to join as an existing node.
 
->**Note:**Do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image and not portable to the clones.
+>**Note:** Do NOT start PX on your master image.  If you do that, then PX will create a configuration file which will permanently become part of your master image and not portable to the clones.
 
->**Note:**If other systemd service contain "Wants=portworx.service", then those services will be restarted anytime that a restart is done on the portworx.service.   In order to avoid this, any dependent services should be launched through a scheduler such as Mesos or Kubernetes.
+>**Note:** If other systemd service contain "Wants=portworx.service", then those services will be restarted anytime that a restart is done on the portworx.service.   In order to avoid this, any dependent services should be launched through a scheduler such as Mesos or Kubernetes.
