@@ -33,19 +33,6 @@ No new features in 1.2.1. This is a patch release.
 * Add compatbility for Linux 4.10+ kernels
 
 
-## 1.2.1 Release notes
-
-### Key Features
-
-No new features in 1.2.1. This is a patch release.
-
-### Key Issues Addressed
-
-* Fix issues with pod failovers with encrypted volumes
-* Improve performance with remote volume mounts
-* Add compatbility for Linux 4.10+ kernels
-
-
 ## 1.2 Release notes
 
 ### Key Features
