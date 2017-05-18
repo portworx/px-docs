@@ -41,9 +41,9 @@
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html   
         - title: How To
-        folderitems:
-        - title: Scaling stateful applications
-          url: /scheduler/mesosphere-dcos/volume-scaling.html
+          folderitems:
+          - title: Scaling stateful applications
+            url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
       - title: Install
