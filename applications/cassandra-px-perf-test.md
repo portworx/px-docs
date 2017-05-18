@@ -84,7 +84,7 @@ $ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i
 On Node 3:
 ```
 $ docker run  --name cass-`hostname` -e CASSANDRA_BROADCAST_ADDRESS=`hostname -i`      \
-              -e CASSANDRA_SEEDS=${NODE_1_IP},${NODE_3_IP}                             \
+              -e CASSANDRA_SEEDS=${NODE_1_IP},${NODE_2_IP}                             \
               -p 17000:17000 -p 7001:7001 -p 9042:9042 -p 9160:9160 -p 7199:7199       \
               -v /etc/cassandra:/etc/cassandra                                         \
               -v CVOL-`hostname`:/var/lib/cassandra                                    \
@@ -258,7 +258,7 @@ $ docker exec -it cass-`hostname` cassandra-stress write n=10000 cl=quorum -mode
 
 If the above Cassandra test is OK and completed without any issue, the number of inserted objects and threads can be adjusted in such way to produce more accurate result.
 
-Below is an example to insert 10 million objects into the target keyspace with threads ``>= 72``. When using threads ``>=72``, Cassandra Stress will run several cycles in threads 72, 108, 162, 243, 364, 546 and 819
+Below is an example to insert 10 million objects into the target keyspace with threads ``>= 72``. When using threads ``>=72``, Cassandra Stress will run several cycles in threads ``72, 108, 162, 243, 364, 546 and 819``
 
 ```
 $ docker exec -it cass-`hostname` cassandra-stress write n=10000000                 \
@@ -276,6 +276,6 @@ $ docker exec -it cass-`hostname` cassandra-stress mixed n=10000000             
   -node ${NODE_1_IP},${NODE_2_IP},${NODE_3_IP}
 ```
 
-Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace, use different sequence to separate between each containers operation on the same keyspace.
+Generally Cassandra stress test should be run on every Cassandra containers about the same time to increase the load. And using the same keyspace on the same test run, requires to use different ``sequence`` to separate between each containers operation on the same keyspace ``(e.g.  1..10000 and 10001..20000 and so on)``.
 
 
