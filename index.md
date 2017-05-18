@@ -67,6 +67,9 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
   * 16 GB RAM
   * 128 GB Storage
   * 10 GB Ethernet NIC
+* Maximum nodes per cluster:
+  * Unlimited for the Enterprise License
+  * 3 for the Developer License
 * Open network ports:
   * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
 
