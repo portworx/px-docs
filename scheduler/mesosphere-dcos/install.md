@@ -59,6 +59,8 @@ You can also change the number of etcd nodes in the etcd cluster.
 ### Lighthouse options
 By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
 
+You will need to enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse after install is complete. The default password is `admin` which can be changed after login.
+
 ![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
 
 Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the
