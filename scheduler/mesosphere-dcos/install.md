@@ -126,7 +126,7 @@ To do so, run the following marathon application
     }
   ],
   "env": {
-    "PROXY_ENDPOINT_0": "Lighthouse,http,lighthouse-0-start,mesos,80,/,/"
+    "PROXY_ENDPOINT_0": "Lighthouse,http,lighthouse-0-start,mesos,8085,/,/"
   }
 }
 ```
