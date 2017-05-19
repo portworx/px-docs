@@ -42,11 +42,11 @@
           url: /scheduler/mesosphere-dcos/kafka.html   
         - title: Elasticsearch
           url: /scheduler/mesosphere-dcos/elasticsearch.html
-       - title: How To
-         folderitems:
-         - title: Dynamically creating volumes
+      - title: How To
+        folderitems:
+        - title: Dynamically creating volumes
           url: /scheduler/mesosphere-dcos/inline.html
-         - title: Scaling stateful applications
+        - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
     - title: Docker
       folderitems:
