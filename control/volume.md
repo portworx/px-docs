@@ -71,18 +71,18 @@ OPTIONS:
    --nodes value                        comma-separated Node Id(s)
  ```
  
-Here is an example of how to create a shared volume with replication factor set to 3
+Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
-sudo /opt/pwx/bin/pxctl volume create clitest1 --shared --size=1 --repl=3
+sudo /opt/pwx/bin/pxctl volume create clitest1 --size=10 --repl=3
 ```
 If the command succeeds, it will print the following.
 ```
-Shared volume successfully created: 508499868375963168
+Volume successfully created: 508499868375963168
 ```
 
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
 ```
-sudo /opt/pwx/bin/pxctl volume create clihigh --shared --size=1 --repl=3 --iopriority=high
+sudo /opt/pwx/bin/pxctl volume create clihigh --size=1 --repl=3 --iopriority=high
 ```
 
 For creating an aggregated volume, use the following command.
@@ -92,12 +92,12 @@ sudo /opt/pwx/bin/pxctl volume create cliaggr --size=1 --repl=2 --aggregation_le
 
 If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
 ```
-sudo /opt/pwx/bin/pxctl volume create cliscale --shared --size=1 --repl=3 --sticky
+sudo /opt/pwx/bin/pxctl volume create cliscale --size=1 --repl=3 --sticky
 ```
 
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven environments. 
 ```
-sudo /opt/pwx/bin/pxctl volume create cliscale1 --shared --size=1 --repl=3 --scale=100
+sudo /opt/pwx/bin/pxctl volume create cliscale1 --size=1 --repl=3 --scale=100
 ```
 
 
@@ -115,7 +115,7 @@ sudo /opt/pwx/bin/pxctl volume list
 ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 1130856252740468850	cliscale1	1 GiB	3	no	no		LOW		100	up - detached
 1131486256496535679	cliscale	1 GiB	3	no	no		LOW		1	up - detached
-970758537931791410	clitest1	1 GiB	3	yes	no		LOW		1	up - detached
+970758537931791410	clitest1	1 GiB	3	no	no		LOW		1	up - detached
 1020258566431745338	clihigh  	1 GiB	1	no	no		HIGH		1	up - detached
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
 1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
