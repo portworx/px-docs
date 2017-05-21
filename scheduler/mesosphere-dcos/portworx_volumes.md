@@ -42,9 +42,8 @@ See https://github.com/portworx/px-docs/blob/gh-pages/scheduler/mesosphere-dcos/
 
 #### Portworx dcos-commons fork
 
-Portworx fork to dcos-commons allows use of DOCKER volumes in pods.
-Added the following config values that can be specified in the yaml file for
-pods:
+Portworx [fork to dcos-commons[(https://github.com/portworx/dcos-commons) allows use of DOCKER volumes in pods.
+The following config values that can be specified in the yaml file for pods:
   - docker_volume_driver: Docker driver to be used to mount volumes
   - docker_volume_name: Name of the volume to be used
   - docker_driver_options: Command separated key=value options to be passed to the docker driver
