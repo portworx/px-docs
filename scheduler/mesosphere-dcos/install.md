@@ -138,6 +138,7 @@ You can then access the Lighthouse WebUI on http://\<public_agent_IP\>:9998.
 If your public agent is behind a firewall you will also need to open up two ports, 9998 and 9999.
 
 ### Login Page
+The default username/password is portworx@yourcompany.com/admin
 ![Lighthouse Login Page](/images/dcos-px-lighthouse-login.png){:width="655px" height="200px"}
 
 ### Dashboard
