@@ -37,9 +37,10 @@ $ dcos package install --yes portworx
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
 This will install all the prerequisites and start the Portworx service on 3 private agents.
+The default login/password for lighthouse would be portworx@yourcompany.com/admin
 
 ### Advanced Install
-If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on
+If you want to modify the defaults, click on the “Install” button next to the package on the DCOS UI and then click on
 “Advanced Installation”
 
 Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to
@@ -49,7 +50,8 @@ use the WebUI.
 ### Portworx Options
 Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
 is enabled this config value will be ignored.
-If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest
+If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest.
+With PX Enterprise you can increase the number of nodes in the PX Cluster to a value greater than 3.
 ![Portworx Install options](/images/dcos-px-install-options-1.png){:width="655px" height="200px"}
 
 ### Etcd Options
@@ -59,7 +61,8 @@ You can also change the number of etcd nodes in the etcd cluster.
 ### Lighthouse options
 By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
 
-You will need to enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse after install is complete. The default password is `admin` which can be changed after login.
+You can enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse
+after install is complete. The default password is `admin` which can be changed after login.
 
 ![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
 
@@ -134,4 +137,14 @@ To do so, run the following marathon application
 You can then access the Lighthouse WebUI on http://\<public_agent_IP\>:9998.
 If your public agent is behind a firewall you will also need to open up two ports, 9998 and 9999.
 
+### Login Page
+![Lighthouse Login Page](/images/dcos-px-lighthouse-login.png){:width="655px" height="200px"}
 
+### Dashboard
+![Lighthouse Dashboard](/images/dcos-px-lighthouse-dashboard.png){:width="655px" height="200px"}
+
+## Scaling Portworx Nodes
+
+If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the NODE
+COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes which
+didn't have it previously.
