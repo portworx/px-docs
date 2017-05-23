@@ -143,8 +143,10 @@ If your public agent is behind a firewall you will also need to open up two port
 ### Dashboard
 ![Lighthouse Dashboard](/images/dcos-px-lighthouse-dashboard.png){:width="655px" height="200px"}
 
-## Scaling Portworx Nodes
+## Scaling Up Portworx Nodes
 
-If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the NODE
-COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes which
-didn't have it previously.
+If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the 
+NODE_COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes 
+which didn't have it previously.
+
+![Scale up PX Nodes](/images/dcos-px-scale-up.png){:width="655px" height="200px"}
