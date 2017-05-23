@@ -11,6 +11,9 @@ redirect_from: "/portworx-on-aws-asg.html"
 
 This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
 
+# About Stateful Auto Scaling
+In order to determine if stateful auto scaling is needed in your environment, read [this blog](https://portworx.com/auto-scaling-groups-ebs-docker/) to get an overview of what this feature does.
+
 # Configure the Auto Scaling Group
 Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
 
