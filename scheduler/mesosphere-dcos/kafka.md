@@ -13,7 +13,9 @@ Since the stateful services in DCOS universe do not have support for external vo
 repositories to your DCOS cluster to install the services mentioned here. 
 
 The source code for these services can be found here: https://github.com/portworx/dcos-commons
-This is a fork from [Mesos DCOS-commons framework](https://github.com/mesosphere/dcos-commons) and we will pull in updates from there regularly.
+
+>**Note:**<br/>This framework is only supported directly by Portworx.
+>Please contact support@portworx.com directly for any support issues related with using this framework.
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
