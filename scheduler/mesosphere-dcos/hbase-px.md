@@ -225,7 +225,7 @@ Scan table ``testtable`` output is length and the end should be similar like bel
 
 And from the HBase Master UI, the ``test`` table is listed under User Tables
 
-![HBase WebUI](/images/hbase-px-universe-003.PNG)
+![HBase WebUI](/images/hbase-px-universe-004.PNG)
 
 ### HBase file system
 
