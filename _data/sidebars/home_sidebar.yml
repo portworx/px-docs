@@ -44,6 +44,8 @@
           url: /scheduler/mesosphere-dcos/elasticsearch.html
       - title: How To
         folderitems:
+        - title: Constraining Applications to PX nodes
+          url: /scheduler/mesosphere-dcos/constraints.html
         - title: Dynamically creating volumes
           url: /scheduler/mesosphere-dcos/inline.html
         - title: Scaling stateful applications

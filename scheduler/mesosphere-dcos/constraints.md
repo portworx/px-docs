@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx with Mesos constraints"
+title: "Specifying Portworx Constraints in your Application"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, constraints
 sidebar: home_sidebar
 ---
@@ -49,7 +49,6 @@ If using Apache Mesos:
 # systemctl restart mesos-slave
 # systemctl status mesos-slave -l
 ```
-
 
 ## Deploy Portworx with 'constraints'
 Deploy Portworx through Marathon, using appropriate constraints, so that Portworx only runs
@@ -127,6 +126,3 @@ on agent nodes where the "pxfabric" attribute is set.   For example:
     }]
 }
 ```
-
-[Download example](/px-marathon-constraints.json?raw=true)
-
