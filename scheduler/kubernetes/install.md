@@ -76,9 +76,18 @@ Examples including optional parameters:
 # kubectl create -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
 ```
 
-### To Uninstall
+## Uninstall
 To Uninstall the PX daemon set, just delete it as follows:
 
 ```
 kubectl delete -f "http://install.portworx.com?cluster=mycluster&etcd=etcd://etcd.fake.net:4001"
 ```
+
+## Known issues
+
+##### Kubernetes on CoreOS deployed through tectonic
+[Tectonic](https://coreos.com/tectonic/) is deploying the [Kubernetes controller manager](https://kubernetes.io/docs/admin/kube-controller-manager/) in the docker `none` network. As a result, when the controller manager invokes a call on http://localhost:9001 to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network.
+
+To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
+
+Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.

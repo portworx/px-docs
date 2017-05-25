@@ -56,3 +56,13 @@ This repository is accessible at [https://docs-amp.portworx.com/](https://docs-a
 Travis will only build upon new commits to the `gh-pages` branch (this will happen when you merge in using a Github pull request) and it may take a few minutes to build and push which means that the time to update AMP may be longer than that of the standard documentation.
 
 Due to the limitations of AMP, there is no Javascript and therefore no Algolia Docsearch, this is replaced by a simple Google search form.
+
+
+## Build px-docs locally
+
+```
+gem install jekyll bundler
+bundle install
+bundle exec jekyll serve
+```
+Docs site will now be served locally at [http://127.0.0.1:4005/](http://127.0.0.1:4005/)
