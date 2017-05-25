@@ -258,3 +258,67 @@ The files associate to the created table ``test`` are located at HDFS /hbase/dat
        drwxr-xr-x   - root supergroup          0 2017-05-24 22:21 /hbase/data/default/test/3c371ba86dbe886839cc5eb38925fa25/recovered.edits
        -rw-r--r--   3 root supergroup          0 2017-05-24 22:21 /hbase/data/default/test/3c371ba86dbe886839cc5eb38925fa25/recovered.edits/2.seqid
 
+## HBase PerformanceEvaluation
+
+Hbase come with a handy tool to test run the Hbase cluster performance. The following example, we use an external hbase client (machine with hbase binary and all hbase required configurations ``hbase-site.xml``, ``hdfs-site.xml``,  ``core-site.xml`` ) to run hbase random write performance. 
+
+
+    $ time ${HBASE_HOME}/bin/hbase org.apache.hadoop.hbase.PerformanceEvaluation randomWrite 3
+
+The above command will run Random Write of 1M rows per hbase slave node into the target ``TestTable`` ; the number at the end of command specify 3 hbase nodes. The hbase performance evaluation job will run as mapreduce job and the output is length, and at the end you should see the standard result of  mapreduce job output.
+
+
+      2017-05-25 00:56:00,953 INFO  [main] mapreduce.Job: Job job_local877688079_0001 completed successfully
+      2017-05-25 00:56:01,079 INFO  [main] mapreduce.Job: Counters: 37
+          File System Counters
+                FILE: Number of bytes read=964427243
+                FILE: Number of bytes written=981709017
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=2806914
+                HDFS: Number of bytes written=568403
+                HDFS: Number of read operations=1117
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=95
+         Map-Reduce Framework
+                Map input records=30
+                Map output records=30
+                Map output bytes=480
+                Map output materialized bytes=720
+                Input split bytes=4230
+                Combine input records=0
+                Combine output records=0
+                Reduce input groups=30
+                Reduce shuffle bytes=720
+                Reduce input records=30
+                Reduce output records=30
+                Spilled Records=60
+                Shuffled Maps =30
+                Failed Shuffles=0
+                Merged Map outputs=30
+                GC time elapsed (ms)=7190
+                Total committed heap usage (bytes)=8958365696
+         Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+         HBase Performance Evaluation
+                Elapsed time in milliseconds=171411
+                Row count=1048560
+         File Input Format Counters
+                Bytes Read=125361
+         File Output Format Counters
+                Bytes Written=359
+
+       real    3m22.431s
+       user    1m54.584s
+       sys     0m3.688s
+
+
+
+
+    
