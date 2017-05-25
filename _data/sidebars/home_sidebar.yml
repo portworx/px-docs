@@ -50,6 +50,10 @@
           url: /scheduler/mesosphere-dcos/inline.html
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
+      - title: FAQ
+        folderitems:
+        - title: How Portworx Volumes work with DCOS
+          url: /scheduler/mesosphere-dcos/portworx_volumes.html
     - title: Docker
       folderitems:
       - title: Install
@@ -62,6 +66,10 @@
           url: /scheduler/docker/swarm.html
         - title: Starting PX via systemd
           url: /scheduler/docker/systemd.html
+      - title: FAQ
+        folderitems:
+        - title: How Portworx Volumes work with Docker
+          url: /scheduler/docker/volume_plugin.html
     - title: Rancher
       folderitems:
       - title: Install
