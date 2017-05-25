@@ -1,5 +1,13 @@
-### Using Portworx volumes with DCOS
+---
+layout: page
+title: "Using Portworx volumes with DCOS"
+keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+---
 
+* TOC
+{:toc}
+
+## Using Portworx volumes with DCOS
 
 Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/docker-volume/) using [dvdcli]( https://github.com/codedellemc/dvdcli)
 dvdcli talks to Portworx using the docker plugin API, see here to understand Portworx implementation of the [API](/scheduler/docker/volume_plugin.md)
