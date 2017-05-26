@@ -7,6 +7,8 @@ sidebar: home_sidebar
 
 This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.  It uses MySQL as an example. 
 
+This feature is available in a future release of PX-Enterprise. Please reach out to support@portworx.com if you would like to have a private beta of this feature
+
 ## Managing snapshots through `kubectl`
 
 ### Taking periodic snapshots on a running POD
