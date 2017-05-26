@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-To install and configure PX via the Docker CLI, use the command-line steps in this section.
+This guide describes installing Portworx using the docker CLI.
 
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX
 
@@ -24,18 +24,9 @@ Portworx pools the storage devices on your server and creates a global capacity 
 
 >**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
 
-To view the storage devices on your server
+To view the storage devices on your server, use the `lsblk` command.
 
-Use this command line:
-
-```
-# lsblk
-```
-
-Example output:
-
-Note that devices without the partition are shown under the **TYPE** column as **part**.
-
+For example:
 ```
 # lsblk
     NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
@@ -44,22 +35,11 @@ Note that devices without the partition are shown under the **TYPE** column as *
     xvdb                      202:16   0    64G  0 disk
     xvdc                      202:32   0    64G  0 disk
 ```
+Note that devices without the partition are shown under the **TYPE** column as **part**. This example has two non-root storage devices (/dev/xvdb, /dev/xvdc) that are candidates for storage devices.
 
 Identify the storage devices you will be allocating to PX.  PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
 
-### Run PX on Docker Swarm or UCP
-
-If you are using [Docker UCP](https://docs.docker.com/datacenter/ucp/2.1/guides/) or [Docker in Swarm mode](https://docs.docker.com/engine/swarm/), you can deploy Portworx as a Swarm service.
-```
-docker service create --mount type=bind,src=/,dst=/media/host \
-                      --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-                      --mode global \
-                      --name portworx-service \
-                      portworx/monitor -x swarm -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc
-```
-The arguments that are given to the service above (-x, -k, -c etc) are described at [Command-line arguments to Portworx daemon](#command-line-args-daemon)
-
-### Run PX on Docker
+### Run PX
 You can run PX via the Docker CLI as follows:
 
 ```
@@ -236,16 +216,9 @@ You will need to grant the above set of permissions for the plugin to be install
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
 
 ## Access the pxctl CLI
-After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
+After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool. 
 
-To view all **pxctl** options, run:
-
-```
-# /opt/pwx/bin/pxctl help
-```
-
-To view global storage capacity
-
+With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
 
 To view the global storage capacity, run:
 
@@ -278,8 +251,6 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
-For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
-
 You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
 
 ## Application Examples
@@ -294,77 +265,34 @@ After you complete this installation, continue with the set up to run stateful c
 
 The following arguments are provided to the PX daemon:
 
-```
--k
-	> Points to your key value database, such as an etcd cluster or a consul cluster.
-
--c
-	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
-
--s
-	> Specifies the various drives that PX should use for storing the data.
-
--a
-	> Instructs PX to use any available, unused and unmounted drive.  PX will never use a drive that is mounted.
-
--A
-	> Instructs PX to use any available, unused and unmounted drives or partitions.  PX will never use a drive or partition that is mounted.
-
--f
-	> Optional.  Instructs PX to use an unmounted drive even if it has a filesystem on it.
-
--z
-	> Optional.  Instructs PX to run in zero storage mode.  In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes.
-	
--userpwd
-       > username and password for ETCD authentication in the form <user_name>:<passwd>
- 
--ca
-       > location of CA file for ETCD authentication
-       
--cert 
-	> location of certificate for ETCD authentication
-
--key 
-	> location of certificate key for ETCD authentication
-
--acltoken 
-	> ACL token value used for Consul authentication
-
--d
-	> Optional.  Specifies the data interface.
-
--m
-	> Optional.  Specifies the management interface.
-```
+|  Argument | Description                                                                                                                                                                              |
+|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
+|     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
+|     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
+|     `-d`    | (Optional) Specifies the data interface.                                                                                                                                                 |
+|     `-m`    | (Optional) Specifies the management interface.                                                                                                                                           |
+|     `-z`    | (Optional) Instructs PX to run in zero storage mode. In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. |
+|     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
+|     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
+|     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
+|  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
+|    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
+|   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
+|    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
+| `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
+|   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
 
 The following Docker runtime command options are explained:
 
-```
---privileged
-    > Sets PX to be a privileged container. Required to export block device and for other functions.
-
---net=host
-    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
-
---shm-size=384M
-    > PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts
-
--v /run/docker/plugins
-    > Specifies that the volume driver interface is enabled.
-
--v /dev
-    > Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\].
-
--v /etc/pwx/config.json:/etc/pwx/config.json
-    > the configuration file location.
-
--v /var/run/docker.sock
-    > Used by Docker to export volume container mappings.
-
--v /var/lib/osd:/var/lib/osd:shared
-    > Location of the exported container mounts. This must be a shared mount.
-
--v /opt/pwx/bin:/export_bin
-    > Exports the PX command line (**pxctl**) tool from the container to the host.
-```
+| Option                                       | Description                                                                                                                                         |
+|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--privileged`                                 | Sets PX to be a privileged container. Required to export block device and for other functions.                                                      |
+| `--net=host`                                   | Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.                  |
+| `--shm-size=384M`                              | PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts.                                                  |
+| `-v /run/docker/plugins:/run/docker/plugins`   | Specifies that the volume driver interface is enabled.                                                                                              |
+| `-v /dev:/dev`                                 | Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\]. |
+| `-v /etc/pwx/config.json:/etc/pwx/config.json` | The configuration file location.                                                                                                                    |
+| `-v /var/run/docker.sock:/var/run/docker.sock` | Used by Docker to export volume container mappings.                                                                                                 |
+| `-v /var/lib/osd:/var/lib/osd:shared`          | Location of the exported container mounts. This must be a shared mount.                                                                             |
+| `-v /opt/pwx/bin:/export_bin`                  | Exports the PX command line (**pxctl**) tool from the container to the host.                                                                        |

@@ -1,76 +1,127 @@
 ---
 layout: page
-title: "Deploy Portworx stack on Docker Swarm or UCP"
-keywords: portworx, architecture, storage, container, cluster, install, docker, compose
+title: "Deploy Portworx on Docker Swarm or UCP"
+keywords: portworx, architecture, storage, container, cluster, install, docker, swarm, ucp
 sidebar: home_sidebar
 ---
 
 * TOC
 {:toc}
 
-Deploy Portworx stack on Docker Swarm or UCP
+## Prerequisites
+#### Key value store
+
+PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. 
+If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX
+
+#### Docker Swarm
+
+Follow the [Swarm mode overview](https://docs.docker.com/engine/swarm/) guide to run Docker in Swarm mode. PX requires a minimum of Docker version 1.10 to be installed.
+
+>**Important:**<br/>If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+
+#### Identify storage devices
+
+Portworx pools the storage devices on your server and creates a global capacity for containers.
+
+>**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
+
+To view the storage devices on your server, use the `lsblk` command.
+
+For example:
+```
+# lsblk
+    NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+    xvda                      202:0    0     8G  0 disk
+    └─xvda1                   202:1    0     8G  0 part /
+    xvdb                      202:16   0    64G  0 disk
+    xvdc                      202:32   0    64G  0 disk
+```
+Note that devices without the partition are shown under the **TYPE** column as **part**. This example has two non-root storage devices (/dev/xvdb, /dev/xvdc) that are candidates for storage devices.
+
+Identify the storage devices you will be allocating to PX.  If you are running in a heterogeneous environment, where different nodes have different drives use the `-a -f` parameters instead of `-s`.
 
 ## Install
 
-If you are using [Docker UCP](https://docs.docker.com/datacenter/ucp/2.1/guides/) or [Docker in Swarm mode](https://docs.docker.com/engine/swarm/), you can deploy Portworx as a stack.
+Portworx can be deployed as a Swarm service.
 ```
-$ curl -o pxservice.yaml "http://portworx.us-west-2.elasticbeanstalk.com/swarm?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
-$ docker stack deploy -c pxservice.yaml portworx
+$ docker service create --mount type=bind,src=/,dst=/media/host \
+                        --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+                        --mode global \
+                        --name portworx \
+                        portworx/monitor -k etcd://etc.fake.net:2379 -c test-cluster -a -f
 ```
->**Note:**<br/>A Docker Engine of version 1.13.0 or later is required  using docker stack deploy
+The arguments that are given to the service above (-k, -c etc) are described at [Command-line arguments to Portworx daemon](#command-line-args-daemon)
 
-Above command first fetches the service specification from a web service and then gives it to `docker stack deploy` command. Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
-Portwork will get deployed as a global service on each of the nodes in the Swarm cluster. You can check status of portworx stack using
+To view status of the service:
 ```
-$ docker stack ps portworx
+$ docker service ps portworx
 ```
 
-Below are all parameters that can be given in the query string of the curl command.
+#### Scaling
+Portworx is deployed as a `Global Service`.  Therefore it automatically scales as you grow your Swarm cluster.  There are no additional requirements to install Portworx on the new nodes.
 
-| Key         	| Description                                                                                                                                                                              	| Example                                           	|
-|-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
-| cluster     	| (Required) Specifies the cluster ID that this PX instance is to join.,You can create any unique name for a cluster ID.                                                                   	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd://etcd.fake.net:4001                    	|
-| drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
-| diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
-| miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
-| zeroStorage 	| (Optional) Instructs PX to run in zero storage mode.,In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. 	| zeroStorage=true                                  	|
-| force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
-| etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
-| etcdCa      	| (Optional) Location of CA file for ETCD authentication.                                                                                                                                  	| etcdCa=/path/to/server.ca                         	|
-| etcdCert    	| (Optional) Location of certificate for ETCD authentication.                                                                                                                              	| etcdCert=/path/to/server.crt                      	|
-| etcdKey     	| (Optional) Location of certificate key for ETCD authentication.                                                                                                                          	| etcdKey=/path/to/server.key                       	|
-| acltoken    	| (Optional) ACL token value used for Consul authentication.                                                                                                                               	| acltoken=398073a8-5091-4d9c-871a-bbbeb030d1f6     	|
-| token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
-| env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
+#### Access the pxctl CLI
+After Portworx is running, you can create, delete & manage storage volumes through the Docker volume commands or the **pxctl** command line tool. 
 
-#### Examples
+For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
+
+A useful pxctl command is `pxctl status`
+The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
 ```
-# To specify drives
-$ curl -o pxservice.yaml "http://portworx.us-west-2.elasticbeanstalk.com/swarm?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
-$ docker stack deploy -c pxservice.yaml portworx
-
-# To specify data and management interfaces
-$ curl -o pxservice.yaml "http://portworx.us-west-2.elasticbeanstalk.com/swarm?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
-$ docker stack deploy -c pxservice.yaml portworx
-
-# To run in zero storage mode
-$ curl -o pxservice.yaml "http://portworx.us-west-2.elasticbeanstalk.com/swarm?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true"
-$ docker stack deploy -c pxservice.yaml portworx
+# /opt/pwx/bin/pxctl status
+Status: PX is operational
+Node ID: 0a0f1f22-374c-4082-8040-5528686b42be
+	IP: 172.31.50.10
+ 	Local Storage Pool: 2 pools
+	POOL	IO_PRIORITY	SIZE	USED	STATUS	ZONE	REGION
+	0	LOW		64 GiB	1.1 GiB	Online	b	us-east-1
+	1	LOW		128 GiB	1.1 GiB	Online	b	us-east-1
+	Local Storage Devices: 2 devices
+	Device	Path		Media Type		Size		Last-Scan
+	0:1	/dev/xvdf	STORAGE_MEDIUM_SSD	64 GiB		10 Dec 16 20:07 UTC
+	1:1	/dev/xvdi	STORAGE_MEDIUM_SSD	128 GiB		10 Dec 16 20:07 UTC
+	total			-			192 GiB
+Cluster Summary
+	Cluster ID: 55f8a8c6-3883-4797-8c34-0cfe783d9890
+	IP		ID					Used	Capacity	Status
+	172.31.50.10	0a0f1f22-374c-4082-8040-5528686b42be	2.2 GiB	192 GiB		Online (This node)
+Global Storage Pool
+	Total Used    	:  2.2 GiB
+	Total Capacity	:  192 GiB
 ```
+
+Now that you have Portworx up, let's look at an example of running [stateful application with Portworx and Swarm](swarm.html)!
 
 ## Upgrade
-To upgrade Portworx, use the same `docker stack deploy` command used to install it. This will repull the image used for Portworx (portworx/px-enterprise:latest) and perform a rolling upgrade.
-
-You can check the upgrade status with following command.
+Following command will perform upgrade with the latest image.
 ```
-$ docker stack ps portworx
+$ docker service update --force portworx
 ```
 
 ## Uninstall
-Following command uninstalls Portworx from the cluster.
-
 ```
-$ docker stack rm portworx
+$ docker service rm portworx
 ```
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
+
+## Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
+
+The following arguments are provided to the PX daemon:
+
+|  Argument | Description                                                                                                                                                                              |
+|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     -c    | (Required) Specifies the unique name for the Portworx cluster                                                                                                                            |
+|     -k    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
+|     -s    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
+|     -d    | (Optional) Specifies the data interface.                                                                                                                                                 |
+|     -m    | (Optional) Specifies the management interface.                                                                                                                                           |
+|     -f    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
+|     -a    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
+|     -A    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
+|  -userpwd | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
+|    -ca    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
+|   -cert   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
+|    -key   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
+| -acltoken | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
+|   -token  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |

@@ -63,7 +63,7 @@ Below are all parameters that can be given in the query string:
 
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
-| cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                            	| cluster=test_cluster                              	|
+| cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
 | kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd://etcd.fake.net:4001                    	|
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
@@ -87,8 +87,8 @@ Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as yo
 # To specify drives
 $ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
 
-# To specify data and management interfaces
-$ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&diface=enp0s8&miface=enp0s8"
+# To run on coreos
+$ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&coreos=true"
 
 # To run in master in zero storage mode and use a specifc drive for other nodes
 $ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"

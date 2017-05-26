@@ -57,7 +57,11 @@
     - title: Docker
       folderitems:
       - title: Install
-        url: /scheduler/docker/install.html
+        folderitems:
+        - title: Docker Swarm or UCP
+          url: /scheduler/docker/install-px-docker-service.html
+        - title: Docker Standalone
+          url: /scheduler/docker/install.html
       - title: How To
         folderitems:
         - title: Create and Manage Data Volumes
