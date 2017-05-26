@@ -54,7 +54,7 @@ preferences:
 Following kubectl command deploys Portworx in the cluster.
 
 ```
-kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+# kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
 ```
 
 Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
@@ -78,6 +78,9 @@ Below are all parameters that can be given in the query string:
 | token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
 | coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
+
+#### Scaling
+Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
 #### Examples
 ```
