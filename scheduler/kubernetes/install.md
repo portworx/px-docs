@@ -51,10 +51,10 @@ preferences:
 ## Install
 >**Note:**<br/>If you are deploying Kubernetes using [Tectonic](https://coreos.com/tectonic/), read the [known issue here](#tectonic-known-issue).
 
-Following kubectl command deploys Portworx in the cluster.
+The following kubectl command deploys Portworx in the cluster as a `daemon set`:
 
 ```
-kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+# kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
 ```
 
 Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
