@@ -81,7 +81,7 @@ make up a service can either be statefull or stateless.
 
 If Persistence is required in any of the stateful tasks they need to provide a volume specification that should be used by
 the pods. In the upstread dcos-commons framework, these volumes can be of two types: MOUNT and ROOT. These types of disks
-are explained here: http://mesos.apache.org/documentation/latest/multiple-disk/
+are explained [here](http://mesos.apache.org/documentation/latest/multiple-disk)
 
 Since both these types of disks use local storage, in case an agent running a statful task dies or
 is restarted it can not be bought up on another agent node.
