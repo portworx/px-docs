@@ -8,7 +8,7 @@ redirect_from: "/dcos-cassandra.html"
 * TOC
 {:toc}
 
-This guide will help you to install the Cassandra service on your DCOS cluster backed by PX volumes for persistent storage.
+This guide will help you to install the [Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service on your DCOS cluster backed by PX volumes for persistent storage.
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
