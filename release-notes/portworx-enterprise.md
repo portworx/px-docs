@@ -20,12 +20,14 @@ redirect_from: "/px-enterprise-release-notes.html"
 * Unique Cluster-specifc bucket for each cluster for cloudsnaps
 * Load balanced cloudsnap backups for replicated PX volumes
 * One-time backup schedules for Cloudsnap
+* Removed the requirement to have /etc/pwx/kubernetes.yaml in all k8s nodes 
 
 
 ### Key Issues Addressed
 
 * `pxctl cloudsnap credentials` command has been moved under `pxctl credentials`
 * Docker inline volume creation support for setting volume aggregation level
+* --nodes support for docker inline volume spec
 * Volume attach issues after a node restart when container attaching to a volume failed
 * PX Alert display issues in Prometheus
 * Cloudsnap scheduler display issues where the existing schedules were not seen by some users.
