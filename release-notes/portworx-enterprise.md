@@ -9,6 +9,41 @@ redirect_from: "/px-enterprise-release-notes.html"
 * TOC
 {:toc}
 
+## 1.2.4 Release notes
+
+### Key Features
+
+* Support for --racks and --zones option when created replicated volumes
+* Improved replication node add speeds
+* Node labels and scheduler convergence for docker swarm
+* Linux Kernel 4.11 support
+* Unique Cluster-specifc bucket for each cluster for cloudsnaps
+* Load balanced cloudsnap backups for replicated PX volumes
+* One-time backup schedules for Cloudsnap
+
+
+### Key Issues Addressed
+
+* pxctl cloudsnap credentials command has been moved under pxctl credentials
+* docker inline volume creation support for setting volume aggregation level
+* Volume attach issues after a node restart when container attaching to a volume failed
+* PX Alert display issues in Prometheus
+* Cloudsnap scheduler display issues where the existing schedules were not seen by some users.
+* Removed snapshots from being counted into to total volume count
+* Removed non-px related metrics being pushed to Prometheus
+* Added CLI feedback and success/failure alerts for `pxctl volume update` command
+* Fixed issues with Cloudsnap backup status updates for container restarts
+
+
+## 1.2.3 Release notes
+
+### Key Features
+
+No new features in 1.2.2. This is a patch release.
+
+### Key Issues Addressed
+
+* Performance improvements for database workloads
 
 ## 1.2.2 Release notes
 
