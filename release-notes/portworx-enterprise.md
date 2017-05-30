@@ -13,7 +13,7 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ### Key Features
 
-* Support for --racks and --zones option when created replicated volumes
+* Support for --racks and --zones option when creating replicated volumes
 * Improved replication node add speeds
 * Node labels and scheduler convergence for docker swarm
 * Linux Kernel 4.11 support
