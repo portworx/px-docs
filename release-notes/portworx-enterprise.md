@@ -39,7 +39,7 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ### Key Features
 
-No new features in 1.2.2. This is a patch release.
+No new features in 1.2.3. This is a patch release.
 
 ### Key Issues Addressed
 
