@@ -24,8 +24,8 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ### Key Issues Addressed
 
-* pxctl cloudsnap credentials command has been moved under pxctl credentials
-* docker inline volume creation support for setting volume aggregation level
+* `pxctl cloudsnap credentials` command has been moved under `pxctl credentials`
+* Docker inline volume creation support for setting volume aggregation level
 * Volume attach issues after a node restart when container attaching to a volume failed
 * PX Alert display issues in Prometheus
 * Cloudsnap scheduler display issues where the existing schedules were not seen by some users.
