@@ -3,7 +3,9 @@ layout: page
 title: "Portworx AWS Auto Scaling"
 keywords: portworx, AWS, CloudFormation, ASG, Auto Scaling, Load Balancer, ECS, EC2
 sidebar: home_sidebar
-redirect_from: "/portworx-on-aws-asg.html"
+redirect_from:
+  - /cloud/aws-ec2-asg.html
+  - /portworx-on-aws-asg.html
 ---
 
 * TOC
