@@ -85,13 +85,13 @@ Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as yo
 #### Examples
 ```
 # To specify drives
-$ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
 
 # To run on coreos
-$ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&coreos=true"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&coreos=true"
 
 # To run in master in zero storage mode and use a specifc drive for other nodes
-$ kubectl apply -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
 ```
 
 ## Upgrade
@@ -106,7 +106,7 @@ $ kubectl rollout status ds portworx --namespace kube-system
 Following kubectl command uninstalls Portworx from the cluster.
 
 ```
-$ kubectl delete -f "http://portworx.us-west-2.elasticbeanstalk.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"
+$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"
 ```
 
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
