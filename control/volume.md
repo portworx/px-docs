@@ -517,7 +517,7 @@ For a volume created with a --group option the inspect output will reflect the f
 ```
 sudo /opt/pwx/bin/pxctl volume inspect volFinGrp
 Volume  :  839994139757433916
-        Name                     :  vol1
+        Name                     :  volFinGrp
         Group                    :  finance
         Size                     :  1.0 GiB
         Format                   :  ext4
