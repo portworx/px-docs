@@ -83,7 +83,7 @@ Portworx exports virtual block devices in the host namespace. This is done via t
 
 Portworx volume can be attached to any participating node in the cluster, although it can be attached to only one node at any given point in time. The node where the Portworx volume is attached is deemed the transaction coordinator and all I/O access to the volume is arbitrated by that node.
 
-Attach is idempotent - multiple attach calls of a volume on the same node will return success. Attach on a node will return a failure, if the device is attached on a different node. Port
+Attach is idempotent - multiple attach calls of a volume on the same node will return success. Attach on a node will return a failure, if the device is attached on a different node. 
 
 The following command will instantiate a virtual block device in the host namespace and mount it under propagated mount location. The mounted volume  is then bind mounted under /data in the busybox container.
 
