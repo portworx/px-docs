@@ -9,10 +9,9 @@ keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 
 ## Docker interaction with Portworx
 
-Portworx implements the Docker Volume Plugin Specificaton (https://docs.docker.com/engine/extend/plugins_volume/).
+Portworx implements the [Docker Volume Plugin Specification](https://docs.docker.com/engine/extend/plugins_volume/).
 
-The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via
-dvdcli (https://github.com/codedellemc/dvdcli).
+The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdcli](https://github.com/codedellemc/dvdcli).
 
 ###  Discovery
 
