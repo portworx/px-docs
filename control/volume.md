@@ -67,8 +67,15 @@ OPTIONS:
    --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
    --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
    --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
+   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
    --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
-   --nodes value                        comma-separated Node Id(s)
+   --nodes value                        comma-separated Node Ids
+   --zones value                        comma-separated Zone names
+   --racks value                        comma-separated Rack names
+   --group value, -g value              group
+   --enforce_cg, --fg                   enforce group during provision
  ```
  
 Here is an example of how to create a  10 GB volume with replication factor set to 3
@@ -100,10 +107,20 @@ For volumes that get created as volume sets, use --scale parameter. This paramet
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --size=1 --repl=3 --scale=100
 ```
 
-
 For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cluster secret key. A different key maybe passed too.
 ```
 sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
+```
+
+To create volumes within specific zones and/or racks in your deployment use the --zones and --racks options in the volume create command. Specifying zone/rack during volume creation will try to provision storage from the nodes in the specified zone/rack.
+```
+sudo /opt/pwx/bin/pxctl volume create volZoneA --size=100 --zones=a  --repl=2
+sudo /opt/pwx/bin/pxctl volume create volDefRack --racks=defaultRack --repl=2 --size=100
+```
+
+To distribute volumes on different set of nodes, use --group option. In case there maybe an ambiguous condition use --enforce_cg to enforce group during volume creation. Note: --nodes option takes precedence over the node exclusion from --group option.
+```
+sudo /opt/pwx/bin/pxctl volume create volFinGrp --group finance --enforce_cg
 ```
 
 #### pxctl volume list
@@ -120,7 +137,9 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 2657835878654349872	climedium  	1 GiB	1	no	no		MEDIUM		1	up - detached
 1013237432577873530     cliencr      	2 GiB   2       no      yes             LOW             1       up - detached
 570354879481121709	cliaggr		1 GiB	2	no	no		LOW		1	up - detached
-
+254582484098891228	volZoneA	100 GiB	2	no	no		LOW		1	up - detached
+611963153912324950	volDefRack	100 GiB 2	no	no		LOW		1	up - detached
+839994139757433916	volFinGrp	1 GiB	1	no	no		LOW		1	up - detached
 ```
 
 #### pxctl volume delete
@@ -423,7 +442,20 @@ Volume	:  485002114762355071
 #### pxctl volume ha-update
 
 `pxctl volume ha-update` can be used to increase or decrease the replication factor for a given portworx volume. 
+```
+sudo /opt/pwx/bin/pxctl volume ha-update --help
+NAME:
+   pxctl volume ha-update - Update volume HA level
 
+USAGE:
+   pxctl volume ha-update [command options] volume-name-or-ID
+
+OPTIONS:
+   --repl factor, -r factor  New replication factor [1...3] (default: 0)
+   --node value, -n value    comma-separated Node Id(s)
+   --zones value             comma-separated Zone names
+   --racks value             comma-separated Rack names
+```
 The volume `clitest` shown in the previous example is a volume with replication factor set to 1. 
 
 Here are the nodes in the cluster.
@@ -442,9 +474,15 @@ bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		
 ```
 
 Using `pxctl volume ha-update`, here is how to increase the replication factor. Note, the command below sets the volume to replicate to the node with NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
-
 ```
 sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+```
+To use the rack/zone specification instead of a specific node ID, use the --rack/--zone option in the ha-update command
+```
+sudo /opt/pwx/bin/pxctl volume ha-update --repl=3 --zones=a volZoneA
+Update Volume Replication: Replication update started successfully for volume volZoneA
+sudo /opt/pwx/bin/pxctl volume ha-update --racks=defaultRack --repl=3 volDefRack
+Update Volume Replication: Replication update started successfully for volume volDefRack
 ```
 
 Once the replication completes and the new node is added to the replication set, the `pxctl volume inspect` shows both the nodes.
@@ -474,6 +512,32 @@ Volume	:  970758537931791410
 		Set  0
 			Node 	 :  10.99.117.133
 			Node 	 :  10.99.117.137
+```
+For a volume created with a --group option the inspect output will reflect the flag as shown below:
+```
+sudo /opt/pwx/bin/pxctl volume inspect volFinGrp
+Volume  :  839994139757433916
+        Name                     :  volFinGrp
+        Group                    :  finance
+        Size                     :  1.0 GiB
+        Format                   :  ext4
+        HA                       :  1
+        IO Priority              :  LOW
+        Creation time            :  May 30 19:06:51 UTC 2017
+        Shared                   :  no
+        Status                   :  up
+        State                    :  detached
+        Reads                    :  0
+        Reads MS                 :  0
+        Bytes Read               :  0
+        Writes                   :  0
+        Writes MS                :  0
+        Bytes Written            :  0
+        IOs in progress          :  0
+        Bytes used               :  32 MiB
+        Replica sets on nodes:
+                Set  0
+                        Node     :  192.168.1.147
 ```
 
 `pxctl volume alerts` will show when the replication is complete
