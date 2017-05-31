@@ -120,6 +120,8 @@
       folderitems:
       - title: Basics
         url: /control/status.html
+      - title: Credentials
+        url: /control/credentials.html
       - title: Volume
         url: /control/volume.html
       - title: Snaps
