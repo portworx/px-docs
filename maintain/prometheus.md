@@ -47,6 +47,12 @@ px_cluster_disk_available_bytes: available storage in px cluster in bytes
 px_cluster_disk_utilized_bytes: used storage in px cluster in bytes
 px_cluster_memory_utilized_percent: average memory usage for the px cluster nodes
 px_cluster_pendingio: total bytes (read/write) being currently processed
+px_cluster_size: total cluster size
+px_cluster_offline_nodes: total offline nodes 
+px_cluster_online_nodes: total online nodes 
+px_cluster_storage_down nodes: total storage down nodes 
+px_cluster_offline_storage_nodes: total offline nodes that has storage
+px_cluster_online_storage_nodes: total online nodes that has storage 
 ```
 
 ### Node stats
@@ -54,6 +60,7 @@ px_cluster_pendingio: total bytes (read/write) being currently processed
 ```
 px_network_io_bytessent: bytes sent by this node to other nodes
 px_network_io_received_bytes: bytes received by this node from other nodes
+px_node_status_<node_id>_status: <node_id> status
 ```
 
 ### Volume stats
