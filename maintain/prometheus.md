@@ -67,14 +67,14 @@ px_node_status_<node_id>_status: <node_id> status
 ### Volume stats
 
 ```
-px_volume_depth_io:number of i/o operations being served at once
+px_volume_depth_io: number of i/o operations being served at once
 px_volume_iops: operations per second
 px_volume_latency_seconds: time spent by
 px_volume_read_bytes: total bytes read from volume
 px_volume_reads: number of read operations served by the volume
 px_volume_readthroughput: bytes read per second
 px_volume_writes: number of write operations served by the volume
-px_colume_writethroughput:bytes written per second
+px_volume_writethroughput: bytes written per second
 px_volume_written_bytes: total bytes written to the volume 
 ```
 
