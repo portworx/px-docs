@@ -53,6 +53,7 @@ px_cluster_online_nodes: total online nodes
 px_cluster_storage_down nodes: total storage down nodes 
 px_cluster_offline_storage_nodes: total offline nodes that has storage
 px_cluster_online_storage_nodes: total online nodes that has storage 
+px_cluster_status_cluster_quorum: cluster_quorum 
 ```
 
 ### Node stats
@@ -77,6 +78,19 @@ px_colume_writethroughput:bytes written per second
 px_volume_written_bytes: total bytes written to the volume 
 ```
 
+### Disk stats
 
+```
+px_disk_stats_interval_seconds: interval_seconds
+px_disk_stats_io_seconds: time spent doing I/Os (ms)
+px_disk_stats_progress_io: I/Os currently in progress
+px_disk_stats_read_bytes: read bytes
+px_disk_stats_read_seconds: time spent reading (ms)
+px_disk_stats_reads: reads
+px_disk_stats_used_bytes: used_bytes
+px_disk_stats_write_bytes: write_bytes
+px_disk_stats_write_seconds: write_seconds
+px_disk_stats_writes: writes
+```
 
 
