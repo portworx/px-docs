@@ -61,7 +61,7 @@ px_cluster_status_cluster_quorum: cluster_quorum, 1 = in quorum, 0 = not in quor
 ```
 px_network_io_bytessent: bytes sent by this node to other nodes
 px_network_io_received_bytes: bytes received by this node from other nodes
-px_node_status_<node_id>_status: <node_id> status
+px_node_status_<node_id>_status: <node_id> status, 1 = online, 0 = offline
 ```
 
 ### Volume stats
