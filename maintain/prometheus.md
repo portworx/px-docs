@@ -80,7 +80,7 @@ px_volume_writethroughput: bytes written per second
 px_volume_written_bytes: total bytes written to the volume 
 ```
 
-### Disk stats
+### Disk stats: collected from /proc/diskstats
 
 ```
 px_disk_stats_interval_seconds: interval seconds
