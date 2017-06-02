@@ -53,7 +53,7 @@ px_cluster_online_nodes: total online nodes
 px_cluster_storage_down nodes: total storage down nodes 
 px_cluster_offline_storage_nodes: total offline nodes that has storage
 px_cluster_online_storage_nodes: total online nodes that has storage 
-px_cluster_status_cluster_quorum: cluster_quorum 
+px_cluster_status_cluster_quorum: cluster_quorum, 1 = in quorum, 0 = not in quorum
 ```
 
 ### Node stats
