@@ -36,15 +36,14 @@
         folderitems:
         - title: About
           url: /scheduler/mesosphere-dcos/frameworks.html
-          folderitems:
-          - title: Cassandra
-            url: /scheduler/mesosphere-dcos/cassandra.html
-          - title: HDFS & Hadoop
-            url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
-          - title: Kafka
-            url: /scheduler/mesosphere-dcos/kafka.html   
-          - title: Elasticsearch
-            url: /scheduler/mesosphere-dcos/elasticsearch.html
+        - title: Cassandra
+          url: /scheduler/mesosphere-dcos/cassandra.html
+        - title: HDFS & Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
+        - title: Kafka
+          url: /scheduler/mesosphere-dcos/kafka.html   
+        - title: Elasticsearch
+          url: /scheduler/mesosphere-dcos/elasticsearch.html
       - title: How To
         folderitems:
         - title: Constraining Applications to PX nodes
