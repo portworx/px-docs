@@ -51,12 +51,13 @@ You can inspect the _jenkins_vol_ volume using the `pxctl` CLI:
             Node : 192.168.56.105
 ```
 
-You can see that PX has now placed node labels on the nodes where this volume can be used in hyperconverged mode (where the container runs local to it's data volume):
-
+### (Optional) Create node labels for convergence
+* Identify the nodes where the replica set of the `jenkins_vol` volume resides using output of inspect command above.
+* Add a label to each of these nodes as below. This will later allow us to create a service whose tasks only run on these nodes.
 ```
-# docker node ls
+$ docker node update --label-add jenkins_vol=true <node_name>
 ```
-The label `jenkins_vol=true` implies that the node hosts volume _jenkins_vol's_ data.
+>**Automatic label placements:**<br/> In the upcoming 1.2.4 release, Portworx will place these labels automatically.
 
 ### Create a service
 We will now create a Jenkins service using the newly created volume.
