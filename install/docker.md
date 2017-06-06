@@ -65,7 +65,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /opt/pwx/bin:/export_bin                   \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-		 -v ${HDRS}:${HDRS}                            \
+                 -v ${HDRS}:${HDRS}                            \
                 portworx/px-dev -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
@@ -176,7 +176,7 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 Example config.json:
 
 
-```
+```json
    {
       "clusterid": "make this unique in your k/v store",
       "dataiface": "bond0",

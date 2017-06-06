@@ -26,9 +26,9 @@ redirect_from: "/get-started-px-developer.html"
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
-  * 20 server nodes
+  * 3 server nodes
 * Open network ports:
-  * Ports 9000 - 9005 must be open for internal network traffic between nodes running PX
+  * Ports 9001 - 9006 must be open for internal network traffic between nodes running PX
 
 ## Step 2: Install and run PX-Developer
 
@@ -41,22 +41,16 @@ Run Portworx with schedulers:
 
 * [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html)
 * [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
-* [Run Portworx with Rancher](/scheduler/rancher.html)
+* [Run Portworx with Rancher](/scheduler/rancher/install.html)
 
-Run stateful containers with Docker volumes:
+Run stateful containers with Portworx:
 
 * [Application Solutions](/application-solutions.html)
 
-Use **pxctl** ([CLI Reference](/control/cli.html)) to directly:
+Use **pxctl** ([CLI Reference](/control/status.html)) to directly:
 
 * View the cluster global capacity and health
-* Create, inspect, and delete storage volumes
-* Attach policies for IOPs prioritization, maximum volume size, and enable storage replication
+* Create and manage storage volumes
+* Advanced management of the PX cluster
 
-If you run into an issue:
-
-* [Troubleshooting](/knowledgebase/troubleshooting.html)
-
-As you use PX-Developer, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
-
-If your requirements extend beyond the scope of PX-Developer, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise. You can take a tour of the PX-Enterprise console [here](/getting-started/px-enterprise.html#step-3-take-a-tour-of-the-px-enterprise-web-console).
+If your requirements extend beyond the scope of PX-Developer, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise.
