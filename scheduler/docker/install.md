@@ -14,9 +14,8 @@ This guide describes installing Portworx using the docker CLI.
 
 ### Install and configure Docker
 
-PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
-
->**Important:**<br/>If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
+* You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ### Specify storage
 
@@ -61,7 +60,7 @@ sudo docker run --restart=always --name px -d --net=host       \
 
 >**Important:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.  If you do not have a license key, you can run the `portworx/px-dev` container instead.
 
-### Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
+#### Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
 
 The following arguments are provided to the PX daemon:
 
@@ -76,6 +75,7 @@ The following arguments are provided to the PX daemon:
 |     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
 |     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
 |     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
+|     `-x`    | (Optional) Specifies the scheduler being used in the environment. Supported values: "swarm" and "kubernetes".                                                                            |
 |  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
 |    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
 |   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
