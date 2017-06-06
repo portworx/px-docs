@@ -60,10 +60,10 @@
       folderitems:
       - title: Install
         folderitems:
-        - title: Docker Swarm or UCP
-          url: /scheduler/docker/install-px-docker-service.html
         - title: Docker Standalone
           url: /scheduler/docker/install.html
+        - title: Docker Swarm or UCP
+          url: /scheduler/docker/install-px-docker-service.html
         - title: Docker Compose
           url: /scheduler/docker/compose.html
       - title: How To
