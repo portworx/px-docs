@@ -64,6 +64,8 @@
           url: /scheduler/docker/install-px-docker-service.html
         - title: Docker Standalone
           url: /scheduler/docker/install.html
+        - title: Docker Compose
+          url: /scheduler/docker/compose.html
       - title: How To
         folderitems:
         - title: Use PX with Swarm

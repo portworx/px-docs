@@ -39,9 +39,6 @@ Select an operating environment to install Portworx:
 * [Run Portworx with Docker](/scheduler/docker/install.html)
 * [Run Portworx with Rancher](/scheduler/rancher/install.html)
 
-* [Run PX-Developer with Docker](/install/docker.html)
-* [Run PX-Developer with Docker Compose](/install/docker-compose.html)
-
 Run stateful containers with Portworx:
 
 * [Application Solutions](/application-solutions.html)
