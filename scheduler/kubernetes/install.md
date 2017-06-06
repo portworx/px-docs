@@ -21,7 +21,8 @@ The native portworx driver in Kubernetes supports the following features:
 4. Persistent Volumes
 
 ## Prerequisites
-You must have a running Kubernetes 1.6+ Cluster.  If your Kubernetes cluster is older than 1.6, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
+* You must have a running Kubernetes 1.6+ Cluster.  If your Kubernetes cluster is older than 1.6, follow [these](/run-with-kubernetes-flexvolume.html) instructions to run Kubernetes with flexvolume.
+* If you are running a version prior to Docker 1.12 or running docker on Ubuntu 14.4 LTS, then you *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ## Install
 >**Note:**<br/>If you are deploying Kubernetes using [Tectonic](https://coreos.com/tectonic/), read the [known issue here](#tectonic-known-issue).
