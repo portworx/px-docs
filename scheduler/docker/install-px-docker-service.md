@@ -49,7 +49,7 @@ $ docker service create --mount type=bind,src=/,dst=/media/host \
                         --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
                         --mode global \
                         --name portworx \
-                        portworx/monitor -k etcd://etc.fake.net:2379 -c test-cluster -a -f
+                        portworx/monitor -k etcd://etc.fake.net:2379 -x swarm -c test-cluster -a -f
 ```
 The arguments that are given to the service above (-k, -c etc) are described at [Command-line arguments to Portworx daemon](#command-line-args-daemon)
 
