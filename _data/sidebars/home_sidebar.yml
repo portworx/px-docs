@@ -66,9 +66,7 @@
           url: /scheduler/docker/install.html
       - title: How To
         folderitems:
-        - title: Create and Manage Data Volumes
-          url: /scheduler/docker/volumes.html
-        - title: Test with Swarm
+        - title: Use PX with Swarm
           url: /scheduler/docker/swarm.html
         - title: Starting PX via systemd
           url: /scheduler/docker/systemd.html
@@ -82,6 +80,8 @@
         url: /scheduler/rancher/install.html
   - title: About Data Volumes
     folderitems:
+    - title: Create and Manage Data Volumes
+      url: /manage/volumes.html
     - title: Shared Volumes
       url: /manage/shared-volumes.html
     - title: Snapshots

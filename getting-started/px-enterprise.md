@@ -3,7 +3,6 @@ layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Enterprise"
 keywords: portworx, px-developer, container, storage, requirements
-redirect_from: "/get-started-px-enterprise.html"
 ---
 
 * TOC
