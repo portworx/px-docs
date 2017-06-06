@@ -32,16 +32,15 @@ redirect_from: "/get-started-px-developer.html"
 
 ## Step 2: Install and run PX-Developer
 
-See our quick start guides:
-
-* [Run PX-Developer with Docker](/install/docker.html)
-* [Run PX-Developer with Docker Compose](/install/docker-compose.html)
-
-Run Portworx with schedulers:
+Select an operating environment to install Portworx:
 
 * [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html)
 * [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
+* [Run Portworx with Docker](/scheduler/docker/install.html)
 * [Run Portworx with Rancher](/scheduler/rancher/install.html)
+
+* [Run PX-Developer with Docker](/install/docker.html)
+* [Run PX-Developer with Docker Compose](/install/docker-compose.html)
 
 Run stateful containers with Portworx:
 

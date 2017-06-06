@@ -56,12 +56,46 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v ${HDRS}:${HDRS}                            \
-                portworx/px-dev -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc
+                portworx/px-enterprise -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc
 ```
 
->**Enterprise Users:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.
+>**Important:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.  If you do not have a license key, you can run the `portworx/px-dev` container instead.
 
-The arguments that are given to the container above (-k, -c etc) are described at [Command-line arguments to Portworx daemon](#command-line-args-daemon)
+### Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
+
+The following arguments are provided to the PX daemon:
+
+|  Argument | Description                                                                                                                                                                              |
+|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
+|     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
+|     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
+|     `-d`    | (Optional) Specifies the data interface.                                                                                                                                                 |
+|     `-m`    | (Optional) Specifies the management interface.                                                                                                                                           |
+|     `-z`    | (Optional) Instructs PX to run in zero storage mode. In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. |
+|     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
+|     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
+|     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
+|  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
+|    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
+|   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
+|    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
+| `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
+|   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
+
+The following Docker runtime command options are explained:
+
+| Option                                       | Description                                                                                                                                         |
+|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--privileged`                                 | Sets PX to be a privileged container. Required to export block device and for other functions.                                                      |
+| `--net=host`                                   | Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.                  |
+| `--shm-size=384M`                              | PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts.                                                  |
+| `-v /run/docker/plugins:/run/docker/plugins`   | Specifies that the volume driver interface is enabled.                                                                                              |
+| `-v /dev:/dev`                                 | Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\]. |
+| `-v /etc/pwx/config.json:/etc/pwx/config.json` | The configuration file location.                                                                                                                    |
+| `-v /var/run/docker.sock:/var/run/docker.sock` | Used by Docker to export volume container mappings.                                                                                                 |
+| `-v /var/lib/osd:/var/lib/osd:shared`          | Location of the exported container mounts. This must be a shared mount.                                                                             |
+| `-v /opt/pwx/bin:/export_bin`                  | Exports the PX command line (**pxctl**) tool from the container to the host.                                                                        |
 
 #### Optional - running with config.json
 
@@ -126,7 +160,7 @@ You can now start the Portworx container with the following run command:
                  -v /var/cores:/var/cores                      \
                  -v /usr/src:/usr/src                          \
                  -v /lib/modules:/lib/modules                  \
-                portworx/px-dev
+                portworx/px-enterprise
 ```
 
 At this point, Portworx should be running on your system. To verify, run `docker ps`.
@@ -259,40 +293,3 @@ After you complete this installation, continue with the set up to run stateful c
 
 * [Scale a Cassandra Database with PX](/applications/cassandra.html)
 * [Run the Docker Registry with High Availability](/applications/docker-registry.html)
-
-
-## Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
-
-The following arguments are provided to the PX daemon:
-
-|  Argument | Description                                                                                                                                                                              |
-|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
-|     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
-|     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
-|     `-d`    | (Optional) Specifies the data interface.                                                                                                                                                 |
-|     `-m`    | (Optional) Specifies the management interface.                                                                                                                                           |
-|     `-z`    | (Optional) Instructs PX to run in zero storage mode. In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. |
-|     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
-|     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
-|     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
-|  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
-|    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
-|   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
-|    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
-| `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
-|   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
-
-The following Docker runtime command options are explained:
-
-| Option                                       | Description                                                                                                                                         |
-|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--privileged`                                 | Sets PX to be a privileged container. Required to export block device and for other functions.                                                      |
-| `--net=host`                                   | Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.                  |
-| `--shm-size=384M`                              | PX advertises support for asynchronous I/O. It uses shared memory to sync across process restarts.                                                  |
-| `-v /run/docker/plugins:/run/docker/plugins`   | Specifies that the volume driver interface is enabled.                                                                                              |
-| `-v /dev:/dev`                                 | Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\]. |
-| `-v /etc/pwx/config.json:/etc/pwx/config.json` | The configuration file location.                                                                                                                    |
-| `-v /var/run/docker.sock:/var/run/docker.sock` | Used by Docker to export volume container mappings.                                                                                                 |
-| `-v /var/lib/osd:/var/lib/osd:shared`          | Location of the exported container mounts. This must be a shared mount.                                                                             |
-| `-v /opt/pwx/bin:/export_bin`                  | Exports the PX command line (**pxctl**) tool from the container to the host.                                                                        |

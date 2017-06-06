@@ -31,14 +31,11 @@ keywords: portworx, px-developer, container, storage, requirements
 
 ## Step 2: Install and run PX-Enterprise
 
-See our quick start guides:
-
-* [Run PX-Enterprise with Docker](/run-with-docker-ent.html)
-
-Run Portworx with schedulers:
+Select an operating environment to install Portworx:
 
 * [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html)
 * [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
+* [Run Portworx with Docker](/scheduler/docker/install.html)
 * [Run Portworx with Rancher](/scheduler/rancher/install.html)
 
 Run stateful containers with Portworx:
