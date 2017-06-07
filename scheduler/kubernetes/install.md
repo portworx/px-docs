@@ -37,6 +37,7 @@ Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your 
 You can also generate the spec using `curl` and supply that to kubectl. This is useful if:
 * Your cluster doesn't have access to http://install.portworx.com, so the spec can be generated on a different machine.
 * You want to save the spec file for future reference.
+
 For example:
 ```
 $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
