@@ -52,6 +52,8 @@
           url: /scheduler/mesosphere-dcos/inline.html
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
+        - title: Cleanup frameworks
+          url: /scheduler/mesosphere-dcos/framework_cleanup.html
       - title: FAQ
         folderitems:
         - title: How Portworx Volumes work with DCOS
