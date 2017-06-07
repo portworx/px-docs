@@ -56,7 +56,7 @@ With PX Enterprise you can increase the number of nodes in the PX Cluster to a v
 
 ### Etcd Options
 You can also change the number of etcd nodes in the etcd cluster.
-![Portworx ETCD Install options](/images/dcos-px-install-options-2.png){:width="655px" height="200px"}
+![Portworx ETCD Install options](/images/dcos-px-etcd-options.png){:width="655px" height="200px"}
 
 ### Lighthouse options
 By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
