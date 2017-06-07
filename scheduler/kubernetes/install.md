@@ -30,10 +30,19 @@ The native portworx driver in Kubernetes supports the following features:
 The following kubectl command deploys Portworx in the cluster as a `daemon set`:
 
 ```
-# kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+```
+Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
+
+You can also generate the spec using `curl` and supply that to kubectl. This is useful if:
+* Your cluster doesn't have access to http://install.portworx.com, so the spec can be generated on a different machine.
+* You want to save the spec file for future reference.
+For example:
+```
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+$ kubectl apply -f px-spec.yaml
 ```
 
-Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
 
 Below are all parameters that can be given in the query string:
 
