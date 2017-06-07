@@ -52,10 +52,12 @@ Specify your kvdb (consul or etcd) server if you don't want to use the etcd clus
 is enabled this config value will be ignored.
 If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest.
 With PX Enterprise you can increase the number of nodes in the PX Cluster to a value greater than 3.
-![Portworx Install options](/images/dcos-px-install-options-1.png){:width="655px" height="200px"}
+![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
 ### Etcd Options
-You can also change the number of etcd nodes in the etcd cluster.
+By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can
+be changed during install. This can not be updated once the service has been started so please make sure you have enough
+storage resources available in your DCOS cluster before starting the install.
 ![Portworx ETCD Install options](/images/dcos-px-etcd-options.png){:width="655px" height="200px"}
 
 ### Lighthouse options
@@ -64,7 +66,7 @@ By default the Lighthouse service will be installed. If this is disabled the inf
 You can enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse
 after install is complete. The default password is `admin` which can be changed after login.
 
-![Portworx Lighthouse Install options](/images/dcos-px-install-options-3.png){:width="655px" height="200px"}
+![Portworx Lighthouse Install options](/images/dcos-px-lighthouse-options.png){:width="655px" height="200px"}
 
 Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the
 service.
