@@ -61,7 +61,7 @@ Due to the limitations of AMP, there is no Javascript and therefore no Algolia D
 ## Build px-docs locally
 
 ```
-gem install jekyll bundler
+sudo gem install jekyll bundler
 bundle install
 bundle exec jekyll serve
 ```

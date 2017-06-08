@@ -76,7 +76,7 @@ $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://et
 # To run on coreos
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&coreos=true"
 
-# To run in master in zero storage mode and use a specifc drive for other nodes
+# To run in master in zero storage mode and use a specific drive for other nodes
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
 ```
 

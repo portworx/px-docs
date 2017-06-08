@@ -6,108 +6,84 @@ sidebar: home_sidebar
 ---
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
->**Note:**<br/>We are tracking when shared mounts will be allowed within Kubernetes (K8s), which will allow Kubernetes to deploy PX-Developer.
+This guide is for Kubernetes 1.5. If you are using Kubernetes 1.6 (recommended), please use [this page](/scheduler/kubernetes/install.html).
 
-## Step 1: Run the PX container
+## Prerequisites
+* You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* If Kubernetes is deployed using Openshift, add the service account `px-account` to the privileged security context
+ ```
+ $ oc adm policy add-scc-to-user privileged -z px-account --namespace kube-system
+ ```
 
-Portworx can be deployed via K8s directly, or run on each host via docker or systemd directly.
-
-To run the PX container using Docker, run the following command:
-
-For Redhat, Ubuntu and Debian distros:
-
-```
-# sudo docker run --restart=always --name px -d --net=host \
-    --privileged=true                             \
-    -v /run/docker/plugins:/run/docker/plugins    \
-    -v /var/lib/osd:/var/lib/osd:shared           \
-    -v /dev:/dev                                  \
-    -v /etc/pwx:/etc/pwx                          \
-    -v /opt/pwx/bin:/export_bin                   \
-    -v /usr/libexec/kubernetes/kubelet-plugins/volume/exec/px~flexvolume:/export_flexvolume:shared \
-    -v /var/run/docker.sock:/var/run/docker.sock  \
-    -v /var/cores:/var/cores                      \
-    -v /var/lib/kubelet:/var/lib/kubelet:shared   \
-    -v /usr/src:/usr/src                          \
-    portworx/px-dev:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
-```
-
-For CoreOS and VMWare Photon	
+## Step 1: Deploy Portworx
+The following kubectl command deploys Portworx in the cluster as a `daemon set`:
 
 ```
-# sudo docker run --restart=always --name px -d --net=host \		
-   --privileged=true                             \
-   -v /run/docker/plugins:/run/docker/plugins    \
-   -v /var/lib/osd:/var/lib/osd:shared           \
-   -v /dev:/dev                                  \
-   -v /etc/pwx:/etc/pwx                          \
-   -v /opt/pwx/bin:/export_bin:shared            \
-   -v /var/run/docker.sock:/var/run/docker.sock  \
-   -v /var/cores:/var/cores                      \
-   -v /lib/modules:/lib/modules                  \
-   -v /var/lib/kubelet:/var/lib/kubelet:shared   \
-   -v /etc/kubernetes/kubelet-plugins/volume/exec/px~flexvolume/:/export_flexvolume:shared \
-   portworx/px-dev:latest -daemon -k etcd://myetc.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
+$ kubectl apply -f "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+```
+Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
+
+>**Openshift users:**<br/> If kubernetes is deployed using Openshift, set `openshift=true` in the above URL. Check examples below.
+
+You can also generate the spec using `curl` and supply that to kubectl. This is useful if:
+* Your cluster doesn't have access to http://install.portworx.com, so the spec can be generated on a different machine.
+* You want to save the spec file for future reference.
+
+For example:
+```
+$ curl -o px-spec.yaml "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+$ kubectl apply -f px-spec.yaml
 ```
 
-Once this is run, PX will automatically deploy the K8s volume driver so that you can use PX volumes with any container deployed via K8s.
+Below are all parameters that can be given in the query string:
 
-## Step 2: Deploy Kubernetes
+| Key         	| Description                                                                                                                                                                              	| Example                                           	|
+|-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
+| cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd://etcd.fake.net:4001                    	|
+| drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
+| diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
+| miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
+| zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
+| force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
+| etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
+| etcdCa      	| (Optional) Location of CA file for ETCD authentication.                                                                                                                                  	| etcdCa=/path/to/server.ca                         	|
+| etcdCert    	| (Optional) Location of certificate for ETCD authentication.                                                                                                                              	| etcdCert=/path/to/server.crt                      	|
+| etcdKey     	| (Optional) Location of certificate key for ETCD authentication.                                                                                                                          	| etcdKey=/path/to/server.key                       	|
+| acltoken    	| (Optional) ACL token value used for Consul authentication.                                                                                                                               	| acltoken=398073a8-5091-4d9c-871a-bbbeb030d1f6     	|
+| token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
+| env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
+| coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
+| openshift    	| (Optional) Specifies that kubernetes is deployed using Openshift                                                                                                                          | openshift=true                                        |
 
-* Start the K8s cluster. 
 
-One way to start K8s for single node local setup is using the local-up-cluster.sh startup script in kubernetes source code.
+#### Scaling
+Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
+#### Examples
 ```
-# cd kubernetes
-# hack/local-up-cluster.sh
-```
+# To specify drives
+$ kubectl apply -f "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
 
-### Set your cluster details.
+# To run on openshift
+$ kubectl apply -f "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&openshift=true"
 
-```
-# cluster/kubectl.sh config set-cluster local --server=http://127.0.0.1:8080 --insecure-skip-tls-verify=true
-# cluster/kubectl.sh config set-context local --cluster=local
-# cluster/kubectl.sh config use-context local
-```
-
-### Set the K8s volume plugin directory
-
-By default the K8s volume plugin directory is "/usr/libexec/kubernetes/kubelet-plugins/volume/exec". If you are starting kubelet service by hand then make sure that you set the --volume-plugin-dir correctly. This is the directory where kubelet tries to search for portworx's volume driver. Example kubelet commands:
-
-For Redhat, Ubuntu, Debian distros:
-
-```bash
-kubelet-wrapper \
-  --api-servers=http://127.0.0.1:8080 \
-  --network-plugin-dir=<network-plugin-dir> \
-  --network-plugin=<network-plugin-name>\
-  --volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec \
-  --allow-privileged=true \
-  --config=/etc/kubernetes/manifests \
-  --hostname-override=<hostname> \
-  --cluster-dns=<cluster-dns> \
-  --cluster-domain=cluster.local
+# To run in master in zero storage mode and use a specific drive for other nodes
+$ kubectl apply -f "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
 ```
 
-For CoreOS and VMWare Photon:
+## Step 2: Restart Kubernetes
+For Kubernetes to discover the newly deployed Portworx plugin, it's control plane components need to be restarted.
 
-```bash
-kubelet-wrapper \
-  --api-servers=http://127.0.0.1:8080 \
-  --network-plugin-dir=<network-plugin-dir> \
-  --network-plugin=<network-plugin-name>\
-  --volume-plugin-dir=/etc/kubernetes/kubelet-plugins/volume/exec/ \
-  --allow-privileged=true \
-  --config=/etc/kubernetes/manifests \
-  --hostname-override=<hostname> \
-  --cluster-dns=<cluster-dns> \
-  --cluster-domain=cluster.local
-```
-  
-* Note that the volume-plugin-dir is provided as a shared mount option in the docker run command for PX container.
+* If using openshift, run `systemctl restart atomic-openshift-node.service` on all nodes
+* For other deployments, restart the `kubelet` service on all nodes
 
 ## Try it out with NGINX
+
+First create a volume using pxctl
+```
+/opt/pwx/bin/pxctl volume create test-vol
+```
 
 To use PX with your applications deployed via Kubernetes, include PX as a volume spec in the K8s spec file.
 
@@ -373,3 +349,20 @@ Events:
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-0
   9m		9m		1	{petset }		Normal		SuccessfulCreate	pet: petset-pwx-1
 ```
+
+## Upgrade
+To upgrade Portworx, use the same `kubectl apply` command used to install it. This will repull the image used for Portworx (portworx/px-enterprise:latest) and perform a rolling upgrade.
+
+You can check the upgrade status with following command.
+```
+$ kubectl rollout status ds portworx --namespace kube-system
+```
+
+## Uninstall
+Following kubectl command uninstalls Portworx from the cluster.
+
+```
+$ kubectl delete -f "http://install.portworx.com/kube1.5?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"
+```
+
+>**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
