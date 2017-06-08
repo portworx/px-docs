@@ -7,6 +7,7 @@ sidebar: home_sidebar
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
 This guide is for Kubernetes 1.5. If you are using Kubernetes 1.6 (recommended), please use [this page](/scheduler/kubernetes/install.html).
+Portworx has limited support for Kubernetes 1.5. The recommended release is 1.6.
 
 ## Prerequisites
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
