@@ -2823,6 +2823,9 @@ table th[class*="col-"] {
   ul.nav {
     padding-bottom: 50px;
   }
+  .navbar-collapse {
+    overflow:visible !important;
+   }
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;

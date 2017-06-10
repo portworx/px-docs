@@ -1,0 +1,46 @@
+#searchexpand {
+    margin-top: 20px;
+    position: absolute;
+    right: 20px;
+    background: lightgrey;
+    text-align: center;
+    height: 30px;
+    box-shadow: 0px 0px 4px grey;
+}
+#algolia-docsearch {
+    height: 30px;
+    width: 0px;
+    transition: width 200ms, background-color 200ms linear;
+    background: none;
+    border: none;
+    border-radius: 3px;
+    padding: 0;
+    margin: 0;
+    vertical-align: initial !important;
+    outline-color: grey;
+    text-indent: 5px;
+}
+#searchexpand i {
+    width: 30px;
+    height: 30px;
+    padding-top: 7px;
+}
+i.fa-search {
+    margin-right: -4px;
+}
+#searchexpand button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+.algolia-autocomplete {
+    top: 0;
+    margin: 0;
+    padding: 0;
+}
+@media (min-width: 1024px) {
+    #searchexpand .navbar-toggle {
+        display: none !important;
+    }
+}
