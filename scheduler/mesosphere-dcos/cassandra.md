@@ -20,7 +20,8 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
-## Adding the repository for the service:
+## Install
+### Adding the repository for the service
 
 For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
 
@@ -34,27 +35,27 @@ Once you have run the above command you should see the Cassandra-PX service avai
 
 ![Cassandra-PX in DCOS Universe](/images/dcos-cassandra-px-universe.png){:width=2597px" height="1287px"}
 
-## Installation
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 ```
 $ dcos package install --yes cassandra-px
 ```
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
+The default install will create PX volumes of size 5GB with 1 replica.
 
-### Advanced Install
+### Advanced Install and Volume Options
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on
 “Advanced Installation”
 
-Here you have the option to change the service name, volume name, volume size,and provide any additional options that you
-want to pass to the docker volume driver. You can also configure other Cassandra related parameters on this page including
-the number of Cassandra nodes.
+Here you have the option to change the service name, volume name, volume size, and provide any additional options for the 
+Portworx volume. You can also configure other Cassandra related parameters on this page including the number of Cassandra 
+nodes.
 
 ![Cassandra-PX install options](/images/dcos-cassandra-px-install-options.png){:width="655px" height="200px"}
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-## Install Status
+### Install Status
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
 ![Cassandra-PX on services page](/images/dcos-cassandra-px-service.png){:width="655px" height="200px"}
@@ -84,7 +85,21 @@ marathon                     10.0.4.21                   True     1    1.0   102
 metronome                    10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000 
 ```
 
-## Scaling the number of nodes
+## Hyperconvergence and Failover
+When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local 
+to the node where they are first launched.
+ 
+On subsequent launches of the same pod for example in the case of a failover, the framework queries Portworx to figure out
+where the data for the volume resides and uses this to decide where the pod should be launched.
+ 
+If there are not enough system resources (like CPU, memory) on the nodes where the data resides, the pod will eventually be 
+started on a node where the data isn’t local. This helps assure that the service can be bought online even when resource 
+utilization and tasks have moved around in the cluster.
+ 
+If the volume was created with a replication factor greater than 1, then the framework can decide to start the task on any 
+of the nodes where the data is local.
+
+## Scaling
 You do not need to create additional volumes of perform to scale up your cluster. 
 Just go to the Cassandra service page, click on the three dots on the top right corner of the page, select “nodes”, scroll
 down and increase the nodes parameter to the desired nodes.
