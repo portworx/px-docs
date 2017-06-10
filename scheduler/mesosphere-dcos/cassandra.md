@@ -85,7 +85,7 @@ marathon                     10.0.4.21                   True     1    1.0   102
 metronome                    10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000 
 ```
 
-## Hyperconvergence and Failover
+## Hyper-convergence and Failover
 When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local 
 to the node where they are first launched.
  
