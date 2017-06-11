@@ -8774,3 +8774,20 @@ section.pull-quote .container:after {
     padding-right: 60px;
   }
 }
+
+
+#marketing-nav {
+	font-family: 'Libre Franklin', sans-serif;
+
+	input {
+		margin-top: 9px;
+	}
+
+	#top-nav li>a {
+		text-transform: capitalize;
+	}
+
+	a[href^="http://"]:after, a[href^="https://"]:after {
+		content: none;
+	}
+}
