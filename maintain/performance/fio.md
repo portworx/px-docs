@@ -51,7 +51,7 @@ from PCSD - Product Collaboration Systems Division
 
 ### Benchmarking HowTo
 
-* Step 1: Before installing PX, benchmark all the disk drives using hdparm or dd. This is the upper bound of all measurement from here on.
+* Step 1: Before installing PX, benchmark all the disk drives using hdparm or dd. This is the upper bound of all measurements from here on.
 * Step 2: Install PX and get a baseline run. Stop PX and mount the disk drive(s) on a mountpoint on the host. Run Fio benchmark using this mountpoint as the target.
 * Step 3: Verify results. Make sure the IOs are hitting the disk by taking a snapshot of /proc/diskstats before and after the run. Make sure there are no reads when running write test and vice versa. Compare with results from Step1.
 * Step 4: Start PX, create and attach a device. Run Fio benchmark with the same options as the baseline using the attached PX device as target.
@@ -60,10 +60,11 @@ from PCSD - Product Collaboration Systems Division
 Note the following Results:
 * Total runtime.
 * Throughput: iops/sec * blocksize.
-* Latency(Completion time per request): 90/95th percentile clat.
+* Latency (Completion time per request): 90/95th percentile clat.
 
 Fio Options:
 
+```
 * ioengine: Linux native asynchronous IO engine (libaio).
 * blocksize: This is the Block size used for each IO operation and varies from application to application.
 * readwrite: IO pattern (read/write sequential/random).
@@ -71,6 +72,7 @@ Fio Options:
 * direct: Set to true for non-buffered IO. This implies files are opened with O_DIRECT flag which results in IOs bypassing host cache.
 * iodepth: This is the number of outstanding/queued IO requests in the system. A higher number typically means greater concurrecy and better resource utilization.
 * end_fsync: This causes flushing of dirty data to disk at the end of test. The flush time is included in the measurement.
+```
 
 Additional factors to consider when running a write test:
 * Do not overwrite. Reusing the same target in repeated tests will end up measuring overwrites instead of appending writes.
