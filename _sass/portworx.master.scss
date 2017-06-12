@@ -8783,8 +8783,16 @@ section.pull-quote .container:after {
 		margin-top: 9px;
 	}
 
-	#top-nav li>a {
-		text-transform: capitalize;
+	#top-nav li{
+		&:after {
+			border-bottom: none !important;
+		}
+
+	    &>a {
+			background-color: transparent !important;
+    		text-transform: capitalize;
+	    	border: none;
+	    }
 	}
 
 	a[href^="http://"]:after, a[href^="https://"]:after {

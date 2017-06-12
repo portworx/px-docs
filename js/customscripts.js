@@ -48,4 +48,9 @@ $(function() {
             return $this.find("a[data-toggle=tab]:first, a[data-toggle=pill]:first").tab("show");
         }
     });
+
+    $( "#marketing-nav #main-menu>li" ).hover( function() {
+          $("#marketing-nav li").removeClass("open");
+          $(this).addClass("open");
+    });
 });
