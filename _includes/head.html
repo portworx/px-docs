@@ -5,9 +5,9 @@
 <meta name="keywords" content="{{page.tags}}{% if page.tags %}, {% endif %} {{page.keywords}}">
 <title>{{ page.title }} | {{ site.site_title }}</title>
 
-<link rel="preload" href="/css/bundle.css" as="style" onload="this.rel='stylesheet'">
+<link rel="preload" href="/css/bundle.css?v={{ 'now' | date: '%s' }}" as="style" onload="this.rel='stylesheet'">
 
-    <link rel="stylesheet" href="/css/bundle.css" />
+    <link rel="stylesheet" href="/css/bundle.css?v={{ 'now' | date: '%s' }}" />
 
 <!-- This needs some minification -->
 <style type="text/css">
@@ -19,13 +19,13 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 
-<script defer src="/js/jquery.min.js"></script>
-<script defer src="/js/jquery.cookie.min.js"></script>
-<script defer src="{{ "/js/jquery.navgoco.min.js" }}"></script>
+<script defer src="/js/jquery.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="/js/jquery.cookie.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="{{ "/js/jquery.navgoco.min.js?v={{ 'now' | date: '%s' }}" }}"></script>
 
-<script defer src="/js/bootstrap.min.js"></script>
-<script defer src="/js/anchor.min.js"></script>
-<script defer src="{{ "/js/customscripts.js" }}"></script>
+<script defer src="/js/bootstrap.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="/js/anchor.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="{{ "/js/customscripts.js" }}?v={{ 'now' | date: '%s' }}"></script>
 
 <link rel="shortcut icon" href="{{ "/images/favicon.ico"  }}">
 
