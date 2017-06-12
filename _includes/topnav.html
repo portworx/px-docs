@@ -2,13 +2,16 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container topnavlinks">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+
+            <div id="searchexpand">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
-             <img src="/images/px-logo.png" height=50 width=138 style=margin-top:20px />
+                <i class="fa fa-search" aria-hidden="true" id="algolia-toggle"></i>
+                <input type="text" id="algolia-docsearch" placeholder="Search">
+            </div>
+
+             <img src="/images/px-logo.png" height=50 width=138 style=margin:10px />
              <!--<a href="https://portworx.github.io/px-docs"><img src="images/px-logo.png" height=50 width=138 style=margin-top:20px/></a>-->
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -53,10 +56,6 @@
     <!--comment out this block if you want to hide search-->
 <li>
 <!--start search-->
-<div id="search-demo-container">
-<input type="text" id="search-input" placeholder="{{site.data.strings.search_placeholder_text}}">
-<ul id="results-container"></ul>
-</div>
 <!-- at the end of the BODY -->
 <script defer type="text/javascript" src="/js/docsearch.min.js"></script>
 <script type="text/javascript"> 
@@ -64,7 +63,7 @@ window.addEventListener('DOMContentLoaded', function() {
     docsearch({
         apiKey: '94701e6663ea3899bf379b1609403bf9',
         indexName: 'portworx',
-        inputSelector: '#search-input',
+        inputSelector: '#algolia-docsearch',
         debug: false /* Set debug to true if you want to inspect the dropdown */
     });
 });

@@ -2817,12 +2817,9 @@ table th[class*="col-"] {
   min-height: 0.01%;
 }
 @media screen and (max-width: 480px) {
-  #search-demo-container {
-    position: fixed;
-  }
-  ul.nav {
-    padding-bottom: 50px;
-  }
+  .navbar-collapse {
+    overflow:visible !important;
+   }
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;

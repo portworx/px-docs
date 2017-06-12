@@ -14,6 +14,22 @@ $( document ).ready(function() {
      */
     anchors.add('h2,h3,h4,h5');
 
+    // Algolia docsearch styling
+    $("#algolia-docsearch").css("width", "0px");
+
+    $( "#algolia-toggle" ).click(function() {
+        $("#algolia-docsearch").css("width", "250px");
+        $("#algolia-docsearch").css("background", "#ffffff");
+        $("#algolia-docsearch").focus();
+        $(".navbar-toggle").hide();
+    });
+
+    $("#algolia-docsearch").focusout(function() {
+        $("#algolia-docsearch").attr("style", "");
+        $(".navbar-toggle").show();
+    });
+
+
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
