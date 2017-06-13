@@ -32,7 +32,7 @@ OPTIONS:
 ```
 ### pxctl license list
 
-`pxctl license list` command is used to list the details of the licenses. This command gives details of various features allowed to run under the current license. Product SKU gives the details of the license. 
+`pxctl license list` command is used to list the details of the licenses. This command gives details of various features limits allowed to run under the current license for the end user. Product SKU gives the details of the license. 
 
 ```
  /opt/pwx/bin/pxctl license list
