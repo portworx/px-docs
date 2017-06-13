@@ -10,9 +10,9 @@ redirect_from: "/dcos-cassandra.html"
 
 DC/OS provides a Cassandra service that makes it easy to deploy and manage Cassandra on Mesosphere DC/OS. This guide will help you to install and run the [containerized Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).  With [Portworx backing your Cassandra cluster](https://docs.portworx.com/applications/cassandra.html), you can 
 
-* Recovery faster during a failure
+* Recover faster during a failure
 * Achieve higher density by running multiple Cassandra rings on the same DC/OS hosts and
-* Simply deployments
+* Simplify deployments
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
@@ -90,7 +90,7 @@ metronome                    10.0.4.21                   True     0    0.0    0.
 ```
 
 ## Hyperconvergence
-Running your Cassandra task on the same host as its data provides the best performance.  This is called hyperconvergence and it is supported by the DC/OS Cassandra when using Portworx. When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local to the node where they are first launched.
+Running your Cassandra task on the same host as its data provides the best performance.  This is called hyperconvergence and it is supported by the DC/OS Cassandra framework when using Portworx. When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local to the node where they are first launched.
 
 ## Failover 
 On subsequent launches of the same pod, for example in the case of a failover, the framework queries Portworx to figure out where the data for the volume resides and uses this to decide where the pod should be launched.
