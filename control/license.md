@@ -27,5 +27,29 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
    
+```
+### pxctl license list
+
+`pxctl license list` command is used to list the details of the licenses. This command gives details of various features allowed to run under the current license. Product SKU gives the details of the license. 
 
 ```
+ /opt/pwx/bin/pxctl license list
+DESCRIPTION				ENABLEMENT	ADDITIONAL INFO
+Number of nodes maximum			1000		
+Number of volumes maximum		1024		
+Volume capacity [TB] maximum		  40		
+Aggregated volumes			 yes		
+Shared volumes				 yes		
+Volume sets				 yes		
+Data Encryption				 yes		
+Resize volumes on demand		 yes		
+Snapshot to object store		 yes		
+Enable bare-metal platforms		 yes		
+Enable virtual machine platforms	 yes		
+Product SKU				Trial		expires in 6 days, 2:59
+
+LICENSE EXPIRES: 2017-06-19 23:59:59 +0000 UTC
+For information on purchase, upgrades and support, see
+https://portworx.com/products/support
+```
+
