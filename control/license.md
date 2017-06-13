@@ -10,6 +10,8 @@ redirect_from: "/cli-reference.html"
 {:toc}
 
 ### License help
+
+`pxctl license --help` command gives details of the help.
 ```
 /opt/pwx/bin/pxctl license --help
 NAME:
