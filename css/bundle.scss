@@ -12,4 +12,8 @@
 @import "gh-fork-ribbon";
 @import "font-awesome/font-awesome";
 @import "docsearch";
-@import "marketing-nav";
+@import "custom-algolia";
+
+#marketing-nav {
+	@import "marketing-nav";
+}

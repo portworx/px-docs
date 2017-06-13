@@ -7,23 +7,6 @@ layout: compress
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             $(document).ready(function() {
-                /* Initialize navgoco with default options */
-                $("#mysidebar").navgoco({
-                    caretHtml: '',
-                    accordion: true,
-                    openClass: 'active', /* open */
-                    save: false, /* leave false or nav highlighting doesn't work right */
-                    cookie: {
-                        name: 'navgoco',
-                        expires: false,
-                        path: '/'
-                    },
-                    slide: {
-                        duration: 400,
-                        easing: 'swing'
-                    }
-                });
-
                 $("#collapseAll").click(function(e) {
                     e.preventDefault();
                     $("#mysidebar").navgoco('toggle', false);
@@ -35,6 +18,26 @@ layout: compress
                 });
 
                 $('[data-toggle="tooltip"]').tooltip();
+            });
+        });
+
+        var ngc = document.querySelector('#ngcload');
+        ngc.addEventListener('load', function() {
+            /* Initialize navgoco with default options */
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', /* open */
+                save: false, /* leave false or nav highlighting doesn't work right */
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
             });
         });
     </script>
@@ -78,6 +81,21 @@ layout: compress
 </div>
 <!-- /.container -->
     </div>
+
+<!--start search-->
+<!-- at the end of the BODY -->
+<script defer type="text/javascript" src="/js/docsearch.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script type="text/javascript"> 
+window.addEventListener('DOMContentLoaded', function() {
+    docsearch({
+        apiKey: '94701e6663ea3899bf379b1609403bf9',
+        indexName: 'portworx',
+        inputSelector: 'input#s',
+        debug: false /* Set debug to true if you want to inspect the dropdown */
+    });
+});
+</script>
+<!--end search-->
 
 </body>
 {% if site.google_analytics %}

@@ -73,7 +73,7 @@ Docs site will now be served locally at [http://127.0.0.1:4005/](http://127.0.0.
 The navbar is copied from the top of the Portworx marketing website. 
 To update the navigation, three steps are required:
 
- 1. Copy the entire content of the `<nav>` from portworx.com (including the nav tag itself) to `_includes/marketing-nav.html`.
+ 1. Copy the entire content of the `<nav>` from portworx.com (including the nav tag itself) to `_includes/topnav.html`.
  2. Copy the entire 6th section of [the Portworx marketing website's CSS file](https://portworx.com/wp-content/themes/portworx/css/master.css) to `_sass/marketing-nav.scss`.
  3. Build the site and test.
 
