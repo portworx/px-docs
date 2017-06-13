@@ -28,6 +28,8 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Get Support
+          url: /scheduler/kubernetes/support.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
