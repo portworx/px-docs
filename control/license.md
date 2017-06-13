@@ -59,4 +59,8 @@ https://portworx.com/products/support
 
 `pxctl license activate <activation>` command is used to activate the activation id. You will get activation id from portworx.
 
+### pxctl license add
+
+`pxctl license add <license file>` command is used to add license. Generally user will use activation id to activate license, but some user might need to download license file on the local machines,example without internet access.
+
 
