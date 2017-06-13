@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Cassandra on DCOS with Portworx"
+title: "Run Cassandra on DCOS"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 redirect_from: "/dcos-cassandra.html"
 ---
@@ -8,7 +8,11 @@ redirect_from: "/dcos-cassandra.html"
 * TOC
 {:toc}
 
-This guide will help you to install the [Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service on your DCOS cluster backed by PX volumes for persistent storage.
+DC/OS provides a Cassandra service that makes it easy to deploy and manage Cassandra on Mesosphere DC/OS. This guide will help you to install and run the [containerized Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).  With [Portworx backing your Cassandra cluster](https://docs.portworx.com/applications/cassandra.html), you can 
+
+* Recover faster during a failure
+* Achieve higher density by running multiple Cassandra rings on the same DC/OS hosts and
+* Simplify deployments
 
 Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
 repositories to your DCOS cluster to install the services mentioned here. 
@@ -85,21 +89,18 @@ marathon                     10.0.4.21                   True     1    1.0   102
 metronome                    10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000 
 ```
 
-## Hyper-convergence and Failover
-When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local 
-to the node where they are first launched.
+## Hyperconvergence
+Running your Cassandra task on the same host as its data provides the best performance.  This is called hyperconvergence and it is supported by the DC/OS Cassandra framework when using Portworx. When each Cassandra task is first launched, they create the required PX volumes. These volumes are created with data local to the node where they are first launched.
+
+## Failover 
+On subsequent launches of the same pod, for example in the case of a failover, the framework queries Portworx to figure out where the data for the volume resides and uses this to decide where the pod should be launched.
  
-On subsequent launches of the same pod for example in the case of a failover, the framework queries Portworx to figure out
-where the data for the volume resides and uses this to decide where the pod should be launched.
+If there are not enough system resources (like CPU, memory) on the nodes where the data resides, the pod will eventually be started on a node where the data isn’t local. This helps ensure that the service can be bought online even when resource utilization and tasks have moved around in the cluster.
  
-If there are not enough system resources (like CPU, memory) on the nodes where the data resides, the pod will eventually be 
-started on a node where the data isn’t local. This helps assure that the service can be bought online even when resource 
-utilization and tasks have moved around in the cluster.
- 
-If the volume was created with a replication factor greater than 1, then the framework can decide to start the task on any 
-of the nodes where the data is local.
+If the volume was created with a replication factor greater than 1, then the framework can decide to start the task on any of the nodes where the data is local.
 
 ## Scaling
+
 You do not need to create additional PX volumes manually to scale up your cluster. 
 Just go to the Cassandra service page, click on the three dots on the top right corner of the page, select “nodes”, scroll
 down and increase the nodes parameter to the desired nodes.
