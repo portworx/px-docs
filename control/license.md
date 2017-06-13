@@ -55,3 +55,8 @@ For information on purchase, upgrades and support, see
 https://portworx.com/products/support
 ```
 
+### pxctl license activate
+
+`pxctl license activate <activation>` command is used to activate the activation id. You will get activation id from portworx.
+
+
