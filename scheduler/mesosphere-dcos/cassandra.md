@@ -100,10 +100,10 @@ If the volume was created with a replication factor greater than 1, then the fra
 of the nodes where the data is local.
 
 ## Scaling
-You do not need to create additional volumes of perform to scale up your cluster. 
+You do not need to create additional PX volumes manually to scale up your cluster. 
 Just go to the Cassandra service page, click on the three dots on the top right corner of the page, select “nodes”, scroll
 down and increase the nodes parameter to the desired nodes.
 
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and
-create more Cassandra nodes. Please make sure you have enough resources and nodes available to scale up the number of nodes.
+create more Cassandra nodes with newly created PX volumes. Please make sure you have enough resources and nodes available to scale up the number of nodes.
 You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
