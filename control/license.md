@@ -63,4 +63,13 @@ https://portworx.com/products/support
 
 `pxctl license add <license file>` command is used to add license. Generally user will use activation id to activate license, but some user might need to download license file on the local machines,example without internet access.
 
+### pxctl license trial
+
+`pxctl license trial` command is used to activate 30 day enterprise license. 
+Note: this command is only applicable for px-dev.
+
+```
+/opt/pwx/bin/pxctl license trial
+Successfully activated trial license.
+```
 
