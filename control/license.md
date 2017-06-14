@@ -9,6 +9,9 @@ redirect_from: "/cli-reference.html"
 * TOC
 {:toc}
 
+Licensing gives details of the licenses present with details of the various features allowed and its limits within a given license.
+
+
 ### License help
 
 `pxctl license --help` command gives details of the help.
