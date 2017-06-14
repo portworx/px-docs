@@ -66,7 +66,7 @@ https://portworx.com/products/support
 ### pxctl license trial
 
 `pxctl license trial` command is used to activate 30 day enterprise license. 
-Note: this command is only applicable for px-dev.
+Note: this command is only applicable for px-dev only.
 
 ```
 /opt/pwx/bin/pxctl license trial
