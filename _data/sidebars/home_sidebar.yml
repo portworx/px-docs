@@ -234,8 +234,6 @@
       url: /knowledgebase/sles-12-sp1.html
     - title: FAQs
       url: /knowledgebase/faqs.html
-    - title: Troubleshooting
-      url: /knowledgebase/troubleshooting.html
   - title: Release Notes
     folderitems:
     - title: About 1.x
