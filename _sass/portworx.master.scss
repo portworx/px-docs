@@ -4344,6 +4344,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 2;
   margin-left: -1px;
 }
+.side-nav {
 .nav {
   margin-bottom: 0;
   padding-left: 0;
@@ -4387,6 +4388,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li > a > img {
   max-width: none;
+}
 }
 .nav-tabs {
   border-bottom: 1px solid #ddd;
@@ -8588,4 +8590,18 @@ section.pull-quote .container:after {
 		content: none;
 	}
 
+    hr {
+        margin: 0 25% !important;
+        width: 50%;
+    }
+
+    :last-child:after {
+    	border-bottom: none !important;
+    }
+
+    .navbar-toggle {
+    	background: none !important;
+    }
+
 }
+
