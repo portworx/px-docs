@@ -27,7 +27,7 @@ Set up the admin user id/password; the default admin id is "admin" ; get into th
  
  you can also create  or change the admin ID / password from webUI
 
-![](images/couchdb-pic-001.PNG)
+![](couchdb-pic-001.PNG)
 
 
 ### Creating test database 
@@ -51,4 +51,4 @@ And ``test-run.sh`` script will run parallel multiple of the above script proces
 The following is the performance test result for  PX (single volume repl=1, ``locally attached``, ``remotely attached``) vs Standard local disk in ext4  (baseline) on Couchdb 2.0 (no couchdb replication and sharding).
 
 
-![](images/couchdb-pic-002.PNG)
+![](couchdb-pic-002.PNG)
