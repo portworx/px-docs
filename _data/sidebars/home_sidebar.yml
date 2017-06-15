@@ -6,6 +6,8 @@
       url: /#install
     - title: Quick Start
       url: /getting-started/asap.html
+    - title: Licensing
+      url: /getting-started/px-licensing.html
   - title: Schedulers
     folderitems:
     - title: Kubernetes
