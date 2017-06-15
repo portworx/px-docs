@@ -6,6 +6,8 @@
       url: /#install
     - title: Quick Start
       url: /getting-started/asap.html
+    - title: Licensing
+      url: /getting-started/px-licensing.html
   - title: Schedulers
     folderitems:
     - title: Kubernetes
@@ -28,6 +30,8 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Get Support
+          url: /scheduler/kubernetes/support.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -126,6 +130,8 @@
       folderitems:
       - title: Basics
         url: /control/status.html
+      - title: License
+        url: /control/license.html
       - title: Credentials
         url: /control/credentials.html
       - title: Volume
