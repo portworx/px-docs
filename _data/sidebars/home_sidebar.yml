@@ -128,6 +128,8 @@
       folderitems:
       - title: Basics
         url: /control/status.html
+      - title: License
+        url: /control/license.html
       - title: Credentials
         url: /control/credentials.html
       - title: Volume
