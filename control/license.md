@@ -9,6 +9,7 @@ redirect_from: "/cli-reference.html"
 * TOC
 {:toc}
 
+NOTE: This is available from version 1.2.8 onwards.<br>
 Licensing gives details of the licenses present with details of the various features allowed and its limits within a given license.
 
 
