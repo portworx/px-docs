@@ -134,9 +134,8 @@ Product SKU                     Trial    expires in 6 days, 20:40
 
 **EXPIRATION**:
 
-When the trial period expires, no new data may be written to the PX-volumes: one will no longer be able to create new volumes or volume
-snapshots.  Additionally, the existing volumes will no longer be accessible as "Read/Write", but will switch to "Read-Only" mode.
-The normal "Read/Write" functionality may be enabled at any time, by purchasing and installing the "PX-Enterprise" license.
+When the trial period expires, one will no longer be able to create new volumes or volume snapshots.
+The normal functionality may be restored at any time, by purchasing and installing the "PX-Enterprise" license.
 
 **UPGRADE NOTES**:
 
@@ -172,9 +171,10 @@ The easiest way to install the "PX-Enterprise" license, is via the
 pxctl license activate c0ffe-fefe-activation-123
 ```
 
-Note that the "license activation" process will require active Internet connection from the PX-node to the license-server,
-as the activation process of automatically sends the unique cluster UUID to the license-server, retrieves and installs
-the generated license on the cluster.  Upon activating the license on one PX-node, all remaining PX-nodes will automatically update to the new license.
+Note that the "license activation" process will require active Internet connection from the PX-nodes to the license-server,
+as the activation process automatically registers the cluster UUID on the license-server, retrieves and installs
+the generated license on the cluster.  Upon activating the license on one PX-node, all remaining PX-nodes will automatically
+update to the new license.
 
 
 
