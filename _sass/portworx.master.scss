@@ -8565,6 +8565,15 @@ section.pull-quote .container:after {
     }
 
     padding-top: 40px;
+
+    input {
+        background-image: url(/images/magnifying-glass.png);
+        background-size: 16px;
+        background-repeat: no-repeat;
+        background-position: left;
+        padding-left: 28px;
+        background-position-x: 6px;
+    }
 }
 
 #marketing-nav {
