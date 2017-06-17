@@ -54,6 +54,14 @@ sudo /opt/pwx/bin/pxctl host attach cliencr
 Volume successfully attached at: /dev/mapper/pxd-enc1013237432577873530
 ```
 
+If you are trying to attach an encrypted volume and if the node in which the encrypted volume is being attached to is not authenticated with the secrets endpoint, then you will get the following error message
+
+```
+sudo /opt/pwx/bin/pxctl host attach  vol3
+attach: Not authenticated with the secrets endpoint
+```
+Ensure that the node is authenticated with the secretes endpoint. Refer to the Encrypted Volumes section.
+
 #### pxctl host detach
 `pxctl host detach` command is used to detach a volume from a host
 ```
