@@ -37,6 +37,7 @@ $( document ).ready(function() {
 $(function() {
     $('#mysidebar b').parents('li').addClass("active");
     $('#mysidebar b').closest('li').removeClass("active");
+    $('#mysidebar .active>ul').css('display', 'block');
 
     var json, tabsState;
     $('a[data-toggle="pill"], a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
