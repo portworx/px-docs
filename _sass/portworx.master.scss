@@ -8581,8 +8581,13 @@ section.pull-quote .container:after {
 	    	transition: all 0.5s ease;
 	    }
 
-	    &.open>a {
-	        color: #ddd;
+	    &.open {
+	        &>a {
+	            color: #ddd;
+	        }
+	        &>ul {
+	        	display: block !important;
+	        }
 		}
 	}
 
@@ -8601,6 +8606,10 @@ section.pull-quote .container:after {
 
     .navbar-toggle {
     	background: none !important;
+    }
+
+    .mobile-close {
+    	font-size: 1.5em !important;
     }
 
 }

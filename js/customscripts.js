@@ -29,6 +29,15 @@ $( document ).ready(function() {
         $(".navbar-toggle").show();
     });
 
+    $('ul.nav li.dropdown').hover(function() {
+        if (window.innerWidth > 1023){
+            $(this).find('.dropdown-menu').stop(true, true).fadeIn(300);
+            }
+        }, function() {
+            if (window.innerWidth > 1023){
+            $(this).find('.dropdown-menu').stop(true, true).fadeOut(300);
+        }
+    });
 
 });
 
@@ -37,6 +46,7 @@ $( document ).ready(function() {
 $(function() {
     $('#mysidebar b').parents('li').addClass("active");
     $('#mysidebar b').closest('li').removeClass("active");
+    $('#mysidebar .active>a').click();
 
     var json, tabsState;
     $('a[data-toggle="pill"], a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -65,8 +75,4 @@ $(function() {
         }
     });
 
-    $( "#marketing-nav #main-menu>li" ).hover( function() {
-          $("#marketing-nav li").removeClass("open");
-          $(this).addClass("open");
-    });
 });
