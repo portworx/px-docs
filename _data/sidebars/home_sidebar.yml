@@ -264,3 +264,5 @@
       url: /video/quickstart.html
     - title: Hadoop on Portworx on DCOS
       url: /video/hadoop_px_dcos.html
+    - title: Microsoft SQL Server with High Availability
+      url: /video/sql_server.html
