@@ -226,8 +226,8 @@ $ mkdir -p /var/cores
 We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
 
 ```
-$ sudo docker plugin install portworx/px:1.2.5 opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
-Plugin "portworx/px:1.2.5" is requesting the following
+$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
+Plugin "portworx/px:latest" is requesting the following
 privileges:
  - network: [host]
  - mount: [/dev]
@@ -244,6 +244,8 @@ Do you grant the above permissions? [y/N] y
 ```
 
 You will need to grant the above set of permissions for the plugin to be installed.
+
+To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-px-plugin.html).
 
 ### Adding Nodes
 
