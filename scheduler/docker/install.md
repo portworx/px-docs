@@ -226,7 +226,7 @@ $ mkdir -p /var/cores
 We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
 
 ```
-$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
+$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc" --alias pxd
 Plugin "portworx/px:latest" is requesting the following
 privileges:
  - network: [host]
