@@ -227,7 +227,7 @@ We need to create these directories on the host, so that the plugin can export `
 
 ```
 $ sudo docker plugin install portworx/px:1.2.5 opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
-Plugin "portworx/px:latest" is requesting the following
+Plugin "portworx/px:1.2.5" is requesting the following
 privileges:
  - network: [host]
  - mount: [/dev]
