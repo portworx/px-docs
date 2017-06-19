@@ -10,7 +10,7 @@ sidebar: home_sidebar
 
 This guide describes upgrading the Portworx docker volume plugin.
 
-The example commands upgrade the plugin to version 1.2.5. You will need to run the below sequence on all Portworx nodes in the cluster.
+The commands in this guide upgrade the plugin to version 1.2.5. You will need to run the below sequence on all Portworx nodes in the cluster.
 
 1. Pause/stop all applications using Portworx volumes
 2. List the plugin ID
