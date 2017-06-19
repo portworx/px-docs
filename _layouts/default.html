@@ -61,7 +61,10 @@ layout: compress
 <body>
 
 <div id="marketing-nav">
-    {% include topnav.html %}
+	{% capture topnav %}
+        {% include topnav.html %}
+    {% endcapture %}
+    {{ topnav | replace: 'href="/', 'href="https://portworx.com/' }}
 </div>
 
 <!-- Page Content -->
