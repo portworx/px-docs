@@ -29,74 +29,33 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@ssw0rd' \
 ```
 
 This command runs `mssql-server-linux` with a 10 GB volume created dynamically on the fly with 3-way replication, 
-which guarantees that the data will be protected on 3 separate nodes. 
+which guarantees that persistent data will be fully replicated on 3 separate nodes for the highest availability. 
 
 The mssql-server container is now accessible remotely at port 1433.
 
 ## Step 2: Access SQL Server
 
-
-
-## Step 3: Use `pxctl` to create snaps of your mysql volume
-
-To demonstrate the capabilities of the SAN-like functionality offered by Portworx, create a snapshot of a mysql volume.
-
-1. Create a database and a demo table in your mysql container.
-
-   ```
-# mysql --user=root --password=password
-MySQL [(none)]> create database pxdemo;
-Query OK, 1 row affected (0.00 sec)
-MySQL [(none)]> use pxdemo;
-Database changed
-MySQL [pxdemo]> create table grapevine (counter int unsigned);
-Query OK, 0 rows affected (0.04 sec)
-MySQL [pxdemo]> quit;
-Bye
-```
-
-2. Create a snapshot of this database using `pxctl`.
-
-   ```
-# /opt/pwx/bin/pxctl snap create 8927336170128555
-Volume successfully snapped:  1483421664452964115
-```
-
-3. Note the snapshot volume ID.  Use this to launch a new instance of mysql.  Since you already have mysql running, you can go to another node in your cluster, or stop the original mysql instance.
-
-   ```
-# docker run -p 3306:3306 --volume-driver=pxd 				\
-                        --name pxmysqlclone                 \
-                        -e MYSQL_ROOT_PASSWORD=password     \
-                        -v 1483421664452964115:/var/lib/mysql -d mysql
-```
-
-4. Verify that the database shows the cloned tables in the new mysql instance.
+To access via `docker exec`:
 
 ```
-# mysql --user=root --password=password
-MySQL [(none)]> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| pxdemo             |
-| sys                |
-+--------------------+
-5 rows in set (0.00 sec)
-MySQL [(none)]> use pxdemo;
-
-Database changed
-MySQL [pxdemo]> show tables;
-+------------------+
-| Tables_in_pxdemo |
-+------------------+
-| grapevine        |
-+------------------+
-1 rows in set (0.00 sec)
+docker exec -it <Container ID> /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" '
 ```
+
+[Download](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools) `sqlcmd` utility.
+Then access the `mssql-server` via:
+
+```
+sqlcmd -S 10.3.2.4 -U SA -P "P@ssw0rd"
+```
+where 10.3.2.4 is the IP address of the host.
+
+
+To access via other client frameworks:
+
+
+## Step 3: Use `pxctl` to create recoverable snapshots of your volume
+
+
 
 ## See Also
 For futher reading on Microsoft SQL Server on Linux, 
