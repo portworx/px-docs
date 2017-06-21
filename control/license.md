@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "CLI Reference"
+title: "CLI Reference–License"
 keywords: portworx, pxctl, command-line tool, cli, reference,license
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
