@@ -13,13 +13,13 @@ redirect_from:
 
 This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
 
-# About Stateful Auto Scaling
+## About Stateful Auto Scaling
 In order to determine if stateful auto scaling is needed in your environment, read [this blog](https://portworx.com/auto-scaling-groups-ebs-docker/) to get an overview of what this feature does.
 
-# Configure the Auto Scaling Group
+## Configure the Auto Scaling Group
 Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
 
-# Stateless Autoscaling
+## Stateless Autoscaling
 When your Portworx instances do not have any local storage, they are called `head-only` or `stateless` nodes.  They still participate in the PX cluster and can provide volumes to any client container on that node.  However, they strictly consume storage from other stateful PX instances.
 
 Automatically scaling these PX instances up or down do not require any special care, since they do not have any local storage.  They can join and leave the cluster without any manual intervention or administrative action.
@@ -54,7 +54,7 @@ ExecStart=/usr/bin/docker run --net=host --privileged=true \
 
 At this point, these nodes will be able to join and leave the cluster dynamically.
 
-# Stateful Autoscaling
+## Stateful Autoscaling
 When your Portworx instances have storage associated with them, they are called `stateful` nodes and extra care must be taken when using `Auto Scaling`.  As instances get allocated, new EBS volumes may need to be allocated.  Similarly as instances as scaled down, care must be taken so that the EBS volumes are not deleted.
 
 This section explains specific functionality that Portworx provides to easily integrate your auto scaling environment with your stateful PX nodes and optimally manage stateful applications across a variable number of nodes in the cluster.
