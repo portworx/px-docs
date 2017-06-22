@@ -88,7 +88,7 @@ If you run the "dcos service" command you should see the kafka-px service in ACT
 
 From the DCOS client; install the new command for kafka-px
 
-      $ docs package install kafka-px --cli
+      $ dcos package install kafka-px --cli
 
 Find out all the kafka broker endpoints
 
