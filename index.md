@@ -58,13 +58,10 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
-* A key/value store such as Etcd 2.0 or Consul 0.7.0
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM
-* Recommended resources per server:
-  * 12 CPU cores
-  * 16 GB RAM
+* Additional resources recommended per server:
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
