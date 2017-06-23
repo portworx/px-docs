@@ -59,9 +59,10 @@ $ mkdir -p /var/cores
 
 We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
 
+>**Important:**<br/>The `--alias pxd` option is important if you are upgrading from a non-plugin Portworx install to this plugin-based method.
 
 ```
-$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
+$ sudo docker plugin install portworx/px:latest --alias pxd opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
 Plugin "portworx/px:latest" is requesting the following
 privileges:
  - network: [host]
@@ -77,49 +78,29 @@ privileges:
  - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
 Do you grant the above permissions? [y/N] y
 ```
-
 You will need to grant the above set of permissions for the plugin to be installed.
-
 
 The description of the arguments provided to the plugin install ```opts``` parameter are described below.
 
-```
--k
-	> Points to your key value database, such as an etcd cluster or a consul cluster.
-	
--userpwd
-    > username and password for ETCD authentication in the form <user_name>:<passwd>
- 
--ca
-    > location of CA file for ETCD authentication
-       
--cert 
-	> location of certificate for ETCD authentication 
+|  Argument | Description                                                                                                                                                                              |
+|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
+|     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
+|     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
+|     `-d`    | (Optional) Specifies the data interface.                                                                                                                                                 |
+|     `-m`    | (Optional) Specifies the management interface.                                                                                                                                           |
+|     `-z`    | (Optional) Instructs PX to run in zero storage mode. In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. |
+|     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
+|     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
+|     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
+|     `-x`    | (Optional) Specifies the scheduler being used in the environment. Supported values: "swarm" and "kubernetes".                                                                            |
+|  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
+|    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
+|   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
+|    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
+| `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
+|   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
 
--c
-	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
-
--s
-	> Specifies the various drives that PX should use for storing the data.
-
--a
-	> Instructs PX to use any available, unused and unmounted drive.  PX will never use a drive that is mounted.
-
--A
-	> Instructs PX to use any available, unused and unmounted drives or partitions.  PX will never use a drive or partition that is mounted.
-
--f
-	> Optional.  Instructs PX to use an unmounted drive even if it has a filesystem on it.
-
--z
-	> Optional.  Instructs PX to run in zero storage mode.  In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes.
-
--d
-	> Optional.  Specifies the data interface.
-
--m
-	> Optional.  Specifies the management interface.
-```
 
 The privileges that PX plugin uses are explained below:
 
