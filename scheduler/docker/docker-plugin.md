@@ -60,6 +60,7 @@ $ mkdir -p /var/cores
 We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
 
 >**Important:**<br/>The `--alias pxd` option is important if you are upgrading from a non-plugin Portworx install to this plugin-based method.
+Once the plugin install is complete, remove the legacy Portworx socket file at `/run/docker/plugins/pxd.sock`
 
 ```
 $ sudo docker plugin install portworx/px:latest --alias pxd opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
