@@ -9,7 +9,7 @@ redirect_from: "/encrypted-volumes.html"
 * TOC
 {:toc}
 
-# Encrypted Volumes
+## Encrypted Volumes
 This guide will give you an overview of how to use Encryption feature for Portworx volumes. Under the hood Portworx uses libgcrypt library to interface with the dm-crypt module for creating, accessing and managing encrypted devices. Portworx uses the LUKS format of dm-crypt and AES-256 as the cipher with xts-plain64 as the cipher mode.
 
 All the encrypted volumes are protected by a key. Portworx uses a passphrase as a key to encrypt volumes. It is recommended to store these passphrases in a secure secret store. Currently Portworx integrates with following Secret endpoints

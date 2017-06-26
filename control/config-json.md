@@ -55,7 +55,7 @@ This is the schema definition for a valid PX configuration file.  This file is e
 }
 ```
 
-# Definitions
+## Definitions
 
 **clusterid**:   Globally unique cluster ID.  Ex: ""07ea5dc0-4e9a-11e6-b2fd-0242ac110003"".   Must be either assigned by PX-Enterprise or guaranteed to be unique
 
