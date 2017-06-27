@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A Production Ops Guide to Deploying Cassandra"
+title: "Taking Consistent Cassandra Snapshots"
 keywords: portworx, px-developer, cassandra, database, cluster, storage, snapshots, snaps, backup
 sidebar: home_sidebar
 ---
