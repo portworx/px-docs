@@ -41,7 +41,7 @@ To access via `docker exec`:
 docker exec -it <Container ID> /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" '
 ```
 
-`OR` [Download](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools) `sqlcmd` utility.
+`OR` [Download the `sqlcmd` utility](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-tools).
 Then access the `mssql-server` via:
 
 ```
@@ -49,8 +49,7 @@ sqlcmd -S 10.3.2.4 -U SA -P "P@ssw0rd"
 ```
 where 10.3.2.4 is the IP address of the host.
 
-
-To access via other client framework, for example SQL Server Management Studio, use the IP Address of the host
+To access via other client framework, for example [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms), use the IP Address of the host
 where `mssql-server` has been launched.  If needed, supply the port of the instance ("1433" in the above example).
 
 Note that you could run multiple instances of `mssql-server` on the same host, each with its own unique persistent volume mapped,
