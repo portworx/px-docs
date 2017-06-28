@@ -13,6 +13,7 @@ youtubeId: G3Lp1RgWdKg
 In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server 
 in containers with Portworx. For the first time, you’ll get the availability, durability, 
 and recoverability that enterprises expect when running containerized SQL.
+
 {% include youtubePlayer.html id=page.youtubeId %}
 
 
@@ -88,6 +89,7 @@ CONTAINER ID        IMAGE                          COMMAND                  CREA
 0636d98250c4        portworx/px-dev                "/docker-entry-point."   2 hours ago         Up 2 hours                                   portworx.service
 jeff-coreos-2 core # docker inspect --format '{{ .Mounts }}' 46eff5a9cbd6
 [{mssqlvol_snap_0628 /var/lib/osd/mounts/mssqlvol_snap_0628 /var/opt/mssql pxd  true rprivate}]
+```
 
 ## See Also
 For futher reading on Microsoft SQL Server on Linux, 
