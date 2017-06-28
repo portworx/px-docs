@@ -194,6 +194,8 @@
           url: /applications/cassandra-snaps.html
       - title: PostgreSQL
         url: /applications/postgres.html
+      - title : Microsoft SQL Server on Portworx
+        url: /applications/mssql-server.html
     - title: Messaging 
       folderitems:
       - title: Redis
