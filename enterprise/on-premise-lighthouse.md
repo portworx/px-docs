@@ -11,7 +11,7 @@ redirect_from: "/run-lighthouse.html"
 
 Portworx offers a SaaS service called Lighthouse.  Lighthouse can monitor and manage your PX clusters and storage.  However you can also run your own Lighthouse.
 
-This guide shows you how you can run [Lighthouse](http://lighthouse.portworx.com/) locally.
+This guide shows you how you can run [Lighthouse](https://lighthouse.portworx.com/login) locally.
 
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
