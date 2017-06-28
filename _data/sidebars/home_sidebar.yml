@@ -190,6 +190,8 @@
           url: /applications/cassandra.html
         - title: Measuring Performance
           url: /applications/cassandra-px-perf-test.html
+        - title: Snapshots
+          url: /applications/cassandra-snaps.html
       - title: PostgreSQL
         url: /applications/postgres.html
     - title: Messaging 
