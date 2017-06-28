@@ -4,7 +4,7 @@ topnav:
 - title: Topnav
   items:
     - title: News
-      external_url: http://portworx.com/news
+      external_url: https://portworx.com/news/
     - title:  Portworx YouTube Channel
       external_url: https://www.youtube.com/channel/UCSexpvQ9esSRgiS_Q9_3mLQ
 
