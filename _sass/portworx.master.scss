@@ -7472,9 +7472,6 @@ footer {
   color: #333;
   padding: 0;
 }
-footer a {
-  color: #fff;
-}
 footer .page-sub-header {
   color: #fff;
   margin-bottom: 20px;
@@ -7514,16 +7511,6 @@ footer small.copyright {
 }
 .footer-links > li {
   padding-top: 10px;
-}
-footer a,
-.footer-links > li > a {
-  text-decoration: none;
-  color: #ccc;
-}
-footer a:hover,
-.footer-links > li > a:hover {
-  text-decoration: none;
-  color: #fff;
 }
 .footer-left h3 {
   text-align: center;
