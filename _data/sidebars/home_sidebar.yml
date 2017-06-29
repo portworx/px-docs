@@ -111,7 +111,11 @@
       - title: Auto Scaling
         url: /cloud/aws/asg.html
     - title: Azure
-      url: /cloud/azure.html
+      folderitems:
+      - title: Portworx on Azure
+        url: /cloud/azure/azure.html
+      - title: Azure Container Engine with DCOS
+        url: /cloud/azure/dcos_acs_engine.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
