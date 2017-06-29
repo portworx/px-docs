@@ -12,7 +12,9 @@ youtubeId: G3Lp1RgWdKg
 ## Watch the video
 In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server 
 in containers with Portworx. For the first time, you’ll get the availability, durability, 
-and recoverability that enterprises expect when running containerized SQL: {% include youtubePlayer.html id=page.youtubeId %}
+and recoverability that enterprises expect when running containerized SQL Server
+<br>
+{% include youtubePlayer.html id=page.youtubeId %}
 
 
 ## Step 1: Run SQL Server with Portworx storage on demand
