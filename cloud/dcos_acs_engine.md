@@ -50,6 +50,9 @@ among the following:  `centralus,eastasia,southeastasia,eastus,eastus2,westus,we
 The example deployment here uses DCOS with pre-attached disks and VM scale sets.
 The sample json file can be found in the acs-engine repository under [examples/disks-managed/dcos-preAttachedDisks-vmss.json](examples/disks-managed/dcos-preAttachedDisks-vmss.json)
 
+The most important consideration for Portworx is to ensure that the target nodes have at least one "local" attached disk
+that can be used to contribute storage to the global storage pool.
+
 For the `masterProfile`, specify an appropriate value for `dnsPrefix` which will be used for fully qualified domain name (FQDN).
 <br>Use the default `vmSize` or select an appropriate value for the machine type and size.
 <br>Specify the number and size of disks that will be attached to each DCOS private agent
