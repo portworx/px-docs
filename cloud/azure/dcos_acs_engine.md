@@ -52,7 +52,7 @@ among the following:
 ### Select and customize the deployment configuration
 
 The example deployment here uses DCOS with pre-attached disks and VM scale sets.
-The sample json file can be found in the acs-engine repository under [examples/disks-managed/dcos-preAttachedDisks-vmss.json](examples/disks-managed/dcos-preAttachedDisks-vmss.json)
+The sample json file can be found in the acs-engine repository under [examples/disks-managed/dcos-preAttachedDisks-vmss.json](https://github.com/Azure/acs-engine/blob/master/examples/disks-managed/dcos-preAttachedDisks-vmss.json)
 
 The most important consideration for Portworx is to ensure that the target nodes have at least one "local" attached disk
 that can be used to contribute storage to the global storage pool.
