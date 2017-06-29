@@ -61,7 +61,7 @@ as per the template default:
 [...]
 ```
 
-Specify the appropriate admin username as `adminUsername' and public key data as `keyData`
+Specify the appropriate admin username as `adminUsername` and public key data as `keyData`
 
 ### Generate the Azure Resource Management (ARM) templates
 
