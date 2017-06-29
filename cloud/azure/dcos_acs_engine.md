@@ -31,7 +31,7 @@ From a Linux host:
 * cd acs-engine
 * ./scripts/devenv.sh
 * make prereqs && make build
-* curl -L https://aka.ms/InstallAzureCli | bash
+* ```curl -L https://aka.ms/InstallAzureCli | bash```
 
 ### Login to Azure and Set Subscription
 
@@ -41,7 +41,11 @@ From a Linux host:
 ### Create Azure Resource Group and Location
 
 Pick a name for the Azure Resource Group and choose a LOCATION value
-among the following:  `centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus,southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest,brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia,canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
+among the following:  
+`centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`
+<br>`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`
+<br>`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`
+<br>`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
 
 * az group create --name "$RGNAME" --location "$LOCATION"
 
@@ -98,7 +102,8 @@ an ssh tunnel that can be used to access the DCOS GUI.  Full instructions for re
 A simple example for access might look like this:
 
 ```
-sudo ssh -i your-private.key  -fNL 80:localhost:80 -p 2200  adminUsername@dnsPrefix.LOCATION.cloudapp.azure.com
+sudo ssh -i your-private.key  -fNL 80:localhost:80 -p 2200  \
+     adminUsername@dnsPrefix.LOCATION.cloudapp.azure.com
 ```
 
 where `your-private.key` is the private key that corresponds to `keyData` in the template
