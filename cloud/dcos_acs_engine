@@ -1,0 +1,38 @@
+---
+layout: page
+title: "ACS-Engine with DCOS and Portworx"
+keywords: portworx, acs-engine, azure, DCOS, Mesosphere, microsoft, azure
+sidebar: home_sidebar
+---
+
+* TOC
+{:toc}
+
+### Overview
+The [Azure Container Service Engine](https://github.com/Azure/acs-engine) (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. The input to the tool is a cluster definition. The cluster definition is very similar to (in many cases the same as) the ARM template syntax used to deploy a Microsoft Azure Container Service cluster.
+
+The cluster definition file enables the following customizations to your Docker enabled cluster:
+
+choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators
+multiple agent pools where each agent pool can specify:
+standard or premium VM Sizes,
+node count,
+Virtual Machine ScaleSets or Availability Sets,
+Storage Account Disks or Managed Disks (under private preview),
+Docker cluster sizes of 1200
+
+### Step 1: Install `acs-engine` and `azure CLI`
+Install and build the [`acs-engine` binary](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md)
+
+From a Linux host:
+* git clone https://github.com/Azure/acs-engine.git
+* cd acs-engine
+* ./scripts/devenv.sh
+* make prereqs && make build
+* curl -L https://aka.ms/InstallAzureCli | bash
+
+
+### Step 2:
+
+### Step 3: 
+### Step 4: 
