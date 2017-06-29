@@ -9,6 +9,16 @@ redirect_from: "/px-enterprise-release-notes.html"
 * TOC
 {:toc}
 
+## 1.2.8 Release notes
+
+### Key Features
+
+* License Tiers for PX-Enterprise
+
+### Key Issues Addressed
+
+NONE
+
 ## 1.2.5 Release notes
 
 ### Key Features
