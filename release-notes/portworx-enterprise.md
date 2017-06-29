@@ -9,6 +9,20 @@ redirect_from: "/px-enterprise-release-notes.html"
 * TOC
 {:toc}
 
+## 1.2.5 Release notes
+
+### Key Features
+
+* Increase volume limit to 16K volumes
+
+### Key Issues Addressed
+
+* Fix issues with volume CLI hitting a panic when used the underlying devices are from LVM devices
+* Fix px bootstrap issues with pre-existing snapshot schedules
+* Remove alerts posted when volumes are mounted and unmounted
+* Remove duplicate updates to kvdb
+
+
 ## 1.2.4 Release notes
 
 ### Key Features
