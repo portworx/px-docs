@@ -87,7 +87,7 @@ jeff-coreos-2 core # docker ps
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                    NAMES
 46eff5a9cbd6        microsoft/mssql-server-linux   "/bin/sh -c /opt/mssq"   4 minutes ago       Up 4 minutes        0.0.0.0:1433->1433/tcp   compassionate_perlman
 0636d98250c4        portworx/px-dev                "/docker-entry-point."   2 hours ago         Up 2 hours                                   portworx.service
-jeff-coreos-2 core # docker inspect --format '{{ .Mounts }}' 46eff5a9cbd6
+jeff-coreos-2 core # docker inspect --format '{{ "{{ .Mounts " }}}}' 46eff5a9cbd6
 [{mssqlvol_snap_0628 /var/lib/osd/mounts/mssqlvol_snap_0628 /var/opt/mssql pxd  true rprivate}]
 ```
 
