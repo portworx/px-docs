@@ -114,10 +114,10 @@ Once the DCOS GUI is accessible, then install the DCOS CLI on your local machine
 
 ### Install Portworx
 
-Use the [standard Portworx doc guide](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html) for 
+Use the [standard Portworx doc guide](/scheduler/mesosphere-dcos/install.html) for 
 installing the Portworx Frameworks on DCOS.
 
-Once Portworx is installed, then the [Portworx Stateful Service Frameworks](https://docs.portworx.com/scheduler/mesosphere-dcos/frameworks.html) can be easily deployed
+Once Portworx is installed, then the [Portworx Stateful Service Frameworks](/scheduler/mesosphere-dcos/frameworks.html) can be easily deployed
 as per the reference documentation.
 
 
