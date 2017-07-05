@@ -27,6 +27,10 @@ This template includes the following to enable Portworx deployments:
 
 - Click the "Launch Stack" button above.  The Portworx Template is automatically loaded into CloudFormation.   Click **Next**
 
+ * If you are not able/authorized to create security groups, then use the CloudFormation template below instead:
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/px-quickstart/px-quickstart-sgfree.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" width="144px" height="27px" class="cf-stack"></a></p>
+
+
 - Pick a specific Name for the Stack.  (default = PX-STACK)
 
 - Specify any restrictions on ssh access via "AllowSSHFrom" (default 0.0.0.0/0)
