@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Service Commands"
+title: "Maintenance Commands"
 keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
 sidebar: home_sidebar
 redirect_from: "/maintenance.html"
