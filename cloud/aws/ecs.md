@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx on Amazon ECS"
+title: "Amazon ECS with Portworx"
 keywords: portworx, amazon, docker, aws, ecs, cloud
 sidebar: home_sidebar
 redirect_from: "/portworx-on-ecs2.html"
