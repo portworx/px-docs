@@ -1,16 +1,15 @@
 ---
 layout: page
-title: "Maintenance Mode"
-keywords: maintenance, drive removal, drive replacement
+title: "Service Commands"
+keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
 sidebar: home_sidebar
 redirect_from: "/maintenance.html"
 ---
 
 * TOC
 {:toc}
-
-Maintenance Mode is useful for cases where a node needs to be physically decommissioned.
-The most common cases would be for Disk/DIMM/NIC replacement.
+Service level commands are related to maintenance of drives and drive pools.
+The most common cases would be for Disk addition/replacement
 
 Here are some of the commands that are needed for maintenance operations
 
@@ -185,4 +184,79 @@ Pool ID: 1
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
+## Storage pool commands
+Storage pools are automatically created by selected like disks in terms of capacity and capability. These pools are classified as High/Medium/Low based on IOPS and latency. 
 
+Help for storage pool commands is available as:
+
+```
+/opt/pwx/bin/pxctl service pool -h
+
+NAME:
+   pxctl service pool update - Update pool properties
+
+USAGE:
+   pxctl service pool update [command options] pool ID
+
+OPTIONS:
+   --io_priority value  io_priority: low|medium|high
+
+[root@ip-172-31-2-134 porx]# bin/pxctl service pool -h
+NAME:
+   pxctl service pool - Storage pool maintenance
+
+USAGE:
+   pxctl service pool command [command options] [arguments...]
+
+COMMANDS:
+     show    Show pools
+     update  Update pool properties
+
+OPTIONS:
+   --help, -h  show help
+```
+
+## List Storage pools
+This is an alias for /opt/pwx/bin/pxctl service drive show
+
+```
+/opt/pwx/bin/pxctl service pool show
+PX drive configuration:
+Pool ID: 0
+	IO_Priority: LOW
+	Size: 15 TiB
+	Status: Online
+	Has meta data: No
+	Drives:
+	1: /dev/sdc, 3.0 GiB allocated of 7.3 TiB, Online
+	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
+Pool ID: 1
+	IO_Priority: HIGH
+	Size: 1.7 TiB
+	Status: Online
+	Has meta data: Yes
+	Drives:
+	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
+```
+
+## Update Storage pool priority classification
+
+Portworx benchmarks drives and classifies them as high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classificaction. This can be done like so:
+```
+/opt/pwx/bin/pxctl service update -h
+NAME:
+   pxctl service pool update - Update pool properties
+
+USAGE:
+   pxctl service pool update [command options] pool ID
+
+OPTIONS:
+   --io_priority value  io_priority: low|medium|high
+
+```
+
+To update pool 0 priority to 'MEDIUM'
+
+```
+ /opt/pwx/bin/pxctl service pool update 0 --io_priority medium
+```
