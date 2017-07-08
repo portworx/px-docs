@@ -216,7 +216,7 @@ OPTIONS:
    --help, -h  show help
 ```
 
-## List Storage pools
+### List Storage pools
 This is an alias for /opt/pwx/bin/pxctl service drive show
 
 ```
@@ -239,7 +239,7 @@ Pool ID: 1
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
 
-## Update Storage pool priority classification
+### Update Storage pool priority classification
 
 Portworx benchmarks drives and classifies them as high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classificaction. This can be done like so:
 ```
