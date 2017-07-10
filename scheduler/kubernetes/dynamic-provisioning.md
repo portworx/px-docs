@@ -3,6 +3,7 @@ layout: page
 title: "Dynamic Provisioning"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
+meta-description: "Looking to use a dynamically provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to dynamically provision volumes with k8s."
 ---
 
 This document describes how to dynamically provision a volume using Kubernetes and Portworx.
