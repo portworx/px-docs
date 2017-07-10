@@ -241,7 +241,7 @@ Pool ID: 1
 
 ### Update Storage pool priority classification
 
-Portworx benchmarks drives and classifies them as high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classificaction. This can be done like so:
+Portworx benchmarks drives and classifies them as high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classification. This can be done like so:
 ```
 /opt/pwx/bin/pxctl service update -h
 NAME:
