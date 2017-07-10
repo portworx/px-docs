@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Microsoft SQL Server Database on Portworx"
-keywords: portworx, container, microsoft, sqlserver, storage
+title: "Microsoft SQL Server with Persistent Storage"
+keywords: portworx, container, microsoft, sqlserver, persistent storage
 sidebar: home_sidebar
 youtubeId: G3Lp1RgWdKg
 ---
