@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Performance"
+title: "SQL Performance"
 keywords: portworx, cos, class of service, production, performance, overhead
 sidebar: home_sidebar
 ---
