@@ -2,6 +2,7 @@
 layout: page
 title: "Kafka on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, kafka
+meta-description: "Find out how to install the Kafka service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!"
 ---
 
 * TOC
