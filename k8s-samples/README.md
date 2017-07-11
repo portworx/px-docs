@@ -250,7 +250,7 @@ create Portworx volumes out of band and they will be created automatically.
        io_priority:  "high"
      ```
 
-     [Download example](portworx-volume-sc-high.yaml?raw=true)
+     [Download example](portworx-volume-sc.yaml?raw=true)
 
      Creating the storageclass:
 

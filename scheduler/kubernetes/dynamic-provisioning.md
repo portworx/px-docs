@@ -31,7 +31,7 @@ Create the storageclass:
 
 ```
 # kubectl create -f \
-   examples/volumes/portworx/portworx-volume-sc-high.yaml
+   examples/volumes/portworx/portworx-sc.yaml
 ```
 
 Example:
@@ -40,24 +40,22 @@ Example:
      kind: StorageClass
      apiVersion: storage.k8s.io/v1beta1
      metadata:
-       name: portworx-io-priority-high
+       name: portworx-sc
      provisioner: kubernetes.io/portworx-volume
      parameters:
        repl: "1"
-       snap_interval:   "70"
-       io_priority:  "high"
 ```
-[Download example](/k8s-samples/portworx-volume-sc-high.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-sc.yaml?raw=true)
 
 Verifying storage class is created:
 
 ```
-# kubectl describe storageclass portworx-io-priority-high
-     Name: 	        	portworx-io-priority-high
+# kubectl describe storageclass portworx-sc
+     Name: 	        	portworx-sc
      IsDefaultClass:	        No
      Annotations:		<none>
      Provisioner:		kubernetes.io/portworx-volume
-     Parameters:		io_priority=high,repl=1,snapshot_interval=70
+     Parameters:		repl=1
      No events.
 ```
 
@@ -77,7 +75,7 @@ Example:
      metadata:
        name: pvcsc001
        annotations:
-         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+         volume.beta.kubernetes.io/storage-class: portworx-sc
      spec:
        accessModes:
          - ReadWriteOnce
@@ -93,7 +91,7 @@ Verifying persistent volume claim is created:
 # kubectl describe pvc pvcsc001
     Name:	      	pvcsc001
     Namespace:      	default
-    StorageClass:   	portworx-io-priority-high
+    StorageClass:   	portworx-sc
     Status:	      	Bound
     Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:	      	<none>
@@ -109,7 +107,7 @@ Verifying persistent volume claim is created:
 # kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
     Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:        	<none>
-    StorageClass:  	portworx-io-priority-high
+    StorageClass:  	portworx-sc
     Status:	      	Bound
     Claim:	      	default/pvcsc001
     Reclaim Policy: 	Delete
