@@ -35,147 +35,18 @@ To start, create one server, following these requirements:
 2. Verify that your Docker version is 1.10 or later.
 
 
-### Install PX-Lighthouse
-There are two ways to deploy PX-Lighthouse
 
-1. Jump to [Docker Compose](#step-3-start-px-lighthouse-with-docker-compose)
 2. Jump to installing the [PX-Lighthouse components manually](#component-install-step-#1:-install-kvdb)
 
-#### Install via Docker compose
 
->**Important:**
-<br/> To get access to Portworx PX-Lighthouse docker repository, contact at 'support@portworx.com'
-<br/> Here are the release notes for the latest version of PX-Lighthouse [on-prem-lighthouse-release-notes](/release-notes/on-premise-lighthouse.html)
-
-There is a docker compose file available to bring up on-prem lighthouse with a few easy steps. 
-Please skip this section and go to Step 4 if you would like to learn about how to setup each lighthouse component individually so you can customize your configuration according to your needs. 
-
-You can run PX-Lighthouse with [docker-compose](https://docs.docker.com/compose/install/), as follows:
-
-Note: Use the script below to launch ‘PX-lighthouse, using your own LOCAL_IP
-
-For **ETCD2**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/etcd2
-docker-compose up -d
-```
-
-For **ETCD3**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/etcd3
-docker-compose up -d
-```
-
-For **Consul**
-
-```
-export LOCAL_IP=1.2.3.4
-git clone https://github.com/portworx/px-lighthouse.git
-cd px-lighthouse/compose/consul
-docker-compose up -d
-``` 
-
-At this point, Lighthouse should be functional.  If you wish to bring up the individual components without compose, follow the steps below.
-
-#### Component Install Step #1: Install kvdb
+#### Component Install Step #1: Ensure Lighthouse Container can access the kvdb
 
 >**Important:**
 <br/> For PX-Lighthouse, output required from this step: 
 <br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' or 'consul:http://{IP_Address}:2379' format
 
-You can either
 
 * Use your existing kvdb store (Lighthouse works with etcd2, etcd3 and consul
-
-or
-
-* Install as a docker container from the following 
-  * [etcd2/etcd3](https://github.com/coreos/etcd/blob/2724c3946eb2f3def5ed38a127be982b62c81779/Documentation/op-guide/container.md)
-  
-  * [consul](https://hub.docker.com/_/consul/)
-  
-For **ETCD2**, start the container with the following run command:
-
-```
-IP_ADDR=10.1.2.3 
-sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
-     --restart=always                                                         \
-     --name etcd-px quay.io/coreos/etcd:v2.3.7                                \
-     -name etcd0                                                              \
-     -data-dir /var/lib/etcd/                                                 \
-     -advertise-client-urls http://${IP_ADDR}:2379,http://${IP_ADDR}:4001     \
-     -listen-client-urls http://0.0.0.0:2379                                  \
-     -initial-advertise-peer-urls http://${IP_ADDR}:2380                      \
-     -listen-peer-urls http://0.0.0.0:2380                                    \
-     -initial-cluster-token etcd-cluster                                      \
-     -initial-cluster etcd0=http://${IP_ADDR}:2380                            \
-     -initial-cluster-state new
-```
-
-For **ETCD3**, start the container with the following run command:
-
-```
-IP_ADDR=10.1.2.3
-sudo docker run -d -p 4001:4001 -p 2379:2379 -p 2380:2380                     \
-     --restart always                                                         \
-     -e "ETCDCTL_API=3" --name etcd3-px quay.io/coreos/etcd                   \
-     /usr/local/bin/etcd                                                      \
-     --name etcd0                                                             \
-     --data-dir /var/lib/etcd/                                                \
-     --advertise-client-urls http://${IP_ADDR}:2379,http://${LOCAL_IP}:4001   \
-     --listen-client-urls http://0.0.0.0:2379                                 \
-     --initial-advertise-peer-urls http://${IP_ADDR}:2380                     \
-     --listen-peer-urls http://0.0.0.0:2380                                   \
-     --initial-cluster-token etcd-cluster                                     \
-     --initial-cluster etcd0=http://${IP_ADDR}:2380                           \
-     --initial-cluster-state new
-```
-
-For **Consul**, start the container with the following run command:
-
-```
-sudo docker run -d -p 8300:8300 -p 8400:8400 -p 8500:8500                                       \
-     --restart=always                                                                           \
-     --name consul-px                                                                           \
-     -e 'CONSUL_LOCAL_CONFIG={"bootstrap_expect":1,"data_dir":"/var/lib/consul","server":true}' \
-     consul agent -server -bind=127.0.0.1 -client=0.0.0.0  
-```
-
-#### Component Install Step #2: Install InfluxDB
-
->**Important:**
-<br/> For PX-Lighthouse, output required from this step: 
-<br/> Connection string in 'http://{ADMIN_USER}:{ADMIN_PASSWORD}@{IP_Address}:8086' format 
-<br/> ADMIN_USER: Admin username of influxdb for $PWX_INFLUXUSR
-<br/> INFLUXDB_INIT_PWD: Password of admin user for $PWX_INFLUXPW 
-
-Lighthouse requires access to InfluxDB for tracking statistics.
-
-Either 
-
-* [Use InfluxCloud](https://cloud.influxdata.com/)
-
-or
-
-* [Run InfluxDB as a docker container](https://github.com/tutumcloud/influxdb)
-
-for configuring InfluxDB access for Lighthouse
-
-Example docker command to run influxdb in a container:
-
-```
-sudo docker run -d -p 8083:8083 -p 8086:8086 --restart always \
-     --name influxdb                                          \
-     -e ADMIN_USER="admin"                                    \
-     -e INFLUXDB_INIT_PWD="password"                          \
-     -e PRE_CREATE_DB="px_stats" tutum/influxdb:latest
-```
 
 #### Component Install Step #3: Run the PX-Lighthouse container
 
