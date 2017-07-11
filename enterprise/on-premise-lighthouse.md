@@ -48,7 +48,7 @@ To start, create one server, following these requirements:
 
 * Use your existing kvdb store (Lighthouse works with etcd2, etcd3 and consul)
 
-#### Component Install Step #3: Run the PX-Lighthouse container
+#### Component Install Step #2: Run the PX-Lighthouse container
 
 For **ETCD**, start the container with the following run command:
 
