@@ -146,5 +146,14 @@ Start Cassandra on node 3
 Use the `nodetool` status command to determine the state of your Cassandra cluster.
 
       # docker exec -it cassandra1 nodetool status
+      
+##See Also
+For further reading on Cassandra:
+*[Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
+*[Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
+*[Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
+*[Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
+*[Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)
+
 
 
