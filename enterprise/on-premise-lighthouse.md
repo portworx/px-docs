@@ -15,40 +15,12 @@ This guide shows you how you can run [Lighthouse](https://lighthouse.portworx.co
 
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
-### Prerequisite #1 - Launch Server
+## Minimum Requirements
+Lighthouse runs as a Docker container and has the same minumum requirements as the Portworx storage solution.  Please consult [this guide](https://docs.portworx.com/#minimum-requirements) for the minumum requirements.
 
-To start, create one server, following these requirements:
+## Install Lighthouse: Run the PX-Lighthouse container
 
-* Image: Must support Docker 1.10 or later, such as:
-  * [Red Hat 7.2 (HVM)](https://aws.amazon.com/marketplace/pp/B019NS7T5I) or CentOS
-  * [Ubuntu 16.04 (HVM)](https://aws.amazon.com/marketplace/pp/B01JBL2M0O)
-  * [Ubuntu 14.04 (HVM)](https://aws.amazon.com/marketplace/pp/B00JV9TBA6)
-* Instance type: c3.xlarge
-* Number of instances: 1
-* Storage:
-  * /dev/xvda: 8 GB boot device
-* Tag (optional): Add value **px-lighthouse** as the name
-
-### Prerequisite #2 - Install and configure Docker
-
-1. Follow the Docker [install guide](https://docs.docker.com/engine/installation/) to install and start the Docker Service.
-2. Verify that your Docker version is 1.10 or later.
-
-
-
-2. Jump to installing the [PX-Lighthouse components manually](#component-install-step-#1:-install-kvdb)
-
-
-#### Component Install Step #1: Ensure Lighthouse Container can access the kvdb
-
->**Important:**
-<br/> For PX-Lighthouse, output required from this step: 
-<br/>Connection string in 'etcd:http://{IP_ADDRESS}:2379' or 'consul:http://{IP_Address}:2379' format
-
-
-* Use your existing kvdb store (Lighthouse works with etcd2, etcd3 and consul)
-
-#### Component Install Step #2: Run the PX-Lighthouse container
+Lighthouse communicates with your Portworx cluster via the Key Value Database (KVDB) that Portworx was configured to use.  Note the use of the `KVDB_IP_ADDR` variable in the commands below:
 
 For **ETCD**, start the container with the following run command:
 
@@ -58,7 +30,7 @@ sudo docker run --restart=always                                        \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086        \
-       -k etcd:http://${IP_ADDR}:2379                
+       -k etcd:http://${KVDB_IP_ADDR}:2379                
 ```
 
 For **Consul**, start the container with the following run command:
@@ -68,7 +40,7 @@ sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
-       -k consul:http://${IP_ADDR}:8500                
+       -k consul:http://${KVDB_IP_ADDR}:8500                
 ```
 
 Runtime command options
@@ -80,7 +52,7 @@ Runtime command options
    > Connection string of your kbdb.
    > Note: Specify port 2379 for etcd and 8500 for consul
    > If you have multinode etcd cluster then you can specify your connection string as 
-       > 'etcd:http://{IP_Address_1}:2379,etcd:http://{IP_Address_2}:2379,etcd:http://{IP_Address_3}:2379'
+       > 'etcd:http://{KVDB_IP_ADDR_1}:2379,etcd:http://{KVDB_IP_ADDR_2}:2379,etcd:http://{KVDB_IP_ADDR_3}:2379'
 ```
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
@@ -102,7 +74,7 @@ sudo docker run --restart=always                                        \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086        \
-       -k etcd:http://${IP_ADDR}:2379
+       -k etcd:http://${KVDB_IP_ADDR}:2379
 ```
 For **Consul**, upgrade with the following commands:
 
@@ -113,7 +85,7 @@ sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
-       -k consul:http://${IP_ADDR}:8500   
+       -k consul:http://${KVDB_IP_ADDR}:8500   
 ```
 
 PX-Lighthouse repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-Lighthouse container to the latest release. There should be minimal downtime in this upgrade process. 
