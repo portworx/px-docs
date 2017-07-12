@@ -18,7 +18,7 @@ First you will need to download 3 files and transfer them to each of you DCOS Ma
 * [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px/docker/local-universe/dcos-local-px-universe-registry.service)
 * [local-universe.tar.gz](https://px-dcos.s3.amazonaws.com/local-universe.tar.gz)
 
-## Install the services
+### Install the services
 On each of your Master nodes run the following steps
 
 * Load the universe container into docker
@@ -43,7 +43,7 @@ $ sudo systemctl status dcos-local-px-universe-http
 $ sudo systemctl status dcos-local-px-universe-registry
 ```
 
-## Add the PX Universe to DCOS
+### Add the PX Universe to DCOS
 
 Run the dcos command to add the newly deployed universe to your DCOS cluster
 
@@ -51,7 +51,7 @@ Run the dcos command to add the newly deployed universe to your DCOS cluster
 $ dcos package repo add local-universe http://master.mesos:8082/repo
 ```
 
-## Add the docker registry as a trusted store on each agent
+### Add the docker registry as a trusted store on each agent
 
 On each agent node you will need to download the certificate from the newly deployed Docker regitry to set is as trusted.
 To do this, run the following command on each agent node, including public agents.
@@ -62,7 +62,12 @@ $ sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:
 $ sudo systemctl restart docker
 ```
 
-## Verify local Universe available from DCOS
+### Verify local Universe available from DCOS
 
 To verify that the local Unviverse has been configured succsfully, log in to the DCOS UI and look at Universe->Packages to
 see if the packages are available.
+
+### Using docker images from local registry
+
+If you want to use any images from the newly deployed registry, you will need to update the image names when starting the
+services. For example, to use the Portworx docker images, you would use "master.mesos:5000/px-enterprise:tag"
