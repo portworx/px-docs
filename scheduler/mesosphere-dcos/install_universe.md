@@ -31,8 +31,9 @@ This will take a few minutes.
 ```
 $ sudo mv dcos-local-px-universe-registry.service /etc/systemd/system/
 $ sudo mv dcos-local-px-universe-http.service /etc/systemd/system/
-$ systemctl enable dcos-local-px-universe-http
-$ systemctl enable dcos-local-px-universe-registry
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable dcos-local-px-universe-http
+$ sudo systemctl enable dcos-local-px-universe-registry
 $ sudo systemctl start dcos-local-px-universe-http     
 $ sudo systemctl start dcos-local-px-universe-registry
 ```
