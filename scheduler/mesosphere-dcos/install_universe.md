@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Install the Portworx Universe on Mesosphere/DCOS for air-gapped clsuters"
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
+title: "Install the Portworx Universe on DCOS for air-gapped clsuters"
+keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage, dcos, universe
 ---
 
 * TOC
@@ -29,7 +29,6 @@ $ docker load < local-universe.tar.gz
 This will take a few minutes.
 
 * Copy the service files to /etc/systemd/system and start the services
-
 ```
 $ sudo mv dcos-local-px-universe-registry.service /etc/systemd/system/
 $ sudo mv dcos-local-px-universe-http.service /etc/systemd/system/
