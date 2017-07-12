@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Install the Portworx Universe on DCOS for air-gapped clsuters"
-keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage, dcos, universe
+title: "Install the Portworx Universe on DCOS for air-gapped clusters"
+keywords: portworx, container, Mesos, Mesosphere, storage, dcos, universe
 ---
 
 * TOC
