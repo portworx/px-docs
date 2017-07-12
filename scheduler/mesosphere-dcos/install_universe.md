@@ -25,7 +25,6 @@ On each of your Master nodes run the following steps
 ```
 $ docker load < local-universe.tar.gz
 ```
-
 This will take a few minutes.
 
 * Copy the service files to /etc/systemd/system and start the services
