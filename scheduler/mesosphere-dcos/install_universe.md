@@ -12,7 +12,7 @@ inlcuding Hadoop, Cassandra, Elastic Search and Kafka which can utilize Portworx
 
 This guide is based on the DCOS guide to install a local universe: https://docs.mesosphere.com/1.8/administration/installing/deploying-a-local-dcos-universe/
 
-## Download the pre-requisites
+### Download the pre-requisites
 First you will need to download 3 files and transfer them to each of you DCOS Master nodes
 * [dcos-local-px-universe-http.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px/docker/local-universe/dcos-local-px-universe-http.service)
 * [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px/docker/local-universe/dcos-local-px-universe-registry.service)
