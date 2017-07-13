@@ -2,6 +2,7 @@
 layout: page
 title: "Elasticsearch on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Elasticsearch
+meta-description: "Find out how to install the ElasticSearch service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!"
 ---
 
 * TOC

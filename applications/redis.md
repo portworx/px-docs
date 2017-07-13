@@ -4,6 +4,7 @@ title: "Run Redis with PX-Developer"
 keywords: portworx, container, redis, storage
 sidebar: home_sidebar
 redirect_from: "/redis.html"
+meta-description: "Learn how to run Redis in a container.  Follow step-by-step guide to run and write to Redis in a container and take snapshots. Try for yourself today!"
 ---
 
 * TOC

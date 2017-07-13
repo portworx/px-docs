@@ -4,6 +4,7 @@ title: "Class of Service"
 keywords: portworx, cos, class of service, production
 sidebar: home_sidebar
 redirect_from: "/cos.html"
+meta-description: "Portworx provides the ability to specify a class of service for IOPS, throughput and more at the container granularity. Learn about Portworx COS today!"
 ---
 
 * TOC

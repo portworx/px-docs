@@ -3,6 +3,7 @@ layout: page
 title: "Hadoop on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
 youtubeId : qp6i8kYq-iQ
+meta-description: "Find out how to install the Hadoop service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!"
 ---
 
 * TOC
