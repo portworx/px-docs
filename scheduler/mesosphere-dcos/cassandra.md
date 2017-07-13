@@ -108,3 +108,11 @@ down and increase the nodes parameter to the desired nodes.
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and
 create more Cassandra nodes with newly created PX volumes. Please make sure you have enough resources and nodes available to scale up the number of nodes.
 You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
+
+## See Also
+For further reading on Cassandra:
+* [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
+* [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
+* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
+* [Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
+* [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)
