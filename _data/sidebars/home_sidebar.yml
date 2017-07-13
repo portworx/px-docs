@@ -111,7 +111,11 @@
       - title: Auto Scaling
         url: /cloud/aws/asg.html
     - title: Azure
-      url: /cloud/azure.html
+      folderitems:
+      - title: Portworx on Azure
+        url: /cloud/azure/azure.html
+      - title: Azure Container Engine with DCOS
+        url: /cloud/azure/dcos_acs_engine.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
@@ -190,8 +194,12 @@
           url: /applications/cassandra.html
         - title: Measuring Performance
           url: /applications/cassandra-px-perf-test.html
+        - title: Snapshots
+          url: /applications/cassandra-snaps.html
       - title: PostgreSQL
         url: /applications/postgres.html
+      - title : Microsoft SQL Server
+        url: /applications/mssql-server.html
     - title: Messaging 
       folderitems:
       - title: Redis

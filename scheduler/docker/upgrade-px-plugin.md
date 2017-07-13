@@ -12,18 +12,17 @@ This guide describes upgrading the Portworx docker volume plugin.
 
 The commands in this guide upgrade the plugin to version 1.2.5. You will need to run the below sequence on all Portworx nodes in the cluster.
 
-1. Pause/stop all applications using Portworx volumes
-2. List the plugin ID
+1. List the plugin ID
 ```
 $ docker plugin ls
 ID                  NAME                DESCRIPTION                         ENABLED
 501536d2e2ed        portworx/px:latest   Portworx Data Services for Docker   true
 ```
-3. Disable the Portworx plugin
+2. Disable the Portworx plugin
 ```
 $ docker plugin disable 501536d2e2ed
 ```
-4. Upgrade the Portworx plugin
+3. Upgrade the Portworx plugin
 ```
 $ docker plugin upgrade 501536d2e2ed portworx/px:1.2.5
 Upgrading plugin portworx/px:latest from portworx/px:latest to portworx/px:1.2.5
@@ -49,11 +48,11 @@ Upgraded plugin portworx/px:latest to portworx/px:1.2.5
 ```
 >**Note:**<br/> If you see an error message like `device or resource busy`, you will see to restart the docker service and then re-attempt the above upgrade.
 
-5. Enable the Portworx plugin
+4. Enable the Portworx plugin
 ```
 $  docker plugin enable 501536d2e2ed
 ```
-6. Check version and status
+5. Check version and status
 ```
 $ /opt/pwx/bin/pxctl -v
 pxctl version 1.2.5-7b6ab38

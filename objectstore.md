@@ -35,10 +35,10 @@ ID			NAME			SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 ```
 
 ## Start the objectstore on a node
-"Start" option starts the object server on the node where it is run. It attaches the volumes on the node if it isn't attached on some other node already.
+"Start" option starts the object server on the node where it is run. It attaches the volumes on the node if it isn't attached on some other node already. NOTE: You need to run this command as root.
 
 ```
-$ pxctl objectstore start
+$ sudo pxctl objectstore start
 Successfully started object store
 ```
 

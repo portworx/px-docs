@@ -212,38 +212,8 @@ OR, if you have a custom [px configuration file](https://github.com/portworx/px-
 ```
 
 #### Optional - Run as a Plugin
-PX V2 plugin requires a minimum of Docker version 1.12 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 
-To install Portworx as V2 Docker plugin follow these steps:
-
-```
-$ mkdir -p /etc/pwx
-$ mkdir -p /opt/pwx/bin
-$ mkdir -p /var/lib/osd
-$ mkdir -p /var/cores
-```
-
-We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
-
-```
-$ sudo docker plugin install portworx/px:latest opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc" --alias pxd
-Plugin "portworx/px:latest" is requesting the following
-privileges:
- - network: [host]
- - mount: [/dev]
- - mount: [/etc/pwx]
- - mount: [/var/lib/osd]
- - mount: [/opt/pwx/bin]
- - mount: [/var/run/docker.sock]
- - mount: [/lib/modules]
- - mount: [/usr/src]
- - mount: [/var/cores]
- - allow-all-devices: [true]
- - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
-Do you grant the above permissions? [y/N] y
-```
-
-You will need to grant the above set of permissions for the plugin to be installed.
+If you have Docker version 1.12 or higher, it is recommended to install Portworx as a plugin. [Follow these steps](docker-plugin.html) to do so.
 
 To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-px-plugin.html).
 

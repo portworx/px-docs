@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "CLI Reference"
+title: "CLI Reference–Host"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
@@ -75,10 +75,10 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
 ```
 #### pxctl host mount
-`pxctl host mount` mounts a volume locally on a node at a path, say /mnt/demodir
+`pxctl host mount` mounts a volume locally on a node at a path, say /var/lib/osd/demodir (note that the path /var/lib/osd is chosen because that is the designated propagated mount directory)
 ```
-sudo /opt/pwx/bin/pxctl host mount demovolume /mnt/demodir
-Volume demovolume successfully mounted at /mnt/demodir
+sudo /opt/pwx/bin/pxctl host mount demovolume /var/lib/osd/demodir
+Volume demovolume successfully mounted at /var/lib/osd/demodir
 ```
 Running "volume list" will now show something like:
 ```
@@ -117,6 +117,6 @@ Volume  :  772733390943400581
 #### pxctl host unmount
 `pxctl host unmount` unmounts a volume from a host
 ```
-sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
-Volume demovolume successfully unmounted at /mnt/demodir
+sudo /opt/pwx/bin/pxctl host unmount demovolume /var/lib/osd/demodir
+Volume demovolume successfully unmounted at /var/lib/osd/demodir
 ```

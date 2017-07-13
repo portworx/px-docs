@@ -130,6 +130,7 @@ To do so, run the following marathon application
       "protocol": "tcp"
     }
   ],
+  "requirePorts": true,
   "env": {
     "PROXY_ENDPOINT_0": "Lighthouse,http,lighthouse-0-start,mesos,8085,/,/"
   }

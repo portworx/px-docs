@@ -26,3 +26,6 @@ with data persistence, recoverability, durability and high availability.
 Here is a short video that shows how SQL Server on Portworx can provide the high-availability and recoverability:
 {% include youtubePlayer.html id=page.youtubeId %}
 
+## See Also
+Here is the documentation allowing you to try this out yourself :
+[Microsoft SQL Server Database on Portworx](/applications/mssql-server.html)

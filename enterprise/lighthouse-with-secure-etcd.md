@@ -9,7 +9,7 @@ redirect_from: "/run-lighthouse-with-secure-etcd.html"
 * TOC
 {:toc}
 
-This guide shows you how you can run [PX-Enterprise Console](http://lighthouse.portworx.com/) locally with secure etcd.
+This guide shows you how you can run [PX-Enterprise Console](https://lighthouse.portworx.com/login) locally with secure etcd.
 
 Lighthouse supports etcd2 auth features as the following
 <br/>1. You can use SSL for connecting to etcd : Use a CA file and/or a Certificate-Key pair

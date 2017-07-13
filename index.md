@@ -9,8 +9,6 @@ youtubeId : 0zTjOly0vkA
 * TOC
 {:toc}
 
-<a href="https://github.com/portworx/px-docs"><img class="topfork" width="149px" height="149px" src="/images/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
-
 Portworx is a software defined persistent storage solution designed and purpose built for containers.  Portworx is a clustered block storage solution that provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through schedulers such as Kubernetes, Mesos and Swarm.
 Portworx storage is delivered as a container that gets installed on your servers that run stateful applications. 
 
@@ -58,13 +56,10 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
-* A key/value store such as Etcd 2.0 or Consul 0.7.0
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM
-* Recommended resources per server:
-  * 12 CPU cores
-  * 16 GB RAM
+* Additional resources recommended per server:
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:

@@ -1,77 +1,112 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container topnavlinks">
+<nav class="navbar navbar-default site-navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+
+
+    <div class="container">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-nav" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+            </button>
+
         <div class="navbar-header">
 
-            <div id="searchexpand">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
-                <i class="fa fa-search" aria-hidden="true" id="algolia-toggle"></i>
-                <input type="text" id="algolia-docsearch" placeholder="Search">
-            </div>
 
-             <img src="/images/px-logo.png" height=50 width=138 style=margin:10px />
-             <!--<a href="https://portworx.github.io/px-docs"><img src="images/px-logo.png" height=50 width=138 style=margin-top:20px/></a>-->
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <!-- entries without drop-downs appear here -->
-                {% for entry in site.data.topnav.topnav %}
-                {% for item in entry.items %}
-                {% if item.external_url %}
-                <li><a href="{{item.external_url}}" target="_blank">{{item.title}}</a></li>
-                {% elsif page.url contains item.url %}
-                <li class="active"><a href="{{item.url | remove: "/"}}">{{item.title}}</a></li>
-                {% else %}
-                <li><a href="{{item.url | remove: "/"}}">{{item.title}}</a></li>
-                {% endif %}
-                {% endfor %}
-                {% endfor %}
-                <!-- entries with drop-downs appear here -->
-                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
-                {% for entry in site.data.topnav.topnav_dropdowns %}
-                {% for folder in entry.folders %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ folder.title }}<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        {% for folderitem in folder.folderitems %}
-                        {% if folderitem.external_url %}
-                        <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
-                        {% elsif page.url contains folderitem.url %}
-                        <li class="dropdownActive"><a href="{{folderitem.url |  remove: "/"}}">{{folderitem.title}}</a></li>
-                        {% else %}
-                        <li><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
-                </li>
-                {% endfor %}
-                {% endfor %}
-                {% if site.feedback_disable == null or site.feedback_disable == false %}
-			{% include feedback.html %}
-		{% endif %}
 
-    <!-- at the end of the HEAD -->
-    <!--comment out this block if you want to hide search-->
-<li>
-<!--start search-->
-<!-- at the end of the BODY -->
-<script defer type="text/javascript" src="/js/docsearch.min.js?v={{ 'now' | date: '%s' }}"></script>
-<script type="text/javascript"> 
-window.addEventListener('DOMContentLoaded', function() {
-    docsearch({
-        apiKey: '94701e6663ea3899bf379b1609403bf9',
-        indexName: 'portworx',
-        inputSelector: '#algolia-docsearch',
-        debug: false /* Set debug to true if you want to inspect the dropdown */
-    });
-});
-</script>
-<!--end search-->
-                </li>
-            </ul>
+            <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+
+
+            <!-- Your site title as branding in the menu -->
+            <a class="navbar-brand" href="https://portworx.com/" title="Portworx">
+                <img src="https://portworx.com/wp-content/themes/portworx/images/portworx-logo.png" class="mobile-logo hidden-lg hidden-xl hidden-xxl" style="max-height:100%;">
+                <img src="https://portworx.com/wp-content/themes/portworx/images/portworx-logo.png" class="img-responsive hidden-xs hidden-sm hidden-md" alt="Portworx">
+            </a>
+
         </div>
-        </div>
-        <!-- /.container -->
-</nav>
+
+
+
+        <div class="navbar-menus">
+
+        <ul class="header-top-menu">
+                    <li><a href="https://portworx.com/blog/">Blog</a></li><li><a href="http://go.portworx.com/request_a_demo.html">Request a demo</a></li>                </ul>
+
+            <!-- The WordPress Menu goes here -->
+            <form method="get" id="searchform" action="https://portworx.com/" role="search" class="navbar-form pull-right hidden-xs hidden-sm hidden-md">
+	<div class="form-group">
+		<div id="input_container">
+			<input type="text" class="form-control header-form input-sm" name="s" id="s" placeholder="SEARCH" />
+			<img src="https://portworx.com/wp-content/themes/portworx/images/icons/search.png" id="input_img">
+		</div>
+	</div>
+</form>
+            <div id="top-nav" class="collapse navbar-collapse"><ul id="main-menu" class="nav navbar-nav navbar-right">
+                        <a href="#" onclick="return false" class="hidden-lg hidden-xl hidden-xxl">
+                            <span class="navbar-toggle material-icons mobile-close pull-right" data-toggle="collapse" data-target="#top-nav">&#xE5CD;</span>
+                        </a>
+                        <br class="hidden-xxl hidden-xl hidden-lg">
+                        <br class="hidden-xxl hidden-xl hidden-lg">
+                        <br class="hidden-xxl hidden-xl hidden-lg">
+                        <li id="menu-item-2261" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nav-item menu-item-2261 dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Products </a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2022" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2022"><a href="https://portworx.com/products/introduction/" class="nav-link">Introduction</a></li>
+	<li id="menu-item-2023" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2023"><a href="https://portworx.com/products/features/" class="nav-link">Features</a></li>
+	<li id="menu-item-2024" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2024"><a href="https://portworx.com/products/getting-started/" class="nav-link">Getting Started</a></li>
+</ul>
+</li>
+<li id="menu-item-2007" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children nav-item menu-item-2007 dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Use Cases </a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-2005" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2005"><a href="https://portworx.com/use-case/databases/" class="nav-link">Databases</a></li>
+	<li id="menu-item-2004" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2004"><a href="https://portworx.com/use-case/cicd/" class="nav-link">CI/CD</a></li>
+	<li id="menu-item-2003" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2003"><a href="https://portworx.com/use-case/big-data/" class="nav-link">Big Data</a></li>
+	<li id="menu-item-2002" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2002"><a href="https://portworx.com/use-case/cms/" class="nav-link">Content Management</a></li>
+	<li id="menu-item-2994" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-2994"><a href="https://portworx.com/use-case/cassandra-docker-container/" class="nav-link">Cassandra</a></li>
+	<li id="menu-item-3092" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-3005 current_page_item nav-item menu-item-3092 active"><a href="https://portworx.com/use-case/persistent-storage-dcos/" class="nav-link nav-active">DC/OS</a></li>
+</ul>
+</li>
+<li id="menu-item-69" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-69"><a href="https://portworx.com/resources/" class="nav-link">Resources</a></li>
+<li id="menu-item-2006" class="menu-item menu-item-type-custom menu-item-object-custom nav-item menu-item-2006"><a target="_blank" href="https://docs.portworx.com/" class="nav-link">Install &#038; Docs</a></li>
+<li id="menu-item-1002" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nav-item menu-item-1002 dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">News &#038; Events </a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-296" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-296"><a href="https://portworx.com/news/" class="nav-link">In the News</a></li>
+	<li id="menu-item-375" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-375"><a href="https://portworx.com/press-releases/" class="nav-link">Press Releases</a></li>
+	<li id="menu-item-292" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-292"><a href="https://portworx.com/events/" class="nav-link">Events</a></li>
+</ul>
+</li>
+<li id="menu-item-288" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nav-item menu-item-288 dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Company </a>
+<ul role="menu" class=" dropdown-menu">
+	<li id="menu-item-289" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-289"><a href="https://portworx.com/about-us/" class="nav-link">About Us</a></li>
+	<li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom nav-item menu-item-290"><a href="/about-us#team" class="nav-link">Team</a></li>
+	<li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom nav-item menu-item-291"><a href="/about-us#board-of-directors" class="nav-link">Leadership and Investors</a></li>
+	<li id="menu-item-293" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-293"><a href="https://portworx.com/careers/" class="nav-link">Careers</a></li>
+	<li id="menu-item-294" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-294"><a href="https://portworx.com/contact-us/" class="nav-link">Contact Us</a></li>
+	<li id="menu-item-295" class="menu-item menu-item-type-post_type menu-item-object-page nav-item menu-item-295"><a href="https://portworx.com/blog/" class="nav-link">Blog</a></li>
+</ul>
+</li>
+
+                        <div class="hidden-xxl hidden-xl hidden-lg centered">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <hr>
+                            <br>
+                            <br>
+                            <a href="https://www.linkedin.com/company/portworx" target="blank">
+                                <img src="https://portworx.com/wp-content/themes/portworx/images/icons/Linkedin-orange.png" class="header-social">
+                            </a>
+                            <a href="https://twitter.com/portwx" target="blank">
+                                <img src="https://portworx.com/wp-content/themes/portworx/images/icons/Twitter-orange.png" class="header-social">
+                            </a>
+                            <a href="/blog">
+                                <img src="https://portworx.com/wp-content/themes/portworx/images/icons/Blog-orange.png" class="header-social">
+                            </a>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </ul></div>        </div>
+    </div> <!-- .container -->
+
+
+</nav><!-- .site-navigation -->
