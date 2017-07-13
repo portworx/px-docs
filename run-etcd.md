@@ -3,7 +3,7 @@ layout: page
 title: "Run your own etcd server"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-meta-description: "Instructions for running your own ETCD server in a container. Try today."
+meta-description: "Instructions for running your own etcd server in a container. Try today."
 ---
 
 Portworx recommends running **etcd** in a container
