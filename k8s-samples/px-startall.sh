@@ -12,7 +12,7 @@
 function waitfor() {
    while true
    do
-        if `kubectl get $1 | egrep "No resources found|the server doesn't have a resource type" > /dev/null`
+        if ! `kubectl get $1 | egrep "No resources found|the server doesn't have a resource type" > /dev/null`
         then
             echo "Waiting for $1 ..."
             sleep 2
