@@ -9,6 +9,16 @@
 # Assumes running instance of Kubernetes 1.6 or above
 #
 
+function waitfor() {
+
+   if `kubectl get $1 | egrep "No resources found|the server doesn't have a resource type" > /dev/null`
+   then
+         echo "Waiting for $1 ..."
+         sleep 2
+   else
+         break
+   fi
+}
 
 cat <<EOF | kubectl create -f -
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -97,7 +107,7 @@ spec:
 EOF
 
 # No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
-sleep 5
+waitfor thirdpartyresources
 
 cat <<EOF | kubectl create -f -
 ---
@@ -110,7 +120,7 @@ spec:
   version: "3.1.8"
 EOF
 
-sleep 5
+waitfor cluster
 
 cat <<EOF | kubectl create -f -
 ---
