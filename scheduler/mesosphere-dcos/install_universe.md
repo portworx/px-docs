@@ -71,4 +71,4 @@ see if the packages are available.
 ### Using docker images from local registry
 
 If you want to use any images from the newly deployed registry, you will need to update the image names when starting the
-services. For example, to use the Portworx docker images, you would use "master.mesos:5000/px-enterprise:tag"
+services. For example, to use the Portworx docker images, you would use "master.mesos:5000/portworx/px-enterprise:tag"
