@@ -2,6 +2,7 @@
 layout: page
 title: "Stateful Frameworks on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Frameworks, Stateful Applications
+meta-description: "Learn about Portworx stateful frameworks for DCOS.  The frameworks extend Mesosphere to allow for the orchestration and usage of the Portworx volumes."
 ---
 
 * TOC

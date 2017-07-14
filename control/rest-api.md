@@ -4,6 +4,7 @@ title: "REST API Reference"
 keywords: portworx, REST, API
 sidebar: home_sidebar
 redirect_from: "/rest_api.html"
+meta-description: "Portworx data services can be managed and monitored through RESTful APIs. View REST API Reference and documentation from Portworx today!"
 ---
 
 Portworx data services can be managed and monitored through RESTful API's.

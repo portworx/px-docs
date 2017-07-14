@@ -4,8 +4,8 @@ title: "FAQs"
 keywords: portworx, faqs
 sidebar: home_sidebar
 redirect_from: "/px-faqs.html"
+meta-description: "Find answers to all the most frequently asked questions about Portworx.  Explore our FAQ today!"
 ---
-
 * TOC
 {:toc}
 

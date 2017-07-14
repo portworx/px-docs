@@ -4,6 +4,7 @@ title: "Adding storage to existing PX Cluster Nodes"
 keywords: scale-up
 sidebar: home_sidebar
 redirect_from: "/scale-up.html"
+meta-description: "Discover how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added.  Try it for yourself today."
 ---
 
 * TOC
