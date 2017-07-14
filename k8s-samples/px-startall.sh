@@ -10,20 +10,6 @@
 #
 
 
-# No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
-function waitfor() {
-    while true
-    do
-       if `kubectl get $1 | grep No`
-       then
-           sleep 2
-           echo "Waiting for $1 ..."
-       else
-           break
-       fi
-    done
-}
-
 cat <<EOF | kubectl create -f -
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -111,7 +97,7 @@ spec:
 EOF
 
 # No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
-waitfor thirdpartyresources
+sleep 5
 
 cat <<EOF | kubectl create -f -
 ---
@@ -124,7 +110,7 @@ spec:
   version: "3.1.8"
 EOF
 
-waitfor cluster
+sleep 5
 
 cat <<EOF | kubectl create -f -
 ---
