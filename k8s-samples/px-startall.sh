@@ -110,6 +110,7 @@ EOF
 
 # No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
 waitfor thirdpartyresources
+sleep 5
 
 cat <<EOF | kubectl create -f -
 ---
@@ -123,6 +124,7 @@ spec:
 EOF
 
 waitfor cluster
+sleep 5
 
 cat <<EOF | kubectl create -f -
 ---
