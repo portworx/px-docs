@@ -8,6 +8,20 @@
 #
 # Assumes running instance of Kubernetes 1.6 or above
 #
+
+function waitfor() {
+    while true
+    do
+       if `kubectl get $1 | grep No`
+       then
+           sleep 2
+           echo "Waiting for $1 ..."
+       else
+           break
+       fi
+    done
+}
+
 cat <<EOF | kubectl create -f -
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -94,17 +108,8 @@ spec:
               fieldPath: metadata.name
 EOF
 
-while true
-do
-   if `kubectl get thirdpartyresources | grep No`
-   then
-       sleep 2
-       echo "Waiting for thirdpartyresources ..."
-   else
-       break
-   fi
-done
-
+waitfor thirdpartyresources
+waitfor cluster
 
 cat <<EOF | kubectl create -f -
 ---
