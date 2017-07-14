@@ -49,7 +49,7 @@ $ sudo systemctl status dcos-local-px-universe-registry
 Run the dcos command to add the newly deployed universe to your DCOS cluster
 
 ```
-$ dcos package repo add local-universe http://master.mesos:8082/repo
+$ dcos package repo add local-universe http://master.mesos:8082/repo --index=0
 ```
 
 ### Add the docker registry as a trusted store on each agent
