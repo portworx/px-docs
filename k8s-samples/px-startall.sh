@@ -9,6 +9,8 @@
 # Assumes running instance of Kubernetes 1.6 or above
 #
 
+
+# No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
 function waitfor() {
     while true
     do
@@ -108,8 +110,8 @@ spec:
               fieldPath: metadata.name
 EOF
 
+# No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
 waitfor thirdpartyresources
-waitfor cluster
 
 cat <<EOF | kubectl create -f -
 ---
@@ -120,6 +122,11 @@ metadata:
 spec:
   size: 3
   version: "3.1.8"
+EOF
+
+waitfor cluster
+
+cat <<EOF | kubectl create -f -
 ---
 apiVersion: v1
 kind: Service
