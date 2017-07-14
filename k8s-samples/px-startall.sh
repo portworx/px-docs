@@ -109,7 +109,16 @@ spec:
 EOF
 
 # No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
-waitfor thirdpartyresources
+while true
+   do
+        if `kubectl get thirdpartyresources | grep "No resources found" > /dev/null`
+        then
+            echo "Waiting for thirdpartyresources ..."
+            sleep 2
+        else
+            break
+        fi
+   done     
 
 cat <<EOF | kubectl create -f -
 ---
@@ -122,7 +131,16 @@ spec:
   version: "3.1.8"
 EOF
 
-waitfor cluster
+ while true
+   do
+        if `kubectl get cluster | egrep "the server doesn't have a resource type" > /dev/null`
+        then
+            echo "Waiting for cluster ..."
+            sleep 2
+        else
+            break
+        fi
+  done
 
 cat <<EOF | kubectl create -f -
 ---
