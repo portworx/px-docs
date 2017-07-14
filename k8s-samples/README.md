@@ -555,9 +555,9 @@ spec:
       mountPath: /var/lib/mysql
   volumes:
   - name: snap-01
-    # This Portworx volume must already exist.
+    # name and volumeID must be the same for snapshot restore
     portworxVolume:
-      volumeID: "vol1"
+      volumeID: snap-01
 ````
 Inspect that the database shows the cloned tables in the new mysql instance.
 
