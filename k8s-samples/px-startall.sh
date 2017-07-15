@@ -12,7 +12,7 @@
 function waitfor() {
    while true
    do
-        if ! `kubectl get $1 | egrep "No resources found|the server doesn't have a resource type" > /dev/null`
+        if ! `kubectl get $1 2>&1 | egrep "No resources found|the server doesn't have a resource type" > /dev/null`
         then
             echo "Waiting for $1 ..."
             sleep 2
@@ -108,17 +108,8 @@ spec:
               fieldPath: metadata.name
 EOF
 
-# No --- you really shouldn't have to wait for 'thirdpartyresources' and 'cluster'.
-while true
-   do
-        if `kubectl get thirdpartyresources | grep "No resources found" > /dev/null`
-        then
-            echo "Waiting for thirdpartyresources ..."
-            sleep 2
-        else
-            break
-        fi
-   done     
+# No --- you really shouldn't have to wait for 'thirdpartyresources'
+waitfor thirdpartyresources
 
 cat <<EOF | kubectl create -f -
 ---
@@ -131,16 +122,8 @@ spec:
   version: "3.1.8"
 EOF
 
- while true
-   do
-        if `kubectl get cluster | egrep "the server doesn't have a resource type" > /dev/null`
-        then
-            echo "Waiting for cluster ..."
-            sleep 2
-        else
-            break
-        fi
-  done
+# No --- you really shouldn't have to wait for 'cluster'
+waitfor cluster
 
 cat <<EOF | kubectl create -f -
 ---
