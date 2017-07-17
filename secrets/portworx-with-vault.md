@@ -1,10 +1,3 @@
----
-layout: page
-title: "Run PX with Vault"
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, encryption
-sidebar: home_sidebar
----
-
 ## Portworx with Vault
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
 
