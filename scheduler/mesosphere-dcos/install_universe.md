@@ -23,25 +23,25 @@ On each of your Master nodes run the following steps
 
 * Load the universe container into docker
 ```
-$ docker load < local-universe.tar.gz
+docker load < local-universe.tar.gz
 ```
 This will take a few minutes.
 
 * Copy the service files to /etc/systemd/system and start the services
 ```
-$ sudo mv dcos-local-px-universe-registry.service /etc/systemd/system/
-$ sudo mv dcos-local-px-universe-http.service /etc/systemd/system/
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable dcos-local-px-universe-http
-$ sudo systemctl enable dcos-local-px-universe-registry
-$ sudo systemctl start dcos-local-px-universe-http     
-$ sudo systemctl start dcos-local-px-universe-registry
+sudo mv dcos-local-px-universe-registry.service /etc/systemd/system/
+sudo mv dcos-local-px-universe-http.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable dcos-local-px-universe-http
+sudo systemctl enable dcos-local-px-universe-registry
+sudo systemctl start dcos-local-px-universe-http     
+sudo systemctl start dcos-local-px-universe-registry
 ```
 
 * Confirm that the services are up
 ```
-$ sudo systemctl status dcos-local-px-universe-http
-$ sudo systemctl status dcos-local-px-universe-registry
+sudo systemctl status dcos-local-px-universe-http
+sudo systemctl status dcos-local-px-universe-registry
 ```
 
 ### Add the PX Universe to DCOS
@@ -49,7 +49,7 @@ $ sudo systemctl status dcos-local-px-universe-registry
 Run the dcos command to add the newly deployed universe to your DCOS cluster
 
 ```
-$ dcos package repo add local-universe http://master.mesos:8082/repo --index=0
+dcos package repo add local-universe http://master.mesos:8082/repo --index=0
 ```
 
 ### Add the docker registry as a trusted store on each agent
@@ -58,9 +58,13 @@ On each agent node you will need to download the certificate from the newly depl
 To do this, run the following command on each agent node, including public agents.
 
 ```
-$ sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
-$ sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
-$ sudo systemctl restart docker
+sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
+sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
+sudo systemctl restart docker
+sudo curl -o /etc/ssl/certs/master.registry.pem http://master.mesos:8082/certs/domain.crt
+sudo update-ca-certificates
+echo CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt | sudo tee -a /opt/mesosphere/etc/mesos-slave-common
+sudo systemctl restart dcos-mesos-slave.service
 ```
 
 ### Verify local Universe available from DCOS
