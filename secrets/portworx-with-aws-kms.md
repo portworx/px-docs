@@ -6,7 +6,8 @@ sidebar: home_sidebar
 ---
 
 ## Portworx with AWS KMS
-This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS will  be used to encrypt Portworx Volumes.
+Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to
+an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
 ## Deploying Portworx
 
@@ -118,8 +119,9 @@ __Important: You need to run this command on all PX nodes, so that you could cre
 
 If the CLI is used to authenticate with AWS, for every restart of PX container it needs to be re-authenticated by running the `login` command.
 
-## Creating AWS KMS keys
-There are two ways in which you can create KMS Data keys.
+## Key generation with AWS KMS
+
+The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. More info about encrypted volumes [here](/manage/encrypted-volumes.md)
 
 ### Using AWS CLI
 You can follow the instructions [here](http://docs.aws.amazon.com/cli/latest/reference/kms/generate-data-key.html) to generate a data key.
