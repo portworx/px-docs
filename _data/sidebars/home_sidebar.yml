@@ -225,7 +225,7 @@
     - title: Portworx with Vault
       url: /secrets/portworx-with-vault.html
     - title: Portworx with AWS KMS
-      url: /enterprise/portworx-with-aws-kms.html
+      url: /secrets/portworx-with-aws-kms.html
   - title: Lighthouse
     folderitems:
     - title: Manage PX via Lighthouse
