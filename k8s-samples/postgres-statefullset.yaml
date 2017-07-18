@@ -1,0 +1,64 @@
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+   name: portworx-postgres
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  ports:
+    - port: 5431
+  selector:
+    app: postgres
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+        tier: frontend
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: postgres
+        image: docker.io/postgres
+        env:
+          # Use secret in real usage
+        - name: POSTGRES_PASSWORD
+          value: password
+        - name: POSTGRES_USER
+          value: user
+        ports:
+        - containerPort: 5431
+          name: mysql
+        volumeMounts:
+        - name: postgres
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres
+      annotations:
+        volume.beta.kubernetes.io/storage-class: portworx-postgres
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      resources:
+        requests:
+          storage: 2Gi
