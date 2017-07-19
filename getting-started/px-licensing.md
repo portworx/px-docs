@@ -145,7 +145,7 @@ Such license (or, license-file) will not work on other clusters.
 **INSTALLATION**:
 
 The easiest way to install the "PX-Enterprise" license, is via the
-[Portworx support](support@portworx.com) -provided "Activation ID", ie:
+[Portworx support](<support@portworx.com>) -provided "Activation ID", ie:
 
 ```
 pxctl license activate c0ffe-fefe-activation-123
