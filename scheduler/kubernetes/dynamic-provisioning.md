@@ -5,34 +5,32 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 sidebar: home_sidebar
 meta-description: "Looking to use a dynamically provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to dynamically provision volumes with k8s."
 ---
+* TOC
+{:toc}
 
 This document describes how to dynamically provision a volume using Kubernetes and Portworx.
 
-## Using Dynamic Provisioning
+### Using Dynamic Provisioning
 Using Dynamic Provisioning and Storage Classes you don't need to create Portworx volumes out of band and they will be created automatically.
-
-### Storage Classes
 Using Storage Classes objects an admin can define the different classes of Portworx Volumes that are offered in a cluster. Following are the different parameters that can be used to define a Portworx Storage Class
 
 ```
 - fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-- block_size: block size in Kbytes (default: `32`)
+- block_size: block size (default: `32k` for block size of 32 KBytes)
 - repl: replication factor [1..3] (default: `1`)
-- io_priority: IO Priority: [high|medium|low] (default: `low`)
 - snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 - aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-- ephemeral: ephemeral storage [true|false] (default `false`)
 - parent: a label or name of a volume or snapshot from which this storage class is to be created
 - secure: to create an encrypted storage class
 ```
 
+### Provision volumes
 #### Step1: Create Storage Class.
 
 Create the storageclass:
 
 ```
-# kubectl create -f \
-   examples/volumes/portworx/portworx-sc.yaml
+# kubectl create -f examples/volumes/portworx/portworx-sc.yaml
 ```
 
 Example:
@@ -91,13 +89,13 @@ Verifying persistent volume claim is created:
 ```
 # kubectl describe pvc pvcsc001
     Name:	      	pvcsc001
-    Namespace:      	default
-    StorageClass:   	portworx-sc
+    Namespace:      default
+    StorageClass:   portworx-sc
     Status:	      	Bound
-    Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
+    Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:	      	<none>
-    Capacity:	        2Gi
-    Access Modes:   	RWO
+    Capacity:	    2Gi
+    Access Modes:   RWO
     No Events.
 ```
 Persistent Volume is automatically created and is bounded to this pvc.
@@ -157,3 +155,8 @@ Verifying pod is created:
    NAME      READY     STATUS    RESTARTS   AGE
    pvpod       1/1     Running   0          48m        
 ```
+
+### Delete volumes
+For dynamically provisioned volumes using StorageClass and PVC (PersistenVolumeClaim), if a PVC is deleted, the corresponding Portworx volume will also get deleted. This is because Kubernetes, for PVC, creates volumes with a reclaim policy of deletion. So the volumes get deleted on PVC deletion.
+
+To delete the PVC and the volume, you can run `kubectl delete -f <pvc_spec_file.yaml>`
