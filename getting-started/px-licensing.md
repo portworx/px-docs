@@ -125,7 +125,7 @@ The normal functionality may be restored at any time, by purchasing and installi
 **UPGRADE NOTES**:
 
 * The "Trial" license can be upgraded into a "PX-Enterprise" license by contacting
-[Portworx support](support@portworx.com), and activating via the "activation code" or via the
+support@portworx.com, and activating via the "activation code" or via the
 license file (see [PX-Enterprise](#px-enterprise-license) below for details)
 * The "Trial" license itself cannot be upgraded or extended with another "Trial", or downgraded into "PX-Developer" license.
 
@@ -145,7 +145,7 @@ Such license (or, license-file) will not work on other clusters.
 **INSTALLATION**:
 
 The easiest way to install the "PX-Enterprise" license, is via the
-[Portworx support](<support@portworx.com>) -provided "Activation ID", ie:
+ "Activation ID" (reach out to us at support@portworx.com for purchasing licenses), ie:
 
 ```
 pxctl license activate c0ffe-fefe-activation-123
