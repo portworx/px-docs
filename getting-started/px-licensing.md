@@ -125,7 +125,7 @@ The normal functionality may be restored at any time, by purchasing and installi
 **UPGRADE NOTES**:
 
 * The "Trial" license can be upgraded into a "PX-Enterprise" license by contacting
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html), and activating via the "activation code" or via the
+[Portworx support](support@portworx.com), and activating via the "activation code" or via the
 license file (see [PX-Enterprise](#px-enterprise-license) below for details)
 * The "Trial" license itself cannot be upgraded or extended with another "Trial", or downgraded into "PX-Developer" license.
 
@@ -145,7 +145,7 @@ Such license (or, license-file) will not work on other clusters.
 **INSTALLATION**:
 
 The easiest way to install the "PX-Enterprise" license, is via the
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html) -provided "Activation ID", ie:
+[Portworx support](support@portworx.com) -provided "Activation ID", ie:
 
 ```
 pxctl license activate c0ffe-fefe-activation-123
@@ -157,9 +157,7 @@ Upon activating the license on one PX-node, all remaining PX-nodes will automati
 
 
 
-**INSTALL ON AIR-GAPPED ENVIRONMENTS**: Customers that do not have an active Internet connection on their PX-cloud, will need to
-be guided by the 
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html), and will follow a slightly different process.
+**INSTALL ON AIR-GAPPED ENVIRONMENTS**: Customers that do not have an active Internet connection on their PX-cloud, will need to be guided by the Portworx support (can be reached at support@portworx.com) , and will follow a slightly different process.
 
 Customers will be asked to provide the `Cluster UUID` information (available via `pxctl cluster list` command):
 
@@ -181,5 +179,4 @@ Finally, please note that the license installation is a non-obtrusive process, w
 on the PX volumes, nor will it interrupt the active IO operations.
 
 
-For information on purchase, upgrades and support, please check our
-[https://docs.portworx.com/knowledgebase/support.html](https://docs.portworx.com/knowledgebase/support.html) page.
+For information on purchase, upgrades and support, please reach out to us at support@portworx.com
