@@ -18,6 +18,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 - fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
 - block_size: block size (default: `32k` for block size of 32 KBytes)
 - repl: replication factor [1..3] (default: `1`)
+- shared: make this a globally shared namespace volume which can be used by multiple containers (e.g shared: "true")
 - snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 - aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
 - parent: a label or name of a volume or snapshot from which this storage class is to be created
