@@ -66,6 +66,8 @@ Below are all parameters that can be given in the query string:
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
 | coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
 
+If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html)
+
 #### Scaling
 Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
