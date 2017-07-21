@@ -52,6 +52,7 @@ Please run the following commands on any one of the nodes running Portworx:
 # uname -a
 # docker version
 # kubectl logs -l  name=portworx -n kube-system --tail=1000
+# kubectl version
 # /opt/pwx/bin/pxctl status
 ```
 Include above logs when contacting us.
