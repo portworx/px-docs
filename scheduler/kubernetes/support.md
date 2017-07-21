@@ -38,12 +38,20 @@ If the PVC creation is failing, this could be due the following reasons
 * If a pod is stuck in terminating state, observe `journalctl -lfu kubelet` on the node where the pod is trying to terminate for errors during the pod termination process. Reach out to us over slack with the specific errors.
 * Ensure that [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of pod and the PersistentVolumeClaim is the same.
 
+### Useful commands
+* List PX pods: `kubectl get pods -l name=portworx -n kube-system`
+* Describe PX pods: `kubectl describe pods -l name=portworx -n kube-system`
+* Logs of all PX pods: `kubectl logs -l name=portworx -n kube-system --tail=1000`
+* Follow logs of a particular px pod: `kubectl logs -w <pod-name> -n kube-system`
+* Monitor kubelet logs on a particular Kubernetes node: `journalctl -lfu kubelet`
+    * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
+
 ### Collecting Logs from PX
 Please run the following commands on any one of the nodes running Portworx:
 ```
 # uname -a
 # docker version
-# kubectl logs -l  name=portworx -n kube-system --tail=200
+# kubectl logs -l  name=portworx -n kube-system --tail=1000
 # /opt/pwx/bin/pxctl status
 ```
 Include above logs when contacting us.
