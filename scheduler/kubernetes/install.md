@@ -28,23 +28,12 @@ The native portworx driver in Kubernetes supports the following features:
 ## Install
 >**Note:**<br/>If you are deploying Kubernetes using [Tectonic](https://coreos.com/tectonic/), read the [known issue here](#tectonic-known-issue).
 
-The following kubectl command deploys Portworx in the cluster as a `daemon set`:
-
-```
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
-```
-Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
-
-You can also generate the spec using `curl` and supply that to kubectl. This is useful if:
-* Your cluster doesn't have access to http://install.portworx.com, so the spec can be generated on a different machine.
-* You want to save the spec file for future reference.
-
-For example:
+The following kubectl commands deploys Portworx in the cluster as a `DaemonSet`:
 ```
 $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
 $ kubectl apply -f px-spec.yaml
 ```
-
+Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
 
 Below are all parameters that can be given in the query string:
 
@@ -81,14 +70,6 @@ $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://et
 
 # To run in master in zero storage mode and use a specific drive for other nodes
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
-```
-
-## Upgrade
-To upgrade Portworx, use the same `kubectl apply` command used to install it. This will repull the image used for Portworx (portworx/px-enterprise:latest) and perform a rolling upgrade.
-
-You can check the upgrade status with following command.
-```
-$ kubectl rollout status ds portworx --namespace kube-system
 ```
 
 ## Uninstall
