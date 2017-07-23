@@ -3,35 +3,35 @@ layout: page
 title: "Dynamic Provisioning"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
+meta-description: "Looking to use a dynamically provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to dynamically provision volumes with k8s."
 ---
+* TOC
+{:toc}
 
 This document describes how to dynamically provision a volume using Kubernetes and Portworx.
 
-## Using Dynamic Provisioning
+### Using Dynamic Provisioning
 Using Dynamic Provisioning and Storage Classes you don't need to create Portworx volumes out of band and they will be created automatically.
-
-### Storage Classes
 Using Storage Classes objects an admin can define the different classes of Portworx Volumes that are offered in a cluster. Following are the different parameters that can be used to define a Portworx Storage Class
 
 ```
 - fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-- block_size: block size in Kbytes (default: `32`)
+- block_size: block size (default: `32k` for block size of 32 KBytes)
 - repl: replication factor [1..3] (default: `1`)
-- io_priority: IO Priority: [high|medium|low] (default: `low`)
+- shared: make this a globally shared namespace volume which can be used by multiple containers (e.g shared: "true")
 - snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 - aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-- ephemeral: ephemeral storage [true|false] (default `false`)
 - parent: a label or name of a volume or snapshot from which this storage class is to be created
 - secure: to create an encrypted storage class
 ```
 
+### Provision volumes
 #### Step1: Create Storage Class.
 
 Create the storageclass:
 
 ```
-# kubectl create -f \
-   examples/volumes/portworx/portworx-volume-sc-high.yaml
+# kubectl create -f examples/volumes/portworx/portworx-sc.yaml
 ```
 
 Example:
@@ -40,24 +40,22 @@ Example:
      kind: StorageClass
      apiVersion: storage.k8s.io/v1beta1
      metadata:
-       name: portworx-io-priority-high
+       name: portworx-sc
      provisioner: kubernetes.io/portworx-volume
      parameters:
        repl: "1"
-       snap_interval:   "70"
-       io_priority:  "high"
 ```
-[Download example](/k8s-samples/portworx-volume-sc-high.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-sc.yaml?raw=true)
 
 Verifying storage class is created:
 
 ```
-# kubectl describe storageclass portworx-io-priority-high
-     Name: 	        	portworx-io-priority-high
+# kubectl describe storageclass portworx-sc
+     Name: 	        	portworx-sc
      IsDefaultClass:	        No
      Annotations:		<none>
      Provisioner:		kubernetes.io/portworx-volume
-     Parameters:		io_priority=high,repl=1,snapshot_interval=70
+     Parameters:		repl=1
      No events.
 ```
 
@@ -77,7 +75,7 @@ Example:
      metadata:
        name: pvcsc001
        annotations:
-         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+         volume.beta.kubernetes.io/storage-class: portworx-sc
      spec:
        accessModes:
          - ReadWriteOnce
@@ -92,13 +90,13 @@ Verifying persistent volume claim is created:
 ```
 # kubectl describe pvc pvcsc001
     Name:	      	pvcsc001
-    Namespace:      	default
-    StorageClass:   	portworx-io-priority-high
+    Namespace:      default
+    StorageClass:   portworx-sc
     Status:	      	Bound
-    Volume:         	pvc-e5578707-c626-11e6-baf6-08002729a32b
+    Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:	      	<none>
-    Capacity:	        2Gi
-    Access Modes:   	RWO
+    Capacity:	    2Gi
+    Access Modes:   RWO
     No Events.
 ```
 Persistent Volume is automatically created and is bounded to this pvc.
@@ -109,7 +107,7 @@ Verifying persistent volume claim is created:
 # kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
     Name: 	      	pvc-e5578707-c626-11e6-baf6-08002729a32b
     Labels:        	<none>
-    StorageClass:  	portworx-io-priority-high
+    StorageClass:  	portworx-sc
     Status:	      	Bound
     Claim:	      	default/pvcsc001
     Reclaim Policy: 	Delete
@@ -158,3 +156,8 @@ Verifying pod is created:
    NAME      READY     STATUS    RESTARTS   AGE
    pvpod       1/1     Running   0          48m        
 ```
+
+### Delete volumes
+For dynamically provisioned volumes using StorageClass and PVC (PersistenVolumeClaim), if a PVC is deleted, the corresponding Portworx volume will also get deleted. This is because Kubernetes, for PVC, creates volumes with a reclaim policy of deletion. So the volumes get deleted on PVC deletion.
+
+To delete the PVC and the volume, you can run `kubectl delete -f <pvc_spec_file.yaml>`

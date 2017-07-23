@@ -1,17 +1,10 @@
----
-layout: page
-title: "Run PX with Vault"
-keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, encryption
-sidebar: home_sidebar
----
-
 ## Portworx with Vault
-This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
+Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
 
 ### Setting up Vault
 Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.html) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
 
-### Deploying Portworx
+## Deploying Portworx
 
 You can start PX on a node via the Docker CLI as follows
 
@@ -60,7 +53,7 @@ You need to add two extra Docker runtime commands
 
 All the above Vault related fields as well as the cluster secret key can be set using PX CLI which is explained in the next section.
 
-### Authenticating with Vault using PX CLI
+## Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
 
@@ -73,7 +66,15 @@ Successfully authenticated with Vault.
 
 __Important: You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes__
 
+
+## Key generation with Vault
+
+The following sections describe the key generation process with PX and
+Vault which can be used for encrypting volumes. More info about
+encrypted volumes [here](/manage/encrypted-volumes.md)
+
 ### Setting cluster wide secret key
+
 A cluster wide secret key is a common key that can be used to encrypt
 all your volumes. You can set the cluster secret key using the following command
 

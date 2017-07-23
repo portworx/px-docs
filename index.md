@@ -9,8 +9,6 @@ youtubeId : 0zTjOly0vkA
 * TOC
 {:toc}
 
-<a href="https://github.com/portworx/px-docs"><img class="topfork" width="149px" height="149px" src="/images/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
-
 Portworx is a software defined persistent storage solution designed and purpose built for containers.  Portworx is a clustered block storage solution that provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through schedulers such as Kubernetes, Mesos and Swarm.
 Portworx storage is delivered as a container that gets installed on your servers that run stateful applications. 
 

@@ -4,6 +4,7 @@ title: "Portworx integration with prometheus"
 keywords: prometheus, graph, stats
 sidebar: home_sidebar
 redirect_from: "/portworx-with-prometheus.html"
+meta-description: "Portworx integrates with Prometheus for container monitoring! Follow this step by step process to find out how."
 ---
 
 * TOC

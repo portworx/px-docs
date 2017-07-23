@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Microsoft SQL Server Database on Portworx"
-keywords: portworx, container, microsoft, sqlserver, storage
+title: "SQL Server on Docker with Persistent Storage"
+keywords: portworx, container, microsoft, sqlserver, persistent storage, docker
 sidebar: home_sidebar
 youtubeId: G3Lp1RgWdKg
 ---
@@ -17,7 +17,7 @@ and recoverability that enterprises expect when running containerized SQL Server
 {% include youtubePlayer.html id=page.youtubeId %}
 
 
-## Step 1: Run SQL Server with Portworx storage on demand
+## Run SQL Server with Portworx storage on demand
 
 To create a highly available storage volume for SQL Server, without having to provision storage in advance,
 run the following command:
@@ -34,7 +34,7 @@ which guarantees that persistent data will be fully replicated on 3 separate nod
 
 The mssql-server container is now accessible remotely at port 1433.
 
-## Step 2: Access SQL Server
+## Access SQL Server
 
 To access via `docker exec`:
 
@@ -57,7 +57,8 @@ Note that you could run multiple instances of `mssql-server` on the same host, e
 and each with its own unique IP Address published.
 
 
-## Step 3: Use `pxctl` to create recoverable snapshots of your volume
+## Database recoverability with snapshots
+### Use `pxctl` to create recoverable snapshots of your volume
 
 To take a recoverable snapshot of the `mssql-server` instance for a point in time, 
 use the `pxctl` CLI:
@@ -70,7 +71,7 @@ ID			NAME			SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 342580301989879504	mssqlvol_snap_0628	10 GiB	3	no	no		LOW		0	up - detached
 ```
 
-## Step 4: Use the snapshot to recover to an earlier point in time
+### Use the snapshot to recover to an earlier point in time
 
 By default, a Portworx volume snapshot is read-writable.   The snapshot taken is visible globally throughout the cluster, 
 and can be used to start another instance of `mssql-server` on a different node as below:
@@ -91,6 +92,9 @@ jeff-coreos-2 core # docker inspect --format '{{ "{{ .Mounts " }}}}' 46eff5a9cbd
 [{mssqlvol_snap_0628 /var/lib/osd/mounts/mssqlvol_snap_0628 /var/opt/mssql pxd  true rprivate}]
 ```
 
+## Deploy SQL Server on Kubernetes
+Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.
+<br>Please download this [Kubernetes POD spec](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/mssql-server.yml) to deploy SQL Server.
 ## See Also
 For futher reading on Microsoft SQL Server on Linux, 
 please visit the [SQL Server on Docker](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-docker#a-idpersista-persist-your-data) documentation

@@ -48,7 +48,7 @@ DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
 Number of nodes maximum         1000
 Number of volumes maximum       1024 [...]
 Virtual machine hosts            yes
-Product SKU                     Trial    expires in 29 days, 20:40
+Product SKU                     Trial    expires in 30 days
 ```
 
 ## Licensed features
@@ -65,8 +65,8 @@ In the table below, we can see the overview of features that are controlled via 
 | Volume sets                  | yes/no | Defines if volumes may be scaled
 | BYOK data encryption         | yes/no | Defines if volumes may be encrypted
 | Snapshot to object store     | yes/no | Defines if volumes may be snapshotted to Amazon S3, MS Azure and Google storage
-| Virtual machine hosts        | yes/no | PX Containers may be deployed on VMs (including Amazon EC2, OpenStack Nova, etc...)
-| Bare-metal hosts             | yes/no | PX Containers may be deployed on commodity hardware
+| Virtual machine hosts        | yes/no | Software may be deployed on VMs (including Amazon EC2, OpenStack Nova, etc...)
+| Bare-metal hosts             | yes/no | Software may be deployed on commodity hardware
 
 
 ## Types of licenses
@@ -94,21 +94,6 @@ Virtual machine hosts             yes
 Product SKU                  PX-Developer  permanent
 ```
 
-**UPGRADE NOTES**:
-
-The "PX-Developer" license can be upgraded to the "Trial" license by running the following command:
-
-```bash
-pxctl license trial
-```
-Alternatively, the PX-Dev can also be upgraded into "PX-Enterprise" license by contacting
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html), and activating via the "activation code" or the
-license file, like so:
-
-```bash
-pxctl license activate c0ffe-fefe-activation-123    || \
-pxctl license add customer_license.bin
-```
 
 ### Trial license
 
@@ -139,16 +124,11 @@ The normal functionality may be restored at any time, by purchasing and installi
 
 **UPGRADE NOTES**:
 
-* The "Trial" license can be activated from the "PX-Developer" containers, by running the `pxctl license trial` command.
-* The "Trial" license itself cannot be upgraded or extended with another "Trial", or downgraded back to the "PX-Developer" license
-* However, it can be upgraded into a "PX-Enterprise" license by contacting
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html), and activating via the "activation code" or the
-license file, like so:
+* The "Trial" license can be upgraded into a "PX-Enterprise" license by contacting
+support@portworx.com, and activating via the "activation code" or via the
+license file (see [PX-Enterprise](#px-enterprise-license) below for details)
+* The "Trial" license itself cannot be upgraded or extended with another "Trial", or downgraded into "PX-Developer" license.
 
-```bash
-pxctl license activate c0ffe-fefe-activation-123    || \
-pxctl license add customer_license.bin
-```
 
 ### PX-Enterprise license
 
@@ -165,24 +145,21 @@ Such license (or, license-file) will not work on other clusters.
 **INSTALLATION**:
 
 The easiest way to install the "PX-Enterprise" license, is via the
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html) -provided "Activation ID", ie:
+ "Activation ID" (reach out to us at support@portworx.com for purchasing licenses), ie:
 
 ```
 pxctl license activate c0ffe-fefe-activation-123
 ```
 
 Note that the "license activation" process will require active Internet connection from the PX-nodes to the license-server,
-as the activation process automatically registers the cluster UUID on the license-server, retrieves and installs
-the generated license on the cluster.  Upon activating the license on one PX-node, all remaining PX-nodes will automatically
-update to the new license.
+as the activation process automatically registers the cluster UUID, generates and installs the license on the cluster.
+Upon activating the license on one PX-node, all remaining PX-nodes will automatically update to the new license.
 
 
 
-**INSTALL ON AIR-GAPPED ENVIRONMENTS**: Customers that do not have an active Internet connection on their PX-cloud, will need to
-be guided by the 
-[Portworx support](https://docs.portworx.com/knowledgebase/support.html), and will follow a slightly different process.
+**INSTALL ON AIR-GAPPED ENVIRONMENTS**: Customers that do not have an active Internet connection on their PX-cloud, will need to be guided by the Portworx support (can be reached at support@portworx.com) , and will follow a slightly different process.
 
-Customers will be asked to provide the *Cluster UUID* (available via `pxctl cluster list` command):
+Customers will be asked to provide the `Cluster UUID` information (available via `pxctl cluster list` command):
 
 ```
 [root@vm1 ~]# pxctl cluster list
@@ -191,16 +168,15 @@ Cluster UUID: f987ad4b-987c-4e7e-a8bd-788c89cc40f1
 Status: OK [...]
 ```
 
-... and will be supplied the "license file".  This "license file" will need to be uploaded to one of the PX-nodes,
-and activated via the following command:
+Upon supplying the "Cluster UUID", the customers will get their "license file".
+The "license file" will need to be uploaded to one of the PX-nodes, and activated via the following command:
 
 ```
-pxctl license add customer_license.bin
+pxctl license add license_file.bin
 ```
 
 Finally, please note that the license installation is a non-obtrusive process, which will not interfere with the data stored
 on the PX volumes, nor will it interrupt the active IO operations.
 
 
-For information on purchase, upgrades and support, see
-[https://docs.portworx.com/knowledgebase/support.html](https://docs.portworx.com/knowledgebase/support.html) page.
+For information on purchase, upgrades and support, please reach out to us at support@portworx.com

@@ -3,6 +3,7 @@ layout: page
 title: "Testing failover of stateful applications"
 keywords: portworx, failover, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
+meta-description: "Learn how to failover a stateful application using Kubernetes and Portworx.  Try it for yourself today."
 ---
 
 ## Failover MYSQL Pod to a different node

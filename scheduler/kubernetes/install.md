@@ -66,6 +66,8 @@ Below are all parameters that can be given in the query string:
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
 | coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
 
+If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html)
+
 #### Scaling
 Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
@@ -97,6 +99,16 @@ $ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://e
 ```
 
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
+
+## Cloud Installation
+Portworx-ready Kubernetes clusters can be deployed through Terraform, using the Terraporx repository, on Digital Ocean and Google Clould Platform
+
+### Google Cloud Platform (GCP)
+To deploy a Portworx-ready Kubernetes cluster on GCP, use [this Terraporx repository](https://github.com/portworx/terraporx/tree/master/gcp/kubernetes_ubuntu16)
+
+### Digital Ocean
+To deploy a Portworx-ready Kubernetes cluster on Digital Ocean, use [this Terraporx repository](https://github.com/portworx/terraporx/tree/master/digital_ocean/kubernetes_ubuntu16)
+
 
 ## Known issues
 

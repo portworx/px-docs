@@ -4344,6 +4344,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 2;
   margin-left: -1px;
 }
+.side-nav {
 .nav {
   margin-bottom: 0;
   padding-left: 0;
@@ -4387,6 +4388,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li > a > img {
   max-width: none;
+}
 }
 .nav-tabs {
   border-bottom: 1px solid #ddd;
@@ -7456,227 +7458,11 @@ section.hero-section {
 6.      Styling for the Header
 
 ***********************/
-hr {
-  margin: 0 0;
-  background: #f1732f;
-  height: 3px;
-  border-top: none;
-}
-i.material-icons {
-  vertical-align: middle;
-}
-.navbar-default {
-  background-color: #cccccc;
-  min-height: 60px;
-  border: none;
-  border-radius: 0;
-  margin: 0;
-}
-.navbar-brand {
-  height: 60px;
-  padding: 5px 15px;
-}
-.navbar-brand .mobile-logo {
-  max-height: 100%;
-  width: auto;
-}
-.navbar-brand img {
-  max-height: 75px;
-}
-.navbar-toggle {
-  border: none;
-  padding: 10px;
-  margin-top:11px;
-  border-radius: 0;
-}
-.navbar-toggle span {
-  color: #ffffff;
-  font-size: 40px;
-}
-.navbar-collapse {
-  background-color: #ffffff;
-}
-.navbar-collapse .navbar-nav {
-  padding-top: 0;
-}
-.navbar-collapse .navbar-nav .mobile-close {
-  font-size: 40px;
-  color: #555559;
-}
-.navbar-collapse .navbar-nav .mobile-close:hover {
-  background-color: #ffffff;
-}
-.navbar-collapse .navbar-nav li a {
-  text-align: center;
-  font-size: 18pt;
-  color: #555559;
-  text-transform: uppercase;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-weight: 600;
-}
-.navbar-collapse .navbar-nav li:after {
-  content: "";
-  position: absolute;
-  border-bottom: 1px dashed #f36621;
-  width: 24%;
-  left: 38%;
-  bottom: 0;
-}
-.navbar-collapse .navbar-nav .open a {
-  background-color: #ffffff!important;
-}
-.navbar-collapse .navbar-nav ul.dropdown-menu li a {
-  color: #f36621 !important;
-  font-size: 15pt;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.header-social {
-  height: 65px;
-  width: 65px;
-  padding: 10px 10px 10px 10px;
-}
-@media (max-width: 1300px) {
-  nav.navbar.site-navigation .container {
-    width: 100%;
-  }
-}
-@media (min-width: 1024px) {
-  .navbar-default {
-    background-color: #fff;
-    border-radius: 0;
-    border: none;
-    min-height: 100px;
-    margin-bottom: 0;
-  }
-  .navbar-brand {
-    height: 100%;
-    padding: 15px;
-  }
-  .navbar-collapse .navbar-nav {
-    padding-top: 40px;
-    line-height: 20px;
-  }
-  .navbar-collapse .navbar-nav .navbar-form {
-    margin: 0;
-  }
-  .navbar-collapse .navbar-nav li {
-    position: relative;
-  }
-  .navbar-collapse .navbar-nav li ul.dropdown-menu {
-    background-color: rgba(243, 102, 33, 0.8);
-    margin-top: -10px;
-    right: auto;
-    /*width: 100%;
-    min-width: 0px;*/
-  }
-  .navbar-collapse .navbar-nav li ul.dropdown-menu li {
-    text-align: center;
-    width: inherit;
-  }
-  .navbar-collapse .navbar-nav li ul.dropdown-menu li a {
-    font-size: 10pt;
-    color: #ffffff!important;
-    background-color: rgba(0, 0, 0, 0) !important;
-    padding: 0;
-    margin: 5px 0;
-    font-weight: 300;
-    width: inherit;
-  }
-  .navbar-collapse .navbar-nav li a {
-    text-transform: uppercase;
-    padding: 2px 2px;
-    margin: 13px 18px;
-    font-size: 10pt;
-    background-color: transparent;
-  }
-  .navbar-collapse .navbar-nav li:after {
-    content: "";
-    position: absolute;
-    border-bottom: none;
-  }
-  .nav-active {
-    border-bottom: 2px solid #f36621;
-  }
-  .header-form {
-    background-color: #e9e9e9;
-    color: #777;
-    border: none;
-    border-radius: 0;
-    min-width: 220px;
-    box-shadow: none;
-  }
-  .header-form:focus {
-    border: none;
-    box-shadow: none;
-  }
-  .header-form::-webkit-input-placeholder {
-    color: #666;
-    text-transform: uppercase;
-    font-size: 8pt;
-  }
-  #input_container {
-    position: relative;
-    padding: 0;
-    margin: 0;
-  }
-  #input_img {
-    position: absolute;
-    bottom: 8px;
-    right: 10px;
-    width: 14px;
-    height: 14px;
-    z-index: 10;
-  }
-}
-/*Styling to make navbar dropdowns collapse style on tablet*/
-@media (max-width: 1024px) {
-  .navbar-nav .open .dropdown-menu {
-    position: static;
-    float: none;
-    width: auto;
-    margin-top: 0;
-    background-color: transparent;
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-}
-/*Styling to make navbar collapse on tablet*/
-@media (max-width: 1024px) {
-  .navbar-header {
-    float: none;
-  }
-  .navbar-toggle {
-    display: block;
-  }
-  .navbar-collapse {
-    border-top: 1px solid transparent;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  .navbar-collapse.collapse {
-    display: none!important;
-  }
-  .navbar-nav {
-    float: none!important;
-    margin: 7.5px -15px;
-  }
-  .navbar-nav > li {
-    float: none;
-  }
-  .navbar-text {
-    float: none;
-    margin: 15px 0;
-  }
-  /* since 3.1.0 */
-  .navbar-collapse.collapse.in {
-    display: block!important;
-  }
-  .collapsing {
-    overflow: hidden!important;
-  }
-}
+
+/*
+This entire section has moved to marketing-nav.scss
+*/
+
 /*******************************
 
 7.      Styling for the Footer
@@ -7685,9 +7471,6 @@ i.material-icons {
 footer {
   color: #333;
   padding: 0;
-}
-footer a {
-  color: #fff;
 }
 footer .page-sub-header {
   color: #fff;
@@ -7728,16 +7511,6 @@ footer small.copyright {
 }
 .footer-links > li {
   padding-top: 10px;
-}
-footer a,
-.footer-links > li > a {
-  text-decoration: none;
-  color: #ccc;
-}
-footer a:hover,
-.footer-links > li > a:hover {
-  text-decoration: none;
-  color: #fff;
 }
 .footer-left h3 {
   text-align: center;
@@ -8771,3 +8544,85 @@ section.pull-quote .container:after {
     padding-right: 60px;
   }
 }
+
+
+#algolia-search {
+    span {
+    	width: 100%;
+    }
+
+    padding-top: 40px;
+
+    input {
+        background-image: url(/images/magnifying-glass.png);
+        background-size: 16px;
+        background-repeat: no-repeat;
+        background-position: left;
+        padding-left: 28px;
+        background-position-x: 6px;
+    }
+}
+
+#marketing-nav {
+	font-family: 'Libre Franklin', sans-serif;
+
+	#searchform {
+		display: none;
+	}
+
+	#top-nav {
+	    max-height: none;
+	}
+
+	input {
+		margin-top: 9px;
+	}
+
+	#top-nav li{
+
+
+	    &>a {
+	    	clear: both;
+			background-color: transparent !important;
+    		text-transform: capitalize;
+	    	border: none;
+	    	transition: all 0.5s ease;
+	    }
+
+	    &.open {
+	        &>a {
+	            color: #ddd;
+	        }
+	        &>ul {
+	        	display: block !important;
+	        }
+		}
+	}
+
+	a[href^="http://"]:after, a[href^="https://"]:after {
+		content: none;
+	}
+
+    hr {
+        margin: 0 25% !important;
+        width: 50%;
+    }
+
+    :last-child:after {
+    	border-bottom: none !important;
+    }
+
+    .navbar-toggle {
+    	background: none !important;
+    }
+
+    .mobile-close {
+    	font-size: 1.5em !important;
+    }
+
+    #menu-item-2006 a {
+        border-bottom: 2px solid #f36621 !important;
+    }
+
+}
+

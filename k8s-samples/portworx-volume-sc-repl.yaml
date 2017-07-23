@@ -1,9 +1,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
 metadata:
-   name: portworx-io-priority-repl
+   name: portworx-sc-repl
 provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "3"
-  snapshot_interval:   "50"
-  io_priority:  "high"

@@ -30,7 +30,7 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
-        - title: Get Support
+        - title: Troubleshoot and Get Support
           url: /scheduler/kubernetes/support.html
     - title: Mesosphere DC/OS
       folderitems:
@@ -220,6 +220,12 @@
         url: /applications/docker-compose.html
       - title: Jenkins with Portworx
         url: /applications/jenkins.html
+  - title: Secrets
+    folderitems:
+    - title: Portworx with Vault
+      url: /secrets/portworx-with-vault.html
+    - title: Portworx with AWS KMS
+      url: /secrets/portworx-with-aws-kms.html
   - title: Lighthouse
     folderitems:
     - title: Manage PX via Lighthouse

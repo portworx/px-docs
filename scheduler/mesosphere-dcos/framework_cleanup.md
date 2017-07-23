@@ -35,3 +35,9 @@ $ dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 $ SERVICE_NAME=cassandra-px
 $ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
+
+## 3. Cleanup PX remnants from slave nodes
+
+If there was a failed PX deployment, then there may be a `/etc/pwx` directory on each of the slave nodes.
+<br> If so, this directory should be removed with `rm -rf /etc/pwx`
+

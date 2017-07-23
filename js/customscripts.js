@@ -29,6 +29,15 @@ $( document ).ready(function() {
         $(".navbar-toggle").show();
     });
 
+    $('ul.nav li.dropdown').hover(function() {
+        if (window.innerWidth > 1023){
+            $(this).find('.dropdown-menu').stop(true, true).fadeIn(300);
+            }
+        }, function() {
+            if (window.innerWidth > 1023){
+            $(this).find('.dropdown-menu').stop(true, true).fadeOut(300);
+        }
+    });
 
 });
 
@@ -65,4 +74,5 @@ $(function() {
             return $this.find("a[data-toggle=tab]:first, a[data-toggle=pill]:first").tab("show");
         }
     });
+
 });
