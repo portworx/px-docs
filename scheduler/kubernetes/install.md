@@ -24,6 +24,7 @@ The native portworx driver in Kubernetes supports the following features:
 ## Prerequisites
 * You must have a running Kubernetes 1.6+ Cluster.  If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* Ensure all nodes running PX are synchronized in time and NTP is configured
 
 ## Install
 >**Note:**<br/>If you are deploying Kubernetes using [Tectonic](https://coreos.com/tectonic/), read the [known issue here](#tectonic-known-issue).
