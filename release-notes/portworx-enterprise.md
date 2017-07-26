@@ -17,7 +17,7 @@ redirect_from: "/px-enterprise-release-notes.html"
 ### Key Features
 
 * Provide ability to cancel a replication add or ha increase operation
-* Automatically decommision a node if it has been offline for longer than 48 hours
+* Automatically decommision a storageless node in the cluster if it has been offline for longer than 48 hours
 * [Kubernetes snapshots driver for PX-Enterprise](https://docs.portworx.com/scheduler/kubernetes/snaps.html)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
 
