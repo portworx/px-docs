@@ -12,7 +12,7 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ## 1.2.9 Release notes
 
->**Important:**<br/> If you are upgrading from an older version of PX (1.2.8 or older), you will need node reboot after upgrade in order for the new version to take effect properly.
+>**Important:**<br/> If you are upgrading from an older version of PX (1.2.8 or older) and have PX volumes in attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
 
 ### Key Features
 
