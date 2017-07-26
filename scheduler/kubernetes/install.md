@@ -27,7 +27,6 @@ The native portworx driver in Kubernetes supports the following features:
 * Ensure all nodes running PX are synchronized in time and NTP is configured
 
 ## Install
->**Note:**<br/>If you are deploying Kubernetes using [Tectonic](https://coreos.com/tectonic/), read the [known issue here](#tectonic-known-issue).
 
 The following kubectl commands deploys Portworx in the cluster as a `DaemonSet`:
 ```
@@ -45,6 +44,7 @@ Below are all parameters that can be given in the query string:
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
+| coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
 | zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
 | force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
 | etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
@@ -54,12 +54,11 @@ Below are all parameters that can be given in the query string:
 | acltoken    	| (Optional) ACL token value used for Consul authentication.                                                                                                                               	| acltoken=398073a8-5091-4d9c-871a-bbbeb030d1f6     	|
 | token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
-| coreos       	| (Optional) Specifies that target nodes are coreos.                                                                                                                                      	| coreos=true                                           |
 
 If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html)
 
 #### Scaling
-Portworx is deployed as a `Daemon Set`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
+Portworx is deployed as a `DaemonSet`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
 #### Examples
 ```
@@ -90,17 +89,3 @@ To deploy a Portworx-ready Kubernetes cluster on GCP, use [this Terraporx reposi
 
 ### Digital Ocean
 To deploy a Portworx-ready Kubernetes cluster on Digital Ocean, use [this Terraporx repository](https://github.com/portworx/terraporx/tree/master/digital_ocean/kubernetes_ubuntu16)
-
-
-## Known issues
-
-<a name="tectonic-known-issue"></a>
-##### Kubernetes on CoreOS deployed through Tectonic
-[Tectonic](https://coreos.com/tectonic/) is deploying the [Kubernetes controller manager](https://kubernetes.io/docs/admin/kube-controller-manager/) in the docker `none` network. As a result, when the controller manager invokes a call on http://localhost:9001 to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network.
-This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
-
-To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
-
-Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
-
-This issue will be fixed in upcoming kubernetes release 1.6.5.

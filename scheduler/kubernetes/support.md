@@ -62,3 +62,13 @@ Include above logs when contacting us.
 If you have an enterprise license, please contact us at support@portworx.com with your license key and logs.
 
 We are always available on Slack. Join us! [![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
+
+### Known issues
+
+##### Kubernetes on CoreOS deployed through Tectonic
+* This issue is fixed in Tectonic 1.6.7. So if are using a version equal or higher, this does not apply to you.
+* [Tectonic](https://coreos.com/tectonic/) is deploying the [Kubernetes controller manager](https://kubernetes.io/docs/admin/kube-controller-manager/) in the docker `none` network. As a result, when the controller manager invokes a call on http://localhost:9001 to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network.
+This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
+* To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
+* Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
+
