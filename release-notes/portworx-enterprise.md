@@ -16,11 +16,11 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 ### Key Features
 
-* Provide ability cancel a replication add operation
+* Provide ability to cancel a replication add or ha increase operation
 * Automatically decommision a node if it has been offline for longer than 48 hours
 * [Kubernetes snapshots driver for PX-Enterprise](https://docs.portworx.com/scheduler/kubernetes/snaps.html)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
-* 
+
 
 ### Key Issues Addressed
 
@@ -32,8 +32,6 @@ redirect_from: "/px-enterprise-release-notes.html"
 * Read topology parameters on PX restart so RACK topology information is read correctly on restarts
 * Retain environment variables when PX is upgraded via `pxctl upgrade` command
 * Improve handling for encrypted scale volumes
-
-
 
 
 ## 1.2.8 Release notes
