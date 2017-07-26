@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Update Portworx on Kubernetes"
+title: "Upgrade Portworx on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
@@ -8,13 +8,13 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-This guide walks through updating Portworx deployed as a DaemonSet in a Kubernetes cluster.
+This guide walks through upgrading Portworx deployed as a DaemonSet in a Kubernetes cluster.
 
-In the current version, Portworx recommends following an update strategy of 'OnDelete'. With 'OnDelete' update strategy, after you update a DaemonSet template, new DaemonSet pods will only be created when you manually delete old DaemonSet pods. Doing so gives end users more control on when they are ready to update Portworx on a particular node.
+In the current version, Portworx recommends following an update strategy of 'OnDelete'. With 'OnDelete' update strategy, after you update a DaemonSet template, new DaemonSet pods will only be created when you manually delete old DaemonSet pods. Doing so gives end users more control on when they are ready to upgrade Portworx on a particular node.
 
 Users are expected to migrate application pods using Portworx volumes to another node before deleting the old Portworx pod.
 
-Follow the below sequence to update Portworx in your cluster.
+Follow the below sequence to upgrade Portworx in your cluster.
 
 ### 1. Ensure that the DaemonSet update strategy is "OnDelete"
 
@@ -27,13 +27,13 @@ Follow the below sequence to update Portworx in your cluster.
             type: OnDelete
         ```
 
-### 2. Update the Portworx image in the spec
+### 2. Upgrade the Portworx image in the spec
 
 * Change the image of the Portworx Daemonset with command: `$ kubectl set image ds portworx portworx=portworx/px-enterprise:1.2.9 -n kube-system`
     * Above command changes the Portworx container image to our 1.2.9 release.
 * Alternately, you can also change the image in the DaemonSet spec file and apply it using `$ kubectl apply -f <px-spec.yaml>`.
 
-### 3. Update Portworx pods
+### 3. Upgrade Portworx pods
 
 It is not recommended to delete the Portworx pod while an application is actively issuing I/O. This can induce race conditions in docker causing it to hang. 
 
