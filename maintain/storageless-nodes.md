@@ -4,6 +4,7 @@ title: "Storage-less Nodes with PX Enterprise"
 keywords: zero storage
 sidebar: home_sidebar
 redirect_from: "/add-nodes-no-storage.html"
+meta-description: “Run PX-Enterprise so the storage in a PX-Cluster is consumed by apps running on nodes without storage. Learn how to add a new node with no storage today!”
 ---
 
 * TOC
