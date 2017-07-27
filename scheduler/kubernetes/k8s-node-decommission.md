@@ -41,59 +41,54 @@ You have 2 options for migrating applications.
     ```
     * You can use `kubectl edit ds portworx -n kube-system` to update the spec or if you have a saved spec file, update the file and `kubectl apply` it. 
 
-### 3. (Optional) Uncordon the node
-If you need to continue using the Kubernetes node without Portworx, uncordon it using: `kubectl uncordon <node>`
+>**Note:**<br/> If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
 
-### 4. Ensure application pods using Portworx don't run on this node
-You will need to ensure your application pods using Porworx volumes don't get scheduled on the node where Portworx is decommissioned.
+### 3. Ensure application pods using Portworx don't run on this node
+If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Porworx volumes don't get scheduled here.
 
-One way to achieve is this to use [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/) and [node anti-affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
-* We decommissioned the Portworx container from one of the nodes by applying the `px/enabled=false` label on the node.
-* Now add a node anti-affinity section in your application pod specs to run only on nodes that do _not_ have this label. For e.g observe the `affinity` section in below spec.
+One way to achieve is this to use [inter-pod affinity](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)
+* Basically we will define a pod affinity rule in your applications that ensure that application pods get scheduled only on nodes where the Portworx pod is running.
+* Consider below nginx example:
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: postgres
+  name: nginx-deployment
 spec:
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
   replicas: 1
   template:
     metadata:
       labels:
-        app: postgres
+        app: nginx
     spec:
       affinity:
-        nodeAffinity:
+        # Inter-pod affinity rule restricting nginx pods to run only on nodes where Portworx pods are running (Portworx pods have a label
+        # name=portworx which is used in the rule)
+        podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: px/enabled
-                operator: NotIn
+          - labelSelector:
+              matchExpressions:
+              - key: name
+                operator: In
                 values:
-                - "false"
+                - "portworx"
+            topologyKey: kubernetes.io/hostname
+            namespaces:
+            - "kube-system"
+      hostNetwork: true
       containers:
-      - name: postgres
-        image: postgres:9.5
-        imagePullPolicy: "IfNotPresent"
+      - name: nginx
+        image: nginx
         ports:
-        - containerPort: 5432
-        env:
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          value: superpostgres
-        - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
+        - containerPort: 80
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgredb
+        - name: nginx-persistent-storage
+          mountPath: /usr/share/nginx/html
       volumes:
-      - name: postgredb
+      - name: nginx-persistent-storage
         persistentVolumeClaim:
-          claimName: postgres-data
+          claimName: px-nginx-pvc
 ```
+
+### 4. (Optional) Uncordon the node
+You can now uncordon the node using: `kubectl uncordon <node>`
