@@ -27,9 +27,11 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 If the PVC creation is failing, this could be due the following reasons
 * A firewall rule for port 9001 is present on the hosts running px containers. This prevents the create volume call to come to the Portworx API server.
 * For Kubernetes versions 1.6.4 and before, Portworx may not running on the Kubernetes master/controller node.
-* For Kubernetes versions 1.6.5 and above, if you don't have Portworx running on the master/controller node, ensure that the `portworx-service` is running in the `kube-system` namespace.
+* For Kubernetes versions 1.6.5 and above, if you don't have Portworx running on the master/controller node, ensure that
+    * The `portworx-service` is running in the `kube-system` namespace.
+    * You don't have any custom taints on the master node. Doing so will disallow kube-proxy to run on master and that will cause the `portworx-service` to fail to handle requests.
 * The StorageClass name specified might be incorrect.
-* You are running Kubernetes 1.5 which does not have our native driver.
+* Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
 
 ### Application pods
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
@@ -51,8 +53,9 @@ Please run the following commands on any one of the nodes running Portworx:
 ```
 # uname -a
 # docker version
-# kubectl logs -l  name=portworx -n kube-system --tail=1000
 # kubectl version
+# kubectl logs -n kube-system -l name=portworx --tail=1000
+# kubectl get pods -n kube-system -l name=portworx -o wide
 # /opt/pwx/bin/pxctl status
 ```
 Include above logs when contacting us.

@@ -26,8 +26,6 @@
             url: /scheduler/kubernetes/preprovisioned-volumes.html
           - title: Create PVCs from snapshots
             url: /scheduler/kubernetes/snaps.html
-          - title: Decommission a node
-            url: /scheduler/kubernetes/k8s-node-decommission.html
         - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
         - title: Test Failover

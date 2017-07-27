@@ -27,7 +27,6 @@ The native portworx driver in Kubernetes supports the following features:
 * Ensure all nodes running PX are synchronized in time and NTP is configured
 
 ## Install
-
 The following kubectl commands deploys Portworx in the cluster as a `DaemonSet`:
 ```
 $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
@@ -55,10 +54,7 @@ Below are all parameters that can be given in the query string:
 | token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
 
-If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html)
-
-#### Scaling
-Portworx is deployed as a `DaemonSet`.  Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
+If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](knowledgebase/faqs.html).
 
 #### Examples
 ```
@@ -72,12 +68,14 @@ $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://et
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
 ```
 
-## Uninstall
-Following kubectl command uninstalls Portworx from the cluster.
+#### Scaling
+Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
-```
-$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"
-```
+## Uninstall
+You can uninstall Portworx from the cluster using: `$ kubectl delete -f <px-spec.yaml>`
+
+Here <px-spec.yaml> is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
+`$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"`
 
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
 

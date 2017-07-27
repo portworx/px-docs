@@ -27,11 +27,28 @@ Follow the below sequence to upgrade Portworx in your cluster.
             type: OnDelete
         ```
 
-### 2. Upgrade the Portworx image in the spec
+### 2. Upgrade the Portworx spec
 
-* Change the image of the Portworx Daemonset with command: `$ kubectl set image ds portworx portworx=portworx/px-enterprise:1.2.9 -n kube-system`
-    * Above command changes the Portworx container image to our 1.2.9 release.
-* Alternately, you can also change the image in the DaemonSet spec file and apply it using `$ kubectl apply -f <px-spec.yaml>`.
+* Change the image of the Portworx Daemonset
+    * Set the image with command: `$ kubectl set image ds portworx portworx=portworx/px-enterprise:1.2.9 -n kube-system`
+    * Alternately, you can also change the image in the DaemonSet spec file and apply it using `$ kubectl apply -f <px-spec.yaml>`.
+* Update the `ClusterRole` permissions in Portworx spec using below:
+
+    ```bash
+    cat <<EOF | kubectl apply -f -
+    kind: ClusterRole
+    apiVersion: rbac.authorization.k8s.io/v1alpha1
+    metadata:
+       name: node-get-put-list-role
+    rules:
+    - apiGroups: [""]
+      resources: ["nodes"]
+      verbs: ["get", "update", "list"]
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "list"]
+    EOF
+    ```
 
 ### 3. Upgrade Portworx pods
 
