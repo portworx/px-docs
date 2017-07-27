@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /cloud/aws-ec2-asg.html
   - /portworx-on-aws-asg.html
+  meta-description: "Learn to scale a Portworx cluster up or down on AWS with Auto Scaling. Use our tips and tricks to make it simple!"
 ---
 
 * TOC
