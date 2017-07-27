@@ -41,7 +41,7 @@ You have 2 options for migrating applications.
     ```
     * You can use `kubectl edit ds portworx -n kube-system` to update the spec or if you have a saved spec file, update the file and `kubectl apply` it. 
 
->**Note:**<br/> If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
+>**Decommission from Kubernetes:**<br/> If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
 
 ### 3. Ensure application pods using Portworx don't run on this node
 If you need to continue using the Kubernetes node without Portworx, you will need to ensure your application pods using Porworx volumes don't get scheduled here.
@@ -90,5 +90,5 @@ spec:
           claimName: px-nginx-pvc
 ```
 
-### 4. (Optional) Uncordon the node
+### 4. Uncordon the node
 You can now uncordon the node using: `kubectl uncordon <node>`
