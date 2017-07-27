@@ -3,6 +3,7 @@ layout: page
 title: "Deploy Portworx with Docker"
 keywords: portworx, architecture, storage, container, cluster, install, docker, compose, systemd, plugin
 sidebar: home_sidebar
+meta-description: "Find out how to install Portworx using the Docker CLI. Use our step-by-step instructions and see for yourself!"
 ---
 
 * TOC
