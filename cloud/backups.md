@@ -4,7 +4,7 @@ title: "Multi-Cloud Backup and Recovery of PX Volumes"
 keywords: cloud, backup, restore, snapshot, DR
 sidebar: home_sidebar
 redirect_from: "/cloudsnaps.html"
-meta-description: "Portworx can be used as a backup and recovery solution for container data volumes on AWS, Azure and Google Cloud.  Find out how today!"
+meta-description: "Find out how PX volumes can be backed up to different cloud provider’s object storage. Learn about multi-cloud backups and recovery of PX volumes."
 ---
 
 * TOC
