@@ -4,6 +4,7 @@ title: "Object Storage with Portworx"
 keywords: portworx, minio, object, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/object-storage.html"
+meta-description: "Find out how to solve your object storage issues by combining the power of Portworx with the ease of Minio! Both complement each other with their simplicity."
 ---
 
 * TOC
