@@ -23,7 +23,7 @@ You have 2 options for migrating applications.
     * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
 ### 2. Decommission Portworx
-1. Follow [this guide](maintain/scale-down.html) to decommission the Portworx node from the cluster.
+1. Follow [this guide](/maintain/scale-down.html) to decommission the Portworx node from the cluster.
 2. Set the `px/enabled` label to `false` on the node using: `kubectl label nodes <node> "px/enabled=false" --overwrite`
     * This will remove the Portworx container from this node since the Portworx DaemonSet spec file uses a node anti-affinity rule that causes it to _not_ run on nodes that have the label: `px/enabled=false`
     * If you have an older Portworx DaemonSet spec, ensure the spec has the following section.
