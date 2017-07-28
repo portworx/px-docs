@@ -57,6 +57,7 @@ dcos package repo add local-universe http://master.mesos:8082/repo --index=0
 On each agent node you will need to download the certificate from the newly deployed Docker regitry to set is as trusted.
 To do this, run the following command on each agent node, including public agents.
 
+For CoreOS:
 ```
 sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
 sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
@@ -64,6 +65,17 @@ sudo systemctl restart docker
 sudo curl -o /etc/ssl/certs/master.registry.pem http://master.mesos:8082/certs/domain.crt
 sudo update-ca-certificates
 echo CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt | sudo tee -a /opt/mesosphere/etc/mesos-slave-common
+sudo systemctl restart dcos-mesos-slave.service
+```
+
+For CentOS and RHEL:
+```
+sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
+sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
+sudo systemctl restart docker
+sudo curl -o /etc/pki/ca-trust/source/anchors/master.registry.pem http://master.mesos:8082/certs/domain.crt
+sudo update-ca-trust
+echo CURL_CA_BUNDLE=/etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt | sudo tee -a /opt/mesosphere/etc/mesos-slave-common
 sudo systemctl restart dcos-mesos-slave.service
 ```
 
