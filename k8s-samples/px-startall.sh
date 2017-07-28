@@ -24,6 +24,27 @@ function waitfor() {
    done
 }
 
+function waitfor_lighthouse() {
+   while true
+   do
+        if ! kubectl get pod | grep px-lighthouse | grep Running > /dev/null
+        then
+            echo "Waiting for px-lighthouse startup ..."
+            sleep 10
+        else
+            if ! curl -X GET -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY"  http://localhost:30062 > /dev/null 2>&1
+            then
+                echo "Waiting for px-lighthouse responsiveness ..."
+                sleep 10
+                continue
+            else
+                echo "Lighthouse is running ..."
+                break
+            fi
+        fi
+   done
+}
+
 try_etcd() {
 cat <<EOF | kubectl create -f -
 ---
@@ -40,6 +61,7 @@ EOF
 
 
 cat <<EOF | kubectl create -f -
+---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
@@ -167,6 +189,93 @@ spec:
 status:
   loadBalancer: {}
 
+EOF
+
+ETCD_IP=`kubectl get svc etcd-px-client -o yaml | grep clusterIP | awk '{print $2}'`
+
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: px-lighthouse
+  name: px-lighthouse
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: px-lighthouse
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - /lighthouse/on-prem-entrypoint.sh
+        - -k
+        - etcd:http://${ETCD_IP}:2379
+        - -d
+        - http://admin:password@influx-px:8086
+        env:
+        - name: PWX_INFLUXDB
+          value: '"http://influx-px:8086"'
+        - name: PWX_INFLUXUSR
+          value: '"admin"'
+        - name: PWX_INFLUXPW
+          value: '"password"'
+        - name: PWX_HOSTNAME
+        - name: PWX_PX_PRECREATE_ADMIN
+          value: "true"
+        - name: PWX_PX_COMPANY_NAME
+          value: yourcompany
+        - name: PWX_PX_ADMIN_EMAIL
+          value: portworx@yourcompany.com
+        image: portworx/px-lighthouse
+        name: px-lighthouse
+        ports:
+        - containerPort: 80
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/log
+          name: px-lighthouse-claim0
+      restartPolicy: Always
+      volumes:
+      - name: px-lighthouse-claim0
+        emptyDir: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: px-lighthouse
+  name: px-lighthouse
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+    nodePort: 30062
+  selector:
+    io.kompose.service: px-lighthouse
+  type: NodePort
+status:
+  loadBalancer: {}
+
+EOF
+
+waitfor_lighthouse
+
+AUTHKEY=`echo -n portworx@yourcompany.com:admin | base64`
+TOKEN=`curl -X POST -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY" http://localhost:30062/api/clusters/create/\?name\=my-cluster\&clusterid\=my-cluster | sed -e 's/"//g'`
+echo LH TOKEN = $TOKEN
+
+cat <<EOF | kubectl create -f -
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -234,10 +343,13 @@ spec:
           image: portworx/px-enterprise:1.2.8
           terminationMessagePath: "/tmp/px-termination-log"
           imagePullPolicy: Always
+          env:
+          - name: API_SERVER
+            value: "http://localhost:30062"
           args:
              ["",
-              "-c my-cluster",
-              "-k etcd://localhost:30061",
+              "-t ${TOKEN}",
+              "",
               "",
               "-a -f",
               "-d weave",
@@ -418,95 +530,6 @@ spec:
     targetPort: 8086
   selector:
     service: influx-px
-status:
-  loadBalancer: {}
-
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvcsc002
-  annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-sc
-  creationTimestamp: null
-  labels:
-    service: px-lighthouse-claim0
-  name: px-lighthouse-claim0
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-status: {}
-
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  creationTimestamp: null
-  labels:
-    service: px-lighthouse
-  name: px-lighthouse
-spec:
-  replicas: 1
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        io.kompose.service: px-lighthouse
-    spec:
-      containers:
-      - command:
-        - /bin/bash
-        - /lighthouse/on-prem-entrypoint.sh
-        - -k
-        - etcd:http://etcd-px-client:2379
-        - -d
-        - http://admin:password@influx-px:8086
-        env:
-        - name: PWX_INFLUXDB
-          value: '"http://influx-px:8086"'
-        - name: PWX_INFLUXUSR
-          value: '"admin"'
-        - name: PWX_INFLUXPW
-          value: '"password"'
-        - name: PWX_HOSTNAME
-        image: portworx/px-lighthouse
-        name: px-lighthouse
-        ports:
-        - containerPort: 80
-        resources: {}
-        volumeMounts:
-        - mountPath: /var/log
-          name: px-lighthouse-claim0
-      restartPolicy: Always
-      volumes:
-      - name: px-lighthouse-claim0
-        persistentVolumeClaim:
-          claimName: px-lighthouse-claim0
-status: {}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    service: px-lighthouse
-  name: px-lighthouse
-spec:
-  ports:
-  - name: "80"
-    port: 80
-    targetPort: 80
-    nodePort: 30062
-  selector:
-    io.kompose.service: px-lighthouse
-  type: NodePort
 status:
   loadBalancer: {}
 
