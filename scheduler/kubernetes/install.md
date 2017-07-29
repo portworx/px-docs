@@ -27,12 +27,13 @@ The native portworx driver in Kubernetes supports the following features:
 * Ensure all nodes running PX are synchronized in time and NTP is configured
 
 ## Install
-The following kubectl commands deploys Portworx in the cluster as a `DaemonSet`:
+
+PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following: 
 ```
 $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
 $ kubectl apply -f px-spec.yaml
 ```
-Make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
+Before you apply this command, make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
 
 Below are all parameters that can be given in the query string:
 
