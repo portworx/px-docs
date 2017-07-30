@@ -4,12 +4,7 @@
 ## Create overlay network
 ```                     
 docker network create --driver overlay --scope swarm cassandra-net
-```  
-## Create cassandra volumes
-```
-docker volume create -d pxd --name cassandra1-vol --opt size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4 
-docker volume create -d pxd --name cassandra2-vol --opt size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4 
-docker volume create -d pxd --name cassandra3-vol --opt size=4 --opt block_size=64 --opt repl=2 --opt fs=ext4 
+```   
 ```
 ## Download and deploy cassandra 3 node compose file
 ```
