@@ -53,14 +53,26 @@ services:
       default:
 volumes:
   volume1:
-    external:
-        name: cassandra1-vol
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
   volume2:
-    external:
-        name: cassandra2-vol
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
   volume3:
-    external:
-        name: cassandra3-vol
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
 networks:
   default:
     external:
