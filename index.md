@@ -67,7 +67,9 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
   * 3 for the Developer License
 * Open network ports:
   * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
-
+* All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
+  synchronized between all the nodes
+  
 ## Install
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 

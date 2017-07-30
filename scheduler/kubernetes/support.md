@@ -27,9 +27,11 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 If the PVC creation is failing, this could be due the following reasons
 * A firewall rule for port 9001 is present on the hosts running px containers. This prevents the create volume call to come to the Portworx API server.
 * For Kubernetes versions 1.6.4 and before, Portworx may not running on the Kubernetes master/controller node.
-* For Kubernetes versions 1.6.5 and above, if you don't have Portworx running on the master/controller node, ensure that the `portworx-service` is running in the `kube-system` namespace.
+* For Kubernetes versions 1.6.5 and above, if you don't have Portworx running on the master/controller node, ensure that
+    * The `portworx-service` is running in the `kube-system` namespace.
+    * You don't have any custom taints on the master node. Doing so will disallow kube-proxy to run on master and that will cause the `portworx-service` to fail to handle requests.
 * The StorageClass name specified might be incorrect.
-* You are running Kubernetes 1.5 which does not have our native driver.
+* Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
 
 ### Application pods
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
@@ -51,8 +53,9 @@ Please run the following commands on any one of the nodes running Portworx:
 ```
 # uname -a
 # docker version
-# kubectl logs -l  name=portworx -n kube-system --tail=1000
 # kubectl version
+# kubectl logs -n kube-system -l name=portworx --tail=1000
+# kubectl get pods -n kube-system -l name=portworx -o wide
 # /opt/pwx/bin/pxctl status
 ```
 Include above logs when contacting us.
@@ -62,3 +65,13 @@ Include above logs when contacting us.
 If you have an enterprise license, please contact us at support@portworx.com with your license key and logs.
 
 We are always available on Slack. Join us! [![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
+
+### Known issues
+
+##### Kubernetes on CoreOS deployed through Tectonic
+* This issue is fixed in Tectonic 1.6.7. So if are using a version equal or higher, this does not apply to you.
+* [Tectonic](https://coreos.com/tectonic/) is deploying the [Kubernetes controller manager](https://kubernetes.io/docs/admin/kube-controller-manager/) in the docker `none` network. As a result, when the controller manager invokes a call on http://localhost:9001 to portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network.
+This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
+* To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
+* Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
+

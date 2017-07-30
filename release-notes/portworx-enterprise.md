@@ -9,6 +9,31 @@ redirect_from: "/px-enterprise-release-notes.html"
 * TOC
 {:toc}
 
+
+## 1.2.9 Release notes
+
+>**Important:**<br/> If you are upgrading from an older version of PX (1.2.8 or older) and have PX volumes in attached state, you will need node reboot after upgrade in order for the new version to take effect properly.
+
+### Key Features
+
+* Provide ability to cancel a replication add or HA increase operation
+* Automatically decommision a storageless node in the cluster if it has been offline for longer than 48 hours
+* [Kubernetes snapshots driver for PX-Enterprise](https://docs.portworx.com/scheduler/kubernetes/snaps.html)
+* Improve Kubernetes mount/unmount handling with POD failovers and moves
+
+
+### Key Issues Addressed
+
+* Correct mountpath retrieval for encrypted volumes
+* Fix cleanup path maintenance mode exit issue and clean up alerts
+* Fix S3 provider for compatibility issues with legacy object storage providers not supporting ListObjectsV2 API correctly.
+* Add more cloudsnap related alerts to indicate cloudsnap status and any cloudsnap operation failures.
+* Fix config.json for Docker Plugin installs
+* Read topology parameters on PX restart so RACK topology information is read correctly on restarts
+* Retain environment variables when PX is upgraded via `pxctl upgrade` command
+* Improve handling for encrypted scale volumes
+
+
 ## 1.2.8 Release notes
 
 ### Key Features

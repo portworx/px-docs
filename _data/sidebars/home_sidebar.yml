@@ -14,6 +14,8 @@
       folderitems:
       - title: Install
         url: /scheduler/kubernetes/install.html
+      - title: Upgrade
+        url: /scheduler/kubernetes/upgrade.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -32,6 +34,8 @@
           url: /scheduler/kubernetes/scheduler-convergence.html
         - title: Troubleshoot and Get Support
           url: /scheduler/kubernetes/support.html
+        - title: Decommission a node
+          url: /scheduler/kubernetes/k8s-node-decommission.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install

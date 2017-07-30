@@ -95,7 +95,25 @@ Adding device  /dev/sdb ...
 Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 
-### Step 3: Exit Maintenance mode 
+### Step 3: Rebalance the storage pool
+
+**Drive addition must be followed by pool rebalance operation to spreads data across all available drives in the pool.**
+
+For e.g., If the drive was added to pool 0
+
+```
+/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation start
+Done: "Pool 0: Balance is running"
+```
+
+Check the rebalance status and wait for completion.
+
+```
+/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
+Done: "Pool 0: Balance is not running"
+```
+
+### Step 4: Exit Maintenance mode 
 
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit

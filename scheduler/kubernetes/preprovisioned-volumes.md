@@ -149,6 +149,8 @@ Verifying persistent volume claim is created:
     No events.
 ```
 
+>**Note:**<br/> If you are planning to use the `PersistentVolumeClaim` in a pod in a non-default namespace, the `PersistentVolumeClaim` needs to created in that namespace.
+
 #### Step3: Create Pod which uses Persistent Volume Claim.
 
 You can create a pod which uses the PVC by running the following command:

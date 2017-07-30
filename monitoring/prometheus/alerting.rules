@@ -1,0 +1,111 @@
+# --- Portworx Volume Alerts ---
+Alert PortworxVolumeUsageCritical
+  IF 100*(px_volume_usage_bytes / px_volume_capacity_bytes) > 80
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is high.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx volume capacity is at {{$value}}% used.",
+    description = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 80% used for more than 10 minutes.",
+  }
+
+Alert PortworxVolumeUsage
+  IF 100*(px_volume_usage_bytes / px_volume_capacity_bytes) > 70
+  FOR 5m
+  LABELS {
+    severity = "warning",
+    issue="Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}% used.",
+    description = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70% used for more than 10 minutes.",
+  }
+
+Alert PortworxVolumeWillFill
+  IF (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7 and predict_linear(px_cluster_disk_available_bytes[1h], 14*86400) < 0
+  FOR 10m
+  LABELS {
+    severity = "warning",
+    issue="Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70% full and is predicted to fill within 2 weeks.",
+    description = "Disk volume {{$labels.volumeid}} on {{$labels.host}} is over 70% full and has been predicted to fill within 2 weeks for more than 10 minutes.",
+  }
+
+# --- Portworx Storage Alerts ---
+Alert PortworxStorageUsageCritical
+  IF 100*(1-px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes) < 20
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx storage capacity is at {{$value}}% used.",
+    description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 80% used for more than 10 minutes.",
+  }
+
+Alert PortworxStorageUsage
+  IF 100*(1-(px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 30
+  FOR 5m
+  LABELS {
+    severity = "warning",
+    issue="Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}% used.",
+    description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% used for more than 10 minutes.",
+  }
+
+Alert PortworxStorageWillFill
+  IF (100*(1- (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes))) < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14*86400) < 0
+  FOR 10m
+  LABELS {
+    severity = "warning",
+    issue="Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted to fill within 2 weeks.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% full and is predicted to fill within 2 weeks.",
+    description = "Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70% full and has been predicted to fill within 2 weeks for more than 10 minutes.",
+  }
+
+#Portworx Cluster Alerts
+Alert PortworxStorageNodeDown
+  IF max(px_cluster_status_nodes_storage_down) > 0
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="Portworx Storage Node is Offline.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx Storage Node is Offline.",
+    description = "Portworx Storage Node has been offline for more than 5 minutes.",
+  }
+
+Alert PortworxQuorumUnhealthy
+  IF max(px_cluster_status_cluster_quorum) > 1
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="Portworx Quorum Unhealthy.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx Quorum Unhealthy.",
+    description = "Portworx cluster Quorum Unhealthy for more than 5 minutes.",
+  }
+
+Alert PortworxMemberDown
+  IF (max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size)) > 0
+  FOR 5m
+  LABELS {
+    severity = "critical",
+    issue="Portworx cluster member(s) is(are) down.",
+    }
+  ANNOTATIONS {
+    summary = "Portworx cluster member(s) is(are) down.",
+    description = "{{$value}} Portworx cluster member(s) has(have) been down for more than 5 minutes.",
+  }
+
