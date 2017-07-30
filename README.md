@@ -49,19 +49,22 @@ There are lots of files from the original template that have been left here for 
 
 Most important things to know:
 
-  + The main sidebar is _data/sidebars/home_sidebar.yml.   If you create a new page, find an appropriate header under which to place it.  As of now, this is the only sidebar being used
-  + Links should not be relative as files can be moved around (all links should have a leading slash).
-  + All images must include a width and height in order to be valid on the AMP version of the documentation. For example:
+ - The main sidebar is `_data/sidebars/home_sidebar.yml`. 
+   If you create a new page, find an appropriate header under which to place it. 
+   As of now, this is the only sidebar being used.d
+ - Links should not be relative as files can be moved around (all links should have a leading slash).
+ - All images must include a width and height in order to be valid on the AMP version of the documentation. 
+   For example:
 ```
 ![Configure Admin User](/images/jenkins3.png){:width="1992px" height="1156px"}
 ```
-  + Local references to files in this directory take the following form:  
- ```
- 
+ - Local references to files in this directory take the following form:  
+``` 
 [Create a PX-Enterprise Cluster](create-px-enterprise-cluster.html)  <br/>
- 
- ```
+```
 Note the reference to a **".html"** file, which gets generated automatically by jekyll from the **".md"** file.
+ - When CSS is changed, so should the "critical" inline CSS. 
+   This is used to ensure that the page loads essential CSS quickly, documentation on this is below.
 
 
 ### Navigation
@@ -73,7 +76,7 @@ In order to have a new submenu rather than a link in a submenu the item must con
 Refer to the existing yaml file for more information.
 
 
-## Table of Contents
+### Table of Contents
 
 Each Markdown page can have its own table of contents (a list which will anchor to every header in the document).
 
@@ -95,6 +98,26 @@ This repository is accessible at [https://docs-amp.portworx.com/](https://docs-a
 Travis will only build upon new commits to the `gh-pages` branch (this will happen when you merge in using a Github pull request) and it may take a few minutes to build and push which means that the time to update AMP may be longer than that of the standard documentation.
 
 Due to the limitations of AMP, there is no Javascript and therefore no Algolia Docsearch, this is replaced by a simple Google search form.
+
+
+### Critical CSS
+
+The Portworx documentation tries to load essential CSS inline with each page, this is to improve initial page load speed and to avoid the page re-rendering whilst it loads. 
+To achieve this we use [critical](https://github.com/addyosmani/critical).
+
+#### Generate a New Critical File
+
+```
+$ # First empty the existing critical file
+$ echo '' > _includes/critical.css
+$ # Allow the documentation to finish building with no inline styles
+$ npm install --save critical # NodeJS must be installed, refer to https://nodejs.org/en/download/
+$ critical _site/index.html --base _site/ > _includes/critical.css
+```
+
+Once the site is built again, ensure responsiveness works correctly by adjusting the page width a few times.
+
+If you encounter issues with Critical, ensure PhantomJS is installed on your system.
 
 
 ## Template
