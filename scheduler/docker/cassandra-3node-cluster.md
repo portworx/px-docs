@@ -5,7 +5,7 @@
 ```                     
 docker network create --driver overlay --scope swarm cassandra-net
 ```   
-```
+
 ## Download and deploy cassandra 3 node compose file
 ```
 wget https://raw.githubusercontent.com/portworx/px-docs/gh-pages/scheduler/docker/portworx-cassandra3node.yaml
