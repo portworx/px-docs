@@ -4,7 +4,7 @@ This repository contains the files required to generate the Portworx Documentati
 Building this repository locally is documented below and we welcome all pull requests from the community!
 
 
-## Website and Reposotiry Configuration
+## Website and Repository Configuration
 
 The Portworx documentation is built on top of [Jekyll](https://jekyllrb.com/) and is current hosted on [GitHub Pages](https://pages.github.com/).
 GitHub pages is aware of our domain name as it is specified in the `CNAME` file located in the base of this repository.
