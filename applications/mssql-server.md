@@ -94,7 +94,7 @@ jeff-coreos-2 core # docker inspect --format '{{ "{{ .Mounts " }}}}' 46eff5a9cbd
 
 ## Deploy SQL Server on Kubernetes
 Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.
-<br>Please download this [Kubernetes POD spec](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/mssql-server.yml) to deploy SQL Server.
+<br>Please use these [Kubernetes specs](https://github.com/portworx/px-docs/tree/gh-pages/k8s-samples/mssql) to deploy SQL Server.
 ## See Also
 For futher reading on Microsoft SQL Server on Linux, 
 please visit the [SQL Server on Docker](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-docker#a-idpersista-persist-your-data) documentation
