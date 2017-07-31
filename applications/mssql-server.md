@@ -1,13 +1,19 @@
 ---
 layout: page
-title: "SQL Server on Docker with Persistent Storage"
-keywords: portworx, container, microsoft, sqlserver, persistent storage, docker
+title: "SQL Server with Persistent Storage"
+keywords: portworx, container, microsoft, sqlserver, persistent storage, docker, kubernetes
 sidebar: home_sidebar
 youtubeId: G3Lp1RgWdKg
 ---
 
 * TOC
 {:toc}
+
+## Deploy SQL Server on Kubernetes
+Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.
+<br>Please use these [Kubernetes specs](https://github.com/portworx/px-docs/tree/gh-pages/k8s-samples/mssql) to deploy SQL Server.
+
+<br>See [this quick video demo](/video/sql_server_on_k8s.html) for achieving SQL Server high-availability on Kubernetes without requiring H/A Clustered mode.
 
 ## Watch the video
 In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server 
@@ -92,9 +98,8 @@ jeff-coreos-2 core # docker inspect --format '{{ "{{ .Mounts " }}}}' 46eff5a9cbd
 [{mssqlvol_snap_0628 /var/lib/osd/mounts/mssqlvol_snap_0628 /var/opt/mssql pxd  true rprivate}]
 ```
 
-## Deploy SQL Server on Kubernetes
-Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.
-<br>Please use these [Kubernetes specs](https://github.com/portworx/px-docs/tree/gh-pages/k8s-samples/mssql) to deploy SQL Server.
+
+
 ## See Also
 For futher reading on Microsoft SQL Server on Linux, 
 please visit the [SQL Server on Docker](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-docker#a-idpersista-persist-your-data) documentation
