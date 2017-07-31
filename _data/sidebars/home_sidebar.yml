@@ -284,3 +284,5 @@
       url: /video/hadoop_px_dcos.html
     - title: Microsoft SQL Server with High Availability
       url: /video/sql_server.html
+    - title: SQL Server on Kubernetes
+      url: /video/sql_server_on_k8s.html
