@@ -1,0 +1,13 @@
+##### Portworx persistent volume claim
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+   name: mssql-data
+   annotations:
+     volume.beta.kubernetes.io/storage-class: px-mssql-sc
+spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 5Gi
