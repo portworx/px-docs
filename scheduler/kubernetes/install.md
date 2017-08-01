@@ -45,6 +45,7 @@ Below are all parameters that can be given in the query string:
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
 | coreos       	|  REQUIRED if target nodes are running coreos.                                                                                                                                         	| coreos=true                                           |
+| master     	| (Optional) If false, PX will not run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default)                                                                 	| master=false                                  	|
 | zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
 | force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
 | etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
@@ -75,7 +76,7 @@ Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/worklo
 ## Uninstall
 You can uninstall Portworx from the cluster using: `$ kubectl delete -f <px-spec.yaml>`
 
-Here <px-spec.yaml> is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
+Here px-spec.yaml is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
 `$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"`
 
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.

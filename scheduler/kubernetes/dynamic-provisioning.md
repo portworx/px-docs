@@ -22,6 +22,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 - snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 - aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
 - parent: a label or name of a volume or snapshot from which this storage class is to be created
+- priority_io: IO Priority: [high|medium|low] (e.g priority_io: "high")
 - secure: to create an encrypted storage class
 ```
 
@@ -37,13 +38,13 @@ Create the storageclass:
 Example:
 
 ```yaml
-     kind: StorageClass
-     apiVersion: storage.k8s.io/v1beta1
-     metadata:
-       name: portworx-sc
-     provisioner: kubernetes.io/portworx-volume
-     parameters:
-       repl: "1"
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "1"
 ```
 [Download example](/k8s-samples/portworx-volume-sc.yaml?raw=true)
 
@@ -70,18 +71,18 @@ Creating the persistent volume claim:
 Example:
 
 ```yaml
-     kind: PersistentVolumeClaim
-     apiVersion: v1
-     metadata:
-       name: pvcsc001
-       annotations:
-         volume.beta.kubernetes.io/storage-class: portworx-sc
-     spec:
-       accessModes:
-         - ReadWriteOnce
-       resources:
-         requests:
-           storage: 2Gi
+ kind: PersistentVolumeClaim
+ apiVersion: v1
+ metadata:
+   name: pvcsc001
+   annotations:
+     volume.beta.kubernetes.io/storage-class: portworx-sc
+ spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 2Gi
 ```
 [Download example](/k8s-samples/portworx-volume-pvcsc.yaml?raw=true)
 
