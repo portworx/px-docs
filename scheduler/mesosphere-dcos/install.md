@@ -77,7 +77,7 @@ Once you have started the install you can go to the Services page to monitor the
 
 If you click on the Portworx service you should be able to look at the status of the services being created. 
 
-In a default install there will be one service for the framework scheduler, 5 services for etcd (one for the etcd scheduler,
+In a default install there will be one service for the framework scheduler, 4 services for etcd (
 3 etcd nodes and one etcd proxy), one service for influxdb and one service for lighthouse.
 
 ![Portworx Install finished](/images/dcos-px-install-finished.png){:width="655px" height="200px"}
