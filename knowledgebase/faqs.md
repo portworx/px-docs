@@ -20,8 +20,8 @@ Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 ### Can Portworx work with any drive vendor?
 Yes.  Portworx can recognize any drive and its type, capacity and IOPS capability and use it appropriately for the given workload.
 
-### Do I need to create a RAID group or do I present all the drives to Portworx individually?
-There is no nead to pre-prepare a RAID group.  Portworx will appropriately place raid drives into different tiers based on their profile.
+### Should I use a H/W RAID controller, or should I present all the drives to Portworx individually?
+Portworx prefers a H/W RAID controller, if available.
 
 ###  Device names are not guaranteed to be consistent. Drive lettters can change, as is the case if using Openstack.  Is there a way for Portworx to use UUID instead of device names?
 
