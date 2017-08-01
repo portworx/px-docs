@@ -3,6 +3,7 @@ layout: page
 title: "Cassandra Stress Test with Portworx"
 keywords: portworx, px-enterprise, cassandra, databases, performance
 sidebar: home_sidebar
+meta-description: "Discover how to measure the performance of running Cassandra with PX volumes and testing Cassandra on PX. Stress test Cassandra on PX today!"
 ---
 
 * TOC

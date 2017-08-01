@@ -4,6 +4,7 @@ title: "Run the Docker Registry with High Availability"
 keywords: portworx, docker registry, storage
 sidebar: home_sidebar
 redirect_from: "/registry.html"
+meta-description: "With Portworx, create a storage volume for the Docker Registry and start the Docker Registry. Try for yourself today!"
 ---
 
 * TOC

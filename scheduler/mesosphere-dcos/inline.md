@@ -4,6 +4,7 @@ title: "Dynamic volume creation through DCOS"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume, inline, dynamic volumes
 sidebar: home_sidebar
 redirect_from: "/create-manage-storage-volumes.html"
+meta-description: "Read the overview on how volumes can be created dynamically through DCOS. Gain a better understanding of dynamic volumes here!"
 ---
 
 * TOC
