@@ -68,6 +68,7 @@ spec:
        storage: 10Gi
 ```
 [Download example](/k8s-samples/portworx-volume-shared-pvc.yaml?raw=true)
+
 Note the accessMode for this PVC is set to ``ReadWriteMany`` so the kubernetes allows mounting this PVC on multiple pods.
 
 Verifying persistent volume claim is created:
@@ -81,6 +82,7 @@ px-shared-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       RW
 #### Step3: Create Pods which uses Persistent Volume Claim.
 
 We will start two pods which use the same shared volume.
+
 Starting pod-1
 ```
 # kubectl create -f examples/volumes/portworx/portworx-volume-shared-pod-1.yaml

@@ -25,7 +25,9 @@
           - title: Using Pre-provisioned Volumes
             url: /scheduler/kubernetes/preprovisioned-volumes.html
           - title: Create PVCs from snapshots
-            url: /scheduler/kubernetes/snaps.html
+            url: /scheduler/kubernetes/snaps.htm
+          - title: Create shared PVCs
+            url: /scheduler/kubernetes/shared-volumes.html
         - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html    
         - title: Test Failover
