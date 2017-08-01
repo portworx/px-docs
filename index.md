@@ -66,7 +66,7 @@ Using IOPS as an example, a team can choose to set the MySQL container to have a
   * Unlimited for the Enterprise License
   * 3 for the Developer License
 * Open network ports:
-  * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
+  * Ports 9001, 9002, 9003, 9010, 9012, 9014 must be open for internal network traffic between nodes running PX
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
   synchronized between all the nodes
   
