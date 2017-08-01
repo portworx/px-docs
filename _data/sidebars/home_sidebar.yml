@@ -40,6 +40,8 @@
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
+      - title: Upgrade
+        url: /scheduler/mesosphere-dcos/upgrade.html
       - title: Stateful frameworks
         folderitems:
         - title: About
