@@ -75,7 +75,7 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
 * [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
-* [Install on Docker](/scheduler/docker/install_standalone.html)
+* [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
 
 ## Join us on Slack!
