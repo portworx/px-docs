@@ -13,12 +13,12 @@ This guide describes installing Portworx using the docker CLI.
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX. Ensure all nodes running PX are synchronized in time and NTP is configured
 
 
-### Install and configure Docker
+## Install and configure Docker
 
 * PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
-### Specify storage
+## Specify storage
 
 Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc).
 
@@ -39,8 +39,15 @@ Note that devices without the partition are shown under the **TYPE** column as *
 
 Identify the storage devices you will be allocating to PX.  PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
 
-### Run PX
-You can run PX via the Docker CLI as follows:
+## Run PX as a Plugin
+
+If you have Docker version 1.13 or higher, it is strongly recommended to install Portworx as a plugin. [Follow these steps](docker-plugin.html) to do so.
+
+To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-px-plugin.html).
+
+### Run PX as a container
+
+If you are running Docker version 1.12 or prior, you can run PX via the Docker CLI as follows:
 
 ```
 if `uname -r | grep -i coreos > /dev/null`; \
@@ -211,12 +218,6 @@ OR, if you have a custom [px configuration file](https://github.com/portworx/px-
 ```
 # docker-compose up -d
 ```
-
-#### Optional - Run as a Plugin
-
-If you have Docker version 1.12 or higher, it is recommended to install Portworx as a plugin. [Follow these steps](docker-plugin.html) to do so.
-
-To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-px-plugin.html).
 
 ### Adding Nodes
 

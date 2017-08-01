@@ -73,11 +73,15 @@
       - title: Install
         folderitems:
         - title: Docker Standalone
-          url: /scheduler/docker/install.html
-        - title: Docker Swarm or UCP
-          url: /scheduler/docker/install-px-docker-service.html
-        - title: Docker Compose
-          url: /scheduler/docker/compose.html
+          url: /scheduler/docker/install-standalone.html
+        - title: Docker Swarm
+          url: /scheduler/docker/install-swarm.html
+      - title: Upgrade
+        folderitems:
+        - title: Docker Standalone
+          url: /scheduler/docker/upgrade-standalone.html
+        - title: Docker Swarm
+          url: /scheduler/docker/upgrade-swarm.html
       - title: How To
         folderitems:
         - title: Use PX with Swarm
