@@ -49,7 +49,6 @@ COMMANDS:
      status, s          Report status of active backups/restores
      schedule, sc       Update cloud-snap schedule
      catalog, t         Display catalog for the backup in cloud
-     credentials, cred  Manage cloud-snap credentials
 
 OPTIONS:
    --help, -h  show help
@@ -57,16 +56,16 @@ OPTIONS:
 
 #### Set the required cloud credentials ####
 
-For this, we will use `pxctl cloudsnap credentials create` command.
+For this, we will use `pxctl credentials create` command.
 
 ```
-# pxctl cloudsnap credentials create 
+# pxctl credentials create 
 
 NAME:
-   pxctl cloudsnap credentials create - Create a credential for cloud-snap
+   pxctl credentials create - Create a credential for cloud-snap
 
 USAGE:
-   pxctl cloudsnap credentials create [command options] [arguments...]
+   pxctl credentials create [command options] [arguments...]
 
 OPTIONS:
    --provider value                            Object store provider type [s3, azure, google]
@@ -86,21 +85,21 @@ OPTIONS:
 For Azure:
 
 ```
-# pxctl cloudsnap credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
+# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
 ```
 
 For AWS:
 
 ```
-# pxctl cloudsnap credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
+# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
 ```
 
 For Google Cloud:
 
 ```
-# pxctl cloudsnap credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
+# pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
 ```
-`pxctl cloudsnap credentials create` enables the user to configure the credentials for each supported cloud provider.
+`pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
 
 An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly. 
 
@@ -108,10 +107,10 @@ These credentials can only be created once and cannot be modified. In order to m
 
 #### List the credentials to verify ####
 
-Use `pxctl cloudsnap credentials list` to verify the credentials supplied. 
+Use `pxctl credentials list` to verify the credentials supplied. 
 
 ```
-# pxctl cloudsnap credentials list
+# pxctl credentials list
 
 S3 Credentials
 UUID                                         REGION            ENDPOINT                ACCESS KEY            SSL ENABLED        ENCRYPTION
@@ -127,7 +126,7 @@ UUID						PROJECT ID     ENCRYPTION
 
 ```
 
-`pxctl cloudsnap credentials list`  only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer to `pxctl secrets` help for more information.
+`pxctl credentials list`  only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer to `pxctl secrets` help for more information.
 
 #### Perform Cloud Backup ####
 
