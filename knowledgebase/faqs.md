@@ -23,6 +23,10 @@ Yes.  Portworx can recognize any drive and its type, capacity and IOPS capabilit
 ### Do I need to create a RAID group or do I present all the drives to Portworx individually?
 There is no nead to pre-prepare a RAID group.  Portworx will appropriately place raid drives into different tiers based on their profile.
 
+###  Device names are not guaranteed to be consistent. Drive lettters can change, as is the case if using Openstack.  Is there a way for Portworx to use UUID instead of device names?
+
+PX automatically uses UUID after the drive has been specified.  You don't need to worry about drive letters changing.
+
 ### Does Portworx need to take over all the disks on a given server?
 No.  You can explicitly allow/disallow drives that participate in a Portworx cluster. In PX-Enterprise, this notion of device delegation/participation is exposed through the "Server Profile".
 A "Server Profile" determines which nodes will be allowed to automatically join a cluster, based on their H/W profile.
