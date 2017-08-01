@@ -13,6 +13,8 @@ To install and configure PX as a standaone Docker container, use the command-lin
 
 >**Note:**<br/>It is highly recommended to run PX as a plugin.  Use these steps only if you are running an older version of Docker (1.12 or prior).
 
+Run PX as a standalone Docker container by executing the following Docker command:
+
 ```
 if `uname -r | grep -i coreos > /dev/null`; \
 then HDRS="/lib/modules"; \

@@ -93,7 +93,7 @@ The privileges that PX plugin uses are explained below:
     > Exports the PX command line (**pxctl**) tool from the container to the host.
 ```
 
-#### Optional - running with config.json
+#### Optional - running with a custom config.json
 
 You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to
 pass the runtime parameters via ```opts``` argument.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
