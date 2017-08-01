@@ -60,7 +60,7 @@ pxctl version 1.2.5-7b6ab38
 $ /opt/pwx/bin/pxctl status
 ```
 
-## Upgrade the PX container
+### Upgrade the PX container
 If you installed PX as a standalone container, you can upgrade PX using the PX CLI command on each host as follows:
 
 ```

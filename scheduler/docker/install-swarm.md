@@ -114,12 +114,6 @@ Global Storage Pool
 
 Now that you have Portworx up, let's look at an example of running [stateful application with Portworx and Swarm](swarm.html)!
 
-## Upgrade
-Following command will perform upgrade with the latest image.
-```
-$ docker service update --force portworx
-```
-
 ## Uninstall
 ```
 $ docker service rm portworx

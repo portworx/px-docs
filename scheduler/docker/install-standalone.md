@@ -43,9 +43,9 @@ Identify the storage devices you will be allocating to PX.  PX can run in a hete
 
 If you have Docker version 1.13 or higher, it is strongly recommended to install Portworx as a plugin. [Follow these steps](docker-plugin.html) to do so.
 
-To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-px-plugin.html).
+To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-standalone.html).
 
-### Run PX as a container
+### Optional - run PX as a container
 
 If you are running Docker version 1.12 or prior, you can run PX via the Docker CLI as follows:
 
@@ -105,7 +105,7 @@ The following Docker runtime command options are explained:
 | `-v /var/lib/osd:/var/lib/osd:shared`          | Location of the exported container mounts. This must be a shared mount.                                                                             |
 | `-v /opt/pwx/bin:/export_bin`                  | Exports the PX command line (**pxctl**) tool from the container to the host.                                                                        |
 
-#### Optional - running with config.json
+#### Running with config.json
 
 You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to pass the runtime parameters via the command line.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
 
@@ -130,7 +130,6 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
 
 Example config.json:
-
 
 ```
    {
@@ -173,7 +172,7 @@ You can now start the Portworx container with the following run command:
 
 At this point, Portworx should be running on your system. To verify, run `docker ps`.
 
-#### Optional - Authenticated KVDB
+#### Authenticated KVDB
 To use `etcd` with authentication and a cafile, use this in your `config.json`:
 
 ```json
@@ -204,7 +203,7 @@ Alternatively, you could specify and explicit username and password as follows:
  "cafile": "/etc/pwx/cafile",
 ```
 
-#### Optional - Run via Compose
+#### Run via Compose
 You can run PX-Developer with [docker-compose](https://docs.docker.com/compose/install/) to create a storage cluster for containers, as follows:
 
 ```
