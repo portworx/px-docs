@@ -9,7 +9,7 @@ redirect_from: "/run-as-docker-pluginv2.html"
 * TOC
 {:toc}
 
-To install and configure PX via the Docker Plugin CLI, use the command-line steps in this section.
+To install and configure PX as a Docker Plugin, use the command-line steps in this section.
 
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.md) for PX
 
@@ -196,61 +196,3 @@ To use `consul` with authentication and a cafile, use this in your `config.json`
  "password": "xxx",
  "cafile": "/etc/pwx/cafile",
 ```
-
-### Access the pxctl CLI
-After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool, which is exported to /opt/pwx/bin/pxctl. With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes.
-
-To view all **pxctl** options, run:
-
-```
-# /opt/pwx/bin/pxctl help
-```
-
-To view global storage capacity
-
-
-To view the global storage capacity, run:
-
-```
-# sudo /opt/pwx/bin/pxctl status
-```
-
-The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
-
-```
-# /opt/pwx/bin/pxctl status
-Status: PX is operational
-Node ID: 0a0f1f22-374c-4082-8040-5528686b42be
-	IP: 172.31.50.10
- 	Local Storage Pool: 2 pools
-	POOL	IO_PRIORITY	SIZE	USED	STATUS	ZONE	REGION
-	0	LOW		64 GiB	1.1 GiB	Online	b	us-east-1
-	1	LOW		128 GiB	1.1 GiB	Online	b	us-east-1
-	Local Storage Devices: 2 devices
-	Device	Path		Media Type		Size		Last-Scan
-	0:1	/dev/xvdf	STORAGE_MEDIUM_SSD	64 GiB		10 Dec 16 20:07 UTC
-	1:1	/dev/xvdi	STORAGE_MEDIUM_SSD	128 GiB		10 Dec 16 20:07 UTC
-	total			-			192 GiB
-Cluster Summary
-	Cluster ID: 55f8a8c6-3883-4797-8c34-0cfe783d9890
-	IP		ID					Used	Capacity	Status
-	172.31.50.10	0a0f1f22-374c-4082-8040-5528686b42be	2.2 GiB	192 GiB		Online (This node)
-Global Storage Pool
-	Total Used    	:  2.2 GiB
-	Total Capacity	:  192 GiB
-```
-
-For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
-
-You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
-
-### Adding Nodes
-
-To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
-
-### Application Examples
-
-After you complete this installation, continue with the set up to run stateful containers with Docker volumes:
-
-* [Scale a Cassandra Database with PX](/applications/cassandra.html)
-* [Run the Docker Registry with High Availability](/applications/docker-registry.html)
