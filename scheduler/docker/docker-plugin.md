@@ -11,41 +11,6 @@ redirect_from: "/run-as-docker-pluginv2.html"
 
 To install and configure PX as a Docker Plugin, use the command-line steps in this section.
 
->**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.md) for PX
-
-### Install and configure Docker
-
-PX V2 plugin requires a minimum of Docker version 1.12 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
-
-### Specify storage
-
-Portworx pools the storage devices on your server and creates a global capacity for containers. This example uses the two non-root storage devices (/dev/xvdb, /dev/xvdc).
-
->**Important:**<br/>Back up any data on storage devices that will be pooled. Storage devices will be reformatted!
-
-To view the storage devices on your server
-
-Use this command line:
-
-```
-# lsblk
-```
-
-Example output:
-
-Note that devices without the partition are shown under the **TYPE** column as **part**.
-
-```
-# lsblk
-    NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-    xvda                      202:0    0     8G  0 disk
-    └─xvda1                   202:1    0     8G  0 part /
-    xvdb                      202:16   0    64G  0 disk
-    xvdc                      202:32   0    64G  0 disk
-```
-
-Identify the storage devices you will be allocating to PX.  PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
-
 ### Install PX plugin
 
 To install Portworx as V2 Docker plugin follow these steps
