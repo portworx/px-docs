@@ -11,6 +11,15 @@
 # Note:  Lots of timing issues that will go away once etcd-operator is in better shape
 #
 
+MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'`
+
+if kubectl describe nodes | grep 'OS Image' | grep -i CoreOS > /dev/null
+then
+   HEADERS=/lib/modules
+else
+   HEADERS=/usr/src
+fi
+
 function waitfor() {
    while true
    do
@@ -32,7 +41,7 @@ function waitfor_lighthouse() {
             echo "Waiting for px-lighthouse startup ..."
             sleep 10
         else
-            if ! curl -X GET -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY"  http://localhost:30062 > /dev/null 2>&1
+            if ! curl -X GET -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY"  http://${MASTER_IP}:30062 > /dev/null 2>&1
             then
                 echo "Waiting for px-lighthouse responsiveness ..."
                 sleep 10
@@ -272,7 +281,7 @@ EOF
 waitfor_lighthouse
 
 AUTHKEY=`echo -n portworx@yourcompany.com:admin | base64`
-TOKEN=`curl -X POST -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY" http://localhost:30062/api/clusters/create/\?name\=my-cluster\&clusterid\=my-cluster | sed -e 's/"//g'`
+TOKEN=`curl -X POST -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY" http://${MASTER_IP}:30062/api/clusters/create/\?name\=my-cluster\&clusterid\=my-cluster | sed -e 's/"//g'`
 echo LH TOKEN = $TOKEN
 
 cat <<EOF | kubectl create -f -
@@ -345,15 +354,15 @@ spec:
           imagePullPolicy: Always
           env:
           - name: API_SERVER
-            value: "http://localhost:30062"
+            value: "http://${MASTER_IP}:30062"
           args:
              ["",
               "-t ${TOKEN}",
               "",
               "",
               "-a -f",
-              "-d weave",
-              "-m weave",
+              "-d cni0",
+              "-m cni0",
               "",
               "",
               "",
@@ -390,7 +399,7 @@ spec:
             - name: kubelet
               mountPath: /var/lib/kubelet:shared
             - name: src
-              mountPath: /usr/src
+              mountPath: $HEADERS
             - name: dockerplugins
               mountPath: /run/docker/plugins
       initContainers:
@@ -428,7 +437,7 @@ spec:
             path: /var/lib/kubelet
         - name: src
           hostPath:
-            path: /usr/src
+            path: $HEADERS
         - name: dockerplugins
           hostPath:
             path: /run/docker/plugins
