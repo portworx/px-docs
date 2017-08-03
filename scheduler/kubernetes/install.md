@@ -22,8 +22,11 @@ The native portworx driver in Kubernetes supports the following features:
 4. Persistent Volumes
 
 ## Prerequisites
-* You must have a running Kubernetes 1.6+ Cluster.  If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
+* Portworx recommends running with Kubernetes 1.6.5+ Cluster.
+    * If your Kubernetes cluster is between 1.6.0 and 1.6.4, set `master=true` when creating the spec in the Install section below.
+    * If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.
 * Ensure all nodes running PX are synchronized in time and NTP is configured
 
 ## Install
@@ -45,7 +48,7 @@ Below are all parameters that can be given in the query string:
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
 | coreos       	|  REQUIRED if target nodes are running coreos.                                                                                                                                         	| coreos=true                                           |
-| master     	| (Optional) If false, PX will not run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default)                                                                 	| master=false                                  	|
+| master     	| (Optional) If true, PX will run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)                                                          	| master=true                                  	|
 | zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
 | force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
 | etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
