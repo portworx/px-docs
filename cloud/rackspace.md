@@ -4,6 +4,7 @@ title: "Portworx on Rackspace"
 keywords: portworx, rackspace, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
 redirect_from: "/portworx-on-rackspace.html"
+meta-description: "Follow these steps to easily install Portworx on Rackspace. Try it today!"
 ---
 
 * TOC
