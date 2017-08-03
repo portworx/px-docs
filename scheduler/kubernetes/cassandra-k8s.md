@@ -252,7 +252,7 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
   "hostIP": "10.142.0.4",
   "PodIP": "10.0.192.3"
 }
-
+```
 Verify that the portworx volume has 2 replicas created.
 
 ```
@@ -287,7 +287,7 @@ Volume  :  651254593135168442
 ```
 
 ### Scaling
-Portworx runs as a Daemonset within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it. 
+Portworx runs as a Daemonset within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
 You would however require to scale your Cassandra cluster which is deployed as a Statefulset. In order for you to scale your Cassandra statefulset. If you do use the [Terraform scripts](https://github.com/portworx/terraporx) to create a Portworx cluster make sure you update the minion count to scale up your kubernetes cluster.
 
@@ -411,7 +411,7 @@ UN  10.0.64.3   159.94 KiB  32           26.9%             ae7e3624-175b-4676-9a
 
 ### Failover
 
-Pod Failover
+#### Pod Failover
 
 Verify that there is a 5 node Cassandra cluster running on your kubernetes cluster.
 ```
@@ -574,7 +574,7 @@ $ kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
 (1 rows)
 ```
 
-Node Failover
+#### Node Failover
 
 Decomissioning a kubernetes node deletes the node object form the APIServer.
 Before that you would want to decomission your Portworx node from the cluster.
