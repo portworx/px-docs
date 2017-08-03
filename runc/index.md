@@ -111,7 +111,7 @@ Please also ensure "loggingurl:" is specificed in config.json. It should either 
 Create a `systemd` unit file:
 
 ```
-/lib/systemd/system/portworx.service
+/etc/systemd/system/portworx.service
 ```
 
 Add the following as the contents of that file:
