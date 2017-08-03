@@ -9,6 +9,8 @@ meta-description: "Looking for a volume which could be shared between your appli
 This document describes how to use portworx shared volumes in your Kubernetes cluster.
 
 ### Provision a Shared Volume
+Shared volumes are useful when you want multiple PODs to access the same PVC (volume) at the same time.  They can use the same volume even if they are running on different hosts.  They provide a global namespace and the semantics are POSIX compliant.
+
 #### Step1: Create Storage Class
 
 Create the storageclass:
