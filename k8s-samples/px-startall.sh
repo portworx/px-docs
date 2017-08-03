@@ -11,7 +11,8 @@
 # Note:  Lots of timing issues that will go away once etcd-operator is in better shape
 #
 
-MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'`
+# MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'`
+MASTER_IP=localhost
 
 if kubectl describe nodes | grep 'OS Image' | grep -i CoreOS > /dev/null
 then
