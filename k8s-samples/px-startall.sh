@@ -21,6 +21,11 @@ else
    HEADERS=/usr/src
 fi
 
+DIFACE=weave
+MIFACE=weave
+
+
+#######################################
 function waitfor() {
    while true
    do
@@ -362,8 +367,8 @@ spec:
               "",
               "",
               "-a -f",
-              "-d cni0",
-              "-m cni0",
+              "-d ${DIFACE}",
+              "-m ${MIFACE}",
               "",
               "",
               "",
