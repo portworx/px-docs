@@ -38,11 +38,10 @@ spec:
   selector:
     app: cassandra
 ```
-
 Apply the configuration.
 
 ```
-$ kubectl apply -f cassandra-headless-service.yml
+kubectl apply -f cassandra-headless-service.yml
 ```
 
 This example dynamically provisions Portworx volumes using StorageClass API resource. [PersistentVolumeClaims with Portworx Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#portworx-volume)
@@ -62,9 +61,8 @@ parameters:
 Apply the configuration
 
 ```
-$ kubectl apply -f px-storageclass.yml
+kubectl apply -f px-storageclass.yml
 ```
-
 Create the Statefulset for Cassandra with 3 replicas.
 The PodSpec in the statefulset specifies the container image of Cassandra. Statefulsets ensures a sticky and unique identity to the pods. The ordinal index ensures this identity to the Pods.  
 
@@ -164,7 +162,7 @@ spec:
 Apply the configuration
 
 ```
-$ kubectl apply -f cassandra-statefulset.yml
+kubectl apply -f cassandra-statefulset.yml
 ```
 
 ### Post Install status
@@ -172,22 +170,17 @@ $ kubectl apply -f cassandra-statefulset.yml
 Verify that the PVC is bound to a volume using the storage class.
 
 ```
-$ kubectl get pvc
+kubectl get pvc
+NAME                         STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
+cassandra-data-cassandra-0   Bound     pvc-e6924b73-72f9-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    2m
+cassandra-data-cassandra-1   Bound     pvc-49e8caf6-735d-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    2m
+cassandra-data-cassandra-2   Bound     pvc-603d4f95-735d-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    1m
 ```
-```
- NAME                         STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
- cassandra-data-cassandra-0   Bound     pvc-e6924b73-72f9-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    2m
- cassandra-data-cassandra-1   Bound     pvc-49e8caf6-735d-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    2m
- cassandra-data-cassandra-2   Bound     pvc-603d4f95-735d-11e7-9d23-42010a8e0002   1Gi        RWO           portworx-sc    1m
-```
-
 Verify that the cassandra cluster is created
 
 ```
 kubectl exec cassandra-0 -- nodetool status
-```
 
-```
 Datacenter: DC1-K8Demo
 ======================
 Status=Up/Down
@@ -201,39 +194,27 @@ UN  10.0.192.3  104.55 KiB  32           73.6%             c778d78d-c6bc-4768-a3
 Verify that the storageclass is created.
 
 ```
-$ kubectl get storageclass
-```
-```
+kubectl get storageclass
 NAME                 TYPE
 portworx-sc          kubernetes.io/portworx-volume
-```
 
-```
-$ kubectl get pods
-```
-```
+kubectl get pods
 NAME          READY     STATUS    RESTARTS   AGE
 cassandra-0   1/1       Running   0          1m
 cassandra-1   1/1       Running   0          1m
 cassandra-2   0/1       Running   0          47s
-```
 
-```
-$ /opt/pwx/bin/pxctl v l
-```
-```
+/opt/pwx/bin/pxctl v l
+
 ID                      NAME                                            SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 651254593135168442      pvc-49e8caf6-735d-11e7-9d23-42010a8e0002        1 GiB   2       no      no              LOW             0       up - attached on 10.142.0.3
 136016794033281980      pvc-603d4f95-735d-11e7-9d23-42010a8e0002        1 GiB   2       no      no              LOW             0       up - attached on 10.142.0.4
 752567898197695962      pvc-e6924b73-72f9-11e7-9d23-42010a8e0002        1 GiB   2       no      no              LOW             0       up - attached on 10.142.0.5
 ```
-
 Get the pods and the knowledge of the Hosts on which they are scheduled.
 
 ```
-$ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-```
-```
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-2",
@@ -256,9 +237,7 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
 Verify that the portworx volume has 2 replicas created.
 
 ```
-$ /opt/pwx/bin/pxctl v i 651254593135168442 (This volume is up and attached to k8s-0)
-```
-```
+/opt/pwx/bin/pxctl v i 651254593135168442 (This volume is up and attached to k8s-0)
 Volume  :  651254593135168442
         Name                     :  pvc-49e8caf6-735d-11e7-9d23-42010a8e0002
         Size                     :  1.0 GiB
@@ -295,19 +274,13 @@ Observe the Portworx cluster once you add a new node.
 Execute the command
 
 ```
-$ kubectl get ds -n kube-system
-```
-```
+kubectl get ds -n kube-system
 NAME         DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE-SELECTOR   AGE
 kube-proxy   6         6         6         6            6           <none>          5h
 portworx     6         5         5         5            5           <none>          4h
 weave-net    6         6         6         6            6           <none>          5h
-```
 
-```
-$ kubectl get pods -n kube-system
-```
-```
+kubectl get pods -n kube-system
 NAME                                 READY     STATUS    RESTARTS   AGE
 etcd-k8s-master                      1/1       Running   0          5h
 kube-apiserver-k8s-master            1/1       Running   0          5h
@@ -332,15 +305,13 @@ weave-net-95l8z                      2/2       Running   0          5h
 weave-net-tlvkz                      2/2       Running   1          4h
 weave-net-tmbxh                      2/2       Running   0          2m
 weave-net-w4xgw                      2/2       Running   0          5h
-
 ```
 
 The portworx cluster automatically scales as you scale your kubernetes cluster.
 
 ```
-$ /opt/pwx/bin/pxctl status
-```
-```
+/opt/pwx/bin/pxctl status
+
 Status: PX is operational
 License: Trial (expires in 30 days)
 Node ID: k8s-master
@@ -372,31 +343,21 @@ Scale your cassandra statefulset
 
 ```
 kubectl get sts cassandra
-
 NAME        DESIRED   CURRENT   AGE
 cassandra   4         4         4h
-```
 
-```
 kubectl scale sts cassandra --replicas=5
-
 statefulset "cassandra" scaled
-```
 
-```
 kubectl get pods -l "app=cassandra" -w
-
 NAME          READY     STATUS    RESTARTS   AGE
 cassandra-0   1/1       Running   0          5h
 cassandra-1   1/1       Running   0          4h
 cassandra-2   1/1       Running   0          4h
 cassandra-3   1/1       Running   0          3h
 cassandra-4   1/1       Running   0          57s
-```
 
-```
 kubectl exec -it cassandra-0 -- nodetool status
-
 Datacenter: DC1-K8Demo
 ======================
 Status=Up/Down
@@ -415,9 +376,7 @@ UN  10.0.64.3   159.94 KiB  32           26.9%             ae7e3624-175b-4676-9a
 
 Verify that there is a 5 node Cassandra cluster running on your kubernetes cluster.
 ```
-$ kubectl get pods -l "app=cassandra"
-```
-```
+kubectl get pods -l "app=cassandra"
 NAME          READY     STATUS    RESTARTS   AGE
 cassandra-0   1/1       Running   0          1h
 cassandra-1   1/1       Running   0          10m
@@ -429,8 +388,7 @@ cassandra-4   1/1       Running   0          13h
 Create data in your Cassandra DB
 
 ```
-$ kubectl exec -it cassandra-2 -- bash
-
+kubectl exec -it cassandra-2 -- bash
 root@cassandra-2:/# cqlsh
 
 Connected to K8Demo at 127.0.0.1:9042.
@@ -438,11 +396,8 @@ Connected to K8Demo at 127.0.0.1:9042.
 Use HELP for help.
 
 cqlsh> CREATE KEYSPACE demodb WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 2 };
-
 cqlsh> use demodb;
-
 cqlsh:demodb> CREATE TABLE emp(emp_id int PRIMARY KEY, emp_name text, emp_city text, emp_sal varint,emp_phone varint);
-
 cqlsh:demodb> INSERT INTO emp (emp_id, emp_name, emp_city, emp_phone, emp_sal) VALUES(123423445,'Steve', 'Denver', 5910234452, 50000);
 
 ```
@@ -451,7 +406,6 @@ Let us look at which nodes host the data in your cassandra ring based on its par
 
 ```
 root@cassandra-2:/# nodetool getendpoints demodb emp 123423445
-
 10.0.112.1
 10.0.160.1
 ```
@@ -459,9 +413,7 @@ root@cassandra-2:/# nodetool getendpoints demodb emp 123423445
 Cross reference the above PodIPs to the nodes (Node k8s-0 is the one which hosts one of the pods)
 
 ```
-$ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-```
-```
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",
@@ -497,25 +449,17 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
 Cordon the node where one of the replicas of the dataset resides. This will force scheduling of the pod to another node.
 
 ```
-$ kubectl cordon k8s-0
-```
-```
- node "k8s-0" cordoned
-```
+kubectl cordon k8s-0
+node "k8s-0" cordoned
 
-```
-$ kubectl delete pods cassandra-1
- ```
-```
- pod "cassandra-1" deleted
+kubectl delete pods cassandra-1
+pod "cassandra-1" deleted
 ```
 
 The statefulset schedules a new cassandra pod on another host. (The pod gets scheduled on the node k8s-2 this time.)
 
 ```
-$ kubectl get pods -w
-```
-```
+kubectl get pods -w
 NAME          READY     STATUS              RESTARTS   AGE
 cassandra-0   1/1       Running             0          1h
 cassandra-1   0/1       ContainerCreating   0          1s
@@ -524,12 +468,8 @@ cassandra-3   1/1       Running             0          17h
 cassandra-4   1/1       Running             0          14h
 cassandra-1   0/1       Running   0         4s
 cassandra-1   1/1       Running   0         28s
-```
-```
-$ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
-```
 
-```
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",
@@ -564,9 +504,7 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
 
 Query for the data that was inserted earlier.
 ```
-$ kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
-```
-```
+kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
  emp_id    | emp_city | emp_name | emp_phone  | emp_sal
 -----------+----------+----------+------------+---------
  123423445 |   Denver |    Steve | 5910234452 |   50000
@@ -582,15 +520,13 @@ Follow the steps mentioned in [Decommision a Portworx node](https://docs.portwor
 Once done, delete the kubernetes node if it requires to be deleted permanently.
 
 ```
-$ kubectl delete node k8s-1
+kubectl delete node k8s-1
 ```
 The kubernetes statefulset would schedule the pod which was running on the node to another node to fulfil the replicas definition.
 
 Cluster State Before k8s-1 was deleted:
 ```
-$ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
-```
-```
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",
@@ -621,11 +557,8 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
   "hostIP": "10.140.0.7",
   "PodIP": "10.0.128.1"
 }
-```
-```
-$ kubectl get nodes --show-labels (Some of the tags and colums are removed for brevity)
-```
-```
+
+kubectl get nodes --show-labels (Some of the tags and colums are removed for brevity)
 k8s-0        Read          cassandra-data-cassandra-1=true,cassandra-data-cassandra-3=true
 k8s-1        Ready         cassandra-data-cassandra-1=true,cassandra-data-cassandra-4=true
 k8s-2        Ready         cassandra-data-cassandra-0=true,cassandra-data-cassandra-2=true
@@ -638,9 +571,7 @@ k8s-master   Ready         cassandra-data-cassandra-0=true,cassandra-data-cassan
 Cluster State After k8s-1 was deleted:
 
 ```
-$ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-```
-```
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",
@@ -671,11 +602,8 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
   "hostIP": "10.140.0.7",
   "PodIP": "10.0.128.1"
 }
-```
-```
-$ kubectl get nodes --show-labels (Some of the tags and colums are removed for brevity)
-```
-```
+
+kubectl get nodes --show-labels (Some of the tags and colums are removed for brevity)
 k8s-0        Ready         cassandra-data-cassandra-1=true,cassandra-data-cassandra-3=true
 k8s-2        Ready         cassandra-data-cassandra-0=true,cassandra-data-cassandra-2=true
 k8s-3        Ready         cassandra-data-cassandra-3=true
