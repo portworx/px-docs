@@ -1,75 +1,78 @@
 ---
 layout: page
-title: "Creating a PVC from a Snapshot"
+title: "Create and use snapshots"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots
 sidebar: home_sidebar
 ---
+* TOC
+{:toc}
 
-This document will show you how to take a snapshot of a volume using Portworx and use that snapshot as the volume for a new pod.  It uses MySQL as an example. 
-
-This feature is available in a future release of PX-Enterprise. Please reach out to support@portworx.com if you would like to have a private beta of this feature
+This document will show you how to create snapshots of Portworx volumes and use them in pods.  It uses MySQL as an example. 
 
 ## Managing snapshots through `kubectl`
 
-### Taking periodic snapshots on a running POD
-When you create the Storage Class, you can specify a snapshot schedule on the volume as specified below:
+### Creating snapshots
+
+#### Creating periodic snapshots
+When you create a StorageClass, you can specify a snapshot schedule on the volume as specified below. This allows to snapshot the persistent data of the running pod using the volume.
 ```yaml
-    kind: StorageClass
-     apiVersion: storage.k8s.io/v1beta1
-     metadata:
-       name: portworx-io-priority-high
-     provisioner: kubernetes.io/portworx-volume
-     parameters:
-       repl: "1"
-       snap_interval:   "24"
-       io_priority:  "high"
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+  metadata:
+    name: portworx-repl-1-snap-internal
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
+  snap_interval: "240"
+```
+Above spec will take snapshots of the _portworx-repl-1-snap-internal_ PVC every 240 minutes.
+
+#### Creating a snapshot on demand
+You can also trigger a new snapshot on a running POD by creating a PersistentVolumeClaim as specified in the following spec:
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+  metadata:
+    name: name.snap001-source.pvc001
+    annotations:
+      volume.beta.kubernetes.io/storage-class: portworx-repl-1-snap-internal
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+```
+Note the format of the “name” field. The format is `name.<new_snap_name>-source.<old_volume_name>`. Above example references the parent (source) persistent volume claim _pvc001_ and creates a snapshot by the name _snap001_. 
+
+### Using snapshots
+#### Listing snapshots
+To list snapshots taken by Portworx, use the `/opt/pwx/bin/pxctl volume snapshot list` command. For example:
+```bash
+# /opt/pwx/bin/pxctl volume snapshot list
+ID			NAME	SIZE	HA	SHARED	IO_PRIORITY	SCALE STATUS
+1067822219288009613	snap001	1 GiB	2	no	LOW		1	up - detached
 ```
 
-### Creating a snapshot on demand
-You can also trigger a new snapshot on a runnig POD by creating a PersitentVolumeClaim as specified in the following `snap.yaml`:
+You can use the ID or NAME of the snapshots when using them to restore a volume.
+
+#### Restoring a volume from a snapshot
+To rollback a pod back to a previous snapshot, use a `PersistentVolumeClaim` that is created with the following format. Following spec creates a PVC that is restored from a previous Portworx snapshot called _snap001_. 
 
 ```yaml
 kind: PersistentVolumeClaim
-     apiVersion: v1
-     metadata:
-       name: name.snap001-source.pvcsc001
-       annotations:
-         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
-     spec:
-       resources:
-         requests:
-           storage: 100Gi
+apiVersion: v1
+  metadata:
+    name: name.rollback001-source.snap001
+    annotations:
+      volume.beta.kubernetes.io/storage-class: portworx-repl-1-snap-internal
+spec:
+  resources:
+    requests:
+      storage: 1Gi   
 ```
 
-Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<old_volume_name>`.  This references the parent (source) persistent volume claim.
+Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<snap_name>`.  Above example references a source snapshot _snap001_ and creates a volume _rollback001_ from it..  
 
-Now run: 
-```
-# kubectl create -f snap.yaml
-```
-
-### Start a new POD or StatefulSet from a snapshot taken on demand
-Similar to the section above, you can also create a POD or a StatefulSet from a PVC that references another PVC with the “source” parameter.  Doing so will create a new POD or StatefulSet that resumes the application from a snapshot of the current volume.
-Rolling a POD or StatefulSet back  to an existing or previously taken snapshot.
-
-### Rolling a POD back to a snapshot
-To rollback a POD or a StatefulSet back to a previous snapshot, create a new Persistent Volume Claim as follows:
-
-```yaml
-kind: PersistentVolumeClaim
-     apiVersion: v1
-     metadata:
-       name: name.rollback001-source.snap001
-       annotations:
-         volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
-     spec:
-       resources:
-         requests:
-           storage: 100Gi   
-```
-
-Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<snap_name>`.  This references a previous snapshot.  Now when you create a POD or a StatefulSet from this PVC, it will resume the application from a rolled back version.
-You can also create a POD or a StatefulSet that directly references a PV created from a snapshot via kubectl.
+Now when you create a POD from this PVC, it will resume the application from a rolled back version.
 
 ## Managing snapshots through `pxctl`
 

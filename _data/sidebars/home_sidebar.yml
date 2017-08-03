@@ -28,7 +28,7 @@
             url: /scheduler/kubernetes/dynamic-provisioning.html
           - title: Using Pre-provisioned Volumes
             url: /scheduler/kubernetes/preprovisioned-volumes.html
-          - title: Create PVCs from snapshots
+          - title: Create and use snapshots
             url: /scheduler/kubernetes/snaps.html
           - title: Create shared PVCs
             url: /scheduler/kubernetes/shared-volumes.html
