@@ -252,7 +252,7 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
   "hostIP": "10.142.0.4",
   "PodIP": "10.0.192.3"
 }
-
+```
 Verify that the portworx volume has 2 replicas created.
 
 ```
@@ -287,7 +287,7 @@ Volume  :  651254593135168442
 ```
 
 ### Scaling
-Portworx runs as a Daemonset within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it. 
+Portworx runs as a Daemonset within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
 You would however require to scale your Cassandra cluster which is deployed as a Statefulset. In order for you to scale your Cassandra statefulset. If you do use the [Terraform scripts](https://github.com/portworx/terraporx) to create a Portworx cluster make sure you update the minion count to scale up your kubernetes cluster.
 
