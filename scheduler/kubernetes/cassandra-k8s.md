@@ -252,19 +252,6 @@ $ kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.
   "hostIP": "10.142.0.4",
   "PodIP": "10.0.192.3"
 }
-```
-Portworx applies labels to the node objects where it places the volumes. so in this case ```k8s-0``` node which runs ```cassandra-1``` pod has the label applied to it as ```cassandra-data-cassandra-1=true```. Check output of the command below.
-
-```
-$ kubectl get nodes --show-labels (Some of the labels have been removed for brevity)
-```
-```
-NAME         STATUS    AGE       VERSION   LABELS
-k8s-0        Ready     1d        v1.7.0    cassandra-data-cassandra-1=true
-k8s-1        Ready     1d        v1.7.0    cassandra-data-cassandra-1=true,cassandra-data-cassandra-2=true
-k8s-2        Ready     1d        v1.7.0    cassandra-data-cassandra-0=true,cassandra-data-cassandra-2=true
-k8s-master   Ready     1d        v1.7.0    cassandra-data-cassandra-0=true
-```
 
 Verify that the portworx volume has 2 replicas created.
 
@@ -300,7 +287,7 @@ Volume  :  651254593135168442
 ```
 
 ### Scaling
-Portworx runs as a Daemon set within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to run Portworx on it.
+Portworx runs as a Daemonset within Kubernetes. Hence when you add a node or a worker to your kuberentes cluster you do not need to explicitly run Portworx on it. 
 
 You would however require to scale your Cassandra cluster which is deployed as a Statefulset. In order for you to scale your Cassandra statefulset. If you do use the [Terraform scripts](https://github.com/portworx/terraporx) to create a Portworx cluster make sure you update the minion count to scale up your kubernetes cluster.
 
