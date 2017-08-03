@@ -411,7 +411,7 @@ UN  10.0.64.3   159.94 KiB  32           26.9%             ae7e3624-175b-4676-9a
 
 ### Failover
 
-Pod Failover
+#### Pod Failover
 
 Verify that there is a 5 node Cassandra cluster running on your kubernetes cluster.
 ```
@@ -574,7 +574,7 @@ $ kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
 (1 rows)
 ```
 
-Node Failover
+#### Node Failover
 
 Decomissioning a kubernetes node deletes the node object form the APIServer.
 Before that you would want to decomission your Portworx node from the cluster.
