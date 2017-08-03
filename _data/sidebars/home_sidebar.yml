@@ -16,6 +16,10 @@
         url: /scheduler/kubernetes/install.html
       - title: Upgrade
         url: /scheduler/kubernetes/upgrade.html
+      - title: Stateful applications
+        folderitems:
+        - title: Cassandra
+          url: /scheduler/kubernetes/cassandra-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -29,7 +33,7 @@
           - title: Create shared PVCs
             url: /scheduler/kubernetes/shared-volumes.html
         - title: Run Statefulsets
-          url: /scheduler/kubernetes/statefulsets.html    
+          url: /scheduler/kubernetes/statefulsets.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
@@ -51,9 +55,9 @@
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
         - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
         - title: Kafka
-          url: /scheduler/mesosphere-dcos/kafka.html   
+          url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch
           url: /scheduler/mesosphere-dcos/elasticsearch.html
       - title: How To
@@ -212,7 +216,7 @@
         url: /applications/postgres.html
       - title : Microsoft SQL Server
         url: /applications/mssql-server.html
-    - title: Messaging 
+    - title: Messaging
       folderitems:
       - title: Redis
         url: /applications/redis.html
@@ -248,7 +252,7 @@
       url: /enterprise/lighthouse-with-secure-etcd.html
     - title: Add Existing PX Node to Lighthouse
       url: /enterprise/add-existing-px-node-to-lighthouse.html
-    - title: Cluster Alerting Preferences 
+    - title: Cluster Alerting Preferences
       url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
     folderitems:
