@@ -57,7 +57,7 @@ $ docker service ps portworx
 ```
 The arguments that are given to the service above (-k, -c etc) are described below.
 
-#### Command-line arguments to Portworx daemon <a id="command-line-args-daemon"></a>
+#### Command-line arguments to Portworx daemon
 
 The following arguments are provided to the PX daemon:
 
@@ -85,7 +85,7 @@ Portworx is deployed as a `Global Service`.  Therefore it automatically scales a
 #### Access the pxctl CLI
 After Portworx is running, you can create, delete & manage storage volumes through the Docker volume commands or the **pxctl** command line tool. 
 
-For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
+For more on using **pxctl**, see the [CLI Reference](/control/status.html).
 
 A useful pxctl command is `pxctl status`
 The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.

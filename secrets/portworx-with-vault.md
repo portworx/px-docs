@@ -76,7 +76,7 @@ __Important: You need to run this command on all PX nodes, so that you could cre
 
 The following sections describe the key generation process with PX and
 Vault which can be used for encrypting volumes. More info about
-encrypted volumes [here](/manage/encrypted-volumes.md)
+encrypted volumes [here](/manage/encrypted-volumes.html)
 
 ### Setting cluster wide secret key
 

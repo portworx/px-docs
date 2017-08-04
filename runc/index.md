@@ -37,7 +37,7 @@ For example:
 # sudo /opt/pwx/bin/runc exec -d px daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc
 ```
 
-#### Command-line arguments to PX <a id="command-line-args-daemon"></a>
+#### Command-line arguments to PX
 
 The following arguments are provided to the PX daemon:
 

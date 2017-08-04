@@ -119,7 +119,8 @@ If the CLI is used to authenticate with AWS, for every restart of PX container i
 
 ## Key generation with AWS KMS
 
-The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. More info about encrypted volumes [here](/manage/encrypted-volumes.md)
+The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. More info about encrypted 
+volumes [here](/manage/encrypted-volumes.html)
 
 ### Using AWS CLI
 You can follow the instructions [here](http://docs.aws.amazon.com/cli/latest/reference/kms/generate-data-key.html) to generate a data key.

@@ -10,10 +10,10 @@ sidebar: home_sidebar
   - [Portworx](#portworx)
   - [Prerequisites](#prerequisites)
   - [Examples](#examples)
-    - [Using Pre-provisioned Portworx Volumes](#pre-provisioned)
-      - [Running Pod](#running-pod)
+    - [Using Pre-provisioned Portworx Volumes](#using-pre-provisioned-portworx-volumes)
+      - [Running Pod](#running-pods)
       - [Persistent Volumes](#persistent-volumes)
-    - [Using Dynamic Provisioning](#dynamic-provisioning)
+    - [Using Dynamic Provisioning](#using-dynamic-provisioning)
       - [Storage Class](#storage-class)
 
 ## Portworx

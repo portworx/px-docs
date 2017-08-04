@@ -22,4 +22,4 @@ Here is a short video that shows how to configure and run Portworx with Rancher:
 >**Note** : Instructions for deploying Portworx through a Rancher Catalog can be found [here](https://github.com/portworx/rancher)
 
 ## See the Documentation
-Get started now with running [Portworx on Rancher](/scheduler/rancher.html)
+Get started now with running [Portworx on Rancher](/scheduler/rancher/install.html)
