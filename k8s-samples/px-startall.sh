@@ -11,9 +11,14 @@
 # Note:  Lots of timing issues that will go away once etcd-operator is in better shape
 #
 
-# MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'`
-MASTER_IP=localhost
+# Can't assume 'kubectl' is running on master, so need an IP to check liveliness of Lighthouse
+MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | awk '{print $1}'`
+if [ -z "$MASTER_IP" ]
+then
+   MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' | awk '{print $1}'`
+fi
 
+# Adjust for CoreOS if needed
 if kubectl describe nodes | grep 'OS Image' | grep -i CoreOS > /dev/null
 then
    HEADERS=/lib/modules
@@ -21,8 +26,10 @@ else
    HEADERS=/usr/src
 fi
 
-DIFACE=weave
-MIFACE=weave
+# Configure PX interfaces.
+# Default to cni0, or override.
+DIFACE=cni0
+MIFACE=cni0
 
 
 #######################################
