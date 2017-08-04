@@ -142,44 +142,42 @@ v2 plugin management, and transparently update the existing Docker
 containers/applications.
 
 
-* PX volume used by MySQL _before_ the v1->v2 Plugin update:
+* ie. PX volume used by MySQL _before_ the v1->v2 Plugin update:
 
-```bash
-sudo docker inspect -f '&#123;&#123;json .Mounts&#125;&#125;' pxMySQL
 ```
-```json
-[
+sudo docker inspect pxMySQL
+
+[...]
+  "Mounts": [
     {
-        "Type": "volume",
-        "Name": "pxMysqlData1",
-        "Source": "/var/lib/osd/mounts/pxMysqlData1",
-        "Destination": "/var/lib/mysql",
-        "Driver": "pxd",
-        "Mode": "",
-        "RW": true,
-        "Propagation": ""
+      "Type": "volume",
+      "Name": "pxMysqlData1",
+      "Source": "/var/lib/osd/mounts/pxMysqlData1",
+      "Destination": "/var/lib/mysql",
+      "Driver": "pxd",
+      "Mode": "",
+      "RW": true,
+      "Propagation": ""
     }
-]
 ```
 
 * ... and _after_ the v1->v2 Plugin update:
 
-```bash
-sudo docker inspect -f '&#123;&#123;json .Mounts&#125;&#125;' pxMySQL
 ```
-```json
-[
+sudo docker inspect pxMySQL
+
+[...]
+  "Mounts": [
     {
-        "Type": "volume",
-        "Name": "pxMysqlData1",
-        "Source": "/var/lib/docker/plugins/9c6d76...bcd/rootfs",
-        "Destination": "/var/lib/mysql",
-        "Driver": "pxd",
-        "Mode": "",
-        "RW": true,
-        "Propagation": ""
+      "Type": "volume",
+      "Name": "pxMysqlData1",
+      "Source": "/var/lib/docker/plugins/9c6d76...bcd/rootfs",
+      "Destination": "/var/lib/mysql",
+      "Driver": "pxd",
+      "Mode": "",
+      "RW": true,
+      "Propagation": ""
     }
-]
 ```
 
 If we omitted the `--alias pxd` option during the [plugin
