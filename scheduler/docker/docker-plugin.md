@@ -140,8 +140,10 @@ containers/applications.
 
 * PX volume used by MySQL _before_ the v1->v2 Plugin update:
 
-```json
+```bash
 sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+```
+```json
 [
     {
         "Type": "volume",
@@ -158,8 +160,10 @@ sudo docker inspect -f '{{json .Mounts}}' pxMySQL
 
 * ... and _after_ the v1->v2 Plugin update:
 
-```json
+```bash
 sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+```
+```json
 [
     {
         "Type": "volume",
