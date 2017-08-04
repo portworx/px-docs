@@ -1,15 +1,15 @@
 ---
 layout: page
-title: "Run PX as a Docker V2 Plugin"
+title: "Run PX as a Docker V1 Plugin (PX Docker container)"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-redirect_from: "/run-as-docker-pluginv2.html"
+redirect_from: "/run-as-docker-pluginv1.html"
 ---
 
 * TOC
 {:toc}
 
-To install and configure PX as a standaone Docker container, use the command-line steps in this section.
+To install and configure PX as a standalone Docker container, use the command-line steps in this section.
 
 >**Note:**<br/>It is highly recommended to run PX as a plugin.  Use these steps only if you are running an older version of Docker (1.12 or prior).
 
