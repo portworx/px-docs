@@ -27,6 +27,7 @@ You can now run the PX OCI bundle by executing the following three commands:
 
 ```
 # sudo mount -o bind,private /etc/pwx/oci /etc/pwx/oci
+# sudo mkdir -p /etc/pwx /opt/pwx/bin /var/lib/osd /var/cores
 # sudo /opt/pwx/bin/runc create -b /etc/pwx/oci px
 # sudo /opt/pwx/bin/runc exec -d px daemon
 ```
@@ -93,7 +94,7 @@ Example config.json:
           "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
         ],
       "mgtiface": "bond0",
-      “loggingurl”: “http://dummy:80“,
+      "loggingurl": "http://dummy:80",
       "storage": {
         "devices": [
           "/dev/xvdb",
