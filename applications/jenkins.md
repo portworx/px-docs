@@ -4,6 +4,7 @@ title: "Deploy Jenkins on Portworx"
 keywords: portworx, jenkins
 sidebar: home_sidebar
 redirect_from: "/jenkins.html"
+meta-description: "Use Portworx to simplify the deployment of Jenkins running as a container. Check out our example to see for yourself!"
 ---
 
 * TOC

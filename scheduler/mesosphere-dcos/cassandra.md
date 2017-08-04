@@ -3,6 +3,7 @@ layout: page
 title: "Run Cassandra on DCOS"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 redirect_from: "/dcos-cassandra.html"
+meta-description: "For help installing and running Cassandra on DCOS, use the guide from Portworx! Achieve more with Portworx backing your cluster."
 ---
 
 * TOC

@@ -2,6 +2,7 @@
 layout: page
 title: "Run Portworx with Mesosphere/DCOS"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
+meta-description: "Find out how to deploy Portworx and manage the Portworx cluster using DCOS."
 ---
 
 * TOC
