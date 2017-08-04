@@ -43,7 +43,7 @@ Below are all parameters that can be given in the query string:
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
 | cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd://etcd.fake.net:4001                    	|
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:4001                |
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
@@ -59,7 +59,9 @@ Below are all parameters that can be given in the query string:
 | token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
 
-If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](knowledgebase/faqs.html).
+If you are having issues, refer to [Troubleshooting PX on Kubernetes(support.html) and [General FAQs](knowledgebase/faqs.html).
+
+>**Note:** If using secure etcd provide "https" in the URL and make sure all the certificates are in a directory which is bind mounted inside PX container. (ex.: /etc/pwx)
 
 #### Examples
 ```
