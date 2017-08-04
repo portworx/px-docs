@@ -9,28 +9,31 @@ redirect_from: "/run-as-docker-pluginv2.html"
 * TOC
 {:toc}
 
-To install and configure PX as a Docker Plugin, use the command-line steps in this section.
+Starting with Docker v1.13, the Docker has introduced a "managed plugin system", together with a new "v2 plugin architecture".
+Please note that the "legacy plugin system" (Docker v1.12 plugins) is still fully supported in the newer Docker versions.
+
+To install and configure Portworx v2 Docker Plugin, please use the steps below.
 
 ### Install PX plugin
 
-To install Portworx as V2 Docker plugin follow these steps
+Before installing the plugin, please create the following directories on the host system:
 
 ```
-$ mkdir -p /etc/pwx
-$ mkdir -p /opt/pwx/bin
-$ mkdir -p /var/lib/osd
-$ mkdir -p /var/cores
+$ sudo mkdir -p /etc/pwx /opt/pwx/bin /var/lib/osd /var/cores
 ```
 
-We need to create these directories on the host, so that the plugin can export ```pxctl``` CLI onto the host and also a few configuration files.
+* these directories are no longer created automatically via v2 Docker plugin, but will be required so that PX-plugin can export ```pxctl``` CLI onto the host, share configuration files, etc.
 
->**Important:**<br/>The `--alias pxd` option is important if you are upgrading from a non-plugin Portworx install to this plugin-based method.
-Once the plugin install is complete, remove the legacy Portworx socket file at `/run/docker/plugins/pxd.sock`
+Also make sure you have your key-value database ready (ie. preinstall `etcd`), and have some extra disk-storage (ie. `/dev/sdc` disk).
+
+
+To install Portworx as V2 Docker plugin, please run:
 
 ```
-$ sudo docker plugin install portworx/px:latest --alias pxd opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc"
-Plugin "portworx/px:latest" is requesting the following
-privileges:
+$ sudo docker plugin install portworx/px:latest --alias pxd \
+  opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc"
+
+Plugin "portworx/px:latest" is requesting the following privileges:
  - network: [host]
  - mount: [/dev]
  - mount: [/etc/pwx]
@@ -41,12 +44,39 @@ privileges:
  - mount: [/usr/src]
  - mount: [/var/cores]
  - allow-all-devices: [true]
- - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
+ - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK CAP_SYS_PTRACE]
 Do you grant the above permissions? [y/N] y
 ```
-You will need to grant the above set of permissions for the plugin to be installed.
+You will need to grant the permissions above for the plugin to be installed.
 
-The description of the arguments provided to the plugin install ```opts``` parameter are described below.
+The required permissions are explained below:
+
+```
+ - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK CAP_SYS_PTRACE]
+    > Sets PX to be a privileged plugin. Required to export block device and for other functions.
+
+ - network: [host]
+    > Sets communication to be on the host IP address over ports 9001-9003. Future versions will support separate IP addressing for PX.
+
+ - mount: [/dev]
+ - allow-all-devices: [true]
+    > Allows PX to access all host devices. Note that PX uses only devices/drives specified via `-s /dev/xxx` in opts or config.json.
+    
+ - mount: [/etc/pwx]
+    > the configuration files location.
+
+ - mount: [/var/run/docker.sock]
+    > Used by Docker to export volume container mappings.
+
+ - mount: [/var/lib/osd]
+    > Location of the exported container mounts. This must be a shared mount.
+
+ - mount: [/opt/pwx/bin]
+    > Exports pxctl, the PX command line tool, from the plugin to the host.
+```
+
+
+The description of all of the arguments one can provide to the plugin via ```opts="..." ``` install parameter:
 
 |  Argument | Description                                                                                                                                                                              |
 |:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -67,31 +97,98 @@ The description of the arguments provided to the plugin install ```opts``` param
 | `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
 |   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
 
+#### Staged install/startup of v2 Portworx plugin
 
-The privileges that PX plugin uses are explained below:
+Sometimes it will be more appropriate to install and start the v2 Portworx plugin "in stages".
+This can be achieved using the following steps:
+
+* step 1: Download the PX-Plugin, but do not immediately enable it:
 
 ```
- - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
-    > Sets PX to be a privileged plugin. Required to export block device and for other functions.
-
- - network: [host]
-    > Sets communication to be on the host IP address over ports 9001 -9003. Future versions will support separate IP addressing for PX.
-
- - mount: [/dev]
-    > Specifies which host drives PX can see. Note that PX only uses drives specified in config.json. This volume flage is an alternate to --device=\[\].
-
- - mount: [/etc/pwx]
-    > the configuration file location.
-
- - mount: [/var/run/docker.sock]
-    > Used by Docker to export volume container mappings.
-
- - mount: [/var/lib/osd]
-    > Location of the exported container mounts. This must be a shared mount.
-
- - mount: [/opt/pwx/bin]
-    > Exports the PX command line (**pxctl**) tool from the container to the host.
+sudo docker plugin install --grant-all-permissions --disable --alias pxd portworx/px:latest
+sudo docker plugin ls
+ID                  NAME                DESCRIPTION                         ENABLED
+9c6d7647ec0b        pxd:latest          Portworx Data Services for Docker   false
 ```
+
+* step 2: Configure PX-Plugin:
+
+```
+sudo docker plugin set pxd \
+   opts='-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8'
+```
+
+* step 3: Stop the old (v1) PX-Plugin container (if any), and start the v2 PX-plugin:
+
+```
+sudo docker stop px-enterprise
+sudo docker plugin enable pxd
+```
+
+
+#### Switching between v1 and v2 Portworx Docker plugins
+
+If you have previously installed Portworx as a Docker container (as "legacy
+plugin system", or v1 plugin), and already have PX-volumes allocated and in use
+by other Docker containers/applications, you **must** install the Portworx v2
+plugin using `--alias pxd` option.
+
+This option will enable Docker to find the registered PX-volumes under new Portworx
+v2 plugin management, and transparently update the existing Docker
+containers/applications.
+
+
+* PX volume used by MySQL _before_ the v1->v2 Plugin update:
+
+```json
+sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+[
+    {
+        "Type": "volume",
+        "Name": "pxMysqlData1",
+        "Source": "/var/lib/osd/mounts/pxMysqlData1",
+        "Destination": "/var/lib/mysql",
+        "Driver": "pxd",
+        "Mode": "",
+        "RW": true,
+        "Propagation": ""
+    }
+]
+```
+
+* ... and _after_ the v1->v2 Plugin update:
+
+```json
+sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+[
+    {
+        "Type": "volume",
+        "Name": "pxMysqlData1",
+        "Source": "/var/lib/docker/plugins/9c6d76...bcd/rootfs",
+        "Destination": "/var/lib/mysql",
+        "Driver": "pxd",
+        "Mode": "",
+        "RW": true,
+        "Propagation": ""
+    }
+]
+```
+
+If we omitted the `--alias pxd` option during the [plugin
+installation](#install-px-plugin), Docker may not automatically update the
+containers that use the PX-volumes.
+
+
+> **NOTE**: In case the PX volumes were in use during the v1->v2 upgrade, they might not be displayed correctly using the
+[docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/) or
+[inspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) command.
+Additionally, Docker service could display warnings about not being able to access `/run/docker/plugins/pxd.sock` file.
+<br/>To fix this, please restart the `docker` service.
+
+
+> **NOTE**: Stopping PX container (or, the v1 plugin) should also remove the `/run/docker/plugins/pxd.sock` file.
+If by any chance this file still exists on the host after the removal of PX container, please feel free to remove it manually.
+
 
 #### Optional - running with a custom config.json
 
@@ -120,7 +217,7 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 
 Example config.json:
 
-```
+```json
    {
       "clusterid": "make this unique in your k/v store",
       "kvdb": [
