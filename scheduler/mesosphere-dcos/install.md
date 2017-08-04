@@ -15,17 +15,7 @@ Portworx can be used to provision volumes on DCOS using either the Docker Volume
 through CSI.
 
 ## Deploy Portworx
-### Adding the repository for the service:
-
-For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
-
-Run the following command to add the repository to your DCOS cluster:
-
-```
-$ dcos package repo add --index=0 portworx https://px-dcos.s3.amazonaws.com/v1/portworx/portworx.zip
-```
-
-Once you have run the above command you should see the Portworx service available in your universe
+The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
 ![Portworx in DCOS Universe](/images/dcos-px-universe.png){:width="655px" height="200px"}
 
