@@ -1,4 +1,9 @@
-## Portworx with AWS KMS
+---
+layout: page
+title: "Portworx with AWS KMS"
+sidebar: home_sidebar
+---
+
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to
 an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 

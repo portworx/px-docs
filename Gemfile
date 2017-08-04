@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-# gem "rails"
 gem 'github-pages'
-gem 'jekyll'
+
+gem 'rake'
+gem 'html-proofer', '3.7.2'

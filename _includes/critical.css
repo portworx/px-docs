@@ -126,19 +126,25 @@ p {
   margin: 0 0 10px;
 }
 
-h1 {
+h1,
+h2 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
 }
 
-h1 {
+h1,
+h2 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 h1 {
   font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
 }
 
 ul {
@@ -683,16 +689,13 @@ body {
   font-size: 15px;
 }
 
-body h1 {
-  margin-top: 40px;
+h2[id] {
+  padding-top: 60px;
+  margin-top: -40px;
 }
 
-.post-content img {
-  margin: 12px 0px 3px 0px;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
+body h1 {
+  margin-top: 40px;
 }
 
 .post-content ul li {
@@ -769,11 +772,6 @@ ul#markdown-toc::before {
   padding: 4px 10px;
 }
 
-.side-nav ul#mysidebar {
-  border-radius: 0px;
-  max-width: 100%;
-}
-
 .side-nav .nav ul li ul li a {
   padding-left: 40px;
 }
@@ -807,10 +805,6 @@ a[data-toggle] {
   color: #248EC2;
 }
 
-li img {
-  clear: both;
-}
-
 hr {
   border: 0;
   border-bottom: 1px dashed #ccc;
@@ -821,7 +815,12 @@ hr {
   margin-right: auto;
 }
 
-#mysidebar .nav ul {
+h2 {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+#sidebar .nav .nav ul {
   background-color: #FAFAFA;
 }
 
@@ -829,37 +828,10 @@ hr {
   margin-bottom: 7px;
 }
 
-@media (max-width: 767px) {
-  .topfork {
-    display: none;
-  }
-}
-
 @media (max-width: 990px) {
-  #mysidebar {
+  #sidebar .nav {
     position: relative;
   }
-}
-
-@media (min-width: 1000px) {
-  ul#mysidebar {
-    width: 225px;
-  }
-}
-
-@media (max-width: 900px) {
-  ul#mysidebar {
-    max-width: 100%;
-  }
-}
-
-ul#mysidebar ul {
-  max-width: 100%;
-}
-
-.col-md-9 img {
-  max-width: 100%;
-  max-height: 100%;
 }
 
 a[href^="http://"]:after,
@@ -875,13 +847,6 @@ a[href^="https://"]:after {
 
 .btn-default {
   margin-bottom: 10px;
-}
-
-.topfork {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
 }
 
 div.sidebarTitle {
@@ -1029,20 +994,26 @@ hr {
 
 
 
-h1 {
+h1,
+h2 {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
 
-h1 {
+h1,
+h2 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 h1 {
   font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
 }
 
 p {
@@ -1559,9 +1530,17 @@ h1 {
   font-size: 39px;
 }
 
+h2 {
+  font-size: 28px;
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 36px;
+  }
+
+  h2 {
+    font-size: 28px;
   }
 }
 
@@ -1581,6 +1560,8 @@ h1 {
 #marketing-nav {
   font-family: 'Libre Franklin', sans-serif;
 }
+
+
 
 #marketing-nav #searchform {
   display: none;

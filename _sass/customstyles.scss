@@ -389,7 +389,7 @@ a.accordion-toggle, a.accordion-collapsed {
 	    padding: 4px 10px;
 	}
 
-	ul#mysidebar {
+	ul#sidebar .nav {
 	    border-radius:0px;
 	    max-width: 100%;
 	}
@@ -741,7 +741,7 @@ ol.series li {
     border-color: #248ec2 !important;
 }
 
-#mysidebar .nav ul {
+#sidebar .nav .nav ul {
     background-color: #FAFAFA;
 }
 .nav ul.series li {
@@ -885,26 +885,26 @@ span.soft {
 }
 
 @media (max-width: 990px) {
-    #mysidebar {
+    #sidebar .nav {
         position: relative;
     }
 }
 
 @media (min-width: 1000px) {
 
-    ul#mysidebar {
+    ul#sidebar .nav {
         width: 225px;
     }
 }
 
 @media (max-width: 900px) {
 
-    ul#mysidebar {
+    ul#sidebar .nav {
         max-width: 100%;
     }
 }
 
-ul#mysidebar ul {
+ul#sidebar .nav ul {
     max-width: 100%;
 }
 
