@@ -16,15 +16,19 @@ To install and configure Portworx v2 Docker Plugin, please use the steps below.
 
 ### Install PX plugin
 
-Before installing the plugin, please create the following directories on the host system:
+Before installing the plugin, please:
 
-```
-$ sudo mkdir -p /etc/pwx /opt/pwx/bin /var/lib/osd /var/cores
-```
+1. Create the following directories on the host system:
 
-* these directories are no longer created automatically via v2 Docker plugin, but will be required so that PX-plugin can export ```pxctl``` CLI onto the host, share configuration files, etc.
+   ```
+   $ sudo mkdir -p /etc/pwx /opt/pwx/bin /var/lib/osd /var/cores
+   ```
 
-Also make sure you have your key-value database ready (ie. preinstall `etcd`), and have some extra disk-storage (ie. `/dev/sdc` disk).
+   * these directories are no longer created automatically via v2 Docker plugin, but will be required so that PX-plugin can export ```pxctl``` CLI onto the host, share configuration files, etc.
+
+2. Make sure you have your key-value database ready (ie. preinstall `etcd`), and
+
+3. Ensure host system has some extra disk-storage (ie. `/dev/sdc` disk).
 
 
 To install Portworx as V2 Docker plugin, please run:
@@ -141,7 +145,7 @@ containers/applications.
 * PX volume used by MySQL _before_ the v1->v2 Plugin update:
 
 ```bash
-sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+sudo docker inspect -f '&#123;&#123;json .Mounts&#125;&#125;' pxMySQL
 ```
 ```json
 [
@@ -161,7 +165,7 @@ sudo docker inspect -f '{{json .Mounts}}' pxMySQL
 * ... and _after_ the v1->v2 Plugin update:
 
 ```bash
-sudo docker inspect -f '{{json .Mounts}}' pxMySQL
+sudo docker inspect -f '&#123;&#123;json .Mounts&#125;&#125;' pxMySQL
 ```
 ```json
 [
@@ -222,18 +226,18 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 Example config.json:
 
 ```json
-   {
-      "clusterid": "make this unique in your k/v store",
-      "kvdb": [
-          "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
-        ],
-      "storage": {
-        "devices": [
-          "/dev/xvdb",
-          "/dev/xvdc"
-        ]
-      }
-    }
+{
+  "clusterid": "make this unique in your k/v store",
+  "kvdb": [
+      "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
+  ],
+  "storage": {
+    "devices": [
+      "/dev/xvdb",
+      "/dev/xvdc"
+    ]
+  }
+}
 ```
 
 At this point, Portworx should be running on your system. To verify, run `docker plugin ls`.
@@ -242,23 +246,27 @@ At this point, Portworx should be running on your system. To verify, run `docker
 To use `etcd` with authentication and a cafile, use this in your `config.json`:
 
 ```json
-"kvdb": [
-   "etcd:https://<ip1>:<port>",
-   "etcd:https://<ip2>:<port>"
- ],
- "username": "root",
- "password": "xxx",
- "cafile": "/etc/pwx/cafile",
+{
+  "kvdb": [
+    "etcd:https://<ip1>:<port>",
+    "etcd:https://<ip2>:<port>"
+  ],
+  "username": "root",
+  "password": "xxx",
+  "cafile": "/etc/pwx/cafile",
+}
 ```
 
 To use `consul` with authentication and a cafile, use this in your `config.json`:
 
 ```json
-"kvdb": [
-   "consul:https://<ip1>:<port>",
-   "consul:https://<ip2>:<port>"
- ],
- "username": "root",
- "password": "xxx",
- "cafile": "/etc/pwx/cafile",
+{
+  "kvdb": [
+    "consul:https://<ip1>:<port>",
+    "consul:https://<ip2>:<port>"
+  ],
+  "username": "root",
+  "password": "xxx",
+  "cafile": "/etc/pwx/cafile",
+}
 ```
