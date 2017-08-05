@@ -1,31 +1,4 @@
 {
- "dashboard": { 
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "4.2.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "table",
-      "name": "Table",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": []
   },
@@ -33,7 +6,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "hideControls": false,
-  "id": null,
+  "id": 10,
   "links": [],
   "refresh": "1m",
   "rows": [
@@ -199,6 +172,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "hideTimeOverride": true,
@@ -226,6 +201,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
@@ -249,6 +225,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -276,6 +253,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "id": 19,
@@ -302,6 +281,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
@@ -325,6 +305,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -364,6 +345,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "id": 15,
@@ -390,6 +373,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
@@ -413,6 +397,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -440,6 +425,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "hideTimeOverride": true,
@@ -467,6 +454,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
@@ -490,6 +478,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -529,6 +518,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "id": 16,
@@ -553,21 +544,24 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(px_volume_written_bytes{volumeid=~\"$volumeid\"}[5m]) ",
+              "expr": "irate(px_volume_writethroughput{volumeid=~\"$volumeid\"}[5m]) ",
+              "format": "time_series",
               "intervalFactor": 4,
-              "legendFormat": "{{volumeid}}_write ",
+              "legendFormat": "{{volumeid}}_writethroughput",
               "refId": "A",
               "step": 20
             },
             {
-              "expr": "1-irate(px_volume_read_bytes{volumeid=~\"$volumeid\"}[5m])",
+              "expr": "irate(px_volume_readthroughput{volumeid=~\"$volumeid\"}[5m])",
+              "format": "time_series",
               "intervalFactor": 4,
-              "legendFormat": "{{volumeid}}_read",
+              "legendFormat": "{{volumeid}}_readthroughput",
               "refId": "B",
               "step": 20
             }
@@ -583,6 +577,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -610,6 +605,8 @@
         {
           "aliasColors": {},
           "bars": false,
+          "dashLength": 10,
+          "dashes": false,
           "datasource": "prometheus",
           "fill": 1,
           "id": 24,
@@ -632,23 +629,18 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "span": 6,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(px_volume_writes[5m]) ",
+              "expr": "irate(px_volume_iops[5m]) ",
+              "format": "time_series",
               "intervalFactor": 4,
-              "legendFormat": "{{host}}_write",
+              "legendFormat": "{{volumeid}}_iops",
               "refId": "A",
               "step": 20
-            },
-            {
-              "expr": "1-irate(px_volume_reads[5m])",
-              "intervalFactor": 2,
-              "legendFormat": "{{host}}_read",
-              "refId": "B",
-              "step": 10
             }
           ],
           "thresholds": [],
@@ -662,6 +654,7 @@
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
@@ -702,7 +695,10 @@
     "list": [
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "prometheus",
         "hide": 0,
         "includeAll": true,
@@ -753,7 +749,5 @@
   },
   "timezone": "browser",
   "title": "Portworx Volume Status",
-  "version": 9
- },
-  "overwrite": true
+  "version": 6
 }

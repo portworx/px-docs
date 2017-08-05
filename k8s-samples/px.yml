@@ -1,74 +1,3 @@
-#!/bin/bash
-#
-# Use this script to deploy an entire stack on Kubernetes:
-#     - etcd cluster
-#     - px daemonset
-#     - influxdb on pvc
-#     - Lighthouse
-#
-# Assumes running instance of Kubernetes 1.6 or above
-#
-# Note:  Lots of timing issues that will go away once etcd-operator is in better shape
-#
-
-# Can't assume 'kubectl' is running on master, so need an IP to check liveliness of Lighthouse
-MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | awk '{print $1}'`
-if [ -z "$MASTER_IP" ]
-then
-   MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' | awk '{print $1}'`
-fi
-
-# Adjust for CoreOS if needed
-if kubectl describe nodes | grep 'OS Image' | grep -i CoreOS > /dev/null
-then
-   HEADERS=/lib/modules
-else
-   HEADERS=/usr/src
-fi
-
-# Configure PX interfaces.
-# Default to cni0, or override.
-DIFACE=cni0
-MIFACE=cni0
-
-
-#######################################
-function waitfor() {
-   while true
-   do
-        if kubectl get $1 2>&1 | egrep 'No resources found|the server doesn.t have a resource type'
-        then
-            echo "Waiting for $1 ..."
-            sleep 5
-        else
-            break
-        fi
-   done
-}
-
-function waitfor_lighthouse() {
-   while true
-   do
-        if ! kubectl get pod | grep px-lighthouse | grep Running > /dev/null
-        then
-            echo "Waiting for px-lighthouse startup ..."
-            sleep 10
-        else
-            if ! curl -X GET -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY"  http://${MASTER_IP}:30062 > /dev/null 2>&1
-            then
-                echo "Waiting for px-lighthouse responsiveness ..."
-                sleep 10
-                continue
-            else
-                echo "Lighthouse is running ..."
-                break
-            fi
-        fi
-   done
-}
-
-try_etcd() {
-cat <<EOF | kubectl create -f -
 ---
 apiVersion: "etcd.coreos.com/v1beta1"
 kind: "Cluster"
@@ -77,12 +6,6 @@ metadata:
 spec:
   size: 3
   version: "3.1.8"
-EOF
-}
-
-
-
-cat <<EOF | kubectl create -f -
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -167,26 +90,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-EOF
-
-# No --- you really shouldn't have to wait for 'thirdpartyresources'
-waitfor thirdpartyresources
-
-while true
-do
-    if ! try_etcd
-    then
-       echo "Waiting for etcd to start ..."
-       sleep 2
-    else
-       break
-    fi
-done
-
-# No --- you really shouldn't have to wait for 'cluster'
-waitfor cluster
-
-cat <<EOF | kubectl create -f -
 ---
 apiVersion: v1
 kind: Service
@@ -211,11 +114,6 @@ spec:
 status:
   loadBalancer: {}
 
-EOF
-
-ETCD_IP=`kubectl get svc etcd-px-client -o yaml | grep clusterIP | awk '{print $2}'`
-
-cat <<EOF | kubectl apply -f -
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -289,15 +187,6 @@ spec:
 status:
   loadBalancer: {}
 
-EOF
-
-waitfor_lighthouse
-
-AUTHKEY=`echo -n portworx@yourcompany.com:admin | base64`
-TOKEN=`curl -X POST -H "Accept:application/json" -H "Authorization:Basic $AUTHKEY" http://${MASTER_IP}:30062/api/clusters/create/\?name\=my-cluster\&clusterid\=my-cluster | sed -e 's/"//g'`
-echo LH TOKEN = $TOKEN
-
-cat <<EOF | kubectl create -f -
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -367,7 +256,7 @@ spec:
           imagePullPolicy: Always
           env:
           - name: API_SERVER
-            value: "http://${MASTER_IP}:30062"
+            value: "http://localhost:30062"
           args:
              ["",
               "-t ${TOKEN}",
@@ -554,11 +443,3 @@ spec:
     service: influx-px
 status:
   loadBalancer: {}
-
-EOF
-
-echo
-echo "Portworx has been deployed and will be available shortly at:"
-echo "https://${MASTER_IP}:30062"
-echo
-

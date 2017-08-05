@@ -28,9 +28,11 @@ docker run -d --name kafka --volume-driver=pxd \
 **Get the IP address of Zookeeper and Kafka services.**
 
 ```
+{% raw %}
 ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
 
 KAFKA_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' kafka)
+{% endraw %}
 ```
 
 **Create a Kafka Topic named “foobar”.**
