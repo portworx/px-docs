@@ -14,7 +14,7 @@ Prometheus will require following two files: config file, alert rules file
 
 ### Prometheus config file
 
-Modify this prometheus.yml (TBD: Insert link) to include your PX nodes' Ip address, and save it as /tmp/prometheus.yml.
+Modify this [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' Ip address, and save it as /tmp/prometheus.yml.
 
 ### Prometheus alerts rules file
 
@@ -54,7 +54,7 @@ Click on 'Save & Test'
 
 ![Grafana data store File](/images/grafana_datastore.png "Grafana data store File")
 
-Next step would be to import Portworx provided Cluster (TBD: Link to be inserted) and Volume (TBD: Link to be inserted) grafana templates.
+Next step would be to import Portworx provided [Cluster](https://gist.github.com/shailvipx/6da98daa4f5464f855482c1de6a138b2) and [Volume](https://gist.github.com/shailvipx/cccbf6a99d9bfc81a86ced1bebc7039a) grafana templates.
 
 From the dropdown on left in your grafana dashboard, go to Dashboards -> Import, and add cluster and volume template.
 
