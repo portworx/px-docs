@@ -556,3 +556,9 @@ status:
   loadBalancer: {}
 
 EOF
+
+echo
+echo "Portworx has been deployed and will be available shortly at:"
+echo "https://${MASTER_IP}:30062"
+echo
+
