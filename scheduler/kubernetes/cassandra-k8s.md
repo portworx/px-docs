@@ -10,13 +10,13 @@ sidebar: home_sidebar
 
 These below instructions will provide you with a step by step guide in deploying Cassandra with Portworx on Kubernetes.
 
-Kubernetes provides management of stateful workloads using Statefulsets. Cassandra is a distributed database and in this guide we will deploy a containerized [Cassandra cluster with Portworx](https://docs.portworx.com/applications/cassandra.html#advantages-of-cassandra-with-portworx) for volume management at the backend.
+Kubernetes provides management of stateful workloads using Statefulsets. Cassandra is a distributed database and in this guide we will deploy a containerized [Cassandra cluster with Portworx](/applications/cassandra.html#advantages-of-cassandra-with-portworx) for volume management at the backend.
 
 ## Prerequisites
 
 -	A running Kubernetes cluster with v 1.6+
--	All the kubernetes nodes should allow [shared volume propagation](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.  
--	[Deploy Portworx on your kubernetes cluster](https://docs.portworx.com/scheduler/kubernetes/install.html). PX runs on each node of your kubernetes cluster as a daemonset.
+-	All the kubernetes nodes should allow [shared volume propagation](/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.  
+-	[Deploy Portworx on your kubernetes cluster](/scheduler/kubernetes/install.html). PX runs on each node of your kubernetes cluster as a daemonset.
 
 ### Install
 
@@ -516,7 +516,7 @@ kubectl exec cassandra-1 -- cqlsh -e 'select * from demodb.emp'
 
 Decomissioning a kubernetes node deletes the node object form the APIServer.
 Before that you would want to decomission your Portworx node from the cluster.
-Follow the steps mentioned in [Decommision a Portworx node](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html)
+Follow the steps mentioned in [Decommision a Portworx node](/scheduler/kubernetes/k8s-node-decommission.html)
 Once done, delete the kubernetes node if it requires to be deleted permanently.
 
 ```
@@ -616,4 +616,4 @@ k8s-master   Ready         cassandra-data-cassandra-0=true,cassandra-data-cassan
 For further reading on Cassandra:
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
-* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
+* [Cassandra stress test with Portworx](/applications/cassandra-px-perf-test.html)

@@ -24,7 +24,7 @@ or cloud instances into converged, highly available compute and storage nodes
 ## Prerequisites
 
 - A Portworx instance running on all of your Kubernetes nodes. For
-  more information on how you can install Portworx can be found [here](http://docs.portworx.com)
+  more information on how you can install Portworx can be found [here](/)
 
 ## Examples
 
