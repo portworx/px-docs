@@ -18,7 +18,7 @@ Modify this [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb
 
 ### Prometheus alerts rules file
 
-Copy this px.rules (TBD: Insert link) file, and save it as /tmp/px.rules.
+Copy this [px.rules](https://gist.github.com/shailvipx/67882f83c7d50d1dfd5bd49fc93fa3de) file, and save it as /tmp/px.rules.
 
 ### Run Prometheus
 
