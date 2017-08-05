@@ -45,18 +45,25 @@ Login to this grafana by visiting http://<IP_ADDRESS>:3000 in your browser. Defa
 
 Here, it will ask you to configure your datastore. We are going to be using prometheus that we configured earlier. To use the templates that are provided later, name your datastore 'prometheus'.
 
-In the below screen <TBD: Insert screenshot>
+In the below screen 
 1) Choose 'Prometheus' from the 'Type' dropdown.
 2) Name datastore 'prometheus'
 3) Add URL of your prometheus UI under Http settings -> Url
 
 Click on 'Save & Test'
 
+![Grafana data store File](/images/grafana_datastore.png "Grafana data store File")
+
 Next step would be to import Portworx provided Cluster (TBD: Link to be inserted) and Volume (TBD: Link to be inserted) grafana templates.
 
 From the dropdown on left in your grafana dashboard, go to Dashboards -> Import, and add cluster and volume template.
 
-Your dashboard should look like the following. (TBD: Picture to be inserted)
+Your dashboard should look like the following. 
+
+![Grafana Cluster Status File](/images/grafana_cluster_status.png "Grafana Cluster Status File")
+
+
+![Grafana Volume Status File](/images/grafana_volume_status.png "Grafana Volume Status File")
 
 
 
