@@ -10,15 +10,19 @@ This guide shows you how to configure prometheus to monitor your portworx node a
 
 ## Configure Prometheus
 
-Prometheus will require following two files: config file, alert rules file
+Prometheus requires the following two files: config file, alert rules file. These files need to be bind mounted into Prometheus container. 
+```
+# This can be any directory on the host.
+PROMETHEUS_CONF=/etc/prometheus
+```
 
 ### Prometheus config file
 
-Modify this [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' Ip address, and save it as /tmp/prometheus.yml.
+Modify [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' IP address, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
 ### Prometheus alerts rules file
 
-Copy this [px.rules](https://gist.github.com/shailvipx/67882f83c7d50d1dfd5bd49fc93fa3de) file, and save it as /tmp/px.rules.
+Copy [px.rules](https://gist.github.com/shailvipx/67882f83c7d50d1dfd5bd49fc93fa3de) file, and save it as ${PROMETHEUS_CONF}/px.rules.
 
 ### Run Prometheus
 
@@ -26,12 +30,10 @@ In this example prometheus is running as docker container. Make sure to map the 
 
 ```
 docker run --restart=always --name prometheus -d -p 9090:9090 \
--v /tmp/prometheus.yml:/etc/prometheus/prometheus.yml \
--v /tmp:/etc/prometheus \
+-v ${PROMETHEUS_CONF}:/etc/prometheus \
 prom/prometheus
 ```
-
-Prometheus UI can be visited at http://<IP_ADDRESS>:9090
+Prometheus UI is available http://<IP_ADDRESS>:9090
 
 ## Configure Grafana
 
@@ -41,11 +43,11 @@ Start grafana with the follwing docker run command
 docker run --restart=always --name grafana -d -p 3000:3000 grafana/grafana
 ```
 
-Login to this grafana by visiting http://<IP_ADDRESS>:3000 in your browser. Default grafana login is admin/admin.
+Login to this grafana at http://<IP_ADDRESS>:3000 in your browser. Default grafana login is admin/admin.
 
 Here, it will ask you to configure your datastore. We are going to be using prometheus that we configured earlier. To use the templates that are provided later, name your datastore 'prometheus'.
 
-In the below screen 
+In the screen below:
 1) Choose 'Prometheus' from the 'Type' dropdown.
 2) Name datastore 'prometheus'
 3) Add URL of your prometheus UI under Http settings -> Url
