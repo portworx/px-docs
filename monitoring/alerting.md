@@ -26,7 +26,7 @@ Copy [px.rules](https://gist.github.com/shailvipx/67882f83c7d50d1dfd5bd49fc93fa3
 
 ### Run Prometheus
 
-In this example prometheus is running as docker container. Make sure to map the directory where your rules and config file is stored to '/etc/prometheus'. This example uses /tmp.
+In this example prometheus is running as docker container. Make sure to map the directory where your rules and config file is stored to '/etc/prometheus'.
 
 ```
 docker run --restart=always --name prometheus -d -p 9090:9090 \
