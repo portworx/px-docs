@@ -5,10 +5,8 @@ cache: bundler
 install:
  - bundle install
 script:
- - "./build/deploy.sh"
-branches:
-  only:
-   - gh-pages
+ - "./build/test.sh"
+ - "./build/deploy-amp.sh"
 notifications:
   email: true
 
