@@ -18,7 +18,7 @@ PROMETHEUS_CONF=/etc/prometheus
 
 ### Prometheus config file
 
-Modify [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' IP address, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
+Modify [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
 
 ### Prometheus alerts rules file
 
