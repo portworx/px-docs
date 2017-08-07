@@ -53,6 +53,29 @@ You need to add two extra Docker runtime commands
 
 All the above Vault related fields as well as the cluster secret key can be set using PX CLI which is explained in the next section.
 
+### Adding Vault Credentials to config.json
+If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
+
+```
+# cat /etc/pwx/config.json
+{
+	"clusterid": "xzc2ed6f-7e4e-4e1d-8e8c-3a6df1fb61a5",
+    "secret": {
+        "secret_type": "vault",
+        "cluster_secret_key": "string",
+         "vault": {
+             "VAULT_TOKEN": "string",
+             "VAULT_ADDR": "string"
+             "VAULT_CACERT": </etc/pwx/path>,
+             "VAULT_CAPATH": </etc/pwx/path>,
+             "VAULT_CLIENT_CERT": </etc/pwx/path>,
+             "VAULT_CLIENT_KEY": </etc/pwx/path>,
+             "VAULT_TLS_SERVER_NAME": <>,
+        }
+    }
+	...
+```
+
 ## Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
