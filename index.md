@@ -22,8 +22,8 @@ Portworx technology:
 * Provides programmatic control on your storage resources - volumes and other stateful services can be created and consumed directly via the scheduler and orchestration software tool chain.
 * Is radically simple - Portworx is deployed just like any other container - and managed by your scheduler of choice.
 
-## Data Service Platform
-Here is a short video that shows how Portworx provides an entire platform of services for managing stateful containerized applications in any Cloud or On-Prem data center:
+## Storage for Cloud Native Applications
+Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center:
 {% include youtubePlayer.html id=page.youtubeId %}
 
 ## How it Works
