@@ -12,12 +12,12 @@ For customers wanting to deploy PX-Enterprise in an automated manner, a config f
 with the following options:
 
 
-+ -t <token> token that was provided in email (or arbitrary clusterID)
-+ -s <device> of the form /dev/sda, repeat for multiple devices
++ -t &lt;token&gt; token that was provided in email (or arbitrary clusterID)
++ -s &lt;device&gt; of the form /dev/sda, repeat for multiple devices
 + -z indicates a "head-only" node that contributes no local storage
-+ -d <data_network_interface> of the form eth0 - (optional)
-+ -m <management_network_interface> of the form eth0 - (optional)
-+ -k <key_value_store> of the form [etcd|consul]://<IP>:<port|4001> - (optional)
++ -d &lt;data_network_interface&gt; of the form eth0 - (optional)
++ -m &lt;management_network_interface&gt; of the form eth0 - (optional)
++ -k &lt;key_value_store&gt; of the form [etcd|consul]://&lt;IP&gt;:&lt;port|4001&gt; - (optional)
 + -a will attempt to use all available devices
 + -f when combined with -a will use all available devices even those with a filesystem
 
@@ -46,7 +46,7 @@ Provide one of the following examples as command line arguments positioned after
    -t 06670ede-70af-11e6-beb9-0242fc110003 -a -f
 ```
 
-If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from **"Manage Clusters -> Get Startup Script"**.  In this case, the **"-k"** argument would not apply, since Lighthouse uses a Portworx hosted **etcd**.
+If using Lighthouse as the management interface, then the "-t" argument will be the PWX_TOKEN, visible from **"Manage Clusters -&gt; Get Startup Script"**.  In this case, the **"-k"** argument would not apply, since Lighthouse uses a Portworx hosted **etcd**.
 
 If running in an ["air-gapped"](/run-air-gap.html) environment, then also supply "**-e API_SERVER=http://1.2.3.4**" to the "docker run" command, which should point to the IPaddr of the on-prem Lighthouse instance.   For example:
 
@@ -69,5 +69,5 @@ docker run --restart=always --name px-enterprise -d \
 
 The "-t" argument will correspond to the token from an on-prem Lighthouse and should be the same for all nodes participating in the same cluster.  In this case, the **"-k"** argument should point to an existing on-prem version of **etcd** or **consul**.
 
-One of the **-z**, or **-a** or the **-s <drive>** options must be specified.
+One of the **-z**, or **-a** or the **-s &lt;drive&gt;** options must be specified.
 

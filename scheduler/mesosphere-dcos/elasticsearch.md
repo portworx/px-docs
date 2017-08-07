@@ -32,7 +32,7 @@ Run the following command to add the repository to your DCOS cluster:
 
 Once you have run the above command you should see the Cassandra-PX service available in your universe
 
-![Elasticsearch-PX in DCOS Universe](/images/elasticsearch-px-universe-001.PNG)
+![Elasticsearch-PX in DCOS Universe](/images/elasticsearch-px-universe-001.PNG){:width="1031px" height="561px"}
 
 ## Installation
 ### Default Install
@@ -50,9 +50,9 @@ Here you have the option to change the service name, secret name, and principal.
 want to pass to the docker volume driver on ``PORTWORX_VOLUME_OPTIONS``. The default number of master_node count is 3 and this is not changeable. The default number of ``data_nodes`` count is 2; and default count for ``ingest_nodes``, ``coordinator_nodes``, ``kibana`` is 1 and can be changed.  
 
 
-![Elasticsearch install options](/images/elasticsearch-px-universe-002.PNG)
+![Elasticsearch install options](/images/elasticsearch-px-universe-002.PNG){:width="1067px" height="590px"}
 
-![Elasticsearch install options](/images/elasticsearch-px-universe-003.PNG)
+![Elasticsearch install options](/images/elasticsearch-px-universe-003.PNG){:width="1065px" height="606px"}
 
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
@@ -61,9 +61,9 @@ Click on “Review and Install” and then “Install” to start the installati
 
 Monitor the DCOS service screen untill all ``9 + 1`` tasks are completed.
 
-![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG)
+![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG){:width="968px" height="597px"}
 
-![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG)
+![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG){:width="968px" height="597px"}
 
 
 From the DCOS workstation, verify the service, look for ``elastic``
@@ -93,13 +93,13 @@ From the DCOS workstation, verify the task; it will show ``9`` tasks.
 
 In the above example, the DCOS Mesos cluster is running with 1 master, 1 public slave and 5 private slave agents. Elasticsearch components will be distributed evenly on every slave agents. See below diagram of the example setup.
 
-![Elasticsearch example setup](/images/elasticsearch-px-universe-006.PNG)
+![Elasticsearch example setup](/images/elasticsearch-px-universe-006.PNG){:width="816px" height="404px"}
 
 
 When the last elasticsearch  component with ID ``elastic.XXXX`` that is the scheduler service shows green, and all 
 elasticsearch tasks are in Running (green) status, you should be ready to start using the elasticsearch in DCOS.
 
-![Elasticsearch service running](/images/elasticsearch-px-universe-007.PNG)
+![Elasticsearch service running](/images/elasticsearch-px-universe-007.PNG){:width="962px" height="500px"}
 
 ### Check PX volumes 
 
@@ -207,11 +207,11 @@ Use Chrome Sense plugin from Google Chrome and you can do the document insert an
 
 Below is the screen for inserting document in Chrome Sense; the POST command will execute once the green arrow is clicked.
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-009.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-009.PNG){:width="959px" height="297px"}
 
 The following is running a search query for "java" from Chrome Sense
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-010.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-010.PNG){:width="1012px" height="771px"}
 
 
 ### Kibana in DCOS
@@ -220,23 +220,23 @@ The kibana URL is ``http://<dcos_url>/service/elastic/kibana/login`` ; and the d
 
 Login to the Kibana
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-011.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-011.PNG){:width="1000px" height="319px"}
 
 Create the default Index pattern
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-012.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-012.PNG){:width="1039px" height="600px"}
 
 On the Kibana console click "Discover" on the left menu, and observe  number of hits with search ``*`` 
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-013.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-013.PNG){:width="1031px" height="600px"}
 
 And replace the ``*`` with ``books`` in the search field, that is the ``books`` index documents hits
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-014.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-014.PNG){:width="1029px" height="598px"}
 
 Document insert and query can also be done in ``Dev Tools`` similar like Chrome Sense
 
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-015.PNG)
+![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-015.PNG){:width="1041px" height="606px"}
 
 
 

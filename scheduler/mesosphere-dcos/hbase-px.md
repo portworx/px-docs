@@ -48,7 +48,7 @@ Click on “Review and Install” and then “Install” to start the installati
 Once you have started the install you can go to the Services page to monitor the status of the installation from the DCOS service screen, one hbase master server task and three hbase region server tasks should be observed when installation of hadoop-px is completed.
 
 
-![Hadoop-PX install status](/images/hbase-px-universe-001.PNG)
+![Hadoop-PX install status](/images/hbase-px-universe-001.PNG){:width="1473px" height="875px"}
 
 
 From the DCOS workstation; check hbase task containers
@@ -89,7 +89,7 @@ Create a ssh tunnel from the DCOS/Mesos master node and access to hbase master n
 
 From the browser; you can inspect the setup of this Hbase cluster. and default setup only has 1 Hbase master and three Hbase region servers, and no backup master node.
 
-![HBase WebUI](/images/hbase-px-universe-002.PNG)
+![HBase WebUI](/images/hbase-px-universe-002.PNG){:width="1032px" height="689px"}
 
 
 ## Checking Hbase in CLI
@@ -225,7 +225,7 @@ Scan table ``testtable`` output is length and the end should be similar like bel
 
 And from the HBase Master UI, the ``test`` table is listed under User Tables
 
-![HBase WebUI](/images/hbase-px-universe-004.PNG)
+![HBase WebUI](/images/hbase-px-universe-004.PNG){:width="1245px" height="699px"}
 
 ### HBase file system
 
