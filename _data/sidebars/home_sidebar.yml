@@ -172,6 +172,14 @@
       url: /control/config-json.html
   - title: Operate and Maintain
     folderitems:
+    - title: Monitoring and Alerts
+      folderitems: 
+      - title: Prometheus
+        url: /maintain/monitoring/prometheus
+      - title: Alerts
+        url: /maintain/monitoring/alerting.html
+      - title: Grafana
+        url: /maintain/monitoring/grafana
     - title: Performance
       folderitems:
       - title: FIO
@@ -196,8 +204,6 @@
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
-    - title: Portworx integration with Prometheus
-      url: /maintain/prometheus.html
   - title: Application Solutions
     folderitems:
     - title: Databases
