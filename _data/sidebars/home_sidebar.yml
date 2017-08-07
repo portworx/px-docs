@@ -175,11 +175,11 @@
     - title: Monitoring and Alerts
       folderitems: 
       - title: Prometheus
-        url: /maintain/monitoring/prometheus
+        url: /maintain/monitoring/prometheus/index.html
       - title: Alerts
         url: /maintain/monitoring/alerting.html
       - title: Grafana
-        url: /maintain/monitoring/grafana
+        url: /maintain/monitoring/grafana/index.html
     - title: Performance
       folderitems:
       - title: FIO
