@@ -76,6 +76,7 @@ If you are deploying PX with your PX configuration created before hand, then add
         }
     }
     ...
+}
 ```
 
 ## Authenticating with Vault using PX CLI
