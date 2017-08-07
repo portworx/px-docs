@@ -3,7 +3,7 @@ layout: page
 title: "Grafana with Portworx"
 keywords: portworx, prometheus, grafana, alertmanager, cluster, storage
 sidebar: home_sidebar
-redirect_from: "/alerting.html"
+redirect_from: "/grafana/index.html"
 ---
 
 ## Cluster Template for Grafana
