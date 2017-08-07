@@ -6,7 +6,7 @@ sidebar: home_sidebar
 redirect_from: "/alerting.html"
 ---
 
-This guide shows you how to configure prometheus to monitor your portworx node and visualize your cluster status and activities in Grafana.
+This guide shows you how to configure prometheus to monitor your portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
 
 ## Configure Prometheus
 
@@ -32,9 +32,17 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['px-node-01-IP:9001','px-node-02-IP:9001','px-node-03-IP:9001']
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alert-manager-ip:9093"
 ```
 
 This file can be downloaded from [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460)
+
+Note: 'alert-manager-ip' is the IP address of the node where AlertManager is running. It is confugured in the later steps.
 
 ### Prometheus alerts rules file
 
