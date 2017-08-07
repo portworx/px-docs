@@ -54,6 +54,8 @@ You need to add two extra Docker runtime commands
 All the above Vault related fields as well as the cluster secret key can be set using PX CLI which is explained in the next section.
 
 ### Adding Vault Credentials to config.json
+>**Note:**<br/>This section is optional is only needed if you intend to provide the PX configuration before installing PX.
+
 If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
 
 ```
