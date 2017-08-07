@@ -61,7 +61,7 @@ If you are deploying PX with your PX configuration created before hand, then add
 ```
 # cat /etc/pwx/config.json
 {
-	"clusterid": "xzc2ed6f-7e4e-4e1d-8e8c-3a6df1fb61a5",
+    "clusterid": "xzc2ed6f-7e4e-4e1d-8e8c-3a6df1fb61a5",
     "secret": {
         "secret_type": "vault",
         "cluster_secret_key": "string",
