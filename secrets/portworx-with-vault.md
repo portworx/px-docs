@@ -75,7 +75,7 @@ If you are deploying PX with your PX configuration created before hand, then add
              "VAULT_TLS_SERVER_NAME": <>,
         }
     }
-	...
+    ...
 ```
 
 ## Authenticating with Vault using PX CLI
