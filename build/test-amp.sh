@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $(uname -s) == 'Darwin' ]; then
+    SED='gsed'
+else
+    SED='sed'
+fi
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE="${DIR}/.."
 
@@ -10,21 +16,26 @@ rm -rf "${BASE}/_site"
 # Build the AMP version of the documentation
 mv "${BASE}/_layouts/page.html" "${BASE}/_layouts/page.bak.html"
 cp "${BASE}/_layouts/amp.html" "${BASE}/_layouts/page.html"
-sed -i'' 's/docs.portworx.com/amp-docs.portworx.com/' "${BASE}/_config.yml"
+${SED} -i'.bak' 's/docs.portworx.com/amp-docs.portworx.com/' "${BASE}/_config.yml"
 bundle exec jekyll build
+
+# Cleanup
+mv "${BASE}/_layouts/page.bak.html" "${BASE}/_layouts/page.html"
+mv "${BASE}/_config.yml.bak" "${BASE}/_config.yml"
+
 
 # Kramdown table cell aligning uses 'text-align:' inline, inline styles are
 # not valid AMP. Replace these with a text-center (bootstrap) class.
 HTMLFILES=$(find "${BASE}/_site" -name '*.html')
 for FILE in ${HTMLFILES}; do
-    gsed -i 's%<td style="text-align: center">%<td class="text-center">%g' ${FILE}
-    gsed -i 's%<th style="text-align: center">%<th class="text-center">%g' ${FILE}
+    ${SED} -i 's%<td style="text-align: center">%<td class="text-center">%g' ${FILE}
+    ${SED} -i 's%<th style="text-align: center">%<th class="text-center">%g' ${FILE}
 
-    gsed -i 's%<td style="text-align: left">%<td class="text-left">%g' ${FILE}
-    gsed -i 's%<th style="text-align: left">%<th class="text-left">%g' ${FILE}
+    ${SED} -i 's%<td style="text-align: left">%<td class="text-left">%g' ${FILE}
+    ${SED} -i 's%<th style="text-align: left">%<th class="text-left">%g' ${FILE}
 
-    gsed -i 's%<td style="text-align: right">%<td class="text-right">%g' ${FILE}
-    gsed -i 's%<th style="text-align: right">%<th class="text-right">%g' ${FILE}
+    ${SED} -i 's%<td style="text-align: right">%<td class="text-right">%g' ${FILE}
+    ${SED} -i 's%<th style="text-align: right">%<th class="text-right">%g' ${FILE}
 done
 
 
@@ -43,13 +54,11 @@ for FILE in ${HTMLFILES}; do
         echo "${FILE} is a redirect - not testing AMP validity"
     fi
 done
+
+
 if [[ ${FAILEDTEST} -eq 1 ]]; then
     echo "Some HTML pages failed the AMP validation test"
     exit 1
 else
     echo "AMP Validation fully passed"
 fi
-
-
-# Cleanup
-mv "${BASE}/_layouts/page.bak.html" "${BASE}/_layouts/page.html"
