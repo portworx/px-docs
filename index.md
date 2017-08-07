@@ -9,8 +9,11 @@ youtubeId : 0zTjOly0vkA
 * TOC
 {:toc}
 
-Portworx is a software defined persistent storage solution designed and purpose built for containers.  Portworx is a clustered block storage solution that provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through schedulers such as Kubernetes, Mesos and Swarm.
-Portworx storage is delivered as a container that gets installed on your servers that run stateful applications. 
+Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via modern scheduling software such as Kubernetes, Marathon and Swarm.
+
+Portworx is a clustered block storage solution that provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through the scheduler.
+
+Portworx storage is delivered as a container that gets installed on your servers that run stateful applications.
 
 Portworx technology:
 
@@ -26,7 +29,10 @@ Here is a short video that shows how Portworx provides an entire platform of ser
 {% include youtubePlayer.html id=page.youtubeId %}
 
 ## How it Works
-Portworx storage is deployed as a container and runs on a cluster of servers. Application containers provision storage directly through the Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f) API or the Docker [command-line](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f). Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (**pxctl**) and then set storage policies using the PX-Enterprise web console.
+Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block storage to your applications on the same server where the application is running.
+Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f) API, [CSI](https://github.com/container-storage-interface/spec) or the Docker [command-line](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f).
+
+Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (**pxctl**) and then set storage policies using the PX-Enterprise web console.
 
 Read more about how Portworx provides storage volumes to your application containers [here](architecture.html)
 
