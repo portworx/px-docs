@@ -33,7 +33,7 @@ docker run --restart=always --name prometheus -d -p 9090:9090 \
 -v ${PROMETHEUS_CONF}:/etc/prometheus \
 prom/prometheus
 ```
-Prometheus UI is available http://<IP_ADDRESS>:9090
+Prometheus UI is available at http://<IP_ADDRESS>:9090
 
 ## Configure Grafana
 
