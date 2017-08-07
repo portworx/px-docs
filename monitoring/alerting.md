@@ -130,6 +130,8 @@ receivers:
     auth_password: "<sender-email-password>"
 ```
 
+This file can be downloaded from [alert.conf](https://gist.github.com/shailvipx/7fa7ed5d722062d6151c15c2db9bc05c)
+
 ### Run AlertManager
 
 In this example AlertManager is running as docker container. Make sure to map the directory where your config file is stored to '/etc/alertmanager'.
