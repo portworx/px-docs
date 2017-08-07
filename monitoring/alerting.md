@@ -18,7 +18,23 @@ PROMETHEUS_CONF=/etc/prometheus
 
 ### Prometheus config file
 
-Modify [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460) to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
+Modify the below configuration to include your PX nodes' IP addresses, and save it as ${PROMETHEUS_CONF}/prometheus.yml.
+
+```
+global:
+  scrape_interval: 1m
+  scrape_timeout: 10s
+  evaluation_interval: 1m
+rule_files:
+  - px.rules
+scrape_configs:
+  - job_name: 'PX'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['px-node-01-IP:9001','px-node-02-IP:9001','px-node-03-IP:9001']
+```
+
+This file can be downloaded from [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460)
 
 ### Prometheus alerts rules file
 
@@ -67,5 +83,52 @@ Your dashboard should look like the following.
 
 ![Grafana Volume Status File](/images/grafana_volume_status.png "Grafana Volume Status File")
 
+## Configure AlertManager
 
+The Alertmanager handles alerts sent by Prometheus server. It can be configured to send them to the correct receiver integrations such as email, PagerDuty, Slack etc.
+This example shows how it can be configured to send email notifications using gmail as SMTP server.
+
+AlertManager requires a config file, which needs to be bind mounted into AlertManager container. 
+
+```
+# This can be any directory on the host.
+ALERTMANAGER_CONF=/etc/alertmanager
+```
+
+### AlertManager config file
+
+Modify the below config file to use Google's SMTP server for your account. 
+Save it as ${ALERTMANAGER_CONF}/alert.conf.
+
+```
+global:
+  # The smarthost and SMTP sender used for mail notifications.
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: '<sender-email-address>'
+  smtp_auth_username: "<sender-email-address>"
+  smtp_auth_password: '<sender-email-password>'
+route:
+  group_by: [Alertname]
+  # Send all notifications to me.
+  receiver: email-me
+receivers:
+- name: email-me
+  email_configs:
+  - to: <receiver-email-address>
+    from: <sender-email-address>
+    smarthost: smtp.gmail.com:587
+    auth_username: "<sender-email-address>"
+    auth_identity: "<sender-email-address>"
+    auth_password: "<sender-email-password>"
+```
+
+### Run AlertManager
+
+In this example AlertManager is running as docker container. Make sure to map the directory where your config file is stored to '/etc/alertmanager'.
+
+```
+docker run -d -p 9093:9093 --restart=always --name alertmgr \
+-v ${ALERTMANAGER_CONF}:/etc/alertmanager \
+prom/alertmanager
+```
 
