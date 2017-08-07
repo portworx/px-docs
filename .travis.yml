@@ -6,6 +6,7 @@ install:
  - bundle install
 script:
  - "./build/test.sh"
+ - "./build/test-amp.sh"
  - "./build/deploy-amp.sh"
 notifications:
   email: true
