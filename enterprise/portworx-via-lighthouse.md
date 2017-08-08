@@ -4,6 +4,7 @@ title: "Manage PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
 redirect_from: "/launch-via-lighthouse.html"
+meta-description: "Lighthouse is a management and GUI to create PX clusters and launch PX nodes to join your clusters. Learn how to manage PX clusters via the Lighthouse today."
 ---
 
 * TOC
