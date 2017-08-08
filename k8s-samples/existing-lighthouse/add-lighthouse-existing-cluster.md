@@ -23,6 +23,7 @@ kubectl apply -f k8-lighthouse.yaml
 ```
 http://<Your k8 Master>:30062
 ```
+#### Login will be the email address you supplied for ADMIN EMAIL and the default password is admin
 ### Click on create new cluster
 
 ### Click on existing cluster and in both name and clusterid insert the name of your portworx cluster and click on create. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/new-cluster.png)   If you do not know the name look in /etc/pwx/config.json 
