@@ -220,6 +220,8 @@
           url: /applications/cassandra-snaps.html
       - title: PostgreSQL
         url: /applications/postgres.html
+      - title: Hadoop and HDFS
+        url: /applications/hadoop-docker.html
       - title : Microsoft SQL Server
         url: /applications/mssql-server.html
     - title: Messaging
