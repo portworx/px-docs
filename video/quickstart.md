@@ -4,6 +4,7 @@ title: "Portworx in a Nutshell"
 keywords: portworx, mysql, storage
 sidebar: home_sidebar
 redirect_from: "/video-portworx-nutshell.html"
+meta-description: "An overview of Portworx and how we offer stateful storage solutions. Learn how quick and easy it is to deploy Portworx!"
 ---
 
 * TOC
