@@ -3,6 +3,7 @@ layout: page
 title: "StatefulSets"
 keywords: portworx, stateful sets, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
+meta-description: "This document demonstrates how to use StatefulSets with Kubernetes and Portworx. Try today!"
 ---
 
 * TOC
