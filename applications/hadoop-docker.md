@@ -10,7 +10,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-# Target Audience
+## Target Audience
 This document is intended for Dev and Ops teams that meet one or more of the following conditions:
 
 * You are heavily over provisioned.  You run Hadoop clusters in silos, and every time you need to bring up a silo, you create a new physical (cloud or on prem) hardware footprint to host this Hadoop cluster.  Virtualization is not an option, since you want to get bare-metal performance.
@@ -37,7 +37,7 @@ Hadoop Distributed File System (HDFS) – a distributed file-system that stores 
 HDFS manages the persistence layer for Hadoop, with stateless services like YARN speaking to HDFS.  HDFS has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level by Portworx, a typical question is: should I ensure high-availability of my Hadoop workloads through HDFS itself, through my storage, or a combination of the two? This Production Operations Guide to Running Hadoop is aimed at helping answer this question by showing how to use HDFS replication alongside Portworx to speed up recovery
 times, increase density and simplify operations.
 
-# Deploying Hadoop as Containers
+## Deploying Hadoop as Containers
 Traditionally, Hadoop has been deployed directly on bare metal servers in a siloed environment.  As the number of Hadoop instances and deployments grow, managing multiple silos becomes problematic.  The specific issues with managing multiple Hadoop silos on fixed physical infrastructure are:
 
 * Under utilization of server and storage resources.
@@ -47,7 +47,7 @@ Traditionally, Hadoop has been deployed directly on bare metal servers in a silo
 
 Typically, some form of virtualization is needed to manage any large application deployment to solve these issues.  Virtual machines however add a layer of overhead that is not conducive to big data deployments.  This is where the advent of containers becomes useful.  By deploying Hadoop inside of Linux containers, you can get the power of virtualization with bare metal performance.  You also empower a DevOps model of deploying applications - one in which out-of-band IT is not involved as your application owners deploy and scale their Hadoop clusters.
 
-# HDFS Architectural Background
+## HDFS Architectural Background
 For the purposes of this discussion, there are a few important architectural components of HDFS that need to be understood.
 
 HDFS is composed of a few specialized services.  They include:
@@ -78,20 +78,20 @@ The benefits of running Hadoop with Portworx are:
 * Simplified installation and configuration of Hadoop via Portworx frameworks
 Let’s look at each in turn.
 
-## Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premise or in any public cloud
+### Enable Hadoop to run on a cloud-native storage infrastructure that is managed the same way, whether you run on-premise or in any public cloud
 The goal behind creating a PaaS is to host multiple application deployments on the same set of hardware resources regardless of the infrastructure type (private or public cloud).  This way you get maximum resource utilization for any application on any platform.
 
 In order to accomplish this, you need cloud native compute scheduling software such as Kubernetes or Mesosphere.  Portworx compliments this by providing a cloud native storage platform which serves as a common denominator across diverse cloud and data center architectures.  Using software-defined data layer, any application can programmatically allocate and consume stateful services without having to plan for different storage architectures.  With Portworx and modern scheduling and orchestration software, you architect your application deployment once, and reuse it on any infrastructure.  Equally important is the ability for your end users to create these resources directly via the orchestration software without having to involve and rely on traditional, out-of-band IT methods.
 
-## Faster recovery times during a node failure
+### Faster recovery times during a node failure
 Hardware and network failures are a part of normal operations. For this reason, modern software like Hadoop, designed to run on commodity servers where failures are common, can recover from these failures automatically.  Though automated, recovery is a time consuming operation and reduces cluster performance during recovery. Portworx can help your Hadoop cluster recover from that failure faster than using HDFS’ own built in replication while at the same time taking advantage of HDFS replication for improved read/write performance.  The rest of this section describes how.
 
-### A failover example
+#### A failover example
 Let’s take a look at what happens when a DataNode in our Hadoop cluster fails.
 
 Let’s assume that we have a readily available pool of brand-new nodes that can take the place of our failed data node. The issue is that this new and willing replacement has no data — its disks are blank, as we would hope if we are practicing immutable infrastructure. This is where HDFS replication comes in.
 
-### HDFS replication
+#### HDFS replication
 When a DataNode has not been in contact via a heartbeat with the NameNode for 10 minutes (or some other period of time configured by the Hadoop admin), the NameNode will instruct a DataNode with the necessary blocks to asynchronously replicate the data to other DataNodes in order to maintain the necessary replication factor.
 So, if the admin has configured a replication factor of 3, and a DataNode containing one replica falls out of the cluster, the NameNode will replicate the data to one new DataNode.
 
@@ -103,7 +103,7 @@ The amount of time depends on the total size of the replica and the available I/
 2- While the rebuild operation is taking place, the read and write performance of the rest of the cluster suffers.
 This is because while replication can happen fastest if all I/O is used for replication, this would bring cluster performance down to zero during the rebuild operation.  Therefore, the NameNode throttles re-replication traffic to two outbound replication streams per DataNode, per heartbeat.  This is configurable via dfs.namenode.replication.max-streams, however turning this up reduces cluster performance even more.  The effect of this is worse if you have compounded or multiple failures in your cluster and need to rebuild multiple nodes.
 
-### Portworx replication
+#### Portworx replication
 So while HDFS itself is capable of recovering from a failure, it is an expensive and time-consuming operation.
 Portworx takes a different approach, allowing for nearly instant failover in the case of a DataNode failure. Portworx replication is synchronous and done at the block layer.  This means that we can transparently replicate a single HDFS DataNode volume multiple times, giving us a backup to use if something fails.
 
@@ -115,7 +115,7 @@ Basically the new DataNode will come up with the same identity as the node that 
 
 In this scenario, where we have just lost a node from our cluster – Portworx has helped us to recover quickly by allowing the replica of the volume to be used right away.
 
-## Increase read/write throughput while reducing recovery time
+### Increase read/write throughput while reducing recovery time
 
 The key to the above process is to use the lower-layer Portworx replication to add resilience and failover to a single DataNode volume instead of relying on HDFS to replicate data. This helps us reduce recovery time but what if we wanted to increase our read/write throughput at the same time?
 
@@ -126,23 +126,23 @@ We can combine the two types of replication in a single cluster and get the best
 Essentially, Portworx offers a backup volume for each HDFS volume enabling a “slide and replace” operation in the event of failover. Compare this to the bootstrap operation and you can see how Portworx can reduce recovery time.
 By using a replicated Portworx volume for your HDFS containers and then turning up HDFS replication, you get the best of both worlds: high query throughput and reduced time to recovery.
 
-## Increase resource utilization by safely running multiple Hadoop clusters on the same hosts
+### Increase resource utilization by safely running multiple Hadoop clusters on the same hosts
 
 The above operational best practices have been concerned with reliability and performance.  Now we can look at efficiency.  Most organizations run multiple Hadoop clusters, and when each cluster is architected as outlined above, you can achieve fast and reliable performance.  However, since Hadoop is a resource intensive application, the costs of operating multiple clusters can be considerable.  It would be nice if multiple clusters could be run on the same hosts. This is possible with Portworx.
 
-### Volume provisioning and isolation
+#### Volume provisioning and isolation
 First, Portworx can provide container-granular volumes to multiple HDFS Data, Name and Journal Nodes running on the same host.  On prem, these volumes can use local direct attached storage which Portworx formats as a block device and “slices” up for each container.  Alternatively in the cloud, a single or multiple network-attached blocked devices like AWS EBS or Google Persistent disk can be used, likewise with Portworx slicing each block device into multiple container-granular block devices.
 
 Since Portworx is application aware, you can pass in the equivalent of a Hadoop cluster id as a group id in volume. Using this id Portworx will make sure that it does not colocate data for two stateful nodes (Data, Name and Journal) instances that belong to the same cluster on the same node. Each of your clusters will be spread across the cluster, maximizing resilience in the face of hardware failure.  This model can be extended for as many clusters as your hardware and network can support.
 
 In principle, it is possible to set up multiple Hadoop clusters on the same hosts without a scheduler.  This requires additional cluster members to use different ports for the HDFS containers and update the corresponding hdfs-site.xml file. However, this option is complex to configure and moves teams away from the automation that speeds up deployments and reduces errors.
 
-### Enforcing SLA with resource limits
+#### Enforcing SLA with resource limits
 Portworx and a container scheduler like DCOS, Kubernetes or Swarm can enable resource isolation between containers from different Hadoop clusters running on the same server.  Using this, each Hadoop cluster can achieve application level SLAs based on business requires.  This works by using schedulers to enforce compute constraints like CPU and Memory and using Portworx to enforce I/O priority.  Portworx can reserve varying levels of disk IOPS and bandwidth for different containers from each Hadoop cluster.  All of these constraints are at the container granular level.
 
 This way, you can have one Yarn job prioritized over another based on the app SLA to your business user.  Maximizing your resource utilization while still guaranteeing performance.
 
-## Improve Hadoop performance with hyperconvergence
+### Improve Hadoop performance with hyperconvergence
 Chances are if you are running Hadoop, read and write performance of jobs is important to you.  Hadoop was designed to run in bare metal environments where each server offers its own disk as the storage media.  The idea of running an app on the same machine as its storage is called “hyperconvergence”.  Hadoop will always get the best performance using this setup because the map() and reduce() operations of put a lot of pressure on the network.
 “Hadoop splits files into large blocks and distributes them across nodes in a cluster. It then transfers packaged code into nodes to process the data in parallel. This approach takes advantage of data locality, where nodes manipulate the data they have access to. This allows the dataset to be processed faster and more efficiently”
 Source: https://en.wikipedia.org/wiki/Apache_Hadoop
@@ -157,7 +157,7 @@ Portworx helps in both these situations because it can force your scheduler–Ku
 Portworx enforces these types of scheduling decisions using host labels. By labeling hosts based on which volumes they have and passing these constraints to the scheduler, your containers will run in the location that minimizes rebuilds and maximizes performance using direct attached storage.
 
 
-## Dynamically resize HDFS volumes with no downtime
+### Dynamically resize HDFS volumes with no downtime
 A defining attribute of big data applications is not just that they are big, but that they grow. DevOps teams running Hadoop clusters regularly discover that they have outgrown the previously provisioned storage for HDFS DataNodes. Provisioning additional storage typically requires DevOps to open a ticket for IT or storage admins to perform the task, which would end up taking hours, or even days. At the admin level, provisioning additional storage requires either migrating data to new larger volumes or performing multiple steps which lead to additional downtime.
 Consider a business-critical BI cluster running a Yarn job on top of a HDFS data node that was provisioned with a 500GB volume because the DevOps thought that was sufficient headroom for the application. But then there is a burst of data ingestion, causing the DataNode to run out of space.
 Portworx provides a programmatic way for DevOps to instantly increase the size of already-provisioned volumes without having to take either the application or the the underlying volumes offline. It involves running just one command which provisions more storage on the existing PX nodes, increases the size of the block device and then resizes the filesystem, all in a matter of seconds.
@@ -229,17 +229,17 @@ $/opt/pwx/bin/pxctl volume inspect hdfs_volume
                                  Node    :  192.168.56.101
                                  Node    :  192.168.56.106
                                  Node    :  192.168.56.105
-``
+```
 
-## Simplified installation and configuration of Hadoop
+### Simplified installation and configuration of Hadoop
 Hadoop is a complex application to run.  Just a basic production Hadoop install requires: Active and Standby NameNodes, Journal Nodes, Data Nodes, Zookeeper Failover Controllers and Yarn nodes.
 The complexity related to installation and configuration increases when you have multiple Hadoop clusters.
 Running Hadoop with Portworx dramatically simplifies this in two main ways.
 
-### Simplifying storage provisioning
+#### Simplifying storage provisioning
 With Portworx all volumes used for Data, Journal and Name nodes are virtually provisioned at container granularity. Operations such as snapshots, encryption, compression and others are not a cluster, or storage wide property, but rather per container. This is a key aspect, because it turns the operational experience over to the application owner (DevOps teams) and not the IT admin (so you can avoid slow, static and out of band storage provisioning).
 
-### Simplifying Hadoop deployments with the DCOS framework
+#### Simplifying Hadoop deployments with the DCOS framework
 Additionally, Portworx makes it easy to deploy specific data services, in this case Hadoop, by understanding how all the different pieces fit together.  Portworx runs with any schedule, but customers have been particularly excited about our DCOS frameworks so this document will discuss that.
 Here we will see how easy it is to set up a 3 node Hadoop cluster running on DCOS. The framework will create:
 * 3 Journal Nodes,
@@ -259,9 +259,9 @@ Once you have run the above command you should see the Hadoop-PX service availab
 
 ![Hadoop-PX in DCOS Universe](/images/dcos-hadoop-px-universe.png){:width="655px" height="200px"}
 
-#### Installation
+##### Installation
 
-##### Default Install
+###### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 
 ```
@@ -270,7 +270,7 @@ $ dcos package install --yes hadoop-px
 
 You can also click on the “Install” button on the WebUI next to the service and then click “Install Package”.
 
-##### Advanced Install
+###### Advanced Install
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on “Advanced Installation”
 
 Here you have the option to change the service name, volume name, volume size, and provide any additional options that you want to pass to the docker volume driver. You can also configure other Hadoop related parameters on this page including the number of Data and Yarn nodes for the Hadoop cluster.
@@ -279,7 +279,7 @@ Here you have the option to change the service name, volume name, volume size, a
 
 Click on “Review and Install” and then “Install” to start the installation of the service.
 
-##### Install Status
+###### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -307,12 +307,12 @@ marathon                  10.0.4.21                   True     1    1.0   1024.0
 metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000
 ```
 
-### Scaling the Data Nodes
+#### Scaling the Data Nodes
 You do not need to create additional volumes of perform to scale up your cluster. Just go to the Hadoop service page, click on the three dots on the top right corner of the page, select “Data”, scroll down and increase the nodes parameter to the desired nodes.
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more Data nodes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
 Additionally, as mentioned above, you can also increase the capacity of your HDFS DataNodes by using the pxctl volume update command without taking the service offline.
 
-## Reference Guide for deploying Hadoop as a Service
+### Reference Guide for deploying Hadoop as a Service
 
 In this section, we cover a reference architecture for creating a PaaS like Hadoop environment.  In this reference architecture, we used:
 
@@ -336,15 +336,15 @@ There are two types of worker nodes used:
 * Tier 1 worker node with 45TB of SSD storage (24+4 x 1.6TB hot plug LFF SAS-SSD drives)
 * Tier 2 worker nodes with 26.9TB of SSD storage (24+4 x 960GB hot plug LFF SATA-SSD drives)
 
-### Installation Step 1
+#### Installation Step 1
 Install DC/OS such that the management and head nodes are used as the DC/OS master nodes and the the Apollo 4200 worker nodes are the Mesos agent nodes.  The Hadoop clusters will be scheduled on these nodes.
 
-### Installation Step 2
+#### Installation Step 2
 Once DC/OS has been installed, deploy Portworx.  First deploy the Portworx framework using the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/install.html
 
 Next, install the Portworx framework for Big Data by following the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/hadoop-hdfs.html
 
-### Two-Rack Deployment Overview
+#### Two-Rack Deployment Overview
 The picture below depicts this architecture deployed in a two-rack environment:
 
 ![Hadoop Reference Architecture two rack diagram](/images/hadoop-ra-2.png){:width="655px" height="200px"}
