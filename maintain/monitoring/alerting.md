@@ -57,7 +57,7 @@ docker run --restart=always --name prometheus -d -p 9090:9090 \
 -v ${PROMETHEUS_CONF}:/etc/prometheus \
 prom/prometheus
 ```
-Prometheus UI is available at http://<IP_ADDRESS>:9090
+Prometheus UI is available at http://&lt;IP_ADDRESS&gt;:9090
 
 ## Configure Grafana
 
@@ -67,14 +67,14 @@ Start grafana with the follwing docker run command
 docker run --restart=always --name grafana -d -p 3000:3000 grafana/grafana
 ```
 
-Login to this grafana at http://<IP_ADDRESS>:3000 in your browser. Default grafana login is admin/admin.
+Login to this grafana at http://&lt;IP_ADDRESS&gt;:3000 in your browser. Default grafana login is admin/admin.
 
 Here, it will ask you to configure your datastore. We are going to be using prometheus that we configured earlier. To use the templates that are provided later, name your datastore 'prometheus'.
 
 In the screen below:
 1) Choose 'Prometheus' from the 'Type' dropdown.
 2) Name datastore 'prometheus'
-3) Add URL of your prometheus UI under Http settings -> Url
+3) Add URL of your prometheus UI under Http settings -&gt; Url
 
 Click on 'Save & Test'
 
@@ -82,7 +82,7 @@ Click on 'Save & Test'
 
 Next step would be to import Portworx provided [Cluster](https://gist.github.com/shailvipx/6da98daa4f5464f855482c1de6a138b2) and [Volume](https://gist.github.com/shailvipx/cccbf6a99d9bfc81a86ced1bebc7039a) grafana templates.
 
-From the dropdown on left in your grafana dashboard, go to Dashboards -> Import, and add cluster and volume template.
+From the dropdown on left in your grafana dashboard, go to Dashboards -&gt; Import, and add cluster and volume template.
 
 Your dashboard should look like the following. 
 
