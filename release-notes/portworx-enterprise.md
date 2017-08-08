@@ -4,6 +4,7 @@ title: "PX-Enterprise Release notes"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 redirect_from: "/px-enterprise-release-notes.html"
+meta-description: "Stay up to date with the new releases and updates from Portworx. See our latest key features and an explanation of them all!"
 ---
 
 * TOC
