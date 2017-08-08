@@ -244,7 +244,7 @@
         url: /applications/docker-compose.html
       - title: Jenkins with Portworx
         url: /applications/jenkins.html
-  - title: Secrets
+  - title: Encryption
     folderitems:
     - title: Portworx with Vault
       url: /secrets/portworx-with-vault.html
