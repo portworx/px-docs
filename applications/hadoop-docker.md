@@ -9,7 +9,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-# Targeted Audience
+# Target Audience
 This document is intended for Dev and Ops teams that meet one or more of the following conditions:
 
 * You are heavily over provisioned.  You run Hadoop clusters in silos, and every time you need to bring up a silo, you create a new physical (cloud or on prem) hardware footprint to host this Hadoop cluster.  Virtualization is not an option, since you want to get bare-metal performance.
@@ -21,17 +21,17 @@ You have unused clusters that are consuming storage and compute resources.  Sinc
 # Introduction
 Apache Hadoop, inspired by work first done at Google,  is a collection of services designed for the distributed processing of large data sets across clusters of commodity servers.  It was developed out of the need to analyze very large datasets without requiring super computer resources.  The Hadoop ecosystem includes many projects, some of most popular include:
 
-Hadoop Common – contains libraries and utilities needed by other Hadoop modules;
+*Hadoop Common* – contains libraries and utilities needed by other Hadoop modules;
 
 Hadoop Distributed File System (HDFS) – a distributed file-system that stores data on commodity machines, providing very high aggregate bandwidth across the cluster;
 
-Hadoop YARN – a platform responsible for managing computing resources in clusters and using them for scheduling users' applications
+*Hadoop YARN* – a platform responsible for managing computing resources in clusters and using them for scheduling users' applications
 
-Hadoop MapReduce – an implementation of the MapReduce programming model for large-scale data processing.
+*Hadoop MapReduce* – an implementation of the MapReduce programming model for large-scale data processing.
 
-Hbase- A scalable, distributed database that supports structured data storage for large tables.
+*Hbase*- A scalable, distributed database that supports structured data storage for large tables.
 
-Hive - A data warehouse infrastructure that provides data summarization and ad hoc querying.
+*Hive* - A data warehouse infrastructure that provides data summarization and ad hoc querying.
 
 HDFS manages the persistence layer for Hadoop, with stateless services like YARN speaking to HDFS.  HDFS has built-in data replication and so is resilient against host failure. Because data replication can also be provided at the storage level by Portworx, a typical question is: should I ensure high-availability of my Hadoop workloads through HDFS itself, through my storage, or a combination of the two? This Production Operations Guide to Running Hadoop is aimed at helping answer this question by showing how to use HDFS replication alongside Portworx to speed up recovery
 times, increase density and simplify operations.
@@ -64,7 +64,7 @@ DataNodes store the the actual blocks of data.  The data in a Hadoop cluster is 
 *Designed for Converged Deployments*
 Hadoop is designed for bare-metal deployments of commodity servers “a la Google” with a Yarn or other job running on the same physical host that has the data needed for the job. These various components of HDFS were designed to run on dedicated servers with local drives.  Scale of capacity is achieved by increasing the number of instances of each of these components.  That is, HDFS is designed to scale horizontally, not vertically by adding more capacity to anyone node.  This in turn makes the use of external storage systems such as SAN or NAS undesirable for HDFS deployments.
 
-#Advantages of Hadoop with Portworx
+# Advantages of Hadoop with Portworx
 
 This data locality is important for performance and simplified operations.   However, when using containers to run Hadoop, data locality creates a problem. Deploying multiple containerized instances of Hadoop via your scheduling software like Kubernetes, Mesos or Docker Swarm can result in Yarn or other jobs running in containers on hosts that do not have the appropriate data, significantly reducing performance. Portworx solves this problem and in doing so brings five significance benefits.
 
@@ -127,7 +127,7 @@ By using a replicated Portworx volume for your HDFS containers and then turning 
 
 ## Increase resource utilization by safely running multiple Hadoop clusters on the same hosts
 
-The above operational best practices have been concerned with reliability and performance.  Now we can look at efficiency.  Most organizations run multiple Hadoop clusters, and when each cluster is architectured as outlined above, you can achieve fast and reliable performance.  However, since Hadoop is a resource intensive application, the costs of operating multiple clusters can be considerable.  It would be nice if multiple clusters could be run on the same hosts. This is possible with Portworx.
+The above operational best practices have been concerned with reliability and performance.  Now we can look at efficiency.  Most organizations run multiple Hadoop clusters, and when each cluster is architected as outlined above, you can achieve fast and reliable performance.  However, since Hadoop is a resource intensive application, the costs of operating multiple clusters can be considerable.  It would be nice if multiple clusters could be run on the same hosts. This is possible with Portworx.
 
 ### Volume provisioning and isolation
 First, Portworx can provide container-granular volumes to multiple HDFS Data, Name and Journal Nodes running on the same host.  On prem, these volumes can use local direct attached storage which Portworx formats as a block device and “slices” up for each container.  Alternatively in the cloud, a single or multiple network-attached blocked devices like AWS EBS or Google Persistent disk can be used, likewise with Portworx slicing each block device into multiple container-granular block devices.
@@ -233,7 +233,7 @@ $/opt/pwx/bin/pxctl volume inspect hdfs_volume
 ## Simplified installation and configuration of Hadoop
 Hadoop is a complex application to run.  Just a basic production Hadoop install requires: Active and Standby NameNodes, Journal Nodes, Data Nodes, Zookeeper Failover Controllers and Yarn nodes.
 The complexity related to installation and configuration increases when you have multiple Hadoop clusters.
-Running Hadoop with Portworx dramatically simplies this in two main ways.
+Running Hadoop with Portworx dramatically simplifies this in two main ways.
 
 ### Simplifying storage provisioning
 With Portworx all volumes used for Data, Journal and Name nodes are virtually provisioned at container granularity. Operations such as snapshots, encryption, compression and others are not a cluster, or storage wide property, but rather per container. This is a key aspect, because it turns the operational experience over to the application owner (DevOps teams) and not the IT admin (so you can avoid slow, static and out of band storage provisioning).
@@ -314,6 +314,7 @@ Additionally, as mentioned above, you can also increase the capacity of your HDF
 ## Reference Guide for deploying Hadoop as a Service
 
 In this section, we cover a reference architecture for creating a PaaS like Hadoop environment.  In this reference architecture, we used:
+
 * HPE DL360 for the DC/OS control plane nodes or similar
 * HPE Apollo servers for the Hadoop clusters or similar
 * HPE 5900 based networking or similar
@@ -321,32 +322,37 @@ In this section, we cover a reference architecture for creating a PaaS like Hado
 * Portworx version 1.2.9
 * RHEL Atomic as the base Linux distribution
 
+
 ![Hadoop Reference Architecture rack diagram](/images/hadoop-ra-1.png){:width="655px" height="200px"}
 
 There are 2 types of server modules used in this RA:
+
 * Management and head nodes - these nodes run as a DC/OS master node and run the control plane services such as Zookeeper.
 * Worker nodes - These nodes run the actual Hadoop clusters.  These are hyper converged compute and storage nodes.  
 
 There are two types of worker nodes used:
+
 * Tier 1 worker node with 45TB of SSD storage (24+4 x 1.6TB hot plug LFF SAS-SSD drives)
 * Tier 2 worker nodes with 26.9TB of SSD storage (24+4 x 960GB hot plug LFF SATA-SSD drives)
 
-Installation Step 1
+### Installation Step 1
 Install DC/OS such that the management and head nodes are used as the DC/OS master nodes and the the Apollo 4200 worker nodes are the Mesos agent nodes.  The Hadoop clusters will be scheduled on these nodes.
 
-Installation Step 2
+### Installation Step 2
 Once DC/OS has been installed, deploy Portworx.  First deploy the Portworx framework using the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/install.html
 
 Next, install the Portworx framework for Big Data by following the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/hadoop-hdfs.html
 
-Two-Rack Deployment Overview
+### Two-Rack Deployment Overview
 The picture below depicts this architecture deployed in a two-rack environment:
 
 ![Hadoop Reference Architecture two rack diagram](/images/hadoop-ra-2.png){:width="655px" height="200px"}
 
 ## Conclusions
-There are two main goals achieved by this reference architecture
-Leveraging homogeneous server architectures for the physical data center scale-out strategy.  As compute and capacity demands increase, the data center is scaled in terms of modular DAS based Apollo 4200 worker nodes.
-Leveraging cloud native compute and storage software such as DC/OS and Portworx to administer a common denominator, self provisioned programmable and composable application environment.
+There are two main goals achieved by this reference architecture.
 
-Using these two components, you can deploy a Hadoop-as-a-Service platform in a way that end users can deploy any big-data job in a self provisioned, self-assisted manner.  This architecture will work on any on-prem data center while maintaining portability to public cloud.
+* Leverage homogeneous server architectures for the physical data center scale-out strategy.  As compute and capacity demands increase, the data center is scaled in terms of modular DAS based Apollo 4200 worker nodes.
+
+* Leveraging cloud native compute and storage software such as DC/OS and Portworx to administer a common denominator, self provisioned programmable and composable application environment.
+
+Using these two components, you can deploy a Hadoop-as-a-Service platform in a way that allows end users to deploy any big-data job in a self provisioned, self-assisted manner.  This architecture will work on any on-prem data center while maintaining portability to public cloud.
