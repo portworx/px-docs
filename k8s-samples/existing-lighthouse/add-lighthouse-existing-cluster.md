@@ -22,12 +22,11 @@ kubectl apply -f k8-lighthouse.yaml
 ## Login to Lighthouse at port 30062 
 ```
 http://<Your k8 Master:30062
-``
+```
 ## Click on create new cluster
 
 ## Click on existing cluster and in both name and clusterid insert the name of your portworx cluster and click on create. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/new-cluster.png)   If you do not know the name look in /etc/pwx/config.json 
 ## Once the cluster is created it will show a token for the cluster you just created. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/authtoken.png).  You will have to add the logging url to each of your existing nodes /etc/pwx/config.json
-TODO add authtoken.png
 ```
 "loggingurl": "<your-lighthouse-url>/api/stats/listen?token=<Auth-Token>",
 ```
