@@ -18,7 +18,8 @@ Portworx technology:
 * Provides virtual, container-granular data volumes to applications running in containers.
 * Is scheduler aware - provides data persistence and HA across multiple nodes, cloud instances, regions, data centers or even clouds.
 * Is application aware - applications like Cassandra are deployed as a set of containers, and Portworx is aware of the entire stack.  Data placement and management is done at an application POD level.
-* Manages physical storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.
+* Is designed for enterprise production deployments, with features like BYOK inline encryption, snapshot-and-backup to S3 and support for stateful Blue-Green deployments.
+* Manages physical storage that is directly attached to servers, from cloud volumes, or provided by hardware arrays.  It monitors the health of the drives and manages the RAID groups directly, repairing failures when needed.
 * Provides programmatic control on your storage resources - volumes and other stateful services can be created and consumed directly via the scheduler and orchestration software tool chain.
 * Is radically simple - Portworx is deployed just like any other container - and managed by your scheduler of choice.
 
