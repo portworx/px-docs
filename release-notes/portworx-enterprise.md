@@ -127,7 +127,7 @@ No new features in 1.2.1. This is a patch release.
 * [Multi-cloud Backup and Restore](/cloud/backups.html) of Portworx Volumes 
 * [Encrypted Volumes](/manage/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
 * [Docker V2 Plugin Support](/scheduler/docker/docker-plugin.html)
-* [Prometheus Integeration](/maintain/prometheus.html)
+* [Prometheus Integeration](/maintain/monitoring/prometheus/index.html)
 * [Hashicorp Vault](/secrets/portworx-with-vault.html), [AWS KMS integration](/secrets/portworx-with-aws-kms.html) and 
   Docker Secrets Integration
 * [Dynamically resize](/manage/volume-update.html#increase-volume-size) PX Volumes with no application downtime
