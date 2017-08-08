@@ -12,14 +12,14 @@ For customers wanting to deploy PX-Enterprise in an automated manner, a config f
 with the following options:
 
 
-+ -t &lt;token&gt; token that was provided in email (or arbitrary clusterID)
-+ -s &lt;device&gt; of the form /dev/sda, repeat for multiple devices
-+ -z indicates a "head-only" node that contributes no local storage
-+ -d &lt;data_network_interface&gt; of the form eth0 - (optional)
-+ -m &lt;management_network_interface&gt; of the form eth0 - (optional)
-+ -k &lt;key_value_store&gt; of the form [etcd|consul]://&lt;IP&gt;:&lt;port|4001&gt; - (optional)
-+ -a will attempt to use all available devices
-+ -f when combined with -a will use all available devices even those with a filesystem
+ - `-t <token>` token that was provided in email (or arbitrary clusterID)
+ - `-s <device>` of the form /dev/sda, repeat for multiple devices
+ - `-z` indicates a "head-only" node that contributes no local storage
+ - `-d <data_network_interface>` of the form eth0 - (optional)
+ - `-m <management_network_interface>` of the form eth0 - (optional)
+ - `-k <key_value_store>` of the form `<etcd|consul://<IP>:<port|4001>` - (optional)
+ - `-a` will attempt to use all available devices
+ - `-f` when combined with -a will use all available devices even those with a filesystem
 
 Example:
 Following the "docker run" command:

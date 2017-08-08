@@ -36,7 +36,7 @@ The following examples assumes that you already have a running Kubernetes cluste
   On one of the Kubernetes nodes with Portworx installed run the following command
 
   ```shell
-  /opt/pwx/bin/pxctl volume create &lt;vol-id&gt; --size &lt;size&gt; --fs &lt;fs-type&gt;
+  /opt/pwx/bin/pxctl volume create <vol-id> --size <size> --fs <fs-type>
   ```
 
 #### Running Pods
@@ -61,8 +61,8 @@ The following examples assumes that you already have a running Kubernetes cluste
      - name: test-volume
        # This Portworx volume must already exist.
        portworxVolume:
-         volumeID: "&lt;vol-id&gt;"
-         fsType: "&lt;fs-type&gt;"
+         volumeID: "<vol-id>"
+         fsType: "<fs-type>"
    ```
 
    [Download example](portworx-volume-pod.yaml?raw=true)
@@ -94,16 +94,16 @@ The following examples assumes that you already have a running Kubernetes cluste
       apiVersion: v1
       kind: PersistentVolume
       metadata:
-        name: &lt;vol-id&gt;
+        name: <vol-id>
       spec:
         capacity:
-          storage: &lt;size&gt;Gi
+          storage: <size>Gi
         accessModes:
           - ReadWriteOnce
         persistentVolumeReclaimPolicy: Retain
         portworxVolume:
-          volumeID: "&lt;vol-id&gt;"
-          fsType:   "&lt;fs-type&gt;"
+          volumeID: "<vol-id>"
+          fsType:   "<fs-type>"
       ```
 
       Make sure to replace &lt;vol-id&gt;, &lt;size&gt; and &lt;fs-type&gt; in the above spec with
@@ -122,7 +122,7 @@ The following examples assumes that you already have a running Kubernetes cluste
       ``` bash
       $ kubectl describe pv pv0001
       Name: 	        pv0001
-      Labels:		&lt;none&gt;
+      Labels:		<none>
       StorageClass:
       Status:		Available
       Claim:
@@ -151,7 +151,7 @@ The following examples assumes that you already have a running Kubernetes cluste
           - ReadWriteOnce
         resources:
           requests:
-            storage: &lt;size&gt;Gi
+            storage: <size>Gi
       ```
 
       [Download example](portworx-volume-pvc.yaml?raw=true)
@@ -170,7 +170,7 @@ The following examples assumes that you already have a running Kubernetes cluste
       Namespace:	default
       Status:		Bound
       Volume:		pv0001
-      Labels:		&lt;none&gt;
+      Labels:		<none>
       Capacity:	2Gi
       Access Modes:	RWO
       No events.
@@ -264,7 +264,7 @@ create Portworx volumes out of band and they will be created automatically.
      $ kubectl describe storageclass portworx-io-priority-high
        Name: 	        portworx-io-priority-high
        IsDefaultClass:	No
-       Annotations:	&lt;none&gt;
+       Annotations:	<none>
        Provisioner:	kubernetes.io/portworx-volume
        Parameters:	io_priority=high,repl=1,snapshot_interval=70
        No events.
@@ -306,7 +306,7 @@ create Portworx volumes out of band and they will be created automatically.
      StorageClass:   portworx-io-priority-high
      Status:	      Bound
      Volume:         pvc-e5578707-c626-11e6-baf6-08002729a32b
-     Labels:	      &lt;none&gt;
+     Labels:	      <none>
      Capacity:	      2Gi
      Access Modes:   RWO
      No Events
@@ -319,7 +319,7 @@ create Portworx volumes out of band and they will be created automatically.
      ``` bash
      $ kubectl describe pv pvc-e5578707-c626-11e6-baf6-08002729a32b
      Name: 	      pvc-e5578707-c626-11e6-baf6-08002729a32b
-     Labels:         &lt;none&gt;
+     Labels:         <none>
      StorageClass:   portworx-io-priority-high
      Status:	      Bound
      Claim:	      default/pvcsc001
@@ -397,7 +397,7 @@ Verify the storageclass is created
 # kubectl describe storageclass  portworx-repl2
 Name:		portworx-repl2
 IsDefaultClass:	No
-Annotations:	&lt;none&gt;
+Annotations:	<none>
 Provisioner:	kubernetes.io/portworx-volume
 Parameters:	repl=2,snap_interval=70
 No events.
@@ -476,7 +476,7 @@ Image(s):		mysql:5.6
 Selector:		app=mysql
 Labels:			app=mysql
 Replicas:		1 current / 1 desired
-Annotations:		&lt;none&gt;
+Annotations:		<none>
 CreationTimestamp:	Tue, 14 Mar 2017 22:33:31 +0000
 Pods Status:		1 Running / 0 Waiting / 0 Succeeded / 0 Failed
 No volumes.
@@ -498,13 +498,13 @@ To demonstrate the capabilities of the SAN like functionality offered by portwor
 First create a database and a demo table in your mysql container.
 ````
 # mysql --user=root --password=password
-MySQL [(none)]&gt; create database pxdemo;
+MySQL [(none)]> create database pxdemo;
 Query OK, 1 row affected (0.00 sec)
-MySQL [(none)]&gt; use pxdemo;
+MySQL [(none)]> use pxdemo;
 Database changed
-MySQL [pxdemo]&gt; create table grapevine (counter int unsigned);
+MySQL [pxdemo]> create table grapevine (counter int unsigned);
 Query OK, 0 rows affected (0.04 sec)
-MySQL [pxdemo]&gt; quit;
+MySQL [pxdemo]> quit;
 Bye
 ````
 #### Now create a snapshot of this database using pxctl.
@@ -563,7 +563,7 @@ Inspect that the database shows the cloned tables in the new mysql instance.
 
 ````
 # mysql --user=root --password=password
-mysql&gt; show databases;
+mysql> show databases;
 +--------------------+
 | Database           |
 +--------------------+
@@ -574,12 +574,12 @@ mysql&gt; show databases;
 +--------------------+
 4 rows in set (0.00 sec)
 
-mysql&gt; use pxdemo;
+mysql> use pxdemo;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
 
 Database changed
-mysql&gt; show tables;
+mysql> show tables;
 +------------------+
 | Tables_in_pxdemo |
 +------------------+
