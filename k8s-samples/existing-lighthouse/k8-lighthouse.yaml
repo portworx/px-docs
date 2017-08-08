@@ -114,7 +114,7 @@ spec:
         - /bin/bash
         - /lighthouse/on-prem-entrypoint.sh
         - -k
-        - etcd:http://7<etcd server>:<ETCD PORT>
+        - etcd:http://<etcd server>:<ETCD PORT>
         - -d
         - http://admin:password@influx-px:8086
         env:
