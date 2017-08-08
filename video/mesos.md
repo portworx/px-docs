@@ -5,6 +5,7 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storag
 sidebar: home_sidebar
 youtubeId : 02yMYE-CEdw
 redirect_from: "/video-mesos.html"
+meta-description: "Find out how to configure and run Portworx with Mesosphere. Use Portworx to provide docker volumes for Mesos through Marathon today!"
 ---
 
 * TOC
@@ -21,4 +22,3 @@ Here is a short video that shows how to configure and run Portworx with Mesosphe
 
 ## See the Documentation
 Get started now with running [Portworx on Mesos](/scheduler/mesosphere-dcos/install.html)
-
