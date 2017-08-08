@@ -21,7 +21,7 @@ kubectl apply -f k8-lighthouse.yaml
 ```
 ## Login to Lighthouse at port 30062 
 ```
-http://<Your k8 Master:30062
+http://<Your k8 Master>:30062
 ```
 ## Click on create new cluster
 
