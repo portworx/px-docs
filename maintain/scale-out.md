@@ -4,6 +4,7 @@ title: "Scaling-out an existig PX Cluster"
 keywords: scale-up, storage, add new nodes
 sidebar: home_sidebar
 redirect_from: "/scale-up-nodes-with-storage.html"
+meta-description: "This document illustrates how to add a new node with attached storage to a PX cluster. Scale out your cluster today!"
 ---
 
 * TOC
