@@ -19,7 +19,7 @@ You have unused clusters that are consuming storage and compute resources.  Sinc
 * Your HDFS data lakes have inconsistencies.  Since you create multiple silos for each Hadoop cluster, you are unable to audit or validate the correctness of the data in the data lakes.  Since these data lakes are created separately from the deployment of your Hadoop cluster, you have no control over the governance of its data.
 * You are spending too much time with manual resources used to create silos.  Your end users are unable to deploy Hadoop clusters without IT intervention and out of band compute and storage provisioning.  You want to get to a mode where clusters can be deployed in a self-service, programmatic manner.
 
-# Introduction
+## Introduction
 Apache Hadoop, inspired by work first done at Google,  is a collection of services designed for the distributed processing of large data sets across clusters of commodity servers.  It was developed out of the need to analyze very large datasets without requiring super computer resources.  The Hadoop ecosystem includes many projects, some of most popular include:
 
 *Hadoop Common* – contains libraries and utilities needed by other Hadoop modules;
@@ -65,7 +65,7 @@ DataNodes store the the actual blocks of data.  The data in a Hadoop cluster is 
 *Designed for Converged Deployments*
 Hadoop is designed for bare-metal deployments of commodity servers “a la Google” with a Yarn or other job running on the same physical host that has the data needed for the job. These various components of HDFS were designed to run on dedicated servers with local drives.  Scale of capacity is achieved by increasing the number of instances of each of these components.  That is, HDFS is designed to scale horizontally, not vertically by adding more capacity to anyone node.  This in turn makes the use of external storage systems such as SAN or NAS undesirable for HDFS deployments.
 
-# Advantages of Hadoop with Portworx
+## Advantages of Hadoop with Portworx
 
 This data locality is important for performance and simplified operations.   However, when using containers to run Hadoop, data locality creates a problem. Deploying multiple containerized instances of Hadoop via your scheduling software like Kubernetes, Mesos or Docker Swarm can result in Yarn or other jobs running in containers on hosts that do not have the appropriate data, significantly reducing performance. Portworx solves this problem and in doing so brings five significance benefits.
 
@@ -312,7 +312,7 @@ You do not need to create additional volumes of perform to scale up your cluster
 Click on “Review and Run” and then “Run Service”. The service scheduler should restart with the updated node count and create more Data nodes. Please make sure you have enough resources and nodes available to scale up the number of nodes. You also need to make sure Portworx is installed on all the agents in the DCOS cluster.
 Additionally, as mentioned above, you can also increase the capacity of your HDFS DataNodes by using the pxctl volume update command without taking the service offline.
 
-### Reference Guide for deploying Hadoop as a Service
+## Reference Guide for deploying Hadoop as a Service
 
 In this section, we cover a reference architecture for creating a PaaS like Hadoop environment.  In this reference architecture, we used:
 
@@ -336,15 +336,15 @@ There are two types of worker nodes used:
 * Tier 1 worker node with 45TB of SSD storage (24+4 x 1.6TB hot plug LFF SAS-SSD drives)
 * Tier 2 worker nodes with 26.9TB of SSD storage (24+4 x 960GB hot plug LFF SATA-SSD drives)
 
-#### Installation Step 1
+### Installation Step 1
 Install DC/OS such that the management and head nodes are used as the DC/OS master nodes and the the Apollo 4200 worker nodes are the Mesos agent nodes.  The Hadoop clusters will be scheduled on these nodes.
 
-#### Installation Step 2
+### Installation Step 2
 Once DC/OS has been installed, deploy Portworx.  First deploy the Portworx framework using the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/install.html
 
 Next, install the Portworx framework for Big Data by following the instructions detailed here: https://docs.portworx.com/scheduler/mesosphere-dcos/hadoop-hdfs.html
 
-#### Two-Rack Deployment Overview
+### Two-Rack Deployment Overview
 The picture below depicts this architecture deployed in a two-rack environment:
 
 ![Hadoop Reference Architecture two rack diagram](/images/hadoop-ra-2.png){:width="655px" height="200px"}
