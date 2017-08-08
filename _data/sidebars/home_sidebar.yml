@@ -206,10 +206,8 @@
       url: /maintain/maintenance-mode.html
   - title: Application Solutions
     folderitems:
-    - title: Databases
+    - title: Big Data
       folderitems:
-      - title: MySQL
-        url: /applications/mysql.html
       - title: Cassandra
         folderitems:
         - title: Deployment
@@ -220,6 +218,10 @@
           url: /applications/cassandra-snaps.html
       - title: Hadoop and HDFS
         url: /applications/hadoop-docker.html
+    - title: Databases
+      folderitems:
+      - title: MySQL
+        url: /applications/mysql.html
       - title: PostgreSQL
         url: /applications/postgres.html
       - title : Microsoft SQL Server
