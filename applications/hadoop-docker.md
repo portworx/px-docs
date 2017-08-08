@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A Production Ops Guide to Deploying Hadoop in Docker Containers"
+title: "A Production Ops Guide to Deploying Hadoop in Containers"
 keywords: portworx, px-developer, hadoop, yarn, database, cluster, storage
 meta-description: "This Production Ops Guide to running Hadoop in Docker containers will show you how to build a scalable and efficient big data platform on commodity servers. Try it today!"
 sidebar: home_sidebar
