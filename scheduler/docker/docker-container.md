@@ -3,7 +3,9 @@ layout: page
 title: "Run PX as a Docker V1 Plugin (PX Docker container)"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-redirect_from: "/run-as-docker-pluginv1.html"
+redirect_from: 
+  - /run-as-docker-pluginv1.html
+  - /scheduler/docker/install.html
 ---
 
 * TOC
