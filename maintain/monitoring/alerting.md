@@ -78,7 +78,7 @@ In the screen below:
 
 Click on 'Save & Test'
 
-![Grafana data store File](/images/grafana_datastore.png "Grafana data store File")
+![Grafana data store File](/images/grafana_datastore.png "Grafana data store File"){:width="1234px" height="1252px"}
 
 Next step would be to import Portworx provided [Cluster](https://gist.github.com/shailvipx/6da98daa4f5464f855482c1de6a138b2) and [Volume](https://gist.github.com/shailvipx/cccbf6a99d9bfc81a86ced1bebc7039a) grafana templates.
 
@@ -86,10 +86,10 @@ From the dropdown on left in your grafana dashboard, go to Dashboards -&gt; Impo
 
 Your dashboard should look like the following. 
 
-![Grafana Cluster Status File](/images/grafana_cluster_status.png "Grafana Cluster Status File")
+![Grafana Cluster Status File](/images/grafana_cluster_status.png "Grafana Cluster Status File"){:width="2554px" height="964px"}
 
 
-![Grafana Volume Status File](/images/grafana_volume_status.png "Grafana Volume Status File")
+![Grafana Volume Status File](/images/grafana_volume_status.png "Grafana Volume Status File"){:width="2556px" height="644px"}
 
 ## Configure AlertManager
 
