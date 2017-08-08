@@ -35,9 +35,7 @@ http://<Your k8 Master>:30062
 ```
     "loggingurl": "http://70.0.38.38:30062/api/stats/listen?token-97b7656a-7c86-11e7-a014-428db0678bce",
 ```    
-### You will need to restart the portworx container for the changes to take affect
-
-### In Lighthouse under nodes you should see the servers start to populate
+### You will need to restart the portworx container for the changes to take affect. Once restarted in Lighthouse under nodes you should see the servers start to populate
 
 
 ### Add API server and Token fileds and create a new px-spec.yaml file for future servers
