@@ -4,6 +4,7 @@ title: "Shared Volumes"
 keywords: portworx, shared volumes, global namespace
 sidebar: home_sidebar
 redirect_from: "/shared-volumes.html"
+meta-description: "Learn to create and use shared volumes to access the same Docker volume from multiple containers. See for yourself!"
 ---
 
 * TOC
