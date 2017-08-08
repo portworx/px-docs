@@ -17,8 +17,8 @@ This is the schema definition for a valid PX configuration file.  This file is e
   "type": "object",
   "properties": {
     "mode": {
-	  "type": "string"
-	},
+      "type": "string"
+    },
     "version": {
       "type": "string"
     },
@@ -134,12 +134,12 @@ This is the schema definition for a valid PX configuration file.  This file is e
         "raidlevelmd": {
           "type": "string"
         },
-		"async_io": {
-		  "type": "boolean"
-		},
-		"num_threads": {
-		  "type": "number"
-		}
+        "async_io": {
+          "type": "boolean"
+        },
+        "num_threads": {
+          "type": "number"
+        }
       }
     },
     "driver": {
