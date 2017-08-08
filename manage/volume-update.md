@@ -4,6 +4,7 @@ title: "Volume Update"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/volume-update.html"
+meta-description: "Updating volumes is done simply with Portworx. Use the pxctl volume update command to update a specific parameters. Try today!"
 ---
 
 * TOC
