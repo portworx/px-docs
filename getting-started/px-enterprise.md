@@ -3,6 +3,7 @@ layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Enterprise"
 keywords: portworx, px-developer, container, storage, requirements
+meta-description: "Looking to get started using PX-Enterprise? Here's a guide to install and run Portworx as the data layer for your container-based applications."
 ---
 
 * TOC
