@@ -28,11 +28,13 @@ Here is a short video that shows how Portworx provides an entire platform of sto
 
 ## How it Works
 Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block storage to your applications on the same server where the application is running.
-Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f) API, [CSI](https://github.com/container-storage-interface/spec) or the Docker [command-line](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f).
+Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Container Orchestrator.  The following are supported:
+* Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f)
+* [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#portworx-volume)
+* Mesosphere DC/OS [DVDI External Storage Interface](https://docs.mesosphere.com/1.9/storage/external-storage/)
+* [CSI](https://github.com/container-storage-interface/spec)
 
-Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (**pxctl**) and then set storage policies using the PX-Enterprise web console.
-
-Read more about how Portworx provides storage volumes to your application containers [here](architecture.html)
+Read more about how Portworx provides storage volumes to your application containers [here](architecture.html).
 
 ## Minimum Requirements
 
