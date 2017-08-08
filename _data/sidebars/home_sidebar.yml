@@ -218,6 +218,8 @@
           url: /applications/cassandra-px-perf-test.html
         - title: Snapshots
           url: /applications/cassandra-snaps.html
+      - title: Hadoop and HDFS
+        url: /applications/hadoop-docker.html
       - title: PostgreSQL
         url: /applications/postgres.html
       - title : Microsoft SQL Server
@@ -242,7 +244,7 @@
         url: /applications/docker-compose.html
       - title: Jenkins with Portworx
         url: /applications/jenkins.html
-  - title: Secrets
+  - title: Encryption
     folderitems:
     - title: Portworx with Vault
       url: /secrets/portworx-with-vault.html
