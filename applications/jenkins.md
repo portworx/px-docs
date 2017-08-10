@@ -58,3 +58,8 @@ Configure the Admin User
 Start Using Jenkins
 
 ![Start Using Jenkins](/images/jenkins4.png){:width="2560px" height="1258px"}
+
+## How to speed up Jenkins
+
+Be sure to read ["How to speed up Jenkins builds"](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance 
+and speed up CI/CD workloads.  
