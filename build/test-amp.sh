@@ -44,10 +44,13 @@ for FILE in ${HTMLFILES}; do
     ${SED} -i 's%<th style="text-align: right">%<th class="text-right">%g' ${FILE}
 done
 
+# Fetch the validator JS file
+wget https://cdn.ampproject.org/v0/validator.js -O ${DIR}/validator.js
+
 
 # Ensure every page is passes AMP validation
 testAMP() {
-    amphtml-validator $1
+    amphtml-validator --validator_js ${DIR}/validator.js $1
     exit $?
 }
 PIDS=""
@@ -72,6 +75,7 @@ for p in $PIDS; do
     fi
 done
 
+rm -rf ${DIR}/validator.js
 if [[ ${FAIL} -eq 1 ]]; then
     echo "At least one page failed AMP validation"
     exit 1
