@@ -23,7 +23,7 @@ Portworx provides a Docker based installation utility to help deploy the PX OCI 
 
 ## Run PX under RunC
 
-You can now run the PX OCI bundle by executing the following three commands:
+You can now run the PX OCI bundle by executing the following four commands:
 
 ```
 # sudo mount -o bind,private /etc/pwx/oci /etc/pwx/oci
