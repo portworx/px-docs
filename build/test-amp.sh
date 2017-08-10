@@ -1,6 +1,12 @@
 #!/bin/bash
 
 if [ $(uname -s) == 'Darwin' ]; then
+    if [[ $(which gsed > /dev/null; echo $?) -ne 0 ]]; then
+        echo -n "MacOS comes with a version of sed which is not GNU compliant. "
+        echo -n "To test locally, you must install GNU coreutils, this can be "
+        echo    "done with 'brew install coreutils'."
+        exit 1
+    fi
     SED='gsed'
 else
     SED='sed'
@@ -14,14 +20,14 @@ rm -rf "${BASE}/_site"
 
 
 # Build the AMP version of the documentation
-mv "${BASE}/_layouts/page.html" "${BASE}/_layouts/page.bak.html"
+mv -f "${BASE}/_layouts/page.html" "${BASE}/_layouts/page.bak.html"
 cp "${BASE}/_layouts/amp.html" "${BASE}/_layouts/page.html"
 ${SED} -i'.bak' 's/docs.portworx.com/amp-docs.portworx.com/' "${BASE}/_config.yml"
 bundle exec jekyll build
 
 # Cleanup
-mv "${BASE}/_layouts/page.bak.html" "${BASE}/_layouts/page.html"
-mv "${BASE}/_config.yml.bak" "${BASE}/_config.yml"
+mv -f "${BASE}/_layouts/page.bak.html" "${BASE}/_layouts/page.html"
+mv -f "${BASE}/_config.yml.bak" "${BASE}/_config.yml"
 
 
 # Kramdown table cell aligning uses 'text-align:' inline, inline styles are
@@ -39,8 +45,6 @@ for FILE in ${HTMLFILES}; do
 done
 
 
-
-# TODO: Install AMP validator
 # Ensure every page is passes AMP validation
 testAMP() {
     amphtml-validator $1

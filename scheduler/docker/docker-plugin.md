@@ -272,7 +272,7 @@ To use `consul` with authentication and a cafile, use this in your `config.json`
 ### Access the pxctl CLI
 After Portworx is running, you can create, delete & manage storage volumes through the Docker volume commands or the **pxctl** command line tool. 
 
-For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
+For more on using **pxctl**, see the [CLI Reference](/control/status.html).
 
 A useful pxctl command is `pxctl status`
 The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
