@@ -61,5 +61,8 @@ Start Using Jenkins
 
 ## How to speed up Jenkins
 
-Be sure to read ["How to speed up Jenkins builds"](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance 
-and speed up CI/CD workloads.  
+Be sure to read ["How to speed up Jenkins builds"](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance and speed up CI/CD workloads.  
+
+## Highly Resilient Jenkins Using Docker Swarm
+
+Be sure to read ["Highly Resilient Jenkins Using Docker Swarm"](https://portworx.com/jenkins-docker-swarm/) on way to deploy fault-tolerant on Docker Swarm with Portworx
