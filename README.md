@@ -123,3 +123,9 @@ If you encounter issues with Critical, ensure PhantomJS is installed on your sys
 ## Template
 
 The initial implementation of this documentation design comes from [I'd Rather Be Writing](http://idratherbewriting.com/documentation-theme-jekyll/).
+
+
+## Testing
+
+Tests take place on Travis and can be ran locally. 
+Refer to the `build/` directory for more information and test scripts.
