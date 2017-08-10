@@ -113,3 +113,95 @@ elasticsearch:
 * Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
 *The referenced volume can be a volume name, a volume ID, or a snapshot ID.  
 
+## Step 5: Launch jobs with docker-compose / rancher-compose
+
+Here are some sample compose scripts that bring up wordpress stacks, referencing Portworx volumes:
+
+**docker-compose.yml:**
+```
+
+version: '2'
+volumes:
+  anchsand-db:
+    driver_opts:
+      repl: '3'
+      size: '5'
+    driver: pxd
+  anchsand-data:
+    driver_opts:
+      repl: '3'
+      size: '5'
+    driver: pxd
+services:
+  wordpress:
+    image: wordpress
+    volumes:
+    - anchsand-data:/var/www/html
+    links:
+    - db:mysql
+    labels:
+      io.rancher.container.pull_image: always
+  lb:
+    image: wordpress
+    ports:
+    - 8026:8026/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+    - anchsand-db:/var/lib/mysql
+```
+
+**rancher-compose.yml**
+```
+version: '2'
+services:
+  wordpress:
+    scale: 2
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 80
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  lb:
+    start_on_create: true
+    lb_config:
+      certs: []
+      config: |-
+        timeout client 2400000
+        timeout server 2400000
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: wordpress
+        source_port: 8026
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  db:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 3306
+ ```
+ 
+      

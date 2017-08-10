@@ -23,7 +23,7 @@ Portworx provides a Docker based installation utility to help deploy the PX OCI 
 
 ## Run PX under RunC
 
-You can now run the PX OCI bundle by executing the following three commands:
+You can now run the PX OCI bundle by executing the following four commands:
 
 ```
 # sudo mount -o bind,private /etc/pwx/oci /etc/pwx/oci
@@ -91,8 +91,8 @@ Example config.json:
       "clusterid": "make this unique in your k/v store",
       "dataiface": "bond0",
       "kvdb": [
-          "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
-        ],
+        "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
+      ],
       "mgtiface": "bond0",
       "loggingurl": "http://dummy:80",
       "storage": {
@@ -103,6 +103,8 @@ Example config.json:
       }
     }
 ```
+
+For more information on the `config.json` format, refer to [this guide](https://docs.portworx.com/control/config-json.html)
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 

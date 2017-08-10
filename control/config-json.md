@@ -13,45 +13,151 @@ This is the schema definition for a valid PX configuration file.  This file is e
 
 ```
 {
- "description": "PX config json schema",
- "type": "object",
- "properties": {
-   "clusterid": {
-     "type": "string"
-   },
-   "mgtiface": {
-     "type": "string"
-   },
-   "dataiface": {
-     "type": "string"
-   },
-   "kvdb": {
-     "type": "array",
-     "minItems": 1,
-     "items": {"type": "string", "format": "uri" },
-     "uniqueItems": true
-   },
-   "loggingurl": {
-     "type": "string"
-   },
-   "storage": {
-     "type": "object",
-     "properties": {
-       "devices_md": {
-         "type": "array",
-         "items": { "type": "string" },
-         "uniqueItems": true
-       },
-       "devices": {
-         "type": "array",
-         "minItems": 1,
-         "items": { "type": "string" },
-         "uniqueItems": true
-       },
-       "debug_level": {
-           "type": "string"
-       }
-   }
+  "description": "Validate PWX config json",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string"
+    },
+    "clusterid": {
+      "type": "string"
+    },
+    "mgtiface": {
+      "type": "string"
+    },
+    "dataiface": {
+      "type": "string"
+    },
+    "kvdb": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "username": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "cafile": {
+      "type": "string"
+    },
+    "certfile": {
+      "type": "string"
+    },
+    "certkey": {
+      "type": "string"
+    },
+    "trustedcafile": {
+      "type": "string"
+    },
+    "clientcertauth": {
+      "type": "string"
+    },
+    "acltoken": {
+      "type": "string"
+    },
+    "loggingurl": {
+      "type": "string"
+    },
+    "alertingurl": {
+      "type": "string"
+    },
+    "scheduler": {
+      "type": "string"
+    },
+    "multi-container": {
+      "type": "boolean"
+    },
+    "nolh": {
+      "type": "boolean"
+    },
+    "callhome": {
+      "type": "boolean"
+    },
+    "bootstrap": {
+      "type": "boolean"
+    },
+    "tunnelendpoint": {
+      "type": "string"
+    },
+    "tunnelcerts": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "secret": {
+      "type": "object",
+      "secret_type": "string",
+      "cluster_secret_key": "string",
+      "vault": {
+        "type": "object",
+        "VAULT_TOKEN": "string",
+        "VAULT_ADDR": "string"
+      },
+      "aws": {
+        "type": "object",
+        "AWS_ACCESS_KEY_ID": "string",
+        "AWS_SECRET_ACCESS_KEY": "string",
+        "AWS_SECRET_TOKEN_KEY": "string",
+        "AWS_CMK": "string",
+        "AWS_REGION": "string"
+      }
+    },
+    "storage": {
+      "type": "object",
+      "properties": {
+        "devices_md": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "max_count": {
+          "type": "number"
+        },
+        "devices": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "raidlevel": {
+          "type": "string"
+        },
+        "raidlevelmd": {
+          "type": "string"
+        },
+        "async_io": {
+          "type": "boolean"
+        },
+        "num_threads": {
+          "type": "number"
+        }
+      }
+    },
+    "driver": {
+      "type": "string"
+    },
+    "debug_level": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "mgmtip": {
+      "type": "string"
+    },
+    "dataip": {
+      "type": "string"
+    }
+  }
 }
 ```
 
