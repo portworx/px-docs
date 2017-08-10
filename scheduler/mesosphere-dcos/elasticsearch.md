@@ -63,7 +63,7 @@ Monitor the DCOS service screen untill all ``9 + 1`` tasks are completed.
 
 ![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG){:width="968px" height="597px"}
 
-![Elasticsearch install status](/images/elasticsearch-px-universe-004.PNG){:width="968px" height="597px"}
+![Elasticsearch install status](/images/elasticsearch-px-universe-005.PNG){:width="966px" height="521px"}
 
 
 From the DCOS workstation, verify the service, look for ``elastic``
