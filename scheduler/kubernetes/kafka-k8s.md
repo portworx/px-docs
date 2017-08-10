@@ -653,6 +653,21 @@ Portworx runs as a Daemonset in Kubernetes. Hence when you add a new node to you
 
 If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node. 
 
+Portworx Cluster before scaling the kubernetes nodes. 
+```
+/opt/pwx/bin/pxctl c l
+Cluster ID: px-kafka-cluster
+Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
+Status: OK
+
+Nodes in the cluster:
+ID      DATA IP         CPU             MEM TOTAL       MEM FREE        CONTAINERS      VERSION         STATUS
+k8s-0   10.140.0.5      8.717949        3.9 GB          2.3 GB          N/A             1.2.9-17d16e4   Online
+k8s-1   10.140.0.3      4.081633        3.9 GB          2.2 GB          N/A             1.2.9-17d16e4   Online
+k8s-2   10.140.0.4      9.5             3.9 GB          2.2 GB          N/A             1.2.9-17d16e4   Online
+
+```
+
 ```
 kubectl get nodes -o wide
 NAME         STATUS    AGE       VERSION   EXTERNAL-IP   OS-IMAGE       KERNEL-VERSION
@@ -689,6 +704,18 @@ Cluster Summary
 Global Storage Pool
         Total Used      :  2.1 GiB
         Total Capacity  :  40 GiB
+	
+/opt/pwx/bin/pxctl c l
+Cluster ID: px-kafka-cluster
+Cluster UUID: 99c0fa42-03f5-4d05-a2fe-52d914ff39d2
+Status: OK
+
+Nodes in the cluster:
+ID      DATA IP         CPU             MEM TOTAL       MEM FREE        CONTAINERS      VERSION         STATUS
+k8s-1   10.140.0.4      8.163265        3.9 GB          2.2 GB          N/A             1.2.9-17d16e4   Online
+k8s-2   10.140.0.3      6.565657        3.9 GB          2.2 GB          N/A             1.2.9-17d16e4   Online
+k8s-0   10.140.0.5      4.102564        3.9 GB          2.3 GB          N/A             1.2.9-17d16e4   Online
+k8s-3   10.140.0.6      4.040404        3.9 GB          3.4 GB          N/A             1.2.9-17d16e4   Online
 ```
 
 Scale the Kafka cluster. 
