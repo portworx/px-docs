@@ -10,7 +10,7 @@ sidebar: home_sidebar
 
 These below instructions will provide you a step by step guide in deploying Apache Kafka and Zookeeper with Portworx on Kubernetes. 
 
-Kubernetes provides management of stateful workloads using Statefulsets. Apache Kafka is a distributed streaming platform. [Apache kafka](https://kafka.apache.org/) is used in multiple cases where the need might be to provide realtime streaming of data to systems or in using it as an enterprise messaging system. 
+Kubernetes provides management of stateful workloads using Statefulsets. Apache Kafka is a distributed streaming platform. [Apache Kafka](https://kafka.apache.org/) is used in multiple cases where the need might be to provide realtime streaming of data to systems or in using it as an enterprise messaging system. 
 Apache Kafka uses [Zookeeper](https://zookeeper.apache.org/) for maintaining configurations and distributed synchronization. 
 
 ## Prerequisites
@@ -24,7 +24,7 @@ Apache Kafka uses [Zookeeper](https://zookeeper.apache.org/) for maintaining con
 ### Portworx StorageClass for Volume Provisioning
 
 Portworx provides volume(s) to Zookeeper as well as Kafka. 
-Create ```portworx-sc.yml``` with Portworx as the provisioner and apply the configuration
+Create ```portworx-sc.yaml``` with Portworx as the provisioner and apply the configuration
 
 ```
 kind: StorageClass
@@ -46,7 +46,7 @@ parameters:
   priority_io: "high"
 ---
 
-kubectl apply -f portworx-sc.yml
+kubectl apply -f portworx-sc.yaml
 	
 ```
 
@@ -310,7 +310,7 @@ zk-1.zk-headless.default.svc.cluster.local
 zk-2.zk-headless.default.svc.cluster.local
 ```
 
-Create ```kafka-all.yml``` with the following contents. Note the property ```zookeeper.connect```. This points to the zookeeper nodes' FQDN obtained earlier.  
+Create ```kafka-all.yaml``` with the following contents. Note the property ```zookeeper.connect```. This points to the zookeeper nodes' FQDN obtained earlier.  
 
 ```
 ---
@@ -527,7 +527,7 @@ spec:
 ```
 Apply the manifest
 ```
-kubectl apply -f kafka-all.yml
+kubectl apply -f kafka-all.yaml
 ```
 
 ### Post Install Status - Kafka
@@ -596,6 +596,7 @@ Volume  :  262949240358217536
                         Node     :  10.140.0.3
 
 ```
+#### Verifying the Kafka installation
 
 Find the Kafka brokers 
 ```
@@ -750,8 +751,9 @@ numChildren = 0
 
 ### Pod Failover for Zookeeper
 
-Kill the zookeeper process which terminates the pod and get the earlier inserted vale from zookeeper.
-Portworx alongwith the Statefulset provides durable storage to the Zookeeper pods. 
+Killing the zookeeper java process in the container terminates the pod. You could alternatively delete the pod as well. 
+Portworx volumes provides durable storage to the Zookeeper pods which are run as a statefulset. 
+Get the earlier inserted value from zookeeper to verify the same.
 
 ```
 kubectl exec zk-0 -- pkill java
@@ -865,7 +867,10 @@ In the case of a statefulset if the node is unreachable, which could happen in e
 - The node is down for maintenance
 - There has been a network partition. 
 
-There is no way for kubernetes to know which of the case is it. Hence Kubernetes would not schedule the Statefulset and the pods running on those nodes would enter the ‘Terminating’ or ‘Unknown’ state after a timeout. For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
+There is no way for kubernetes to know which of the case is it. Hence Kubernetes would not schedule the Statefulset and the pods running on those nodes would enter the ‘Terminating’ or ‘Unknown’ state after a timeout. 
+If there was a network partition and when the partition heals, kubernetes will complete the deletion of the Pod and remove it from the API server. It would subsequently schedule a new pod to honor the replication requirements mentioned in the Podspec. 
+
+For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
 
 Decomissioning a kubernetes node deletes the node object form the APIServer. 
 Before that you would want to decomission your Portworx node from the cluster. 
