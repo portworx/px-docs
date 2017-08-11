@@ -1,21 +1,5 @@
 
 # Elasticsearch setup on Kubernetes with Portworx
----
-layout: page
-title: "Deploy Apache Kafka and Zookeeper with Portworx on Kubernetes"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, kafka, zookeeper
-sidebar: home_sidebar
----
-
-* TOC
-{:toc}
-
-layout: page
-title: "Deploy Elasticsearch with Portworx on Kubernetes"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, ELK, elasticsearch,
-sidebar: home_sidebar
----
-
 * TOC
 {:toc}
 
