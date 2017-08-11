@@ -42,7 +42,7 @@ $ sudo pxctl objectstore start
 Successfully started object store
 ```
 
-At this point you should be able to access the object browser at http://<node_ip>:9010
+At this point you should be able to access the object browser at http://&lt;node_ip&gt;:9010
 You'll need to run this command from every node that you want to access the object store.
 On restarting the container the object store does not restart automatically.
 

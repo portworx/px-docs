@@ -2,13 +2,14 @@ language: ruby
 rvm:
  - 2.2
 cache: bundler
+before_install:
+ - npm i -g amphtml-validator
 install:
  - bundle install
 script:
- - "./build/deploy.sh"
-branches:
-  only:
-   - gh-pages
+ - "./build/test.sh"
+ - "./build/test-amp.sh"
+ - "./build/deploy-amp.sh"
 notifications:
   email: true
 

@@ -11,7 +11,7 @@ redirect_from: "/os-config-shared-mounts.html"
 
 Portworx requires Docker to allow shared mounts.
 
-### Checking whether shared mounts are enabled <a id="check-shared-mounts"></a>
+### Checking whether shared mounts are enabled
 If the following command succeeds, shared mounts are enabled on your system and no action is needed.
 ```
 $ docker run -it -v /mnt:/mnt:shared busybox sh -c /bin/date
@@ -22,7 +22,9 @@ $ docker run -it -v /mnt:/mnt:shared busybox sh -c /bin/date
 docker: Error response from daemon: linux mounts: Path /mnt is mounted on / but it is not a shared mount..
 ```
 
-The following sections describe how to configure Docker for shared mounts on [CoreOS](#coreos-configuration-and-shared-mounts), [RedHat/CentOS](#centos-configuration-and-shared-mounts), and [Ubuntu](#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. 
+The following sections describe how to configure Docker for shared mounts on [CoreOS](#coreos-configuration-and-shared-mounts), 
+[RedHat/CentOS](#redhatcentos-configuration-and-shared-mounts), 
+and [Ubuntu](#ubuntu-configuration-and-shared-mounts). The configuration is required because the Portworx solution exports mount points. 
 
 ### CoreOS Configuration and Shared Mounts
 
@@ -121,4 +123,4 @@ $ sudo service docker restart
 
 ### Verify that shared mounts work
 
-Head back to [Checking whether shared mounts are enabled](#check-shared-mounts) to check that shared mounts are now working.
+Head back to [Checking whether shared mounts are enabled](#checking-whether-shared-mounts-are-enabled) to check that shared mounts are now working.

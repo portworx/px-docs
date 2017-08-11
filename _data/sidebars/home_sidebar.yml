@@ -56,8 +56,8 @@
           url: /scheduler/mesosphere-dcos/frameworks.html
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
-        - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
+        - title: HDFS &amp; Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch

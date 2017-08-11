@@ -1,7 +1,4 @@
 
-//$('#mysidebar').height($(".nav").height());
-
-
 $( document ).ready(function() {
 
     // activate tooltips. although this is a bootstrap js function, it must be activated this way in your theme.
@@ -29,7 +26,7 @@ $( document ).ready(function() {
         $(".navbar-toggle").show();
     });
 
-    $('ul.nav li.dropdown').hover(function() {
+    $('#sidebar ul.nav li.dropdown').hover(function() {
         if (window.innerWidth > 1023){
             $(this).find('.dropdown-menu').stop(true, true).fadeIn(300);
             }
@@ -44,9 +41,9 @@ $( document ).ready(function() {
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
 // script from http://stackoverflow.com/questions/10523433/how-do-i-keep-the-current-tab-active-with-twitter-bootstrap-after-a-page-reload
 $(function() {
-    $('#mysidebar b').parents('li').addClass("active");
-    $('#mysidebar b').closest('li').removeClass("active");
-    $('#mysidebar .active>ul').css('display', 'block');
+    $('#sidebar .nav b').parents('li').addClass("active");
+    $('#sidebar .nav b').closest('li').removeClass("active");
+    $('#sidebar .nav .active>ul').css('display', 'block');
 
     var json, tabsState;
     $('a[data-toggle="pill"], a[data-toggle="tab"]').on('shown.bs.tab', function(e) {

@@ -1,9 +1,9 @@
 {% assign navurl = page.url | remove: 'index.html' %}
-<ul id="mysidebar" class="nav">
+<ul class="nav">
 {% for item in include.nav %}
     {% assign currenturl = item.url | remove: 'index.html' %}
     <li {% if item.folderitems %}class="submenu"{% endif %}>
-        <a href="{% if item.url and item.folderitems == null %}{{ item.url }}{% else %}#{% endif %}" 
+        <a {% if item.url and item.folderitems == null %}href="{{ item.url }}"{% endif %} 
             {% if currenturl == navurl %}class="selected"{% endif %}>
             {% if currenturl == navurl %}
                 <b>{{ item.title }}</b>

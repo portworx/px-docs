@@ -30,7 +30,7 @@ PORT=4001
 ```
 
 ### Create a custom 'config.json' file
-The reference for 'config.json' can be found [here](/config-json.html).
+The reference for 'config.json' can be found [here](/install/docker.html#optional---running-with-configjson).
 An absolute minimal configuration would look like this:
 
 ```

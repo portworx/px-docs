@@ -36,7 +36,7 @@ sudo docker run --restart=always --name px -d --net=host       \
 
 >**Important:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.  If you do not have a license key, you can run the `portworx/px-dev` container instead.
 
-#### Command-line arguments to PX <a id="command-line-args-daemon"></a>
+#### Command-line arguments to PX
 
 The following arguments are provided to the PX daemon:
 

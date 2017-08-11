@@ -67,6 +67,6 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Rancher](/scheduler/rancher/install.html)
 
 ## Join us on Slack!
-[![](/images/slack.png){:height="48px" width="48px" .slack-icon}](http://slack.portworx.com)
+[![](/images/slack.png){:height="48px" width="48px" alt="Slack" .slack-icon}](http://slack.portworx.com)
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.

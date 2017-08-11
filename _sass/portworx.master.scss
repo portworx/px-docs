@@ -8564,6 +8564,10 @@ section.pull-quote .container:after {
 }
 
 #marketing-nav {
+	a {
+		cursor: pointer;
+	}
+
 	font-family: 'Libre Franklin', sans-serif;
 
 	#searchform {

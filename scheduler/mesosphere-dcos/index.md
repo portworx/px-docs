@@ -28,5 +28,5 @@ Read on for how to use Portworx to provide [persistent storage for Mesosphere DC
  * [Install Portworx for Mesosphere/DCOS](/scheduler/mesosphere-dcos/install.html)
  * [Cassandra on DCOS with Portworx](/scheduler/mesosphere-dcos/cassandra.html)
  * [Hadoop on DCOS with Portworx](/scheduler/mesosphere-dcos/hadoop-hdfs.html)
- * [Kafka on DCOS with Portworx](https://docs.portworx.com/scheduler/mesosphere-dcos/kafka.html)
- * [Elasticsearch on DCOS with Portworx](https://docs.portworx.com/scheduler/mesosphere-dcos/elasticsearch.html)
+ * [Kafka on DCOS with Portworx](/scheduler/mesosphere-dcos/kafka.html)
+ * [Elasticsearch on DCOS with Portworx](/scheduler/mesosphere-dcos/elasticsearch.html)

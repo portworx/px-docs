@@ -18,7 +18,7 @@ redirect_from: "/px-enterprise-release-notes.html"
 
 * Provide ability to cancel a replication add or HA increase operation
 * Automatically decommision a storageless node in the cluster if it has been offline for longer than 48 hours
-* [Kubernetes snapshots driver for PX-Enterprise](https://docs.portworx.com/scheduler/kubernetes/snaps.html)
+* [Kubernetes snapshots driver for PX-Enterprise](/scheduler/kubernetes/snaps.html)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
 
 
@@ -123,12 +123,12 @@ No new features in 1.2.1. This is a patch release.
 
 ### Key Features
 
-* [AWS Auto-scaling integration with Portworx](/cloud/aws-ec2-asg.html) managing EBS volumes for EC2 instances in AWS ASG 
+* [AWS Auto-scaling integration with Portworx](/cloud/aws/asg.html) managing EBS volumes for EC2 instances in AWS ASG 
 * [Multi-cloud Backup and Restore](/cloud/backups.html) of Portworx Volumes 
 * [Encrypted Volumes](/manage/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
 * [Docker V2 Plugin Support](/scheduler/docker/docker-plugin.html)
-* [Prometheus Integeration](/maintain/prometheus.html)
-* [Hashicorp Vault](https://docs.portworx.com/portworx-with-vault.html), [AWS KMS integration](https://docs.portworx.com/portworx-with-aws-kms.html) and 
+* [Prometheus Integeration](/maintain/monitoring/prometheus/index.html)
+* [Hashicorp Vault](/secrets/portworx-with-vault.html), [AWS KMS integration](/secrets/portworx-with-aws-kms.html) and 
   Docker Secrets Integration
 * [Dynamically resize](/manage/volume-update.html#increase-volume-size) PX Volumes with no application downtime
 * Security updates improve PX container security

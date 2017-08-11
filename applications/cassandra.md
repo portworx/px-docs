@@ -110,7 +110,8 @@ Use the Docker `-v` option to assign the volume created with `docker volume crea
 
 * Be sure to substitute your IP address for the 10.0.0.1 placeholder in the `CASSANDRA_BROADCAST_ADDRESS` parameter.
 
->**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the [`security-opt`](/knowledgebase/troubleshooting.html) parameter between `run` and `--name`.
+>**Important:**<br/>If you are running an OS with SELinux enabled, a workaround to issue [20834](https://github.com/docker/docker/pull/20834) is to pass the 
+[`security-opt`](/knowledgebase/selinux.html) parameter between `run` and `--name`.
 
 
       # docker run --name cassandra1 -d \
@@ -151,8 +152,8 @@ Use the `nodetool` status command to determine the state of your Cassandra clust
 For further reading on Cassandra:
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
-* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
-* [Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
+* [Cassandra stress test with Portworx](/applications/cassandra-px-perf-test.html)
+* [Run Cassandra on DCOS](/scheduler/mesosphere-dcos/cassandra.html)
 * [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)
 
 

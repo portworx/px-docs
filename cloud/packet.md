@@ -31,7 +31,7 @@ Note: Portworx requires Docker to allow shared mounts.  This is standard as of D
 If you are running Docker without shared mounts, please follow the steps listed [here](/knowledgebase/shared-mount-propogation.html)
 
 ### Step 3: Deploy and Attach Block Storage Volume to Packet Server
-Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage](https://www.packet.net/help/kb/how-to-use-the-block-storage/)
+Follow the instuctions on Packet's knowledge base for [installing and attaching to block storage](https://help.packet.net/technical/storage/packet-block-storage-linux)
 
 Your deployment will look something like following:
 

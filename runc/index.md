@@ -43,7 +43,7 @@ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2
    -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
-#### Command-line arguments to PX <a id="command-line-args-daemon"></a>
+#### Command-line arguments to PX
 
 The following arguments can be provided to the `px-runc` helper tool, which will in turn pass them to the PX daemon:
 
