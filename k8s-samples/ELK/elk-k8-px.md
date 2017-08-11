@@ -33,16 +33,13 @@ kubectl create -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8
 kubectl create -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/ELK/es-svc.yaml
 ```
 
-** Wait until es-master all pods are completed then run
+** Wait until all  es-master pods are completed then run
 
 ```
-TODO kubectl describe ?????
-```
-
 kubectl create -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/ELK/es-client.yaml
 kubectl create -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/ELK/es-data-sc.yaml
 kubectl create -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/ELK/es-data-stateful.yaml
-
+```
 ### Verify all pods,deployment for ELK are successfully created
 
 ```
