@@ -313,6 +313,9 @@ rules:
 - apiGroups: [""]
   resources: ["nodes"]
   verbs: ["get", "update", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1alpha1
@@ -350,19 +353,29 @@ metadata:
 spec:
   minReadySeconds: 0
   updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
+    type: OnDelete
   template:
     metadata:
       labels:
         name: portworx
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: px/enabled
+                operator: NotIn
+                values:
+                - "false"
+              
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
       hostNetwork: true
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/px-enterprise:1.2.8
+          image: portworx/px-enterprise:latest
           terminationMessagePath: "/tmp/px-termination-log"
           imagePullPolicy: Always
           env:

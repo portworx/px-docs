@@ -34,7 +34,7 @@ Follow the below sequence to upgrade Portworx in your cluster.
     * Alternately, you can also change the image in the DaemonSet spec file and apply it using `$ kubectl apply -f <px-spec.yaml>`.
 * Update the `ClusterRole` permissions in Portworx spec using below:
 
-    ```bash
+    ```
     cat <<EOF | kubectl apply -f -
     kind: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1alpha1

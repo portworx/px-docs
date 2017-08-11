@@ -20,6 +20,8 @@
         folderitems:
         - title: Cassandra
           url: /scheduler/kubernetes/cassandra-k8s.html
+        - title: Kafka
+          url: /scheduler/kubernetes/kafka-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
