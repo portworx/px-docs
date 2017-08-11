@@ -325,6 +325,7 @@ zk-2.zk-headless.default.svc.cluster.local
 Create ```kafka-all.yaml``` with the following contents. Note the property ```zookeeper.connect```. This points to the zookeeper nodes' FQDN obtained earlier.  
 
 ```
+{% raw %}
 ---
 apiVersion: v1
 kind: Namespace
@@ -549,6 +550,7 @@ spec:
         requests:
           storage: 3Gi
 ---
+{% endraw %}
 ```
 Apply the manifest
 ```
