@@ -19,9 +19,9 @@ For K8 setup, please refer official Kubernetes setup guide using kubeadm.
 
 The ELK cluster consists of three major components
 
-3 - master nodes
-2 - client nodes
-3 -data   nodes
+  3 - master nodes
+  2 - client nodes
+  3 -data   nodes
 
   - Data nodes are those indexed document stored and require stateful volumes 
 
