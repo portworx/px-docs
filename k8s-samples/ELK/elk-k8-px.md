@@ -1,12 +1,14 @@
 
 # Elasticsearch setup on Kubernetes with Portworx
 ---
-layout	title	keywords	sidebar
-page
-Deploy Apache Kafka and Zookeeper with Portworx on Kubernetes
-portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, kafka, zookeeper
-home_sidebar
-TOC {:toc}
+layout: page
+title: "Deploy Apache Kafka and Zookeeper with Portworx on Kubernetes"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, kafka, zookeeper
+sidebar: home_sidebar
+---
+
+* TOC
+{:toc}
 
 layout: page
 title: "Deploy Elasticsearch with Portworx on Kubernetes"
