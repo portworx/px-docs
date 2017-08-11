@@ -1,7 +1,5 @@
 
 # Elasticsearch setup on Kubernetes with Portworx
-* TOC
-{:toc}
 
 These below instructions will provide you a step by step guide in deploying Elasticsearch with Portworx on Kubernetes. 
 
