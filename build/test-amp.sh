@@ -54,6 +54,7 @@ testAMP() {
     exit $?
 }
 PIDS=""
+FAIL=0
 
 HTMLFILES=$(find _site -name '*.html')
 for FILE in ${HTMLFILES}; do
@@ -62,13 +63,24 @@ for FILE in ${HTMLFILES}; do
     if [[ ${ISREDIRECT} -eq 1 ]]; then
         ( testAMP ${FILE} ) &
         PIDS+=" $!"
+
+        # Test in batches of 16 so that we don't destroy the computer
+        if [[ `expr $(echo ${PIDS} | wc -w) % 16` -eq 0 ]]; then
+            # Ensure everything exited with 0
+            for p in $PIDS; do
+                if ! wait $p; then
+                    FAIL=1
+                fi
+            done
+            PIDS=""
+        fi
     else
         echo "${FILE} is a redirect - not testing AMP validity"
     fi
 done
 
-# Ensure everything exited with 0
-FAIL=0
+
+# Wait for remaining tests to cleanup
 for p in $PIDS; do
     if ! wait $p; then
         FAIL=1
