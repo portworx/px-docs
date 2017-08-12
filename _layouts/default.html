@@ -60,10 +60,7 @@ layout: compress
 </head>
 <body>
 
-<div id="marketing-nav">
-<!--
-<div id="marketing-nav" data-proofer-ignore>
--->
+<div id="marketing-nav" class="marketing-styles">
 	{% capture topnav %}
         {% include topnav.html %}
     {% endcapture %}
@@ -89,7 +86,14 @@ layout: compress
     <!-- /.row -->
 </div>
 <!-- /.container -->
-    </div>
+</div>
+
+<div id="marketing-footer" class="marketing-styles">
+    {% capture footer %}
+        {% include footer.html %}
+    {% endcapture %}
+    {{ footer | replace: 'href="/', 'href="https://portworx.com/' | replace: 'href="#"', ' ' }}
+</div>
 
 <!--start search-->
 <!-- at the end of the BODY -->

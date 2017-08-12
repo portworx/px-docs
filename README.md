@@ -120,6 +120,27 @@ Once the site is built again, ensure responsiveness works correctly by adjusting
 If you encounter issues with Critical, ensure PhantomJS is installed on your system.
 
 
+### Blocks From Marketing Website
+
+Currently there are two blocks from the marketing website; the header and footer. 
+These are relatively simply to update and should be done in two phases, the content block itself and then the CSS.
+
+The content of `_sass/marketing-styles.scss` is exactly the same content from that of the [`master.css` file on the marketing 
+website](https://portworx.com/wp-content/themes/portworx/css/master.css) however it has the "charset" property stripped out. 
+This is included by the documentation CSS bundle and wrapped in the `.marketing-styles` class.
+
+`_includes/footer.html` contains a 1:1 copy of the `<footer>` block from portworx.com. 
+This can be copied as-is.
+
+The same applies for `_includes/topnav.html` and the `<nav>` block. 
+This can also be copied as-is.
+
+When these two files are included they should be wrapped in a `div` containing the `.marketing-styles` class to ensure they inherit the relevant CSS styles.
+
+It's also possible for inconsistencies between the marketing site due to global styles in the marketing CSS itself. 
+These should be overwritten in `_sass/marketing-nav.scss` and `_sass/marketing-footer.scss`.
+
+
 ## Template
 
 The initial implementation of this documentation design comes from [I'd Rather Be Writing](http://idratherbewriting.com/documentation-theme-jekyll/).
