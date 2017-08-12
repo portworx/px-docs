@@ -140,6 +140,9 @@ When these two files are included they should be wrapped in a `div` containing t
 It's also possible for inconsistencies between the marketing site due to global styles in the marketing CSS itself. 
 These should be overwritten in `_sass/marketing-nav.scss` and `_sass/marketing-footer.scss`.
 
+To avoid malformed content, do not copy these blocks from a page which passed through Cloudflare. 
+Either bypass Cloudflare or run the website locally if possible.
+
 
 ## Template
 
