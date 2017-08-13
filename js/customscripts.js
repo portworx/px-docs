@@ -41,10 +41,6 @@ $( document ).ready(function() {
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
 // script from http://stackoverflow.com/questions/10523433/how-do-i-keep-the-current-tab-active-with-twitter-bootstrap-after-a-page-reload
 $(function() {
-    $('#sidebar .nav b').parents('li').addClass("active");
-    $('#sidebar .nav b').closest('li').removeClass("active");
-    $('#sidebar .nav .active>ul').css('display', 'block');
-
     var json, tabsState;
     $('a[data-toggle="pill"], a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
         var href, json, parentId, tabsState;

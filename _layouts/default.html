@@ -75,13 +75,15 @@ layout: compress
 <div class="container">
 
     {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
-    {{ activePath }}
+	{% for page in activePath %}
+	    {{ page }} -> 
+	{% endfor %}
 
     <!-- Content Row -->
     <div class="row">
         <!-- Sidebar Column -->
         <div class="col-md-3 side-nav">
-          {% include sidebar.html %}
+          {% include sidebar.html activePath=activePath %}
         </div>
     <!-- Content Column -->
     <div class="col-md-9">

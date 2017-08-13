@@ -4,12 +4,12 @@
     {% if include.path == '' %}
         {% assign thisPath = item.title | strip %}
     {% else %}
-        {% capture thisPath %}{{ include.path | strip }} > {{ item.title | strip }}{% endcapture %}
+        {% capture thisPath %}{{ include.path | strip }}>>>{{ item.title | strip }}{% endcapture %}
     {% endif %}
     {% assign currenturl = item.url | remove: 'index.html' %}
 
     {% if currenturl == navurl %}
-       {% assign activePath = thisPath %}
+       {% assign activePath = thisPath | split: ">>>" %}
     {% endif %}
 
     {% if item.folderitems %}
