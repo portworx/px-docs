@@ -1,6 +1,7 @@
 ---
 layout: compress
 ---
+
 <!DOCTYPE html>
 <head>
     {% include head.html %}
@@ -72,6 +73,10 @@ layout: compress
 
 <!-- Page Content -->
 <div class="container">
+
+    {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
+    {{ activePath }}
+
     <!-- Content Row -->
     <div class="row">
         <!-- Sidebar Column -->

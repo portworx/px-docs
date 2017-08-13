@@ -1,0 +1,18 @@
+{% assign navurl = page.url | remove: 'index.html' %}
+
+{% for item in include.nav %}
+    {% if include.path == '' %}
+        {% assign thisPath = item.title | strip %}
+    {% else %}
+        {% capture thisPath %}{{ include.path | strip }} > {{ item.title | strip }}{% endcapture %}
+    {% endif %}
+    {% assign currenturl = item.url | remove: 'index.html' %}
+
+    {% if currenturl == navurl %}
+       {% assign activePath = thisPath %}
+    {% endif %}
+
+    {% if item.folderitems %}
+        {% include breadcrumbcrawl.html nav=item.folderitems path=thisPath %}
+    {% endif %}
+{% endfor %}
