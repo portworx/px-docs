@@ -1,0 +1,26 @@
+{% raw %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+{% endraw %}
+                    {% for item in include.activePath %}
+                        {% raw %}
+                            {
+                                "@type": "ListItem",
+                                "position": {% endraw %}{{ forloop.index }}{% raw %},
+                                "item": {
+                                    "name": "{% endraw %}{{ item }}{% raw %}"
+                                }
+                            }
+                        {% endraw %}
+                        {% if forloop.length != forloop.index %}
+                            ,
+                        {% endif %}
+                    {% endfor %}
+                {% raw %}
+            ]
+        }
+    </script>
+{% endraw %}

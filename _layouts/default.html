@@ -58,6 +58,9 @@ layout: compress
     </script>
     {% endif %}
 
+    {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
+
+    {% include schema/breadcrumbs.html activePath=activePath %}
 </head>
 <body>
 
@@ -70,8 +73,6 @@ layout: compress
 
 <!-- Page Content -->
 <div class="container">
-
-    {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
 
     <!-- Content Row -->
     <div class="row">
