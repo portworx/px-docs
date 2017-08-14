@@ -92,7 +92,12 @@ layout: compress
     {% capture footer %}
         {% include footer.html %}
     {% endcapture %}
-    {{ footer | replace: 'href="/', 'href="https://portworx.com/' | replace: 'href="127.0.0.1', 'href="portworx.com/' | replace: 'href="#"', ' ' }}
+    {{ footer | 
+         replace: 'href="/', 'href="https://portworx.com/' |
+         replace: 'href="http://127.0.0.1/', 'href="https://portworx.com/' | 
+         replace: 'src="http://127.0.0.1/', 'src="https://portworx.com/' |
+         replace: 'href="#"', ' ' 
+    }}
 </div>
 
 <!--start search-->
