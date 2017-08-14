@@ -13,9 +13,13 @@
 @import "docsearch";
 @import "custom-algolia";
 
-#marketing-nav {
-	@import "marketing-nav";
+.marketing-styles {
+  @import "marketing-styles";
 }
+
+/* Custom styles on top of marketing styles to fix appearance in docs */
+@import "marketing-nav";
+@import "marketing-footer";
 
 /* libre Franklin */
 @font-face {
@@ -49,3 +53,5 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+

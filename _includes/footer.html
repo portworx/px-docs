@@ -1,12 +1,110 @@
 <footer>
-            <div class="row">
-                <div class="col-lg-12 footer">
 
-               <a href="https://github.com/portworx/px-docs/blob/gh-pages/{{ page.path }}">Edit this page on Github</a> <br/>              
-               &copy;{{ site.time | date: "%Y"  }} {{site.company_name}}. All rights reserved. <br />
-{% if page.last_updated %}<span>Page last updated:</span> {{page.last_updated}}<br/>{% endif %} Site last generated: {{ site.time | date: "%b %-d, %Y"  }} <br />
-<!--<p><img src="{{ "images/company_logo.png" }}" alt="Company logo"/></p>-->
-<p><img src="{{ "/images/px-logo.png" }}" height=50 width=138 alt="Portworx"/></p>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-4 footer-left tablet-container">
+                <h3 class="page-sub-header">Let's Talk</h3>
+                <script src="//app-sj15.marketo.com/js/forms2/js/forms2.min.js"></script>
+                <form id="mktoForm_1124"></form>
+                <script>
+                    MktoForms2.loadForm("//app-sj15.marketo.com", "126-NHQ-240", 1124, function(form){
+                        var parent = jQuery(form.getFormElem()).parent();
+                        parent.find(".mktoHasWidth").removeAttr("style");
+                        parent.find(".mktoFormCol, .mktoFieldWrap").css("width", "100%");
+                        parent.find(".mktoField").each(function(){
+                            var $input = jQuery(this),
+                            placeholder = $input.prop('title');
+                            $input.addClass('footer-input');
+
+                            if($input.attr('id') == 'FirstName'){
+                                placeholder = 'first name';
+                            }
+                            if($input.attr('id') == 'LastName'){
+                                placeholder = 'last name';
+                            }
+                            if($input.attr('id') == 'Email'){
+                                placeholder = 'email';
+                            }
+                            if($input.attr('id') == 'Phone'){
+                                placeholder = 'Phone number';
+                            }
+                            if($input.attr('id') == 'commentCapture'){
+                                placeholder = 'how can we help you?';
+                            }
+                            if ($input.hasClass('mktoRequired')) {
+                                placeholder += '*';
+                            }
+
+                            $input.attr('placeholder', placeholder);
+                        });
+                    });
+                </script>
+            </div>
+            <div class="col-lg-5 footer-mid hidden-xs hidden-sm hidden-md">
+                <div class="col-md-4">
+                    <a href="/products" class="font-600">PRODUCTS</a>
+                    <ul class="footer-links">
+                        <li><a  class="font-400" href="http://127.0.0.1/products/introduction/">Introduction</a></li><li><a  class="font-400" href="http://127.0.0.1/products/features/">Features</a></li><li><a  class="font-400" href="http://127.0.0.1/products/getting-started/">Getting Started</a></li>                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <a href="/use-cases" class="font-600">USE CASES</a>
+                    <ul class="footer-links">
+                        <li><a  class="font-400" href="http://127.0.0.1/use-case/databases/">Databases</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/cicd/">CI/CD</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/big-data/">Big Data</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/cms/">Content Management</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/persistent-storage-dcos/">DC/OS</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/docker-storage/">Docker storage</a></li><li><a  class="font-400" href="http://127.0.0.1/use-case/kubernetes-storage/">Kubernetes storage</a></li>                    </ul>
+                    <br>
+                    <ul class="footer-links">
+                        <li><a  class="font-400" href="http://127.0.0.1/resources/">RESOURCES</a></li><li><a  class="font-400" href="https://docs.portworx.com/">INSTALL & DOCS</a></li><li><a  class="font-400" href="http://127.0.0.1/news/">NEWS & EVENTS</a></li>                    </ul>
+
+                </div>
+                <div class="col-md-4">
+                    <a href="/about-us" class="font-600">COMPANY</a>
+                    <ul class="footer-links">
+                        <li><a  class="font-400" href="http://127.0.0.1/about-us/">About Us</a></li><li><a  class="font-400" href="/about-us#team">Team</a></li><li><a  class="font-400" href="/about-us#board-of-directors">Leadership and Investors</a></li><li><a  class="font-400" href="http://127.0.0.1/careers/">Careers</a></li><li><a  class="font-400" href="http://127.0.0.1/contact-us/">Contact Us</a></li><li><a  class="font-400" href="http://127.0.0.1/blog/">Blog</a></li><li><a  class="font-400" href="http://127.0.0.1/privacy-policy/">Privacy Policy</a></li>                    </ul>
                 </div>
             </div>
-</footer>
+
+            <div class="col-lg-3 footer-right">
+                <img src="http://127.0.0.1/wp-content/themes/portworx/images/portworx-logo.png" class="img-responsive hidden-xs hidden-sm hidden-md" alt="Portworx">
+                <div class="footer-right-indent">
+                    <div class="hidden-md hidden-lg">
+                        <a href="https://twitter.com/portwx" target="blank">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Twitter.png" class="footer-social" alt="Twitter">
+                        </a>
+                        <a href="https://www.linkedin.com/company/portworx" target="blank">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Linkedin.png" class="footer-social" alt="LinkedIn">
+                        </a>
+
+                        <a href="/blog">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Blog.png" class="footer-social" alt="Blog">
+                        </a>
+                    </div>
+                    <address class="font-300">
+                        Portworx, Inc.<br>
+                        4940 El Camino Real<br>
+                        Suite 200<br>
+                        Los Altos, CA 94022<br>
+                        <a class="white" href="mailto:info@portworx.com">info@portworx.com</a>
+                    </address>
+                    <div class="hidden-xs hidden-sm">
+                        <a href="https://www.linkedin.com/company/portworx" target="blank">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Linkedin.png" class="footer-social" alt="LinkedIn">
+                        </a>
+                        <a href="https://twitter.com/portwx" target="blank">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Twitter.png" class="footer-social" alt="Twitter">
+                        </a>
+                        <a href="/blog">
+                            <img src="http://127.0.0.1/wp-content/themes/portworx/images/icons/Blog.png" class="footer-social" alt="Blog">
+                        </a>
+                    </div>
+                    <br>
+                    <small class="copyright" style="font-size:13px;margin-top:15px;">© 2017 | Portworx</small>
+                </div>
+            </div>
+
+        </div><!-- row end -->
+
+    </div><!-- container end -->
+
+
+</footer><!-- wrapper end -->
