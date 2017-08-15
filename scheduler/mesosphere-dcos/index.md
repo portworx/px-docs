@@ -21,7 +21,7 @@ Unlike the default DC/OS volume driver, Portworx lets you:
 * avoid fragile block device mount/unmount operations that block or delay failover operations
 * encrypt data at rest and in flight at the container level
 
-Read on for how to use Portworx to provide [persistent storage for Mesosphere DC/OS and marathon](https://portworx.com/use-case/persistent-storage-dcos/)and use it with [DC/OS Commons frameworks](https://docs.mesosphere.com/service-docs/) for some of the most popular stateful services.
+Read on for how to use Portworx to provide [persistent storage for Mesosphere DC/OS and marathon](https://portworx.com/use-case/persistent-storage-dcos/) and use it with [DC/OS Commons frameworks](https://docs.mesosphere.com/service-docs/) for some of the most popular stateful services.
 
 ## Using Portworx with Mesosphere DCOS
 
