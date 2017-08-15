@@ -2,6 +2,10 @@ language: ruby
 rvm:
  - 2.2
 cache: bundler
+branches:
+  only:
+   - gh-pages
+   - /.*/
 before_install:
  - npm i -g amphtml-validator
 install:
