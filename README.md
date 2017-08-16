@@ -143,6 +143,8 @@ These should be overwritten in `_sass/marketing-nav.scss` and `_sass/marketing-f
 To avoid malformed content, do not copy these blocks from a page which passed through Cloudflare. 
 Either bypass Cloudflare or run the website locally if possible.
 
+> **Note:** A script to do this from MacOS is included at `./build/marketing-blocks.sh`.
+
 
 ## Template
 
