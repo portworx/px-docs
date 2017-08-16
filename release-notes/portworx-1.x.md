@@ -43,7 +43,7 @@ Following are the supported limits as tested and qualified by Portworx.
 * Docker versions: Minimum 1.10
 * For minimum hardware recommendations, refer to [Get Started with PX-Enterprise](/getting-started/px-enterprise.html).
 
-## Schedulers
+## Supported Schedulers
 
 PX-Enterprise is tested and qualified against the following schedulers:
 

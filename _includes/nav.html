@@ -1,19 +1,28 @@
 {% assign navurl = page.url | remove: 'index.html' %}
 <ul class="nav">
+
 {% for item in include.nav %}
     {% assign currenturl = item.url | remove: 'index.html' %}
-    <li {% if item.folderitems %}class="submenu"{% endif %}>
+    <li {% if item.folderitems %}class="submenu
+        {% if include.activePath[include.level] == item.title | strip %}
+            active
+        {% endif%}"{% endif %}>
         <a {% if item.url and item.folderitems == null %}href="{{ item.url }}"{% endif %} 
-            {% if currenturl == navurl %}class="selected"{% endif %}>
-            {% if currenturl == navurl %}
-                <b>{{ item.title }}</b>
-            {% else %}
-                {{ item.title }}
+            {% if currenturl == navurl %}class="selected"{% endif %}
+            {% if item.folderitems %}
+                {% if include.anchorPath %}
+                    {% capture anchorPath %}{{ include.anchorPath }}--{{ item.title | downcase | replace: ' ', '-' | replace: '/', '' }}{% endcapture %}
+                {% else %}
+                    {% capture anchorPath %}{{ item.title | downcase | replace: ' ', '-' | replace: '/', '' }}{% endcapture %}
+                {% endif %}
+                id="{{ anchorPath }}"
             {% endif %}
+            >
+            {{ item.title }}
         </a>
-
         {% if item.folderitems %}
-            {% include nav.html nav=item.folderitems %}
+            {% assign level = include.level | plus: 1 %}
+            {% include nav.html nav=item.folderitems activePath=include.activePath level=level anchorPath=anchorPath %}
         {% endif %}
     </li>
 {% endfor %}
