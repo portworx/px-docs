@@ -5,12 +5,25 @@
             "@type": "BreadcrumbList",
             "itemListElement": [
 {% endraw %}
+                    {% assign anchorPath = '' %}
                     {% for item in include.activePath %}
                         {% raw %}
                             {
                                 "@type": "ListItem",
                                 "position": {% endraw %}{{ forloop.index }}{% raw %},
                                 "item": {
+                                    {% endraw %}
+                                        {% if forloop.length == forloop.index %}
+                                            "@id": "https://docs.portworx.com{{ page.url }}",
+                                        {% else %}
+                                        {% if anchorPath == '' %}
+                                            {% capture anchorPath %}{{ item | downcase | replace: ' ', '-' | replace: '/', '' }}{% endcapture %}
+                                        {% else %}
+                                            {% capture anchorPath %}{{ anchorPath }}--{{ item | downcase | replace: ' ', '-' | replace: '/', '' }}{% endcapture %}
+                                        {% endif %}
+                                            "@id": "https://docs.portworx.com/#{{ anchorPath }}",
+                                        {% endif %}
+                                    {% raw %}
                                     "name": "{% endraw %}{{ item }}{% raw %}"
                                 }
                             }
