@@ -33,7 +33,7 @@ The native portworx driver in Kubernetes supports the following features:
 
 PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following: 
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:4001"
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:2379"
 $ kubectl apply -f px-spec.yaml
 ```
 Before you apply this command, make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
@@ -43,7 +43,7 @@ Below are all parameters that can be given in the query string:
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
 | cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:4001                |
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
@@ -66,13 +66,13 @@ If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.ht
 #### Examples
 ```
 # To specify drives
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&drives=/dev/sdb,/dev/sdc"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
 
 # To run on coreos
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&coreos=true"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
 
 # To run in master in zero storage mode and use a specific drive for other nodes
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001&zeroStorage=true&drives=/dev/sdb"
+$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
 ```
 
 #### Scaling
@@ -82,7 +82,7 @@ Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/worklo
 You can uninstall Portworx from the cluster using: `$ kubectl delete -f <px-spec.yaml>`
 
 Here px-spec.yaml is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
-`$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:4001"`
+`$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379"`
 
 >**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
 

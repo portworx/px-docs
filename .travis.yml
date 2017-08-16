@@ -1,7 +1,13 @@
 language: ruby
 rvm:
  - 2.2
-cache: bundler
+cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+branches:
+  only:
+   - gh-pages
+   - /.*/
 before_install:
  - npm i -g amphtml-validator
 install:
@@ -12,4 +18,3 @@ script:
  - "./build/deploy-amp.sh"
 notifications:
   email: true
-
