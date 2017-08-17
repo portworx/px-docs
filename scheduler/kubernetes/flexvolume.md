@@ -3,6 +3,10 @@ layout: page
 title: "Run Portworx with Kubernetes Flexvolume"
 keywords: portworx, PX-Developer, container, Kubernetes, storage
 sidebar: home_sidebar
+redirect_from: 
+  - /run-with-kubernetes.html
+  - /run-with-kubernetes-native-driver.html
+  - /run-with-kubernetes-flexvolume.html
 ---
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 

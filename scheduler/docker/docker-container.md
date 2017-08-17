@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from: 
   - /run-as-docker-pluginv1.html
   - /scheduler/docker/install.html
+  - /scheduler/docker/upgrade-px-plugin.html
 ---
 
 * TOC

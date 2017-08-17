@@ -2,6 +2,8 @@
 layout: page
 title: "Run Portworx with Mesosphere/DCOS"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
+redirect_from:
+  - /scheduler/mesosphere-dcos/install_xxx_delete_me_soon.html
 ---
 
 * TOC
