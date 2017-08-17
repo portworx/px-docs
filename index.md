@@ -6,6 +6,7 @@ sidebar: home_sidebar
 youtubeId : 0zTjOly0vkA
 redirect_from:
   - /architecture.html
+  - /README.html
 ---
 
 * TOC
