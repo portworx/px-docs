@@ -12,7 +12,7 @@
     {% if include.description %}
         <span itemprop="description">{{ include.description }} <br/></span>
     {% endif %}
-    <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/{{ embed.id }}/mqdefault.jpg" />
+    <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/{{ include.id }}/mqdefault.jpg" />
     <meta itemprop="embedURL" content="https://www.youtube.com/embed/{{ include.id }}" />
     <iframe style="max-width:100%" width="560" height="315" src="https://www.youtube.com/embed/{{ include.id }}" frameborder="0" allowfullscreen></iframe>
 </div>
