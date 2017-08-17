@@ -3,7 +3,9 @@ layout: page
 title: "Portworx Integration with Prometheus"
 keywords: prometheus, graph, stats
 sidebar: home_sidebar
-redirect_from: "/prometheus/index.html" "/maintain/prometheus.html"
+redirect_from: 
+      - /prometheus/index.html 
+      - /maintain/prometheus.html"
 
 meta-description: "Portworx integrates with Prometheus for container monitoring! Follow this step by step process to find out how."
 ---
