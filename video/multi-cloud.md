@@ -6,7 +6,6 @@ sidebar: home_sidebar
 youtubeId: es-DgA8Np0E
 redirect_from:
   - /video-multi-cloud.html
-  - /scheduler/docker-ucp.html
 ---
 
 * TOC
