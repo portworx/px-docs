@@ -7,14 +7,14 @@ youtubeId : hQojYux3ono
 redirect_from: "/video-dcos.html"
 ---
 
-* TOC
-{:toc}
-
 Portworx is available in the DCOS Universe.
 
-## Watch the video
-Here is a short video that shows how to configure and run Portworx with DCOS:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "hQojYux3ono"
+    title = "Running Portworx with DCOS"
+    description = "Here is a short video that shows how to configure and run Portworx with DCOS"
+%}
 
 
 ## See the Documentation
