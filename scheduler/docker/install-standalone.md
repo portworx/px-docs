@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /install/docker-plugin.html
   - /docker/install-px-docker-service.html
+  - /run-with-docker.html
 ---
 
 * TOC
