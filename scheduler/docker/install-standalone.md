@@ -5,6 +5,7 @@ keywords: portworx, architecture, storage, container, cluster, install, docker, 
 sidebar: home_sidebar
 redirect_from:
   - /install/docker-plugin.html
+  - /docker/install-px-docker-service.html
 ---
 
 * TOC
