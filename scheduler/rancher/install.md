@@ -4,7 +4,9 @@ title: "Run Portworx with Rancher"
 keywords: portworx, PX-Developer, container, Rancher, storage
 sidebar: home_sidebar
 youtubeId: yGjDxDLyS78
-redirect_from: "/run-with-rancher.html"
+redirect_from:
+  - /run-with-rancher.html
+  - /scheduler/rancher.html
 ---
 
 * TOC
