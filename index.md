@@ -4,6 +4,8 @@ title: "Welcome to Portworx Docs"
 keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
 youtubeId : 0zTjOly0vkA
+redirect_from:
+  - /architecture.html
 ---
 
 * TOC
