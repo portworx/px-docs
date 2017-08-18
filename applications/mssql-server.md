@@ -3,7 +3,6 @@ layout: page
 title: "SQL Server with Persistent Storage"
 keywords: portworx, container, microsoft, sqlserver, persistent storage, docker, kubernetes
 sidebar: home_sidebar
-youtubeId: G3Lp1RgWdKg
 ---
 
 * TOC
@@ -15,12 +14,14 @@ Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and t
 
 <br>See [this quick video demo](/video/sql_server_on_k8s.html) for achieving SQL Server high-availability on Kubernetes without requiring H/A Clustered mode.
 
-## Watch the video
-In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server 
-in containers with Portworx. For the first time, you’ll get the availability, durability, 
-and recoverability that enterprises expect when running containerized SQL Server
-<br>
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "G3Lp1RgWdKg"
+    title = "Watch How to Deploy SQL Server with Portworx"
+    description = "In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server
+        in containers with Portworx. For the first time, you’ll get the availability, durability,
+        and recoverability that enterprises expect when running containerized SQL Server"
+%}
 
 
 ## Run SQL Server with Portworx storage on demand

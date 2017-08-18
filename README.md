@@ -146,6 +146,25 @@ Either bypass Cloudflare or run the website locally if possible.
 > **Note:** A script to do this from MacOS is included at `./build/marketing-blocks.sh`.
 
 
+### External Videos
+
+There are helpers to correctly load in videos from Youtube and Vimeo. 
+Whenever adding a new video, these should be used to ensure that the video renders correctly and works well on the AMP representation of the documentation.
+
+To include a Youtube video:
+
+```
+{%
+    include youtubePlayer.html
+    id = "<Youtube video ID>"
+    title = "Title of the video (H2 above the video and description))"
+    description = "Description of the video which is below the title"
+%}
+```
+
+Identical syntax can be used for Vimeo (however replace `youtubePlayer.html` with `vimeoPlayer.html`).
+
+
 ## Template
 
 The initial implementation of this documentation design comes from [I'd Rather Be Writing](http://idratherbewriting.com/documentation-theme-jekyll/).
