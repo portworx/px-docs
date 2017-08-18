@@ -26,6 +26,7 @@ Portworx technology:
     include youtubePlayer.html 
     id = "0zTjOly0vkA"
     title = "Storage for Cloud Native Applications"
+    date = "2017-03-17"
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
 
