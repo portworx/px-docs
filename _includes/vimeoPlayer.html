@@ -7,7 +7,13 @@
 {% else %}
 <div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
     {% if include.title %}
-        <h2><span itemprop="name">{{ include.title }}</span></h2>
+        <h2>
+            <span itemprop="name">{{ include.title }}</span>
+            {% if include.date %}
+                <small>{{ include.date | date: "%e %B %Y" }}</small>
+                <meta itemprop="uploadDate" content="{{ include.date }}" />
+            {% endif %}
+        </h2>
     {% endif %}
     {% if include.description %}
         <span itemprop="description">{{ include.description }} <br/></span>

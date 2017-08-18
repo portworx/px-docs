@@ -157,12 +157,15 @@ To include a Youtube video:
 {%
     include youtubePlayer.html
     id = "<Youtube video ID>"
+    date = "2017-03-17"
     title = "Title of the video (H2 above the video and description))"
     description = "Description of the video which is below the title"
 %}
 ```
 
 Identical syntax can be used for Vimeo (however replace `youtubePlayer.html` with `vimeoPlayer.html`).
+
+The date *must* be in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
 
 
 ## Template
