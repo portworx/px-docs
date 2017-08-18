@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Running PX on SuSe Enterprise Linux 12SP1"
+title: "Running PX on SuSE Enterprise Linux 12SP1"
 keywords: portworx, px-developer, px-enterprise, install, configure, SLES 12, SP1
 sidebar: home_sidebar
 redirect_from: "/run-px-on-sles12-sp1.html"
-meta-description: "Follow our step-by-step instructions to running Portworx on SuSe Enterprise Linux 12SP1"
+meta-description: "Follow our step-by-step instructions to running Portworx on SuSE Enterprise Linux 12SP1."
 ---
 
 * TOC
@@ -26,7 +26,7 @@ cat /etc/modprobe.d/btrfs.conf
 options btrfs allow_unupported=1
 ```
 
-### Disable suse firewall
+### Disable SuSE firewall
   
 ```
 yast firewall  

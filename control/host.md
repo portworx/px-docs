@@ -4,7 +4,7 @@ title: "CLI Reference–Host"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
-meta-description: "This guide shows you how to use the PXCL CLI to perform host operations. Try today"
+meta-description: "This guide shows you how to use the PXCL CLI to perform host operations. Try today."
 ---
 
 * TOC
