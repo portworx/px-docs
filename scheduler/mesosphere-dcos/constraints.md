@@ -3,6 +3,7 @@ layout: page
 title: "Specifying Portworx Constraints in your Application"
 keywords: portworx, PX-Developer, container, Mesos, Mesosphere, constraints
 sidebar: home_sidebar
+meta-description: "Learn how to use constraints on your DCOS cluster to control where Mesos schedules your stateful applications. Read our guide today!"
 ---
 
 Whenever possible, Portworx should be deployed on all nodes within a Mesos/Mesosphere/DCOS cluster.

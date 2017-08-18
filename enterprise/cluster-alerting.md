@@ -4,6 +4,7 @@ title: "Cluster Alerting Preferences"
 keywords: lighthouse
 sidebar: home_sidebar
 redirect_from: "/Lighthouse-Manage-Clusters.html"
+meta-description: "To setup your Lighthouse cluster alert settings, use these four simple steps. See for yourself and get customizing!"
 ---
 
 You can setup alerting preferences for your cluster as the following.

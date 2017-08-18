@@ -3,6 +3,7 @@ layout: page
 title: "Welcome to Portworx Docs"
 keywords: portworx, px-enterprise, px-developer, containers, storage
 sidebar: home_sidebar
+meta-description: "Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!"
 ---
 
 * TOC
