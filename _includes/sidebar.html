@@ -1,5 +1,6 @@
 {% include custom/sidebarconfigs.html %}
 
 <div class="sidebarTitle">Menu</div>
-
-{% include nav.html nav=site.data.sidebars.home_sidebar %}
+<div id="sidebar">
+    {% include nav.html nav=site.data.sidebars.home_sidebar activePath=include.activePath level=0 %}
+</div>

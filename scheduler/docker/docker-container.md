@@ -3,8 +3,10 @@ layout: page
 title: "Run PX as a Docker V1 Plugin (PX Docker container)"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-redirect_from: "/run-as-docker-pluginv1.html"
 meta-description: "Find out how to install Portworx using the Docker CLI. Use our step-by-step instructions and see for yourself!"
+redirect_from: 
+  - /run-as-docker-pluginv1.html
+  - /scheduler/docker/install.html
 ---
 
 * TOC
@@ -35,7 +37,7 @@ sudo docker run --restart=always --name px -d --net=host       \
 
 >**Important:**<br/>To run the Enterprise version of PX, you must obtain a license key from support@portworx.com.  If you do not have a license key, you can run the `portworx/px-dev` container instead.
 
-#### Command-line arguments to PX <a id="command-line-args-daemon"></a>
+#### Command-line arguments to PX
 
 The following arguments are provided to the PX daemon:
 

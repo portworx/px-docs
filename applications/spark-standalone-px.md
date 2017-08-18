@@ -23,7 +23,7 @@ If you want to use the defaults, you can now run the dcos command to install the
 
     $ dcos package install --yes spark-standalone-px
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-001.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-001.PNG){:width="1145px" height="702px"}
 
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
@@ -31,28 +31,28 @@ You can also click on the  “Install” button on the WebUI next to the service
 If you want to modify the default, click on the “Install” button next to the package on the DCOS UI and then click on
 ``Advanced Installation``
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-002.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-002.PNG){:width="1131px" height="692px"}
 
 
 Here you have the option to change the service name, spark master and worker nodes' memory and default port information, and you can update the spark worker node counts. You will need to input the master and worker JAVA OPTS, please check details from [official spark documentation ](http://spark.apache.org/docs/latest/spark-standalone.html). For master JAVA OPTS e.g. ``spark.deploy.spreadOut=true`` and for worker JAVA OPTS e.g. ``spark.worker.cleanup.enabled=false``. The default setup is to launch 1 master node and 2 worker nodes. And the PX volumes being created will have name prefix with SparkWorker and default volume size is 2GB.
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-003.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-003.PNG){:width="1140px" height="689px"}
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-004.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-004.PNG){:width="1132px" height="689px"}
 
 when everything is updated, then click ``install`` button
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-005.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-005.PNG){:width="1138px" height="697px"}
 
 
 ### Verify Installation
 Once the service is completed, 5 tasks are running under ``spark-standlone`` services
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-005-b.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-005-b.PNG){:width="1169px" height="478px"}
 
 Inspect each task under spark-standalone service
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-006.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-006.PNG){:width="1136px" height="681px"}
 
 Inspect PX created PX volumes, from the DCOS client machine, use ``dcos node ssh`` to access to one of the mesos private agent and run ``pxctl`` command to check created volumes with ``SparkWorker`` prefix.
 
@@ -64,7 +64,7 @@ Inspect PX created PX volumes, from the DCOS client machine, use ``dcos node ssh
 
 From the DCOS WEb UI, the spark master node is exposed on IP address ``10.0.3.241``.
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-006-b.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-006-b.PNG){:width="1170px" height="376px"}
 
 From the DCOS client find the exposed spark master Web port (default is on 4040)
 
@@ -73,7 +73,7 @@ From the DCOS client find the exposed spark master Web port (default is on 4040)
 
 Accessing to the Spark Master WebUI. Create a ssh tunnel from DCOS/Mesos master node and tunnel to the spark master node's port 4040. Since DCOS/Mesos master node has access to all private agent nodes. You should see the spark master web console similar like below and connected with two worker nodes.
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-007.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-007.PNG){:width="1175px" height="675px"}
 
 
 ## Running Spark job
@@ -101,7 +101,7 @@ For name resolving issue within Mesos cluster, udpate the /etc/resolv.conf on th
 
 From the spark client machine, run ``spark-shell`` and specify ``--master`` to the spark master URL, and that is observed from Spark master node Web UI.
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-008-b.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-008-b.PNG){:width="1172px" height="390px"}
 
  
  From the spark client use the following command to launch a spark-shell
@@ -134,7 +134,7 @@ You should see the spark shell has a ``scala`` prompt.
 
 From the master node Web console, A new running application is observed
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-008.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-008.PNG){:width="1174px" height="648px"}
 
 Do a simple wordcount  for a local file ``/etc/hosts`` on spark shell. The /etc/hosts file contains only 3 word strings shown below.
 
@@ -163,7 +163,7 @@ From the spark client submit an example job ``SparkPi`` (calculating Pi) to this
 
 Once job is submitted, A new running application is observed on the Spark master Web console.
 
-![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-010.PNG)
+![Spark-standalone-px in DCOS Universe](/images/spark-px-universe-010.PNG){:width="1163px" height="679px"}
 
 The screen output of this job is length and when completed the result look similar like below.
 

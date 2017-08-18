@@ -20,6 +20,8 @@
         folderitems:
         - title: Cassandra
           url: /scheduler/kubernetes/cassandra-k8s.html
+        - title: Kafka
+          url: /scheduler/kubernetes/kafka-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -54,8 +56,8 @@
           url: /scheduler/mesosphere-dcos/frameworks.html
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
-        - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
+        - title: HDFS &amp; Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch
@@ -116,6 +118,12 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
+    - title: Legacy and External Access
+      folderitems:
+      - title: NFS
+        url: /applications/nfs.html
+      - title: Object Storage
+        url: /applications/object-storage.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS
@@ -172,6 +180,14 @@
       url: /control/config-json.html
   - title: Operate and Maintain
     folderitems:
+    - title: Monitoring and Alerts
+      folderitems: 
+      - title: Prometheus
+        url: /maintain/monitoring/prometheus/index.html
+      - title: Alerts
+        url: /maintain/monitoring/alerting.html
+      - title: Grafana
+        url: /maintain/monitoring/grafana/index.html
     - title: Performance
       folderitems:
       - title: FIO
@@ -196,14 +212,10 @@
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
-    - title: Portworx integration with Prometheus
-      url: /maintain/prometheus.html
   - title: Application Solutions
     folderitems:
-    - title: Databases
+    - title: Big Data
       folderitems:
-      - title: MySQL
-        url: /applications/mysql.html
       - title: Cassandra
         folderitems:
         - title: Deployment
@@ -212,6 +224,12 @@
           url: /applications/cassandra-px-perf-test.html
         - title: Snapshots
           url: /applications/cassandra-snaps.html
+      - title: Hadoop and HDFS
+        url: /applications/hadoop-docker.html
+    - title: Databases
+      folderitems:
+      - title: MySQL
+        url: /applications/mysql.html
       - title: PostgreSQL
         url: /applications/postgres.html
       - title : Microsoft SQL Server
@@ -222,21 +240,13 @@
         url: /applications/redis.html
       - title: Kafka
         url: /applications/kafka.html
-    - title: External Access
-      folderitems:
-      - title: NFS
-        url: /applications/nfs.html
-      - title: Object Storage
-        url: /applications/object-storage.html
-    - title: Applications
-      folderitems:
-      - title: Docker Registry
-        url: /applications/docker-registry.html
-      - title: Wordpress
-        url: /applications/docker-compose.html
-      - title: Jenkins with Portworx
-        url: /applications/jenkins.html
-  - title: Secrets
+    - title: Docker Registry
+      url: /applications/docker-registry.html
+    - title: Wordpress
+      url: /applications/docker-compose.html
+    - title: Jenkins
+      url: /applications/jenkins.html
+  - title: Encryption
     folderitems:
     - title: Portworx with Vault
       url: /secrets/portworx-with-vault.html

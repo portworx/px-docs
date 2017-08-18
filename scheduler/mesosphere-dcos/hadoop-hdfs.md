@@ -2,7 +2,6 @@
 layout: page
 title: "Hadoop on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, hadoop, hdfs
-youtubeId : qp6i8kYq-iQ
 meta-description: "Find out how to install the Hadoop service on your DCOS cluster. Follow our step-by-step guide to running stateful services on DCOS today!"
 ---
 
@@ -32,7 +31,7 @@ For this step you will need to login to a node which has the dcos cli installed 
 Run the following command to add the repository to your DCOS cluster:
 
 ```
-$ dcos package repo add --index=0 hadoop-px-aws https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
+$ dcos package repo add --index=0 hadoop-px https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
 ```
 
 Once you have run the above command you should see the Hadoop-PX service available in your universe
@@ -89,9 +88,13 @@ marathon                  10.0.4.21                   True     1    1.0   1024.0
 metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000  
 ```
 
-## Watch the video
-Here is a short video that shows Hadoop on DCOS with Portworx:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "qp6i8kYq-iQ"
+    title = "Running Hadoop with Portworx on DCOS"
+    description = "Here is a short video that shows how to install and run Hadoop on Portworx with DCOS"
+%}
+
 
 ## Scaling the Data Nodes
 You do not need to create additional volumes of perform to scale up your cluster. 

@@ -126,25 +126,19 @@ p {
   margin: 0 0 10px;
 }
 
-h1,
-h2 {
+h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
 }
 
-h1,
-h2 {
+h1 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 h1 {
   font-size: 36px;
-}
-
-h2 {
-  font-size: 30px;
 }
 
 ul {
@@ -289,26 +283,6 @@ ul ul {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 6px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 1.428571429;
-  text-align: center;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-.btn-default {
-  color: #333333;
-  background-color: #ffffff;
-  border-color: #cccccc;
 }
 
 .collapse {
@@ -689,11 +663,6 @@ body {
   font-size: 15px;
 }
 
-h2[id] {
-  padding-top: 60px;
-  margin-top: -40px;
-}
-
 body h1 {
   margin-top: 40px;
 }
@@ -772,11 +741,6 @@ ul#markdown-toc::before {
   padding: 4px 10px;
 }
 
-.side-nav ul#mysidebar {
-  border-radius: 0px;
-  max-width: 100%;
-}
-
 .side-nav .nav ul li ul li a {
   padding-left: 40px;
 }
@@ -824,39 +788,14 @@ hr {
   margin-right: auto;
 }
 
-h2 {
-  font-size: 24px;
-  line-height: 29px;
-}
-
-#mysidebar .nav ul {
+#sidebar .nav .nav ul {
   background-color: #FAFAFA;
 }
 
-.githubEditButton {
-  margin-bottom: 7px;
-}
-
 @media (max-width: 990px) {
-  #mysidebar {
+  #sidebar .nav {
     position: relative;
   }
-}
-
-@media (min-width: 1000px) {
-  ul#mysidebar {
-    width: 225px;
-  }
-}
-
-@media (max-width: 900px) {
-  ul#mysidebar {
-    max-width: 100%;
-  }
-}
-
-ul#mysidebar ul {
-  max-width: 100%;
 }
 
 a[href^="http://"]:after,
@@ -870,9 +809,7 @@ a[href^="https://"]:after {
   padding-left: 3px;
 }
 
-.btn-default {
-  margin-bottom: 10px;
-}
+
 
 div.sidebarTitle {
   margin-top: 40px;
@@ -1017,28 +954,20 @@ hr {
   border: 0;
 }
 
-
-
-h1,
-h2 {
+h1 {
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
 
-h1,
-h2 {
+h1 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 h1 {
   font-size: 36px;
-}
-
-h2 {
-  font-size: 30px;
 }
 
 p {
@@ -1163,28 +1092,6 @@ ul ul {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
-}
-
-.btn {
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  touch-action: manipulation;
-  background-image: none;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-}
-
-.btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
 }
 
 .collapse {
@@ -1547,25 +1454,13 @@ body {
   text-align: center;
 }
 
-i {
-  font-size: inherit !important;
-}
-
 h1 {
   font-size: 39px;
-}
-
-h2 {
-  font-size: 28px;
 }
 
 @media (min-width: 768px) {
   h1 {
     font-size: 36px;
-  }
-
-  h2 {
-    font-size: 28px;
   }
 }
 
@@ -1582,55 +1477,6 @@ h2 {
   background-position-x: 6px;
 }
 
-#marketing-nav {
-  font-family: 'Libre Franklin', sans-serif;
-}
-
-#marketing-nav #searchform {
-  display: none;
-}
-
-#marketing-nav #top-nav {
-  max-height: none;
-}
-
-#marketing-nav input {
-  margin-top: 9px;
-}
-
-#marketing-nav #top-nav li>a {
-  clear: both;
-  background-color: transparent !important;
-  text-transform: capitalize;
-  border: none;
-}
-
-#marketing-nav a[href^="http://"]:after,
-#marketing-nav a[href^="https://"]:after {
-  content: none;
-}
-
-#marketing-nav hr {
-  margin: 0 25% !important;
-  width: 50%;
-}
-
-#marketing-nav :last-child:after {
-  border-bottom: none !important;
-}
-
-#marketing-nav .navbar-toggle {
-  background: none !important;
-}
-
-#marketing-nav .mobile-close {
-  font-size: 1.5em !important;
-}
-
-#marketing-nav #menu-item-2006 a {
-  border-bottom: 2px solid #f36621 !important;
-}
-
 @font-face {
   font-family: 'FontAwesome';
   src: url("/fonts/fontawesome-webfont.eot?v=4.7.0");
@@ -1639,27 +1485,8 @@ h2 {
   font-style: normal;
 }
 
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.fa-lg {
-  font-size: 1.33333em;
-  line-height: .75em;
-  vertical-align: -15%;
-}
-
 .pull-right {
   float: right;
-}
-
-.fa-github:before {
-  content: "";
 }
 
 .sr-only {

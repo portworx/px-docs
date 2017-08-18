@@ -10,10 +10,10 @@ sidebar: home_sidebar
   - [Portworx](#portworx)
   - [Prerequisites](#prerequisites)
   - [Examples](#examples)
-    - [Using Pre-provisioned Portworx Volumes](#pre-provisioned)
-      - [Running Pod](#running-pod)
+    - [Using Pre-provisioned Portworx Volumes](#using-pre-provisioned-portworx-volumes)
+      - [Running Pod](#running-pods)
       - [Persistent Volumes](#persistent-volumes)
-    - [Using Dynamic Provisioning](#dynamic-provisioning)
+    - [Using Dynamic Provisioning](#using-dynamic-provisioning)
       - [Storage Class](#storage-class)
 
 ## Portworx
@@ -24,7 +24,7 @@ or cloud instances into converged, highly available compute and storage nodes
 ## Prerequisites
 
 - A Portworx instance running on all of your Kubernetes nodes. For
-  more information on how you can install Portworx can be found [here](http://docs.portworx.com)
+  more information on how you can install Portworx can be found [here](/)
 
 ## Examples
 
@@ -67,7 +67,7 @@ The following examples assumes that you already have a running Kubernetes cluste
 
    [Download example](portworx-volume-pod.yaml?raw=true)
 
-   Make sure to replace <vol-id> and <fs-type> in the above spec with
+   Make sure to replace &lt;vol-id&gt; and &lt;fs-type&gt; in the above spec with
    the ones that you used while creating the volume.
 
    Create the Pod.
@@ -106,7 +106,7 @@ The following examples assumes that you already have a running Kubernetes cluste
           fsType:   "<fs-type>"
       ```
 
-      Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
+      Make sure to replace &lt;vol-id&gt;, &lt;size&gt; and &lt;fs-type&gt; in the above spec with
       the ones that you used while creating the volume.
 
       [Download example](portworx-volume-pv.yaml?raw=true)
@@ -589,5 +589,5 @@ mysql> show tables;
 
 ````
 <!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
-[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/volumes/portworx/README.md?pixel)]()
+[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/volumes/portworx/README.md?pixel){:width="1px" height="1px"}]()
 <!-- END MUNGE: GENERATED_ANALYTICS -->

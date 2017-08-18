@@ -1,6 +1,7 @@
 ---
 layout: compress
 ---
+
 <!DOCTYPE html>
 <head>
     {% include head.html %}
@@ -9,12 +10,12 @@ layout: compress
             $(document).ready(function() {
                 $("#collapseAll").click(function(e) {
                     e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', false);
+                    $("#sidebar>.nav").navgoco('toggle', false);
                 });
 
                 $("#expandAll").click(function(e) {
                     e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', true);
+                    $("#sidebar>.nav").navgoco('toggle', true);
                 });
 
                 $('[data-toggle="tooltip"]').tooltip();
@@ -24,7 +25,7 @@ layout: compress
         var ngc = document.querySelector('#ngcload');
         ngc.addEventListener('load', function() {
             /* Initialize navgoco with default options */
-            $("#mysidebar").navgoco({
+            $("#sidebar>.nav").navgoco({
                 caretHtml: '',
                 accordion: true,
                 openClass: 'active', /* open */
@@ -57,36 +58,53 @@ layout: compress
     </script>
     {% endif %}
 
+    {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
+
+    {% include schema/breadcrumbs.html activePath=activePath %}
 </head>
 <body>
 
-<div id="marketing-nav">
+<div id="marketing-nav" class="marketing-styles">
 	{% capture topnav %}
         {% include topnav.html %}
     {% endcapture %}
-    {{ topnav | replace: 'href="/', 'href="https://portworx.com/' }}
+    {{ topnav | replace: 'href="/', 'href="https://portworx.com/' | replace: 'href="#"', ' ' }}
 </div>
 
 <!-- Page Content -->
 <div class="container">
+
     <!-- Content Row -->
     <div class="row">
         <!-- Sidebar Column -->
         <div class="col-md-3 side-nav">
-          {% include sidebar.html %}
+          {% include sidebar.html activePath=activePath %}
         </div>
     <!-- Content Column -->
     <div class="col-md-9">
     	<div id="algolia-search">
-    		<input type="text" class="form-control header-form input aa-input" name="s" id="s" placeholder="Search the Portworx documentation" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-labelledby="s" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+    		<input type="text" class="form-control header-form input aa-input" name="algoliainput" id="algoliainput" placeholder="Search the Portworx documentation" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-labelledby="s" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
     	</div>
 
         {{content}}
+        <div class="text-right"><a class="btn" href="https://github.com/portworx/px-docs/blob/gh-pages/{{ page.path }}">Edit this page on Github</a></div>
     </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
-    </div>
+</div>
+
+<div id="marketing-footer" class="marketing-styles">
+    {% capture footer %}
+        {% include footer.html %}
+    {% endcapture %}
+    {{ footer | 
+         replace: 'href="/', 'href="https://portworx.com/' |
+         replace: 'href="http://127.0.0.1/', 'href="https://portworx.com/' | 
+         replace: 'src="http://127.0.0.1/', 'src="https://portworx.com/' |
+         replace: 'href="#"', ' ' 
+    }}
+</div>
 
 <!--start search-->
 <!-- at the end of the BODY -->

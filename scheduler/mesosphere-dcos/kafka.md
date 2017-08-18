@@ -131,7 +131,7 @@ Connect to the master node and launch a kafka client container.
 Produce a message and send to all kafka brokers
 
    
-     $  echo "Hello, World." | ./kafka-console-producer.sh --broker-list 10.0.2.82:1025,10.0.0.49:1025,10.0.3.101:1029 --topic test-one
+     $  echo "Hello, World." | ./kafka-console-producer.sh --broker-list kafka-2-broker.kafka.mesos:1025,kafka-0-broker.kafka.mesos:1025,kafka-1-broker.kafka.mesos:1029 --topic test-one
 
 Consume the message
 

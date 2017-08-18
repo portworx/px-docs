@@ -11,9 +11,14 @@
 # Note:  Lots of timing issues that will go away once etcd-operator is in better shape
 #
 
-# MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'`
-MASTER_IP=localhost
+# Can't assume 'kubectl' is running on master, so need an IP to check liveliness of Lighthouse
+MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | awk '{print $1}'`
+if [ -z "$MASTER_IP" ]
+then
+   MASTER_IP=`kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}' | awk '{print $1}'`
+fi
 
+# Adjust for CoreOS if needed
 if kubectl describe nodes | grep 'OS Image' | grep -i CoreOS > /dev/null
 then
    HEADERS=/lib/modules
@@ -21,8 +26,10 @@ else
    HEADERS=/usr/src
 fi
 
-DIFACE=weave
-MIFACE=weave
+# Configure PX interfaces.
+# Default to cni0, or override.
+DIFACE=cni0
+MIFACE=cni0
 
 
 #######################################
@@ -306,6 +313,9 @@ rules:
 - apiGroups: [""]
   resources: ["nodes"]
   verbs: ["get", "update", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1alpha1
@@ -343,19 +353,29 @@ metadata:
 spec:
   minReadySeconds: 0
   updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
+    type: OnDelete
   template:
     metadata:
       labels:
         name: portworx
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: px/enabled
+                operator: NotIn
+                values:
+                - "false"
+              
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
       hostNetwork: true
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/px-enterprise:1.2.8
+          image: portworx/px-enterprise:latest
           terminationMessagePath: "/tmp/px-termination-log"
           imagePullPolicy: Always
           env:
@@ -549,3 +569,9 @@ status:
   loadBalancer: {}
 
 EOF
+
+echo
+echo "Portworx has been deployed and will be available shortly at:"
+echo "http://${MASTER_IP}:30062"
+echo
+

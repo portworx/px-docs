@@ -1,4 +1,9 @@
-## Portworx with Vault
+---
+layout: page
+title: "Portworx with Vault"
+sidebar: home_sidebar
+---
+
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
 
 ### Setting up Vault
@@ -53,6 +58,32 @@ You need to add two extra Docker runtime commands
 
 All the above Vault related fields as well as the cluster secret key can be set using PX CLI which is explained in the next section.
 
+### Adding Vault Credentials to config.json
+>**Note:**<br/>This section is optional is only needed if you intend to provide the PX configuration before installing PX.
+
+If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
+
+```
+# cat /etc/pwx/config.json
+{
+    "clusterid": "xzc2ed6f-7e4e-4e1d-8e8c-3a6df1fb61a5",
+    "secret": {
+        "secret_type": "vault",
+        "cluster_secret_key": "string",
+         "vault": {
+             "VAULT_TOKEN": "string",
+             "VAULT_ADDR": "string"
+             "VAULT_CACERT": </etc/pwx/path>,
+             "VAULT_CAPATH": </etc/pwx/path>,
+             "VAULT_CLIENT_CERT": </etc/pwx/path>,
+             "VAULT_CLIENT_KEY": </etc/pwx/path>,
+             "VAULT_TLS_SERVER_NAME": <>,
+        }
+    }
+    ...
+}
+```
+
 ## Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
@@ -71,7 +102,7 @@ __Important: You need to run this command on all PX nodes, so that you could cre
 
 The following sections describe the key generation process with PX and
 Vault which can be used for encrypting volumes. More info about
-encrypted volumes [here](/manage/encrypted-volumes.md)
+encrypted volumes [here](/manage/encrypted-volumes.html)
 
 ### Setting cluster wide secret key
 
