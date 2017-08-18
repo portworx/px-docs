@@ -5,7 +5,7 @@ keywords: portworx, azure, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
 redirect_from:
   - /portworx-on-azure.html
-  - /cloud/azure/azure.html
+  - /cloud/azure.html
 ---
 
 * TOC
