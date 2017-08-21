@@ -20,6 +20,7 @@ with data persistence, recoverability, durability and high availability.
 {%
     include youtubePlayer.html
     id = "G3Lp1RgWdKg"
+    date = "2017-06-17"
     title = "Running Microsoft SQL Server on Portworx"
     description = "Here is a short video that shows how SQL Server on Portworx can provide the high-availability and recoverability"
 %}
