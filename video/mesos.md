@@ -14,6 +14,7 @@ The Marathon service maps options through the Docker command line to reference t
 {%
     include youtubePlayer.html
     id = "02yMYE-CEdw"
+    date = "2016-07-07"
     title = "Portworx on Mesos and Mesosphere"
     description = "Here is a short video that shows how to configure and run Portworx with Mesosphere"
 %}
