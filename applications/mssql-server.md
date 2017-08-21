@@ -17,7 +17,7 @@ Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and t
 {%
     include youtubePlayer.html
     id = "G3Lp1RgWdKg"
-    date = “2017-07-16”
+    date = "2017-07-16"
     title = "Watch How to Deploy SQL Server with Portworx"
     description = "In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server
         in containers with Portworx. For the first time, you’ll get the availability, durability,
