@@ -11,6 +11,7 @@ Portworx can be used as the HDFS layer for Hadoop, deployed through the Mesosphe
 {%
     include youtubePlayer.html
     id = "qp6i8kYq-iQ"
+    date = "2017-05-08"
     title = "Running Hadoop with Portworx on DCOS"
     description = "Here is a short video that shows how to install and run Hadoop on Portworx with DCOS"
 %}
