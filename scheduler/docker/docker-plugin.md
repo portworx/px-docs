@@ -296,7 +296,7 @@ Global Storage Pool
 ```
 
 
-#### TROUBLESHOOTING NOTES:
+### TROUBLESHOOTING NOTES:
 
 * Q: My PX-Plugin won't start! The `docker plugin ls` shows *Enabled=false* even after I ran `docker plugin enable pxd` command.  How can I fix it?
 	* A: Please run `journalctl -b -u docker` to get the PX-Plugin log, and:
