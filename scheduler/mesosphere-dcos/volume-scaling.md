@@ -5,6 +5,7 @@ keywords: portworx, jenkins
 sidebar: home_sidebar
 redirect_from:
   - /volume-sets.html
+  - /scaled-volumes.html
 meta-description: "Learn how to implement and use volume scaling with DCOS. Try it today!"
 ---
 
