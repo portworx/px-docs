@@ -5,6 +5,7 @@ keywords: portworx, cos, class of service, production, performance, overhead, fi
 sidebar: home_sidebar
 redirect_from:
   - /performance.html
+  - /maintain/performance.html
 ---
 
 * TOC
