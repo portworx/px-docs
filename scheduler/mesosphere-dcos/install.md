@@ -5,6 +5,7 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, storage
 redirect_from:
   - /scheduler/mesosphere-dcos/install_xxx_delete_me_soon.html
   - /run-with-mesosphere.html
+  - /scheduler/mesosphere-dcos/install_deprecated.html
 meta-description: "Find out how to deploy Portworx and manage the Portworx cluster using DCOS."
 ---
 
