@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /portworx-on-azure.html
   - /cloud/azure.html
+  - /cloud/azure/examples/disks-managed/dcos-preAttachedDisks-vmss.json
 meta-description: "Follow these four steps to run Portworx on Azure. Try it today!"
 ---
 
