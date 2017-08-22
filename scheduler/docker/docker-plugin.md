@@ -127,20 +127,29 @@ sudo docker plugin set pxd \
 
 ```
 sudo docker stop px-enterprise
+sudo docker update --restart=no px-enterprise
+
 sudo docker plugin enable pxd
 ```
 
 <a name="docker-switch-v1-v2"></a>
-#### Switching between v1 and v2 Portworx Docker plugins
+#### Upgrading Portworx Container to Portworx v2 Docker plugin
 
-If you have previously installed Portworx as a Docker container (as "legacy
-plugin system", or v1 plugin), and already have PX-volumes allocated and in use
-by other Docker containers/applications, you **must** install the Portworx v2
-plugin using `--alias pxd` option.
+Note that one cannot run the PX-Container and PX-Plugin at the same time.
+If you have previously installed Portworx as a Docker container (the "legacy
+plugin system", or v1 plugin), please first stop the PX-Container and disable
+the automatic startup, like so:
 
-This option will enable Docker to find the registered PX-volumes under new Portworx
-v2 plugin management, and transparently update the existing Docker
-containers/applications.
+```
+sudo docker stop px-enterprise
+sudo docker update --restart=no px-enterprise
+```
+
+Please make sure to install the Portworx v2 plugin with `--alias pxd` option
+during [plugin installation](#install-px-plugin).
+This option will enable Docker to find the registered PX-Volumes under new
+Portworx v2 plugin management, and transparently update the existing Docker
+containers/applications that use the PX-Volumes:
 
 
 * ie. PX volume used by MySQL _before_ the v1->v2 Plugin update:
@@ -180,21 +189,6 @@ sudo docker inspect pxMySQL
       "Propagation": ""
     }
 ```
-
-If we omitted the `--alias pxd` option during the [plugin
-installation](#install-px-plugin), Docker may not automatically update the
-containers that use the PX-volumes.
-
-
-> **NOTE**: In case the PX volumes were in use during the v1->v2 upgrade, they might not be displayed correctly using the
-[docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/) or
-[inspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) command.
-Additionally, Docker service could display warnings about not being able to access `/run/docker/plugins/pxd.sock` file.
-<br/>To fix this, please restart the `docker` service.
-
-
-> **NOTE**: Stopping PX container (or, the v1 plugin) should also remove the `/run/docker/plugins/pxd.sock` file.
-If by any chance this file still exists on the host after the removal of PX container, please feel free to remove it manually.
 
 
 #### Optional - running with a custom config.json
@@ -271,12 +265,13 @@ To use `consul` with authentication and a cafile, use this in your `config.json`
 ```
 
 ### Access the pxctl CLI
-After Portworx is running, you can create, delete & manage storage volumes through the Docker volume commands or the **pxctl** command line tool. 
+After Portworx V2 plugin is running, you can create, delete & manage storage volumes through the
+[Docker volume commands](/scheduler/docker/volume_plugin.html#docker-interaction-with-portworx)
+or via the [**pxctl** command line tool](/control/status.html), as you usually would.
 
-For more on using **pxctl**, see the [CLI Reference](/control/status.html).
-
-A useful pxctl command is `pxctl status`
+A useful pxctl command is `pxctl status`.
 The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
+
 ```
 # /opt/pwx/bin/pxctl status
 Status: PX is operational
@@ -300,3 +295,23 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
+
+#### TROUBLESHOOTING NOTES:
+
+* Q: My PX-Plugin won't start! The `docker plugin ls` shows *Enabled=false* even after I ran `docker plugin enable pxd` command.  How can I fix it?
+	* A: Please run `journalctl -b -u docker` to get the PX-Plugin log, and:
+		* if you spot <U>"bind: address already in use"</U> error messages, please make sure you are _not_ running both PX-Container and PX-Plugin at the same time (ie. check "docker ps" and "docker plugin ls").
+		* If you find <U>"PX upgrade in progress. Requires reboot to complete."</U> error message in the log, disable the PX-Container and reboot the host system.
+		* **NOTE** that one can disable the PX-Container by running:<br/>`docker stop px-enterprise; docker update --restart=no px-enterprise`
+
+* Q: Docker apps cannot find the PX-Volumes after v1->v2 upgrade. How do I fix this?
+	* A1: Make sure you have not omitted the `--alias pxd` option during the [plugin
+installation](#install-px-plugin) (ie. command `docker plugin inspect pxd` should work).  Reinstall plugin otherwise.
+	* A2: Use `umount` and `pxctl host detach` commands to manually detach the PX-Volume, restart Docker service and the Docker apps that are using the PX-Volumes (or, just reboot the host).
+
+* Q: The [docker volume ls](https://docs.docker.com/engine/reference/commandline/volume_ls/) and
+[inspect](https://docs.docker.com/engine/reference/commandline/volume_inspect/) commands failing when run on PX-Volumes after v1->v2 upgrade.
+	* A: The PX-Volumes were likely in use (mounted) during the v1->v2 upgrade.  Please restart Docker service to fix this.
+
+* Q: Docker startup is slow, logs show Docker is trying to access `/run/docker/plugins/pxd.sock` file.
+	* A: The `/run/docker/plugins/pxd.sock` file should have been removed when the PX-Container services have been stopped.  If by any chance this file still exists on the host, please remove it manually.
