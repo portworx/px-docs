@@ -3,7 +3,8 @@ layout: page
 title: "A Production Ops Guide to Deploying Hadoop in Docker Containers"
 keywords: portworx, px-developer, hadoop, yarn, database, cluster, storage
 sidebar: home_sidebar
-
+redirect_from:
+  - /reference-architecture/sdn.html
 ---
 
 * TOC
