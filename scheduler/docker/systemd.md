@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /run-with-systemd.html
   - /systemd.html
+  - /install/systemd.html
 ---
 
 If you are creating a template image - be it an AWS AMI or a Virtual Machine Image - This reference outlines the best practices to automate the provisioning of a multinode PX cluster by creating a base image via `systemd`:
