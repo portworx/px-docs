@@ -12,18 +12,18 @@ These below instructions will provide you with a step by step guide in deploying
 
 Elasticsearch creates a cluster based on the cluster name property specified in the configuration. Each node within the cluster can forward client requests to the appropriate node and also knows about every other node in the cluster. 
 
-An ES cluster node can have one or more purposes. 
-Master-eligible node
+An Elasticsearch cluster node can have one or more purposes. 
+- Master-eligible node
 	A node that has node.master set to true (default), which makes it eligible to be elected as the master node, which controls the cluster.
-Data node
+- Data node
 	A node that has node.data set to true (default). Data nodes hold data and perform data related operations such as CRUD, search, and aggregations.
-Coordinating node
+- Coordinating node
 	A node which only routes requests, handles the search reduce phase, and distributes bulk indexing. 
 
 In the document we will create an ES cluster with 
-	3 master nodes
-	3 data nodes and
-	2 coordinating nodes. 
+-	3 master nodes
+-	3 data nodes and
+-	2 coordinating nodes. 
 
 ## Prerequisites
 
@@ -99,11 +99,7 @@ es-master-1371619260-z1mv7   1/1       Running           0          26s
 
 Verify that the master nodes have joined the cluster. 
 
- kubectl logs po/es-master-1371619260-z1mv7
-
-The output would be similar to the below 
-
-[2017-08-22T07:20:24,209][INFO ][o.e.c.s.ClusterService   ] [es-master-1371619260-z1mv7] detected_master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300}, added {{elasticsearch-data-0}{Ip_-GFZeSwOV-zaH2biVIA}{NtAFTKADR-6gQDqxW6l1Mw}{10.36.0.1}{10.36.0.1:9300},{elasticsearch-data-1}{enePaIqUS0OealqM1-oJHw}{jMiHok6STyiFjcP4cRrh3Q}{10.42.0.2}{10.42.0.2:9300},{es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300},{elasticsearch-data-2}{uYYGvKHJSiquMKNFNrsWig}{LArL4aj3QFOTNrb918w4Lw}{10.47.0.2}{10.47.0.2:9300},{es-master-1371619260-0lg4h}{ZCQAyZCQS0WZtMXg0p5-pQ}{4wOJU4P2RfW5zZYP-9NNqQ}{10.40.0.2}{10.40.0.2:9300},}, reason: zen-disco-receive(from master [master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300} committed version [4]])
+kubectl logs po/es-master-1371619260-z1mv7
 
 ```
 
@@ -131,9 +127,6 @@ Verify that the client nodes have joined the cluster.
 
 kubectl logs po/es-client-2193029848-5828s
 
-The output would be similar to the below 
-
-[2017-08-22T07:29:50,162][INFO ][o.e.c.s.ClusterService   ] [es-client-2193029848-5828s] detected_master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300}, added {{es-master-1371619260-z1mv7}{s1FLUTxPRF-lDOM-rw7VJA}{-MlkS8wuRXGnfSP_D97kfg}{10.42.0.3}{10.42.0.3:9300},{elasticsearch-data-1}{enePaIqUS0OealqM1-oJHw}{jMiHok6STyiFjcP4cRrh3Q}{10.42.0.2}{10.42.0.2:9300},{es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300},{elasticsearch-data-2}{uYYGvKHJSiquMKNFNrsWig}{LArL4aj3QFOTNrb918w4Lw}{10.47.0.2}{10.47.0.2:9300},{es-master-1371619260-0lg4h}{ZCQAyZCQS0WZtMXg0p5-pQ}{4wOJU4P2RfW5zZYP-9NNqQ}{10.40.0.2}{10.40.0.2:9300},{elasticsearch-data-0}{Ip_-GFZeSwOV-zaH2biVIA}{NtAFTKADR-6gQDqxW6l1Mw}{10.36.0.1}{10.36.0.1:9300},}, reason: zen-disco-receive(from master [master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300} committed version [5]])
 
 ``` 
 
@@ -289,10 +282,10 @@ curl 'http://10.103.92.60:9200/customer/external/1?pretty&pretty'
 
 ```
 
-### Scaling
+## Scaling
 
 ```
- kubectl scale sts elasticsearch-data --replicas=5
+kubectl scale sts elasticsearch-data --replicas=5
 statefulset "elasticsearch-data" scaled
 
 kubectl get pods -l "component=elasticsearch, role=data"
@@ -315,9 +308,5 @@ ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master
 10.44.0.3           38          48   0    0.11    0.15     0.10 d         -      elasticsearch-data-4
 10.36.0.1           40          29   0    0.11    0.09     0.06 d         -      elasticsearch-data-0
 10.36.0.2           53          29   0    0.11    0.09     0.06 m         *      es-master-1371619260-f0hl8
-
-kubectl logs po/elasticsearch-data-4
-
-[2017-08-22T08:51:59,943][INFO ][o.e.c.s.ClusterService   ] [elasticsearch-data-4] detected_master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300}, added {{es-master-1371619260-z1mv7}{s1FLUTxPRF-lDOM-rw7VJA}{-MlkS8wuRXGnfSP_D97kfg}{10.42.0.3}{10.42.0.3:9300},{elasticsearch-data-0}{Ip_-GFZeSwOV-zaH2biVIA}{NtAFTKADR-6gQDqxW6l1Mw}{10.36.0.1}{10.36.0.1:9300},{elasticsearch-data-1}{enePaIqUS0OealqM1-oJHw}{jMiHok6STyiFjcP4cRrh3Q}{10.42.0.2}{10.42.0.2:9300},{es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300},{es-master-1371619260-0lg4h}{ZCQAyZCQS0WZtMXg0p5-pQ}{4wOJU4P2RfW5zZYP-9NNqQ}{10.40.0.2}{10.40.0.2:9300},{es-client-2193029848-5828s}{tumRYeDIQDqJl7eFoY88cQ}{rTq7FwajSJypRPDydsQ0UQ}{10.44.0.2}{10.44.0.2:9300},{elasticsearch-data-3}{pZeWh0wHT4Wa4zvIkYCuJQ}{JS9fXf25Q1KYJWt3YAlIcA}{10.40.0.3}{10.40.0.3:9300},{es-client-2193029848-7xpss}{Nkw5tYnKRCK8ISfk5i9cqg}{h7DdFNv6TqumTpFyMHOkxw}{10.36.0.3}{10.36.0.3:9300},{elasticsearch-data-2}{uYYGvKHJSiquMKNFNrsWig}{LArL4aj3QFOTNrb918w4Lw}{10.47.0.2}{10.47.0.2:9300},}, reason: zen-disco-receive(from master [master {es-master-1371619260-f0hl8}{XuZoEvheQf6dC4x0X_hXog}{qcylMUxQQKWOxgk7G8-j3A}{10.36.0.2}{10.36.0.2:9300} committed version [17]])
 
 ```
