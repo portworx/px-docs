@@ -5,6 +5,7 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 sidebar: home_sidebar
 redirect_from:
   - /gce-k8s-pwx.html
+  - /scheduler/kubernetes.html
 ---
 
 * TOC
