@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /gce-k8s-pwx.html
   - /scheduler/kubernetes.html
+  - /scheduler/kubernetes/
 ---
 
 * TOC
