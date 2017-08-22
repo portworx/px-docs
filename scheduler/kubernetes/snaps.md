@@ -3,6 +3,8 @@ layout: page
 title: "Create and use snapshots"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots
 sidebar: home_sidebar
+redirect_from:
+  - /scheduler/kubernetes/mount-snapshot-to-pod.html
 ---
 * TOC
 {:toc}
