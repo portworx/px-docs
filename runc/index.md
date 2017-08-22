@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-To install and configure PX to run directly with RunC, use the command-line steps in this section.
+To install and configure PX to run directly with RunC, please use the configuration steps described in this section.
 
 >**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.
 
@@ -18,10 +18,13 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```
-$ sudo docker run --rm -it -v /etc/pwx:/etc/pwx -v /opt/pwx:/opt/pwx portworx/px-base-enterprise-oci
+$ sudo docker run --rm -it --privileged=true -v /etc/pwx:/etc/pwx -v /opt/pwx:/opt/pwx \
+    portworx/px-base-enterprise-oci
 ```
 
->**Note:**<br/>If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+>**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+
+>**Note:**<br/>The `--privileged=true` flag has been included for backward compatibility.  You may omit this flag when using a newer Docker version (ie. v1.13 or higher), also when installing on systems that do not have SELinux enabled.
 
 ## Run PX under RunC
 
@@ -35,10 +38,10 @@ The `px-runc` command is a helper-tool that does the following:
 
 For example:
 ```
-# EXAMPLE-1: Run PX OCI bundle interactively:
+# EXAMPLE-1: Run PX OCI bundle interactively (use Ctrl-C to abort):
 sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc
 
-# EXAMPLE-2: Set up PX OCI service for kubernetes:
+# EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
 sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc \
    -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
@@ -51,7 +54,8 @@ The following arguments can be provided to the `px-runc` helper tool, which will
 Usage: /opt/pwx/bin/px-runc <run|install> [options]
 
 options:
-   -oci <dir>                Specify OCI directory (dfl: /etc/pwx/oci)
+   -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
+   -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
    -v <dir:dir[:shared,ro]>  Specify extra mounts
    -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
    -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
@@ -74,7 +78,7 @@ kvdb-options:
 
 examples:
    px-runc run -k etcd://my.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
-   px-runc install -k etcd:70.0.0.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d eth1 -m eth1
+   px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
 >**Note:**<br/>The volumes and files that are used internally by PX (namely `/dev`, `/etc/resolv.conf`, `/etc/pwx`, `/opt/pwx/bin`, `/var/run/docker.sock`, `/run/docker`, `/lib/modules`, `/usr/src`, `/var/cores` and `/var/lib/osd`) do not have to be specified via the `-v <dir1>:<dir2>` options.
@@ -82,53 +86,13 @@ examples:
 
 #### Running with a custom config.json
 
-You can also provide the runtime parameters to PX via a configuration file called config.json.  When this is present, you do not need to pass the runtime parameters via the command line.  This maybe useful if you are using tools like chef or puppet to provision your host machines.
+Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
 
-1. Download the sample config.json file:
-https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
-2. Create a directory for the configuration file.
+After the initial installation, you can edit and adjust the:
 
-```
-# sudo mkdir -p /etc/pwx
-```
-   
-3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
+* PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
+* OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
 
-```
-# sudo cp -p config.json /etc/pwx
-```
-   
-4. Edit the config.json to include the following:
-   * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
-   * `kvdb`: This is the etcd connection string for your etcd key/value store.
-   * `devices`: These are the storage devices that will be pooled from the prior step.
-
-
-Example config.json:
-
-```
-   {
-      "clusterid": "make this unique in your k/v store",
-      "dataiface": "bond0",
-      "kvdb": [
-        "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
-      ],
-      "mgtiface": "bond0",
-      "loggingurl": "http://dummy:80",
-      "storage": {
-        "devices": [
-          "/dev/xvdb",
-          "/dev/xvdc"
-        ]
-      }
-    }
-```
-
-For more information on the `config.json` format, refer to [this guide](https://docs.portworx.com/control/config-json.html)
-
->**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
-
-Please also ensure "loggingurl:" is specified in config.json. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like Prometheus
 
 ## Configure systemd to start PX
 
@@ -137,10 +101,35 @@ You can configure the PX OCI service by running the `px-runc install` command.
 For example:
 
 ```
-# Set up PX OCI service:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc
+# Set up PX OCI as systemd service:
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
 
-# Reload systemd configurations and start Portworx service
+# Reload systemd configurations, enable and start Portworx service
 sudo systemctl daemon-reload
+sudo systemctl enable portworx
+sudo systemctl start portworx
+```
+
+
+Alternatively, one might prefer to first start the PX interactively (ie, to verify the configuration parameters were OK, and the startup was successful), and then install it as a service:
+
+
+```
+# Run PX interactively:
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+
+[...]
+> time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
+> time="2017-08-18T20:34:23Z" level=info msg="Starting REST service on socket : /run/docker/plugins/pxd.sock"
+> time="2017-08-18T20:34:23Z" level=info msg="Starting REST service on socket : /var/lib/osd/driver/pxd.sock"
+> time="2017-08-18T20:34:23Z" level=info msg="PX is ready on Node: 53f5e87b... CLI accessible at /opt/pwx/bin/pxctl."
+[ hit Ctrl-C ]
+
+# Set up PX OCI as systemd service, without reconfiguring (note: passing only 'install' parameter):
+sudo /opt/pwx/bin/px-runc install
+
+# Reload systemd configurations, enable and start Portworx service
+sudo systemctl daemon-reload
+sudo systemctl enable portworx
 sudo systemctl start portworx
 ```

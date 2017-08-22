@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /portworx-on-aws-cloudformation.html
   - /cloud/aws-cloudformation.html
+meta-description: "Find out how to quickly and easily deploy Portworx using Amazon Web Services CloudFormation. You'll be up and running in < 10 minutes!"
 ---
 
 * TOC

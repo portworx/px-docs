@@ -2,6 +2,7 @@
 layout: page
 title: "Using Portworx volumes with DCOS"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+meta-description: "Learn how Portworx volumes are created, instantiated, and managed by DCOS.  Try Portworx on DC/OS today!"
 ---
 
 * TOC

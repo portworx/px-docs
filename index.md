@@ -6,6 +6,7 @@ sidebar: home_sidebar
 youtubeId : 0zTjOly0vkA
 redirect_from:
   - /README.html
+meta-description: "Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!"
 ---
 
 * TOC
@@ -29,6 +30,7 @@ Portworx technology:
     include youtubePlayer.html 
     id = "0zTjOly0vkA"
     title = "Storage for Cloud Native Applications"
+    date = "2017-03-17"
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
 

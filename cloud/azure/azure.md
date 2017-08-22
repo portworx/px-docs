@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /portworx-on-azure.html
   - /cloud/azure.html
+meta-description: "Follow these four steps to run Portworx on Azure. Try it today!"
 ---
 
 * TOC
