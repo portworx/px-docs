@@ -5,6 +5,7 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 sidebar: home_sidebar
 redirect_from:
   - /troubleshooting.html
+  - /scheduler/kubernetes/knowledgebase/faqs.html
 meta-description: "For troubleshooting PX on Kubernetes, Portworx can help. Read this article for details about how to resolve your issue today."
 ---
 
