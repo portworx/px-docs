@@ -3,7 +3,9 @@ layout: page
 title: "Shared Volume Video"
 keywords: portworx, PX-Developer, container, Shared Volume, storage
 sidebar: home_sidebar
-redirect_from: "/video-shared-volumes.html"
+redirect_from:
+  - /video-shared-volumes.html
+  - /video_shared_volumes.html
 meta-description: "Portworx Shared Volumes work with NFS and give the ability for multiple containers to access the same volumes.  Watch the video to see how!"
 ---
 
