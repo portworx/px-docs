@@ -20,11 +20,6 @@ An Elasticsearch cluster node can have one or more purposes.
 - Coordinating node
 	A node which only routes requests, handles the search reduce phase, and distributes bulk indexing. 
 
-In the document we will create an ES cluster with 
--	3 master nodes
--	3 data nodes and
--	2 coordinating nodes. 
-
 ## Prerequisites
 
 -	A running Kubernetes cluster with v 1.6+
@@ -36,7 +31,7 @@ In the document we will create an ES cluster with
 ### Portworx StorageClass for Volume Provisioning
 
 Portworx provides volume(s) to the elastic search data nodes. 
-Create ```portworx-sc.yaml``` with Portworx as the provisioner and apply the configuration
+Create ```portworx-sc.yaml``` with Portworx as the provisioner and apply the configuration. This storage class creates a replica 2 Portworx volume when reference via a PersistentVolumeClaim.  
 
 ```
 kind: StorageClass
@@ -53,82 +48,83 @@ kubectl apply -f portworx-sc.yaml
 ```
 
 ### Install Elasticsearch cluster
+In this section we will create an ES cluster with 
+-	3 master nodes using a Kubernetes Statefulset backed by PX.
+-	3 data nodes and using a Kubernetes Replication Controller.
+-	2 coordinating node using a Kubernetes Replication Controller.
 
-
-Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
-
-```
- kubectl apply -f es-data-sts.yaml 
-statefulset "elasticsearch-data" created
-
- kubectl get pods -w
-NAME                   READY     STATUS            RESTARTS   AGE
-elasticsearch-data-0   1/1       Running           0          21s
-elasticsearch-data-1   0/1       PodInitializing   0          7s
-elasticsearch-data-1   1/1       Running   		   0          14s
-elasticsearch-data-2   0/1       Pending   		   0          0s
-elasticsearch-data-2   0/1       Pending           0          0s
-elasticsearch-data-2   0/1       Pending           0          3s
-elasticsearch-data-2   0/1       Init:0/1          0          3s
-elasticsearch-data-2   0/1       PodInitializing   0          6s
-elasticsearch-data-2   1/1       Running           0          16s
-
- kubectl apply -f es-data-svc.yaml 
-service "es-data-srv" created
+Apply the specification for the Elastic search Master nodes and the service for the same. 
 
 ```
-
-Apply the specification for the Replication controller and its service for the Elastic search master nodes. 
-
-```
- kubectl apply -f es-master-rc.yaml 
-deployment "es-master" created
-
- kubectl apply -f es-master-svc.yaml 
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-svc.yaml 
 service "elasticsearch-discovery" created
 
- kubectl get pods -w
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-rc.yaml 
+deployment "es-master" created
+
+kubectl get pods
 NAME                         READY     STATUS            RESTARTS   AGE
-elasticsearch-data-0         1/1       Running           0          6m
-elasticsearch-data-1         1/1       Running           0          6m
-elasticsearch-data-2         1/1       Running           0          5m
-es-master-1371619260-0lg4h   1/1       Running           0          24s
-es-master-1371619260-f0hl8   1/1       Running           0          24s
-es-master-1371619260-z1mv7   0/1       PodInitializing   0          24s
-es-master-1371619260-z1mv7   1/1       Running           0          26s
+es-master-2996564765-4c56v   0/1       PodInitializing   0          22s
+es-master-2996564765-rql6m   0/1       PodInitializing   0          22s
+es-master-2996564765-zj0gc   0/1       PodInitializing   0          22s
 
-Verify that the master nodes have joined the cluster. 
+Verify that the master nodes have create and joined the cluster. 
 
-kubectl logs po/es-master-1371619260-z1mv7
+kubectl logs po/es-master-2996564765-4c56v
 
 ```
 
 Apply the specification for the Replication controller and its service for the co-ordinator only nodes.
 
 ```
- kubectl apply -f es-client-rc.yaml 
+ kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-rc.yaml
 deployment "es-client" created
 
- kubectl apply -f es-client-svc.yaml 
+ kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-svc.yaml 
 service "elasticsearch" created
 
 kubectl get pods -w
-NAME                         READY     STATUS    RESTARTS   AGE
-elasticsearch-data-0         1/1       Running   0          15m
-elasticsearch-data-1         1/1       Running   0          15m
-elasticsearch-data-2         1/1       Running   0          15m
-es-client-2193029848-5828s   1/1       Running   0          12s
-es-client-2193029848-7xpss   1/1       Running   0          12s
-es-master-1371619260-0lg4h   1/1       Running   0          10m
-es-master-1371619260-f0hl8   1/1       Running   0          10m
-es-master-1371619260-z1mv7   1/1       Running   0          10m
+NAME                            READY     STATUS    RESTARTS   AGE
+po/es-client-2155074821-nxdkt   1/1       Running   0          1m
+po/es-client-2155074821-v0w31   1/1       Running   0          1m
+po/es-master-2996564765-4c56v   1/1       Running   0          4m
+po/es-master-2996564765-rql6m   1/1       Running   0          4m
+po/es-master-2996564765-zj0gc   1/1       Running   0          4m
 
 Verify that the client nodes have joined the cluster. 
 
-kubectl logs po/es-client-2193029848-5828s
-
+kubectl logs po/es-client-2155074821-nxdkt
 
 ``` 
+
+Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
+
+```
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-svc.yaml
+service "es-data-srv" created
+
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-sts.yaml 
+statefulset "elasticsearch-data" created
+
+kubectl get pods -l "component=elasticsearch, role=data" -w
+NAME                   READY     STATUS            RESTARTS   AGE
+elasticsearch-data-0   0/1       PodInitializing   0          24s
+elasticsearch-data-0   1/1       Running   		   0          26s
+elasticsearch-data-1   0/1       Pending   		   0          0s
+elasticsearch-data-1   0/1       Pending           0          0s
+elasticsearch-data-1   0/1       Pending   		   0          3s
+elasticsearch-data-1   0/1       Init:0/1   	   0          3s
+elasticsearch-data-1   0/1       PodInitializing   0          5s
+elasticsearch-data-1   1/1       Running   		   0          51s
+elasticsearch-data-2   0/1       Pending   		   0          0s
+elasticsearch-data-2   0/1       Pending   		   0          0s
+elasticsearch-data-2   0/1       Pending   		   0          3s
+elasticsearch-data-2   0/1       Init:0/1   	   0          3s
+elasticsearch-data-2   0/1       PodInitializing   0          5s
+elasticsearch-data-2   1/1       Running   		   0          18s
+
+```
+
 
 Cluster state
 ```
@@ -144,7 +140,7 @@ po/es-master-1371619260-f0hl8   1/1       Running   0          12m
 po/es-master-1371619260-z1mv7   1/1       Running   0          12m
 
 NAME                          CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-svc/elasticsearch             10.103.92.60   <pending>     9200:31989/TCP   2m
+svc/elasticsearch             10.105.105.41   <pending>     9200:31989/TCP   2m
 svc/elasticsearch-discovery   10.106.42.96   <none>        9300/TCP         12m
 svc/es-data-srv               None           <none>        9300/TCP         14m
 svc/kubernetes                10.96.0.1      <none>        443/TCP          20d
@@ -164,37 +160,63 @@ rs/es-master-1371619260   3         3         3         12m
 
 ### Verify the installation. 
 
+- Verify that Portworx Volumes are used for the elasticsearch cluster. 
+- Verify the cluster state by inserting and querying indexes. 
+
+Portworx volumes are created with 2 replicas for storing Indexes and Documents for Elasticsearch. This is based on the Storageclass definition. 
+
 ```
+kubectl get pv
+NAME                                       CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS    CLAIM                                     STORAGECLASS   REASON    AGE
+pvc-0a4f64e3-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           Delete          Bound     default/px-storage-elasticsearch-data-1   px-data-sc               1m
+pvc-29425813-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           Delete          Bound     default/px-storage-elasticsearch-data-2   px-data-sc               25s
+pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc   80Gi       RWO           Delete          Bound     default/px-storage-elasticsearch-data-0   px-data-sc               1m
+
+kubectl get pvc
+NAME                              STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
+px-storage-elasticsearch-data-0   Bound     pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     1m
+px-storage-elasticsearch-data-1   Bound     pvc-0a4f64e3-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     1m
+px-storage-elasticsearch-data-2   Bound     pvc-29425813-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     30s
+
+/opt/pwx/bin/pxctl v l
+ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
+96135343166233254	pvc-0a4f64e3-8799-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.86 *
+975571810766781331	pvc-29425813-8799-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.84
+422726037527917126	pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.87
+* Data is not local to the node on which volume is attached.
+
 /opt/pwx/bin/pxctl v l --label pvc=px-storage-elasticsearch-data-0
 ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
-517283802325048021	pvc-d59cb883-86ce-11e7-8556-ac1f6b2024cc	200 GiB	2	no	no		LOW		0	up - attached on 70.0.0.83
+422726037527917126	pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.87
 
-/opt/pwx/bin/pxctl v i 517283802325048021
-Volume	:  517283802325048021
-	Name            	 :  pvc-d59cb883-86ce-11e7-8556-ac1f6b2024cc
-	Size            	 :  200 GiB
+/opt/pwx/bin/pxctl v i 422726037527917126
+Volume	:  422726037527917126
+	Name            	 :  pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc
+	Size            	 :  80 GiB
 	Format          	 :  ext4
 	HA              	 :  2
 	IO Priority     	 :  LOW
-	Creation time   	 :  Aug 22 07:13:52 UTC 2017
+	Creation time   	 :  Aug 23 07:20:52 UTC 2017
 	Shared          	 :  no
 	Status          	 :  up
-	State           	 :  Attached: pdc-dell15
-	Device Path     	 :  /dev/pxd/pxd517283802325048021
+	State           	 :  Attached: pdc3-sm19
+	Device Path     	 :  /dev/pxd/pxd422726037527917126
 	Labels          	 :  pvc=px-storage-elasticsearch-data-0
-	Reads           	 :  79
-	Reads MS        	 :  157
+	Reads           	 :  72
+	Reads MS        	 :  313
 	Bytes Read      	 :  512000
-	Writes          	 :  6801
-	Writes MS       	 :  89763
-	Bytes Written   	 :  3358715904
+	Writes          	 :  2665
+	Writes MS       	 :  32137
+	Bytes Written   	 :  1342943232
 	IOs in progress 	 :  0
-	Bytes used      	 :  3.3 GiB
+	Bytes used      	 :  1.4 GiB
 	Replica sets on nodes:
 		Set  0
-			Node 	 :  70.0.0.83
-			Node 	 :  70.0.0.84
+			Node 	 :  70.0.0.86
+			Node 	 :  70.0.0.87
 ```
+
+### Verify Elastic search cluster state. 
 
 Obtain the External IP address from the elasticsearch client service.  
 ```
@@ -206,50 +228,50 @@ Labels:			component=elasticsearch
 Annotations:		kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"component":"elasticsearch","role":"client"},"name":"elasticsearch","namespa...
 Selector:		component=elasticsearch,role=client
 Type:			LoadBalancer
-IP:			10.103.92.60
+IP:			    10.105.105.41
 Port:			http	9200/TCP
-NodePort:		http	31989/TCP
-Endpoints:		10.36.0.3:9200,10.44.0.2:9200
+NodePort:		http	32058/TCP
+Endpoints:		10.36.0.1:9200,10.47.0.3:9200
 Session Affinity:	None
 Events:			<none>
 
-curl http://10.103.92.60:9200
+curl http://10.105.105.41:9200
 {
-  "name" : "es-client-2193029848-7xpss",
+  "name" : "es-client-2155074821-nxdkt",
   "cluster_name" : "escluster",
-  "cluster_uuid" : "tDHo-ioCShqF8SSSzHnF8Q",
+  "cluster_uuid" : "zAYA9ERGQgCEclvYHCsOsA",
   "version" : {
-    "number" : "5.4.0",
-    "build_hash" : "780f8c4",
-    "build_date" : "2017-04-28T17:43:27.229Z",
+    "number" : "5.5.0",
+    "build_hash" : "260387d",
+    "build_date" : "2017-06-30T23:16:05.735Z",
     "build_snapshot" : false,
-    "lucene_version" : "6.5.0"
+    "lucene_version" : "6.6.0"
   },
   "tagline" : "You Know, for Search"
 }
 
-curl http://10.103.92.60:9200/_cat/nodes?v
+curl http://10.105.105.41:9200/_cat/nodes?v
 ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
-10.42.0.2           37          12   0    0.08    0.05     0.11 d         -      elasticsearch-data-1
-10.36.0.2           46          27   0    0.08    0.10     0.14 m         *      es-master-1371619260-f0hl8
-10.36.0.3           36          27   0    0.08    0.10     0.14 i         -      es-client-2193029848-7xpss
-10.47.0.2           37          22   0    0.05    0.10     0.13 d         -      elasticsearch-data-2
-10.40.0.2           40          14   0    0.03    0.12     0.17 m         -      es-master-1371619260-0lg4h
-10.36.0.1           38          27   0    0.08    0.10     0.14 d         -      elasticsearch-data-0
-10.44.0.2           39          47   0    0.02    0.07     0.10 i         -      es-client-2193029848-5828s
-10.42.0.3           39          12   0    0.08    0.05     0.11 m         -      es-master-1371619260-z1mv7
+10.44.0.2           41          41   0    0.00    0.03     0.08 m         -      es-master-2996564765-4c56v
+10.36.0.1           43          18   0    0.07    0.05     0.05 i         -      es-client-2155074821-v0w31
+10.40.0.2           49          15   0    0.05    0.07     0.11 m         *      es-master-2996564765-zj0gc
+10.47.0.3           43          20   0    0.13    0.11     0.13 i         -      es-client-2155074821-nxdkt
+10.47.0.4           42          20   0    0.13    0.11     0.13 d         -      elasticsearch-data-2
+10.47.0.2           39          20   0    0.13    0.11     0.13 m         -      es-master-2996564765-rql6m
+10.42.0.2           41          13   0    0.00    0.04     0.10 d         -      elasticsearch-data-1
+10.40.0.3           42          15   0    0.05    0.07     0.11 d         -      elasticsearch-data-0
 
-curl -XPUT 'http://10.103.92.60:9200/customer?pretty&pretty'
+curl -XPUT 'http://10.105.105.41:9200/customer?pretty&pretty'
 {
   "acknowledged" : true,
   "shards_acknowledged" : true
 }
 
-curl -XGET 'http://10.103.92.60:9200/_cat/indices?v&pretty'
+curl -XGET 'http://10.105.105.41:9200/_cat/indices?v&pretty'
 health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   customer py6RhNDKRfa7_PgEL7oqzw   5   1          0            0      1.2kb           650b
+green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          0            0      1.5kb           810b
 
-curl -XPUT 'http://10.103.92.60:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
+curl -XPUT 'http://10.105.105.41:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
 "name": "Daenerys Targaryen"
 }
@@ -268,7 +290,7 @@ curl -XPUT 'http://10.103.92.60:9200/customer/external/1?pretty&pretty' -H 'Cont
   "created" : true
 }
 
-curl 'http://10.103.92.60:9200/customer/external/1?pretty&pretty'
+curl 'http://10.105.105.41:9200/customer/external/1?pretty&pretty'
 {
   "_index" : "customer",
   "_type" : "external",
@@ -281,32 +303,176 @@ curl 'http://10.103.92.60:9200/customer/external/1?pretty&pretty'
 }
 
 ```
+### Install Kibana
+
+Deploy the Kibana spec for the replication controller as well as the service. 
+
+```
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-svc.yaml 
+service "kibana" created
+
+kubectl describe svc/kibana
+Name:			kibana
+Namespace:		default
+Labels:			component=kibana
+Annotations:		kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"component":"kibana"},"name":"kibana","namespace":"default"},"spec":{"ports"...
+Selector:		component=kibana
+Type:			LoadBalancer
+IP:			    10.102.83.180
+Port:			http	80/TCP
+NodePort:		http	32645/TCP
+Endpoints:		<none>
+Session Affinity:	None
+Events:			<none>
+
+kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-rc.yaml 
+deployment "kibana" created
+
+kubectl get pods -l "component=kibana" -w
+NAME                      READY     STATUS    RESTARTS   AGE
+kibana-2713637544-4wxsk   1/1       Running   0          12s
+
+
+kubectl logs po/kibana-2713637544-4wxsk
+
+{"type":"log","@timestamp":"2017-08-23T11:36:19Z","tags":["listening","info"],"pid":1,"message":"Server running at http://0:5601"}
+
+```
+
+
 
 ## Scaling
 
+Portworx runs as a Daemonset in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
+
+If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node. 
+
+Scale your Elastic Search Cluster.
 ```
 kubectl scale sts elasticsearch-data --replicas=5
 statefulset "elasticsearch-data" scaled
 
-kubectl get pods -l "component=elasticsearch, role=data"
-NAME                   READY     STATUS    RESTARTS   AGE
-elasticsearch-data-0   1/1       Running   0          1h
-elasticsearch-data-1   1/1       Running   0          1h
-elasticsearch-data-2   1/1       Running   0          1h
-elasticsearch-data-3   1/1       Running   0          2m
-elasticsearch-data-4   1/1       Running   0          2m
+kubectl get pods -l "component=elasticsearch, role=data" -w
+NAME                   READY     STATUS            RESTARTS   AGE
+elasticsearch-data-0   1/1       Running           0          21m
+elasticsearch-data-1   1/1       Running           0          21m
+elasticsearch-data-2   1/1       Running           0          20m
+elasticsearch-data-3   0/1       PodInitializing   0          22s
+elasticsearch-data-3   1/1       Running   		   0          1m
+elasticsearch-data-4   0/1       Pending   		   0          0s
+elasticsearch-data-4   0/1       Pending   		   0          0s
+elasticsearch-data-4   0/1       Pending   		   0          3s
+elasticsearch-data-4   0/1       Init:0/1   	   0          3s
+elasticsearch-data-4   0/1       PodInitializing   0          6s
+elasticsearch-data-4   1/1       Running   		   0          9s
 
-curl http://10.103.92.60:9200/_cat/nodes?v
+
+curl http://10.105.105.41:9200/_cat/nodes?v
 ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
-10.47.0.2           36          24   0    0.12    0.09     0.06 d         -      elasticsearch-data-2
-10.40.0.2           40          15   0    0.07    0.12     0.13 m         -      es-master-1371619260-0lg4h
-10.44.0.2           43          48   0    0.11    0.15     0.10 i         -      es-client-2193029848-5828s
-10.40.0.3           37          15   0    0.07    0.12     0.13 d         -      elasticsearch-data-3
-10.36.0.3           42          29   0    0.11    0.09     0.06 i         -      es-client-2193029848-7xpss
-10.42.0.3           40          12   0    0.06    0.06     0.05 m         -      es-master-1371619260-z1mv7
-10.42.0.2           44          12   0    0.06    0.06     0.05 d         -      elasticsearch-data-1
-10.44.0.3           38          48   0    0.11    0.15     0.10 d         -      elasticsearch-data-4
-10.36.0.1           40          29   0    0.11    0.09     0.06 d         -      elasticsearch-data-0
-10.36.0.2           53          29   0    0.11    0.09     0.06 m         *      es-master-1371619260-f0hl8
+10.40.0.2           35          16   0    0.06    0.09     0.13 m         *      es-master-2996564765-zj0gc
+10.44.0.2           47          42   0    0.00    0.12     0.17 m         -      es-master-2996564765-4c56v
+10.44.0.3           49          42   0    0.00    0.12     0.17 d         -      elasticsearch-data-4
+10.47.0.4           36          21   0    0.29    0.11     0.12 d         -      elasticsearch-data-2
+10.47.0.2           46          21   0    0.29    0.11     0.12 m         -      es-master-2996564765-rql6m
+10.42.0.2           41          15   0    0.01    0.15     0.16 d         -      elasticsearch-data-1
+10.40.0.3           42          16   0    0.06    0.09     0.13 d         -      elasticsearch-data-0
+10.36.0.2           48          20   0    0.01    0.07     0.08 d         -      elasticsearch-data-3
+10.47.0.3           51          21   0    0.29    0.11     0.12 i         -      es-client-2155074821-nxdkt
+10.36.0.1           51          20   0    0.01    0.07     0.08 i         -      es-client-2155074821-v0w31
+
+
+kubectl get pvc
+NAME                              STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS   AGE
+px-storage-elasticsearch-data-0   Bound     pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     40m
+px-storage-elasticsearch-data-1   Bound     pvc-0a4f64e3-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     39m
+px-storage-elasticsearch-data-2   Bound     pvc-29425813-8799-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     38m
+px-storage-elasticsearch-data-3   Bound     pvc-fe3a70ec-879b-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     18m
+px-storage-elasticsearch-data-4   Bound     pvc-26de7009-879c-11e7-8556-ac1f6b2024cc   80Gi       RWO           px-data-sc     17m
+
+
+/opt/pwx/bin/pxctl v l
+ID			NAME						SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
+96135343166233254	pvc-0a4f64e3-8799-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.86 *
+630052527958773402	pvc-26de7009-879c-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.82 *
+975571810766781331	pvc-29425813-8799-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.84
+422726037527917126	pvc-fb1daa48-8798-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.87
+1018809289518576887	pvc-fe3a70ec-879b-11e7-8556-ac1f6b2024cc	80 GiB	2	no	no		LOW		0	up - attached on 70.0.0.83 *
+* Data is not local to the node on which volume is attached.
 
 ```
+
+## Failover 
+
+### Pod Failover for Elastic search. 
+Portworx provides durable storage for the Elastic search pods. 
+Cordon a node so that pods do not get scheduled on it, delete a pod manually to simulate a failure scenario and watch the pod get scheduled on another node. However the Statefulset with PX as the volume would reattach the 
+
+```
+kubectl get pods -l "component=elasticsearch, role=data"  -o wide
+NAME                   READY     STATUS    RESTARTS   AGE       IP          NODE
+elasticsearch-data-0   1/1       Running   0          1h        10.40.0.3   pdc3-sm19
+elasticsearch-data-1   1/1       Running   0          1h        10.42.0.2   pdc3-sm18
+elasticsearch-data-2   1/1       Running   0          1h        10.47.0.4   pdc3-sm16
+elasticsearch-data-3   1/1       Running   0          43m       10.39.0.1   70-0-5-129.pools.spcsdns.net
+elasticsearch-data-4   1/1       Running   0          1h        10.44.0.3   pdc-dell14
+
+kubectl cordon 70-0-5-129.pools.spcsdns.net
+node "70-0-5-129.pools.spcsdns.net" cordoned
+
+kubectl get nodes
+NAME                           STATUS                     AGE       VERSION
+70-0-5-129.pools.spcsdns.net   Ready,SchedulingDisabled   20d       v1.7.2
+pdc-dell14                     Ready                      21d       v1.7.2
+pdc-dell15                     Ready                      21d       v1.7.2
+pdc-sm13.portcolo.com          Ready                      21d       v1.7.2
+pdc3-sm16                      Ready                      21d       v1.7.2
+pdc3-sm18                      Ready                      21d       v1.7.2
+pdc3-sm19                      Ready                      21d       v1.7.2
+
+
+Find the docs count on this data node. 
+
+curl http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices
+
+{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479282677,"name":"elasticsearch-data-3","transport_address":"10.39.0.1:9300","host":"10.39.0.1","ip":"10.39.0.1:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0}.....
+
+kubectl delete po/elasticsearch-data-3
+pod "elasticsearch-data-3" deleted
+
+kubectl get pods -l "component=elasticsearch, role=data"  -o wide -w
+NAME                   READY     STATUS        RESTARTS       AGE       IP          NODE
+elasticsearch-data-0   1/1       Running       		0         1h        10.40.0.3   pdc3-sm19
+elasticsearch-data-1   1/1       Running       		0         1h        10.42.0.2   pdc3-sm18
+elasticsearch-data-2   1/1       Running       		0         1h        10.47.0.4   pdc3-sm16
+elasticsearch-data-3   1/1       Terminating   		0         46m       10.39.0.1   70-0-5-129.pools.spcsdns.net
+elasticsearch-data-4   1/1       Running       		0         1h        10.44.0.3   pdc-dell14
+elasticsearch-data-3   0/1       Terminating   		0         46m       <none>      70-0-5-129.pools.spcsdns.net
+elasticsearch-data-3   0/1       Terminating   		0         46m       <none>      70-0-5-129.pools.spcsdns.net
+elasticsearch-data-3   0/1       Terminating   		0         46m       <none>      70-0-5-129.pools.spcsdns.net
+elasticsearch-data-3   0/1       Pending   	   		0         0s        <none>    	<none>
+elasticsearch-data-3   0/1       Pending   	   		0         0s        <none>    	pdc-dell15
+elasticsearch-data-3   0/1       Init:0/1      		0         0s        <none>    	pdc-dell15
+elasticsearch-data-3   0/1       PodInitializing    0         3s        10.36.0.2   pdc-dell15
+elasticsearch-data-3   1/1       Running       		0         6s        10.36.0.2   pdc-dell15
+
+Verify that the same volume has been attached back to the pod which was scheduled post failover.
+
+curl http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices
+{"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479456687,"name":"elasticsearch-data-3","transport_address":"10.36.0.2:9300","host":"10.36.0.2","ip":"10.36.0.2:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0},
+
+```
+### Node Failover
+
+In the case of a statefulset if the node is unreachable, which could happen in either of two cases
+- The node is down for maintenance
+- There has been a network partition. 
+
+There is no way for kubernetes to know which of the case is it. Hence Kubernetes would not schedule the Statefulset and the pods running on those nodes would enter the ‘Terminating’ or ‘Unknown’ state after a timeout. 
+If there was a network partition and when the partition heals, kubernetes will complete the deletion of the Pod and remove it from the API server. It would subsequently schedule a new pod to honor the replication requirements mentioned in the Podspec. 
+
+For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/)
+
+Decomissioning a kubernetes node deletes the node object form the APIServer. 
+Before that you would want to decomission your Portworx node from the cluster. 
+Follow the steps mentioned in [Decommision a Portworx node](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html) 
+Once done, delete the kubernetes node if it requires to be deleted permanently. 
