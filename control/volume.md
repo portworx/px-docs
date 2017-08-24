@@ -589,6 +589,21 @@ Here is the output of the volume alerts.
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated 
 ```
+#### pxctl volume ha-update cancel
+
+`pxctl volume ha-update cancel` is a command that can be used to cancel an ongoing request to ha-update a volume
+NOTE: Volume may need to be in attached state for this operation.
+```
+sudo /opt/pwx/bin/pxctl volume ha-update --repl=2 volcanc
+Update Volume Replication: Replication update started successfully for volume volcanc
+sudo /opt/pwx/bin/pxctl volume ha-update --cancel volcanc
+Update Volume Replication: Replication update canceled for volume volcanc
+```
+An alert is raised when we run this command.
+```
+sudo /opt/pwx/bin/pxctl sv alerts show
+33162 VOLUME 845339212632295104 Jul 26 03:14:42 UTC 2017 NOTIFY Volume operation success Volume volcanc (845339212632295104) ha-increase canceled
+```
 
 #### pxctl volume stats
 

@@ -3,11 +3,7 @@ layout: page
 title: "SQL Server on Kubernetes Video"
 keywords: Microsoft, SQL Server, portworx, kubernetes, high-availability,  container, storage
 sidebar: home_sidebar
-youtubeId: xUSfWfMbP0g
 ---
-
-* TOC
-{:toc}
 
 In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server in Kubernetes with Portworx. 
 You'll see how to achieve database reliability, recoverability, and high availability 
@@ -20,9 +16,14 @@ Prior to Portworx, customers have had to configure SQL Server in clustered mode 
 Now with Kubernetes, Portworx and Microsoft --- Enterprises can use MS SQL and achieve high-availability
 without having to configure multiple SQL Server instances in clustered or hot-standby mode.
 
-## Watch the video
-Here is a short video that shows how SQL Server, Kubernetes and Portworx can provide the high-availability:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "xUSfWfMbP0g"
+    date = "2017-07-28"
+    title = "Running Microsoft SQL Server with Portworx on Kubernetes"
+    description = "Here is a short video that shows how SQL Server, Kubernetes and Portworx can provide the high-availability"
+%}
+
 
 ## See Also
 Here is the documentation allowing you to try this out yourself :

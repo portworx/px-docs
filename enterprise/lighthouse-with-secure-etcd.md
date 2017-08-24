@@ -4,6 +4,7 @@ title: "Run Lighthouse with Secure etcd"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse, secure, etcd
 sidebar: home_sidebar
 redirect_from: "/run-lighthouse-with-secure-etcd.html"
+meta-description: "This guide shows you how you can run PX-Enterprise Console locally with secure etcd. Try it today!"
 ---
 
 * TOC

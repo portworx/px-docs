@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /cloud/aws-ec2-asg.html
   - /portworx-on-aws-asg.html
+meta-description: "Learn to scale a Portworx cluster up or down on AWS with Auto Scaling. Use our tips and tricks to make it simple!"
 ---
 
 * TOC
@@ -31,7 +32,9 @@ You will need to create a master AMI that you will associate with your auto scal
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  Please **do not 
+start 
+PX** while creating the master AMI.
 
 This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
 
@@ -82,7 +85,9 @@ The PX instance that is launching will use the above information to either alloc
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/systemd.html) instructions to configure the image to run PX.  Please **do not start PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  Please **do not 
+start 
+PX** while creating the master AMI.
 
 This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
 

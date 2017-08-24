@@ -1,9 +1,25 @@
 <!-- Vimeo -->
 {% if layout.amp %}
-<amp-vimeo
-    data-videoid="{{ include.id }}"
-    layout="responsive"
-    width="500" height="281"></amp-vimeo>
+    <amp-vimeo
+        data-videoid="{{ include.id }}"
+        layout="responsive"
+        width="500" height="281"></amp-vimeo>
 {% else %}
-<iframe src="https://player.vimeo.com/video/{{ include.id }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+    {% if include.title %}
+        <h2>
+            <span itemprop="name">{{ include.title }}</span>
+            {% if include.date %}
+                <small>{{ include.date | date: "%e %B %Y" }}</small>
+                <meta itemprop="uploadDate" content="{{ include.date }}" />
+            {% endif %}
+        </h2>
+    {% endif %}
+    {% if include.description %}
+        <span itemprop="description">{{ include.description }} <br/></span>
+    {% endif %}
+    <meta itemprop="thumbnailUrl" content="/playlist_generic.png" />
+    <meta itemprop="embedURL" content="https://player.vimeo.com/video/{{ include.id }}" />
+    <iframe src="https://player.vimeo.com/video/{{ include.id }}" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
 {% endif %}

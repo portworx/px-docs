@@ -22,7 +22,9 @@ Note that Portworx recommends the following:
   * 128 GB Storage
   * 10 GB Ethernet NIC
 
-## Examples of Portworx performance as measured by [fio](https://github.com/axboe/fio)
+## Examples of Portworx performance
+
+These metrics are recorded by [fio](https://github.com/axboe/fio).
 
 The following graphs show the results of running fio against the underlying baremetal hardware and comparing it to the performance of a Portworx volume that used the underlying hardware for storage provisioning.  The graphs show the overhead, or delta, between running the same test on the raw volume and on a PX volume.
 

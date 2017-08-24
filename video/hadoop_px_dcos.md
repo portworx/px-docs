@@ -3,19 +3,19 @@ layout: page
 title: "Video Demo of Hadoop and Portworx on DCOS"
 keywords: portworx, PX-Developer, Hadoop, HDFS, container, Mesos, Mesosphere, Marathon, storage, DCOS
 sidebar: home_sidebar
-youtubeId : qp6i8kYq-iQ
 redirect_from: "/video-dcos-hadoop.html"
 meta-description: "Find out how to install and run Hadoop on Portworx with DCOS. Use Portworx as the HDFS layer for Hadoop, deployed through the Mesosphere DCOS."
 ---
 
-* TOC
-{:toc}
-
 Portworx can be used as the HDFS layer for Hadoop, deployed through the Mesosphere DCOS wUniverse.
 
-## Watch the video
-Here is a short video that shows how to install and run Hadoop on Portworx with DCOS:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "qp6i8kYq-iQ"
+    date = "2017-05-08"
+    title = "Running Hadoop with Portworx on DCOS"
+    description = "Here is a short video that shows how to install and run Hadoop on Portworx with DCOS"
+%}
 
 
 ## See the Documentation

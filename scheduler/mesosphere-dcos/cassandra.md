@@ -3,12 +3,15 @@ layout: page
 title: "Run Cassandra on DCOS"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 redirect_from: "/dcos-cassandra.html"
+meta-description: "For help installing and running Cassandra on DCOS, use the guide from Portworx! Achieve more with Portworx backing your cluster."
 ---
 
 * TOC
 {:toc}
 
-DC/OS provides a Cassandra service that makes it easy to deploy and manage Cassandra on Mesosphere DC/OS. This guide will help you to install and run the [containerized Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).  With [Portworx backing your Cassandra cluster](https://docs.portworx.com/applications/cassandra.html), you can 
+DC/OS provides a Cassandra service that makes it easy to deploy and manage Cassandra on Mesosphere DC/OS. This guide will help you to install and run the [containerized 
+Cassandra](https://portworx.com/use-case/cassandra-docker-container/) service backed by Portworx volumes for [persistent DCOS 
+storage](https://portworx.com/use-case/persistent-storage-dcos/).  With [Portworx backing your Cassandra cluster](/applications/cassandra.html), you can 
 
 * Recover faster during a failure
 * Achieve higher density by running multiple Cassandra rings on the same DC/OS hosts and
@@ -113,6 +116,6 @@ You also need to make sure Portworx is installed on all the agents in the DCOS c
 For further reading on Cassandra:
 * [Cassandra Docker](https://portworx.com/use-case/cassandra-docker-container/) How to run Cassandra in Docker containers
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)
-* [Cassandra stress test with Portworx](https://docs.portworx.com/applications/cassandra-px-perf-test.html)
-* [Run Cassandra on DCOS](https://docs.portworx.com/scheduler/mesosphere-dcos/cassandra.html)
+* [Cassandra stress test with Portworx](/applications/cassandra-px-perf-test.html)
+* [Run Cassandra on DCOS](/scheduler/mesosphere-dcos/cassandra.html)
 * [Snapshotting Cassandra Container Volumes for CI/CD using Mesosphere DC/OS](https://portworx.com/snapshotting-cassandra-container-volumes-ci-using-mesosphere-dcos/)

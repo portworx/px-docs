@@ -3,11 +3,7 @@ layout: page
 title: "Microsoft SQL Server on PX Video"
 keywords: Microsoft, SQL Server, portworx, high-availability,  container, storage
 sidebar: home_sidebar
-youtubeId: G3Lp1RgWdKg
 ---
-
-* TOC
-{:toc}
 
 In this five-minute hands-on video, 
 you’ll learn how simple it is to run Microsoft SQL Server in containers with Portworx. 
@@ -21,10 +17,14 @@ Prior to Portworx, there has been no reliable way to make these important data g
 Now with Portworx and Microsoft --- Enterprises can use MS SQL with Docker --- 
 with data persistence, recoverability, durability and high availability.
 
+{%
+    include youtubePlayer.html
+    id = "G3Lp1RgWdKg"
+    date = "2017-06-17"
+    title = "Running Microsoft SQL Server on Portworx"
+    description = "Here is a short video that shows how SQL Server on Portworx can provide the high-availability and recoverability"
+%}
 
-## Watch the video
-Here is a short video that shows how SQL Server on Portworx can provide the high-availability and recoverability:
-{% include youtubePlayer.html id=page.youtubeId %}
 
 ## See Also
 Here is the documentation allowing you to try this out yourself :

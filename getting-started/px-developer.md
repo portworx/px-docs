@@ -37,7 +37,7 @@ Select an operating environment to install Portworx:
 
 * [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html)
 * [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
-* [Run Portworx with Docker](/scheduler/docker/install.html)
+* [Run Portworx with Docker](/scheduler/docker/install-standalone.html)
 * [Run Portworx with Rancher](/scheduler/rancher/install.html)
 
 Run stateful containers with Portworx:

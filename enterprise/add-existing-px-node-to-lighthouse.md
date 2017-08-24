@@ -4,6 +4,7 @@ title: "Add Existing PX Node to Lighthouse"
 keywords: portworx, lighthouse, px, config.json
 sidebar: home_sidebar
 redirect_from: "/add-existing-px-node-to-lighthouse.html"
+meta-description: "Find out how to add your Portworx node to Lighthouse, the PX-Enterprise web console. Follow our step-by-step guide today!"
 ---
 
 ```
