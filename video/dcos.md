@@ -12,6 +12,7 @@ Portworx is available in the DCOS Universe.
 {%
     include youtubePlayer.html
     id = "hQojYux3ono"
+    date = "2017-03-21"
     title = "Running Portworx with DCOS"
     description = "Here is a short video that shows how to configure and run Portworx with DCOS"
 %}

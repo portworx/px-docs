@@ -12,6 +12,7 @@ This section, qualified using Rancher v1.5.5, Cattle v0.178.3, describes how to 
 {%
     include youtubePlayer.html
     id = "yGjDxDLyS78"
+    date = "2017-05-09"
     title = "Running Portworx with Rancher"
     description = "Here is a short video that shows how to configure and run Portworx with Rancher"
 %}
