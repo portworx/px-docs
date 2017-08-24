@@ -5,6 +5,8 @@ title: "Get Started with PX-Enterprise"
 keywords: portworx, px-developer, container, storage, requirements
 redirect_from:
   - /get-started-px-enterprise.html?
+  - /get-started-px-enterprise.html
+
 ---
 
 * TOC
