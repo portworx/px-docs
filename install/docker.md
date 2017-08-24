@@ -3,7 +3,6 @@ layout: page
 title: "Run PX with Docker"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-redirect_from:
 meta-description: "This guide describes installing Portworx using the docker CLI. Try it today!"
 ---
 
