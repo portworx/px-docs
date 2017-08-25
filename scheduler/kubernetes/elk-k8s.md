@@ -358,7 +358,6 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0   
 
 ```
 
-
 Once you have run the above command you should see `bank` and `customer` indices in your elasticsearch cluster. 
 Search for them through your Kibana dashboard. 
 
@@ -366,7 +365,6 @@ Search for them through your Kibana dashboard.
 
 
 ![Kibana Dashboard for Bank Index](/images/kibana_bank.png){:width="655px" height="200px"}
-
 
 
 ## Scaling
@@ -489,6 +487,7 @@ curl http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices
 {"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479456687,"name":"elasticsearch-data-3","transport_address":"10.36.0.2:9300","host":"10.36.0.2","ip":"10.36.0.2:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0},
 
 ```
+
 ### Node Failover
 
 In the case of a statefulset if the node is unreachable, which could happen in either of two cases
