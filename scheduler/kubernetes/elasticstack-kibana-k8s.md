@@ -54,9 +54,97 @@ In this section we will create an ES cluster with
 -	3 data nodes and using a Kubernetes Replication Controller.
 -	2 coordinating node using a Kubernetes Replication Controller.
 
+Create ```es-master-svc.yaml``` with the following content
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-discovery
+  labels:
+    component: elasticsearch
+    role: master
+spec:
+  selector:
+    component: elasticsearch
+    role: master
+  ports:
+  - name: transport
+    port: 9300
+    protocol: TCP
+
+```
+
+Create ```es-master-rc.yaml``` with the following content
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: es-master
+  labels:
+    component: elasticsearch
+    role: master
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: master
+    spec:
+      initContainers:
+      - name: init-sysctl
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+      containers:
+      - name: es-master
+        securityContext:
+          privileged: false
+          capabilities:
+            add:
+              - IPC_LOCK
+              - SYS_RESOURCE
+        image: quay.io/pires/docker-elasticsearch-kubernetes:5.5.0
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: "CLUSTER_NAME"
+          value: "escluster"
+        - name: "NUMBER_OF_MASTERS"
+          value: "2"
+        - name: NODE_MASTER
+          value: "true"
+        - name: NODE_INGEST
+          value: "false"
+        - name: NODE_DATA
+          value: "false"
+        - name: HTTP_ENABLE
+          value: "false"
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms256m -Xmx256m"
+        ports:
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+      volumes:
+          - emptyDir:
+              medium: ""
+            name: "storage"
+```
 Apply the specification for the Elastic search Master nodes and the service for the same. 
-[Download es-master-svc.yaml](/k8s-samples/efk/es-master-svc.yaml?raw=true)
-[Download es-master-rc.yaml](/k8s-samples/efk/es-master-rc.yaml?raw=true)
 
 ```
 kubectl apply -f es-master-svc.yaml 
@@ -77,9 +165,95 @@ kubectl logs po/es-master-2996564765-4c56v
 
 ```
 
+Create ```es-client-svc.yaml``` with the following content
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  labels:
+    component: elasticsearch
+    role: client
+spec:
+  type: LoadBalancer
+  selector:
+    component: elasticsearch
+    role: client
+  ports:
+  - name: http
+    port: 9200
+    protocol: TCP
+```
+
+Create ```es-client-rc.yaml``` with the following content
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: es-client
+  labels:
+    component: elasticsearch
+    role: client
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: client
+    spec:
+      initContainers:
+      - name: init-sysctl
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+      containers:
+      - name: es-client
+        securityContext:
+          privileged: false
+          capabilities:
+            add:
+              - IPC_LOCK
+              - SYS_RESOURCE
+        image: quay.io/pires/docker-elasticsearch-kubernetes:5.5.0
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: "CLUSTER_NAME"
+          value: "escluster"
+        - name: NODE_MASTER
+          value: "false"
+        - name: NODE_DATA
+          value: "false"
+        - name: HTTP_ENABLE
+          value: "true"
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms256m -Xmx256m"
+        ports:
+        - containerPort: 9200
+          name: http
+          protocol: TCP
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+      volumes:
+          - emptyDir:
+              medium: ""
+            name: "storage"
+```
 Apply the specification for the Replication controller and its service for the co-ordinator only nodes.
-[Download es-client-rc.yaml](/k8s-samples/efk/es-client-rc.yaml?raw=true)
-[Download es-client-svc.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
 
 ```
 kubectl apply -f es-client-rc.yaml
@@ -102,9 +276,102 @@ kubectl logs po/es-client-2155074821-nxdkt
 
 ``` 
 
+
+
+Create ```es-data-svc.yaml``` with the following content
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch-data
+  labels:
+    component: elasticsearch
+    role: data
+spec:
+  clusterIP: None
+  selector:
+    component: elasticsearch
+    role: data
+  ports:
+  - name: transport
+    port: 9300
+    protocol: TCP
+
+```
+
+Create ```es-data-sts.yaml``` with the following content
+```
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-data
+  labels:
+    component: elasticsearch
+    role: data
+spec:
+  serviceName: elasticsearch-data
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: elasticsearch
+        role: data
+    spec:
+      initContainers:
+      - name: init-sysctl
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        securityContext:
+          privileged: true
+      containers:
+      - name: elasticsearch-data-pod
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - IPC_LOCK
+        image: quay.io/pires/docker-elasticsearch-kubernetes:5.5.0
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: "CLUSTER_NAME"
+          value: "escluster"
+        - name: NODE_MASTER
+          value: "false"
+        - name: NODE_INGEST
+          value: "false"
+        - name: HTTP_ENABLE
+          value: "false"
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms256m -Xmx256m"
+        ports:
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:
+        - name: px-storage
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: px-storage
+      annotations:
+        volume.beta.kubernetes.io/storage-class: px-data-sc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 80Gi
+```
+
 Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
-[Download es-data-svc.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
-[Download es-data-sts.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
 ```
 kubectl apply -f es-data-svc.yaml
 service "es-data-srv" created
@@ -128,10 +395,7 @@ elasticsearch-data-2   0/1       Pending   		     0          3s
 elasticsearch-data-2   0/1       Init:0/1   	     0          3s
 elasticsearch-data-2   0/1       PodInitializing   0          5s
 elasticsearch-data-2   1/1       Running   		     0          18s
-
 ```
-
-
 Cluster state
 ```
 kubectl get all
@@ -161,7 +425,6 @@ deploy/es-master   3         3         3            3           12m
 NAME                      DESIRED   CURRENT   READY     AGE
 rs/es-client-2193029848   2         2         2         2m
 rs/es-master-1371619260   3         3         3         12m
-
 ```
 
 ### Verify Elastic Search installation. 
@@ -233,15 +496,15 @@ Labels:			component=elasticsearch
 			role=client
 Annotations:		kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"component":"elasticsearch","role":"client"},"name":"elasticsearch","namespa...
 Selector:		component=elasticsearch,role=client
-Type:			LoadBalancer
+Type:			  LoadBalancer
 IP:			    10.105.105.41
-Port:			http	9200/TCP
-NodePort:		http	32058/TCP
+Port:			  	9200/TCP
+NodePort:			32058/TCP
 Endpoints:		10.36.0.1:9200,10.47.0.3:9200
 Session Affinity:	None
 Events:			<none>
 
-curl http://10.105.105.41:9200
+curl 'http://10.105.105.41:9200'
 {
   "name" : "es-client-2155074821-nxdkt",
   "cluster_name" : "escluster",
@@ -256,7 +519,7 @@ curl http://10.105.105.41:9200
   "tagline" : "You Know, for Search"
 }
 
-curl http://10.105.105.41:9200/_cat/nodes?v
+curl 'http://10.105.105.41:9200/_cat/nodes?v'
 ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
 10.44.0.2           41          41   0    0.00    0.03     0.08 m         -      es-master-2996564765-4c56v
 10.36.0.1           43          18   0    0.07    0.05     0.05 i         -      es-client-2155074821-v0w31
@@ -311,23 +574,87 @@ curl 'http://10.105.105.41:9200/customer/external/1?pretty&pretty'
 ```
 ### Install Kibana
 
+Create ```kibana-svc.yaml``` with the following content
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana
+  namespace: default
+  labels:
+    component: kibana
+spec:
+  selector:
+    component: kibana
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5601
+    protocol: TCP
+```
+Create ```kibana-rc.yaml``` with the following content
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: default
+  labels:
+    component: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     component: kibana
+  template:
+    metadata:
+      labels:
+        component: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: cfontes/kibana-xpack-less:5.5.0
+        env:
+        - name: "CLUSTER_NAME"
+          value: "escluster"
+        - name: XPACK_SECURITY_ENABLED
+          value: 'false'
+        - name: XPACK_GRAPH_ENABLED
+          value: 'false'
+        - name: XPACK_ML_ENABLED
+          value: 'false'
+        - name: XPACK_REPORTING_ENABLED
+          value: 'false'
+# Important that the IP address is changed to the co-ordinator node clusterIP. This will change for each setup. 
+        - name: ELASTICSEARCH_URL
+          value: 'http://10.105.105.41:9200'
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 100m
+        ports:
+        - containerPort: 5601
+          name: kibana
+          protocol: TCP
+```
+
 Deploy the Kibana spec for the replication controller as well as the service. 
-[Download kibana-svc.yaml](/k8s-samples/efk/kibana-svc.yaml?raw=true)
-[Download kibana-rc.yaml](/k8s-samples/efk/kibana-rc.yaml?raw=true)
 ```
 kubectl apply -f kibana-svc.yaml 
 service "kibana" created
 
 kubectl describe svc/kibana
-Name:			kibana
-Namespace:		default
-Labels:			component=kibana
-Annotations:		kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"component":"kibana"},"name":"kibana","namespace":"default"},"spec":{"ports"...
-Selector:		component=kibana
-Type:			LoadBalancer
-IP:			    10.102.83.180
-Port:			http	80/TCP
-NodePort:		http	32645/TCP
+Name:     kibana
+Namespace:    default
+Labels:     component=kibana
+Annotations:    kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"component":"kibana"},"name":"kibana","namespace":"default"},"spec":{"ports"...
+Selector:   component=kibana
+Type:     LoadBalancer
+IP:         10.102.83.180
+Port:       80/TCP
+NodePort:		32645/TCP
 Endpoints:		<none>
 Session Affinity:	None
 Events:			<none>
@@ -357,7 +684,7 @@ Save the data from the following location
 ```
 curl -H "Content-Type: application/json" -XPOST 'http://10.105.105.41:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
 
-curl http://10.105.105.41:9200/_cat/indices?v
+curl 'http://10.105.105.41:9200/_cat/indices?v'
 health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
 green  open   bank     7Ll5S-NeSHK3subHKhA7Dg   5   1       1000            0      1.2mb        648.1kb
 green  open   .kibana  uJnR9Dp5RdCvAEJ6bg-mEQ   1   1          2            0     10.8kb          5.4kb
@@ -368,9 +695,9 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0   
 Once you have run the above command you should see `bank` and `customer` indices in your elasticsearch cluster. 
 Search for them through your Kibana dashboard. 
 
-![customerIndex](/images/kibana_customer.png){:width="655px" height="200px"}
+Bank Index with its documents
 
-![bankIndex](/images/kibana_bank.png){:width="655px" height="200px"}
+![bankIndex](/images/kibanaBank.png){:width="655px" height="200px"}
 
 ## Scaling
 
@@ -398,7 +725,7 @@ elasticsearch-data-4   0/1       PodInitializing   0          6s
 elasticsearch-data-4   1/1       Running   		   0          9s
 
 
-curl http://10.105.105.41:9200/_cat/nodes?v
+curl 'http://10.105.105.41:9200/_cat/nodes?v'
 ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
 10.40.0.2           35          16   0    0.06    0.09     0.13 m         *      es-master-2996564765-zj0gc
 10.44.0.2           47          42   0    0.00    0.12     0.17 m         -      es-master-2996564765-4c56v
@@ -463,7 +790,7 @@ pdc3-sm19                      Ready                      21d       v1.7.2
 
 Find the docs count on this data node. 
 
-curl http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices
+curl 'http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices'
 
 {"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479282677,"name":"elasticsearch-data-3","transport_address":"10.39.0.1:9300","host":"10.39.0.1","ip":"10.39.0.1:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0}.....
 
@@ -488,7 +815,8 @@ elasticsearch-data-3   1/1       Running       		0         6s        10.36.0.2  
 
 Verify that the same volume has been attached back to the pod which was scheduled post failover.
 
-curl http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices
+curl 'http://10.105.105.41:9200/_nodes/elasticsearch-data-3/stats/indices'
+
 {"_nodes":{"total":1,"successful":1,"failed":0},"cluster_name":"escluster","nodes":{"Y53C7xqeS-Wi2UHDdE3hgg":{"timestamp":1503479456687,"name":"elasticsearch-data-3","transport_address":"10.36.0.2:9300","host":"10.36.0.2","ip":"10.36.0.2:9300","roles":["data"],"indices":{"docs":{"count":401,"deleted":0},
 
 ```
@@ -506,5 +834,5 @@ For further information : [Statefulset Pod Deletion](https://kubernetes.io/docs/
 
 Decomissioning a kubernetes node deletes the node object form the APIServer. 
 Before that you would want to decomission your Portworx node from the cluster. 
-Follow the steps mentioned in [Decommision a Portworx node](https://docs.portworx.com/scheduler/kubernetes/k8s-node-decommission.html) 
+Follow the steps mentioned in [Decommision a Portworx node](/scheduler/kubernetes/k8s-node-decommission.html) 
 Once done, delete the kubernetes node if it requires to be deleted permanently. 
