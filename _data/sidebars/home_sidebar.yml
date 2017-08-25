@@ -23,7 +23,7 @@
         - title: Kafka
           url: /scheduler/kubernetes/kafka-k8s.html
         - title: Elastic Search and Kibana
-          url: /scheduler/kubernetes/elk-k8s.html      
+          url: /scheduler/kubernetes/elasticstack-kibana-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs

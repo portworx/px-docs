@@ -20,6 +20,7 @@ An Elasticsearch cluster node can have one or more purposes.
 - Coordinating node
 	A node which only routes requests, handles the search reduce phase, and distributes bulk indexing. 
 
+
 ## Prerequisites
 
 -	A running Kubernetes cluster with v 1.6+
@@ -54,12 +55,14 @@ In this section we will create an ES cluster with
 -	2 coordinating node using a Kubernetes Replication Controller.
 
 Apply the specification for the Elastic search Master nodes and the service for the same. 
+[Download es-master-svc.yaml](/k8s-samples/efk/es-master-svc.yaml?raw=true)
+[Download es-master-rc.yaml](/k8s-samples/efk/es-master-rc.yaml?raw=true)
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-svc.yaml 
+kubectl apply -f es-master-svc.yaml 
 service "elasticsearch-discovery" created
 
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-rc.yaml 
+kubectl apply -f es-master-rc.yaml 
 deployment "es-master" created
 
 kubectl get pods
@@ -75,12 +78,14 @@ kubectl logs po/es-master-2996564765-4c56v
 ```
 
 Apply the specification for the Replication controller and its service for the co-ordinator only nodes.
+[Download es-client-rc.yaml](/k8s-samples/efk/es-client-rc.yaml?raw=true)
+[Download es-client-svc.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
 
 ```
- kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-rc.yaml
+kubectl apply -f es-client-rc.yaml
 deployment "es-client" created
 
- kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-svc.yaml 
+kubectl apply -f es-client-svc.yaml 
 service "elasticsearch" created
 
 kubectl get pods -w
@@ -98,30 +103,31 @@ kubectl logs po/es-client-2155074821-nxdkt
 ``` 
 
 Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
-
+[Download es-data-svc.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
+[Download es-data-sts.yaml](/k8s-samples/efk/es-client-svc.yaml?raw=true)
 ```
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-svc.yaml
+kubectl apply -f es-data-svc.yaml
 service "es-data-srv" created
 
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-sts.yaml 
+kubectl apply -f es-data-sts.yaml 
 statefulset "elasticsearch-data" created
 
 kubectl get pods -l "component=elasticsearch, role=data" -w
 NAME                   READY     STATUS            RESTARTS   AGE
 elasticsearch-data-0   0/1       PodInitializing   0          24s
-elasticsearch-data-0   1/1       Running   		   0          26s
-elasticsearch-data-1   0/1       Pending   		   0          0s
+elasticsearch-data-0   1/1       Running   		     0          26s
+elasticsearch-data-1   0/1       Pending   		     0          0s
 elasticsearch-data-1   0/1       Pending           0          0s
-elasticsearch-data-1   0/1       Pending   		   0          3s
-elasticsearch-data-1   0/1       Init:0/1   	   0          3s
+elasticsearch-data-1   0/1       Pending   		     0          3s
+elasticsearch-data-1   0/1       Init:0/1   	     0          3s
 elasticsearch-data-1   0/1       PodInitializing   0          5s
-elasticsearch-data-1   1/1       Running   		   0          51s
-elasticsearch-data-2   0/1       Pending   		   0          0s
-elasticsearch-data-2   0/1       Pending   		   0          0s
-elasticsearch-data-2   0/1       Pending   		   0          3s
-elasticsearch-data-2   0/1       Init:0/1   	   0          3s
+elasticsearch-data-1   1/1       Running   		     0          51s
+elasticsearch-data-2   0/1       Pending   		     0          0s
+elasticsearch-data-2   0/1       Pending   		     0          0s
+elasticsearch-data-2   0/1       Pending   		     0          3s
+elasticsearch-data-2   0/1       Init:0/1   	     0          3s
 elasticsearch-data-2   0/1       PodInitializing   0          5s
-elasticsearch-data-2   1/1       Running   		   0          18s
+elasticsearch-data-2   1/1       Running   		     0          18s
 
 ```
 
@@ -139,11 +145,11 @@ po/es-master-1371619260-0lg4h   1/1       Running   0          12m
 po/es-master-1371619260-f0hl8   1/1       Running   0          12m
 po/es-master-1371619260-z1mv7   1/1       Running   0          12m
 
-NAME                          CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+NAME                          CLUSTER-IP     EXTERNAL-IP    PORT(S)          AGE
 svc/elasticsearch             10.105.105.41   <pending>     9200:31989/TCP   2m
-svc/elasticsearch-discovery   10.106.42.96   <none>        9300/TCP         12m
-svc/es-data-srv               None           <none>        9300/TCP         14m
-svc/kubernetes                10.96.0.1      <none>        443/TCP          20d
+svc/elasticsearch-discovery   10.106.42.96    <none>        9300/TCP         12m
+svc/es-data-srv               None            <none>        9300/TCP         14m
+svc/kubernetes                10.96.0.1       <none>        443/TCP          20d
 
 NAME                              DESIRED   CURRENT   AGE
 statefulsets/elasticsearch-data   3         3         18m
@@ -306,9 +312,10 @@ curl 'http://10.105.105.41:9200/customer/external/1?pretty&pretty'
 ### Install Kibana
 
 Deploy the Kibana spec for the replication controller as well as the service. 
-
+[Download kibana-svc.yaml](/k8s-samples/efk/kibana-svc.yaml?raw=true)
+[Download kibana-rc.yaml](/k8s-samples/efk/kibana-rc.yaml?raw=true)
 ```
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-svc.yaml 
+kubectl apply -f kibana-svc.yaml 
 service "kibana" created
 
 kubectl describe svc/kibana
@@ -325,7 +332,7 @@ Endpoints:		<none>
 Session Affinity:	None
 Events:			<none>
 
-kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-rc.yaml 
+kubectl apply -f kibana-rc.yaml 
 deployment "kibana" created
 
 kubectl get pods -l "component=kibana" -w
@@ -345,7 +352,7 @@ Insert data into Elasticsearch and verify that Kibana is able to search for the 
 This will help create dashboards and visualizations. 
 
 Save the data from the following location 
-https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/accounts.json
+[Download accounts.json](/k8s-samples/efk/accounts.json?raw=true)
 
 ```
 curl -H "Content-Type: application/json" -XPOST 'http://10.105.105.41:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
@@ -361,11 +368,9 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0   
 Once you have run the above command you should see `bank` and `customer` indices in your elasticsearch cluster. 
 Search for them through your Kibana dashboard. 
 
-![Kibana Dashboard for Customer Index](/images/kibana_customer.png){:width="655px" height="200px"}
+![customerIndex](/images/kibana_customer.png){:width="655px" height="200px"}
 
-
-![Kibana Dashboard for Bank Index](/images/kibana_bank.png){:width="655px" height="200px"}
-
+![bankIndex](/images/kibana_bank.png){:width="655px" height="200px"}
 
 ## Scaling
 
