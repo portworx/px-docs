@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Deploy Elastic Stack with Portworx on Kubernetes"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, elastic stack, elastic search, logstash, kibana
+title: "Deploy Elastic Search and Kibana with Portworx on Kubernetes"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, elastic stack, elastic search, kibana
 sidebar: home_sidebar
 ---
 
@@ -158,7 +158,7 @@ rs/es-master-1371619260   3         3         3         12m
 
 ```
 
-### Verify the installation. 
+### Verify Elastic Search installation. 
 
 - Verify that Portworx Volumes are used for the elasticsearch cluster. 
 - Verify the cluster state by inserting and querying indexes. 
@@ -338,6 +338,34 @@ kubectl logs po/kibana-2713637544-4wxsk
 {"type":"log","@timestamp":"2017-08-23T11:36:19Z","tags":["listening","info"],"pid":1,"message":"Server running at http://0:5601"}
 
 ```
+
+### Verify Kibana Installation
+
+Insert data into Elasticsearch and verify that Kibana is able to search for the data in Elastic Search. 
+This will help create dashboards and visualizations. 
+
+Save the data from the following location 
+https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/accounts.json
+
+```
+curl -H "Content-Type: application/json" -XPOST 'http://10.105.105.41:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
+
+curl http://10.105.105.41:9200/_cat/indices?v
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   bank     7Ll5S-NeSHK3subHKhA7Dg   5   1       1000            0      1.2mb        648.1kb
+green  open   .kibana  uJnR9Dp5RdCvAEJ6bg-mEQ   1   1          2            0     10.8kb          5.4kb
+green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0      8.2kb          4.1kb
+
+```
+
+
+Once you have run the above command you should see `bank` and `customer` indices in your elasticsearch cluster. 
+Search for them through your Kibana dashboard. 
+
+![Kibana Dashboard for Customer Index](/images/kibana_customer.png){:width="655px" height="200px"}
+
+
+![Kibana Dashboard for Bank Index](/images/kibana_bank.png){:width="655px" height="200px"}
 
 
 

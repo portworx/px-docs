@@ -22,7 +22,7 @@
           url: /scheduler/kubernetes/cassandra-k8s.html
         - title: Kafka
           url: /scheduler/kubernetes/kafka-k8s.html
-        - title: Elastic Stack
+        - title: Elastic Search and Kibana
           url: /scheduler/kubernetes/elk-k8s.html      
       - title: How To
         folderitems:
