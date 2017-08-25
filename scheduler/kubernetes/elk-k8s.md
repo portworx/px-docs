@@ -56,10 +56,10 @@ In this section we will create an ES cluster with
 Apply the specification for the Elastic search Master nodes and the service for the same. 
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-svc.yaml 
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-svc.yaml 
 service "elasticsearch-discovery" created
 
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-rc.yaml 
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-master-rc.yaml 
 deployment "es-master" created
 
 kubectl get pods
@@ -77,10 +77,10 @@ kubectl logs po/es-master-2996564765-4c56v
 Apply the specification for the Replication controller and its service for the co-ordinator only nodes.
 
 ```
- kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-rc.yaml
+ kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-rc.yaml
 deployment "es-client" created
 
- kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-svc.yaml 
+ kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-client-svc.yaml 
 service "elasticsearch" created
 
 kubectl get pods -w
@@ -100,10 +100,10 @@ kubectl logs po/es-client-2155074821-nxdkt
 Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-svc.yaml
 service "es-data-srv" created
 
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-sts.yaml 
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/es-data-sts.yaml 
 statefulset "elasticsearch-data" created
 
 kubectl get pods -l "component=elasticsearch, role=data" -w
@@ -308,7 +308,7 @@ curl 'http://10.105.105.41:9200/customer/external/1?pretty&pretty'
 Deploy the Kibana spec for the replication controller as well as the service. 
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-svc.yaml 
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-svc.yaml 
 service "kibana" created
 
 kubectl describe svc/kibana
@@ -325,7 +325,7 @@ Endpoints:		<none>
 Session Affinity:	None
 Events:			<none>
 
-kubectl apply -f https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-rc.yaml 
+kubectl apply -f https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/kibana/kibana-rc.yaml 
 deployment "kibana" created
 
 kubectl get pods -l "component=kibana" -w
@@ -345,7 +345,7 @@ Insert data into Elasticsearch and verify that Kibana is able to search for the 
 This will help create dashboards and visualizations. 
 
 Save the data from the following location 
-https://raw.githubusercontent.com/Hrishike/px-docs/gh-pages/k8s-samples/elk/elasticsearch/accounts.json
+https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/elk/elasticsearch/accounts.json
 
 ```
 curl -H "Content-Type: application/json" -XPOST 'http://10.105.105.41:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
