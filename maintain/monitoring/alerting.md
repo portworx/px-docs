@@ -42,7 +42,7 @@ alerting:
 
 This file can be downloaded from [prometheus.yml](https://gist.github.com/shailvipx/dc5094d3a853c4cdb2b54cd188f80460)
 
-Note: 'alert-manager-ip' is the IP address of the node where AlertManager is running. It is confugured in the later steps.
+Note: 'alert-manager-ip' is the IP address of the node where AlertManager is running. It is configured in the later steps.
 
 ### Prometheus alerts rules file
 
