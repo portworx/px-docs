@@ -19,6 +19,7 @@ without having to configure multiple SQL Server instances in clustered or hot-st
 {%
     include youtubePlayer.html
     id = "xUSfWfMbP0g"
+    date = "2017-07-28"
     title = "Running Microsoft SQL Server with Portworx on Kubernetes"
     description = "Here is a short video that shows how SQL Server, Kubernetes and Portworx can provide the high-availability"
 %}
