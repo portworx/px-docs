@@ -16,6 +16,7 @@ Portworx Shared Volumes provides the following unique capabilities:
 {%
     include youtubePlayer.html
     id = "AIVABlClYAU"
+    date = "2016-07-07"
     title = "Shared Volumes with Portworx"
     description = "Here is a short video that shows how to configure and use Portworx Shared Volumes"
 %}
