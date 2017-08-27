@@ -14,7 +14,6 @@ bundle exec jekyll build
 HTMLFILES=$(find "${BASE}/_site" -name '*.html')
 for FILE in ${HTMLFILES}; do
     ISREDIRECT=$(grep 'Click here if you are not redirected.' ${FILE} > /dev/null; echo $?)
-
     if [[ ${ISREDIRECT} -eq 0 ]]; then
          rm -rf "${FILE}"
     fi
