@@ -1,9 +1,9 @@
 <!-- Vimeo -->
 {% if layout.amp %}
-    <amp-vimeo
-        data-videoid="{{ include.id }}"
-        layout="responsive"
-        width="500" height="281"></amp-vimeo>
+<amp-vimeo
+    data-videoid="{{ include.id }}"
+    layout="responsive"
+    width="500" height="281"></amp-vimeo>
 {% else %}
 <div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
     {% if include.title %}
