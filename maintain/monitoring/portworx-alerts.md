@@ -35,10 +35,10 @@ Each alert has a severity from one of the following levels:
 8|VolGroupStateChange|WARN|CLUSTER|Triggered when a volume group's state changes.
 9|NodeStartFailure|ALARM|CLUSTER|Triggered when a node in the PX cluster fails to start.
 10|NodeStartSuccess|NOTIFY|CLUSTER|Triggered when a node in the PX cluster successfully initializes.
-11|<Internal PX Alert>|-|-|Alert code used for internal PX book keeping.
+11|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX book keeping.
 12|NodeJournalHighUsage|ALARM|CLUSTER|Triggered when a node's timestamp journal usage is not within limits.
 13|IOOperation|ALARM|VOLUME|Triggered when an IO operation such as Block Read/Block Write fails.
-14-16|<Internal PX Alerts>|-|-|Alert codes used for internal PX book keeping.
+14-16|&gt;Internal PX Alerts&lt;|-|-|Alert codes used for internal PX book keeping.
 17|PXInitFailure|ALARM|NODE|Triggered when PX fails to initialize on a node.
 18|PXInitSuccess|NOTIFY|NODE|Triggered when PX successfully initializes on a node.
 19|PXStateChange|WARN|NODE|Triggered when the PX daemon shuts down in error.
@@ -50,7 +50,7 @@ Each alert has a severity from one of the following levels:
 25|NodeDecommissionFailure|ALARM|CLUSTER|Triggered when a node could not be decommissioned from PX cluster.
 26|NodeDecommissionPending|WARN|CLUSTER|Triggered when a node decommission is kept in pending state as it has data which is not replicated on other nodes.
 27|NodeInitFailure|ALARM|CLUSTER|Triggered when PX fails to initialize on a node.
-28|<Internal PX Alert>|-|-|Alert code used for internal PX book keeping.
+28|&gt;Internal PX Alert&lt;|-|-|Alert code used for internal PX book keeping.
 29|NodeScanCompletion|NOTIFY|NODE|Triggered when node media scan completes without error.
 30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
 31|ReplAddVersionMismatch|WARN|VOLUME|Triggered when a volume HA update fails with version mismatch.
