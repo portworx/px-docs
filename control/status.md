@@ -3,7 +3,9 @@ layout: page
 title: "CLI Reference–Basics"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
-redirect_from: "/cli-reference.html"
+redirect_from:
+  - /cli-reference.html
+  - /control/cli.html
 ---
 
 * TOC

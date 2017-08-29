@@ -2,6 +2,8 @@
 layout: page
 title: "Portworx with AWS KMS"
 sidebar: home_sidebar
+redirect_from:
+  - /enterprise/portworx-with-aws-kms.html
 ---
 
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to

@@ -3,7 +3,10 @@ layout: page
 title: "Portworx on Azure"
 keywords: portworx, azure, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
-redirect_from: "/portworx-on-azure.html"
+redirect_from:
+  - /portworx-on-azure.html
+  - /cloud/azure.html
+  - /cloud/azure/examples/disks-managed/dcos-preAttachedDisks-vmss.json
 meta-description: "Follow these four steps to run Portworx on Azure. Try it today!"
 ---
 

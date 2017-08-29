@@ -3,6 +3,8 @@ layout: page
 title: "Run pods on same host as a volume"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
+redirect_from:
+  - /kubernetes-with-scheduler-convergence.html
 ---
 
 ## Using scheduler convergence

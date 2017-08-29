@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /portworx-with-prometheus.html
   - /prometheus/index.html
+  - /maintain/prometheus.html
 meta-description: "Looking to integrate Portworx with Prometheus? Learn to integrate PX storage with Prometheus for monitoring today!"
 ---
 

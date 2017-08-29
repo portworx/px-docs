@@ -3,7 +3,9 @@ layout: page
 title: "Manage PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
-redirect_from: "/launch-via-lighthouse.html"
+redirect_from:
+  - /launch-via-lighthouse.html
+  - /create-px-enterprise-cluster.html
 ---
 
 * TOC

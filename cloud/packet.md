@@ -3,7 +3,9 @@ layout: page
 title: "Portworx on the Packet.net Hosted Platform"
 keywords: portworx, packet.net, PaaS, IaaS, docker, converged, bare metal
 sidebar: home_sidebar
-redirect_from: "/portworx-on-packet.html"
+redirect_from:
+  - /portworx-on-packet.html
+  - /portworx_on_packet.html
 ---
 
 * TOC
