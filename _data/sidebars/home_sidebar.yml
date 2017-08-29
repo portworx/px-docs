@@ -186,10 +186,12 @@
       folderitems: 
       - title: Prometheus
         url: /maintain/monitoring/prometheus/index.html
-      - title: Alerts
+      - title: Alerts integration with Prometheus
         url: /maintain/monitoring/alerting.html
       - title: Grafana
         url: /maintain/monitoring/grafana/index.html
+      - title: Alerts Reference
+        url: /maintain/monitoring/portworx-alerts.html
     - title: Performance
       folderitems:
       - title: FIO
