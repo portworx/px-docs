@@ -7,7 +7,6 @@ redirect_from:
   - /create-manage-storage-volumes.html
   - /manage/create-and-manage.html
   - /manage/volume-sets.html
-
 meta-description: "Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!"
 ---
 

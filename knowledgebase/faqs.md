@@ -7,6 +7,7 @@ redirect_from:
   - /px-faqs.html
   - /knowledgebase/troubleshooting.html
   - /knowledgebase/support.html
+  - /troubleshooting.html
 meta-description: "Find answers to all the most frequently asked questions about Portworx.  Explore our FAQ today!"
 ---
 * TOC

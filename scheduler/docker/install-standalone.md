@@ -7,8 +7,7 @@ redirect_from:
   - /install/docker-plugin.html
   - /docker/install-px-docker-service.html
   - /run-with-docker.html
-  - /scheduler/docker-ucp.html
-  - /install/docker-compose.html
+  - /convert-x86-to-storage-nodes.html
 ---
 
 * TOC
