@@ -3,7 +3,11 @@ layout: page
 title: "Create and Manage Storage Volumes"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume
 sidebar: home_sidebar
-redirect_from: "/create-manage-storage-volumes.html"
+redirect_from:
+  - /create-manage-storage-volumes.html
+  - /manage/create-and-manage.html
+  - /manage/volume-sets.html
+
 meta-description: "Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!"
 ---
 

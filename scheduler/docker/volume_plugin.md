@@ -2,6 +2,8 @@
 layout: page
 title: "Docker interaction with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
+redirect_from:
+  - /scheduler/docker/volumes.html
 ---
 
 * TOC

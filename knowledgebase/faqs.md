@@ -1,9 +1,12 @@
 ---
 layout: page
-title: "FAQs"
+title: "Frequently Asked Questions Portworx”
 keywords: portworx, faqs
 sidebar: home_sidebar
-redirect_from: "/px-faqs.html"
+redirect_from:
+  - /px-faqs.html
+  - /knowledgebase/troubleshooting.html
+  - /knowledgebase/support.html
 meta-description: "Find answers to all the most frequently asked questions about Portworx.  Explore our FAQ today!"
 ---
 * TOC
