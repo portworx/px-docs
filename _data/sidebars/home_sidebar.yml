@@ -16,6 +16,8 @@
         url: /scheduler/kubernetes/install.html
       - title: Upgrade
         url: /scheduler/kubernetes/upgrade.html
+      - title: Tectonic
+        url: /scheduler/kubernetes/tectonic.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
