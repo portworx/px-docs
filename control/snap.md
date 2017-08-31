@@ -27,7 +27,7 @@ COMMANDS:
 OPTIONS:
    --help, -h  show help
 ```
-#### pxctl snapshot create
+#### pxctl snap create
 `pxctl snapshot create` creates a snapshot of a volume. The different options and ways to use are shown below:
 ```
 sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap1_on_vQuorum1 --label temp=true,cluster=devops
@@ -40,7 +40,7 @@ Volume successfully snapped: 118252956373660375
 * Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
 * Example 3 shows how to make a snapshot readonly
 
-#### pxctl snapshot list
+#### pxctl snap list
 `pxctl snapshot list` lists all snapshots:
 ```
 sudo /opt/pwx/bin/pxctl snap list
@@ -59,7 +59,7 @@ sudo /opt/pwx/bin/pxctl snap list --label cluster=devops
 ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
 376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
 ```
-#### pxctl snapshot delete
+#### pxctl snap delete
 `pxctl snapshot delete` deletes snapshots (make sure they are detached through host commands):
 ```
 sudo /opt/pwx/bin/pxctl snap delete Snap3_on_vQuorum1
