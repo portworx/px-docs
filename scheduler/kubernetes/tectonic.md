@@ -9,17 +9,20 @@ sidebar: home_sidebar
 {:toc}
 
 [Tectonic](https://coreos.com/tectonic/docs/latest/) is the new automated installer for Kubernetes from CoreOS.
-While Tectonic provides a simple way to install Kubernetes, there are still a few requirements needed before
+While Tectonic provides a simple way to install Kubernetes, there are still a few requirements before
 Portworx can run on a cluster installed with Tectonic --- 
 specifically, ensuring that additional disks are created and attached for the workers,
 and ensuring that the Portworx-required network ports are open.
 
 To address these requirements in a uniform fashion, Portworx has offered the ["px-ptool"](https://github.com/portworx/px-ptool).
-*px-ptool* has a facilities to create clusters from scratch that are "Portworx ready", 
+*px-ptool* has facilities to create clusters from scratch that are "Portworx ready", 
 or to take clusters that have already been deployed through Tectonic, and to make sure that they are "PX ready".
 
 *"px-ptool"* assumes that the Tectonic cluster has been successfully deployed first, 
 and that the corresponding environment variables set during the deployment are still active.
+
+**"px-ptool"** is in an **early experimental phase** and **should not** be run on production clusters.    
+Users are encouraged to contribute to the project.  
 
 Please see the *"px-ptool"* [README](https://github.com/portworx/px-ptool/blob/master/README.md) for documentation and usage.
 
