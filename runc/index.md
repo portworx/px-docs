@@ -115,8 +115,8 @@ Alternatively, one might prefer to first start the PX interactively (ie, to veri
 
 
 ```
-# Run PX interactively:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+# Invoke PX interactively, abort w/ CTRL-C when confirmed it's running:
+sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
 
 [...]
 > time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
