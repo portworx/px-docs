@@ -155,8 +155,8 @@ containers/applications that use the PX-Volumes:
 * ie. PX volume used by MySQL _before_ the v1->v2 Plugin update:
 
 ```json
-{% raw -%}
-# docker inspect --format ' {{json .Mounts}} ' pxMySQL
+{%- raw %}
+# docker inspect --format '{{json .Mounts}}' pxMySQL
 {% endraw %}
 [
   {
@@ -175,8 +175,8 @@ containers/applications that use the PX-Volumes:
 * ... and _after_ the v1->v2 Plugin update (note: _Driver_ and _Source_ got updated):
 
 ```json
-{% raw -%}
-# docker inspect --format ' {{json .Mounts}} ' pxMySQL
+{%- raw %}
+# docker inspect --format '{{json .Mounts}}' pxMySQL
 {% endraw %}
 [
   {
