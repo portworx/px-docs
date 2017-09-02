@@ -4,6 +4,7 @@ title: "Portworx on Rackspace"
 keywords: portworx, rackspace, PaaS, IaaS, docker, converged, cloud
 sidebar: home_sidebar
 redirect_from: "/portworx-on-rackspace.html"
+meta-description: "This guide shows you how to use the PXCL CLI to perform host operations. Try today!"
 ---
 
 * TOC

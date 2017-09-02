@@ -4,6 +4,7 @@ title: "On-Prem Lighthouse Release Notes"
 keywords: portworx, px-enterprise, px-lighthouse, release notes
 sidebar: home_sidebar
 redirect_from: "/on-prem-lighthouse-release-notes.html"
+meta-description: "Release notes for Lighthouse, the Portworx UI."
 ---
 
 * TOC

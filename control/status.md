@@ -4,6 +4,7 @@ title: "CLI Reference–Basics"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
+meta-description: "This guide shows you the basics of using PXCL CLI to perform operations on your container data layer. Try today!"
 ---
 
 * TOC

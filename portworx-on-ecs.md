@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on Amazon ECS"
 keywords: portworx, amazon, docker, aws, ecs, cloud
 sidebar: home_sidebar
+meta-description: "Portworx has the step-by-step tutorial you need to deploy Portworx on Amazon Elastic Container Service (ECS). Check it out today!"
 ---
 
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)

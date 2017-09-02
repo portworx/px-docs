@@ -3,6 +3,7 @@ layout: page
 title: "Deploy Portworx on Mesosphere DCOS"
 keywords: portworx, mesos, mesosphere, dcos
 sidebar: home_sidebar
+meta-description: "Mesosphere DCOS makes it simple to run modern distributed applications in production at scale. Learn to run Portworx on Mesosphere to manage stateful apps!"
 ---
 
 [Mesosphere DC/OS](https://mesosphere.com/product/) makes it easy to build and run modern distributed applications in production at scale, by pooling resources across an entire datacenter or

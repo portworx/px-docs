@@ -4,6 +4,7 @@ title: "Maintenance Commands"
 keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority
 sidebar: home_sidebar
 redirect_from: "/maintenance.html"
+meta-description: "Explore commands needed for maintenance operations using Portworx. Try today!"
 ---
 
 * TOC

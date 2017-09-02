@@ -4,6 +4,7 @@ title: "PostgreSQL"
 keywords: portworx, postgres, postgresql
 sidebar: home_sidebar
 redirect_from: "/postgres.html"
+meta-description: "Use this guide to install and run PostgreSQL in Docker containers. Try today!"
 ---
 
 ## Running PostgreSQL from CrunchyData on Portworx 

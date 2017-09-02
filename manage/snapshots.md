@@ -4,6 +4,7 @@ title: "Snapshot Reference"
 keywords: portworx, pxctl, snapshot, reference
 sidebar: home_sidebar
 redirect_from: "/snapshot.html"
+meta-description: "Learn how container volume snapshots can be created explicitly by pxctl snap create commands or through a schedule that is set on the volume. Try today!"
 ---
 
 * TOC
