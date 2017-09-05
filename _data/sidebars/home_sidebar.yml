@@ -48,6 +48,8 @@
           url: /scheduler/kubernetes/support.html
         - title: Decommission a node
           url: /scheduler/kubernetes/k8s-node-decommission.html
+        - title: Enter Portworx maintenance mode
+          url: /scheduler/kubernetes/k8s-node-maintenance.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
