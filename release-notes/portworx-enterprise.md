@@ -31,7 +31,7 @@ None
 * Add log messages when logging URL is changed
 * Auto re-attach containers mounting shared volumes when PX container is restarted. 
 * Handle volume delete requests gracefully when PX container is starting up
-* Handle service account access when PX is running as a container instead of a daemonset
+* Handle service account access when PX is running as a container instead of a daemonset when running under kubernetes
 * Implement a global lock for kubernetes filter such that all cluster-wide k8s filter operations are coordinated through the
   lock
 * Improvements in unmount/detach handling in kubernetes to handle different POD clean up behaviors for deployments 
