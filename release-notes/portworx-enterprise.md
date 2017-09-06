@@ -28,7 +28,7 @@ None
 * Remove the volume quorum check during volume mounts so the mount can be retried until the quorum is achieved
 * Allow snapshot volume source to be provided as another PX volume ID and Snapshot ID
 * Allow K8S inline snapshot creation using the k8s volume spec
-* Add log messages when logging URL is changed
+* Post log messages indicating when logging URL is changed
 * Auto re-attach containers mounting shared volumes when PX container is restarted. 
 * Handle volume delete requests gracefully when PX container is starting up
 * Handle service account access when PX is running as a container instead of a daemonset when running under kubernetes
