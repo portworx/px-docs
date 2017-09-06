@@ -31,6 +31,7 @@ None
 * Add log messages when logging URL is changed
 * Auto re-attach containers attached shared volumes when PX container is restarted. 
 * Handle volume delete requests gracefully when PX container is starting up
+* Handle service account access when PX is running as a container instead of a daemonset
 
 
 
