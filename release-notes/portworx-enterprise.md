@@ -9,6 +9,30 @@ redirect_from: "/px-enterprise-release-notes.html"
 * TOC
 {:toc}
 
+## 1.2.10 Release notes
+
+### Key Features
+
+None
+
+### Key Changes and Issues Addressed
+
+* Fix issue when a node running PX goes down, it never gets marked down in the kvdb by other nodes.
+* Fix issue when a container in Lighthouse UI always shows as running even after it has exited
+* Fix issue kubernetes pods attaching to shared volumes in PX will not get reattached after a PX container restart 
+  that takes longer than 10 minutes
+* Add Linux immutable (CAP_LINUX_IMMUTABLE) to PX Plugins
+* Set autocache parameter for shared volumes
+* On volume mount, make the path read-only if an unmount comes in if the POD gets deleted or PX is restarted during POD
+  creation. On unmount, the delete the mount path.
+* Remove the volume quorum check during volume mounts so the mount can be retried until the quorum is achieved
+* Allow snapshot volume source to be provided as another PX volume ID and Snapshot ID
+* Allow K8S inline snapshot creation using the k8s volume spec
+* Add log messages when logging URL is changed
+* Auto re-attach containers attached shared volumes when PX container is restarted. 
+* Handle volume delete requests gracefully when PX container is starting up
+
+
 
 ## 1.2.9 Release notes
 
