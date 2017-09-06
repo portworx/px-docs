@@ -21,7 +21,7 @@ None
 * Fix issue when a container in Lighthouse UI always shows as running even after it has exited
 * Fix issue kubernetes pods attaching to shared volumes in PX will not get reattached after a PX container restart 
   that takes longer than 10 minutes
-* Add Linux immutable (CAP_LINUX_IMMUTABLE) to PX Plugins
+* Add Linux immutable (CAP_LINUX_IMMUTABLE) when PX is running as Docker V2 Plugin
 * Set autocache parameter for shared volumes
 * On volume mount, make the path read-only if an unmount comes in if the POD gets deleted or PX is restarted during POD
   creation. On unmount, the delete the mount path.
