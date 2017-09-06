@@ -29,9 +29,13 @@ None
 * Allow snapshot volume source to be provided as another PX volume ID and Snapshot ID
 * Allow K8S inline snapshot creation using the k8s volume spec
 * Add log messages when logging URL is changed
-* Auto re-attach containers attached shared volumes when PX container is restarted. 
+* Auto re-attach containers mounting shared volumes when PX container is restarted. 
 * Handle volume delete requests gracefully when PX container is starting up
 * Handle service account access when PX is running as a container instead of a daemonset
+* Implement a global lock for kubernetes filter such that all cluster-wide k8s filter operations are coordinated through the
+  lock
+* Improvements in unmount/detach handling in kubernetes to handle different POD clean up behaviors for deployments 
+  and statefulsets
 
 
 
