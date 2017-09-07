@@ -106,7 +106,7 @@ ALERTMANAGER_CONF=/etc/alertmanager
 ### AlertManager config file
 
 Modify the below config file to use Google's SMTP server for your account. 
-Save it as ${ALERTMANAGER_CONF}/alert.conf.
+Save it as ${ALERTMANAGER_CONF}/config.yml.
 
 ```
 global:
@@ -130,7 +130,7 @@ receivers:
     auth_password: "<sender-email-password>"
 ```
 
-This file can be downloaded from [alert.conf](https://gist.github.com/shailvipx/7fa7ed5d722062d6151c15c2db9bc05c)
+This file can be downloaded from [config.yml](https://gist.github.com/shailvipx/7fa7ed5d722062d6151c15c2db9bc05c)
 
 ### Run AlertManager
 
