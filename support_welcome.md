@@ -30,14 +30,14 @@ email addresses of your team to "support@portworx.com".   You will be notified b
 
 ## Support Email Alias
 We can also maintain support through a general purpose support email alias : "support@portworx.com".
-Access to the support email alias is open, unfiltered and unmoderated.
+<br>Access to the support email alias is open, unfiltered and unmoderated.
 
 ## Phone Support
 We also offer Phone Support by calling our Support Hotline at +1 (650) 397-8535
-Phone Support is available on a 24x7 basis
+<br>Phone Support is available on a 24x7 basis
 
 Please do not hesitate to engage with us for any problems, issues, questions or requests you may have.
-Again, your customer experience is our highest priority.   
+<br>Again, your customer experience is our highest priority.   
 
 Thank you for choosing Portworx.
 
