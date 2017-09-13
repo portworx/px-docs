@@ -54,25 +54,9 @@ ID			NAME	SIZE	HA	SHARED	IO_PRIORITY	SCALE STATUS
 
 You can use the ID or NAME of the snapshots when using them to restore a volume.
 
-#### Restoring a volume from a snapshot
-To rollback a pod back to a previous snapshot, use a `PersistentVolumeClaim` that is created with the following format. Following spec creates a PVC that is restored from a previous Portworx snapshot called _snap001_. 
+#### Restoring a pod from a snapshot
 
-```yaml
-kind: PersistentVolumeClaim
-apiVersion: v1
-  metadata:
-    name: name.rollback001-source.snap001
-    annotations:
-      volume.beta.kubernetes.io/storage-class: portworx-repl-1-snap-internal
-spec:
-  resources:
-    requests:
-      storage: 1Gi   
-```
-
-Note the format of the “name” field.  The format is `name.<new_volume_name>-source.<snap_name>`.  Above example references a source snapshot _snap001_ and creates a volume _rollback001_ from it..  
-
-Now when you create a POD from this PVC, it will resume the application from a rolled back version.
+To restore a pod to use the created snapshot, use the pvc `name.snap001-source.pvc001` in the pod spec.
 
 ## Managing snapshots through `pxctl`
 

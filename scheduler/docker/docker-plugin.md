@@ -154,40 +154,38 @@ containers/applications that use the PX-Volumes:
 
 * ie. PX volume used by MySQL _before_ the v1->v2 Plugin update:
 
+```json
+{% raw %}# docker inspect --format '{{json .Mounts}}' pxMySQL {% endraw %}
+[
+  {
+    "Type": "volume",
+    "Name": "pxMysqlData1",
+    "Source": "/var/lib/osd/mounts/pxMysqlData1",
+    "Destination": "/var/lib/mysql",
+    "Driver": "pxd",
+    "Mode": "",
+    "RW": true,
+    "Propagation": ""
+  }
+]
 ```
-sudo docker inspect pxMySQL
 
-[...]
-  "Mounts": [
-    {
-      "Type": "volume",
-      "Name": "pxMysqlData1",
-      "Source": "/var/lib/osd/mounts/pxMysqlData1",
-      "Destination": "/var/lib/mysql",
-      "Driver": "pxd",
-      "Mode": "",
-      "RW": true,
-      "Propagation": ""
-    }
-```
+* ... and _after_ the v1->v2 Plugin update (note: _Driver_ and _Source_ got updated):
 
-* ... and _after_ the v1->v2 Plugin update:
-
-```
-sudo docker inspect pxMySQL
-
-[...]
-  "Mounts": [
-    {
-      "Type": "volume",
-      "Name": "pxMysqlData1",
-      "Source": "/var/lib/docker/plugins/9c6d76...bcd/rootfs",
-      "Destination": "/var/lib/mysql",
-      "Driver": "pxd",
-      "Mode": "",
-      "RW": true,
-      "Propagation": ""
-    }
+```json
+{% raw %}# docker inspect --format '{{json .Mounts}}' pxMySQL {% endraw %}
+[
+  {
+    "Type": "volume",
+    "Name": "pxMysqlData1",
+    "Source": "/var/lib/docker/plugins/4e0c09be71b29399...aefae6/rootfs/var/lib/osd/mounts/pxMysqlData1",
+    "Destination": "/var/lib/mysql",
+    "Driver": "pxd:latest",
+    "Mode": "",
+    "RW": true,
+    "Propagation": ""
+  }
+]
 ```
 
 

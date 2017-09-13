@@ -16,6 +16,8 @@
         url: /scheduler/kubernetes/install.html
       - title: Upgrade
         url: /scheduler/kubernetes/upgrade.html
+      - title: Tectonic
+        url: /scheduler/kubernetes/tectonic.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
@@ -46,6 +48,8 @@
           url: /scheduler/kubernetes/support.html
         - title: Decommission a node
           url: /scheduler/kubernetes/k8s-node-decommission.html
+        - title: Enter Portworx maintenance mode
+          url: /scheduler/kubernetes/k8s-node-maintenance.html
       - title: PX Log Management using EFK
         url: /scheduler/kubernetes/logmanagement-efk-k8s.html
     - title: Mesosphere DC/OS
@@ -144,6 +148,8 @@
         url: /cloud/azure/azure.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos_acs_engine.html
+      - title: Kubernetes on Azure with Tectconic
+        url: /cloud/azure/k8s_tectonic.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
@@ -188,10 +194,12 @@
       folderitems: 
       - title: Prometheus
         url: /maintain/monitoring/prometheus/index.html
-      - title: Alerts
+      - title: Alerts integration with Prometheus
         url: /maintain/monitoring/alerting.html
       - title: Grafana
         url: /maintain/monitoring/grafana/index.html
+      - title: Alerts Reference
+        url: /maintain/monitoring/portworx-alerts.html
     - title: Performance
       folderitems:
       - title: FIO

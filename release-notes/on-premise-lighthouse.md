@@ -11,6 +11,19 @@ redirect_from: "/on-prem-lighthouse-release-notes.html"
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
+## Lighthouse 1.1.8 Release notes
+
+* Added in support for the latest Openstorage api's and made Lighthouse work with these.
+* Added creation of the influx px_stats database if not present.
+* Added kubernetes commands for spinning up a px node/cluster
+* Added feature where the user can specify admin email and company.
+* Added feature where the user can specify which port Lighthouse would be running on.
+
+### Key Fixes
+
+* Fixed an issue where volumes would always show as attached
+* Fixed an issue where in different timezones last communication date would show 2017 years ago.
+
 ## Lighthouse 1.1.6 Release notes
 
 * Updated dashboard with better representation of different IO Priority pools
