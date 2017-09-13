@@ -46,6 +46,8 @@
           url: /scheduler/kubernetes/support.html
         - title: Decommission a node
           url: /scheduler/kubernetes/k8s-node-decommission.html
+      - title: PX Log Management using EFK
+        url: /scheduler/kubernetes/logmanagement-efk-k8s.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
