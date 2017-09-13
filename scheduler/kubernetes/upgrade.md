@@ -62,5 +62,3 @@ The following procedure should be followed:
 4. A new Portworx pod with the new version will be initiated on this node. This pod will stay in initializing state.
 4. Reboot the node. (Portworx 1.2.9 release requires a reboot of the host to perform upgrade of our kernel driver.)
 5. Uncordon the node once it comes up.
-
->**Coming soon:**<br/> In the 1.2.10 release, Portworx will be automating parts of the above procedure by closer integration with the Kubernetes API.
