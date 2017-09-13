@@ -3,7 +3,7 @@ layout: page
 sidebar: home_sidebar
 title: "Portworx Licensing"
 keywords: portworx, px-enterprise, px-developer, requirements
-redirect_from: "/get-started-licensing.html"
+redirect_from: "/knowledgebase/support.html"
 ---
 
 * TOC
