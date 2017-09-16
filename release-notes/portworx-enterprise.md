@@ -35,6 +35,9 @@ None
 * Improvements in unmount/detach handling in kubernetes to handle different POD clean up behaviors for deployments 
   and statefulsets
 
+### Errata
+
+* If two containers using the same shared volume are run in the same node using docker, when one container exits, the container's connection to the volume will get disrupted as well. Workaround is to run containers using shared volume in two different portworx nodes
 
 ## 1.2.9 Release notes
 
