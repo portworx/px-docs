@@ -5,6 +5,11 @@ The Portworx documentation is tested to prevent new issues from occuring such as
 Testing currently occurs on Travis as it is a free service for open source projects. 
 The test manifest can be found at the root of this repository in `.travis.yml`.
 
+## Requirements
+
+ * [`pup`](https://github.com/ericchiang/pup)
+ * GNU Core Utils (MacOS users can obtain this through Brew)
+
 
 ## Common Failures
 

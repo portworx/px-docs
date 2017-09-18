@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Upgrade Portworx volume plugin"
+title: "Upgrade Portworx volume plugin with Swarm"
 keywords: portworx, architecture, storage, container, install, docker, upgrade, plugin
 sidebar: home_sidebar
 ---
