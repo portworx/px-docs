@@ -61,6 +61,9 @@ Read more about how Portworx provides storage volumes to your application contai
   * Ports 9001, 9002, 9003, 9010, 9012, 9014 must be open for internal network traffic between nodes running PX
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
   synchronized between all the nodes
+ * Ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. Follow the instructions here 
+   to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
+   
   
 ## Install
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
