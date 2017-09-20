@@ -46,7 +46,7 @@ Below are all parameters that can be given in the query string:
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
 | cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster. Specify comma-separated list of kvdb endpoints.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
@@ -70,6 +70,9 @@ If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.ht
 ```
 # To specify drives
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
+
+# To specify multiple kvdb endpoints
+$ kubectl apply -f "http:install.portworx.com?cluster=mycluster&kvdb=etcd://etcd1.fake.net:2379,etcd://etcd2.fake.net:2379&drives=/dev/sdb"
 
 # To run on coreos
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
