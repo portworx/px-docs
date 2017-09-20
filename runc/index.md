@@ -8,9 +8,11 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
+>**Note:**<br/>Running Portworx via OCI RunC is still experimental.
+
 To install and configure PX to run directly with RunC, please use the configuration steps described in this section.
 
->**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.
+>**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
 
 ## Install the PX OCI bundle
 Portworx provides a Docker based installation utility to help deploy the PX OCI
@@ -110,9 +112,28 @@ sudo systemctl enable portworx
 sudo systemctl start portworx
 ```
 
+The `px-runc install` command above creates a systemd unit file such as the example below:
+
+```
+[Unit]
+Description=Portworx OCI Container
+Documentation=https://docs.portworx.com/runc
+Before=docker.service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/%p
+WorkingDirectory=/opt/pwx/oci
+ExecStartPre=-/opt/pwx/bin/runc delete portworx
+ExecStart=/opt/pwx/bin/px-runc run --name portworx
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+```
 
 Alternatively, one might prefer to first start the PX interactively (ie, to verify the configuration parameters were OK, and the startup was successful), and then install it as a service:
-
 
 ```
 # Invoke PX interactively, abort w/ CTRL-C when confirmed it's running:

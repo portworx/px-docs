@@ -73,6 +73,10 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
 
+## Run Portworx via RunC
+Alternatively, you can run Portworx directly via OCI RunC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
+[Install with RunC](/runc/)
+
 ## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" alt="Slack" .slack-icon}](http://slack.portworx.com)
 
