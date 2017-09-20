@@ -1,7 +1,7 @@
-# Install 'etcd3' on BareMetal or VMs
+# Install 'etcd3' cluster on BareMetal or VMs
 
 The `ansible` script in this directory can be used to deploy a 
-fully functioning 3 node 'etcd3' cluster to existing servers or VMs.
+fully functioning 3 node 'etcd3' cluster to existing servers or VMs with host persistent storage.
 
 The inventory file `inv.yml` should be structured as follows:
 
