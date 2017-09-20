@@ -1,0 +1,4 @@
+[nodes]
+server1 IP=192.168.205.10
+server2 IP=192.168.205.11
+server3 IP=192.168.205.12
