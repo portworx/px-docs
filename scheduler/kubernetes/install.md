@@ -78,6 +78,13 @@ $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://et
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
 ```
 
+#### Restricting PX to certain nodes
+To restrict Portworx to only a subset of nodes in the Kubernetes cluster, you can label the minion nodes.  For example, to prevent Portworx from starting on minion-X:
+
+```
+$ kubectl label nodes minion-X "px/enabled=false" --overwrite
+```
+
 #### Scaling
 Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
