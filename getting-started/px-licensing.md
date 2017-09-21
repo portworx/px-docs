@@ -11,7 +11,7 @@ redirect_from: "/knowledgebase/support.html"
 
 ## Introduction
 
-Starting with v1.2.8 release, the Portworx products support the following license types:
+Starting with the v1.2.8 release, the Portworx products support the following license types:
 
 |      License type      |  Description
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
