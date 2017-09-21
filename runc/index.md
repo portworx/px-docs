@@ -112,12 +112,12 @@ For example:
 
 ```
 # Set up PX OCI as systemd service:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
 
 # Reload systemd configurations, enable and start Portworx service
-sudo systemctl daemon-reload
-sudo systemctl enable portworx
-sudo systemctl start portworx
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable portworx
+$ sudo systemctl start portworx
 ```
 
 The `px-runc install` command above creates a systemd unit file such as the example below:
@@ -145,7 +145,8 @@ Alternatively, one might prefer to first start the PX interactively (ie, to veri
 
 ```
 # Invoke PX interactively, abort with CTRL-C when confirmed it's running:
-$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
+$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb
 
 [...]
@@ -155,7 +156,8 @@ $ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:237
 > time="2017-08-18T20:34:23Z" level=info msg="PX is ready on Node: 53f5e87b... CLI accessible at /opt/pwx/bin/pxctl."
 [ hit Ctrl-C ]
 
-# Set up PX OCI as systemd service, without reconfiguring (note: passing only 'install' parameter):
+# Set up PX OCI as systemd service, without reconfiguring 
+# (note: passing only 'install' parameter):
 sudo /opt/pwx/bin/px-runc install
 
 # Reload systemd configurations, enable and start Portworx service
