@@ -306,7 +306,7 @@
     folderitems:
     - title: OpenStorage.org
       url: http://www.openstorage.org
-    - title: Production Test Framework for CSI and Kubernetes
+    - title: Torpedo for CSI and Kubernetes
       url: https://github.com/portworx/torpedo
     - title: Graph Drivers for Docker
       url: https://github.com/portworx/lcfs
