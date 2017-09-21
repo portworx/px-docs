@@ -9,7 +9,7 @@ meta-description: "Find out more about Portworx, the persistent storage solution
 * TOC
 {:toc}
 
-Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via modern scheduling software such as Kubernetes, Marathon and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through the scheduler.  
+Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via container orchestrators such as Kubernetes, Marathon and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through the scheduler.  
 Portworx volumes are always hyper-converged.  That is, they are exposed on the same host where the application container executes.
 
 Portworx technology:
@@ -23,11 +23,10 @@ Portworx technology:
 * Provides programmatic control on your storage resources - volumes and other stateful services can be created and consumed directly via the scheduler and orchestration software tool chain.
 * Is radically simple - Portworx is deployed just like any other container - and managed by your scheduler of choice.
 
+## Cloud Native Storage
 {%
     include youtubePlayer.html 
     id = "0zTjOly0vkA"
-    title = "Storage for Cloud Native Applications"
-    date = "2017-03-17"
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
 
@@ -42,7 +41,6 @@ Portworx itself is deployed as a container and runs on every host in your cluste
 Read more about how Portworx provides storage volumes to your application containers [here](architecture.html).
 
 ## Minimum Requirements
-
 * Linux kernel 3.10 or greater
 * Docker 1.10 or greater.
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
@@ -65,13 +63,17 @@ Read more about how Portworx provides storage volumes to your application contai
    Follow the instructions here to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
    
   
-## Install
+## Install with a Container Orchestrator
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
 * [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
+
+## Install with runC
+You can run Portworx directly via OCI runC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
+[Install with RunC](/runc/)
 
 ## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" alt="Slack" .slack-icon}](http://slack.portworx.com)

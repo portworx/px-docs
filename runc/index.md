@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Run PX under RunC"
+title: "Run PX under runC"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
 ---
@@ -8,9 +8,14 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-To install and configure PX to run directly with RunC, please use the configuration steps described in this section.
+## Why runC
+Running Portworx as a runC container eliminates any cyclical dependancies between a Docker container consuming storage from the Portworx container.  It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.
 
->**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.
+>**Note:**<br/>Running Portworx via OCI runC is still experimental.
+
+To install and configure PX to run directly with runC, please use the configuration steps described in this section.
+
+>**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
 
 ## Install the PX OCI bundle
 Portworx provides a Docker based installation utility to help deploy the PX OCI
@@ -18,7 +23,9 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```
-$ sudo docker run --rm -it --privileged=true -v /etc/pwx:/etc/pwx -v /opt/pwx:/opt/pwx \
+$ sudo docker run --rm -it --privileged=true \
+    -v /etc/pwx:/etc/pwx \
+    -v /opt/pwx:/opt/pwx \
     portworx/px-base-enterprise-oci
 ```
 
@@ -26,24 +33,28 @@ $ sudo docker run --rm -it --privileged=true -v /etc/pwx:/etc/pwx -v /opt/pwx:/o
 
 >**Note:**<br/>The `--privileged=true` flag has been included for backward compatibility.  You may omit this flag when using a newer Docker version (ie. v1.13 or higher), also when installing on systems that do not have SELinux enabled.
 
-## Run PX under RunC
+## Run PX under runC
 
 You can run the PX OCI bundle via the `px-runc <install|run>` command.
 
 The `px-runc` command is a helper-tool that does the following:
 
 1. prepares the OCI configuration for PX,
-2. prepares the OCI directory for RunC, and
-3. starts the PX OCI bundle via RunC command.
+2. prepares the OCI directory for runC, and
+3. starts the PX OCI bundle via runC command.
 
 For example:
 ```
 # EXAMPLE-1: Run PX OCI bundle interactively (use Ctrl-C to abort):
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc
+$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb -s /dev/xvdc
 
 # EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc \
-   -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb -s /dev/xvdc -x kubernetes \
+    -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 #### Command-line arguments to PX
@@ -81,42 +92,60 @@ examples:
    px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
->**Note:**<br/>The volumes and files that are used internally by PX (namely `/dev`, `/etc/resolv.conf`, `/etc/pwx`, `/opt/pwx/bin`, `/var/run/docker.sock`, `/run/docker`, `/lib/modules`, `/usr/src`, `/var/cores` and `/var/lib/osd`) do not have to be specified via the `-v <dir1>:<dir2>` options.
-
-
-#### Running with a custom config.json
+#### Modifying the PX configuration
 
 Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
 
-After the initial installation, you can edit and adjust the:
+After the initial installation, you can modify the following files and restart the PX runC container:
 
 * PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
 * OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
 
-
 ## Configure systemd to start PX
 
-You can configure the PX OCI service by running the `px-runc install` command.
+You can configure the PX OCI to run as a [systemd(1)](https://en.wikipedia.org/wiki/Systemd) service
+by running the `px-runc install` command.
 
 For example:
 
 ```
 # Set up PX OCI as systemd service:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
 
 # Reload systemd configurations, enable and start Portworx service
-sudo systemctl daemon-reload
-sudo systemctl enable portworx
-sudo systemctl start portworx
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable portworx
+$ sudo systemctl start portworx
 ```
 
-
-Alternatively, one might prefer to first start the PX interactively (ie, to verify the configuration parameters were OK, and the startup was successful), and then install it as a service:
-
+The `px-runc install` command above creates a systemd unit file such as the example below:
 
 ```
-# Invoke PX interactively, abort w/ CTRL-C when confirmed it's running:
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+[Unit]
+Description=Portworx OCI Container
+Documentation=https://docs.portworx.com/runc
+Before=docker.service
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/%p
+WorkingDirectory=/opt/pwx/oci
+ExecStartPre=-/opt/pwx/bin/runc delete portworx
+ExecStart=/opt/pwx/bin/px-runc run --name portworx
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Alternatively, one might prefer to first start the PX interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:
+
+```
+# Invoke PX interactively, abort with CTRL-C when confirmed it's running:
+$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb
 
 [...]
 > time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
@@ -125,11 +154,55 @@ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 
 > time="2017-08-18T20:34:23Z" level=info msg="PX is ready on Node: 53f5e87b... CLI accessible at /opt/pwx/bin/pxctl."
 [ hit Ctrl-C ]
 
-# Set up PX OCI as systemd service, without reconfiguring (note: passing only 'install' parameter):
-sudo /opt/pwx/bin/px-runc install
+# Set up PX OCI as systemd service, without reconfiguring 
+# (note: passing only 'install' parameter):
+$ sudo /opt/pwx/bin/px-runc install
 
 # Reload systemd configurations, enable and start Portworx service
-sudo systemctl daemon-reload
-sudo systemctl enable portworx
-sudo systemctl start portworx
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable portworx
+$ sudo systemctl start portworx
+```
+
+## Miscellaneous
+
+### Logging and Log files
+
+The [systemd(1)](https://en.wikipedia.org/wiki/Systemd) uses a very flexible logging mechanism, where logs can be viewed using the `journalctl` command.
+
+For example:
+
+```
+# Monitor the Portworx logs
+$ sudo journalctl -f -u portworx
+
+# Get a slice of Portworx logs
+$ sudo journalctl -u portworx --since 09:00 --until "1 hour ago"
+```
+
+However, if you prefer to capture Portworx service logs in a separate log file, you will need to modify your host system as follows:
+
+```
+# Create a rsyslogd(8) rule to separate out the PX logs:
+$ sudo cat > /etc/rsyslog.d/23-px-runc.conf << _EOF
+:programname, isequal, "px-runc" /var/log/portworx.log
+& stop
+_EOF
+
+# Create logrotate(8) configuration to periodically rotate the logs:
+$ sudo cat > /etc/logrotate.d/portworx << _EOF
+/var/log/portworx.log {
+    daily
+    rotate 7
+    compress
+    notifempty
+    missingok
+    postrotate
+        /usr/bin/pkill -HUP syslogd 2> /dev/null || true
+    endscript
+}
+_EOF
+
+# Signal syslogd to reload the configurations:
+$ sudo pkill -HUP syslogd
 ```
