@@ -29,7 +29,7 @@ Depending on the type of the container you are installing, a different license w
 activates the "Trial" license (limited to 30 days), which can be upgraded to one of the "PX-Enterprise" licenses at any time.
 
 
-## How to check which license is installed?
+## Checking your License
 
 A brief license summary is provided w/ `pxctl status` command:
 
@@ -69,9 +69,9 @@ In the table below, we can see the overview of features that are controlled via 
 | Bare-metal hosts             | yes/no | Software may be deployed on commodity hardware
 
 
-## Types of licenses
+## Type of Licenses
 
-### PX-Developer license
+### PX-Developer License
 
 The "PX-Developer" license is a default license for [px-developer](/getting-started/px-developer.html) containers.
 The "PX-Developer" license is permanent and free, and provides a limited set of functionality, with unrestricted use.
@@ -95,7 +95,7 @@ Product SKU                  PX-Developer  permanent
 ```
 
 
-### Trial license
+### Trial License
 
 The "Trial" license activates automatically when the [px-enterprise](/getting-started/px-enterprise.html) container is installed.
 The trial license provides the full product functionality for 30 days.
@@ -130,7 +130,7 @@ license file (see [PX-Enterprise](#px-enterprise-license) below for details)
 * The "Trial" license itself cannot be upgraded or extended with another "Trial", or downgraded into "PX-Developer" license.
 
 
-### PX-Enterprise license
+### PX-Enterprise License
 
 The "PX-Enterprise" license is our most flexible license, which comes with a number of options.
 Please refer to [Features page](https://portworx.com/products/features/) to
@@ -177,6 +177,5 @@ pxctl license add license_file.bin
 
 Finally, please note that the license installation is a non-obtrusive process, which will not interfere with the data stored
 on the PX volumes, nor will it interrupt the active IO operations.
-
 
 For information on purchase, upgrades and support, please reach out to us at support@portworx.com
