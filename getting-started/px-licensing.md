@@ -31,10 +31,10 @@ activates the "Trial" license (limited to 30 days), which can be upgraded to one
 
 ## Checking your License
 
-A brief license summary is provided w/ `pxctl status` command:
+A brief license summary is provided with the `pxctl status` command:
 
 ```
-[root@vm1 ~]# pxctl status
+# pxctl status
 Status: PX is operational
 License: Trial license (expires in 30 days)
  [...]
@@ -43,7 +43,7 @@ License: Trial license (expires in 30 days)
 More details about each individual licensed feature is displayed via `pxctl license list` command, ie.:
 
 ```
-[root@vm1 ~]# pxctl license list
+# pxctl license list
 DESCRIPTION                  ENABLEMENT  ADDITIONAL INFO
 Number of nodes maximum         1000
 Number of volumes maximum       1024 [...]
@@ -78,7 +78,7 @@ The "PX-Developer" license is permanent and free, and provides a limited set of 
 It supports the following features:
 
 ```
-[root@vm1 ~]# pxctl license list
+# pxctl license list
 DESCRIPTION                  ENABLEMENT    ADDITIONAL INFO
 Number of nodes maximum             3
 Number of volumes maximum         256
@@ -148,7 +148,7 @@ The easiest way to install the "PX-Enterprise" license, is via the
  "Activation ID" (reach out to us at support@portworx.com for purchasing licenses), ie:
 
 ```
-pxctl license activate c0ffe-fefe-activation-123
+# pxctl license activate c0ffe-fefe-activation-123
 ```
 
 Note that the "license activation" process will require active Internet connection from the PX-nodes to the license-server,
@@ -162,7 +162,7 @@ Upon activating the license on one PX-node, all remaining PX-nodes will automati
 Customers will be asked to provide the `Cluster UUID` information (available via `pxctl cluster list` command):
 
 ```
-[root@vm1 ~]# pxctl cluster list
+# pxctl cluster list
 Cluster ID: MY_FAVORITE_PX_CLUSTER
 Cluster UUID: f987ad4b-987c-4e7e-a8bd-788c89cc40f1
 Status: OK [...]
@@ -172,7 +172,7 @@ Upon supplying the "Cluster UUID", the customers will get their "license file".
 The "license file" will need to be uploaded to one of the PX-nodes, and activated via the following command:
 
 ```
-pxctl license add license_file.bin
+# pxctl license add license_file.bin
 ```
 
 Finally, please note that the license installation is a non-obtrusive process, which will not interfere with the data stored
