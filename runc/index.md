@@ -92,6 +92,8 @@ examples:
    px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
+>**Note:**<br/>The volumes and files that are used internally by PX (namely `/dev`, `/etc/resolv.conf`, `/etc/pwx`, `/opt/pwx/bin`, `/var/run`, `/run/docker`, `/lib/modules`, `/usr/src`, `/var/cores` and `/var/lib/osd`) do not have to be specified via the `-v <dir1>:<dir2>` options.
+
 #### Modifying the PX configuration
 
 Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
@@ -103,7 +105,8 @@ After the initial installation, you can modify the following files and restart t
 
 ## Configure systemd to start PX
 
-You can configure the PX OCI service by running the `px-runc install` command.
+You can configure the PX OCI to run as a [systemd(1)](https://en.wikipedia.org/wiki/Systemd) service
+by running the `px-runc install` command.
 
 For example:
 
@@ -159,4 +162,47 @@ sudo /opt/pwx/bin/px-runc install
 sudo systemctl daemon-reload
 sudo systemctl enable portworx
 sudo systemctl start portworx
+```
+
+## Miscellaneous
+
+### Logging and log-files
+
+The [systemd(1)](https://en.wikipedia.org/wiki/Systemd) uses a very flexible logging mechanism, where logs can be viewed using the `journalctl` command.
+
+For example:
+
+```
+# monitor the Portworx logs
+sudo journalctl -f -u portworx
+
+# get a slice of Portworx logs
+sudo journalctl -u portworx --since 09:00 --until "1 hour ago"
+```
+
+However, if you prefer to capture Portworx service logs in a separate log-file, you will need to modify your host system as follows:
+
+```
+# Create a rsyslogd(8) rule to separate out the PX logs:
+sudo cat > /etc/rsyslog.d/23-px-runc.conf << _EOF
+:programname, isequal, "px-runc" /var/log/portworx.log
+& stop
+_EOF
+
+# Create logrotate(8) configuration to periodically rotate the logs:
+sudo cat > /etc/logrotate.d/portworx << _EOF
+/var/log/portworx.log {
+    daily
+    rotate 7
+    compress
+    notifempty
+    missingok
+    postrotate
+        /usr/bin/pkill -HUP syslogd 2> /dev/null || true
+    endscript
+}
+_EOF
+
+# Signal syslogd to reload the configurations:
+sudo pkill -HUP syslogd
 ```
