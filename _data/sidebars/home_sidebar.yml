@@ -302,6 +302,14 @@
       url: /release-notes/portworx-enterprise.html
     - title: Lighthouse On-Prem Release Notes
       url: /release-notes/on-premise-lighthouse.html
+  - title: Open Source Resources
+    folderitems:
+    - title: OpenStorage.org
+      url: http://www.openstorage.org
+    - title: Production Test Framework for CSI and Kubernetes
+      url: https://github.com/portworx/torpedo
+    - title: Graph Drivers for Docker
+      url: https://github.com/portworx/lcfs
   - title: Video Demos
     folderitems:
     - title: Mesos, Mesosphere and Marathon
