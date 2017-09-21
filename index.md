@@ -23,14 +23,14 @@ Portworx technology:
 * Provides programmatic control on your storage resources - volumes and other stateful services can be created and consumed directly via the scheduler and orchestration software tool chain.
 * Is radically simple - Portworx is deployed just like any other container - and managed by your scheduler of choice.
 
+## Cloud Native Storage
 {%
     include youtubePlayer.html 
     id = "0zTjOly0vkA"
-    title = "Cloud Native Storage"
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
 
-### How it Works
+## How it Works
 Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block storage to your applications on the same server where the application is running.
 Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Container Orchestrator.  The following are supported:
 * Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f)
@@ -40,7 +40,7 @@ Portworx itself is deployed as a container and runs on every host in your cluste
 
 Read more about how Portworx provides storage volumes to your application containers [here](architecture.html).
 
-### Minimum Requirements
+## Minimum Requirements
 * Linux kernel 3.10 or greater
 * Docker 1.10 or greater.
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
@@ -63,7 +63,7 @@ Read more about how Portworx provides storage volumes to your application contai
    Follow the instructions here to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
    
   
-### Install with a Container Orchestrator
+## Install with a Container Orchestrator
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
@@ -71,11 +71,11 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
 
-### Install with runC
+## Install with runC
 You can run Portworx directly via OCI runC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
 
-### Join us on Slack!
+## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" alt="Slack" .slack-icon}](http://slack.portworx.com)
 
 [Contact us](http://portworx.com/contact-us/) to share feedback, work with us, and to request features.
