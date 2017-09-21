@@ -41,11 +41,13 @@ The `px-runc` command is a helper-tool that does the following:
 For example:
 ```
 # EXAMPLE-1: Run PX OCI bundle interactively (use Ctrl-C to abort):
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379
+$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
+        -k etcd://myetc.company.com:2379 \
         -s /dev/xvdb -s /dev/xvdc
 
 # EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+        -k etcd://myetc.company.com:2379 \
         -s /dev/xvdb -s /dev/xvdc -x kubernetes \
         -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
