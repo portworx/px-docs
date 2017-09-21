@@ -3,9 +3,9 @@
   - title: Get Started
     folderitems:
     - title: Install with a Container Orchestrator
-      url: /#install with a container orchestrator
+      url: /#install-with-a-container-orchestrator
     - title: Install with OCI runC
-      url: /#install with runc
+      url: /#install-with-runc
     - title: Quick Start
       url: /getting-started/asap.html
     - title: Licensing
