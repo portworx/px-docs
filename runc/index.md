@@ -20,7 +20,9 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```
-$ sudo docker run --rm -it --privileged=true -v /etc/pwx:/etc/pwx -v /opt/pwx:/opt/pwx \
+$ sudo docker run --rm -it --privileged=true \
+    -v /etc/pwx:/etc/pwx \
+    -v /opt/pwx:/opt/pwx \
     portworx/px-base-enterprise-oci
 ```
 
@@ -42,14 +44,14 @@ For example:
 ```
 # EXAMPLE-1: Run PX OCI bundle interactively (use Ctrl-C to abort):
 $ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
-        -k etcd://myetc.company.com:2379 \
-        -s /dev/xvdb -s /dev/xvdc
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb -s /dev/xvdc
 
 # EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
 $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
-        -k etcd://myetc.company.com:2379 \
-        -s /dev/xvdb -s /dev/xvdc -x kubernetes \
-        -v /var/lib/kubelet:/var/lib/kubelet:shared
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb -s /dev/xvdc -x kubernetes \
+    -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 #### Command-line arguments to PX
@@ -87,13 +89,11 @@ examples:
    px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 ```
 
->**Note:**<br/>The volumes and files that are used internally by PX (namely `/dev`, `/etc/resolv.conf`, `/etc/pwx`, `/opt/pwx/bin`, `/var/run/docker.sock`, `/run/docker`, `/lib/modules`, `/usr/src`, `/var/cores` and `/var/lib/osd`) do not have to be specified via the `-v <dir1>:<dir2>` options.
-
-#### Running with a custom config.json
+#### Modifying the PX configuration
 
 Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
 
-After the initial installation, you can edit and adjust the:
+After the initial installation, you can modify the following files and restart the PX runC container:
 
 * PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
 * OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
@@ -139,8 +139,8 @@ Alternatively, one might prefer to first start the PX interactively (ie, to veri
 
 ```
 # Invoke PX interactively, abort with CTRL-C when confirmed it's running:
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
-        -s /dev/xvdb
+$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb
 
 [...]
 > time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
