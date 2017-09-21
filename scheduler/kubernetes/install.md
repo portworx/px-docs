@@ -12,7 +12,7 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 
 >**Note:**<br/>OpenShift and Kubernetes Pre 1.6 users, please follow [these instructions](flexvolume.html).
 
-![k8s porx Logo](/images/k8s-porx.png)
+![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
 ## Deploy PX with Kubernetes 1.6+
 Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
