@@ -13,7 +13,7 @@ This guide walks through upgrading Portworx deployed on DCOS
 ### Upgrade the Portworx image in the systemd service file
 
 On each agent node where Portworx is installed, edit the `/etc/systemd/system/portworx.service` file and change the docker image tag for
-the Portworx image to the desired version. For instance if you want to upgrade from 1.2.8 to 1.2.9, change "portworx/px-enterprise:1.2.8" to "portworx/px-enterprise:1.2.9"
+the Portworx image to the desired version. For instance if you want to upgrade from 1.2.9 to 1.2.10, change "portworx/px-enterprise:1.2.9" to "portworx/px-enterprise:1.2.10"
 
 ### Restart the Portworx service
 
