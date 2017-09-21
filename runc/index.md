@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Run PX under RunC"
+title: "Run PX under runC"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
 ---
@@ -8,9 +8,9 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
->**Note:**<br/>Running Portworx via OCI RunC is still experimental.
+>**Note:**<br/>Running Portworx via OCI runC is still experimental.
 
-To install and configure PX to run directly with RunC, please use the configuration steps described in this section.
+To install and configure PX to run directly with runC, please use the configuration steps described in this section.
 
 >**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
 
@@ -28,15 +28,15 @@ $ sudo docker run --rm -it --privileged=true -v /etc/pwx:/etc/pwx -v /opt/pwx:/o
 
 >**Note:**<br/>The `--privileged=true` flag has been included for backward compatibility.  You may omit this flag when using a newer Docker version (ie. v1.13 or higher), also when installing on systems that do not have SELinux enabled.
 
-## Run PX under RunC
+## Run PX under runC
 
 You can run the PX OCI bundle via the `px-runc <install|run>` command.
 
 The `px-runc` command is a helper-tool that does the following:
 
 1. prepares the OCI configuration for PX,
-2. prepares the OCI directory for RunC, and
-3. starts the PX OCI bundle via RunC command.
+2. prepares the OCI directory for runC, and
+3. starts the PX OCI bundle via runC command.
 
 For example:
 ```

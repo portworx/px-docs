@@ -65,7 +65,7 @@ Read more about how Portworx provides storage volumes to your application contai
    Follow the instructions here to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
    
   
-## Install
+## Install with a Container Orchestrator
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
 
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
@@ -73,8 +73,8 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
 
-## Run Portworx via RunC
-Alternatively, you can run Portworx directly via OCI RunC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
+## Install with runC
+You can run Portworx directly via OCI runC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
 
 ## Join us on Slack!

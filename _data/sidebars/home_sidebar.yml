@@ -2,13 +2,15 @@
 
   - title: Get Started
     folderitems:
-    - title: Install
-      url: /#install
+    - title: Install with a Container Orchestrator
+      url: /#install with a container orchestrator
+    - title: Install with standalone via OCI runC
+      url: /#install with runc
     - title: Quick Start
       url: /getting-started/asap.html
     - title: Licensing
       url: /getting-started/px-licensing.html
-  - title: Schedulers
+  - title: Container Orchestrators
     folderitems:
     - title: Kubernetes
       folderitems:
