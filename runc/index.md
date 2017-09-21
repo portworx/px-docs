@@ -41,11 +41,13 @@ The `px-runc` command is a helper-tool that does the following:
 For example:
 ```
 # EXAMPLE-1: Run PX OCI bundle interactively (use Ctrl-C to abort):
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc
+sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379
+        -s /dev/xvdb -s /dev/xvdc
 
 # EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
-sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb -s /dev/xvdc \
-   -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
+        -s /dev/xvdb -s /dev/xvdc -x kubernetes \
+        -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 #### Command-line arguments to PX
@@ -85,7 +87,6 @@ examples:
 
 >**Note:**<br/>The volumes and files that are used internally by PX (namely `/dev`, `/etc/resolv.conf`, `/etc/pwx`, `/opt/pwx/bin`, `/var/run/docker.sock`, `/run/docker`, `/lib/modules`, `/usr/src`, `/var/cores` and `/var/lib/osd`) do not have to be specified via the `-v <dir1>:<dir2>` options.
 
-
 #### Running with a custom config.json
 
 Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
@@ -94,7 +95,6 @@ After the initial installation, you can edit and adjust the:
 
 * PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
 * OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
-
 
 ## Configure systemd to start PX
 
@@ -136,8 +136,9 @@ WantedBy=multi-user.target
 Alternatively, one might prefer to first start the PX interactively (ie, to verify the configuration parameters were OK, and the startup was successful), and then install it as a service:
 
 ```
-# Invoke PX interactively, abort w/ CTRL-C when confirmed it's running:
-sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb
+# Invoke PX interactively, abort with CTRL-C when confirmed it's running:
+sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 \
+        -s /dev/xvdb
 
 [...]
 > time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
