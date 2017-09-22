@@ -15,7 +15,7 @@ Users are encourged to use freely and contribute.
 
 Portworx-ready clusters can be installed using Terraform and the following Terraporx directories:
 
-* [Full Hashi Stack (Consul/Nomad/Vault) on AWS](http:///github.com/portworx/terraporx/tree/master/aws/hashi-porx)
+* [Full Hashi Stack (Consul/Nomad/Vault) on AWS](http://github.com/portworx/terraporx/tree/master/aws/hashi-porx)
 * [AWS with CoreOS](https://github.com/portworx/terraporx/tree/master/aws)
 * [Azure with CoreOS](https://github.com/portworx/terraporx/tree/master/azure/coreos)
 * Digital Ocean with [CoreOS](https://github.com/portworx/terraporx/tree/master/digital_ocean/coreos), [CentOS](https://github.com/portworx/terraporx/tree/master/digital_ocean/centos), [Ubuntu16](https://github.com/portworx/terraporx/tree/master/digital_ocean/ubuntu16), [DCOS on CentOS](https://github.com/portworx/terraporx/tree/master/digital_ocean/dcos_centos), [Kubernetes on Ubuntu](https://github.com/portworx/terraporx/tree/master/digital_ocean/kubernetes_ubuntu16)
