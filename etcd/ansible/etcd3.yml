@@ -6,11 +6,19 @@
        etcd_version: "3.2.7"
   tasks:
   - name: Remove any old existing etcd
-    shell: |
-         yum -y install wget
-         yum remove etcd etcd2 etcd3
-         rpm -e `rpm -qa | grep etcd`
+    package:
+      name: etcd
+      state: absent
     ignore_errors: yes
+  - name: Remove any old existing etcd2
+    package:
+      name: etcd2
+      state: absent
+    ignore_errors: yes
+  - name: install the latest version of wget
+    package:
+      name: wget
+      state: latest
   - name: Set up persistent directory
     shell: |
          mkdir -p /var/lib/etcd
