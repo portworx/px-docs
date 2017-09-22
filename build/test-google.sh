@@ -1,6 +1,11 @@
 #!/bin/bash
 
-APIKEY='AIzaSyBw1k291he4wdm3fagkAT6TQ-sTH4Jy2u8'
+if [ -z "${GCSAPIKEY}" ]; then
+    echo "Google Custom search API key not defined"
+    exit 1
+fi
+
+APIKEY="${GCSAPIKEY}"
 CX='014138606599756990118%3Axxlvk9kidsa'
 DOMAIN='docs.portworx.com'
 
