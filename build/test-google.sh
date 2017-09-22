@@ -4,7 +4,11 @@ APIKEY='AIzaSyBw1k291he4wdm3fagkAT6TQ-sTH4Jy2u8'
 CX='014138606599756990118%3Axxlvk9kidsa'
 DOMAIN='docs.portworx.com'
 
-CACHEPATH='asdasd'
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BASE="${DIR}/.."
+mkdir -p "${BASE}/tmp/.googletest"
+
+CACHEPATH="${BASE}/tmp/.googletest/cache.json"
 HTTPDOMAIN="http://${DOMAIN}"
 HTTPSDOMAIN="https://${DOMAIN}"
 INDEX=1
