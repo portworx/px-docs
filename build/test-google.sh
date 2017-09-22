@@ -56,7 +56,7 @@ done
 echo "Testing pages exist locally"
 FAIL=0
 for ADDRESS in $(cat "${CACHEPATH}" | jq -r .links[]); do
-    if [ ! -f "../_site${ADDRESS}" ]; then
+    if [ ! -f "${BASE}/_site${ADDRESS}" ]; then
         echo "ERROR: Google result ${ADDRESS} does not exist"
         FAIL=1
     fi
