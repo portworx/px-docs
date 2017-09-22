@@ -10,7 +10,7 @@ meta-description: "Learn how Portworx volumes are created, instantiated, and man
 
 ## Using Portworx volumes with DCOS
 
-Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/docker-volume/) using [dvdcli]( https://github.com/codedellemc/dvdcli)
+Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/isolators/docker-volume/) using [dvdcli]( https://github.com/codedellemc/dvdcli)
 dvdcli talks to Portworx using the docker plugin API, see here to understand Portworx implementation of the 
 [API](/scheduler/docker/volume_plugin.html)
 

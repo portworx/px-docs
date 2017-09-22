@@ -2,13 +2,15 @@
 
   - title: Get Started
     folderitems:
-    - title: Install
-      url: /#install
+    - title: Install with a Container Orchestrator
+      url: /#install-with-a-container-orchestrator
+    - title: Install with OCI runC
+      url: /runc/
     - title: Quick Start
       url: /getting-started/asap.html
     - title: Licensing
       url: /getting-started/px-licensing.html
-  - title: Schedulers
+  - title: Container Orchestrators
     folderitems:
     - title: Kubernetes
       folderitems:
@@ -300,6 +302,14 @@
       url: /release-notes/portworx-enterprise.html
     - title: Lighthouse On-Prem Release Notes
       url: /release-notes/on-premise-lighthouse.html
+  - title: Open Source Resources
+    folderitems:
+    - title: OpenStorage.org
+      url: http://www.openstorage.org
+    - title: Torpedo for CSI and Kubernetes
+      url: https://github.com/portworx/torpedo
+    - title: Graph Drivers for Docker
+      url: https://github.com/portworx/lcfs
   - title: Video Demos
     folderitems:
     - title: Mesos, Mesosphere and Marathon

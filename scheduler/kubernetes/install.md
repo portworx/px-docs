@@ -12,6 +12,8 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 
 >**Note:**<br/>OpenShift and Kubernetes Pre 1.6 users, please follow [these instructions](flexvolume.html).
 
+![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
+
 ## Deploy PX with Kubernetes 1.6+
 Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
 
@@ -44,7 +46,7 @@ Below are all parameters that can be given in the query string:
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
 | cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster. Specify comma-separated list of kvdb endpoints.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
@@ -69,11 +71,21 @@ If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.ht
 # To specify drives
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
 
+# To specify multiple kvdb endpoints
+$ kubectl apply -f "http:install.portworx.com?cluster=mycluster&kvdb=etcd://etcd1.fake.net:2379,etcd://etcd2.fake.net:2379&drives=/dev/sdb"
+
 # To run on coreos
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
 
 # To run in master in zero storage mode and use a specific drive for other nodes
 $ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
+```
+
+#### Restricting PX to certain nodes
+To restrict Portworx to only a subset of nodes in the Kubernetes cluster, you can label the minion nodes.  For example, to prevent Portworx from starting on minion-X:
+
+```
+$ kubectl label nodes minion-X "px/enabled=false" --overwrite
 ```
 
 #### Scaling
