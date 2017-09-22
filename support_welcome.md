@@ -1,7 +1,8 @@
-
-![](.//images/portworx-logo-horizontal.png)
-
-# Welcome to Portworx Support
+---
+layout: page
+title: "Welcome to Portworx Support"
+sidebar: home_sidebar
+---
 
 Thank you for being a valued Portworx customer.   
 At Portworx we are committed to your success and to offering you the best possible customer experience.
