@@ -153,7 +153,7 @@ This command decides whether to take a full or incremental backup depending on t
 If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
 ```
-# pxctl cloudnsap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
+# pxctl cloudsnap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
 ```
 
 Users can force the full backup any time by giving the --full option.
