@@ -70,7 +70,7 @@ Provisioning storage to these EC2 instances by creating new EBS volumes and atta
 
 
 ### Step 2: Deploy Portworx
-Ssh into each of the EC2 instances and configure docker for shared mount on "/"
+ssh into each of the EC2 instances and configure docker for shared mount on "/"
 
      $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
      $ sudo mount --make-shared /
@@ -118,7 +118,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
          $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
          $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
 
-  3. Create a 1GB PX volume using the Docker CLI.  Ssh into one of the ECS instances and create this PX volumes.
+  3. Create a 1GB PX volume using the Docker CLI.  ssh into one of the ECS instances and create this PX volumes.
 
 
          $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
@@ -189,7 +189,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
 Create a ECS tasks definition directly via the ECS console (GUI) and using PX volume.
 
-  1. Ssh into one of the EC2 instance and create a new PX volume using Docker CLI. 
+  1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI. 
 
           $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
 
