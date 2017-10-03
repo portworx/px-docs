@@ -73,8 +73,9 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
+* [Install on AWS ECS](/cloud/aws/ecs.html)
 
-## Install with runC (Beta)
+## Install with RunC (Beta)
 You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
 
