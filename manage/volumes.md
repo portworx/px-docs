@@ -117,13 +117,13 @@ PX supports passing the volume spec inline along with the volume name.  This is 
 For example, a PX inline spec can be specified as the following:
 
 ```
-# docker volume create -d pxd --name io_priority=high,size=10G,repl=3,name=demovolume
+# docker volume create -d pxd io_priority=high,size=10G,repl=3,name=demovolume
 ```
 
 This is useful when you need to create a volume dynamically while using docker run.  For example, the following command will create a volume and launch the container dynamically:
 
 ```
-# docker run --volume-driver pxd -it -v io_priority,size=10G,repl=3,name=demovolume:/data busybox sh
+# docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,name=demovolume:/data busybox sh
 ```
 
 The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3 and a IO priority level of 3 and start the busybox container.
