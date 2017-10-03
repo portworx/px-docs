@@ -60,10 +60,10 @@ Read more about how Portworx provides storage volumes to your application contai
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
   synchronized between all the nodes
  * Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
-   Follow the instructions here to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
+   Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
    
-   Also, you can use this ansible playbook to deploy a 3-node etcd cluster. 
-   https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible
+   Also, you can use this ansible playbook to deploy a 
+    [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
    
   
 ## Install with a Container Orchestrator
