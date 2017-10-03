@@ -36,7 +36,13 @@ The native portworx driver in Kubernetes supports the following features:
 
 PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following: 
 ```
+# Download the spec - substitute your parameters below.
 $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:2379"
+
+# Verify that the contents of px-spec.yaml are correct.
+$ vi px-spec.yaml
+
+# Apply the spec.
 $ kubectl apply -f px-spec.yaml
 ```
 Before you apply this command, make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
