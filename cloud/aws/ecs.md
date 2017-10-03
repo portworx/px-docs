@@ -82,9 +82,12 @@ ssh into each of the EC2 instances and configure docker for shared mount on "/"
 
 
 Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
-You will need the etcd be running, and you can use container for your etcd.
 
-     docker run --name etcd01 -v /data/varlib/etcd -p 4001:4001 -d portworx/etcd:latest
+Portworx requires a 3-node etcd cluster to be running for storing cluster configuration. 
+
+Follow the instructions here for spinning up a etcd cluster. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
+
+Also, the ansible playbook here can be used to spin up a 3 node etcd cluster https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible. Make sure to have three ec2 instances provisioned and root ssh keys are installed in all the servers
 
 Launch PX containers, you will have to log into each of ECS instance and run the following command for this step. Change the etcd IP and cluster ID for your PX cluster deployment.
 
