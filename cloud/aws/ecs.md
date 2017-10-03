@@ -70,6 +70,8 @@ Provisioning storage to these EC2 instances by creating new EBS volumes and atta
 
 
 ### Step 2: Deploy Portworx
+
+>**Important:**<br/>
 ssh into each of the EC2 instances and configure docker for shared mount on "/"
 
      $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
