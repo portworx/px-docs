@@ -62,6 +62,9 @@ Read more about how Portworx provides storage volumes to your application contai
  * Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
    Follow the instructions here to deploy a clustered etcd. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
    
+   Also, you can use this ansible playbook to deploy a 3-node etcd cluster. 
+   https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible
+   
   
 ## Install with a Container Orchestrator
 Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
@@ -71,8 +74,8 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Docker](/scheduler/docker/install-standalone.html)
 * [Install on Rancher](/scheduler/rancher/install.html)
 
-## Install with runC
-You can run Portworx directly via OCI runC.  This will run Portworx as a standalone container without any reliance on the Docker daemon.
+## Install with runC (Beta)
+You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
 
 ## Join us on Slack!
