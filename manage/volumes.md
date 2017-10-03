@@ -117,13 +117,13 @@ PX supports passing the volume spec inline along with the volume name.  This is 
 For example, a PX inline spec can be specified as the following:
 
 ```
-# docker volume create -d pxd --name cos=3,size=10G,repl=3,name=demovolume
+# docker volume create -d pxd --name io_priority=high,size=10G,repl=3,name=demovolume
 ```
 
 This is useful when you need to create a volume dynamically while using docker run.  For example, the following command will create a volume and launch the container dynamically:
 
 ```
-# docker run --volume-driver pxd -it -v cos=3,size=10G,repl=3,name=demovolume:/data busybox sh
+# docker run --volume-driver pxd -it -v io_priority,size=10G,repl=3,name=demovolume:/data busybox sh
 ```
 
 The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3 and a IO priority level of 3 and start the busybox container.
@@ -131,7 +131,7 @@ The above command will create a volume called demovolume with an initial size of
 Each spec key must be comma separated.  The following are supported key value pairs:
 
 ```
-IO priority      - cos=[1,2,3]
+IO priority      - io_priority=[high|medium|low]
 Volume size      - size=[1..9][G|M|T]
 HA factor        - repl=[1,2,3]
 Block size       - bs=[4096...]
@@ -150,7 +150,7 @@ These inline specs can be passed in through the scheduler application template. 
 	},
 	{
 		"key": "volume",
-		"value": "size=100G,repl=3,cos=3,name=mysql_vol:/var/lib/mysql"
+		"value": "size=100G,repl=3,io_priority=high,name=mysql_vol:/var/lib/mysql"
 	}],
 ```
 
