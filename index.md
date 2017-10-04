@@ -75,7 +75,7 @@ Visit the Schedulers section of this documentation, and chose the appropriate in
 * [Install on Rancher](/scheduler/rancher/install.html)
 * [Install on AWS ECS](/cloud/aws/ecs.html)
 
-## Install with RunC (Beta)
+## Install with RunC
 You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
 
