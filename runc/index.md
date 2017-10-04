@@ -23,10 +23,10 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```
-$ sudo docker run --rm -it --privileged=true \
-    -v /etc/pwx:/etc/pwx \
-    -v /opt/pwx:/opt/pwx \
-    portworx/px-base-enterprise-oci
+$ sudo docker run --entrypoint /runc-entry-point.sh \
+    --rm -i --privileged=true \
+    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+    portworx/px-enterprise:1.2.11-rc4
 ```
 
 >**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
@@ -164,35 +164,7 @@ $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
 ```
 
-## Uninstall the PX OCI bundle
-
-To uninstall the PX OCI bundle, please run the following:
-
-```
-# 1: Remove systemd service (if any)
-$ sudo systemctl stop portworx
-$ sudo systemctl disable portworx
-$ sudo rm -f /etc/systemd/system/portworx.service
-
-# NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
-
-# 2: Unmount oci (if required)
-$ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
-
-# 3: Remove kernel module
-$ sudo rmmod px
-
-# 4: Remove binary files
-$ sudo rm -fr /opt/pwx
-
-# 5: Remove configuration files
-$ sudo rm -fr /etc/pwx
-```
-
-
-## Miscellaneous
-
-### Logging and Log files
+## Logging and Log files
 
 The [systemd(1)](https://en.wikipedia.org/wiki/Systemd) uses a very flexible logging mechanism, where logs can be viewed using the `journalctl` command.
 
@@ -231,4 +203,29 @@ _EOF
 
 # Signal syslogd to reload the configurations:
 $ sudo pkill -HUP syslogd
+```
+
+## Uninstall the PX OCI bundle
+
+To uninstall the PX OCI bundle, please run the following:
+
+```
+# 1: Remove systemd service (if any)
+$ sudo systemctl stop portworx
+$ sudo systemctl disable portworx
+$ sudo rm -f /etc/systemd/system/portworx.service
+
+# NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
+
+# 2: Unmount oci (if required)
+$ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
+
+# 3: Remove kernel module
+$ sudo rmmod px
+
+# 4: Remove binary files
+$ sudo rm -fr /opt/pwx
+
+# 5: Remove configuration files
+$ sudo rm -fr /etc/pwx
 ```

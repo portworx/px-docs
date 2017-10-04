@@ -36,7 +36,7 @@ To install Portworx as V2 Docker plugin, please run:
 
 ```
 $ sudo docker plugin install portworx/px:latest --alias pxd \
-  opts="-k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc"
+  opts="-k etcd://<Domain name or IP address of your etcd server> -c <Your unique cluster ID) -s <path to storage device>"
 
 Plugin "portworx/px:latest" is requesting the following privileges:
  - network: [host]
