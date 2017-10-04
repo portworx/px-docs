@@ -190,9 +190,7 @@ $ sudo rm -fr /etc/pwx
 ```
 
 
-## Miscellaneous
-
-### Logging and Log files
+## Logging and Log files
 
 The [systemd(1)](https://en.wikipedia.org/wiki/Systemd) uses a very flexible logging mechanism, where logs can be viewed using the `journalctl` command.
 
