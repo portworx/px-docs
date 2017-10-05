@@ -16,6 +16,8 @@ containsElement () {
 rm -rf "${BASE}/_site/"
 bundle exec jekyll build
 
+# Test Google Links all work
+source "${BASE}/build/test-google.sh"
 
 # Check for references to redirects by removing them
 # Also check for duplicate H1 tags

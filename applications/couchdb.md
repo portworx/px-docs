@@ -1,6 +1,10 @@
-## Running Couchdb 2.0 with PX
+---
+layout: page
+title: "Running Couchdb 2.0 with Portworx"
+sidebar: home_sidebar
+---
 
-### Launch Couchdb containers
+## Launch Couchdb containers
 Deploy couchdb 2.0 using PX volume; create a simple PX volume ``couch_vol01``
 
     docker run --name couchdb-001 -d \
@@ -10,7 +14,7 @@ Deploy couchdb 2.0 using PX volume; create a simple PX volume ``couch_vol01``
             -p 9100:9100         \
             rluiarch/couchdb2:001
 
-Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/2.0.0).
+Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/2.1.0).
 
 In Couchdb 2.0; four system databases ( "_users", "_replicator", "_metadata", "_global_changes" ) wasn't created by default and errors will be observed from docker logs; therefore these database need to be created after the couchdb container is up and running
 
@@ -27,10 +31,10 @@ Set up the admin user id/password; the default admin id is "admin" ; get into th
  
  you can also create  or change the admin ID / password from webUI
 
-![](couchdb-pic-001.PNG)
+![](couchdb-pic-001.PNG){:width="910px" height="556px" alt="Change CouchDB credentials"}
 
 
-### Creating test database 
+## Creating test database 
 
 Create three test couchdb database for testing purpose
 
@@ -51,4 +55,4 @@ And ``test-run.sh`` script will run parallel multiple of the above script proces
 The following is the performance test result for  PX (single volume repl=1, ``locally attached``, ``remotely attached``) vs Standard local disk in ext4  (baseline) on Couchdb 2.0 (no couchdb replication and sharding).
 
 
-![](couchdb-pic-002.PNG)
+![](couchdb-pic-002.PNG){:width="1331px" height="172px" alt="Test results"}
