@@ -30,7 +30,7 @@ Follow the below sequence to upgrade Portworx in your cluster.
 ### 2. Upgrade the Portworx spec
 
 * Change the image of the Portworx Daemonset
-    * Set the image with command: `$ kubectl set image ds portworx portworx=portworx/px-enterprise:1.2.9 -n kube-system`
+    * Set the image with command: `$ kubectl set image ds portworx portworx=portworx/px-enterprise:1.2.10 -n kube-system`
     * Alternately, you can also change the image in the DaemonSet spec file and apply it using `$ kubectl apply -f <px-spec.yaml>`.
 * Update the `ClusterRole` permissions in Portworx spec using below:
 
@@ -62,5 +62,3 @@ The following procedure should be followed:
 4. A new Portworx pod with the new version will be initiated on this node. This pod will stay in initializing state.
 4. Reboot the node. (Portworx 1.2.9 release requires a reboot of the host to perform upgrade of our kernel driver.)
 5. Uncordon the node once it comes up.
-
->**Coming soon:**<br/> In the 1.2.10 release, Portworx will be automating parts of the above procedure by closer integration with the Kubernetes API.

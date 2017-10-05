@@ -4,10 +4,7 @@ title: "Deploy Portworx with Docker"
 keywords: portworx, architecture, storage, container, cluster, install, docker, compose, systemd, plugin
 sidebar: home_sidebar
 redirect_from:
-  - /install/docker-plugin.html
-  - /docker/install-px-docker-service.html
-  - /run-with-docker.html
-  - /convert-x86-to-storage-nodes.html
+ - runpx.html
 ---
 
 * TOC

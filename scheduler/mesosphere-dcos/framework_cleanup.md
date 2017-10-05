@@ -39,6 +39,27 @@ $ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.
 
 ## 3. Cleanup PX remnants from slave nodes
 
+Stop the portworx service on all the nodes and remove the docker container
+```
+sudo systemctl stop portworx
+sudo docker rm portworx.service -f
+```
+
+Remove the portworx service file from all the nodes
+```
+sudo rm /etc/systemd/system/portworx.service -f
+sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
+sudo systemctl daemon-reload
+```
+		
 If there was a failed PX deployment, then there may be a `/etc/pwx` directory on each of the slave nodes.
-<br> If so, this directory should be removed with `rm -rf /etc/pwx`
+<br> If so, this directory should be removed
+```
+rm -rf /etc/pwx
+```
+
+Also remove the px kernel module
+```
+sudo rmmod px -f
+```
 

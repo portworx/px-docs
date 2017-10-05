@@ -103,5 +103,7 @@ jeff-coreos-2 core # docker inspect --format '{{ "{{ .Mounts " }}}}' 46eff5a9cbd
 
 
 ## See Also
+For more on Microsoft SQL Server, please visit [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2016)
+
 For futher reading on Microsoft SQL Server on Linux, 
 please visit the [SQL Server on Docker](https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-docker#a-idpersista-persist-your-data) documentation

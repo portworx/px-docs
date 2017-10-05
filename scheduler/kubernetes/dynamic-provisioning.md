@@ -14,17 +14,20 @@ This document describes how to dynamically provision a volume using Kubernetes a
 Using Dynamic Provisioning and Storage Classes you don't need to create Portworx volumes out of band and they will be created automatically.
 Using Storage Classes objects an admin can define the different classes of Portworx Volumes that are offered in a cluster. Following are the different parameters that can be used to define a Portworx Storage Class
 
-```
-- fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
-- block_size: block size (default: `32k` for block size of 32 KBytes)
-- repl: replication factor [1..3] (default: `1`)
-- shared: make this a globally shared namespace volume which can be used by multiple containers (e.g shared: "true")
-- snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
-- aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
-- parent: a label or name of a volume or snapshot from which this storage class is to be created
-- priority_io: IO Priority: [high|medium|low] (e.g priority_io: "high")
-- secure: to create an encrypted storage class
-```
+| Name              	| Description                                                                                                                                                                                                                                                            	| Example                	|
+|-------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------------	|
+| fs                	| Filesystem to be laid out: none\|xfs\|ext4                                                                                                                                                                                                                               	| fs: "ext4"               	|
+| block_size        	| Block size                                                                                                                                                                                                                                                             	| block_size: "32k"        	|
+| repl              	| Replication factor for the volume: 1\|2\|3                                                                                                                                                                                                                                	| repl: "3"                	|
+| shared            	| Flag to create a globally shared namespace volume which can be used by multiple pods                                                                                                                                                                                   	| shared: "true"         	|
+| priority_io       	| IO Priority: low\|medium\|high                                                                                                                                                                                                                                           	| priority_io: "high"    	|
+| io_profile        	| IO Profile: random\|sequential\|db\|db_remote                                                                                                                                                                                                                           	| io_profile: "db"         	|
+| group             	| The group a volume should belong too. Portworx will restrict replication sets of volumes of the same group on different nodes. If the force group option 'fg' is set to true, the volume group rule will be strictly enforced. By default, it's not strictly enforced. 	| group: "volgroup1"       	|
+| fg                	| This option enforces volume group policy. If a volume belonging to a group cannot find nodes for it's replication sets which don't have other volumes of same group, the volume creation will fail.                                                                    	| fg: "true"             	|
+| label             	| List of comma-separated name=value pairs to apply to the Portworx volume                                                                                                                                                                                               	| label: "name=mypxvol"    	|
+| nodes             	| Comma-separated Portworx Node ID's to use for replication sets of the volume                                                                                                                                                                                           	| nodes: "minion1,minion2" 	|
+| aggregation_level 	| Specifies the number of replication sets the volume can be aggregated from                                                                                                                                                                                             	| aggregation_level: "2"   	|
+| snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60                                                                                                                                                                                                      	| snap_interval: "120"     	|
 
 ### Provision volumes
 #### Step1: Create Storage Class.

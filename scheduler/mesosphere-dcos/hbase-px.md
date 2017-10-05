@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Spark on DCOS with Portworx"
+title: "HBase on DCOS with Portworx"
 keywords: portworx, container, Mesos, Mesosphere, DCOS, HBase, hbase, HBASE
 ---
 

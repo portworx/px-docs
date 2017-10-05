@@ -13,6 +13,9 @@ redirect_from: "/cli-reference.html"
 Help for specific cloudsnap commands can be found by running the following command
 
 Note: All cloudsnap operations requires secrets login to configured endpoint with/without encryption. Please refer pxctl secrets cmd help.
+
+Also refer to https://docs.portworx.com/control/credentials.html for configuring cloud provider credentials
+
 #### pxctl cloudsnap --help
 ```
 sudo /opt/pwx/bin/pxctl cloudsnap --help

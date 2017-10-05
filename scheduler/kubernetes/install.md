@@ -16,6 +16,8 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 
 >**Note:**<br/>OpenShift and Kubernetes Pre 1.6 users, please follow [these instructions](flexvolume.html).
 
+![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
+
 ## Deploy PX with Kubernetes 1.6+
 Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
 
@@ -32,12 +34,20 @@ The native portworx driver in Kubernetes supports the following features:
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 * Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.
 * Ensure all nodes running PX are synchronized in time and NTP is configured
+* A clustered key-value database (etcd or consul) https://coreos.com/etcd/docs/latest/op-guide/clustering.html
 
 ## Install
 
 PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following: 
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:2379"
+# Download the spec - substitute your parameters below.
+K8S_VERSION=`kubectl version --short | grep Server | awk '{print $3}'`
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:2379&k8sVersion=$K8S_VERSION"
+
+# Verify that the contents of px-spec.yaml are correct.
+$ vi px-spec.yaml
+
+# Apply the spec.
 $ kubectl apply -f px-spec.yaml
 ```
 Before you apply this command, make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
@@ -47,12 +57,13 @@ Below are all parameters that can be given in the query string:
 | Key         	| Description                                                                                                                                                                              	| Example                                           	|
 |-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
 | cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379                |
+| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster. Specify comma-separated list of kvdb endpoints.                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379              |
+| k8sVersion   | (Optional) Specifies the Kubernetes version. (Use the server version in the `kubectl version` output.)                                                                                   	| k8sVersion=v1.8.0                           	      |
 | drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
 | diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
 | miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
-| coreos       	|  REQUIRED if target nodes are running coreos.                                                                                                                                         	| coreos=true                                           |
-| master     	| (Optional) If true, PX will run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)                                                          	| master=true                                  	|
+| coreos       	|  REQUIRED if target nodes are running coreos.                                                                                                                                         	| coreos=true                                         |
+| master     	| (Optional) If true, PX will run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)                                                            	| master=true                                  	      |
 | zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
 | force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
 | etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
@@ -70,13 +81,23 @@ If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.ht
 #### Examples
 ```
 # To specify drives
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
+
+# To specify multiple kvdb endpoints
+$ curl -o px-spec.yaml "http:install.portworx.com?cluster=mycluster&kvdb=etcd://etcd1.fake.net:2379,etcd://etcd2.fake.net:2379&drives=/dev/sdb"
 
 # To run on coreos
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
 
 # To run in master in zero storage mode and use a specific drive for other nodes
-$ kubectl apply -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
+```
+
+#### Restricting PX to certain nodes
+To restrict Portworx to only a subset of nodes in the Kubernetes cluster, you can label the minion nodes.  For example, to prevent Portworx from starting on minion-X:
+
+```
+$ kubectl label nodes minion-X "px/enabled=false" --overwrite
 ```
 
 #### Scaling

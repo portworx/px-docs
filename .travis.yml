@@ -4,12 +4,14 @@ rvm:
 cache:
   directories:
   - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+  - $TRAVIS_BUILD_DIR/tmp/.googletest
 branches:
   only:
    - gh-pages
    - /.*/
 before_install:
  - npm i -g amphtml-validator
+ - go get github.com/ericchiang/pup
 install:
  - bundle install
 script:

@@ -23,6 +23,14 @@ Following guide shows you how you can add your portworx node to PX-Enterprise co
 "loggingurl": "<your-lighthouse-url>/api/stats/listen?token=<Auth-Token>",
 ```
 
+For example:
+
+```
+"loggingurl" : "http://10.11.12.13:80/api/stats/listen?token=token-6fc08356-8f1b-11e7-9e40-0242ac110003
+```
+
+Note: "token=token-123456-..." format
+
 * Restart PX container on each node. 
 
 At this point, you should be able to monitor PX node from web console.

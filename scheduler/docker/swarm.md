@@ -71,11 +71,12 @@ We will use service constraints to influence on which worker node Swarm schedule
          --publish 50000:50000 \
          -e JENKINS_OPTS="--prefix=/jenkins" \
          --reserve-memory 300m \
-         --mount "type=volume,source=jenkins_vol,target=/var/jenkins_home" \
+         --mount "type=volume,volume-driver=pxd,source=jenkins_vol,target=/var/jenkins_home" \
          --constraint 'node.labels.jenkins_vol == true' \
          jenkins
 ```
 * Note how the volume binding is done via `--mount`. This causes the Portworx `jenkins_vol` to get bind mounted at `/var/jenkins_home`, which is where the jenkins Docker container stores it’s data.
+* Make sure you specify `volume-driver=pxd` in the `--mount` option. This ensures that docker always uses `jenkins_vol` provided the Portworx's pxd volume driver
 * Also note how we put a constraint using `--constraint 'node.labels.jenkins_vol == true'`.
 
 Now Docker Swarm will place the jenkins container _only_ on Swarm nodes that contain our volume's data locally leading to great I/O performance.

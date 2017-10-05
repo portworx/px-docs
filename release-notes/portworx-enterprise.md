@@ -11,6 +11,35 @@ redirect_from:
 * TOC
 {:toc}
 
+## 1.2.10 Release notes
+
+### Key Features
+
+None
+
+### Key Changes and Issues Addressed
+
+* Fix issue when a node running PX goes down, it never gets marked down in the kvdb by other nodes.
+* Fix issue when a container in Lighthouse UI always shows as running even after it has exited
+* Auto re-attach containers mounting shared volumes when PX container is restarted. 
+* Add Linux immutable (CAP_LINUX_IMMUTABLE) when PX is running as Docker V2 Plugin
+* Set autocache parameter for shared volumes
+* On volume mount, make the path read-only if an unmount comes in if the POD gets deleted or PX is restarted during POD
+  creation. On unmount, the delete the mount path.
+* Remove the volume quorum check during volume mounts so the mount can be retried until the quorum is achieved
+* Allow snapshot volume source to be provided as another PX volume ID and Snapshot ID
+* Allow inline snapshot creation in Portworx Kubernetes volume driver using the Portworx Kubernetes volume spec
+* Post log messages indicating when logging URL is changed
+* Handle volume delete requests gracefully when PX container is starting up
+* Handle service account access when PX is running as a container instead of a daemonset when running under kubernetes
+* Implement a global lock for kubernetes filter such that all cluster-wide Kubernetes filter operations are 
+  coordinated through the lock
+* Improvements in unmount/detach handling in kubernetes to handle different POD clean up behaviors for deployments 
+  and statefulsets
+
+### Errata
+
+* If two containers using the same shared volume are run in the same node using docker, when one container exits, the container's connection to the volume will get disrupted as well. Workaround is to run containers using shared volume in two different portworx nodes
 
 ## 1.2.9 Release notes
 
