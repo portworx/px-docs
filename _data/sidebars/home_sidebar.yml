@@ -305,7 +305,7 @@
   - title: Open Source Resources
     folderitems:
     - title: OpenStorage.org
-      url: http://www.openstorage.org
+      url: https://github.com/libopenstorage
     - title: Torpedo for CSI and Kubernetes
       url: https://github.com/portworx/torpedo
     - title: Graph Drivers for Docker
