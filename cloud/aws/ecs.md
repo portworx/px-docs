@@ -68,6 +68,8 @@ Provisioning storage to these EC2 instances by creating new EBS volumes and atta
 
 ![ecs-clust-create](/images/aws-ecs-setup_withPX_004yy.PNG "ecs-4"){:width="1477px" height="699px"}.
 
+Note that there is no need to format the EBS volumes once they are created and attached to the ec2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command. 
+
 
 ### Step 2: Deploy Portworx
 
@@ -87,9 +89,9 @@ Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provis
 
 Portworx requires a 3-node etcd cluster to be running for storing cluster configuration. 
 
-Follow the instructions here for spinning up a etcd cluster. https://coreos.com/etcd/docs/latest/op-guide/clustering.html
+Follow the instructions here for spinning up a [etcd cluster](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
 
-Also, the ansible playbook here can be used to spin up a 3 node etcd cluster https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible. Make sure to have three ec2 instances provisioned and root ssh keys are installed in all the servers
+Also, the ansible playbook here can be used to spin up a [3 node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible). Make sure to have three ec2 instances provisioned and root ssh keys are installed in all the servers
 
 Launch PX containers, you will have to log into each of ECS instance and run the following command for this step. Change the etcd IP and cluster ID for your PX cluster deployment.
 
@@ -104,9 +106,14 @@ Launch PX containers, you will have to log into each of ECS instance and run the
                    -v /var/run/docker.sock:/var/run/docker.sock  \
                    -v /var/cores:/var/cores                      \
                    -v /usr/src:/usr/src                          \
-                   portworx/px-dev -daemon -k etcd://172.31.31.61:4001 -c MY_CLUSTER_ID -a -z -f
+                   portworx/px-dev -daemon -k etcd://172.31.31.61:4001 -c <Enter your unique cluster ID> -a -z -f
 
 On above the etcd is also deployed as in docker container and is running on one of the EC2 instance; thus the etcd IP is using the internal IP address of the EC2 instance "172.31.31.61".
+
+Make sure you enter a cluster ID that is unique if your etcd server is going to be used for multiple PX clusters.
+
+In the example above, we are using the -a option which will pick up all the available unformatted drives to be added to the local storage pool. Alternatively, a user can point the the drive they want to be selected to be added to the Portworx pool by using the -s option instead of the -a option (-s /dev/xvdc -s /dev/xvdd)
+
 
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
