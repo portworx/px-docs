@@ -1,4 +1,8 @@
-# Install 'etcd3' cluster on BareMetal or VMs
+---
+layout: page
+title: "Install 'etcd3' cluster on BareMetal or VMs"
+sidebar: home_sidebar
+---
 
 The `ansible` script in this directory can be used to deploy a 
 fully functioning 3 node 'etcd3' cluster to existing servers or VMs with host persistent storage.
