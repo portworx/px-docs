@@ -17,7 +17,7 @@ For production Portworx clusters we recommend the following configuration of an 
 1. Etcd Version > 3.1.x
 2. Minimum 3 nodes
 3. Minimum 8G of memory dedicated to each etcd node.
-4. Etcd backed with storage disks.
+4. Each Etcd node in the etcd cluster backed with storage disks (minimum 100GB)
 
 More detailed set of hardware requirements as recommended by etcd can be found [here](https://coreos.com/etcd/docs/latest/op-guide/hardware.html#example-hardware-configurations)
 
