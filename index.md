@@ -9,7 +9,7 @@ meta-description: "Find out more about Portworx, the persistent storage solution
 * TOC
 {:toc}
 
-Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via container orchestrators such as Kubernetes, Marathon and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume storage services directly through the scheduler.  
+Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via container orchestrators such as Kubernetes, Marathon and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume block, file and object storage services directly through the scheduler.
 Portworx volumes are always hyper-converged.  That is, they are exposed on the same host where the application container executes.
 
 Portworx technology:
@@ -31,7 +31,7 @@ Portworx technology:
 %}
 
 ## How it Works
-Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block storage to your applications on the same server where the application is running.
+Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block, file and object storage to your applications on the same server where the application is running.
 Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Container Orchestrator.  The following are supported:
 * Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f)
 * [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#portworx-volume)
@@ -64,7 +64,7 @@ Read more about how Portworx provides storage volumes to your application contai
    
    Also, you can use this ansible playbook to deploy a 
     [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
-   
+ 
 ## Install with RunC
 You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.
 [Install with RunC](/runc/)
