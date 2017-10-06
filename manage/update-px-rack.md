@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Updating PX Rack Info"
+title: "Updating Portworx Rack Info"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/px-rack.html"
@@ -24,7 +24,7 @@ PolicyRule:
   Resources        Non-Resource URLs        Resource Names        Verbs
   ---------        -----------------        --------------        -----
   nodes                []                        []                [get update list]
-  pods                []                        []                [get list]
+  pods                 []                        []                [get list]
 ```
 As seen above the permissions on the node object are [get update list]. In order for Portworx nodes to dynamically update its rack information from node labels it needs an additional ``watch`` permission. Update the ClusterRole using
 
@@ -65,9 +65,9 @@ Double check  if the rack information is reflected in the PX cluster.
 
 ```
 $ /opt/pwx/bin/pxctl cluster provision-status
-NODE        NODE STATUS        POOL        POOL STATUS        IO_PRIORITY        SIZE        AVAILABLE        USED        PROVISIONED        RESERVEFACTOR        ZONE        REGION        RACK
-vm-2        Online                0        Online                LOW                150 GiB        148 GiB                2.0 GiB        0 B                0                default        default        rack1
-vm-3        Online                0        Online                LOW                150 GiB        148 GiB                2.0 GiB        0 B                0                default        default        default
+NODE        NODE STATUS        POOL        POOL STATUS .....   ZONE           REGION        RACK
+vm-2        Online                0        Online      .....   default        default       rack1
+vm-3        Online                0        Online      .....   default        default       default
 
 ```
 The node vm-2 which was labelled ``rack1`` is reflected on the PX node while the unlabelled node vm-3 is still using the ``default`` rack info.
