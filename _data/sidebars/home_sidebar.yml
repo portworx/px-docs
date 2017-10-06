@@ -52,8 +52,8 @@
           url: /scheduler/kubernetes/k8s-node-decommission.html
         - title: Enter Portworx maintenance mode
           url: /scheduler/kubernetes/k8s-node-maintenance.html
-      - title: PX Log Management using EFK
-        url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+        - title: Manage PX logs using ELK and Fluentd
+          url: /scheduler/kubernetes/logmanagement-efk-k8s.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
