@@ -69,6 +69,8 @@ Below are all parameters that can be given in the query string:
 | acltoken    	| (Optional) ACL token value used for Consul authentication.                                                                                                                               	| acltoken=398073a8-5091-4d9c-871a-bbbeb030d1f6     	|
 | token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
 | env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
+| secretType   	| (Optional) Instructs PX from which secrets endpoint to fetch secrets from. Supported: vault, aws and kvdb                                                                                	| secretType=vault                                   	|
+| clusterSecretKey | (Required for vault secret type) Sets the cluster-wide secretID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes 	| clusterSecretKey=mysecretkey        	|
 
 If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](/knowledgebase/faqs.html).
 
