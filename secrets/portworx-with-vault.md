@@ -4,6 +4,9 @@ title: "Portworx with Vault"
 sidebar: home_sidebar
 ---
 
+* TOC
+{:toc}
+
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster up which is connected to a Vault endpoint. The vault endpoint could be used to store secrets which will be used for encrypting volumes.
 
 ### Setting up Vault
@@ -16,7 +19,7 @@ If you are installing Portworx on Kubernetes, when generating the Portworx Kuber
 2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes.
 3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#px-vault-env) to identify vault endpoint.
 
-Instructions on generating the Portworx spec for Kubernetes are available [here](scheduler/kubernetes/install.html).
+Instructions on generating the Portworx spec for Kubernetes are available [here](/scheduler/kubernetes/install.html).
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#vault-config-json).
 
