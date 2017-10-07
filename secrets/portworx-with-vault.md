@@ -12,9 +12,9 @@ Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.
 ### Kubernetes users
 
 If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file:
-- Use `secretType=vault` to specify the secret type as vault
-- Use `cluster_secret_key=<key>` to set the cluster-wide secret ID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes.
-- Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#px-vault-env) to identify vault endpoint.
+1. Use `secretType=vault` to specify the secret type as vault
+2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes.
+3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#px-vault-env) to identify vault endpoint.
 
 Instructions on generating the Portworx spec for Kubernetes are available [here](scheduler/kubernetes/install.html).
 
@@ -40,9 +40,12 @@ If you already have a running Portworx installation, [update `/etc/pwx/config.js
 All the above Vault related fields as well as the cluster secret key can be set using PX CLI which is explained in the next section.
 
 ### <a name="vault-config-json"></a> Adding Vault Credentials to config.json
->**Note:**<br/>This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
 
-If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
+This section is relevant for either of the below 2 scenarios
+- You are deploying PX with your PX configuration created before hand. So you want to create a `/etc/pwx/config.json` before starting Portworx installation.
+- You already have a working Portworx cluster so each node already has a `/etc/pwx/config.json`
+
+Add the following `secret_type`, `cluster_secret_key` and `vault` section to the `/etc/pwx/config.json`:
 
 ```
 # cat /etc/pwx/config.json
