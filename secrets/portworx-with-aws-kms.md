@@ -4,6 +4,9 @@ title: "Portworx with AWS KMS"
 sidebar: home_sidebar
 ---
 
+* TOC
+{:toc}
+
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
 ## Deploying Portworx
@@ -21,7 +24,7 @@ If you are installing Portworx on Kubernetes, when generating the Portworx Kuber
 2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
 3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx aws environment variables](#aws-kms-env) to identify AWS endpoint.
 
-Instructions on generating the Portworx spec for Kubernetes are available [here](scheduler/kubernetes/install.html).
+Instructions on generating the Portworx spec for Kubernetes are available [here](/scheduler/kubernetes/install.html).
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#aws-kms-config-json).
 
