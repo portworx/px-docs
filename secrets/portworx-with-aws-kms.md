@@ -22,28 +22,28 @@ Portworx can authenticate with AWS using AWS SDK's EnvProvider.
 If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file:
 1. Use `secretType=aws` to specify the secret type as aws
 2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
-3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx aws environment variables](#aws-kms-env) to identify AWS endpoint.
+3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx aws environment variables](#portworx-aws-kms-environment-variables) to identify AWS endpoint.
 
 Instructions on generating the Portworx spec for Kubernetes are available [here](/scheduler/kubernetes/install.html).
 
-If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#aws-kms-config-json).
+If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).
 
 #### Docker & Docker plugin users
 
 If you are installing Portworx as a Docker container or a plugin,
 1. Use `-secret_type aws -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as AWS and the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
-2. Use `-e` docker option to expose the [Portworx AWS KMS environment variables](#aws-kms-env)
+2. Use `-e` docker option to expose the [Portworx AWS KMS environment variables](#portworx-aws-kms-environment-variables)
 
-If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#aws-kms-config-json).
+If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).
 
-#### <a name="aws-kms-env"></a> Portworx AWS KMS environment variables
+#### Portworx AWS KMS environment variables
 - `AWS_ACCESS_KEY_ID=<aws-access-key>` : Sets the AWS_ACCESS_KEY_ID environment variable. It would be used to authenticate with AWS.
 - `AWS_SECRET_ACCESS_KEY=<aws-secret-key>` : Sets the AWS_SECRET_ACCESS_KEY environment variable. It would be used to authenticate with AWS.
 - `AWS_SECRET_TOKEN_KEY=<aws-secret-token>` : Sets the AWS_SECRET_TOKEN_KEY environment variable. It would be used to authenticate with AWS.
 - `AWS_CMK=<kms-customer-master-key>` : Sets the AWS_CMK environment variable. The customer master key is used while generating KMS Data keys for encrypting volumes.
 - `AWS_REGION=<aws-region>` : Sets the AWS_REGION environment variable. This is the AWS region where the customer master key was created.
 
-#### <a name="aws-kms-config-json"></a> Adding AWS KMS Credentials to config.json
+#### Adding AWS KMS Credentials to config.json
 >**Note:**<br/>This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
 
 If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
