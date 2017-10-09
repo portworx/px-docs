@@ -3,7 +3,9 @@ layout: page
 title: "Docker Compose, Wordpress and MySQL on Portworx"
 keywords: portworx, volume stack, application stack, docker compose
 sidebar: home_sidebar
-redirect_from: "/docker-compose.html"
+redirect_from:
+  - /docker-compose.html
+  - /install/docker-compose.html
 meta-description: "Use Version 2 of Docker Compose to quickly deploy application stacks. Use PX volume driver to create new volumes or reuse existing ones."
 ---
 

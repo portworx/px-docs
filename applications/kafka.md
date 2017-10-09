@@ -3,7 +3,9 @@ layout: page
 title: "Run Kafka on Portworx Volumes for Topic Persistence"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
-redirect_from: "/run-kafka-on-px.html"
+redirect_from:
+  - /run-kafka-on-px.html
+  - /run-kafka
 ---
 
 * TOC

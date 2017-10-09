@@ -3,6 +3,8 @@ layout: page
 title: "Upgrade Portworx volume plugin"
 keywords: portworx, architecture, storage, container, install, docker, upgrade, plugin
 sidebar: home_sidebar
+redirect_from:
+  - /scheduler/docker/upgrade-px-plugin.html
 ---
 
 * TOC

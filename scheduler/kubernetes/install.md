@@ -3,6 +3,10 @@ layout: page
 title: "Deploy Portworx on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
+redirect_from:
+  - /gce-k8s-pwx.html
+  - /scheduler/kubernetes.html
+  - /scheduler/kubernetes/
 ---
 
 * TOC

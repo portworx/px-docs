@@ -3,6 +3,9 @@ layout: page
 title: "FIO Performance"
 keywords: portworx, cos, class of service, production, performance, overhead, fio
 sidebar: home_sidebar
+redirect_from:
+  - /performance.html
+  - /maintain/performance.html
 ---
 
 * TOC

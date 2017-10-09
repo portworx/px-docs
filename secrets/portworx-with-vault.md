@@ -2,6 +2,8 @@
 layout: page
 title: "Portworx with Vault"
 sidebar: home_sidebar
+redirect_from:
+  - /portworx-with-vault.html
 ---
 
 * TOC

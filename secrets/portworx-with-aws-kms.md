@@ -2,6 +2,8 @@
 layout: page
 title: "Portworx with AWS KMS"
 sidebar: home_sidebar
+redirect_from:
+  - /enterprise/portworx-with-aws-kms.html
 ---
 
 * TOC

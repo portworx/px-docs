@@ -3,6 +3,9 @@ layout: page
 title: "Deploy Portworx on Docker Swarm or UCP"
 keywords: portworx, architecture, storage, container, cluster, install, docker, swarm, ucp
 sidebar: home_sidebar
+redirect_from:
+  - /scheduler/docker-swarm.html
+  - /scheduler/docker-ucp.html
 meta-description: "Follow this step-by-step guide to install Portworx on Docker Swarm or UCP.  Try it for yourself today!"
 ---
 
