@@ -59,6 +59,8 @@ The following arguments are provided to the PX daemon:
 |    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
 | `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
 |   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
+| `-secret_type`   	| (Optional) Instructs PX from which secrets endpoint to fetch secrets from. Supported: vault, aws and kvdb                                                                                	| secretType=vault                                   	|
+| `-cluster_secret_key` | (Required for vault secret type) Sets the cluster-wide secretID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes 	| clusterSecretKey=mysecretkey        	|
 
 The following Docker runtime command options are explained:
 

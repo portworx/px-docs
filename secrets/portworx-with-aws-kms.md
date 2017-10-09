@@ -6,71 +6,60 @@ redirect_from:
   - /enterprise/portworx-with-aws-kms.html
 ---
 
-Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to
-an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
+* TOC
+{:toc}
+
+Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
 ## Deploying Portworx
 
 There are multiple ways in which you can setup Portworx so that it gets authenticated with AWS
 
 ### Using AWS environment variables
-Portworx can authenticate with AWS using AWS SDK's EnvProvider.  You can start PX on a node via the Docker CLI as follows
+
+Portworx can authenticate with AWS using AWS SDK's EnvProvider.
+
+#### Kubernetes users
+
+If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file:
+1. Use `secretType=aws` to specify the secret type as aws
+2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
+3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx aws environment variables](#portworx-aws-kms-environment-variables) to identify AWS endpoint.
+
+Instructions on generating the Portworx spec for Kubernetes are available [here](/scheduler/kubernetes/install.html).
+
+If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).
+
+#### Docker & Docker plugin users
+
+If you are installing Portworx as a Docker container or a plugin,
+1. Use `-secret_type aws -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as AWS and the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
+2. Use `-e` docker option to expose the [Portworx AWS KMS environment variables](#portworx-aws-kms-environment-variables)
+
+If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).
+
+#### Portworx AWS KMS environment variables
+- `AWS_ACCESS_KEY_ID=<aws-access-key>` : Sets the AWS_ACCESS_KEY_ID environment variable. It would be used to authenticate with AWS.
+- `AWS_SECRET_ACCESS_KEY=<aws-secret-key>` : Sets the AWS_SECRET_ACCESS_KEY environment variable. It would be used to authenticate with AWS.
+- `AWS_SECRET_TOKEN_KEY=<aws-secret-token>` : Sets the AWS_SECRET_TOKEN_KEY environment variable. It would be used to authenticate with AWS.
+- `AWS_CMK=<kms-customer-master-key>` : Sets the AWS_CMK environment variable. The customer master key is used while generating KMS Data keys for encrypting volumes.
+- `AWS_REGION=<aws-region>` : Sets the AWS_REGION environment variable. This is the AWS region where the customer master key was created.
+
+#### Adding AWS KMS Credentials to config.json
+>**Note:**<br/>This section is optional and is only needed if you intend to provide the PX configuration before installing PX.
+
+If you are deploying PX with your PX configuration created before hand, then add the following `secrets` section to the `/etc/pwx/config.json`:
 
 ```
-if `uname -r | grep -i coreos > /dev/null`; \
-then HDRS="/lib/modules"; \
-else HDRS="/usr/src"; fi
-sudo docker run --restart=always --name px -d --net=host       \
-                 --privileged=true                             \
-                 -v /run/docker/plugins:/run/docker/plugins    \
-                 -v /var/lib/osd:/var/lib/osd:shared           \
-                 -v /dev:/dev                                  \
-                 -v /etc/pwx:/etc/pwx                          \
-                 -v /opt/pwx/bin:/export_bin:shared            \
-                 -v /var/run/docker.sock:/var/run/docker.sock  \
-                 -v /var/cores:/var/cores                      \
-                 -v ${HDRS}:${HDRS}                            \
-                 -e "AWS_ACCESS_KEY_ID=<aws-access-key>" \
-                 -e "AWS_SECRET_ACCESS_KEY=<aws-secret-key>" \
-                 -e "AWS_SECRET_TOKEN_KEY=<aws-secret-token>" \
-                 -e "AWS_CMK=<kms-customer-master-key>" \
-                 -e "AWS_REGION=<aws-region>" \
-                portworx/px-enterprise:latest -daemon -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s \
-		/dev/sdb -s /dev/sdc -secret_type aws -cluster_secret_key <secret-id>
-```
-All the arguments to the docker run command are explained [here](/install/docker.html). The two new arguments related to KMS are:
-
-```
-- secret_type
-    > Instructs PX to use AWS KMS as the secret endpoint to fetch secrets from
-
-- cluster_secret_key
-    > Sets the cluster-wide secret key. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
-```
-
-You need to add the following extra Docker runtime commands
-
-```
--e "AWS_ACCESS_KEY_ID=<aws-access-key>"
-    > Sets the AWS_ACCESS_KEY_ID environment variable. It would be
-    used to authenticate with AWS.
-
--e "AWS_SECRET_ACCESS_KEY=<aws-secret-key>"
-    > Sets the AWS_SECRET_ACCESS_KEY environment variable. It would be
-    used to authenticate with AWS.
-
--e "AWS_SECRET_TOKEN_KEY=<aws-secret-token>"
-    > Sets the AWS_SECRET_TOKEN_KEY environment variable. It would be
-    used to authenticate with AWS.
-
--e "AWS_CMK=<kms-customer-master-key>"
-    > Sets the AWS_CMK environment variable. The customer master key
-    is used while generating KMS Data keys for encrypting volumes.
-
--e "AWS_REGION=<aws-region>"
-    > Sets the AWS_REGION environment variable. This is the AWS region
-    where the customer master key was created.
-
+# cat /etc/pwx/config.json
+{
+    "clusterid": "<cluster-id>",
+    "secret": {
+        "secret_type": "aws",
+        "cluster_secret_key": "mysecret",
+    }
+    ...
+}
 ```
 
 ### Using AWS EC2 Role Credentials

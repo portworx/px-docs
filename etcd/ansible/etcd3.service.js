@@ -13,6 +13,8 @@ TimeoutStartSec=0
 
 ExecStart=/usr/local/bin/etcd --name etcd-{{ hostvars[inventory_hostname]['inventory_hostname'] }} \
 		--data-dir /var/lib/etcd \
+		--quota-backend-bytes 8589934592 \
+                --auto-compaction-retention 3 \
 		--listen-client-urls http://{{ hostvars[inventory_hostname]['IP'] }}:2379 \
 		--advertise-client-urls http://{{ hostvars[inventory_hostname]['IP'] }}:2379 \
 		--listen-peer-urls http://{{ hostvars[inventory_hostname]['IP'] }}:2380 \

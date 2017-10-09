@@ -52,8 +52,8 @@
           url: /scheduler/kubernetes/k8s-node-decommission.html
         - title: Enter Portworx maintenance mode
           url: /scheduler/kubernetes/k8s-node-maintenance.html
-      - title: PX Log Management using EFK
-        url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+        - title: Manage PX logs using ELK and Fluentd
+          url: /scheduler/kubernetes/logmanagement-efk-k8s.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -67,7 +67,7 @@
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
         - title: HDFS &amp; Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
         - title: Kafka
           url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch
@@ -128,6 +128,8 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
+    - title: Updating Portworx Rack Info
+      url: /manage/update-px-rack.html
     - title: Legacy and External Access
       folderitems:
       - title: NFS
@@ -193,7 +195,7 @@
   - title: Operate and Maintain
     folderitems:
     - title: Monitoring and Alerts
-      folderitems: 
+      folderitems:
       - title: Prometheus
         url: /maintain/monitoring/prometheus/index.html
       - title: Alerts integration with Prometheus
