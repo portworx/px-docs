@@ -26,7 +26,7 @@ on your host system:
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    portworx/px-enterprise:1.2.11-rc4
+    portworx/px-enterprise:1.2.11-rc5
 ```
 
 >**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
@@ -101,7 +101,7 @@ After the initial installation, you can modify the following files and restart t
 * PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
 * OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
 
-## Configure systemd to start PX
+## Configure systemd to start PX OCI
 
 You can configure the PX OCI to run as a [systemd(1)](https://en.wikipedia.org/wiki/Systemd) service
 by running the `px-runc install` command.
@@ -159,6 +159,63 @@ $ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
 $ sudo /opt/pwx/bin/px-runc install
 
 # Reload systemd configurations, enable and start Portworx service
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable portworx
+$ sudo systemctl start portworx
+```
+
+## Upgrade from PX-Containers to PX-OCI
+
+This chapter describes the steps how to upgrade your storage cluster running PX as Docker containers (ie. PX-Containers),
+and convert it into the PX OCI.
+
+Step 1: Download and deploy the PX OCI bundle
+
+```
+$ sudo docker run --entrypoint /runc-entry-point.sh \
+    --rm -i --privileged=true \
+    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+    portworx/px-enterprise:1.2.11-rc5
+```
+
+Step 2: Inspect your existing PX-Containers, record arguments and any custom mounts:
+
+>**Note:**<br/>Mounts for `/dev`, `/proc`, `/sys`, `/etc/pwx`, `/opt/pwx`, `/run/docker/plugins`, `/usr/src`, `/var/cores`, `/var/lib/osd`, `/var/run/docker.sock` can be safely ignored (omitted).<br/>Custom mounts will need to be passed to PX-OCI in the next step, using the following notation:<br/>`px-runc install -v <Source1>:<Destination1>[:<Propagation1 if shared,ro>] ...`
+
+```
+# Inspect Arguments
+$ {% raw %}$ sudo docker inspect --format '{{.Args}}' px-enterprise {% endraw %}
+[ -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb ]
+
+# Inspect Mounts
+$ {% raw %}$ sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool {% endraw %}
+[...]
+    {
+        "Destination": "/var/lib/kubelet",
+        "Mode": "shared",
+        "Propagation": "shared",
+        "RW": true,
+        "Source": "/var/lib/kubelet",
+        "Type": "bind"
+    },
+```
+
+Step 3: Configure PX-OCI
+
+```
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb
+```
+
+Step 4: Stop PX-Container, start PX-OCI
+
+```
+# Disable and stop PX Docker container
+$ sudo docker update --restart=no px-enterprise
+$ sudo docker stop px-enterprise
+
+# Set up and start PX COI as systemd service
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
