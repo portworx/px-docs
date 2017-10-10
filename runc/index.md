@@ -184,11 +184,11 @@ Step 2: Inspect your existing PX-Containers, record arguments and any custom mou
 
 ```
 # Inspect Arguments
-$ {% raw %}$ sudo docker inspect --format '{{.Args}}' px-enterprise {% endraw %}
+{% raw %}$ sudo docker inspect --format '{{.Args}}' px-enterprise {% endraw %}
 [ -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb ]
 
 # Inspect Mounts
-$ {% raw %}$ sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool {% endraw %}
+{% raw %}$ sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool {% endraw %}
 [...]
     {
         "Destination": "/var/lib/kubelet",
@@ -214,12 +214,16 @@ Step 4: Stop PX-Container, start PX-OCI
 # Disable and stop PX Docker container
 $ sudo docker update --restart=no px-enterprise
 $ sudo docker stop px-enterprise
+$ sudo rmmod px
 
-# Set up and start PX COI as systemd service
+# Set up and start PX OCI as systemd service
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
 ```
+>**Note:**<br/>If `rmmod px` command failed, you will need to reboot your node.
+
+Once you confirm the PX-Container -> PX-OCI upgrade worked, you can permanently delete the `px-enterprise` docker container.
 
 ## Logging and Log files
 
