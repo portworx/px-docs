@@ -7,6 +7,7 @@ redirect_from:
   - /run-with-systemd.html
   - /systemd.html
   - /install/systemd.html
+meta-description: "This guide will show you how to start Portworx via systemd.  Try it today."
 ---
 
 If you are creating a template image - be it an AWS AMI or a Virtual Machine Image - This reference outlines the best practices to automate the provisioning of a multinode PX cluster by creating a base image via `systemd`:

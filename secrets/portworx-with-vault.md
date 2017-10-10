@@ -4,6 +4,7 @@ title: "Portworx with Vault"
 sidebar: home_sidebar
 redirect_from:
   - /portworx-with-vault.html
+meta-description: "Portworx can integrate with Vault to store your encryption keys/secrets. This guide will get a Portworx cluster up which is connected to a Vault endpoint."
 ---
 
 * TOC

@@ -4,6 +4,7 @@ title: "config.json reference"
 keywords: portworx, config.json, reference
 sidebar: home_sidebar
 redirect_from: "/config-json.html"
+meta-description: "Learn the schema definition for a valid PX configuration file along with the meaning of terms like: clusterid, mgtiface and dataiface. Find out more!"
 ---
 
 * TOC

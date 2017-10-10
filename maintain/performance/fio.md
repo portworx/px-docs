@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /performance.html
   - /maintain/performance.html
+meta-description: "Check out Portworx performance stats meaured with FIO! Portworx operates typically within less than 3% overhead of the underlying storage hardware."
 ---
 
 * TOC

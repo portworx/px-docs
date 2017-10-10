@@ -5,6 +5,7 @@ keywords: portworx, stateful sets, container, Kubernetes, storage, Docker, k8s, 
 sidebar: home_sidebar
 redirect_from:
   - /portworx-with-mysql-statefulsets.html
+meta-description: "This document demonstrates how to use StatefulSets with Kubernetes and Portworx.  Try today!"
 ---
 
 * TOC

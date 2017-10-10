@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /launch-via-lighthouse.html
   - /create-px-enterprise-cluster.html
+meta-description: "Lighthouse is a management and GUI to create PX clusters and launch PX nodes to join your clusters. Learn how to manage PX clusters via the Lighthouse today."
 ---
 
 * TOC
