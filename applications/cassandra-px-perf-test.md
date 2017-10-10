@@ -9,13 +9,13 @@ meta-description: "Discover how to measure the performance of running Cassandra 
 * TOC
 {:toc}
 
-# About this Guide
+## About this Guide
 This guide is to measure the performance of running Cassandra with PX volumes.  We use Docker directly on EC2 instances.  You may chose to use a different way of starting Cassandra and creating Portworx volumes depending on your orchestration environment (Kubernetes, Mesosphere or Swarm). Running [Cassandra in Docker containers](https://portworx.com/use-case/cassandra-docker-container/) is one of the most common uses of Portworx.
 
-# Testing Cassandra on PX
+## Testing Cassandra on PX
 Below are the instructions to test and verify Cassandra's Performance with PX volumes in a Docker environment without a scheduler. We will create three Cassandra docker containers on three machines and each Cassandra container will expose its ports. The test is conducted in AWS, using three r4.2xlarge instance and each with 60GB Ram and 128GB disk for the PX cluster. 
 
-## Setup for the test
+### Setup for the test
 
 In each of the AWS instance launch PX container and specify the etcd IP e.g. ``172.31.45.219`` and disk volume e.g.`` /dev/xvdb``
 
@@ -107,7 +107,7 @@ $ docker exec -it cass-ip-172-31-32-188 sh -c 'nodetool status'
      UN  172.31.47.121  108.29 KiB  256          68.3%             26ffac02-2975-4921-b5d0-54f3274bfe84  rack1
 ```
 
-## Running the test
+### Running the test
 
 Run Cassandra stress ``write`` testing with 10K inserts into the target keyspace ``TestKEYSPACE`` and 4 threads ``-rate threads=4``. On each node, start the Cassandra stress test about the same time. Below each node's Cassandra container is inserting object into the same keyspace but at different sequence `` e.g. 1 .. 10000``.
 
