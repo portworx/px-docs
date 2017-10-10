@@ -8,7 +8,9 @@ redirect_from:
   - /run-with-kubernetes-native-driver.html
   - /run-with-kubernetes-flexvolume.html
   - /run-with-k8s.html
+meta-description: "Run Portworx with Kubernetes Flexvolume for K8s 1.5 and earlier.  Try today!"
 ---
+
 You can use Portworx to provide storage for your Kubernetes pods. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
 This guide is for Kubernetes 1.5. If you are using Kubernetes 1.6 (recommended), please use [this page](/scheduler/kubernetes/install.html).

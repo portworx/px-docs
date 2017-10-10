@@ -7,6 +7,7 @@ redirect_from:
   - /gce-k8s-pwx.html
   - /scheduler/kubernetes.html
   - /scheduler/kubernetes/
+meta-description: "Find out how to install PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
 * TOC

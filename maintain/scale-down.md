@@ -4,6 +4,7 @@ title: "Scale-Down Nodes"
 keywords: scale-down
 sidebar: home_sidebar
 redirect_from: "/scale-down.html"
+meta-description: "Find out how to remove an offline node from a cluster with this document from Portworx. Discover how to scale-down nodes today!"
 ---
 
 * TOC

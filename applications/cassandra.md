@@ -4,6 +4,7 @@ title: "A Production Ops Guide to Deploying Cassandra"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/cassandra.html"
+meta-description: "Read our production ops guide to running Cassandra in Docker containers today! Failover faster, improve density and simplify operations."
 ---
 
 * TOC

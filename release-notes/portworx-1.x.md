@@ -4,6 +4,7 @@ title: "About PX 1.x"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 redirect_from: "/about-1-x.html"
+meta-description: "Portworx 1.0 release notes."
 ---
 
 * TOC

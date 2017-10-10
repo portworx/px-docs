@@ -4,6 +4,7 @@ title: "Upgrade Portworx"
 keywords: upgrade
 sidebar: home_sidebar
 redirect_from: "/upgrade.html"
+meta-description: "Looking to upgrade Portworx Enterprise? Follow these step-by-step instructions and find out how you can upgrade today!"
 ---
 
 Please visit the scheduler section in the left hand navigation menu in order to use the correct upgrade instructions for your scheduler.  Depending on the orchestration environment, Portworx has different best practices for the upgrade process.

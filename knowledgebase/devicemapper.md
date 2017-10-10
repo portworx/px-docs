@@ -4,7 +4,9 @@ title: "Pre-requisites : Devicemapper setup"
 keywords: portworx, px-developer, devicemapper
 sidebar: home_sidebar
 redirect_from: "/devicemapper-setup.html"
+meta-description: "Portworx recommends using devicemapper as the default graph driver for container images. Follow these instructions to setup Device Mapper for your distribution."
 ---
+
 Portworx recommends using devicemapper as the default graph driver for container images.
 
 Please follow [these instructions](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper) to setup Device Mapper for your distribution.

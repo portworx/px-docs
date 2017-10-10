@@ -4,7 +4,9 @@ title: "Manage Users"
 keywords: portworx, px-enterprise, users, user admin
 sidebar: home_sidebar
 redirect_from: "/manage-users-groups.html"
+meta-description: "Want to create a new user or manage an existing one in PX Lighthouse? Follow these steps today."
 ---
+
 To create users, click the gear icon in the upper-right corner of the console and choose **Manage Users**.
 
 ![User Admin selected in Settings menu](/images/settings-user-admin-updated.png "User Admin selected in Settings menu"){:width="278px" height="328px"}

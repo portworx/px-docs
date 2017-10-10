@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /run-kafka-on-px.html
   - /run-kafka
+meta-description: "Portworx can enable persistent data streams for kafka clusters. To learn how with these steps and tips, try it for yourself today!"
 ---
 
 * TOC
