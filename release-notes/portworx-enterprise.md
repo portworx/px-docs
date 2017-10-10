@@ -12,6 +12,17 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.10.2 Release notes
+
+### Key Features
+
+None
+
+### Key Changes and Issues Addressed
+
+* Fix boot issues with Amazon linux
+* Fix issues with shared volume mount and unmount with multiple containers  with kubernetes
+
 ## 1.2.10 Release notes
 
 ### Key Features
