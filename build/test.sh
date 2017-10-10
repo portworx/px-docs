@@ -24,6 +24,8 @@ source "${BASE}/build/test-google.sh"
 H1TAGS=()
 H1FAILS=()
 H1FAIL=0
+H1DUPFAIL=0
+H1DUPS=()
 
 HTMLFILES=$(find "${BASE}/_site" -name '*.html')
 for FILE in ${HTMLFILES}; do
@@ -31,6 +33,13 @@ for FILE in ${HTMLFILES}; do
     if [[ ${ISREDIRECT} -eq 0 ]]; then
          rm -rf "${FILE}"
     else
+        H1COUNT=$(cat "${FILE}" | pup -n h1)
+        if [[ ${H1COUNT} -gt 1 ]]; then
+            # This page has more than one H1
+            H1DUPFAIL=1
+            H1DUPS+=("${FILE}")
+        fi
+
         H1TAG=$(cat "${FILE}" | pup 'h1 text{}' | awk '{$1=$1};1' | tr -d '\n')
         if containsElement "${H1TAG}" "${H1TAGS[@]}"; then
             H1FAILS+=("${H1TAG}")
@@ -41,11 +50,25 @@ for FILE in ${HTMLFILES}; do
     fi
 done
 
+EXITAS=0
+
 # If there was a H1 match, fail the test
 if [[ ${H1FAIL} -eq 1 ]]; then
     echo -en '\033[0;31mFAIL '
     echo "The following H1s are used more than once"
     printf '%s\n' "${H1FAILS[@]}"
+    EXITAS=1
+fi
+
+# If there was a H1 duplicate, fail the text
+if [[ ${H1DUPFAIL} -eq 1 ]]; then
+    echo -en '\033[0;31mFAIL '
+    echo "The following pages contain more than 1 H1"
+    printf '%s\n' "${H1DUPS[@]}"
+    EXITAS=1
+fi
+
+if [[ ${EXITAS} -eq 1 ]]; then
     exit 1
 fi
 
