@@ -27,7 +27,7 @@ Log into the ECS console and create an ecs cluster called "ecs-demo1".
 ![ecs-clust-create](/images/aws-ecs-setup_withPX_001y.PNG "ecs-1"){:width="1023px" height="928px"}.
 
 
-On above, the Container Instance IAM role is used by the ECS container agent. These ECS container agent is deployed by default with the EC2 instances from the ECS wizard. And these agent makes call to AWS ECS API actions on your behalf, thus these EC2 instances that running the ECS container agent require an IAM role that has permission to join ECS cluster and launch containers within the cluster. 
+On above, the Container Instance IAM role is used by the ECS container agent. These ECS container agent is deployed by default with the EC2 instances from the ECS wizard. And these agent makes call to AWS ECS API actions on your behalf, thus these EC2 instances that running the ECS container agent require an IAM role that has permission to join ECS cluster and launch containers within the cluster.
 
 Create a custom IAM role and Select Role Type "Amazon EC2 Role for Container Service". This is the minimal required permission to launch ECS cluster. And depends on your use case, you may need additional AWS policy for your ECS to access and use other AWS resources. The "AmazonEC2ContainerServiceRole" has the policy shown below:
 
@@ -58,7 +58,7 @@ Your EC2 instances must have the correct IAM role set.  Follow these [IAM instru
 
 
 
-After the ECS cluster "ecs-demo1" successfully launched, the corresponding EC2 instances that belong to this ECS cluster can be found under the "ECS instance" tab of ECS console or from AWS EC2 console. Each of this EC2 instance is running with an amazon-ecs-agent in docker container. 
+After the ECS cluster "ecs-demo1" successfully launched, the corresponding EC2 instances that belong to this ECS cluster can be found under the "ECS instance" tab of ECS console or from AWS EC2 console. Each of this EC2 instance is running with an amazon-ecs-agent in docker container.
 
 ![ecs-clust-create](/images/aws-ecs-setup_withPX_003xx.PNG "ecs-3"){:width="1723px" height="863px"}.
 
@@ -70,7 +70,7 @@ Provisioning storage to these EC2 instances by creating new EBS volumes and atta
 
 ![ecs-clust-create](/images/aws-ecs-setup_withPX_004yy.PNG "ecs-4"){:width="1477px" height="699px"}.
 
-Note that there is no need to format the EBS volumes once they are created and attached to the ec2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command. 
+Note that there is no need to format the EBS volumes once they are created and attached to the ec2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command.
 
 
 ### Step 2: Deploy Portworx
@@ -89,11 +89,9 @@ ssh into each of the EC2 instances and configure docker for shared mount on "/"
 
 Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
 
-Portworx requires a 3-node etcd cluster to be running for storing cluster configuration. 
+Portworx requires a 3-node etcd cluster to be running for storing cluster configuration.
 
-Follow the instructions here for spinning up a [etcd cluster](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
-
-Also, the ansible playbook here can be used to spin up a [3 node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible). Make sure to have three ec2 instances provisioned and root ssh keys are installed in all the servers
+Follow the instructions here for spinning up a [etcd cluster](/maintain/etcd.md)
 
 Launch PX containers, you will have to log into each of ECS instance and run the following command for this step. Change the etcd IP and cluster ID for your PX cluster deployment.
 
@@ -119,15 +117,15 @@ In the example above, we are using the -a option which will pick up all the avai
 
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
-From your linux workstation download and setup AWS ECS CLI utilities 
+From your linux workstation download and setup AWS ECS CLI utilities
 
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
-  
+
          $ sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
          $ sudo chmod +x /usr/local/bin/ecs-cli
 
   2. Configure AWS ECS CLI on your workstation
-     
+
          $ export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXX
          $ export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXX
          $ ecs-cli configure --region us-east-1 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster ecs-demo1
@@ -136,7 +134,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
 
 
          $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
-         $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true 
+         $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
          demovol
 
          $ docker volume ls
@@ -156,8 +154,8 @@ From your linux workstation download and setup AWS ECS CLI utilities
          image: redis
          volumes:
            -  demovol:/data
-           -  
-         $ ecs-cli compose --file redis.yml up 
+           -
+         $ ecs-cli compose --file redis.yml up
          INFO[0001] Using ECS task definition                     TaskDefinition="ecscompose-root:1"
          INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/web"
          INFO[0001] Starting container...                         container="59701c44-c267-4c85-a8c0-ff87910af535/redis"
@@ -176,17 +174,17 @@ From your linux workstation download and setup AWS ECS CLI utilities
   6. On the above ECS console, Clusters -> pick your cluster ```ecs-demo1``` and click on the ```Container Instance``` ID that corresponding to the running task. This will display the containers information including where are these containers deployed into which EC2 instance. Below, we find that the task defined containers are deployed on EC2 instance with public IP address ```52.91.191.220```.
 ![task](/images/aws-ecs-setup_withPX_003z.PNG "ecs3z"){:width="1136px" height="598px"}
   7. From above, ssh into the EC2 instance 52.91.191.220 and verify PX volume is attached to running container.
-         
+
          [ec2-user@ip-172-31-31-61 ~]$ sudo docker ps -a
          CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                             NAMES
          7ba93d51918b        binocarlos/moby-counter          "node index.js"          12 hours ago        Up 12 hours         80/tcp                                            ecs-ecscompose-root-1-web-c2fbfff3bf92b1dad401
-         e25ba9131f9b        redis                            "docker-entrypoint.sh"   12 hours ago        Up 12 hours         6379/tcp                                          ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601         
+         e25ba9131f9b        redis                            "docker-entrypoint.sh"   12 hours ago        Up 12 hours         6379/tcp                                          ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601
 
          [ec2-user@ip-172-31-31-61 ~]$ sudo /opt/pwx/bin/pxctl v l
          ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
          1061916907972944739     demovol                 1 GiB   3       yes     no              LOW             0       up - attached on 172.31.31.61
    8. Check the redis container ```ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601``` and verify a 1GB pxfs volume is mounted on /data
-  
+
           [ec2-user@ip-172-31-31-61 ~]$ sudo docker exec -it ecs-ecscompose-root-1-redis-a6a6a2fcb4a6d188e601 sh -c 'df -kh'
           Filesystem                                                                                        Size  Used Avail Use% Mounted on
           /dev/mapper/docker-202:1-263203-3f7e353e23d7ba722fc74d1fb7db60e34f98933355ac65f78e6b4f2bcde19778  9.8G  215M  9.0G   3% /
@@ -195,21 +193,21 @@ From your linux workstation download and setup AWS ECS CLI utilities
           pxfs                                                                                              976M  2.5M  907M   1% /data
           /dev/xvda1                                                                                        7.8G  1.3G  6.5G  16% /etc/hosts
           shm                                                                                                64M     0   64M   0% /dev/shm
-         
-    
+
+
 
 ### Step 4: Setup ECS task with PX volume via AWS ECS console
-#### Optional: the same process of step3 but do it on AWS GUI 
+#### Optional: the same process of step3 but do it on AWS GUI
 
 Create a ECS tasks definition directly via the ECS console (GUI) and using PX volume.
 
-  1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI. 
+  1. ssh into one of the EC2 instance and create a new PX volume using Docker CLI.
 
           $ docker volume create -d pxd --name=demovol --opt size=1 --opt repl=3 --opt shared=true
 
 
   2. In AWS ECS console, choose the previously created cluster ```ecs-demo1```; then create a new task definition.
- 
+
    ![task](/images/aws-ecs-setup_withPX_005y.PNG){:width="1345px" height="594px"}
   3. From the new task definition screen, enter the task definition name ```redis-demo``` and click ```Add volume``` near the bottom of the page.
   ![task](/images/aws-ecs-setup_withPX_005yy.PNG){:width="1404px" height="777px"}
@@ -229,5 +227,4 @@ Create a ECS tasks definition directly via the ECS console (GUI) and using PX vo
   ![task](/images/aws-ecs-setup_withPX_010y.PNG){:width="1304px" height="713px"}
   11. You will see the task is submitted and change status from ```PENDING``` to ```RUNNING```.
   ![task](/images/aws-ecs-setup_withPX_011y.PNG){:width="1157px" height="598px"}
-  ![task](/images/aws-ecs-setup_withPX_012y.PNG){:width="1570px" height="640px"}  
-  
+  ![task](/images/aws-ecs-setup_withPX_012y.PNG){:width="1570px" height="640px"}

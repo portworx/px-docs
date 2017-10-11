@@ -12,7 +12,7 @@ redirect_from:
 
 This guide describes installing Portworx using the docker CLI.
 
->**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX. Ensure all nodes running PX are synchronized in time and NTP is configured
+>**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/maintain/etcd.md) for PX. Ensure all nodes running PX are synchronized in time and NTP is configured
 
 
 ## Install and configure Docker
@@ -55,9 +55,9 @@ If you are running Docker version 1.12 or prior, you can run PX as a Docker cont
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
 
 ## Access the pxctl CLI
-After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool. 
+After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool.
 
-With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI 
+With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI
 Reference](/control/status.html).
 
 To view the global storage capacity, run:

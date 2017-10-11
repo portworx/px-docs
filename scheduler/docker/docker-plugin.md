@@ -27,7 +27,7 @@ Before installing the plugin, please:
 
    * these directories are no longer created automatically via v2 Docker plugin, but will be required so that PX-plugin can export ```pxctl``` CLI onto the host, share configuration files, etc.
 
-2. Make sure you have your key-value database ready (ie. preinstall `etcd`), and
+2. Make sure you have your key-value database ready (ie. preinstall `etcd`). For etcd installation instructions refer this [doc](../maintain/etcd.md).
 
 3. Ensure host system has some extra disk-storage (ie. `/dev/sdc` disk).
 
@@ -66,7 +66,7 @@ The required permissions are explained below:
  - mount: [/dev]
  - allow-all-devices: [true]
     > Allows PX to access all host devices. Note that PX uses only devices/drives specified via `-s /dev/xxx` in opts or config.json.
-    
+
  - mount: [/etc/pwx]
     > the configuration files location.
 
@@ -201,13 +201,13 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
    ```
    # sudo mkdir -p /etc/pwx
    ```
-   
+
 3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
 
    ```
    # sudo cp -p config.json /etc/pwx
    ```
-   
+
 4. Edit the config.json to include the following:
    * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
    * `kvdb`: This is the etcd connection string for your etcd key/value store.

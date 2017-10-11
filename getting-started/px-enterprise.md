@@ -17,7 +17,7 @@ redirect_from:
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Enterprise exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
-* A kev/value store such as Etcd 2.0 or Consul 0.7.0
+* A kev/value store such as Etcd 3.0 or Consul 0.7.0
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM

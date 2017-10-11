@@ -16,7 +16,7 @@ This DCOS service will deploy Portworx as well as all the dependencies and addit
 cluster. This includes a highly available etcd cluster, influxdb to store statistics and the Lighthouse service, which is
 the Web UI for Portworx.
 
-Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly 
+Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly
 through CSI.
 
 ## Deploy Portworx
@@ -39,8 +39,8 @@ If you want to modify the defaults, click on the “Install” button next to th
 “Advanced Installation”
 
 Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to
-disable etcd (if you have an external etcd service) as well as disable the Lighthouse service in case you do not want to
-use the WebUI.
+disable etcd (if you have an external etcd service) If you wish to to have a custom etcd installation please refer this [doc](../maintain/etcd.md).
+You can also disable the Lighthouse service in case you do not want to use the WebUI.
 
 ### Portworx Options
 Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
@@ -70,7 +70,7 @@ service.
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
-If you click on the Portworx service you should be able to look at the status of the services being created. 
+If you click on the Portworx service you should be able to look at the status of the services being created.
 
 In a default install there will be one service for the framework scheduler, 4 services for etcd (
 3 etcd nodes and one etcd proxy), one service for influxdb and one service for lighthouse.
@@ -87,7 +87,7 @@ link on the DCOS UI.
 
 Since Lighthouse is deployed on a private agent it might not be accessible from outside your network depending on your
 network configuration. To access Lighthouse from an external network you can deploy the
-[Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic from one of the public 
+[Repoxy](https://gist.github.com/nlsun/877411115f7e3b885b5e9daa8821722f) service to redirect traffic from one of the public
 agents.
 
 To do so, run the following marathon application
@@ -144,8 +144,8 @@ The default username/password is portworx@yourcompany.com/admin
 
 ## Scaling Up Portworx Nodes
 
-If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the 
-NODE_COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes 
+If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the
+NODE_COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes
 which didn't have it previously.
 
 ![Scale up PX Nodes](/images/dcos-px-scale-up.png){:width="655px" height="200px"}

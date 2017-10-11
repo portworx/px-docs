@@ -20,7 +20,7 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
 ## Deploy PX with Kubernetes 1.6+
-Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning. 
+Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning.
 
 The native portworx driver in Kubernetes supports the following features:
 1. Dynamic Volume Provisioning
@@ -35,11 +35,11 @@ The native portworx driver in Kubernetes supports the following features:
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 * Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.
 * Ensure all nodes running PX are synchronized in time and NTP is configured
-* A clustered key-value database (etcd or consul) https://coreos.com/etcd/docs/latest/op-guide/clustering.html
+* A clustered key-value database (etcd or consul). For etcd installation instructions refer this [doc](../maintain/etcd.md).
 
 ## Install
 
-PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following: 
+PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following:
 ```
 # Download the spec - substitute your parameters below.
 K8S_VERSION=`kubectl version --short | grep Server | awk '{print $3}'`
