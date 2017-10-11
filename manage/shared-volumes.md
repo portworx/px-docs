@@ -57,7 +57,7 @@ host2# docker run -it --name box1  -v my_shared_vol:/data --volume-driver=pxd  b
 
 All writes and modifications to files and directories will be immediately available to consumers of the shared volume. Concurrency of files is handled by the volume's filesystem.
 
-### Use shared volumes externally
+### Use shared volumes via NFS
 Any nodes outside of the Portworx cluster can access a shared volume through NFS with the following format:
 
 ```
