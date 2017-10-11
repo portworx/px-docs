@@ -91,7 +91,7 @@ Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provis
 
 Portworx requires a 3-node etcd cluster to be running for storing cluster configuration.
 
-Follow the instructions here for spinning up a [etcd cluster](/maintain/etcd.md)
+Follow the instructions here for spinning up a [etcd cluster](/maintain/etcd.html)
 
 Launch PX containers, you will have to log into each of ECS instance and run the following command for this step. Change the etcd IP and cluster ID for your PX cluster deployment.
 

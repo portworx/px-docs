@@ -35,7 +35,7 @@ The native portworx driver in Kubernetes supports the following features:
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 * Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.
 * Ensure all nodes running PX are synchronized in time and NTP is configured
-* A clustered key-value database (etcd or consul). For etcd installation instructions refer this [doc](../maintain/etcd.md).
+* A clustered key-value database (etcd or consul). For etcd installation instructions refer this [doc](/maintain/etcd.html).
 
 ## Install
 

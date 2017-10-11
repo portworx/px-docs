@@ -39,7 +39,7 @@ If you want to modify the defaults, click on the “Install” button next to th
 “Advanced Installation”
 
 Through the advanced install options you can change the configuration of the Portworx deployment. Here you can choose to
-disable etcd (if you have an external etcd service) If you wish to to have a custom etcd installation please refer this [doc](../maintain/etcd.md).
+disable etcd (if you have an external etcd service) If you wish to to have a custom etcd installation please refer this [doc](/maintain/etcd.html).
 You can also disable the Lighthouse service in case you do not want to use the WebUI.
 
 ### Portworx Options

@@ -8,7 +8,7 @@ sidebar: home_sidebar
 Environments that do not permit any outside connectivity are considered an "air-gap" environment.
 Such environments preclude the use PX-Enterprise "Lighthouse" console, but can still run PX-Developer or PX-Enterprise.
 There are 3 main requirements
-- Run a local version of 'etcd'. For etcd installation instructions refer this [doc](/maintain/etcd.md)
+- Run a local version of 'etcd'. For etcd installation instructions refer this [doc](/maintain/etcd.html)
 - Create a customer 'config.json' file
 - Launch PX-Entprise manually
 

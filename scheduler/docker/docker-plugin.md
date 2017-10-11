@@ -27,7 +27,7 @@ Before installing the plugin, please:
 
    * these directories are no longer created automatically via v2 Docker plugin, but will be required so that PX-plugin can export ```pxctl``` CLI onto the host, share configuration files, etc.
 
-2. Make sure you have your key-value database ready (ie. preinstall `etcd`). For etcd installation instructions refer this [doc](../maintain/etcd.md).
+2. Make sure you have your key-value database ready (ie. preinstall `etcd`). For etcd installation instructions refer this [doc](/maintain/etcd.html).
 
 3. Ensure host system has some extra disk-storage (ie. `/dev/sdc` disk).
 

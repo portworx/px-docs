@@ -14,7 +14,7 @@ meta-description: "For troubleshooting PX on Kubernetes, Portworx can help. Read
 Following sections will guide you in troubleshooting issues with your Portworx installation on Kubernetes.
 
 ### Etcd
-* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](../maintain/etcd.md).
+* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/maintain/etcd.html).
   * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
   * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl http://192.168.33.10:2379/version`
 * If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
