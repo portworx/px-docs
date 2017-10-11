@@ -17,7 +17,7 @@ This guide shows you how you can run [Lighthouse](https://lighthouse.portworx.co
 Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2) for servers in the cluster. In your deployment, you can use physical servers, another public cloud, or virtual machines.
 
 ## Minimum Requirements
-Lighthouse runs as a Docker container and has the same minumum requirements as the Portworx storage solution.  Please consult [this guide](#minimum-requirements) for the minumum requirements.
+Lighthouse runs as a Docker container and has the same minumum requirements as the Portworx storage solution.  Please consult [this guide](https://docs.portworx.com/#minimum-requirements) for the minumum requirements.
 
 ## Install Lighthouse: Run the PX-Lighthouse container
 
