@@ -16,7 +16,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 * Run PX as a storageless node if the underlying pool goes offline
 * Improve container attach/detach scenarios where PODs are created or deleted simultaneously over multiple nodes and improve integration around kubernetes
-* Add PX as RunC support - Early Access - PX will run as a RunC container instead of docker container
+* Run PX as OCI container support - PX will run as a RunC container instead of docker container - Early Access
 * Add Read/Write latency stats
 * Add Disk latency stats
 * Add volume name to exported metrics
@@ -36,6 +36,14 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Rate limit PX alerts
 * Enhance IO-Profile=db further and address corner cases found in error injection tests
 * Lock all PX processes into memory so they don't get swapped
+
+### Errata
+
+* When a application POD mounting a shared volume is scheduled on a kubernetes node and if the Portworx container restarts while the mount is in progress, the Mount operation will fail. The application POD needs be restarted when Portworx comes up in that node
+
+* When a drive is added to PX node and the user tried to exit the maintenance mode immediately, the exit operation would fail if there is rebalance operation in progress. There is no explicit error message to indicate the progress of the rebalane operation. This will be addressed in the next release
+
+
 
 
 
