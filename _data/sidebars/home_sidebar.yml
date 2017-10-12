@@ -150,8 +150,6 @@
         url: /cloud/azure/azure.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos_acs_engine.html
-      - title: Kubernetes on Azure with Tectconic
-        url: /cloud/azure/k8s_tectonic.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
