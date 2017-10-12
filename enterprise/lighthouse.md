@@ -21,7 +21,7 @@ Lighthouse connects to two other services:
 1) Key Value Database (KVDB) store: it stores all the cluster data and lighthouse management data. This must be the same KVDB store that your Portworx nodes are/will be configured to use
 2) Influxdb: it stores all the performance data that lighthouse uses to graph
 
-Setup KVDB store by following instructions on [CoreOS etcd] (https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
+Setup KVDB store by following instructions on [Etcd] (https://docs.portworx.com/maintain/etcd.html)
 
 Setup Influxdb by following instructions on [InfluxDB] (https://hub.docker.com/r/library/influxdb/)
 
@@ -59,13 +59,31 @@ PWX_KVDB_USER_PWD           Username and password for etcd2 as username:password
 PWX_INFLUXDB                Influx URL:PORT without username:password
 PWX_INFLUXUSR               Influx username
 PWX_INFLUXPW                Influx password
+PWX_PX_PRECREATE_ADMIN      'true' or 'false', by default false, will create a user 'admin' with password 'admin'
+PWX_PX_COMPANY_NAME         Company name, by default Portworx
+PWX_PX_ADMIN_EMAIL          Email address that would be used to login
 
-(Note: If you are specifying PWX_KVDB_USER_PWD, then PWX_KVDB_AUTH needs to be set as true)
+[Note: 1) If you are specifying PWX_KVDB_USER_PWD, then PWX_KVDB_AUTH needs to be set as true 2) PWX_PX_COMPANY_NAME and PWX_PX_ADMIN_EMAIL can only be used when PWX_PX_PRECREATE_ADMIN is set to true ]
 ```
 
-In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse.
+In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse. 
+Here as a part of sign-up, you can create a root user and setup email server, that will be used to send emails for password reset, new user signup, Portworx alerts. 
 
 ![LH-ON-PREM-FIRST-LOGIN](/images/lh-on-prem-first-login-updated_2.png "First Login"){:width="983px" height="707px"}
+
+## Create Portworx Cluster
+
+Follow the instructions on [Manage PX-Enterprise via Lighthouse] (https://docs.portworx.com/enterprise/portworx-via-lighthouse.html)
+
+## Add users to Lighthouse
+
+You have already setup a root user while signing up. Here, we are going to create additional users. Click on the gear icon on top right. From the dropdown, choose 'Manage Users'. Here click on 'New', and fill out user name and email address.
+
+![LH-ADD-USER](/images/LH-add-a-new-user.png "Add User"){:width="983px" height="707px"}
+
+By default lighthouse will create a cluster for this user names <user-name>-cluster and also add this user to a group called <user-name>-group. This user will only have admin access on the cluster that got created for him. These permission can be modified under Manage Users -> Groups -> Edit. Permissions are per comapnay and per cluster based.
+
+![LH-USER-GROUPS](/images/LH-group-details.png "User Groups"){:width="983px" height="707px"}
 
 ### Upgrading PX-Lighthouse
 
