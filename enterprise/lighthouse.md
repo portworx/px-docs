@@ -63,7 +63,9 @@ PWX_PX_PRECREATE_ADMIN      'true' or 'false', by default false, will create a u
 PWX_PX_COMPANY_NAME         Company name, by default Portworx
 PWX_PX_ADMIN_EMAIL          Email address that would be used to login
 
-[Note: 1) If you are specifying PWX_KVDB_USER_PWD, then PWX_KVDB_AUTH needs to be set as true 2) PWX_PX_COMPANY_NAME and PWX_PX_ADMIN_EMAIL can only be used when PWX_PX_PRECREATE_ADMIN is set to true ]
+Note: 
+1) If you are specifying PWX_KVDB_USER_PWD, then PWX_KVDB_AUTH needs to be set as true
+2) PWX_PX_COMPANY_NAME are used in set PWX_PX_ADMIN_EMAIL, and can only be used when PWX_PX_PRECREATE_ADMIN is set to true
 ```
 
 In your browser visit *http://{IP_ADDRESS}:80* to access your locally running PX-Lighthouse. 
