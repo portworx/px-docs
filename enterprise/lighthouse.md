@@ -21,9 +21,9 @@ Lighthouse connects to two other services:
 1) Key Value Database (KVDB) store: it stores all the cluster data and lighthouse management data. This must be the same KVDB store that your Portworx nodes are/will be configured to use
 2) Influxdb: it stores all the performance data that lighthouse uses to graph
 
-Setup KVDB store by following instructions on [Etcd] (https://docs.portworx.com/maintain/etcd.html)
+Setup KVDB store by following instructions on [Etcd](https://docs.portworx.com/maintain/etcd.html).
 
-Setup Influxdb by following instructions on [InfluxDB] (https://hub.docker.com/r/library/influxdb/)
+Setup Influxdb by following instructions on [InfluxDB](https://hub.docker.com/r/library/influxdb/).
 
 ## Install Lighthouse: Run the PX-Lighthouse container
 
@@ -73,7 +73,7 @@ Here as a part of sign-up, you can create a root user and setup email server, th
 
 ## Create Portworx Cluster
 
-Follow the instructions on [Manage PX-Enterprise via Lighthouse] (https://docs.portworx.com/enterprise/portworx-via-lighthouse.html)
+Follow the instructions on [Manage PX-Enterprise via Lighthouse](https://docs.portworx.com/enterprise/portworx-via-lighthouse.html).
 
 ## Add users to Lighthouse
 
