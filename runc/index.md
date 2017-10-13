@@ -31,33 +31,28 @@ $ sudo docker run --entrypoint /runc-entry-point.sh \
 
 >**Note:**<br/>The `--privileged=true` flag has been included for backward compatibility.  You may omit this flag when using a newer Docker version (ie. v1.13 or higher), also when installing on systems that do not have SELinux enabled.
 
-## Run PX under runC
+## Running PX under runC
 
-You can run the PX OCI bundle via the `px-runc install` command.
+Now that you have downloaded and installed the PX OCI bundle, you can use the the `px-runc install` command from the bundle to configure `systemd` to start PX runC.
 
 The `px-runc` command is a helper-tool that does the following:
 
-1. prepares the OCI configuration for PX
-2. prepares the OCI directory for runC
+1. prepares the OCI directory for runC
+2. prepares the runC configuration for PX
 3. starts the PX OCI bundle via `systemd`
 
-For example:
+Installation examples:
 ```
-# EXAMPLE-1: Install the PX OCI bundle and systemd configuration:
+# EXAMPLE-1: Basic installation
 $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb -s /dev/xvdc
 
-# EXAMPLE-2: Set up PX OCI to run as a service, configured for kubernetes:
+# EXAMPLE-2: Installation configured for Kubernetes:
 $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb -s /dev/xvdc -x kubernetes \
     -v /var/lib/kubelet:/var/lib/kubelet:shared
-
-# EXAMPLE-3: Run PX OCI bundle interactively (use Ctrl-C to abort):
-$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
-    -k etcd://myetc.company.com:2379 \
-    -s /dev/xvdb -s /dev/xvdc
 ```
 
 The `px-runc install` command above creates a systemd unit file such as the example below:
