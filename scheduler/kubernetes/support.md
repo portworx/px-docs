@@ -14,9 +14,10 @@ meta-description: "For troubleshooting PX on Kubernetes, Portworx can help. Read
 Following sections will guide you in troubleshooting issues with your Portworx installation on Kubernetes.
 
 ### Etcd
-* Px container will fail to come up if it cannot reach etcd. The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
+* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/maintain/etcd.html).
+  * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
   * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl http://192.168.33.10:2379/version`
-* If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network. 
+* If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
 
 ### Portworx cluster
 * If the px container is failing to start on each node, ensure you have shared mounts enable. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
@@ -76,4 +77,3 @@ We are always available on Slack. Join us! [![](/images/slack.png){:height="48px
 This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
 * To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
 * Here is a sample [kube-controller-manager.yaml](https://gist.github.com/harsh-px/106a23b702da5c86ac07d2d08fd44e8d) after the workaround.
-

@@ -31,7 +31,7 @@ sudo docker run --restart=always                                        \
        -p 80:80                                                         \
        portworx/px-lighthouse                                           \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086        \
-       -k etcd:http://${KVDB_IP_ADDR}:2379                
+       -k etcd:http://${KVDB_IP_ADDR}:2379
 ```
 
 For **Consul**, start the container with the following run command:
@@ -41,7 +41,7 @@ sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
-       -k consul:http://${KVDB_IP_ADDR}:8500                
+       -k consul:http://${KVDB_IP_ADDR}:8500
 ```
 
 Runtime command options
@@ -52,7 +52,7 @@ Runtime command options
 -k {etcd/consul}:http://{IP_Address}:{Port_NO}
    > Connection string of your kbdb.
    > Note: Specify port 2379 for etcd and 8500 for consul
-   > If you have multinode etcd cluster then you can specify your connection string as 
+   > If you have multinode etcd cluster then you can specify your connection string as
        > 'etcd:http://{KVDB_IP_ADDR_1}:2379,etcd:http://{KVDB_IP_ADDR_2}:2379,etcd:http://{KVDB_IP_ADDR_3}:2379'
 ```
 
@@ -86,10 +86,10 @@ sudo docker run --restart=always --name px-lighthouse -d --net=bridge    \
        -p 80:80                                                          \
        portworx/px-lighthouse                                            \
        -d http://${ADMIN_USER}:${ADMIN_PASSWORD}@${IP_ADDR}:8086         \
-       -k consul:http://${KVDB_IP_ADDR}:8500   
+       -k consul:http://${KVDB_IP_ADDR}:8500
 ```
 
-PX-Lighthouse repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-Lighthouse container to the latest release. There should be minimal downtime in this upgrade process. 
+PX-Lighthouse repository is located [here](https://hub.docker.com/r/portworx/px-lighthouse/). Above mentioned docker commands will upgrade your PX-Lighthouse container to the latest release. There should be minimal downtime in this upgrade process.
 
 ### Provider Specific Instructions
 

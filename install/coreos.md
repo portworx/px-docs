@@ -13,8 +13,8 @@ These instructions are for CoreOS and VMWare Photon.
 
 To install and configure PX via the Docker CLI, use the command-line steps in this section.
 
->**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set 
-one up, see the [etcd example](/run-etcd.html) for PX
+>**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. We recommend setting up a dedicated kvdb for PX to use.  If you want to set
+one up, see the [etcd example](/maintain/etcd.html) for PX
 
 ### Install and configure Docker
 
@@ -145,13 +145,13 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
    ```
    # sudo mkdir -p /etc/pwx
    ```
-   
+
 3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
 
    ```
    # sudo cp -p config.json /etc/pwx
    ```
-   
+
 4. Edit the config.json to include the following:
    * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
    * `kvdb`: This is the etcd connection string for your etcd key/value store.
