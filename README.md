@@ -42,7 +42,6 @@ bundle exec jekyll serve
 
 The documentation will now be accessible locally at [http://127.0.0.1:4005/](http://127.0.0.1:4005/).
 
-
 ## Useful Development Notes
 
 There are lots of files from the original template that have been left here for reference, but which aren't actually being used.
