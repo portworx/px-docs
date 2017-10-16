@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx on the Digital Ocean Cloud Platform"
+title: "Portworx on the DigitalOcean Cloud Platform"
 keywords: portworx, digital ocean, PaaS, IaaS, docker, converged
 sidebar: home_sidebar
 ---
