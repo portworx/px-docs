@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Get Started ASAP"
+title: "DIY Demo"
 keywords: portworx, AWS, CloudFormation
 sidebar: home_sidebar
 redirect_from:

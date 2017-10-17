@@ -7,6 +7,7 @@ youtubeId : 0zTjOly0vkA
 redirect_from:
   - /README.html
   - /getting-started/px-enterprise.html
+  - /getting-started/px-developer.html
 meta-description: "Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!"
 ---
 

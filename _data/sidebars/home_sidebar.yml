@@ -10,8 +10,8 @@
         url: /runc/
       - title: Install Arguments
         url: /runc/options.html
-    - title: Quick Start
-      url: /getting-started/asap.html
+    - title: DIY Demo
+      url: /getting-started/diy.html
     - title: Licensing
       url: /getting-started/px-licensing.html
   - title: Container Orchestrators
