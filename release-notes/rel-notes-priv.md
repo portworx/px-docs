@@ -42,10 +42,17 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 * When a application POD mounting a shared volume is scheduled on a kubernetes node and if the Portworx container restarts while the mount is in progress, the Mount operation will fail. The application POD needs be restarted when Portworx comes up in that node
 
-* When a drive is added to PX node and the user tried to exit the maintenance mode immediately, the exit operation would fail if there is rebalance operation in progress. There is no explicit error message to indicate the progress of the rebalane operation. This will be addressed in the next release
+* After putting a node into maintenance mode, adding drives, and then running "pxctl service m --exit", the message "Maintenance operation is in progress, cancel operation or wait for completion" doesn't specify which operation hasn't completed. Workaround: Use pxctl to query the status of all three drive operations (add, replace, rebalance). pxctl then reports which drive operations are in progress and allows exiting from maintenance mode if all maintenance operations are completed.
 
+* When running under Kubernetes, adding a node label for a scheduled cloudsnap fails with the error "Failed to update k8s node". A node label isn't needed for cloudsnaps because they are read-only and used only for backup to the cloud.
 
+* When running under Kubernetes, a PVC label created by MySQL POD for the MySQL volume PVC isn't removed from the node labels when the POD is deleted.
 
+* On 3.10 and older Linux kernels when using the Ext4 file system, a volume delete fails with the message "Volume is attached". This issue doesn't occur for scheduled deletes. Workaround: Run pxctl host detach.
+
+* When a cloudsnap is taken when a ha reduce operation is in progress, there is a small window where the cloudsnap operation can fail. In the case of scheduled cloudsnaps, subsequent snaps would succeed. 
+
+* When cloudsnaps are scheduled, sometimes it creates two snapshots at the same time slot instead of one. This will be addressed in the next release.
 
 
 ## 1.2.10.2 Release notes
