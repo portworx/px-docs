@@ -10,28 +10,30 @@ sidebar: home_sidebar
 
 # Installation arguments to PX
 
-The following arguments can be provided to PX the `px-runc` helper tool, which will in turn pass them to the PX daemon:
+The following arguments can be provided to PX, which will in turn pass them to the PX daemon:
+
+>**Note:**<br/>These options are for `runC`.  These options are a superset of the now deprecated `docker run` method of starting PX.
 
 ```
 Usage: /opt/pwx/bin/px-runc <run|install> [options]
 
-options:
+Options:
    -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
    -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
    -v <dir:dir[:shared,ro]>  Specify extra mounts
    -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
    -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
    -s                        [OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data
-   -d <ethX>                 Specify the data network interface
-   -m <ethX>                 Specify the management network interface
-   -z                        Instructs PX to run in zero storage mode
-   -f                        Instructs PX to use an unmounted drive even if it has a filesystem on it
-   -a                        Instructs PX to use any available, unused and unmounted drives
-   -A                        Instructs PX to use any available, unused and unmounted drives or partitions
-   -x <swarm|kubernetes>     Specify scheduler being used in the environment
-   -token <token>            Portworx lighthouse token for cluster
+   -d <ethX>                 [OPTIONAL] Specify the data network interface
+   -m <ethX>                 [OPTIONAL] Specify the management network interface
+   -z                        [OPTIONAL] Instructs PX to run in zero storage mode
+   -f                        [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
+   -a                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
+   -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
+   -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
+   -token <token>            [OPTIONAL] Portworx lighthouse token for cluster
 
-kvdb-options:
+Advanced kvdb-options:
    -userpwd <user:passwd>    Username and password for ETCD authentication
    -ca <file>                Specify location of CA file for ETCD authentication
    -cert <file>              Specify locationof certificate for ETCD authentication
