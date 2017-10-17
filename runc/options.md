@@ -32,6 +32,8 @@ Options:
    -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
    -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
    -token <token>            [OPTIONAL] Portworx lighthouse token for cluster
+   -secret_type <type>       [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.                                         Supported values: aws, vault, kvdb
+   -cluster_secret_key <key> [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume                                         encryption.
 
 Advanced kvdb-options:
    -userpwd <user:passwd>    Username and password for ETCD authentication
