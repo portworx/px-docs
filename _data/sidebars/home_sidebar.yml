@@ -172,10 +172,6 @@
       folderitems:
       - title: Basics
         url: /control/status.html
-      - title: License
-        url: /control/license.html
-      - title: Credentials
-        url: /control/credentials.html
       - title: Volume
         url: /control/volume.html
       - title: Snaps
@@ -184,10 +180,14 @@
         url: /control/cluster.html
       - title: Service
         url: /control/service.html
-      - title: Cloud
-        url: /control/cloud.html
       - title: Host
         url: /control/host.html
+      - title: Cloud
+        url: /control/cloud.html
+      - title: Credentials
+        url: /control/credentials.html
+      - title: License
+        url: /control/license.html
     - title: REST API
       url: /control/rest-api.html
     - title: Node config data
