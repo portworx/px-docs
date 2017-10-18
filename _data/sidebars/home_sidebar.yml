@@ -162,8 +162,6 @@
       url: /cloud/digital_ocean.html
     - title: Rackspace
       url: /cloud/rackspace.html
-    - title: Terraform and Terraporx
-      url: /cloud/terraform.html
     - title: Cloud Backups
       url: /cloud/backups.html
   - title: CLI and API Reference
