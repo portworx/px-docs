@@ -26,9 +26,11 @@ ID                  NAME                DESCRIPTION                         ENAB
 $ docker plugin disable 501536d2e2ed
 ```
 3. Upgrade the Portworx plugin
+
+Use the following command to upgrade a plugin to a specific image.
 ```
-$ docker plugin upgrade 501536d2e2ed portworx/px:1.2.5
-Upgrading plugin portworx/px:latest from portworx/px:latest to portworx/px:1.2.5
+$ docker plugin upgrade 501536d2e2ed portworx/px:1.2.10
+Upgrading plugin portworx/px:latest from portworx/px:latest to portworx/px:1.2.10
 Plugin images do not match, are you sure? y
 Plugin "portworx/px:1.2.5" is requesting the following privileges:
  - network: [host]
@@ -43,11 +45,11 @@ Plugin "portworx/px:1.2.5" is requesting the following privileges:
  - allow-all-devices: [true]
  - capabilities: [CAP_SYS_ADMIN CAP_SYS_MODULE CAP_IPC_LOCK]
 Do you grant the above permissions? [y/N] y
-1.2.5: Pulling from portworx/px
-1d7345f9dd3b: Download complete 
+1.2.10: Pulling from portworx/px
+1d7345f9dd3b: Download complete
 Digest: sha256:65da96a98d2f3fba872ef0b90191c451b1bf6c5e1bb51e16e4012bcff6f8e51a
-Status: Downloaded newer image for portworx/px:1.2.5
-Upgraded plugin portworx/px:latest to portworx/px:1.2.5
+Status: Downloaded newer image for portworx/px:1.2.10
+Upgraded plugin portworx/px:latest to portworx/px:1.2.10
 ```
 >**Note:**<br/> If you see an error message like `device or resource busy`, you will see to restart the docker service and then re-attempt the above upgrade.
 
@@ -74,4 +76,3 @@ To specify a tag, you can run:
 ```
 # pxctl upgrade --tag 1.2.9
 ```
-
