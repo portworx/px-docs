@@ -3,6 +3,8 @@ layout: page
 title: "Command line options for PX"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
+redirect_from:
+  - /install/options.html
 ---
 
 * TOC
