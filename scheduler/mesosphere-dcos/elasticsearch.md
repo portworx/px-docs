@@ -200,20 +200,6 @@ Repeat inserting 4 more sample documents, then issue a search query to look for 
          }
       }'
 
-
-### Inserting document from Chrome Sense plugin
-
-Use Chrome Sense plugin from Google Chrome and you can do the document insert and query in Chrome browser. Before that you will have to establish a ssh tunnel from DCOS master node to the corrdinator port 9200. [Sense plugin for Chrome](https://chrome.google.com/webstore/detail/sense-beta/lhjgkmllcaadmopgmanpapmpjgmfcfig?hl=en) can be obtained from here.
-
-Below is the screen for inserting document in Chrome Sense; the POST command will execute once the green arrow is clicked.
-
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-009.PNG){:width="959px" height="297px"}
-
-The following is running a search query for "java" from Chrome Sense
-
-![Elasticsearch input data from Chrome Sense](/images/elasticsearch-px-universe-010.PNG){:width="1012px" height="771px"}
-
-
 ### Kibana in DCOS
 
 The kibana URL is ``http://<dcos_url>/service/elastic/kibana/login`` ; and the default login ID and password is ``elastic`` and ``changeme``.
