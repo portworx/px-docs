@@ -14,9 +14,8 @@ redirect_from:
 
 The following arguments can be provided to PX, which will in turn pass them to the PX daemon:
 
-**Note:**
-
-These options are for `runC`.  While these options are a superset of the now deprecated `docker run` method of starting PX, they can still be used with the Docker version of PX.
+>**Note:** <br>
+>These options are for `runC`.  While these options are a superset of the now deprecated `docker run` method of starting PX, they can still be used with the Docker version of PX.
 
 ```
 Usage: /opt/pwx/bin/px-runc <run|install> [options]
