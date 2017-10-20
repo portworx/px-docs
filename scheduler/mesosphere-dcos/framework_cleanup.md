@@ -9,7 +9,7 @@ meta-description: "Follow these two steps to clean up the resources in DCOS afte
 {:toc}
 
 You will have to run the following steps after destroying a service to clean up all the resources in DCOS.  We are going to clean up the cassandra-px
-service in this example. These steps can be used to clean up any service in DCOS includuing the Portworx service.
+service in this example. These steps can be used to clean up any service in DCOS including the Portworx service.
 
 ## 1. Shutdown the service if it is still running
 
@@ -52,14 +52,29 @@ sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
 sudo systemctl daemon-reload
 ```
 		
-If there was a failed PX deployment, then there may be a `/etc/pwx` directory on each of the slave nodes.
-<br> If so, this directory should be removed
+Remove the Portworx config from all the nodes
 ```
 rm -rf /etc/pwx
 ```
 
-Also remove the px kernel module
+Also remove the Portworx kernel module from all the nodes
 ```
 sudo rmmod px -f
+```
+
+If you have the dcos cli installed then you can execute the above steps on all the nodes by running the following script
+```
+ips=( `dcos node --json | jq ' .[]' | jq .id -r` )
+for ip in "${ips[@]}"
+do
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl stop portworx'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo docker rm portworx.service -f'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/portworx.service -f'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /etc/pwx'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rmmod px -f'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sdb' #Replace with your disk name
+done
 ```
 
