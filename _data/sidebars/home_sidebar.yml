@@ -194,6 +194,8 @@
     folderitems:
     - title: Monitoring and Alerts
       folderitems:
+      - title: Monitoring
+        url: /maintain/monitoring/monitoring.html
       - title: Prometheus
         url: /maintain/monitoring/prometheus/index.html
       - title: Alerts integration with Prometheus
