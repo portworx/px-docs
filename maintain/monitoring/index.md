@@ -18,7 +18,7 @@ Portworx exports mounts to other containers and these in turn also get exported 
 
 ## Monitoring Portworx
 
-Portworx exports metrics to Prometheus, these metrics are described [here] (prometheus/index.html)
+Portworx exports metrics to Prometheus, these metrics are described [here](prometheus/index.html)
 
 Alert manager integration is described [here](alerting.html)
 
