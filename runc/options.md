@@ -10,7 +10,7 @@ redirect_from:
 * TOC
 {:toc}
 
-# Installation arguments to PX
+## Installation arguments to PX
 
 The following arguments can be provided to PX, which will in turn pass them to the PX daemon:
 
