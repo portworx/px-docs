@@ -91,15 +91,26 @@ PX is not running on this host.
 For e.g., Add drive /dev/sdb to PX cluster
 
 ```
-/opt/pwx/bin/pxctl service drive add /dev/sdb
+/opt/pwx/bin/pxctl service drive add --drive /dev/sdb --operation start
 Adding device  /dev/sdb ...
-Drive add  successful. Requires restart (Exit maintenance mode).
+"Drive add done: Storage rebalance is in progress"
 ```
 
 ### Step 3: Rebalance the storage pool
 
-**Drive addition must be followed by pool rebalance operation to spreads data across all available drives in the pool.**
+**Pool rebalance is a must to spread data across all available drives in the pool.**
 
+Check the rebalance status and wait for completion.
+
+```
+/opt/pwx/bin/pxctl sv drive add --drive /dev/sdb --operation status
+"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+
+/opt/pwx/bin/pxctl sv drive add --drive /dev/sdb --operation status
+"Drive add: Storage rebalance complete"
+```
+
+In case drive add operation did not start a rebalance, start it manually.
 For e.g., If the drive was added to pool 0
 
 ```
