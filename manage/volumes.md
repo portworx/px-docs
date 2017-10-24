@@ -54,8 +54,8 @@ A volume can be created before use by its container or by the container directly
 Example of creating a volume through `pxctl`, where the volume ID is returned:
 
 ```
- # pxctl volume create foobar
- 3903386035533561360
+# pxctl volume create foobar
+3903386035533561360
 ```
 
 Throughput is controlled per container and can be shared. Volumes have fine-grained control, set through policy.
@@ -90,7 +90,6 @@ OPTIONS:
    --repl factor, -r factor             replication factor [1..3] (default: 1)
    --scale value, --sc value            auto scale to max number [1..1024] (default: 1)
    --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
-   --io_profile                         IO Profile: [sequential|random|db] (default: "auto")
    --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
    --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
    --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
@@ -160,15 +159,6 @@ These inline specs can be passed in through the scheduler application template. 
 
 ## Global Namespace (Shared Volumes)
 To use Portworx volumes across nodes and multiple containers, see [Shared Volumes](/manage/shared-volumes.html).
-
-## IO Profile setting
-It is highly recommended to let PX decide the correct IO profile tuning.  If you do however override the setting, you should understand the operation of each profile setting.
-
-* Sequential: This optimizes the read ahead algorithm for sequential access.
-* Random: This records the IO pattern of recent access and optimizes the read ahead and data layout algorithms for short term random patterns.
-* DB: This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync.  In order to do this, this algorithm requires a minimum replication (HA factor) of 3.
-
->**Note:**<br/>If there are not enough nodes online, PX will automatically disable this algorithm.
 
 ## Inspect volumes
 Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.
