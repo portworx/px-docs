@@ -19,8 +19,13 @@ Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.
 
 If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file:
 1. Use `secretType=vault` to specify the secret type as vault
-2. Use `clusterSecretKey=<key>` to set the cluster-wide secret ID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes.
-3. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#portworx-vault-environment-variables) to identify vault endpoint.
+2. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#portworx-vault-environment-variables) to identify vault endpoint.
+
+For example:
+```
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&secretType=vault&env=VAULT_ADDR=<vault-address>,VAULT_TOKEN=<vault-token>"
+$ kubectl apply -f px-spec.yaml
+```
 
 Instructions on generating the Portworx spec for Kubernetes are available [here](/scheduler/kubernetes/install.html).
 
@@ -51,7 +56,7 @@ This section is relevant for either of the below 2 scenarios
 - You are deploying PX with your PX configuration created before hand. So you want to create a `/etc/pwx/config.json` before starting Portworx installation.
 - You already have a working Portworx cluster so each node already has a `/etc/pwx/config.json`
 
-Add the following `secret_type`, `cluster_secret_key` and `vault` section to the `/etc/pwx/config.json`:
+Add the following `secret_type`, `cluster_secret_key` and `vault` section to the `/etc/pwx/config.json` on each node in the cluster:
 
 ```
 # cat /etc/pwx/config.json
@@ -74,10 +79,25 @@ Add the following `secret_type`, `cluster_secret_key` and `vault` section to the
 }
 ```
 
-## Authenticating with Vault using PX CLI
+## Key generation with Vault
+
+The following sections describe the key generation process with PX and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/manage/encrypted-volumes.html)
+
+### Setting cluster wide secret key
+
+A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command.
+
+```
+# /opt/pwx/bin/pxctl secrets set-cluster-key
+Enter cluster wide secret key: *****
+Successfully set cluster secret key!
+```
+This command needs to be run just once for the cluster.
+
+
+## (Optional) Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
-
 ```
 # /opt/pwx/bin/pxctl secrets vault login
 Enter VAULT_ADDRESS: <vault-endpoint-address>
@@ -86,24 +106,6 @@ Successfully authenticated with Vault.
 ```
 
 __Important: You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes__
-
-
-## Key generation with Vault
-
-The following sections describe the key generation process with PX and
-Vault which can be used for encrypting volumes. More info about
-encrypted volumes [here](/manage/encrypted-volumes.html)
-
-### Setting cluster wide secret key
-
-A cluster wide secret key is a common key that can be used to encrypt
-all your volumes. You can set the cluster secret key using the following command
-
-```
-# /opt/pwx/bin/pxctl secrets set-cluster-key
-Enter cluster wide secret key: *****
-Successfully set cluster secret key!
-```
 
 __Important: Make sure that the secret key has been created in Vault__
 
