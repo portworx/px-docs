@@ -26,6 +26,6 @@ This optimizes the read ahead algorithm for sequential access.  Use `io_profile=
 This records the IO pattern of recent access and optimizes the read ahead and data layout algorithms for short term random patterns.  Use `io_profile=random`.
 
 ### DB
-This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes 3 failures do not occur in a 50 ms window. Use `io_profile=db`.
+This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 3. This mode assumes all replicas do not failin a 50 ms window. Use `io_profile=db`.
 
 >**Note:**<br/>If there are not enough nodes online, PX will automatically disable this algorithm.
