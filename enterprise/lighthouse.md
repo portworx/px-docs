@@ -3,7 +3,10 @@ layout: page
 title: "Run Lighthouse"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
 sidebar: home_sidebar
-redirect_from: "/run-lighthouse.html"
+redirect_from: 
+  - /run-lighthouse.html
+  - /on-premise-lighthouse.html
+  - /lighthouse-with-secure-etcd.html
 meta-description: "Lighthouse monitors and manages your PX cluster and storage and can be run on-prem. Find out how today."
 ---
 

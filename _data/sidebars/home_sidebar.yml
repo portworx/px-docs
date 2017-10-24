@@ -272,10 +272,8 @@
     folderitems:
     - title: Manage PX via Lighthouse
       url: /enterprise/portworx-via-lighthouse.html
-    - title: Run Lighthouse on-prem
-      url: /enterprise/on-premise-lighthouse.html
-    - title: Run Lighthouse with Secure etcd
-      url: /enterprise/lighthouse-with-secure-etcd.html
+    - title: Run Lighthouse 
+      url: /enterprise/lighthouse.html
     - title: Add Existing PX Node to Lighthouse
       url: /enterprise/add-existing-px-node-to-lighthouse.html
     - title: Cluster Alerting Preferences
