@@ -79,11 +79,11 @@ Add the following `secret_type`, `cluster_secret_key` and `vault` section to the
 }
 ```
 
-## Key generation with Vault
+### Key generation with Vault
 
 The following sections describe the key generation process with PX and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/manage/encrypted-volumes.html)
 
-### Setting cluster wide secret key
+#### Setting cluster wide secret key
 
 A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command.
 
@@ -95,7 +95,7 @@ Successfully set cluster secret key!
 This command needs to be run just once for the cluster.
 
 
-## (Optional) Authenticating with Vault using PX CLI
+#### (Optional) Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
 ```
