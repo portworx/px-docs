@@ -36,9 +36,9 @@ TestDFSIO Read throughput was about +/- 20 percent from the average Read through
 |1	              |3	            |102.78               	|124.3	                |153	                   |126.69  |
 
 ## TestDFSIO benchmark without Px
-I used Cloudera Manager to setup Hadoop cluster on bare metal (CDH 5.12.1). By default, Cloudera Manager installed namenode and secondary name node on separated machines (this was consistent with the practice out there). So, it installed 1 namenode, 1 secondary name node and 3 data nodes.
+Used Cloudera Manager to setup Hadoop cluster on bare metal (CDH 5.12.1). By default, Cloudera Manager installed namenode and secondary name node on separated machines (this was consistent with the practice out there). So, it installed 1 namenode, 1 secondary name node and 3 data nodes.
 
-For each node, I configured all available disks (i.e. 10 or 8 disks) as RAID0 device (similar to Px configuration) and HDFS used this device. 
+For each node, configured all available disks (i.e. 10 or 8 disks) as RAID0 device (similar to Px configuration) and HDFS used this device. 
 
 ### Hardware for Hadoop
 These benchmark tests were based on 3 data nodes, 1 name node and 1 standby name node as following. 
