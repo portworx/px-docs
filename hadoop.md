@@ -70,12 +70,17 @@ TestDFSIO Read throughput was about +/- 5 percent from the average Read throughp
 |3	              | 1712.85	               |1802.71                 |	1896.41                 |	1803.99|
 
 ## Comparison of Px vs. No Px
+
+### Write Performance
+
 | HDFS replication| Avg Write (MB/s) per node with no Px|  Avg Write (MB/s) per node with Px | % Avg Diff  |
 | -------------   |--------------------------------------|-----------------------------------|---------    |
 |1                | 471.02                               | 181.93                            |-61.37       |
 |2	              | 37.32                                | 53.01                             |42.05        |
 |3	              | 36.66                                | 31.15                             |-15.02       |
 
+
+### Read Performance
 
 | HDFS replication| Avg Read (MB/s) per node with no Px  |  Avg Read (MB/s) per node with Px | % Avg Diff  |
 | -------------   |--------------------------------------|-----------------------------------|---------    |
