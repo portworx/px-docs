@@ -84,7 +84,7 @@ The required permissions are explained below:
 The description of all of the arguments one can provide to the plugin via ```opts="..." ``` install parameter:
 
 |  Argument | Description                                                                                                                                                                              |
-|:---------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:--------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
 |     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
 |     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
@@ -101,6 +101,7 @@ The description of all of the arguments one can provide to the plugin via ```opt
 |    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
 | `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
 |   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
+|   `-api_server`  | (Optional) Portworx lighthouse host:port.                                                                                                                                        |
 
 #### Staged install/startup of v2 Portworx plugin
 
