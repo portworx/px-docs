@@ -72,7 +72,7 @@ TestDFSIO Read throughput was about +/- 5 percent from the average Read throughp
 ## Comparison of Px vs. No Px
 | HDFS replication| Avg Write (MB/s) per node with no Px|  Avg Write (MB/s) per node with Px | % Avg Diff  |
 | -------------   |--------------------------------------|-----------------------------------|---------    |
-|1                | 471.02                               | 181.93                            |-61.37       |
+|1                | 471.02                               | 400.93                            |-17.37       |
 |2	              | 37.32                                | 53.01                             |42.05        |
 |3	              | 36.66                                | 31.15                             |-15.02       |
 
@@ -81,16 +81,6 @@ TestDFSIO Read throughput was about +/- 5 percent from the average Read throughp
 | -------------   |--------------------------------------|-----------------------------------|---------    |
 |1                |  37.44                               |266.38                             |611.56       |
 |2	              |  63.71                               | 115.40                            |81.12        |
-|3	              |  1803.99                             | 113.80                            |-93.69       |
+|3	              |  1803.99                             | 1603.80                            |-11.09       |
 
-## Terasort benchmark with Px
-It took about 4 mins 44 sec to sort 10GB of data.
 
-# FIO benchmark
-For each node, all available disks (i.e 10 or 8) were used to create a RAID0 device and formatted with Ext4.
-
-|                 |Write 1 (MB/s) per node |	Read 1 (MB/s) per node |
-|-----------------|------------------------|-------------------------|
-|FIO without Px   |1660.5	                 |1690.2   |
-|FIO with Px      |1211.3                  |	1051.2  |
-|% Diff	          |-27.05	                 |-37.81    |
