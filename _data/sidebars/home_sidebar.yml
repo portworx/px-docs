@@ -154,6 +154,8 @@
         url: /cloud/azure/azure.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos_acs_engine.html
+      - title: Azure Container Engine with Kubernetes
+        url: /cloud/azure/k8s_acs_engine.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
