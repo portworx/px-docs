@@ -111,10 +111,10 @@ where $RGNAME corresponds to the resource group name created above, and $NAME co
 Login to the Kubernetes master node.
 Download and run the Portworx [all-in-one kubernetes installation script for acs-engine](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/px_startall_acs_engine.sh)
 
-Refer to [Portworx Docs](http://docs.portworx.com) for further information on:
-* [Storage Classes and PVCs](https://docs.portworx.com/scheduler/kubernetes/dynamic-provisioning.html)
-* [Scheduler Convergence](https://docs.portworx.com/scheduler/kubernetes/scheduler-convergence.html)
-* [Troubleshooting](https://docs.portworx.com/scheduler/kubernetes/support.html)
+Refer to [Portworx Docs](/) for further information on:
+* [Storage Classes and PVCs](/scheduler/kubernetes/dynamic-provisioning.html)
+* [Scheduler Convergence](/scheduler/kubernetes/scheduler-convergence.html)
+* [Troubleshooting](/scheduler/kubernetes/support.html)
 
 
 
