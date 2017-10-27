@@ -108,12 +108,13 @@ where $RGNAME corresponds to the resource group name created above, and $NAME co
 
 ### Install Portworx
 
-Use the [standard Portworx doc guide](/scheduler/mesosphere-dcos/install.html) for 
-installing the Portworx Frameworks on DCOS.
+Login to the Kubernetes master node.
+Download and run the Portworx [all-in-one kubernetes installation script for acs-engine](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/px_startall_acs_engine.sh)
 
-Once Portworx is installed, then the [Portworx Stateful Service Frameworks](/scheduler/mesosphere-dcos/frameworks.html) can be easily deployed
-as per the reference documentation.
-
+Refer to [Portworx Docs](http://docs.portworx.com) for further information on:
+* [Storage Classes and PVCs](https://docs.portworx.com/scheduler/kubernetes/dynamic-provisioning.html)
+* [Scheduler Convergence](https://docs.portworx.com/scheduler/kubernetes/scheduler-convergence.html)
+* [Troubleshooting](https://docs.portworx.com/scheduler/kubernetes/support.html)
 
 
 
