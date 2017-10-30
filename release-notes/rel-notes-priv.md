@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.2.11.0-rc10 Release notes
+## 1.2.11.0-rc9 Release notes
 
 * Run PX as a storageless node if the underlying pool goes offline
 * Improve container attach/detach scenarios where PODs are created or deleted simultaneously over multiple nodes and improve integration around kubernetes
