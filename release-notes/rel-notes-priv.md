@@ -17,8 +17,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Run PX as a storageless node if the underlying pool goes offline
 * Improve container attach/detach scenarios where PODs are created or deleted simultaneously over multiple nodes and improve integration around kubernetes
 * Run PX as OCI container support - PX will run as a RunC container instead of docker container - Early Access
-* Add Read/Write latency stats
-* Add Disk latency stats
+* Add Read/Write latency statistics
 * Add volume name to exported metrics
 * Fix diags collection issues where in some cases diags collection can itself hang
 * Add checks to maintenance mode to make sure the maintenance mode exit does not happen if there is any drive operation in progress
@@ -40,6 +39,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Support ASG EBS Volume Templates across AWS Zones
 * Rancher Cattle with PX Shared Volumes - Prevent attach to happen before volume is created in the case of 
   shared volumes for successful mounts with Rancher Cattle 
+* Display AWS zone information in `pxctl status`
 
 ### Errata
 
