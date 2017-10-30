@@ -38,6 +38,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Lock all PX processes into memory so they don't get swapped
 * Address permissions propagation for shared volumes when wordpress plugins are updated
 * Support ASG EBS Volume Templates across AWS Zones
+* Rancher Cattle with PX Shared Volumes - Prevent attach to happen before volume is created in the case of 
+  shared volumes for successful mounts with Rancher Cattle 
 
 ### Errata
 
