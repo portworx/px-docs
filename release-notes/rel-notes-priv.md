@@ -31,7 +31,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Enqueue snaphots when more snaps happen while a snapshot is in progress
 * Do not allow shared and scaled volume settings to co-exist
 * Detach encrypted volumes upon docker restarts
-* Allow canceling replication operation
+* Allow canceling of HA node addition operation when the high-availabilty of volumes are increased by 
+  adding a new node to increase the number of replicas
 * Rate limit PX alerts
 * Enhance IO-Profile=db further and address corner cases found in error injection tests
 * Lock all PX processes into memory so they don't get swapped
@@ -40,6 +41,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Rancher Cattle with PX Shared Volumes - Prevent attach to happen before volume is created in the case of 
   shared volumes for successful mounts with Rancher Cattle 
 * Display AWS zone information in `pxctl status`
+* Kubernetes POD using namespace (shared) volumes do not get terminated properly when the POD using 
+  the namespace volume is deleted
 
 ### Errata
 
