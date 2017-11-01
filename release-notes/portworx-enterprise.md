@@ -111,7 +111,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4027 Canceling a service drive replace operation fails with the message "Replace cancel failed - Not in progress". However, if you try to exit maintenance mode, the status message indicates that a maintenance operation is in progress. Workaround: Wait for the drive replace operation to finish. The replace operation might be in a state where it can't be canceled. Cancel operations are performed when possible.
 * PWX-4039 When running Ubuntu on Azure, an XFS volume format fails. Do not use XFS volumes when running Ubuntu on Azure.
 * PWX-4043 When a Portworx POD gets deleted in Kubernetes, no alerts are generated to indicate the POD deletion via kubectl.
-* PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. After a while, the entire cluster becomes operational.
+* PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
 
 
 ## 1.2.10.2 Release notes
