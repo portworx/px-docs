@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.2.11 Release notes
+## 1.2.11.0 Release notes
 
 ### Key Features and Changes
 * You can now update volume labels. The pxctl volume update command has a new option, --label pairs. Specify a list of comma-separated name=value pairs. For example, if the current labels are x1=v1,x2=v2:
