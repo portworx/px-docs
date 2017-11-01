@@ -100,7 +100,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4051 Previous versions of Portworx logged too many "Etcd did not return any transaction responses" messages. That error is now rate-limited to log only a few times.
 * PWX-4083 When volume is in a down state due to a create failure, but is still attached without a shared volume export, the detach fails with the error "Mountpath is not mounted".
 * PWX-4085 When running under Kubernetes, too many instances of this message get generated: “Kubernetes node watch channel closed. Restarting the watch.."
-  PWX-4131 Specifying -a or -A for providing disks to PX needs to handle mpath & raid drives/partitions as well
+* PWX-4131 Specifying -a or -A for providing disks to PX needs to handle mpath & raid drives/partitions as well
 
 ### Errata
 
