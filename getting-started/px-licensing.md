@@ -15,8 +15,8 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 
 |      License type      |  Description
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
-| PX-Developer           | Embedded into [px-developer](/getting-started/px-developer.html), free license that supports limited functionality.
-| Trial                  | Automatically installed w/ [px-enterprise](/getting-started/px-enterprise.html), enables full functionality for 30 days.
+| PX-Developer           | Embedded into [px-developer](/developer/index.html), free license that supports limited functionality.
+| Trial                  | Automatically installed w/ [px-enterprise](/index.html#install), enables full functionality for 30 days.
 | PX-Enterprise VM Basic | Commercial license, suitable for medium-sized VM/cloud based installs (see [Features](https://portworx.com/products/features/))
 | PX-Enterprise VM Plus  | Enterprise license, suitable for large VM/cloud -based installs (see [Features](https://portworx.com/products/features/))
 | PX-Enterprise Metal    | Enterprise license, suitable for large installs on any hardware (see [Features](https://portworx.com/products/features/))
@@ -24,8 +24,8 @@ Starting with the v1.2.8 release, the Portworx products support the following li
 
 Depending on the type of the container you are installing, a different license will be automatically activated:
 
-* [px-developer](/getting-started/px-developer.html) container activates free "PX-Developer" license, and
-* [px-enterprise](/getting-started/px-enterprise.html) automatically
+* [px-developer](/developer/index.html) container activates free "PX-Developer" license, and
+* [px-enterprise](/index.html#install) automatically
 activates the "Trial" license (limited to 30 days), which can be upgraded to one of the "PX-Enterprise" licenses at any time.
 
 
@@ -73,7 +73,7 @@ In the table below, we can see the overview of features that are controlled via 
 
 ### PX-Developer License
 
-The "PX-Developer" license is a default license for [px-developer](/getting-started/px-developer.html) containers.
+The "PX-Developer" license is a default license for [px-developer](/developer/index.html) containers.
 The "PX-Developer" license is permanent and free, and provides a limited set of functionality, with unrestricted use.
 It supports the following features:
 
@@ -97,7 +97,7 @@ Product SKU                  PX-Developer  permanent
 
 ### Trial License
 
-The "Trial" license activates automatically when the [px-enterprise](/getting-started/px-enterprise.html) container is installed.
+The "Trial" license activates automatically when the [px-enterprise](/index.html#install) container is installed.
 The trial license provides the full product functionality for 30 days.
 
 ```
