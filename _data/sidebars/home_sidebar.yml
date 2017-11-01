@@ -12,6 +12,8 @@
         url: /runc/options.html
     - title: DIY Demo
       url: /getting-started/diy.html
+    - title: Developer Edition
+      url: /developer/index.html
     - title: Licensing
       url: /getting-started/px-licensing.html
   - title: Container Orchestrators
