@@ -18,6 +18,8 @@ server3 IP=192.168.205.12
 
 Ensure that the `nodes` group is used and that the `IP` attribute is defined
 
+Ensure that the servers listed under `nodes` all correspond to entries defined in `/etc/hosts`
+
 This installation method assumes you have root `ssh` keys installed on all the servers in the inventory file.
 
 ## Install
