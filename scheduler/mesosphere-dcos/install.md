@@ -19,6 +19,9 @@ the Web UI for Portworx.
 Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly
 through CSI.
 
+## (Optional) Deploy an AWS Portworx-ready cluster 
+Using [this AWS CloudFormation template](/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is "Portworx-ready".
+
 ## Deploy Portworx
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
