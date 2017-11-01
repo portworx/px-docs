@@ -58,8 +58,8 @@ Read more about how Portworx provides storage volumes to your application contai
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
-  * Unlimited for the Enterprise License
-  * 3 for the Developer License
+  * Unlimited for the Enterprise Edition
+  * 3 for the Developer Edition
 * Open network ports:
   * Ports 9001, 9002, 9003, 9010, 9012, 9014 must be open for internal network traffic between nodes running PX
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
