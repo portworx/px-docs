@@ -69,13 +69,16 @@ Read more about how Portworx provides storage volumes to your application contai
    
    Also, you can use this ansible playbook to deploy a 
     [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
- 
-## Install with RunC
-You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.
+
+## Install
+PX runs completely in a container.  It can be installed to run directly via `OCI runC` or deployed and managed via your container orchestrator.  Follow the instructions for either method below.
+
+### Install with RunC
+You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.  In this method, PX is managed by `systemd`.
 [Install with RunC](/runc/)
   
-## Install with a Container Orchestrator
-Visit the Schedulers section of this documentation, and chose the appropriate installation instructions for your scheduler.
+### Install with a Container Orchestrator
+You can also deploy Portworx via your container orchestrator.  Chose the appropriate installation instructions for your scheduler.
 
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
 * [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
