@@ -2,6 +2,8 @@
 layout: page
 title: "Objectstore on PX Cluster"
 keywords: cloud, objectstore
+redirect_from:
+  - /objectstore.html
 ---
 
 ## Objectstore on PX Cluster
