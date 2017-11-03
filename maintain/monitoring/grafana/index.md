@@ -27,7 +27,8 @@ Click on 'Save & Test'
 
 ![Grafana data store File](/images/grafana_datastore.png "Grafana data store File"){:width="1234px" height="1252px"}
 
-Next step would be to import Portworx provided [Cluster](https://gist.github.com/shailvipx/6da98daa4f5464f855482c1de6a138b2) and [Volume](https://gist.github.com/shailvipx/cccbf6a99d9bfc81a86ced1bebc7039a) grafana templates.
+Next step would be to import Portworx provided [Cluster](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/Cluster_Template.json) and [Volume](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/Volume_Template.json) grafana templates.
+If using PX 1.2.11, use [Volume 1.2.11](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/Portworx%20Volume%20Status_V2_Nov_2.json) grafana template.
 
 From the dropdown on left in your grafana dashboard, go to Dashboards -&gt; Import, and add cluster and volume template.
 
