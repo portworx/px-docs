@@ -1,0 +1,10 @@
+- arg:    -userpwd <user:passwd>    
+  descr:  Username and password for ETCD authentication
+- arg:    -ca <file>                
+  descr:  Specify location of CA file for ETCD authentication
+- arg:    -cert <file>              
+  descr:  Specify locationof certificate for ETCD authentication
+- arg:    -key <file>               
+  descr:  Specify location of certificate key for ETCD authentication
+- arg:    -acltoken <token>         
+  descr:  ACL token value used for Consul authentication
