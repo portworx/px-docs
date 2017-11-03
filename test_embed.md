@@ -9,6 +9,6 @@ sidebar: home_sidebar
 
 
 {% for member in site.data.cmdargs %}
-| {{ member.arg }} | {{ member.desr }} |  
+| {{ member.arg }} | {{ member.descr }} |  
 {% endfor %}
 
