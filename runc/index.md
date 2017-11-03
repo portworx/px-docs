@@ -82,36 +82,11 @@ The following arguments can be provided to the `px-runc` helper tool, which will
 
 ```
 Usage: /opt/pwx/bin/px-runc <run|install> [options]
+```
 
-options:
-   -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
-   -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
-   -s                        [REQUIRED unless -a is used] Specifies the various drives that PX should use for storing the data
-   -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
-   -name <name>              Specify container/service name (dfl: portworx)
-   -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
-   -e key=value              Specify extra environment variables
-   -v <dir:dir[:shared,ro]>  Specify extra mounts
-   -d <ethX>                 Specify the data network interface
-   -m <ethX>                 Specify the management network interface
-   -z                        Instructs PX to run in zero storage mode
-   -f                        Instructs PX to use an unmounted drive even if it has a filesystem on it
-   -a                        Instructs PX to use any available, unused and unmounted drives
-   -A                        Instructs PX to use any available, unused and unmounted drives or partitions
-   -x <swarm|kubernetes>     Specify scheduler being used in the environment
-   -token <token>            Portworx lighthouse token for cluster
+{% include cmdargs.md %}
 
-kvdb-options:
-   -userpwd <user:passwd>    Username and password for ETCD authentication
-   -ca <file>                Specify location of CA file for ETCD authentication
-   -cert <file>              Specify location of certificate for ETCD authentication
-   -key <file>               Specify location of certificate key for ETCD authentication
-   -acltoken <token>         ACL token value used for Consul authentication
-
-secrets-options:
-   -secret_type <aws|kvdb|vault> Specify the secrets type
-   -cluster_secret_key <id>      Specify cluster-wide secret ID
-
+```
 examples:
    px-runc run -k etcd://my.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
    px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
