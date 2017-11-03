@@ -5,10 +5,9 @@ keywords: portworx
 sidebar: home_sidebar
 ---
 
-## CmdLine Args
 
-
+| Argument       |  Description                                                                   |
 {% for member in site.data.cmdargs %}
-| {{ member.arg }} | {{ member.descr }} |  
+| {{ member.arg }} | {{ member.descr }}                                                           |  
 {% endfor %}
 
