@@ -1,5 +1,6 @@
+### Options:
+
 ```
-Options:
    -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
    -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
    -v <dir:dir[:shared,ro]>  Specify extra mounts
@@ -16,11 +17,13 @@ Options:
    -token <token>            [OPTIONAL] Portworx lighthouse token for cluster
    -secret_type <type>       [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb
    -cluster_secret_key <key> [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
+```
 
-Advanced kvdb-options:
+### Advanced kvdb-options:
+```
    -userpwd <user:passwd>    Username and password for ETCD authentication
    -ca <file>                Specify location of CA file for ETCD authentication
    -cert <file>              Specify locationof certificate for ETCD authentication
    -key <file>               Specify location of certificate key for ETCD authentication
    -acltoken <token>         ACL token value used for Consul authentication
-   ```
+```
