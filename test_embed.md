@@ -6,9 +6,9 @@ sidebar: home_sidebar
 ---
 
 
-| Argument                |  Description                                                                   |
-| ----------------------  |:------------------------------------------------------------------------------:|
+Argument                  |  Description                                                                  
+------------------------- | ------------------------------------------------------------------------------ 
 {% for member in site.data.cmdargs %}
-| {{ member.arg }}        | {{ member.descr }}                                                             |  
+| {{ member.arg }}        | {{ member.descr }}                                                             
 {% endfor %}
 
