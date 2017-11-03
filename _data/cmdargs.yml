@@ -4,30 +4,30 @@
   descr: "Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)"
 - arg:   "-v <dir:dir[:shared,ro]>"  
   descr: Specify extra mounts
-- arg:  -c                        
-  descr: [REQUIRED] Specifies the cluster ID that this PX instance is to join
-- arg:  -k                        
-  descr: [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
-- arg:  -s                        
-  descr: [OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data
-- arg:  -d <ethX>                 
-  descr: [OPTIONAL] Specify the data network interface
-- arg:  -m <ethX>                 
-  descr: [OPTIONAL] Specify the management network interface
-- arg:  -z                        
-  descr: [OPTIONAL] Instructs PX to run in zero storage mode
-- arg:  -f                        
-  descr: [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
-- arg:  -a                        
-  descr: [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
-- arg:  -A                        
-  descr: [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
-- arg:  -x <swarm|kubernetes>     
-  descr: [OPTIONAL] Specify scheduler being used in the environment
-- arg:  -token <token>            
-  descr: [OPTIONAL] Portworx lighthouse token for cluster
-- arg:  -secret_type <type>       
-  descr: [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb
-- arg:  -cluster_secret_key <key> 
-  descr: [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
+- arg:   "-c"                        
+  descr: "[REQUIRED] Specifies the cluster ID that this PX instance is to join"
+- arg:   "-k"                        
+  descr: "[REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster"
+- arg:   "-s"                        
+  descr: "[OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data"
+- arg:   "-d <ethX>"                 
+  descr: "[OPTIONAL] Specify the data network interface"
+- arg:   "-m <ethX>"                 
+  descr: "[OPTIONAL] Specify the management network interface"
+- arg:  "-z"                        
+  descr: "[OPTIONAL] Instructs PX to run in zero storage mode"
+- arg:  "-f"                        
+  descr: "[OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it"
+- arg:   "-a"                        
+  descr: "[OPTIONAL] Instructs PX to use any available, unused and unmounted drives"
+- arg:   "-A"                        
+  descr: "[OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions"
+- arg:   "-x <swarm|kubernetes>"     
+  descr: "[OPTIONAL] Specify scheduler being used in the environment"
+- arg:   "-token <token>"            
+  descr: "[OPTIONAL] Portworx lighthouse token for cluster"
+- arg:   "-secret_type <type>"       
+  descr: "[OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb"
+- arg:   "-cluster_secret_key <key>" 
+  descr: "[OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption."
 
