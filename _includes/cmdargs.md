@@ -30,5 +30,5 @@
 ### secrets-options:
 ```
     -secret_type <aws|kvdb|vault>   [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
-    -cluster_secret_key <id> [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
+    -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
 ```
