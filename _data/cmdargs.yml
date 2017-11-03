@@ -2,8 +2,8 @@
   descr: "Specify OCI directory (dfl: /opt/pwx/oci)"  
 - arg:   "-sysd <file>"              
   descr: "Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)"
-- arg:   "-v <dir:dir[:shared,ro]>"  
-  descr: Specify extra mounts
+- arg:   '-v <dir:dir[:shared,ro]>'  
+  descr: "Specify extra mounts"
 - arg:   "-c"                        
   descr: "[REQUIRED] Specifies the cluster ID that this PX instance is to join"
 - arg:   "-k"                        
@@ -22,12 +22,12 @@
   descr: "[OPTIONAL] Instructs PX to use any available, unused and unmounted drives"
 - arg:   "-A"                        
   descr: "[OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions"
-- arg:   "-x <swarm|kubernetes>"     
+- arg:   '-x <swarm|kubernetes>'     
   descr: "[OPTIONAL] Specify scheduler being used in the environment"
 - arg:   "-token <token>"            
   descr: "[OPTIONAL] Portworx lighthouse token for cluster"
 - arg:   "-secret_type <type>"       
   descr: "[OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb"
-- arg:   "-cluster_secret_key <key>" 
+- arg:   '-cluster_secret_key <key>' 
   descr: "[OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption."
 
