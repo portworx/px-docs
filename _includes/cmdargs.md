@@ -1,9 +1,9 @@
 
-| Argument         	        | Description                                                                                                                                                                              	| 
-|--------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+| Argument         	                | Description                                                                                                                                                                              	| 
+|----------------------------------------  |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 |   -oci <dir>               |  Specify OCI directory (dfl: /opt/pwx/oci)
 |   -sysd <file>             |  Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
-|   -v <dir:dir[:shared,ro]> |  Specify extra mounts
+|   -v <dir:dir[:shared,ro]>  |  Specify extra mounts
 |   -c                       |  [REQUIRED] Specifies the cluster ID that this PX instance is to join
 |   -k                       |  [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
 |   -s                       |  [OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data
@@ -12,8 +12,8 @@
 |   -z                       |  [OPTIONAL] Instructs PX to run in zero storage mode
 |   -f                       |  [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
 |   -a                       |  [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
-|   -A                       |  [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
-|   -x <swarm|kubernetes>    |  [OPTIONAL] Specify scheduler being used in the environment
+|   -A                          |  [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
+|   -x \<swarm\|kubernetes>            |  [OPTIONAL] Specify scheduler being used in the environment
 |   -token <token>           |  [OPTIONAL] Portworx lighthouse token for cluster
 |   -secret_type <type>      |  [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb
 |   -cluster_secret_key <key> |  [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
