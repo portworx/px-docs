@@ -12,3 +12,7 @@ sidebar: home_sidebar
 | {{ member.arg }}             | {{ member.descr }}                                                                 |                 
 {% endfor %}
 
+
+
+
+{% include cmdargs.md %}
