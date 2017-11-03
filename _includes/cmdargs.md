@@ -1,4 +1,4 @@
-### Options:
+### options:
 
 ```
    -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
@@ -15,11 +15,10 @@
    -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
    -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
    -token <token>            [OPTIONAL] Portworx lighthouse token for cluster
-   -secret_type <type>       [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features. Supported values: aws, vault, kvdb
-   -cluster_secret_key <key> [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
+  
 ```
 
-### Advanced kvdb-options:
+### kvdb-options:
 ```
    -userpwd <user:passwd>    Username and password for ETCD authentication
    -ca <file>                Specify location of CA file for ETCD authentication
@@ -27,3 +26,8 @@
    -key <file>               Specify location of certificate key for ETCD authentication
    -acltoken <token>         ACL token value used for Consul authentication
 ```
+
+### secrets-options:
+    -secret_type <aws|kvdb|vault>   [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
+    -cluster_secret_key <id> [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
+
