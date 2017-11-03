@@ -65,4 +65,4 @@ restart (COMPLETE)
    └─ portworx-4:[restart] (COMPLETE)
 ```
 
-At this point you Portworx cluster should be upgraded to the specified version.
+At this point your Portworx cluster should be upgraded to the specified version.
