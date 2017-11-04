@@ -86,11 +86,11 @@ Usage: /opt/pwx/bin/px-runc <run|install> [options]
 
 {% include cmdargs.md %}
 
+### Examples:
 ```
-examples:
-   px-runc run -k etcd://my.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
-   px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
-   px-runc install -k etcd://70.0.1.65:2379 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
+px-runc run -k etcd://my.company.com:4001 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
+px-runc install -k etcd://70.0.1.65:2379 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 #### Modifying the PX configuration
