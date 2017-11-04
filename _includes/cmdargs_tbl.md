@@ -15,7 +15,7 @@
 |   `-f`                       |  [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
 |   `-a`                       |  [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
 |   `-A`                          |  [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
-|   `-x \<swarm\|kubernetes>`            |  [OPTIONAL] Specify scheduler being used in the environment
+|   `-x <swarm\|kubernetes>`            |  [OPTIONAL] Specify scheduler being used in the environment
 |   `-token <token>`           |  [OPTIONAL] Portworx lighthouse token for cluster
 
 
