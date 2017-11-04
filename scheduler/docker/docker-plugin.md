@@ -83,25 +83,8 @@ The required permissions are explained below:
 
 The description of all of the arguments one can provide to the plugin via ```opts="..." ``` install parameter:
 
-|  Argument | Description                                                                                                                                                                              |
-|:--------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     `-c`    | (Required) Specifies the cluster ID that this PX instance is to join. You can create any unique name for a cluster ID.                                                                   |
-|     `-k`    | (Required) Points to your key value database, such as an etcd cluster or a consul cluster.                                                                                               |
-|     `-s`    | (Optional if -a is used) Specifies the various drives that PX should use for storing the data.                                                                                           |
-|     `-d`    | (Optional) Specifies the data interface.                                                                                                                                                 |
-|     `-m`    | (Optional) Specifies the management interface.                                                                                                                                           |
-|     `-z`    | (Optional) Instructs PX to run in zero storage mode. In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes. |
-|     `-f`    | (Optional) Instructs PX to use an unmounted drive even if it has a filesystem on it.                                                                                                     |
-|     `-a`    | (Optional) Instructs PX to use any available, unused and unmounted drive.,PX will never use a drive that is mounted.                                                                     |
-|     `-A`    | (Optional) Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted.                                         |
-|     `-x`    | (Optional) Specifies the scheduler being used in the environment. Supported values: "swarm" and "kubernetes".                                                                            |
-|  `-userpwd` | (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       |
-|    `-ca`    | (Optional) Location of CA file for ETCD authentication.                                                                                                                                  |
-|   `-cert`   | (Optional) Location of certificate for ETCD authentication.                                                                                                                              |
-|    `-key`   | (Optional) Location of certificate key for ETCD authentication.                                                                                                                          |
-| `-acltoken` | (Optional) ACL token value used for Consul authentication.                                                                                                                               |
-|   `-token`  | (Optional) Portworx lighthouse token for cluster.                                                                                                                                        |
-|   `-api_server`  | (Optional) Portworx lighthouse host:port.                                                                                                                                        |
+{% include cmdargs.md %}
+
 
 #### Staged install/startup of v2 Portworx plugin
 
