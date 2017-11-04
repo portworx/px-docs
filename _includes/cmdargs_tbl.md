@@ -1,11 +1,11 @@
 
 ### Executable command-line options:
 
-|  Argument | Description                                                                                                                                                                              |
-|:--------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  Argument                        | Description                                                                                                                                                                              |
+|:---------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   `-oci <dir>`               |  Specify OCI directory (dfl: /opt/pwx/oci)
 |   `-sysd <file>`             |  Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
-|   `-v <dir:dir[:shared,ro]>`  |  Specify extra mounts
+|   `-v <dir:dir[:shared,ro]>`             |  Specify extra mounts
 |   `-c`                       |  [REQUIRED] Specifies the cluster ID that this PX instance is to join
 |   `-k`                       |  [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
 |   `-s`                       |  [OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data
@@ -21,7 +21,7 @@
 
 ### Advanced kvdb-options:
 |  Argument | Description                                                                                                                                                                              |
-|:--------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	
+|:------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	
 |   `-userpwd <user:passwd>`   |  Username and password for ETCD authentication
 |   `-ca <file>`               |  Specify location of CA file for ETCD authentication
 |   `-cert <file>`             |  Specify locationof certificate for ETCD authentication
@@ -30,6 +30,6 @@
 
 ### Secrets-options:
 |  Argument | Description                                                                                                                                                                              |
-|:--------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	
+|:----------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|	
 |   `-secret_type <aws\|vault\|kvdb>`      |  [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
 |   `-cluster_secret_key <id>` |  [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
