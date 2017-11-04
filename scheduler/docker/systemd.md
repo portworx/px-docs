@@ -51,16 +51,7 @@ WantedBy=multi-user.target
 
 You must edit the above template to provide the cluster and node initialization options.  Provide one of the following examples as command line arguments positioned after “px-enterprise”:
 
-```bash
--t <token> token that was provided in email (or arbitrary clusterID)
--c <cluster_id> cluster ID is required if token is not specified
--s <device> of the form /dev/sdN, repeat for multiple devices
--d <data_network_interface> of the form eth0 - (optional)
--m <management_network_interface> of the form eth0 - (optional)
--k <key_value_store> of the form [etcd|consul]://<IP>:<port> - (Not required if Portworx Management portal, Lighthouse is used)
--a will attempt to use all available devices
--f when combined with -a will use all available devices even those with a filesystem
-```
+{% include cmdargs.md %}
 
 For example, you can provide this after the `-d px-enterprise` line in the above `systemd` unit file:
 
