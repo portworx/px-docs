@@ -5,7 +5,7 @@
 |:---------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |   `-oci <dir>`               |  Specify OCI directory (dfl: /opt/pwx/oci)
 |   `-sysd <file>`             |  Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
-|   `-v <dir:dir[:shared,ro]>`             |  Specify extra mounts
+|`-v <dir:dir[:shared,ro]>`|  Specify extra mounts
 |   `-c`                       |  [REQUIRED] Specifies the cluster ID that this PX instance is to join
 |   `-k`                       |  [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
 |   `-s`                       |  [OPTIONAL if -a is used] Specifies the various drives that PX should use for storing the data
