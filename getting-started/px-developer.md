@@ -29,7 +29,7 @@ meta-description: "Getting started with PX-Developer? In just two steps, Portwor
 * Maximum nodes per cluster:
   * 3 server nodes
 * Open network ports:
-  * Ports 9001 - 9006 must be open for internal network traffic between nodes running PX
+  * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
 
 ## Step 2: Install and run PX-Developer
 

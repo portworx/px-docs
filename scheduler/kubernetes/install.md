@@ -108,6 +108,14 @@ $ kubectl label nodes minion-X "px/enabled=false" --overwrite
 #### Scaling
 Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
+#### Installing in environments behind a proxy
+Portworx container needs to fetch the kernel headers to install the px kernel module. If your cluster runs behind a proxy, expose `PX_HTTP_PROXY` and/or `PX_HTTPS_PROXY` environment variables to point to your proxy when starting the DaemonSet.
+
+Use `env=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when generating the DaemonSet spec. For example:
+```
+$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&env=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
+```
+
 ## Uninstall
 You can uninstall Portworx from the cluster using: `$ kubectl delete -f <px-spec.yaml>`
 
