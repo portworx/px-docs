@@ -1,4 +1,4 @@
-### options:
+##### options:
 
 ```
    -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
@@ -18,7 +18,7 @@
   
 ```
 
-### kvdb-options:
+##### kvdb-options:
 ```
    -userpwd <user:passwd>    Username and password for ETCD authentication
    -ca <file>                Specify location of CA file for ETCD authentication
@@ -27,7 +27,7 @@
    -acltoken <token>         ACL token value used for Consul authentication
 ```
 
-### secrets-options:
+##### secrets-options:
 ```
     -secret_type <aws|kvdb|vault>   [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
     -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
