@@ -9,7 +9,7 @@ sidebar: home_sidebar
 {:toc}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your Google Kurbenetes Engine (GKE) cluster.
-This guide assumes that you have already [installed Portworx on your Kubernetes cluster](/scheduler/kubernetes/install.md).
+This guide assumes that you have already [installed Portworx on your Kubernetes cluster](/scheduler/kubernetes/install.html).
 
 ## Dynamic provisioner on GKE
 Dynamic provisioning of volumes in Kubernetes is done through the Persistent Volume (PV) binder controller running on the
@@ -118,5 +118,5 @@ portworx-pvc-controller-2561368997-5s35p              1/1       Running   0     
 ...
 ```
 
-After the controller is in Running statue you can [use PV claims to dynamically provision Portworx volumes on GKE](/scheduler/kubernetes/dynamic-provisioning.md).
+After the controller is in Running statue you can [use PV claims to dynamically provision Portworx volumes on GKE](/scheduler/kubernetes/dynamic-provisioning.html).
 
