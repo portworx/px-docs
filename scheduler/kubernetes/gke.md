@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Deploy Portworx on Google Kubernetes Engine (GKE)"
+title: "Dynamic Provisioning on Google Kubernetes Engine (GKE)"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 sidebar: home_sidebar
 ---
