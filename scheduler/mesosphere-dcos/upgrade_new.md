@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Upgrade Portworx on DCOS"
+title: "Upgrade Portworx on DCOS (new)"
 keywords: portworx, container, dcos, storage, Docker, mesos
 ---
 
