@@ -252,7 +252,8 @@ spec:
               medium: ""
             name: "storage"
 ```
-Apply the specification for the Replication controller and its service for the co-ordinator only nodes.
+
+Apply the specification for the client `Deployment` and its service.
 
 ```
 kubectl apply -f es-client-rc.yaml
@@ -370,7 +371,7 @@ spec:
           storage: 80Gi
 ```
 
-Apply the Statefulset spec for the Elastic search data nodes alongwith the headless service. 
+Apply the Statefulset spec for the Elastic search data nodes along with the headless service.
 ```
 kubectl apply -f es-data-svc.yaml
 service "es-data-srv" created
@@ -625,7 +626,7 @@ spec:
           value: 'false'
         - name: XPACK_REPORTING_ENABLED
           value: 'false'
-# Important that the IP address is changed to the co-ordinator node clusterIP. This will change for each setup. 
+# Important that the IP address is changed to the Elastic Search client service clusterIP. This will change for each setup.
         - name: ELASTICSEARCH_URL
           value: 'http://10.105.105.41:9200'
         resources:
@@ -639,7 +640,7 @@ spec:
           protocol: TCP
 ```
 
-Deploy the Kibana spec for the replication controller as well as the service. 
+Deploy the Kibana spec for the `Deployment` as well as the service.
 ```
 kubectl apply -f kibana-svc.yaml 
 service "kibana" created
