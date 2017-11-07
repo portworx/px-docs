@@ -60,5 +60,5 @@ The following procedure should be followed:
     * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 3. Delete Portworx pod running on this node. This will start a new Portworx pod on this node with the new version you set above. (Note: Cordoning a kubernetes node doesn't affect DaemonSet pods)
 4. A new Portworx pod with the new version will be initiated on this node. This pod will stay in initializing state.
-4. Reboot the node. (Portworx 1.2.9 release requires a reboot of the host to perform upgrade of our kernel driver.)
-5. Uncordon the node once it comes up.
+5. Reboot the node. (This step is needed only if your current Portworx version is 1.2.9 since it requires a reboot of the host to perform upgrade of our kernel driver.)
+6. Uncordon the node once it comes up.
