@@ -74,7 +74,7 @@ spec:
 
 ```
 
-Create ```es-master-rc.yaml``` with the following content
+Create ```es-master-deployment.yaml``` with the following content
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -149,7 +149,7 @@ Apply the specification for the Elastic search Master nodes and the service for 
 kubectl apply -f es-master-svc.yaml 
 service "elasticsearch-discovery" created
 
-kubectl apply -f es-master-rc.yaml 
+kubectl apply -f es-master-deployment.yaml 
 deployment "es-master" created
 
 kubectl get pods
@@ -184,7 +184,7 @@ spec:
     protocol: TCP
 ```
 
-Create ```es-client-rc.yaml``` with the following content
+Create ```es-client-deployment.yaml``` with the following content
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -256,7 +256,7 @@ spec:
 Apply the specification for the client `Deployment` and its service.
 
 ```
-kubectl apply -f es-client-rc.yaml
+kubectl apply -f es-client-deployment.yaml
 deployment "es-client" created
 
 kubectl apply -f es-client-svc.yaml 
@@ -593,7 +593,7 @@ spec:
     targetPort: 5601
     protocol: TCP
 ```
-Create ```kibana-rc.yaml``` with the following content
+Create ```kibana-deployment.yaml``` with the following content
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -659,7 +659,7 @@ Endpoints:		<none>
 Session Affinity:	None
 Events:			<none>
 
-kubectl apply -f kibana-rc.yaml 
+kubectl apply -f kibana-deployment.yaml 
 deployment "kibana" created
 
 kubectl get pods -l "component=kibana" -w
