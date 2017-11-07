@@ -72,52 +72,7 @@ sudo docker run --restart=always --name px -d --net=host       \
 
 Where the following arguments are provided to the PX daemon:
 
-```
--daemon
-	> Instructs PX to start in daemon mode.  Other modes are for service users only.
-
--k
-	> Points to your key value database, such as an etcd cluster or a consul cluster.
-
--userpwd
-       > username and password for ETCD authentication in the form <user_name>:<passwd>
-
--ca
-       > location of CA file for ETCD authentication
-
--cert
-	> location of certificate for ETCD authentication
-
--key
-	> location of certificate key for ETCD authentication
-
--acltoken
-	> ACL token value used for Consul authentication
-
--c
-	> Specifies the cluster ID that this PX instance is to join.  You can create any unique name for a cluster ID.
-
--s
-	> Specifies the various drives that PX should use for storing the data.
-
--a
-	> Instructs PX to use any available, unused and unmounted drive.  PX will never use a drive that is mounted.
-
--A
-	> Instructs PX to use any available, unused and unmounted drives or partitions.  PX will never use a drive or partition that is mounted.
-
--f
-	> Optional.  Instructs PX to use an unmounted drive even if it has a filesystem on it.
-
--z
-	> Optional.  Instructs PX to run in zero storage mode.  In this mode, PX can still provide virtual storage to your containers, but the data will come over the network from other PX nodes.
-
--d
-	> Optional.  Specifies the data interface.
-
--m
-	> Optional.  Specifies the management interface.
-```
+{% include cmdargs.md %}
 
 The following Docker runtime command options are explained:
 
