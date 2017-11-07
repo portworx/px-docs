@@ -17,14 +17,13 @@ An Elasticsearch cluster node can have one or more purposes.
 	A node that has node.master set to true (default), which makes it eligible to be elected as the master node, which controls the cluster.
 - Data node
 	A node that has node.data set to true (default). Data nodes hold data and perform data related operations such as CRUD, search, and aggregations.
-- Coordinating node
-	A node which only routes requests, handles the search reduce phase, and distributes bulk indexing. 
+- Client node
+	A node which only routes requests, handles the search reduce phase, and distributes bulk indexing. Consumers of the elastic search cluster interact with the client nodes.
 
 
 ## Prerequisites
-
 -	A running Kubernetes cluster with v 1.6+
--	All the kubernetes nodes should allow [shared mount propagation](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.  
+-	All the kubernetes nodes should allow [shared mount propagation](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.
 -	[Deploy Portworx on your kubernetes cluster](https://docs.portworx.com/scheduler/kubernetes/install.html). PX runs on each node of your kubernetes cluster as a daemonset.
 
 ## Install
@@ -50,9 +49,9 @@ kubectl apply -f portworx-sc.yaml
 
 ### Install Elasticsearch cluster
 In this section we will create an ES cluster with 
--	3 master nodes using a Kubernetes Statefulset backed by PX.
--	3 data nodes and using a Kubernetes Replication Controller.
--	2 coordinating node using a Kubernetes Replication Controller.
+-	3 master nodes using a Kubernetes `Deployment`
+-	3 data nodes using a Kubernetes `Statefulset` backed by Portworx volumes
+-	2 client node using a Kubernetes `Deployment`
 
 Create ```es-master-svc.yaml``` with the following content
 
