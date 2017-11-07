@@ -25,8 +25,10 @@ update-portworx plan through the dcos cli. This step will perform a rolling rest
 outage.
 
 ```
-$ dcos portworx plan force-restart update-portworx
-"update-portworx" plan has been restarted.
+$ dcos portworx plan start update-portworx
+{
+  "message": "Received cmd: start"
+}
 ```
 
 Now wait for the tasks to go to COMPLETE state on all the agents
