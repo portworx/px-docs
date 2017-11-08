@@ -65,6 +65,7 @@ sudo rmmod px -f
 NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
 up by Portworx in the next install. This can be done by running the wipefs command
 ```
+# Use with care since this will wipe data from that disk
 sudo wipefs -a /dev/sda123 # Replace with your disk names
 ```
 
