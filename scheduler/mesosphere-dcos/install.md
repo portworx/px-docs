@@ -19,15 +19,17 @@ the Web UI for Portworx.
 Portworx can be used to provision volumes on DCOS using either the Docker Volume Driver Interface (DVDI) or, directly
 through CSI.
 
-## (Optional) Deploy an AWS Portworx-ready cluster 
+NOTE: Please ensure that your mesos private agents have unmounted block devices that can be used by Portworx.
+
+### (Optional) Deploy an AWS Portworx-ready cluster 
 Using [this AWS CloudFormation template](/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is "Portworx-ready".
 
-## Deploy Portworx
+### Deploy Portworx
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
 ![Portworx in DCOS Universe](/images/dcos-px-universe.png){:width="655px" height="200px"}
 
-### Default Install
+#### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 ```
 $ dcos package install --yes portworx
@@ -37,7 +39,7 @@ You can also click on the  “Install” button on the WebUI next to the service
 This will install all the prerequisites and start the Portworx service on 3 private agents.
 The default login/password for lighthouse would be portworx@yourcompany.com/admin
 
-### Advanced Install
+#### Advanced Install
 If you want to modify the defaults, click on the “Install” button next to the package on the DCOS UI and then click on
 “Advanced Installation”
 
@@ -45,20 +47,22 @@ Through the advanced install options you can change the configuration of the Por
 disable etcd (if you have an external etcd service) If you wish to to have a custom etcd installation please refer this [doc](/maintain/etcd.html).
 You can also disable the Lighthouse service in case you do not want to use the WebUI.
 
-### Portworx Options
+#### Portworx Options
 Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
 is enabled this config value will be ignored.
 If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest.
 With PX Enterprise you can increase the number of nodes in the PX Cluster to a value greater than 3.
+
+NOTE: If you are trying to use block devices that already have a filesystem on them, either add the "-f" option to "Portworx Options" to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
 ![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
-### Etcd Options
+#### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can
 be changed during install. This can not be updated once the service has been started so please make sure you have enough
 storage resources available in your DCOS cluster before starting the install.
 ![Portworx ETCD Install options](/images/dcos-px-etcd-options.png){:width="655px" height="200px"}
 
-### Lighthouse options
+#### Lighthouse options
 By default the Lighthouse service will be installed. If this is disabled the influxdb service will also be disabled.
 
 You can enter the admin email to be used for creating the Lighthouse account. This can be used to login to Lighthouse
@@ -69,7 +73,7 @@ after install is complete. The default password is `admin` which can be changed 
 Once you have configured the service, click on “Review and Install” and then “Install” to start the installation of the
 service.
 
-## Install Status
+### Install Status
 
 Once you have started the install you can go to the Services page to monitor the status of the installation.
 
@@ -86,7 +90,7 @@ You can check the nodes where Portworx is installed and the status of the Portwo
 link on the DCOS UI.
 ![Portworx in DCOS Compenents](/images/dcos-px-components.png){:width="655px" height="200px"}
 
-## Accessing Lighthouse
+### Accessing Lighthouse
 
 Since Lighthouse is deployed on a private agent it might not be accessible from outside your network depending on your
 network configuration. To access Lighthouse from an external network you can deploy the
@@ -138,14 +142,14 @@ To do so, run the following marathon application
 You can then access the Lighthouse WebUI on http://\<public_agent_IP\>:9998.
 If your public agent is behind a firewall you will also need to open up two ports, 9998 and 9999.
 
-### Login Page
+#### Login Page
 The default username/password is portworx@yourcompany.com/admin
 ![Lighthouse Login Page](/images/dcos-px-lighthouse-login.png){:width="655px" height="200px"}
 
 ### Dashboard
 ![Lighthouse Dashboard](/images/dcos-px-lighthouse-dashboard.png){:width="655px" height="200px"}
 
-## Scaling Up Portworx Nodes
+### Scaling Up Portworx Nodes
 
 If you add more agents to your DCOS cluster and you want to install Portworx on those new nodes, you can increase the
 NODE_COUNT to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes
