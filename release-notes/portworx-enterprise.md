@@ -12,6 +12,12 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.1 Release notes
+
+### Fixed Issues
+
+* Fix file descriptors not being released after reporting containers attached to a shared volume
+
 ## 1.2.11.0 Release notes
 
 ### Key Features and Changes
