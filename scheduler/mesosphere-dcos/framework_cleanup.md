@@ -62,6 +62,12 @@ Also remove the Portworx kernel module from all the nodes
 sudo rmmod px -f
 ```
 
+NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
+up by Portworx in the next install. This can be done by running the wipefs command
+```
+sudo wipefs -a /dev/sda123 # Replace with your disk names
+```
+
 If you have the dcos cli installed then you can execute the above steps on all the nodes by running the following script
 ```
 ips=( `dcos node --json | jq ' .[]' | jq .id -r` )
@@ -74,7 +80,7 @@ do
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /etc/pwx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rmmod px -f'
-        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sdb' #Replace with your disk name
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sda123' # Replace with your disk names
 done
 ```
 
