@@ -28,25 +28,27 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 
 ### PVC creation
 If the PVC creation is failing, this could be due the following reasons
-* A firewall rule for port 9001 is present on the hosts running px containers. This prevents the create volume call to come to the Portworx API server.
+* A firewall/iptables rule for port 9001 is present on the hosts running px containers. This prevents the create volume call to come to the Portworx API server.
 * For Kubernetes versions 1.6.4 and before, Portworx may not running on the Kubernetes master/controller node.
 * For Kubernetes versions 1.6.5 and above, if you don't have Portworx running on the master/controller node, ensure that
     * The `portworx-service` is running in the `kube-system` namespace.
     * You don't have any custom taints on the master node. Doing so will disallow kube-proxy to run on master and that will cause the `portworx-service` to fail to handle requests.
 * The StorageClass name specified might be incorrect.
 * Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
+* Describe the PVC using `kubectl describe pvc <pvc-name>` and look at errors in the events section which might be causing failure of the PVC creation.
 
 ### Application pods
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
 * Ensure the PVC used by the application pod is in "Bound" state.
 * Check if Portworx is in maintenance mode on the node where the pod is running. If so, that will cause existing pods to see a read-only filesystem after about 10 minutes. New pods using Portworx will fail to start on this node.
 * If a pod is stuck in terminating state, observe `journalctl -lfu kubelet` on the node where the pod is trying to terminate for errors during the pod termination process. Reach out to us over slack with the specific errors.
+* If a pod is stuck in Creating state, describe the pod using `kubectl describe pod <pod-name>` look at errors in the events section which might be causing the failure.
 * Ensure that [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of pod and the PersistentVolumeClaim is the same.
 
 ### Useful commands
 * List PX pods: `kubectl get pods -l name=portworx -n kube-system`
 * Describe PX pods: `kubectl describe pods -l name=portworx -n kube-system`
-* Logs of all PX pods: `kubectl logs -l name=portworx -n kube-system --tail=1000`
+* Logs of all PX pods: `kubectl logs -l name=portworx -n kube-system --tail=99999`
 * Follow logs of a particular px pod: `kubectl logs -w <pod-name> -n kube-system`
 * Monitor kubelet logs on a particular Kubernetes node: `journalctl -lfu kubelet`
     * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
