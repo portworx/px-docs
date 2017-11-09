@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 
 
->**Note:**<br/>Portworx is a  ![](/images/mssqllogo.png)[Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
+><br/>Portworx is a  ![](/images/mssqllogo.png)[Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
 
 In this five-minute hands-on video, 
 you’ll learn how simple it is to run Microsoft SQL Server in containers with Portworx. 
