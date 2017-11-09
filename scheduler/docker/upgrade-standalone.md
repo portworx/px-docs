@@ -13,7 +13,7 @@ redirect_from:
 ## Upgrade the PX Plugin
 This guide describes upgrading the Portworx docker volume plugin.
 
-The commands in this guide upgrade the plugin to version 1.2.5. You will need to run the below sequence on all Portworx nodes in the cluster.
+The commands in this guide upgrade the plugin to version 1.2.10. You will need to run the below sequence on all Portworx nodes in the cluster.
 
 1. List the plugin ID
 ```
@@ -60,7 +60,6 @@ $  docker plugin enable 501536d2e2ed
 5. Check version and status
 ```
 $ /opt/pwx/bin/pxctl -v
-pxctl version 1.2.5-7b6ab38
 $ /opt/pwx/bin/pxctl status
 ```
 
@@ -74,5 +73,5 @@ If you installed PX as a standalone container, you can upgrade PX using the PX C
 To specify a tag, you can run:
 
 ```
-# pxctl upgrade --tag 1.2.9
+# pxctl upgrade --tag 1.2.10
 ```
