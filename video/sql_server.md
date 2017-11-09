@@ -5,6 +5,9 @@ keywords: Microsoft, SQL Server, portworx, high-availability,  container, storag
 sidebar: home_sidebar
 ---
 
+
+>**Note:**<br/>Portworx is a  ![](/images/mssqllogo.png)[Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
+
 In this five-minute hands-on video, 
 you’ll learn how simple it is to run Microsoft SQL Server in containers with Portworx. 
 For the first time, you’ll get the availability, durability, and recoverability 
