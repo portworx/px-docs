@@ -40,10 +40,13 @@ If the PVC creation is failing, this could be due the following reasons
 ### Application pods
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
 * Ensure the PVC used by the application pod is in "Bound" state.
+* Ensure that [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of pod and the PersistentVolumeClaim is the same.
 * Check if Portworx is in maintenance mode on the node where the pod is running. If so, that will cause existing pods to see a read-only filesystem after about 10 minutes. New pods using Portworx will fail to start on this node.
 * If a pod is stuck in terminating state, observe `journalctl -lfu kubelet` on the node where the pod is trying to terminate for errors during the pod termination process. Reach out to us over slack with the specific errors.
 * If a pod is stuck in Creating state, describe the pod using `kubectl describe pod <pod-name>` look at errors in the events section which might be causing the failure.
-* Ensure that [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) of pod and the PersistentVolumeClaim is the same.
+* If a pod is stuck in CrashLoopBackoff state, check the logs of the pod using `kubectl logs <pod-name> [<container-name>]` and look for the failure reason. It could be because of any of the following reasons
+  * Portworx was down on this node for a period of more than 10 minutes. This caused the volume to go into read-only state. Hence the application pod can no longer write to the volume filesystem. To fix this issue, delete the pod. A new pod will get created and the volume will be setup again. The pod will resume with the same persistent data since that is being backed by a PVC provisioned by Portworx.
+  * The application container found existing data in the mounted PVC volume and was expecting an empty volume.
 
 ### Useful commands
 * List PX pods: `kubectl get pods -l name=portworx -n kube-system`
