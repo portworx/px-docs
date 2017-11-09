@@ -5,6 +5,7 @@ keywords: portworx, architecture, storage, container, cluster, install, docker, 
 sidebar: home_sidebar
 redirect_from:
  - runpx.html
+ - run-with-docker.html
 ---
 
 * TOC
