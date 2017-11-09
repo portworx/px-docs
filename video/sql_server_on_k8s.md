@@ -5,6 +5,8 @@ keywords: Microsoft, SQL Server, portworx, kubernetes, high-availability,  conta
 sidebar: home_sidebar
 ---
 
+>**Note:**<br/>Portworx is a ![](/images/mssqllogo.png)[Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
+
 In this five-minute hands-on video, you’ll learn how simple it is to run Microsoft SQL Server in Kubernetes with Portworx. 
 You'll see how to achieve database reliability, recoverability, and high availability 
 without having to configure multiple clustered SQL Server instances.
