@@ -12,9 +12,4 @@ This guide describes upgrading PX when running in swarm.
 
 ## Upgrade
 
-Following command will perform upgrade with the latest image.
-```
-$ docker service update --force portworx
-```
-
-If you are running PX as a plugin in a swarm cluster follow the upgrade instructions [here](/scheduler/docker/upgrade-standalone.html)
+PX is deployed as a plugin in Docker Swarm. Follow the plugin upgrade instructions [here](/scheduler/docker/upgrade-standalone.html) to upgrade PX in your swarm cluster.
