@@ -12,6 +12,18 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
+## Lighthouse 1.1.10 Release notes
+
+### Key Fixes
+
+* Fixed an issue where with Portworx 1.2.11, all volumes were showing as attached in UI
+
+## Lighthouse 1.1.9 Release notes
+
+### Key Fixes
+
+* Fixed an issue where deleting user group was crashing UI
+
 ## Lighthouse 1.1.8 Release notes
 
 * Added in support for the latest Openstorage api's and made Lighthouse work with these.
