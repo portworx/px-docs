@@ -30,11 +30,18 @@ $ docker plugin disable 501536d2e2ed
 3. Upgrade the Portworx plugin
 
 Use the following command to upgrade a plugin to a specific image.
+
+```
+$ docker plugin upgrade 501536d2e2ed portworx/px:<version>
+```
+
+Replace the `<version>` field with the plugin tag you want to upgrade to. Here is an example command that upgrades PX plugin to `1.2.10`
+
 ```
 $ docker plugin upgrade 501536d2e2ed portworx/px:1.2.10
 Upgrading plugin portworx/px:latest from portworx/px:latest to portworx/px:1.2.10
 Plugin images do not match, are you sure? y
-Plugin "portworx/px:1.2.5" is requesting the following privileges:
+Plugin "portworx/px:1.2.10" is requesting the following privileges:
  - network: [host]
  - mount: [/dev]
  - mount: [/etc/pwx]
@@ -53,13 +60,26 @@ Digest: sha256:65da96a98d2f3fba872ef0b90191c451b1bf6c5e1bb51e16e4012bcff6f8e51a
 Status: Downloaded newer image for portworx/px:1.2.10
 Upgraded plugin portworx/px:latest to portworx/px:1.2.10
 ```
->**Note:**<br/> If PX is not up after upgrade and you see an error message like `device or resource busy` in docker daemon logs, you will need to restart the docker service.
 
-4. Enable the Portworx plugin
+4. Restart Docker Daemon (Optional)
+
+With several docker versions viz. `17.06.x`, `17.09` we have seen multiple issues with docker's `plugin upgrade command`. A few of them are listed below
+
+ a. After upgrade, when the plugin is re-enabled you see an error message like `device or resource busy` in docker daemon logs.
+ b. Docker daemon crash when listing volumes [#35124](https://github.com/moby/moby/issues/35124)
+
+We recommend restarting the docker daemon before enabling the PX plugin.
+
+```
+$ systemctl restart docker
+```
+
+5. Enable the Portworx plugin
 ```
 $  docker plugin enable 501536d2e2ed
 ```
-5. Check version and status
+
+6. Check version and status
 ```
 $ /opt/pwx/bin/pxctl -v
 $ /opt/pwx/bin/pxctl status
