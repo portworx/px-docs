@@ -58,6 +58,10 @@
           url: /scheduler/kubernetes/k8s-node-maintenance.html
         - title: Manage PX logs using ELK and Fluentd
           url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+    - title: Google Container Engine
+      url: /scheduler/kubernetes/gke.html
+    - title: Azure Container Engine
+      url: /scheduler/kubernetes/aks.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
