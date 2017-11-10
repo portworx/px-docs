@@ -60,7 +60,6 @@ Digest: sha256:65da96a98d2f3fba872ef0b90191c451b1bf6c5e1bb51e16e4012bcff6f8e51a
 Status: Downloaded newer image for portworx/px:1.2.10
 Upgraded plugin portworx/px:latest to portworx/px:1.2.10
 ```
-
 4. Restart Docker Daemon (Optional)
 
 With several docker versions viz. `17.06.x`, `17.09` we have seen multiple issues with docker's `plugin upgrade command`. A few of them are listed below
@@ -73,12 +72,10 @@ We recommend restarting the docker daemon before enabling the PX plugin.
 ```
 $ systemctl restart docker
 ```
-
 5. Enable the Portworx plugin
 ```
 $  docker plugin enable 501536d2e2ed
 ```
-
 6. Check version and status
 ```
 $ /opt/pwx/bin/pxctl -v
