@@ -26,7 +26,6 @@ ID                  NAME                DESCRIPTION                         ENAB
 $ docker plugin disable 501536d2e2ed
 ```
 >**Note:** If you get the error "plugin pxd:latest is in use" try with `--force` flag.
-
 3. Upgrade the Portworx plugin
 
 Use the following command to upgrade a plugin to a specific image.
@@ -65,6 +64,7 @@ Upgraded plugin portworx/px:latest to portworx/px:1.2.10
 With several docker versions viz. `17.06.x`, `17.09` we have seen multiple issues with docker's `plugin upgrade command`. A few of them are listed below
 
  a. After upgrade, when the plugin is re-enabled you see an error message like `device or resource busy` in docker daemon logs.
+
  b. Docker daemon crash when listing volumes [#35124](https://github.com/moby/moby/issues/35124)
 
 We recommend restarting the docker daemon before enabling the PX plugin.
