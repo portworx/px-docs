@@ -10,23 +10,27 @@ redirect_from:
 * TOC
 {:toc}
 
-## Upgrade the PX Plugin
+## Upgrade PX Plugin
 This guide describes upgrading the Portworx docker volume plugin.
 
 The commands in this guide upgrade the plugin to version 1.2.10. You will need to run the below sequence on all Portworx nodes in the cluster.
 
-1. List the plugin ID
+####  List the plugin ID
+
 ```
 $ docker plugin ls
 ID                  NAME                DESCRIPTION                         ENABLED
 501536d2e2ed        portworx/px:latest   Portworx Data Services for Docker   true
 ```
-2. Disable the Portworx plugin
+
+#### Disable the Portworx plugin
+
 ```
 $ docker plugin disable 501536d2e2ed
 ```
 >**Note:** If you get the error "plugin pxd:latest is in use" try with `--force` flag.
-3. Upgrade the Portworx plugin
+
+#### Upgrade the Portworx plugin
 
 Use the following command to upgrade a plugin to a specific image.
 
@@ -59,7 +63,8 @@ Digest: sha256:65da96a98d2f3fba872ef0b90191c451b1bf6c5e1bb51e16e4012bcff6f8e51a
 Status: Downloaded newer image for portworx/px:1.2.10
 Upgraded plugin portworx/px:latest to portworx/px:1.2.10
 ```
-4. Restart Docker Daemon (Optional)
+
+#### Restart Docker Daemon (Optional)
 
 With several docker versions viz. `17.06.x`, `17.09` we have seen multiple issues with docker's `plugin upgrade command`. A few of them are listed below
 
@@ -72,17 +77,21 @@ We recommend restarting the docker daemon before enabling the PX plugin.
 ```
 $ systemctl restart docker
 ```
-5. Enable the Portworx plugin
+
+#### Enable the Portworx plugin
+
 ```
 $  docker plugin enable 501536d2e2ed
 ```
-6. Check version and status
+
+#### Check version and status
+
 ```
 $ /opt/pwx/bin/pxctl -v
 $ /opt/pwx/bin/pxctl status
 ```
 
-### Upgrade the PX container
+## Upgrade the PX container
 If you installed PX as a standalone container, you can upgrade PX using the PX CLI command on each host as follows:
 
 ```
