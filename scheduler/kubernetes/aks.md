@@ -8,4 +8,4 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-## Comming soon
+## Coming soon
