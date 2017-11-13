@@ -20,17 +20,9 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
-## Adding the repository for the service:
+## Finding the service in the DCOS Universe/Catalog:
 
-For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
-
-Run the following command to add the repository to your DCOS cluster:
-
-
-     $ dcos package repo add --index=0 kafka-px https://px-dcos.s3.amazonaws.com/v1/kafka/kafka.zip
-
-
-Once you have run the above command you should see the Kafka service available in your universe
+You should see the Kafka service available in your universe as Portworx-Kafka
 
 ![Kafka-PX in DCOS Universe](/images/dcos-kafka-px-universe.png){:width="655px" height="200px"}
 
@@ -38,7 +30,7 @@ Once you have run the above command you should see the Kafka service available i
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 
-     $ dcos package install --yes kafka-px
+     $ dcos package install --yes portworx-kafka
 
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
@@ -78,7 +70,7 @@ If you run the "dcos service" command you should see the kafka-px service in ACT
 
      $ dcos service
      NAME                  HOST             ACTIVE  TASKS  CPU   MEM      DISK   ID                                         
-     kafka      ip-10-0-3-116.ec2.internal   True     3    3.0  6144.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0038  
+     portworx-kafka      ip-10-0-3-116.ec2.internal   True     3    3.0  6144.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0038  
      marathon           10.0.7.49            True     2    2.0  2048.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0001  
      metronome          10.0.7.49            True     0    0.0   0.0      0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0000  
      portworx   ip-10-0-1-127.ec2.internal   True     4    3.3  4096.0    25.0   66d598b0-2f90-4d0a-9567-8468a9979190-0031  
@@ -89,11 +81,11 @@ If you run the "dcos service" command you should see the kafka-px service in ACT
 
 From the DCOS client; install the new command for kafka-px
 
-      $ dcos package install kafka-px --cli
+      $ dcos package install portworx-kafka --cli
 
 Find out all the kafka broker endpoints
 
-      $ dcos kafka endpoints broker
+      $ dcos portowrx-kafka endpoints broker
       {
        "address": [
         "10.0.2.82:1025",
@@ -110,13 +102,13 @@ Find out all the kafka broker endpoints
 
 Find out the zookeeper endpoint for the create kafka service
 
-     $ dcos kafka endpoints zookeeper
+     $ dcos portworx-kafka endpoints zookeeper
      master.mesos:2181/dcos-service-kafka
 
 
 Create a topic, from the DCOS client use dcos command to create a test topic ``test-one`` with replication set to three
 
-    $ dcos kafka topic create test-one --partitions 1 --replication 3
+    $ dcos portworx-kafka topic create test-one --partitions 1 --replication 3
     {
         "message": "Output: Created topic \"test-one\".\n"
     }
