@@ -23,7 +23,7 @@ dvdcli talks to Portworx using the docker plugin API, see here to understand Por
 ### Marathon framework
 
 #### Docker containers
-Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Docker container
+Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Docker container. This would mount the Portworx volume under /data
 ```
 {
   ...
@@ -77,7 +77,7 @@ volume with replication factor 3:
 
 #### Mesos/UCR containers
 
-Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Mesos/UCR container
+Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Mesos/UCR container. This would mount the Portworx volume under /data
 ```
 {
   ...
@@ -186,9 +186,3 @@ the same PX volume. On the attach on the new node, PX would reconcile data betwe
 integrity between the replicas.
 
 Note: This would require the PX volumes to created with a replication factor > 1
-
-
-
-
-
-
