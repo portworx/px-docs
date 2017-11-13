@@ -101,16 +101,19 @@ spec:
       serviceAccountName: portworx-pvc-controller-account
 ```
 NOTE:
-  a. This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image
-     to match that version.
-  b. If encounter cluster role permission issue (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create clusterrolebinding as below.
-        ```# get current google identity
-        $ gcloud info | grep Account
-          Account: [myname@example.org]
-        # grant cluster-admin to your current identity
-        $ kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
-          Clusterrolebinding "myname-cluster-admin-binding" created
-        ```
+a. This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image
+     to match that version. 
+
+b. If encounter cluster role permission issue (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create clusterrolebinding as below.
+
+```
+# get current google identity
+$ gcloud info | grep Account
+Account: [myname@example.org]
+# grant cluster-admin to your current identity
+$ kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
+Clusterrolebinding "myname-cluster-admin-binding" created
+```
 
 To deploy the above pod, save the spec to a file and then apply it using kubectl:
 ```
