@@ -100,8 +100,17 @@ spec:
       hostNetwork: true
       serviceAccountName: portworx-pvc-controller-account
 ```
-NOTE: This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image 
-to match that version.
+NOTE:
+  a. This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image
+     to match that version.
+  b. If encounter cluster role permission issue (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create clusterrolebinding as below.
+        ```# get current google identity
+        $ gcloud info | grep Account
+          Account: [myname@example.org]
+        # grant cluster-admin to your current identity
+        $ kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=cluster-admin --user=myname@example.org
+          Clusterrolebinding "myname-cluster-admin-binding" created
+        ```
 
 To deploy the above pod, save the spec to a file and then apply it using kubectl:
 ```
@@ -112,11 +121,10 @@ kubectl apply -f px-pvc-controller.yaml
 
 Once the spec has been applied, wait for the pod to go to "Running" state:
 ```
-$ kubectl get pods -n kube-system 
+$ kubectl get pods -n kube-system
 ...
 portworx-pvc-controller-2561368997-5s35p              1/1       Running   0          43s
 ...
 ```
 
 After the controller is in Running statue you can [use PV claims to dynamically provision Portworx volumes on GKE](/scheduler/kubernetes/dynamic-provisioning.html).
-
