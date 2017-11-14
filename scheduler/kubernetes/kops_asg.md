@@ -17,7 +17,7 @@ The purpose of this below steps to guide and setting up a production ready dynam
 •	Install aws cli \
 •	Create IAM role for kops and configure aws client to use your new IAM role \
 •	Create a hosted DNS zone for kops \
-•	Create S3 bucket for kops to store cluster state \
+•	Create S3 bucket for kops to store cluster state.
 
 ## Example - Create kubernetes cluster using Kops:
 ```
@@ -37,7 +37,7 @@ $ kops create cluster \
 >     ${NAME}
 ```
 ## Prepare key-value database(etcd):
-Portworx requires a key-value database such as etcd for configuring storage. Either point to your external etcd or Follow the steps set up new [etcd](https://docs.portworx.com/maintain/etcd.html#tuning-etcd) Cluster. we are starting our own etcd.
+Portworx requires a key-value database such as etcd for configuring storage. Either point to your external etcd or Follow this steps to set up new [etcd](https://docs.portworx.com/maintain/etcd.html#tuning-etcd) Cluster. we are starting our own etcd.
 
 ## Create EBS volume templates
 Create various EBS volume templates for PX to use. PX will use these templates as a reference when creating new EBS volumes while scaling up.
@@ -61,6 +61,7 @@ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd:/
 
 Note:
 a) There are 2 env variables passed into the px-spec.yaml. These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication. \
+
 b) Volume template passed as drives=vol-04e2283f1925ec9ee.
 
 
