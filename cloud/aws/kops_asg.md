@@ -62,7 +62,7 @@ For further information, refer to the explanation of the parameters that can be 
 
 Example:
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=AKIAIJ3VWGC47DHL2KAQ,AWS_SECRET_ACCESS_KEY=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”
+$ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=<enter your details>,AWS_SECRET_ACCESS_KEY=<enter your details>”
 ```
 
 >**Note:**<br/>There are 2 env variables passed into the px-spec.yaml. These are the KOPS IAM user AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
