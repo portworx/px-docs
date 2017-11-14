@@ -119,12 +119,32 @@ $ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd:
 ```
 
 ## Uninstall
-You can uninstall Portworx from the cluster using: `$ kubectl delete -f <px-spec.yaml>`
+Uninstalling or deleting the portworx daemon set only removes the portworx containers from the nodes. As the configurations files which PX use are persisted on the nodes the storage devices and the data volumes are still intact. These portworx volumes can be used again if the PX containers are started with the same configuration files.
+
+You can uninstall Portworx from the cluster using:
+```
+$ kubectl delete -f <px-spec.yaml>
+```
 
 Here px-spec.yaml is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
-`$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379"`
+```
+$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379"
+```
 
->**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted. If you delete /etc/pwx/.private.json, Portworx will lose access to data volumes.
+>**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted.
+
+## Wipe off PX Cluster
+The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
+
+You can completely wipe PX cluster by deleting the configuration files under `/etc/pwx` on all nodes. If the portworx pods are running you can run the following command:
+
+```
+for pod in $(kubectl get pods -n kube-system -l name=portworx | awk -F" " '{print $1}' | grep -v NAME); do  kubectl -n kube-system exec -it $pod rm -- -rf /etc/pwx/; done
+```
+
+If the portworx pods are not running you need to remove the contents of `/etc/pwx` from all the nodes.
+
+>**Note**<br/>If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a new clusterid in the daemonset spec file
 
 ## Cloud Installation
 Portworx-ready Kubernetes clusters can be deployed through Terraform, using the Terraporx repository, on Digital Ocean and Google Clould Platform
