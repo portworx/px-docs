@@ -27,6 +27,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 | nodes             	| Comma-separated Portworx Node ID's to use for replication sets of the volume                                                                                                                                                                                           	| nodes: "minion1,minion2" 	|
 | aggregation_level 	| Specifies the number of replication sets the volume can be aggregated from                                                                                                                                                                                             	| aggregation_level: "2"   	|
 | snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60                                                                                                                                                                                                      	| snap_interval: "120"     	|
+| sticky     	| Flag to create sticky volumes that cannot be deleted until the flag is disabled                                                                                                                                                                                                      	| sticky: "true"     	|
 
 ### Provision volumes
 #### Step1: Create Storage Class.
