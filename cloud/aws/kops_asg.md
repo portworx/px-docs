@@ -24,7 +24,7 @@ Prepare your AWS environment for KOPS.  You will have to perform the following s
 
 •	Create S3 bucket for KOPS to store cluster state.
 
-Detailed instructions on these prerequisites are documented [here](https://github.com/kubernetes/KOPS/blob/master/docs/aws.md).
+Detailed instructions on these steps are documented [here](https://github.com/kubernetes/KOPS/blob/master/docs/aws.md).
 
 ## Create a kubernetes cluster using KOPS:
 ```
