@@ -12,71 +12,132 @@ redirect_from:
 
 ## Using Portworx volumes with DCOS
 
-Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/isolators/docker-volume/) using [dvdcli]( https://github.com/codedellemc/dvdcli)
+Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/isolators/docker-volume/). Portworx volumes can be used with both Docker containers and Mesos/UCR container.
+
+When using Docker containers, volumes are provisioned and mounted using Docker and it's volume drivers directly.
+
+When using Mesos/UCR containers DCOS uses [dvdcli]( https://github.com/codedellemc/dvdcli) to provision and mount volumes.
 dvdcli talks to Portworx using the docker plugin API, see here to understand Portworx implementation of the 
 [API](/scheduler/docker/volume_plugin.html)
 
 ### Marathon framework
 
 #### Docker containers
-
-Here's how you would specify Portworx as a volume driver in a task begin launched via Mesos
+Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Docker container. This would mount the Portworx volume under /data
 ```
-TaskInfo {
+{
   ...
-  "command" : ...,
-  "container" : {
-    "volumes" : [
-      {
-        "container_path" : "/data",
-        "mode" : "RW",
-        "source" : {
-          "type" : "DOCKER_VOLUME",
-          "docker_volume" : {
-            "driver" : "pxd",
-            "name" : "px_vol"
-          }
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+     ...
+      "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "pxd"
+        },
+        {
+          "key": "volume",
+          "value": "size=500,name=px_vol:/data"
         }
-      }
-    ]
+      ]
+    ],
+    ...
   }
 }
 ```
+
+You can also speciy additional driver options for the volume as key=value pairs in the parameters. For example to create a
+volume with replication factor 3:
+
+```
+{
+  ...
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+     ...
+      "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "pxd"
+        },
+        {
+          "key": "volume",
+          "value": "repl=3,size=500,name=px_vol:/data"
+        }
+      ]
+    ],
+    ...
+  }
+}
+```
+
+
+
+#### Mesos/UCR containers
+
+Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Mesos/UCR container. This would mount the Portworx volume under /data
+```
+{
+  ...
+  "cmd" : ...,
+  "container" : {
+    "type": "MESOS",
+    "volumes": [
+      {
+        "containerPath": "/data",
+        "mode": "RW",
+        "external": {
+          "size": 500,
+          "name": "px_vol",
+          "provider": "dvdi",
+          "options": {
+            "dvdi/driver": "pxd"
+          }
+        }
+      }
+    ],
+    ...
+  }
+}
+```
+
+You can also speciy additional driver options for the volume as key:value pairs. For example to create a volume with
+replication factor 3:
+
+```
+{
+  ...
+  "cmd" : ...,
+  "container" : {
+    "type": "MESOS",
+    "volumes": [
+      {
+        "containerPath": "/data",
+        "mode": "RW",
+        "external": {
+          "size": 500,
+          "name": "px_vol",
+          "provider": "dvdi",
+          "options": {
+            "dvdi/repl": "3",
+            "dvdi/driver": "pxd"
+          }
+        }
+      }
+    ],
+    ...
+  }
+}
+```
+
+#### Provisioning Volumes
 
 If the volume `px_vol` does not already exist, a new volume with default parameters will be created. The volume will be
 mounted under `/data` in the container Heres's how you can specify inline paramters for volume creation:
 See this [link](https://github.com/portworx/px-docs/blob/gh-pages/scheduler/mesosphere-dcos/inline.md) for more information
 
-You can also speciy additional driver options for the volume in key:value pairs. For example to create a volume with
-replication factor 3:
-
-```
-TaskInfo {
-  ...
-  "command" : ...,
-  "container" : {
-    "volumes" : [
-      {
-        "container_path" : "/data",
-        "mode" : "RW",
-        "source" : {
-          "type" : "DOCKER_VOLUME",
-          "docker_volume" : {
-            "driver" : "pxd",
-            "name" : "px_vol",
-            "driver_options" : {
-              "parameter" : [{
-                "key" : "repl",
-                "value" : "3"
-              }]
-            }
-          }
-        }
-      }
-    ]
-  }
-}
-```
 
 ### Custom Frameworks:
 DCOS-Commons frameworks is a collection of tools and APIs that allows defining stateful applications like Cassandra and HDFS
@@ -125,9 +186,3 @@ the same PX volume. On the attach on the new node, PX would reconcile data betwe
 integrity between the replicas.
 
 Note: This would require the PX volumes to created with a replication factor > 1
-
-
-
-
-
-
