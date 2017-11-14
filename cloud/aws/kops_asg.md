@@ -76,7 +76,7 @@ $ kubectl create -f px-spec.yaml
 daemonset "portworx" created
 ```
 
-List pods and check that Portworx monitor daemonset is running.
+List the pods and verify that the Portworx daemonset is running:
 ```
 $ admin@ip-172-20-60-36:~$ kubectl get pods --all-namespaces | grep portworx
 kube-system   portworx-2kst8                                                       1/1       Running   0          32m
