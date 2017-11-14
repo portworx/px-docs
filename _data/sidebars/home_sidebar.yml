@@ -8,6 +8,8 @@
       folderitems:
       - title: Install
         url: /runc/
+      - title: Upgrade
+        url: /runc/#upgrading-from-px-containers-to-px-oci
       - title: Install Arguments
         url: /runc/options.html
     - title: DIY Demo
