@@ -12,12 +12,12 @@ sidebar: home_sidebar
 The purpose of this below steps to guide and setting up a production ready dynamic provisioning of Portworx volumes using Kubernetes(KOPS) environment on AWS.
 
 ## Prerequisites:
-•	Follow standard kops guide from [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md). Hence, the commands are skipped for Prerequisites.
-•	Install kops
-•	Install aws cli
-•	Create IAM role for kops and configure aws client to use your new IAM role
-•	Create a hosted DNS zone for kops
-•	Create S3 bucket for kops to store cluster state
+•	Follow standard kops guide from [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md). Hence, the commands are skipped for Prerequisites. \
+•	Install kops \
+•	Install aws cli \
+•	Create IAM role for kops and configure aws client to use your new IAM role \
+•	Create a hosted DNS zone for kops \
+•	Create S3 bucket for kops to store cluster state \
 
 ## Example - Create kubernetes cluster using Kops:
 ```
@@ -60,7 +60,7 @@ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd:/
 ```
 
 Note:
-a) There are 2 env variables passed into the px-spec.yaml. These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
+a) There are 2 env variables passed into the px-spec.yaml. These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication. \
 b) Volume template passed as drives=vol-04e2283f1925ec9ee.
 
 
