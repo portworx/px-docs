@@ -47,12 +47,13 @@ $ KOPS create cluster \
 ## Prepare the key-value database (etcd):
 Portworx requires a key-value database such as etcd for configuring storage. Either point to your external etcd or Follow this steps to set up new [etcd](https://docs.portworx.com/maintain/etcd.html#tuning-etcd) Cluster. we are starting our own etcd.
 
-## Create EBS volume templates
-Create various EBS volume templates for PX to use. PX will use these templates as a reference when creating new EBS volumes while scaling up.
+## Create EBS volume 
 
-For example, create an EBS volume template as: `vol-04e2283f1925ec9ee`
+Create atleast one EBS volume. This volume will serve as a template EBS volume. On every node where PX is brought up as a storage node, a new EBS volume identical to the template volume will be created. 
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group (KOPS cluster).
+
+Record the EBS volume ID (e.g. `vol-04e2283f1925ec9ee`), this will be passed in to PX as a parameter.
 
 ## Prepare Portworx Spec for KOPS auto scaling group (ASG):
 
