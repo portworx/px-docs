@@ -11,7 +11,7 @@ sidebar: home_sidebar
 
 The purpose of this below steps to guide and setting up a production ready dynamic provisioning of Portworx volumes using Kubernetes(KOPS) environment on AWS.
 
-#Prerequisites:
+## Prerequisites:
 •	Follow standard kops guide from [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md). Hence, the commands are skipped for Prerequisites.
 •	Install kops
 •	Install aws cli
@@ -19,7 +19,7 @@ The purpose of this below steps to guide and setting up a production ready dynam
 •	Create a hosted DNS zone for kops
 •	Create S3 bucket for kops to store cluster state
 
-#Example - Create kubernetes cluster using Kops:
+## Example - Create kubernetes cluster using Kops:
 ```
 $ export NAME=sen.k8s-demo.com
 $ export KOPS_STATE_STORE=s3://kops-demo-state-store
@@ -36,10 +36,10 @@ $ kops create cluster \
 >     --cloud-labels "Team=Portworx,Owner=SenS" \
 >     ${NAME}
 ```
-#Prepare key-value database(etcd):
+## Prepare key-value database(etcd):
 Portworx requires a key-value database such as etcd for configuring storage. Either point to your external etcd or Follow the steps set up new [etcd](https://docs.portworx.com/maintain/etcd.html#tuning-etcd) Cluster. we are starting our own etcd.
 
-#Create EBS volume templates
+## Create EBS volume templates
 Create various EBS volume templates for PX to use. PX will use these templates as a reference when creating new EBS volumes while scaling up.
 
 For example, create volumes as:
@@ -47,7 +47,7 @@ vol-04e2283f1925ec9ee
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group(kops cluster).
 
-#Prepare Portworx Spec for KOPS auto scaling group(ASG):
+## Prepare Portworx Spec for KOPS auto scaling group(ASG):
 
 Update and curl below PX spec URL. Make sure you change the custom parameters (cluster, kvdb , aws environment variables and volume template name) to match your environment.
 For further info refer all parameters that can be given in the query [string](https://docs.portworx.com/scheduler/kubernetes/install.html).
@@ -64,7 +64,7 @@ a) There are 2 env variables passed into the px-spec.yaml. These are AWS_ACCESS_
 b) Volume template passed as drives=vol-04e2283f1925ec9ee.
 
 
-#Deploy Portworx Example:
+## Deploy Portworx Example:
 ```
 $ kubectl create -f px-spec.yaml
 
