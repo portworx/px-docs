@@ -64,11 +64,9 @@ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd:/
 
 ```
 
-Note:
-a) There are 2 env variables passed into the px-spec.yaml. These are kops IAM users AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
+>**Note:**<br/>There are 2 env variables passed into the px-spec.yaml. These are the kops IAM user AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
 
-b) Volume template passed as drives=vol-04e2283f1925ec9ee.
-
+>**Note:**<br/>The volume template is passed in as drives=vol-04e2283f1925ec9ee.
 
 ## Deploy Portworx Example:
 ```
