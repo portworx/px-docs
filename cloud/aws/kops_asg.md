@@ -13,6 +13,7 @@ The purpose of this below steps to guide and setting up a production ready dynam
 
 ## Prerequisites:
 Prepare your AWS environment for KOPS.  You will have to perform the following steps:
+
 •	Install KOPS
 
 •	Install aws cli
