@@ -154,6 +154,8 @@
         url: /cloud/aws/cloudformation.html
       - title: ECS
         url: /cloud/aws/ecs.html
+      - title: KOPS
+        url: /cloud/aws/kops_asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
     - title: Azure
