@@ -12,11 +12,16 @@ sidebar: home_sidebar
 The purpose of this below steps to guide and setting up a production ready dynamic provisioning of Portworx volumes using Kubernetes(KOPS) environment on AWS.
 
 ## Prerequisites:
-•	Follow standard kops guide from [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md). Hence, the commands are skipped for Prerequisites. \ 
-•	Install kops \ 
-•	Install aws cli \ 
-•	Create and Setup IAM user permission for kops \ 
-•	Create a hosted DNS zone for kops \ 
+•	Follow standard kops guide from [here](https://github.com/kubernetes/kops/blob/master/docs/aws.md). Hence, the commands are skipped for Prerequisites.
+
+•	Install kops
+
+•	Install aws cli
+
+•	Create and Setup IAM user permission for kops
+
+•	Create a hosted DNS zone for kops
+
 •	Create S3 bucket for kops to store cluster state.
 
 ## Example - Create kubernetes cluster using Kops:
