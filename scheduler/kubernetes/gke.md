@@ -9,7 +9,20 @@ sidebar: home_sidebar
 {:toc}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your Google Kurbenetes Engine (GKE) cluster.
-This guide assumes that you have already [installed Portworx on your Kubernetes cluster](/scheduler/kubernetes/install.html).
+
+## Create GKE cluster
+Portworx is supported on GKE provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images).
+
+You can create a 3 node GKE cluster with the gcloud cli using the following command:
+```
+gcloud container clusters create [CLUSTER_NAME] --image-type=ubuntu --zone=[ZONE_NAME]
+```
+
+More information about the gcloud command for GKE can be found here: https://cloud.google.com/kubernetes-engine/docs/clusters/operations
+
+## Install Portworx
+
+After your GKE cluster is online, install Portworx using the [Kubernetes install guide](/scheduler/kubernetes/install.html).
 
 ## Dynamic provisioner on GKE
 Dynamic provisioning of volumes in Kubernetes is done through the Persistent Volume (PV) binder controller running on the
