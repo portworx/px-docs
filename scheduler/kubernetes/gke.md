@@ -154,13 +154,13 @@ $ kubectl get pods -n kube-system
 portworx-pvc-controller-2561368997-5s35p              1/1       Running   0          43s
 ...
 ```
+After the controller is in Running statue you can [use PV claims to dynamically provision Portworx volumes on GKE](/scheduler/kubernetes/dynamic-provisioning.html).
 
 ### Notes
 * This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image
-     to match that version.
+to match that version.
 
-* If encounter cluster role permission issue (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create clusterrolebinding as below.
-
+* If you encounter an error with the cluster role permission (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create a clusterrolebinding for your user using the following commands:
 ```
 # get current google identity
 $ gcloud info | grep Account
@@ -170,4 +170,4 @@ $ kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=c
 Clusterrolebinding "myname-cluster-admin-binding" created
 ```
 
-After the controller is in Running statue you can [use PV claims to dynamically provision Portworx volumes on GKE](/scheduler/kubernetes/dynamic-provisioning.html).
+
