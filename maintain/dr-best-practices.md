@@ -19,7 +19,7 @@ Following are some of the recommended best practices for disaster-preparedness a
 
 * Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically.
 * Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrived from other sites if one of your side is down
-* Follow this link to learn more on how to restore etcd cluster from its snapshots
+* Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots
 * The table below shows different etcd failure scenarios, how Portworx reacts to it and the levels of recovery available
 
 The following table summarizes how PX will respond to an etcd disaster and its recovery from a previous snapshot.
