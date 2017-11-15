@@ -50,7 +50,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-3612 When creating or updating a volume, disallow ability to set both the "shared" and "scale" options.
 * PWX-3614 A volume inspect returns the wrong error message when one node in the cluster is down: Could not find any volumes that match ID(s).
 * PWX-3620 The volume inspect command doesn't show the replication set status, such as whether the replication set has down members or is in a clean or resync state.
-* PWX-3632 After a Kubernetes pod terminates and the Portworx volume unmount/cleanup fails, the kubelet logs include "Orphaned pod <name> found, but volume paths are still present on disk."
+* PWX-3632 After a Kubernetes pod terminates and the Portworx volume unmount/cleanup fails, the kubelet logs include "Orphaned pod &lt;name&gt; found, but volume paths are still present on disk."
 * PWX-3648 After all nodes in a cluster go offline: If a node doesn't restart when the other nodes restart, the other restarting nodes don't mark that node as offline.
 * PWX-3665 The Portworx live core collection hangs sometimes.
 * PWX-3666 The pxctl service diags command doesn't store all diagnostics for all nodes in the same lcoation. All diagnostics should appear in /var/cores.
@@ -69,7 +69,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-3793 When running in Kubernetes, if an unmount fails for a shared volume with the error "volume not mounted", the volume is stuck in a terminating state.
 * PWX-3817 When running under Kubernetes, a WordPress pod is stuck in terminating for almost ten minutes.
 * PWX-3820 When running Portworx as a Docker V2 plugin: After a service create --replicas command, a volume is mounted locally on a MySQL container instead of a Portworx container. The Swarm service fails with the error "404 Failed to locate volume: Cannot locate volume". To avoid this issue, you can now specify the volume-driver with the service create command.
-* PWX-3825 When a node is in a storage down state because the pool is out of capacity: A drive add fails with the error "Drive add start failed. drive size <size> too big" during an attempt to add the same size disk.
+* PWX-3825 When a node is in a storage down state because the pool is out of capacity: A drive add fails with the error "Drive add start failed. drive size &lt;size&gt; too big" during an attempt to add the same size disk.
 * PWX-3829 Container status in the Portworx Lighthouse GUI isn't updated properly from Portworx nodes.
 * PWX-3843 Portworx stats include metrics for utilized and available bytes, but not for total bytes (px\_cluster\_disk\_total_bytes). As a result, alerts can't be generated in Prometheus for storage utilization.
 * PWX-3844 When you add a snapshot schedule to a volume, the alert type is "Snapshot Interval update failure" instead of "Snapshot interval update success".
@@ -77,7 +77,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-3851 When two Postgres pods attempted to use the same volume, one of the Postgres pods mounted a local volume instead of a Portworx volume.
 * PWX-3859 After adding a volume template to an Auto Scaling Group and Portworx adds tags to the volume: If you stop that cluster and then start a new cluster with the same volume, without removing the tags, a message indicates that the cluster is already initialized. The message should indicate that it failed to attach template volumes because the tag is already used. You can then manually remove the tags from the stopped cluster.
 * PWX-3862 A volume is stuck in the detaching state indefinitely due to an issue in etcd.
-* PWX-3867 When running under Kubernetes, a pod using namespace volumes generates the messages "Orphaned pod <pod> found, but volume paths are still present on disk".
+* PWX-3867 When running under Kubernetes, a pod using namespace volumes generates the messages "Orphaned pod &lt;pod&gt; found, but volume paths are still present on disk".
 * PWX-3868 A PX cluster shows an extra node when running with ASG templates enabled if the AWS API returns an error when the PX container is booting up.
 * PWX-3871 Added support for dot and hyphen in source and destination names in Kubernetes inline spec for snapshots.
 * PWX-3873 When running under Kubernetes, a volume detach fails on a regular volume, with the message "Failed to detach volume: Failed with status -16", and px-storage dumps core.
@@ -357,7 +357,7 @@ Improve node failure and resync handling
 
 ### Key Features
 * Class of Service Support. Refer to [CoS](/manage/class-of-service.html)
-* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/enterprise/on-premise-lighthouse.html)
+* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/enterprise/lighthouse.html)
 * Scale up to 125 nodes
 
 

@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-><br/>Portworx is a ![](/images/mssqllogo.png) [Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
+><br/>Portworx is a ![Microsoft Logo](/images/mssqllogo.png){:height="85px" width="79px"} [Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)
 
 ## Deploy SQL Server on Kubernetes
 Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.

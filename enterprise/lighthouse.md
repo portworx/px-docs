@@ -86,7 +86,7 @@ You have already setup a root user while signing up. Here, we are going to creat
 
 ![LH-ADD-USER](/images/LH-add-a-new-user.png "Add User"){:width="983px" height="707px"}
 
-By default lighthouse will create a cluster for this user names <user-name>-cluster and also add this user to a group called <user-name>-group. This user will only have admin access on the cluster that got created for him. These permission can be modified under Manage Users -> Groups -> Edit. Permissions are per comapnay and per cluster based.
+By default lighthouse will create a cluster for this user names &lt;user-name&gt;-cluster and also add this user to a group called &lt;user-name&gt;-group. This user will only have admin access on the cluster that got created for him. These permission can be modified under Manage Users -> Groups -> Edit. Permissions are per comapnay and per cluster based.
 
 ![LH-USER-GROUPS](/images/LH-group-details.png "User Groups"){:width="983px" height="707px"}
 

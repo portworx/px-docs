@@ -297,7 +297,7 @@ Improve node failure and resync handling
 
 ### Key Features
 * Class of Service Support. Refer to [CoS](/manage/class-of-service.html)
-* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/enterprise/on-premise-lighthouse.html)
+* Lighthouse on-prem for airgapped environments. Refer to [Lighthouse on-prem](/enterprise/lighthouse.html)
 * Scale up to 125 nodes
 
 

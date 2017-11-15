@@ -100,7 +100,7 @@ Labels:
 
 ## Step 4: Install Portworx 
 
-Follow the instructions for [Getting Started with Portworx Enterprise](/getting-started/px-enterprise.html)
+Follow the instructions for [Getting Started with Portworx Enterprise](/#install-with-a-container-orchestrator)
 
 Follow the instructions for [Creating a PX-Enterprise Cluster](/enterprise/portworx-via-lighthouse.html#step-1-provision-a-cluster-in-the-px-enterprise-console)
 

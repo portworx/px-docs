@@ -22,7 +22,7 @@ Other supported bare metal cloud providers are
 >**NB:**<br/> For quick/easy deployment of Portworx on Packet.net, please refer to the [Terraporx Repo](https://github.com/portworx/terraporx/tree/master/packet) of Terraform deployment scripts. 
 
 ### Step 1: Provision Server 
-When chosing an instance, verify that you meet the [minimum requirements](/getting-started/px-enterprise.html#step-1-verify-requirements)
+When chosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
@@ -62,7 +62,7 @@ For CentOS7, your likely public interface will be "team0" and private interface 
 For Ubuntu16, your likely public interface will be "bond0" and private interface will be "bond0:0".   Use "bond0" as the Portworx management interface, and "bond0:0" as the Portworx data interface.
 
 ### Step 7: Launch PX-Enterprise
-[Follow the instructions to launch PX-Enterprise](/getting-started/px-enterprise.html)
+[Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
 
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 
