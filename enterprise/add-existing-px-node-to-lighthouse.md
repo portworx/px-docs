@@ -13,7 +13,7 @@ Note: This guide requires that both your PX node and lighthouse are talking to t
 
 Following guide shows you how you can add your portworx node to PX-Enterprise console.
 
-* Setup your lighthouse container with the same kvdb store as your PX node. If you are following instructions from [our on premise Lighthouse](/enterprise/on-premise-lighthouse.html), then you can specify this kvdb url to lighthouse with '-k' option.
+* Setup your lighthouse container with the same kvdb store as your PX node. If you are following instructions from [our on premise Lighthouse](/enterprise/lighthouse.html), then you can specify this kvdb url to lighthouse with '-k' option.
 * Visit your lighthouse URL in the browser, and complete initial setup.
 * Once you are logged in, click on 'Manage clusters' button. This will take you to a new page. Here, click on 'New'. This will open a widget. Here click on 'Existing Cluster'. Add your cluster ID here.
 * Once you click 'Create', it will generate 'Auth Token' for this cluster.

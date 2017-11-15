@@ -17,7 +17,7 @@ meta-description: "Find answers to all the most frequently asked questions about
 Portworx clusters can run in the cloud or on premise.  The volume format is the same, regardless of running in the cloud or on-prem.  When running in the cloud, Portworx aggregates and virtualizes the various underlying cloud volumes.
 
 ### Is there a Hardware/Software compatibility list?
-Hardware : No. But there are minimum resource recommendation listed [here](/getting-started/px-enterprise.html#step-1-verify-requirements) 
+Hardware : No. But there are minimum resource recommendation listed [here](/#minimum-requirements) 
 
 Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 

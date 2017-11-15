@@ -16,7 +16,7 @@ meta-description: "Follow these four steps to run Portworx on Azure. Try it toda
 This guide shows you how you can easily deploy Portworx on [**Azure**](https://azure.microsoft.com/en-us/)
 
 ### Step 1: Provision Virtual Machine
-When chosing an instance, verify that you meet the [minimum requirements](/getting-started/px-enterprise.html#step-1-verify-requirements)
+When chosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
@@ -36,7 +36,7 @@ Note: Portworx requires Docker to allow shared mounts.  This is standard as of D
 If you are running Docker without shared mounts, please follow the steps listed [here](/knowledgebase/shared-mount-propogation.html)
 
 ### Step 4: Launch PX-Enterprise
-[Follow the instructions to launch PX-Enterprise](/getting-started/px-enterprise.html)
+[Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
 
 Use the docker run command to launch PX-Enterprise, substituting the appropriate multipath devices and network interfaces, as identified from the previous steps.
 

@@ -25,7 +25,7 @@ Supported bare metal cloud providers are
 * Rackspace
 * Packet.io
 
-When chosing an instance, verify that you meet the minimum requirements available on [the Portworx enterpris getting started guide.](/getting-started/px-enterprise.html#step-1-verify-requirements)
+When chosing an instance, verify that you meet the minimum requirements available on [the Portworx enterpris getting started guide.](/#minimum-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
