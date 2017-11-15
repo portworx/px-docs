@@ -18,11 +18,36 @@ You can create a 3 node GKE cluster with the gcloud cli using the following comm
 gcloud container clusters create [CLUSTER_NAME] --image-type=ubuntu --zone=[ZONE_NAME]
 ```
 
-More information about the gcloud command for GKE can be found here: https://cloud.google.com/kubernetes-engine/docs/clusters/operations
+More information about the gcloud command for GKE can be found here: [https://cloud.google.com/kubernetes-engine/docs/clusters/operations](https://cloud.google.com/kubernetes-engine/docs/clusters/operations)
+
+## Add disks to nodes
+
+After your GKE cluster is up, you will need to add disks to each of the nodes. These disks will be used by Portworx to create a storage pool.
+
+You can do this by using the `gcloud compute disks create` and `gcloud compute instances attach-disk` commands as described here [https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk](https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk)
+
+For example, after you GKE cluster is up, find the compute instances
+```
+$ gcloud compute instances list
+NAME                                   ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP      STATUS
+gke-px-gke-default-pool-6a9f0154-gxfg  us-east1-b     n1-standard-1               10.142.0.4   104.196.156.231  RUNNING
+gke-px-gke-default-pool-6a9f0154-tzj4  us-east1-b     n1-standard-1               10.142.0.3   35.196.233.64    RUNNING
+gke-px-gke-default-pool-6a9f0154-vqpb  us-east1-b     n1-standard-1               10.142.0.2   35.196.124.54    RUNNING
+```
+
+Then for each instance [create a persistent disk](https://cloud.google.com/sdk/gcloud/reference/compute/disks/create)
+```
+gcloud compute disks create [DISK_NAME] --size [DISK_SIZE] --type [DISK_TYPE]
+```
+
+Once the persistent disks have been created, [attach a disk to each instance](https://cloud.google.com/sdk/gcloud/reference/compute/instances/attach-disk)
+```
+gcloud compute instances attach-disk [INSTANCE_NAME] --disk [DISK_NAME]
+```
 
 ## Install Portworx
 
-After your GKE cluster is online, install Portworx using the [Kubernetes install guide](/scheduler/kubernetes/install.html).
+Once your GKE cluster is online and you have attached persistent disks to your nodes, install Portworx using the [Kubernetes install guide](/scheduler/kubernetes/install.html).
 
 ## Dynamic provisioner on GKE
 Dynamic provisioning of volumes in Kubernetes is done through the Persistent Volume (PV) binder controller running on the
