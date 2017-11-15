@@ -37,7 +37,8 @@ Portworx technology:
 %}
 
 {%
-    include asciinemaPlayer.html 
+    include asciinemaPlayer.html
+    cast = "install.cast"
 %}
 
 ## How it Works
