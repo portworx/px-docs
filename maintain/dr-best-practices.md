@@ -15,7 +15,7 @@ This page describes how to configure and setup Portworx for high availability an
 
 Following are some of the recommended best practices for disaster-preparedness and recovery
 
-### Recoverying from Etcd Failure
+### Recoverying from etcd Failure
 
 * Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically.
 * Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrived from other sites if one of your side is down
