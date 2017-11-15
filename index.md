@@ -36,6 +36,10 @@ Portworx technology:
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
 
+{%
+    include asciinemaPlayer.html 
+%}
+
 ## How it Works
 Unlike traditional storage which is designed to provide storage to a host machine or operating system via protocols like iSCSI, NBD or NFS, Portworx directly provides block, file and object storage to your applications on the same server where the application is running.
 Portworx itself is deployed as a container and runs on every host in your cluster. Application containers consume Portworx volumes directly through the Container Orchestrator.  The following are supported:
