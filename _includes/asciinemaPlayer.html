@@ -1,0 +1,14 @@
+<!-- asciinema-player -->
+{% if layout.amp %}
+<div id="player-container" width="480" height="270"></div>
+  <script>
+    asciinema_player.core.CreatePlayer('player-container', '/demo.json');
+  </script>
+</div>
+{% else %}
+<div id="player-container" width="560" height="315"></div>
+  <script>
+    asciinema_player.core.CreatePlayer('player-container', '/demo.json');
+  </script>
+</div>
+{% endif %}
