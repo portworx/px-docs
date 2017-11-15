@@ -37,6 +37,14 @@ The following table summarizes how PX will respond to an etcd disaster and its r
 
 ### Recovering application data in Portworx Volumes
 
+#### Protecting against node failures
+
+Portworx supports replicated volumes where a given volume's data can be replicated up to 3 copies (including the local copy). For applications that need to be highly available and resistant to any failure in the node (CPU failure, Memory failure, Drive Failure, Kernel Crash, Node Power Loss), Portworx recommends customers deploy applications on replicated volumes. Volumes with replication factor as two is generally recommended. Volumes with replication factor set as three can be used for maximum availability. See [here](https://docs.portworx.com/control/volume.html#pxctl-volume-create) for more information on how to configure volumes with replication via `pxctl`. 
+
+You can also refer to the page of container orchestrator of your choice to see how you can pass this inline in Kubernetes, DC/OS or Docker SWarm/UCP when a container using Portworx volumes gets mounted via these orchestrators. Go [here]( https://docs.portworx.com/#install-with-a-container-orchestrator) for more information
+
+Also, the case of deployment in on-prem datacenters, Portworx can take in the rack id parameter and place the replicas across racks to tolerate rack power failures. Please refer [here](https://docs.portworx.com/manage/update-px-rack.html) to learn how to set this up 
+
 #### Recovering data from application errors
 
 * Always ensure Portworx volumes are enabled with snapshot schedules so each volume is periodically snapshotted. Portworx recommends setting up an hourly snapshot schedule. Follow this page to see how to setup a [snapshot schedule] (https://docs.portworx.com/manage/snapshots.html#snapshot-schedules)
@@ -49,7 +57,3 @@ The following table summarizes how PX will respond to an etcd disaster and its r
 * Portworx can periodically upload snapshots to cloud provider of choice, roll up all the snaps up and import that as a volume in the same PX cluster or another PX cluster
 * This feature is called Cloudsnaps and is documented [here](https://docs.portworx.com/cloud/backups.html)
 * Portworx recommends setting up Cloudsnaps atleast once a day and configure the snaps to be uploaded to a cloud provider or a object store that supports S3 protocol. Portworx current supports AWS S3, Azure Blob Store and Google Drive as the cloudstorage providers
-
-
-
-
