@@ -1,6 +1,6 @@
 <!-- asciinema-player -->
 {% if layout.amp %}
-<asciinema-player src="/demo.cast"></asciinema-player>
+<asciinema-player src="/casts/{{ include.cast }}"></asciinema-player>
 {% else %}
-<asciinema-player src="/demo.cast"></asciinema-player>
+<asciinema-player src="/cast/{{ include.cast }}"></asciinema-player>
 {% endif %}
