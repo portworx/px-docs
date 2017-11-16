@@ -1,11 +1,13 @@
-
 ---
 layout: page
-title: "Production Readiness Check-List"
-keywords: production, ops guide, deployment, rollout
+title: "Production Readiness"
+keywords: disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
-meta-description: "Production Readiness Checklist"
+meta-description: "Are you ready for production?"
 ---
+
+* TOC
+{:toc}
 
 * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability
 
