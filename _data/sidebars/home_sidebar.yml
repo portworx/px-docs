@@ -95,11 +95,11 @@
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
         - title: Cleanup frameworks
-          url: /scheduler/mesosphere-dcos/framework_cleanup.html
+          url: /scheduler/mesosphere-dcos/framework-cleanup.html
       - title: FAQ
         folderitems:
         - title: How Portworx Volumes work with DCOS
-          url: /scheduler/mesosphere-dcos/portworx_volumes.html
+          url: /scheduler/mesosphere-dcos/portworx-volumes.html
     - title: Docker
       folderitems:
       - title: Install
@@ -123,7 +123,7 @@
       - title: FAQ
         folderitems:
         - title: How Portworx Volumes work with Docker
-          url: /scheduler/docker/volume_plugin.html
+          url: /scheduler/docker/volume-plugin.html
     - title: Rancher
       folderitems:
       - title: Install
@@ -159,7 +159,7 @@
       - title: ECS
         url: /cloud/aws/ecs.html
       - title: KOPS
-        url: /cloud/aws/kops_asg.html
+        url: /cloud/aws/kops-asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
     - title: Azure
@@ -167,15 +167,15 @@
       - title: Portworx on Azure
         url: /cloud/azure/azure.html
       - title: Azure Container Engine with DCOS
-        url: /cloud/azure/dcos_acs_engine.html
+        url: /cloud/azure/dcos-acs-engine.html
       - title: Azure Container Engine with Kubernetes
-        url: /cloud/azure/k8s_acs_engine.html
+        url: /cloud/azure/k8s-acs-engine.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
       url: /cloud/packet.html
     - title: DigitalOcean
-      url: /cloud/digital_ocean.html
+      url: /cloud/digitalocean.html
     - title: Rackspace
       url: /cloud/rackspace.html
     - title: Cloud Backups
@@ -345,8 +345,8 @@
     - title: Portwork QuickStart Explainer
       url: /video/quickstart.html
     - title: Hadoop on Portworx on DCOS
-      url: /video/hadoop_px_dcos.html
+      url: /video/hadoop-px-dcos.html
     - title: Microsoft SQL Server with High Availability
-      url: /video/sql_server.html
+      url: /video/sql-server.html
     - title: SQL Server on Kubernetes
-      url: /video/sql_server_on_k8s.html
+      url: /video/sql-server-on-k8s.html

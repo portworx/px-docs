@@ -7,6 +7,7 @@ youtubeId: yGjDxDLyS78
 redirect_from:
   - /run-with-rancher.html
   - /scheduler/rancher.html
+  - /deploy_px_with_rancher.html
 ---
 
 * TOC

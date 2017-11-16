@@ -2,6 +2,7 @@
 layout: page
 title: "Welcome to Portworx Support"
 sidebar: home_sidebar
+redirect_from: /support_welcome.html
 ---
 
 Thank you for being a valued Portworx customer.   

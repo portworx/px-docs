@@ -2,6 +2,7 @@
 layout: page
 title: "Install the Portworx Universe on DCOS for air-gapped clusters"
 keywords: portworx, container, Mesos, Mesosphere, storage, dcos, universe
+redirect_from: "/scheduler/mesosphere-dcos/install_universe.html"
 ---
 
 * TOC

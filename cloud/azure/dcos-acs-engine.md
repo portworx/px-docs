@@ -3,6 +3,7 @@ layout: page
 title: "ACS-Engine with DCOS and Portworx"
 keywords: portworx, acs-engine, azure, DCOS, Mesosphere, microsoft, azure
 sidebar: home_sidebar
+redirect_from: "/cloud/azure/dcos_acs_engine.html"
 ---
 
 * TOC

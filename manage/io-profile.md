@@ -4,6 +4,7 @@ title: "IO Profile tuning on PX volumes"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume, performance
 sidebar: home_sidebar
 meta-description: "Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!"
+redirect_from: "/manage/io_profile.html"
 ---
 
 By default, PX will try to auto tune the IO profile setting for a given volume by learning from the access patterns.  However, this algorithm can be overridden and a specific profile can be chosen.
