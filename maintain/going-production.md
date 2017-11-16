@@ -26,4 +26,3 @@ meta-description: "Production Readiness Checklist"
 
 * OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. Ensure kernel-devel packages are installed after a OS migration
 
-* 
