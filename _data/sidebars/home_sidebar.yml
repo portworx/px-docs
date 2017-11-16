@@ -246,6 +246,8 @@
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
+    - title: Best Practices for Disaster Recovery with Portworx
+      url: /maintain/dr-best-practices.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
