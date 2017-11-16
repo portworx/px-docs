@@ -89,7 +89,7 @@ sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
 
 * Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric called "px-cluster1".
 
-## Step 4: Launch jobs, specifying host affinity
+## Step 5: Launch jobs, specifying host affinity
 
 When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host (Ex: "px-fabric=px-cluster1)".
 
@@ -119,7 +119,7 @@ elasticsearch:
 * Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
 *The referenced volume can be a volume name, a volume ID, or a snapshot ID.  
 
-## Step 5: Launch jobs with docker-compose / rancher-compose
+## Step 6: Launch jobs with docker-compose / rancher-compose
 
 Here are some sample compose scripts that bring up wordpress stacks, referencing Portworx volumes:
 
