@@ -18,10 +18,6 @@
       url: /developer/index.html
     - title: Licensing
       url: /getting-started/px-licensing.html
-  - title: Hands-On Tutorials
-    folderitems:
-    - title: Deploy PX on Kubernetes
-      url: https://www.katacoda.com/px/scenarios/deploy-px-k8s
   - title: Container Orchestrators
     folderitems:
     - title: Kubernetes
