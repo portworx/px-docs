@@ -5,6 +5,7 @@ keywords: portworx, container, Mesos, Mesosphere, DCOS, Cassandra
 meta-description: "Learn how Portworx volumes are created, instantiated, and managed by DCOS.  Try Portworx on DC/OS today!"
 redirect_from:
   - /run-px-etcd-marathon.html
+  - /scheduler/mesosphere-dcos/portworx_volumes.html
 ---
 
 * TOC
@@ -18,7 +19,7 @@ When using Docker containers, volumes are provisioned and mounted using Docker a
 
 When using Mesos/UCR containers DCOS uses [dvdcli]( https://github.com/codedellemc/dvdcli) to provision and mount volumes.
 dvdcli talks to Portworx using the docker plugin API, see here to understand Portworx implementation of the 
-[API](/scheduler/docker/volume_plugin.html)
+[API](/scheduler/docker/volume-plugin.html)
 
 ### Marathon framework
 

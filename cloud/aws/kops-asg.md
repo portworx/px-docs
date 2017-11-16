@@ -3,6 +3,7 @@ layout: page
 title: "Dynamic Portworx Volume Creation by Kubernetes Operations(KOPS)"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
 sidebar: home_sidebar
+redirect_from: "/cloud/aws/kops_asg.html"
 ---
 
 * TOC

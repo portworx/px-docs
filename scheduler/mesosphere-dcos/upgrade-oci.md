@@ -2,6 +2,7 @@
 layout: page
 title: "Upgrade Portworx OCI on DCOS"
 keywords: portworx, container, dcos, storage, Docker, mesos
+redirect_from: "/scheduler/mesosphere-dcos/upgrade_oci.html"
 ---
 
 * TOC

@@ -3,6 +3,7 @@ layout: page
 title: "ACS-Engine with Kubernetes and Portworx"
 keywords: portworx, acs-engine, azure, Kubernetes, microsoft, azure
 sidebar: home_sidebar
+redirect_from: "/cloud/azure/k8s_acs_engine.html"
 ---
 
 * TOC

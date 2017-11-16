@@ -68,6 +68,16 @@ if [[ ${H1DUPFAIL} -eq 1 ]]; then
     EXITAS=1
 fi
 
+# Check if there are any HTML files with underscores
+UNDERSCORES=$(find "${BASE}/_site" -name '*_*' -name '*.html' | wc -l)
+
+if [[ ${UNDERSCORES} -ne 0 ]]; then
+    echo -en '\033[0;31mFAIL '
+    echo "The following pages contain underscores"
+    find "${BASE}/_site" -name '*_*' -name '*.html'
+    EXITAS=1
+fi
+
 if [[ ${EXITAS} -eq 1 ]]; then
     exit 1
 fi

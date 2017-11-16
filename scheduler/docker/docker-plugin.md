@@ -248,7 +248,7 @@ To use `consul` with authentication and a cafile, use this in your `config.json`
 
 ### Access the pxctl CLI
 After Portworx V2 plugin is running, you can create, delete & manage storage volumes through the
-[Docker volume commands](/scheduler/docker/volume_plugin.html#docker-interaction-with-portworx)
+[Docker volume commands](/scheduler/docker/volume-plugin.html#docker-interaction-with-portworx)
 or via the [**pxctl** command line tool](/control/status.html), as you usually would.
 
 A useful pxctl command is `pxctl status`.

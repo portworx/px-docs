@@ -14,7 +14,7 @@ sidebar: home_sidebar
 Kubernetes 1.6+ has support for Storage Classes, Persistent Volume Claims, and the Portworx volume driver.
 <br>Please use these [Kubernetes specs](https://github.com/portworx/px-docs/tree/gh-pages/k8s-samples/mssql) to deploy SQL Server.
 
-<br>See [this quick video demo](/video/sql_server_on_k8s.html) for achieving SQL Server high-availability on Kubernetes without requiring H/A Clustered mode.
+<br>See [this quick video demo](/video/sql-server-on-k8s.html) for achieving SQL Server high-availability on Kubernetes without requiring H/A Clustered mode.
 
 {%
     include youtubePlayer.html
