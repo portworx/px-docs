@@ -69,58 +69,8 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install/docker.html#run-px)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
-## Step 5: Label hosts that run Portworx (optional)
 
-If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
-so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
-
-If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
-
-As directed, copy from the clipboard and paste on to the new host. The form for the command follows. Use IP addresses that are appropriate for your environment.
-
-```
-sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
-                -e CATTLE_HOST_LABELS='pxfabric=px-cluster1'  \
-                -d --privileged                    \ 
-                -v /var/run/docker.sock:/var/run/docker.sock   \
-                -v /var/lib/rancher:/var/lib/rancher           \
-                rancher/agent:v1.0.2 http://192.168.33.10:8080/v1/scripts/98DD3D1ADD1F0CE368B5:1470250800000:IVpsBQEDjYGHDEULOfGjt9qgA
-
-```
-
-* Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric called "px-cluster1".
-
-## Step 5: Launch jobs, specifying host affinity
-
-When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host (Ex: "px-fabric=px-cluster1)".
-
-The `label` clause should look like the following:
-
-```
-labels:
-    io.rancher.scheduler.affinity:host_label: pxfabric=px-cluster1
-```
-
-Following is an example for starting Elasticsearch. The "docker-compose.yml" file is:
-
-```yaml
-elasticsearch:
-  image: elasticsearch:latest
-  command: elasticsearch -Des.network.host=0.0.0.0
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-  volume_driver: pxd
-  volumes:
-    - elasticsearch1:/usr/share/elasticsearch/data
-  labels:
-      io.rancher.scheduler.affinity:host_label: pxfabric=px-cluster1
-```
-
-* Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
-*The referenced volume can be a volume name, a volume ID, or a snapshot ID.  
-
-## Step 6: Launch jobs with docker-compose / rancher-compose
+## Step 5: Launch jobs with docker-compose / rancher-compose
 
 Here are some sample compose scripts that bring up wordpress stacks, referencing Portworx volumes:
 
