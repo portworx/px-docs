@@ -1,13 +1,14 @@
 ---
 layout: page
 title: "Production Readiness"
-keywords: disaster recovery, disaster proof, site failure, node failure, power failure
+keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
 meta-description: "Are you ready for production?"
 ---
 
 * TOC
 {:toc}
+
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
