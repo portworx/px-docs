@@ -14,17 +14,27 @@ meta-description: "Are you ready for production?"
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * Ensure a minimum of 4GB RAM is available for Portworx software to use and also atleast 4-cores
-  
-* etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
+* Ensure that at the minimum 4 cores and 4GB of RAM are allocated for Portworx
+* Ensure the base operating system of the server supports linux kernel 3.10+
+* Ensure the shared mount propagation is enabled
+
 ### Configuring the Networking Infrastructure
+
+* Ensure all the required ports are open as defined in the PX-Enterprise requirements
+* Configure separate networks for Data and Management networks to isolate the traffic
+
 
 ### Configuring and Provisioning Underlying Storage
 
-* Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools. If it is a cloud deployment, ensure you have enough cloud disks attached. For AWS ASG, Portworx supports automatic management of EBS volumes. It is recommended to use that [feature](https://docs.portworx.com/cloud/aws/asg.html)
+* Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
+  If it is a cloud deployment, ensure you have enough cloud disks attached. 
+  
+  * For AWS ASG, Portworx supports automatic management of EBS volumes. 
+    It is recommended to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
 
