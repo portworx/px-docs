@@ -22,10 +22,11 @@ meta-description: "Are you ready for production?"
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Refer to the alerts page for more information
 
-  * List of Portworx Alerts are documented [here](/monitoring/portworx-alerts.html)
   * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/monitoring/prometheus/index.html)
   * Configure Grafana via this [template](/monitoring/grafana/index.html)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/monitoring/alerting.html)
+  * List of Portworx Alerts are documented [here](/monitoring/portworx-alerts.html)
+
   
 * Network - Use different networks for data and management better 
 
