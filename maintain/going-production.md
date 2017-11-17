@@ -46,7 +46,7 @@ meta-description: "Are you ready for production?"
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](/dr-best-practices.html) page for more information.
 
-* Cloudsnaps - Follow DR best practices and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from a offsite backup
+* Cloudsnaps - Follow DR best practices and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
@@ -65,8 +65,10 @@ meta-description: "Are you ready for production?"
 
 ### Software Upgrades
 
-* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshot and cloudsnap before performing upgrades
+* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
+  latest snapshot and cloudsnap before performing upgrades
 
 * Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
-* OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. Ensure kernel-devel packages are installed after a OS migration
+* OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
+  Ensure kernel-devel packages are installed after a OS migration
