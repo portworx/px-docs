@@ -10,7 +10,10 @@ meta-description: "Are you ready for production?"
 {:toc}
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
-
+  * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
+  * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
+  * Ensure a minimum of 4GB RAM is available for Portworx software to use and also atleast 4-cores
+  
 * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 * Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools. If it is a cloud deployment, ensure you have enough cloud disks attached. For AWS ASG, Portworx supports automatic management of EBS volumes. It is recommended to use that [feature](https://docs.portworx.com/cloud/aws/asg.html)
@@ -24,7 +27,6 @@ meta-description: "Are you ready for production?"
   * Configure Grafana via this [template](/monitoring/grafana/index.html)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/monitoring/alerting.html)
   
-
 * Network - Use different networks for data and management better 
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](/dr-best-practices.html) page for more information.
