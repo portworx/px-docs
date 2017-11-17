@@ -44,16 +44,16 @@ meta-description: "Are you ready for production?"
 
 ### Data Protection for Containers
 
-* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](/dr-best-practices.html) page for more information.
+* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information.
 
 * Cloudsnaps - Follow DR best practices and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/monitoring/prometheus/index.html)
-  * Configure Grafana via this [template](/monitoring/grafana/index.html)
-  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/monitoring/alerting.html)
-  * List of Portworx Alerts are documented [here](/monitoring/portworx-alerts.html)
+  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
+  * Configure Grafana via this [template](monitoring/grafana/index.html)
+  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
+  * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
 
 ### Hardware Replacements and Upgrades
 
