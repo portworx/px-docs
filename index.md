@@ -84,8 +84,10 @@ You can also deploy Portworx via your container orchestrator.  Chose the appropr
 * [Install on Kubernetes](/scheduler/kubernetes/install.html)
 * [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
 * [Install on Docker](/scheduler/docker/install-standalone.html)
-* [Install on Rancher](/scheduler/rancher/install.html)
+* [Intall on GKE] (/scheduler/kubernetes/gke.html)
 * [Install on AWS ECS](/cloud/aws/ecs.html)
+* [Install on Rancher](/scheduler/rancher/install.html)
+
 
 ## Join us on Slack!
 [![](/images/slack.png){:height="48px" width="48px" alt="Slack" .slack-icon}](http://slack.portworx.com)
