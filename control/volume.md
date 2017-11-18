@@ -89,37 +89,52 @@ Volume successfully created: 508499868375963168
 ```
 
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create clihigh --size=1 --repl=3 --iopriority=high
 ```
+##### Aggregated Volumes
 
 For creating an aggregated volume, use the following command.
 ```
 sudo /opt/pwx/bin/pxctl volume create cliaggr --size=1 --repl=2 --aggregation_level=3
 ```
+##### Sticky Volumes
 
 If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
+
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale --size=1 --repl=3 --sticky
 ```
 
+##### Volume Sets
+
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven environments. 
+
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --size=1 --repl=3 --scale=100
 ```
+
+##### Encrypted Volumes
 
 For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cluster secret key. A different key maybe passed too.
 ```
 sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
 ```
 
+##### Passing Zones and Rack Information
+
 To create volumes within specific zones and/or racks in your deployment use the --zones and --racks options in the volume create command. Specifying zone/rack during volume creation will try to provision storage from the nodes in the specified zone/rack.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create volZoneA --size=100 --zones=a  --repl=2
 sudo /opt/pwx/bin/pxctl volume create volDefRack --racks=defaultRack --repl=2 --size=100
 ```
 
+##### Volume Distribution to Different Nodes
+
 To distribute volumes on different set of nodes, use --group option. In case there maybe an ambiguous condition use --enforce_cg to enforce group during volume creation. Note: --nodes option takes precedence over the node exclusion from --group option.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create volFinGrp --group finance --enforce_cg
 ```
