@@ -13,11 +13,12 @@ meta-description: "Are you ready for production?"
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - 
   Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
+  
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
   * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the 
-    container orchestrator to ensure maximum stability. Refer to the following [page
-    (https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+    container orchestrator to ensure maximum stability. Refer to the following 
+    [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -58,12 +59,17 @@ meta-description: "Are you ready for production?"
 ### Data Protection for Containers
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the 
-  case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information.
+  case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information. 
+  Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
 
 * Cloudsnaps - Follow [DR best practices](dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster,
   Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
+
+Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
+
+While Prometheus can be deployed as a container within the container orchestrator, many of Portworx's production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
   * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
   * Configure Grafana via this [template](monitoring/grafana/index.html)
@@ -71,6 +77,8 @@ meta-description: "Are you ready for production?"
   * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
 
 ### Hardware Replacements and Upgrades
+
+  * It is recommended to setup fault monitoring for the nodes used the in the container orchestrator.
 
 #### Server Upgrades and Replacements
 
