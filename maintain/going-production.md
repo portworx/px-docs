@@ -44,7 +44,16 @@ meta-description: "Are you ready for production?"
 ### Volume Management Best Practices
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. 
-  Refer to the alerts page for more information
+  Monitor for for Volume Space Low alerts
+
+  30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
+
+* For applications needing node level availability and read parallelism across nodes, it is recommended to set the 
+  volumes with replication factor 2 or replication factor 3
+  
+* If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
+  then the volumes need to enabled with Sticky Flag
+ 
 
 ### Data Protection for Containers
 
