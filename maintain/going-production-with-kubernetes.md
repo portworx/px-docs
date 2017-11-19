@@ -1,9 +1,9 @@
 ---
 layout: page
-title: "Production Readiness"
+title: "Operations Guide to deploy Portworx in Production in Kubernetes Clusters"
 keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
-meta-description: "Are you ready for production?"
+meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ---
 
 * TOC
@@ -22,7 +22,7 @@ meta-description: "Are you ready for production?"
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Check and Ensure minimum 4 cores and 4GB of RAM are allocated for Portworx
+* Check and Ensure minimum 4 cores and 4GB of RAM are allocated for Portworx. The minimum configuration
 * Ensure the base operating system of the server supports linux kernel 3.10+
 * Ensure the shared mount propagation is enabled
 
@@ -31,33 +31,20 @@ meta-description: "Are you ready for production?"
 * Make sure the following ports are open in all the servers. 9001, 9002, 9003, 9010, 9012, 9014 
 
 * Configure separate networks for Data and Management networks to isolate the traffic
-  * Data and Management networks can be configured either via config.json in each PX node or by giving this as a 
+  * Data and Management networks can be configured by giving this as a 
     parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
-  * Here how the data and management networks can be configured via config.json
+  * Here is how this can be configured.
+  
+  * A node that has been successfully configured would look like this when its config.json is inspected.
+  ```
+  TODO: Add config.json from a k8s node 
   
   ```
-  cat config.json
-  {
-    "version": "0.3",
-    "clusterid": "1dee3114-55ff-4868-add7-895aa710c4df",
-    "mgtiface": "enp0s3",
-    "dataiface": "enp0s3",
-    "loggingurl": "",
-    "alertingurl": "",
-    "bootstrap": true,
-    "kvdb": [
-       "etcd:http://70.0.5.211:2379",
-       "etcd:http://70.0.5.212:2379",
-       "etcd:http://70.0.5.213:2379"
-     ],
-     "storage": {
-      "devices": [
-     "/dev/sdd"
-     ],
-     "raidlevel": "raid0"
-    }
-  }
-  ```
+  
+  
+  Note in the case above, data traffic will be routed through `enp0s4` and management traffic is routed through `enp0s3`
+  
+  For Kubernetes, 
 
 ### Configuring and Provisioning Underlying Storage
 
