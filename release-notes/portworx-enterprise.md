@@ -12,6 +12,31 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.4 Release notes
+
+### Key Features and Changes
+
+* PX-Enterprise container is now available in [OCI Format](https://docs.portworx.com/runc/)
+* Enhancements for db workloads to handle slow media
+
+### Fixed issues
+
+* Ignore `sticky` flag when purging old snapshots after a cloudsnap is completed.
+* `pxctl status` shows the first interface IP address instead of the mgmt. IP
+
+## 1.2.11.3 Release notes
+
+### Fixed Issues
+
+* Shared volume performance improvements
+* Do not take a a inline snap in k8s when no valid candidate pvcs are found
+
+## 1.2.11.2 Release notes
+
+### Fixed Issues
+
+* Increase file descriptors to support large number of shared volumes
+
 ## 1.2.11.1 Release notes
 
 ### Fixed Issues
