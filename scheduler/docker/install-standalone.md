@@ -15,10 +15,9 @@ This guide describes installing Portworx using the docker CLI.
 
 >**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/maintain/etcd.html) for PX. Ensure all nodes running PX are synchronized in time and NTP is configured
 
-
 ## Install and configure Docker
 
-* PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
+* PX requires a minimum of Docker version 1.10.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 * You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ## Specify storage
@@ -42,15 +41,9 @@ Note that devices without the partition are shown under the **TYPE** column as *
 
 Identify the storage devices you will be allocating to PX.  PX can run in a heterogeneous environment, so you can mix and match drives of different types.  Different servers in the cluster can also have different drive configurations.
 
-## Run PX as a Plugin
+## Install PX via OCI runC
 
-If you have Docker version 1.13 or higher, it is strongly recommended to install Portworx as a plugin. [Follow these steps](docker-plugin.html) to do so.
-
-To upgrade a previously installed Portworx plugin, [follow these steps](upgrade-standalone.html).
-
-### Optional - Run PX as a container
-
-If you are running Docker version 1.12 or prior, you can run PX as a Docker container.  [Follow these steps](docker-container.html) to do so.
+PX runs as a container directly via OCI runC.  This ensures that there are no cyclical dependencies between Docker and PX.  [Follow these steps](/runc/index.html) to install PX.
 
 ## Adding Nodes
 To add nodes to increase capacity and enable high availability, simply repeat these steps on other servers.  As long as PX is started with the same cluster ID, they will form a cluster.
@@ -58,8 +51,7 @@ To add nodes to increase capacity and enable high availability, simply repeat th
 ## Access the pxctl CLI
 After Portworx is running, you can create and delete storage volumes through the Docker volume commands or the **pxctl** command line tool.
 
-With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI
-Reference](/control/status.html).
+With **pxctl**, you can also inspect volumes, the volume relationships with containers, and nodes. For more on using **pxctl**, see the [CLI Reference](/control/status.html).
 
 To view the global storage capacity, run:
 

@@ -99,25 +99,13 @@
     - title: Docker
       folderitems:
       - title: Install
-        folderitems:
-        - title: Docker Standalone
-          url: /scheduler/docker/install-standalone.html
-        - title: Docker Swarm
-          url: /scheduler/docker/install-swarm.html
+        url: /scheduler/docker/install-standalone.html
       - title: Upgrade
-        folderitems:
-        - title: Docker Standalone
-          url: /scheduler/docker/upgrade-standalone.html
-        - title: Docker Swarm
-          url: /scheduler/docker/upgrade-swarm.html
+        url: /runc/#upgrading-from-px-containers-to-px-oci
       - title: How To
         folderitems:
         - title: Use PX with Swarm
           url: /scheduler/docker/swarm.html
-        - title: Starting PX via systemd
-          url: /scheduler/docker/systemd.html
-      - title: FAQ
-        folderitems:
         - title: How Portworx Volumes work with Docker
           url: /scheduler/docker/volume-plugin.html
     - title: Rancher
