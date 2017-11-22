@@ -11,13 +11,15 @@ meta-description: "Learn to take a snapshot of a volume from a Kubernetes persis
 * TOC
 {:toc}
 
-This document will show you how to create snapshots of Portworx volumes and use them in pods.  It uses MySQL as an example. 
+This document will show you how to create snapshots of Portworx volumes and use them in pods.  It uses MySQL as an example.
 
-## Managing snapshots through `kubectl`
+## Managing snapshots with `kubectl`
 
-### Creating snapshots
+### Taking snapshots
 
-#### Creating periodic snapshots
+Following are the different ways in which you can take snapshots of your volume through kubernetes.
+
+#### Periodic snapshots
 When you create a StorageClass, you can specify a snapshot schedule on the volume as specified below. This allows to snapshot the persistent data of the running pod using the volume.
 ```yaml
 kind: StorageClass
@@ -31,8 +33,58 @@ parameters:
 ```
 Above spec will take snapshots of the _portworx-repl-1-snap-internal_ PVC every 240 minutes.
 
-#### Creating a snapshot on demand
-You can also trigger a new snapshot on a running POD by creating a PersistentVolumeClaim as specified in the following spec:
+#### On demand Snapshots
+
+You can trigger a new snapshot on a running POD by creating a PersistentVolumeClaim
+
+##### Using annotations
+
+Portworx uses a special annotation `px/snapshot-source-pvc` which can be used to identify the name of the source PVC whose snapshot needs to be taken.
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: prod
+  name: ns.prod-name.px-snap-1
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
+    px/snapshot-source-pvc: px-vol-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 6Gi
+```
+Note the format of the `name` field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name "px-snap-1" of the source PVC "px-vol-1" in the "prod" namespace.
+
+##### Snapshot of a snapshot
+
+You can take a snapshot of a snapshot using the following spec file
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: prod
+  name: ns.prod-name.px-snap-2
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc-2
+    px/snapshot-source-pvc: px-snap-1
+spec:
+   accessModes:
+     - ReadWriteOnce
+   resources:
+     requests:
+       storage: 2Gi
+```
+
+The above example takes a snapshot with the name "px-snap-2" of the source snapshot "px-snap-1" in the "prod" namespace. Note that `px/snapshot-source-pvc` does not take the actual PVC name of the snapshot "ns.prod-name.px-snap-1" but instead only the name subsection "px-snap-1"
+
+##### Using inline spec
+
+If you do not wish to use annotations you can take a snapshot by providing the source PVC name in the name field of the claim.  However this method does not allow you to provide namespaces.
 ```yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -45,7 +97,7 @@ spec:
     requests:
       storage: 1Gi
 ```
-Note the format of the “name” field. The format is `name.<new_snap_name>-source.<old_volume_name>`. Above example references the parent (source) persistent volume claim _pvc001_ and creates a snapshot by the name _snap001_. 
+Note the format of the “name” field. The format is `name.<new_snap_name>-source.<old_volume_name>`. Above example references the parent (source) persistent volume claim _pvc001_ and creates a snapshot by the name _snap001_.
 
 ### Using snapshots
 #### Listing snapshots
