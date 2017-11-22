@@ -274,14 +274,16 @@
       url: /secrets/portworx-with-aws-kms.html
   - title: Lighthouse
     folderitems:
-    - title: Manage PX via Lighthouse
-      url: /enterprise/portworx-via-lighthouse.html
-    - title: Run Lighthouse 
+    - title: Install Lighthouse 
       url: /enterprise/lighthouse.html
-    - title: Add Existing PX Node to Lighthouse
-      url: /enterprise/add-existing-px-node-to-lighthouse.html
-    - title: Cluster Alerting Preferences
-      url: /enterprise/cluster-alerting.html
+    - title: Manage PX via Lighthouse
+      folderitems:
+      - title: Manage the PX cluster
+        url: /enterprise/portworx-via-lighthouse.html
+      - title: Add Existing PX Nodes to Lighthouse
+        url: /enterprise/add-existing-px-node-to-lighthouse.html
+      - title: Alerting Preferences
+        url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
     folderitems:
     - title: Running with an SDN
