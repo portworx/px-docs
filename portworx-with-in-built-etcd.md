@@ -47,6 +47,14 @@ For a complete list of options refer [here](/scheduler/docker/install-standalone
 
 PX uses an external etcd specified through the `-k` option to bootstrap internal etcd. Once PX cluster is up and the internal etcd is bootstrapped the dependency on external etcd is released. All PX metadata will now be stored in the internal etcd. As mentioned above the `-b` option is required to instruct PX to spin up internal etcd.
 
+Portworx has a generally available etcd cluster which you can point to for the external bootstrap etcd, so that you do not have to spin up one.
+
+```
+http://etcdv3-01.portworx.com:2379
+http://etcdv3-02.portworx.com:2379
+http://etcdv3-03.portworx.com:2379
+```
+
 If you are using any scheduler for running PX you can refer to their respective docs and make sure you specify the `-b` option.
 
 * [Kubernetes](scheduler/kubernetes/install.html)
