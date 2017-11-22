@@ -15,14 +15,16 @@ meta-description: "Lighthouse monitors and manages your PX cluster and storage a
 
 Lighthouse can monitor and manage your PX clusters and storage. This guide shows you how you can run [Lighthouse](http://lighthouse-new.portworx.com/login) locally.
 
-Note: The example in this section uses Amazon Web Services (AWS) Elastic Compute Cloud (EC2). In your deployment, you can use physical servers, another public cloud, or virtual machines.
+>**Note:**<br/>You must have an enterprise license to be able to download the `portworx/px-lighthouse` image.  Please contact support@portworx.com for access to this image.
 
 ## Minimum Requirements
 Lighthouse runs as a Docker container and has the same minumum requirements as the Portworx storage solution. Please consult [this guide](https://docs.portworx.com/#minimum-requirements) for the minumum requirements.
 
-Lighthouse connects to two other services: 
-1) Key Value Database (KVDB) store: it stores all the cluster data and lighthouse management data. This must be the same KVDB store that your Portworx nodes are/will be configured to use
-2) Influxdb: it stores all the performance data that lighthouse uses to graph
+Lighthouse connects to an existing PX cluster by talking to the same KVDB that your PX cluster uses.  In order to get Lighthouse to manage your PX cluster, you must provide the following connection strings:
+
+1) Key Value Database (KVDB) store: This must be the same KVDB store that your Portworx nodes are/will be configured to use
+
+2) Influxdb: Light house stores the performance data of your PX cluster in this time series DB
 
 Setup KVDB store by following instructions on [Etcd](https://docs.portworx.com/maintain/etcd.html).
 
