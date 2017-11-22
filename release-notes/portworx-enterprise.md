@@ -12,6 +12,14 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+
+## 1.2.11.5 Release notes
+
+### Key Features and Changes
+
+* Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
+
 ## 1.2.11.4 Release notes
 
 ### Key Features and Changes
