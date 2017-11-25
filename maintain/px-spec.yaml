@@ -1,0 +1,154 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: px-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+   name: node-get-put-list-role
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["watch", "get", "update", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1alpha1
+metadata:
+  name: node-role-binding
+subjects:
+- apiVersion: v1
+  kind: ServiceAccount
+  name: px-account
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: node-get-put-list-role
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: portworx-service
+  namespace: kube-system
+spec:
+  selector:
+    name: portworx
+  ports:
+    - protocol: TCP
+      port: 9001
+      targetPort: 9001
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: portworx
+  namespace: kube-system
+spec:
+  minReadySeconds: 0
+  updateStrategy:
+    type: OnDelete
+  template:
+    metadata:
+      labels:
+        name: portworx
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: px/enabled
+                operator: NotIn
+                values:
+                - "false"
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
+      hostNetwork: true
+      hostPID: true
+      containers:
+        - name: portworx
+          image: portworx/px-enterprise:1.2.11.3
+          terminationMessagePath: "/tmp/px-termination-log"
+          imagePullPolicy: Always
+          args:
+            ["-k", "etcd:http://etc.fake.net:2379", "-c", "test_cluster", "-d", "eth0", "-m", "eth1", "-a", "-f",
+             "-x", "kubernetes"]
+          env:
+            - name: "PX_TEMPLATE_VERSION"
+              value: "v2"
+            
+          livenessProbe:
+            periodSeconds: 30
+            initialDelaySeconds: 840 # allow image pull in slow networks
+            httpGet:
+              host: 127.0.0.1
+              path: /status
+              port: 9001
+          readinessProbe:
+            periodSeconds: 10
+            initialDelaySeconds: 20
+            httpGet:
+              host: 127.0.0.1
+              path: /v1/cluster/nodehealth
+              port: 9001
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+            - name: kubelet
+              mountPath: /var/lib/kubelet:shared
+            - name: libosd
+              mountPath: /var/lib/osd:shared
+            - name: etcpwx
+              mountPath: /etc/pwx
+            - name: dev
+              mountPath: /dev
+            - name: optpwx
+              mountPath: /export_bin
+            - name: cores
+              mountPath: /var/cores
+            - name: src
+              mountPath: /usr/src
+            - name: dockerplugins
+              mountPath: /run/docker/plugins
+            - name: hostproc
+              mountPath: /hostproc
+      restartPolicy: Always
+      serviceAccountName: px-account
+      volumes:
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: kubelet
+          hostPath:
+            path: /var/lib/kubelet
+        - name: libosd
+          hostPath:
+            path: /var/lib/osd
+        - name: etcpwx
+          hostPath:
+            path: /etc/pwx
+        - name: dev
+          hostPath:
+            path: /dev
+        - name: optpwx
+          hostPath:
+            path: /opt/pwx/bin
+        - name: cores
+          hostPath:
+            path: /var/cores
+        - name: src
+          hostPath:
+            path: /usr/src
+        - name: dockerplugins
+          hostPath:
+            path: /run/docker/plugins
+        - name: hostproc
+          hostPath:
+            path: /proc
