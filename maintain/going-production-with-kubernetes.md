@@ -25,8 +25,15 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * Check and ensure minimum 4 cores and 4GB of RAM are allocated for Portworx. 
   The minimum configuration supports light workloads and is primary used for POCs
 * For database workloads similar to MySQL or Postgres, Portworx reocmmends 8 Cores and 8GB of RAM
-* Ensure the base operating system of the server supports linux kernel 3.10+
+* The base operating system of the server supports linux kernel 3.10+
+
+```
+[centos@ip-172-31-51-89 ~]$ uname -r
+3.10.0-327.22.2.el7.x86_64
+
+```
 * Ensure the shared mount propagation is enabled
+  Refer to this [page](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html#checking-whether-shared-mounts-are-enabled) for checking and enabling shared mount propogation is enabled. 
 
 ### Configuring the Networking Infrastructure
 
@@ -35,24 +42,18 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * Configure separate networks for Data and Management networks to isolate the traffic
   * Data and Management networks can be configured by giving this as a 
     parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
-  * Here is how this can be configured.
+  * Refer to this kubernetes spec for Portworx Daeemonset on how this can be configured. [spec](px-spec.yaml)
   
-  ```
-  TODO: add px.yaml spec from a k8s node that shows how the mgmt interface is configured
-  TODO: Add screenshots of the new configuration wizard
-  ```
+  The mgmt and data interface must be given as follows:
+   ```
+   args:
+     ["-k", "etcd:http://etc.fake.net:2379", "-c", "test_cluster", "-d", "eth0", "-m", "eth1", "-a", "-f",
+     "-x", "kubernetes"]
+   ```
+    
   
-  * A node that has been successfully configured would look like this when its config.json is inspected.
-  ```
-  TODO: Add config.json from a k8s node 
+  Note in the case above, data traffic will be routed through `eth0` and management traffic is routed through `eth1`
   
-  ```
-  
-  
-  Note in the case above, data traffic will be routed through `enp0s4` and management traffic is routed through `enp0s3`
-  
-  For Kubernetes, 
-
 ### Configuring and Provisioning Underlying Storage
 
 * Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
