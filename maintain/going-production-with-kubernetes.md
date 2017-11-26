@@ -142,7 +142,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 #### Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
   latest snapshot and cloudsnap before performing upgrades
 
-#### Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
+#### Container Orchestrator Upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
 #### OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
   Ensure kernel-devel packages are installed after a OS migration
