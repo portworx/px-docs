@@ -142,7 +142,7 @@ You can completely wipe PX cluster by deleting the configuration files under `/e
 for pod in $(kubectl get pods -n kube-system -l name=portworx | awk -F" " '{print $1}' | grep -v NAME); do  kubectl -n kube-system exec -it $pod rm -- -rf /etc/pwx/; done
 ```
 
-If the portworx pods are not running you need to remove the contents of `/etc/pwx` from all the nodes.
+If the portworx pods are not running you need to remove `/etc/pwx` from all the nodes.
 
 >**Note**<br/>If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a new clusterid in the daemonset spec file
 
