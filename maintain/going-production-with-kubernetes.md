@@ -32,8 +32,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ```
 [centos@ip-172-31-51-89 ~]$ uname -r
 3.10.0-327.22.2.el7.x86_64
-
 ```
+
 * Ensure the shared mount propagation is enabled
   Refer to this [page](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html#checking-whether-shared-mounts-are-enabled) for checking and enabling shared mount propogation is enabled. 
 
@@ -97,6 +97,44 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
   ```
   
+* For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
+  different zones. For e.g., see below for the output of `pxctl status`
+  
+  ```
+  [centos@ip-172-31-51-89 ~]$ sudo /opt/pwx/bin/pxctl status
+  Status: PX is operational 
+  License: Trial (expires in 23 days)
+  Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
+	 IP: 172.31.51.89
+ 	 Local Storage Pool: 2 pools
+	 POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+	 0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
+	 1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
+	 Local Storage Devices: 2 devices
+	 Device	Path		Media Type		Size		Last-Scan
+	 0:1	/dev/xvdf	STORAGE_MEDIUM_SSD	64 GiB		20 Nov 17 05:19 UTC
+	 1:1	/dev/xvdi	STORAGE_MEDIUM_SSD	128 GiB		20 Nov 17 05:19 UTC
+	 total			-			192 GiB
+ Cluster Summary
+	Cluster ID: 2e9d45f0-fa3d-4de3-ac2b-5f840d57f0ad
+	Cluster UUID: 7de94a29-6229-4b7d-8387-29776a4a7d8e
+	Nodes: 3 node(s) with storage (3 online)
+	IP		ID					StorageNode	Used	Capacity	Status
+	172.31.51.48	e1df6f1b-fc35-4178-952e-36ea60613af0	Yes		66 GiB	192 GiB		Online
+	172.31.51.89	a17f382d-b2ef-41b8-81fc-d9b86d56b5d1	Yes		66 GiB	192 GiB		Online	 (This node)
+	172.31.55.188	5585c62b-3633-47b9-a181-ad7f11bb0736	Yes		66 GiB	192 GiB		Online
+ Global Storage Pool
+	Total Used    	:  198 GiB
+	Total Capacity	:  576 GiB
+ ```
+ This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
+ is created, it will have the replicas automatically created in other nodes in other zones.
+
+* For on-prem installs, Portworx recommends deploying the replicas for a given values across racks. This can be achieved 
+  by passing the rack parameter via the environment variable. 
+  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information.
+ 
+ 
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
   then the volumes need to enabled with `--sticky` flag
   
@@ -119,6 +157,9 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   pxctl volume create wordpressvol --shared --size=100 --repl=3
 
   ```
+  
+  This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
+  how to create them and update the configuration for the volumes 
 
 ### Data Protection for Containers
 
