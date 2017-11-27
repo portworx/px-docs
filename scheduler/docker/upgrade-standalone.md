@@ -5,6 +5,7 @@ keywords: portworx, architecture, storage, container, install, docker, upgrade, 
 sidebar: home_sidebar
 redirect_from:
   - /scheduler/docker/upgrade-px-plugin.html
+meta-description: "Updating the Portworx Docker volume plugin is simple. Follow this guide to find out how."
 ---
 
 * TOC

@@ -3,6 +3,7 @@ layout: page
 title: "Portworx on Amazon ECS"
 keywords: portworx, amazon, docker, aws, ecs, cloud
 sidebar: home_sidebar
+meta-description: "Learn how to rapidly deploy persistent storage for your Docker containers running on ECS by using Portworx."
 ---
 
 This guide shows you how you can easily deploy Portworx on Amazon Elastic Container Service [**ECS**](https://aws.amazon.com/ecs/)

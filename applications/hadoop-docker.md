@@ -3,6 +3,7 @@ layout: page
 title: "A Production Ops Guide to Deploying Hadoop in Docker Containers"
 keywords: portworx, px-developer, hadoop, yarn, database, cluster, storage
 sidebar: home_sidebar
+meta-description: "Follow this guide to learn how to reliably deploy Hadoop containers using Portworx."
 ---
 
 * TOC

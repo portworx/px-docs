@@ -3,6 +3,7 @@ layout: page
 title: "Deploy Elastic Search and Kibana with Portworx on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, elastic, elastic stack, elastic search, kibana
 sidebar: home_sidebar
+meta-description: "Find out how to easily deploy Elasticsearch and Kibana on Kubernetes using Portworx to preserve state!"
 ---
 
 * TOC
