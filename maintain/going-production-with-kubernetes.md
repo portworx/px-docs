@@ -57,7 +57,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
    ```
   Note in the case above, data traffic will be routed through `eth0` and management traffic is routed through `eth1`
   
-  * it is recommended to create a bonded ethernet port for each data and management interface for improved availability and performance.
+  * It is recommended to create a bonded ethernet port for each data and management interface for improved availability 
+    and performance.
   
 ### Configuring and Provisioning Underlying Storage
 
@@ -100,8 +101,6 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level. 
-  
-* 
   
 * For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
   different zones. For e.g., see below for the partial output of `pxctl status`
@@ -170,8 +169,26 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ### Data Protection for Containers
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the 
-  case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information. 
-  Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
+  case of app failures. 
+  
+* Portworx support 64 snapshots per volume
+
+* Each snapshot can be taken manually via the `pxctl snap create` command. For e.g.,
+
+  ```
+  pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
+  Volume successfully snapped: 1152602487227170184
+  ```
+  
+* Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots 
+  to be automatically created without user intervention.
+  
+  ```
+  pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
+  ```
+  
+* Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
+
 
 * Cloudsnaps - Follow [DR best practices](dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster,
   Portworx volumes can be restored from an offsite backup
