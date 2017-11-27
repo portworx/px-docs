@@ -74,11 +74,11 @@ Below are all parameters that can be given in the query string  (see [install.po
 
 | Value  | Description                                                                                                                           | Example                                                    |
 |:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
-|        | <center> _ *REQUIRED PARAMETERS* _ </center>                                                                                          |                                                            |
+|        | <center>REQUIRED PARAMETERS</center>                                                                                                  |                                                            |
 | type   | Select Portworx deployment type (_oci_ for OCI container, _dock_ for Docker container)                                                | <var>type=oci</var>                                        |
 | c      | Specifies the unique name for the Portworx cluster.                                                                                   | <var>c=test_cluster</var>                                  |
 | k      | Your key value database, such as an etcd cluster or a consul cluster.                                                                 | <var>k=etcd:http://etcd.fake.net:2379</var>                |
-|        | <center> _ *OPTIONAL PARAMETERS* _ </center>                                                                                          |                                                            |
+|        | <center>OPTIONAL PARAMETERS</center>                                                                                                  |                                                            |
 | s      | Specify comma-separated list of drives.                                                                                               | <var>s=/dev/sdb,/dev/sdc</var>                             |
 | d      | Specify data network interface. This is useful if your instances have non-standard network interfaces.                                | <var>d=eth1</var>                                          |
 | m      | Specify management network interface. This is useful if your instances have non-standard network interfaces.                          | <var>m=eth1</var>                                          |
@@ -88,13 +88,13 @@ Below are all parameters that can be given in the query string  (see [install.po
 | z      | Instructs PX to run in zero storage mode on Kubernetes master.                                                                        | <var>z=true</var>                                          |
 | f      | Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted. | <var>f=true</var>                                          |
 | st     | Select the secrets type (_aws_, _kvdb_ or _vault_)                                                                                    | <var>st=vault</var>                                        |
-|        | <center> _ *KVDB CONFIGURATION PARAMETERS* _ </center>                                                                                |                                                            |
+|        | <center>KVDB CONFIGURATION PARAMETERS</center>                                                                                        |                                                            |
 | pwd    | Username and password for ETCD authentication in the form user:password                                                               | <var>pwd=username:password</var>                           |
 | ca     | Location of CA file for ETCD authentication.                                                                                          | <var>ca=/path/to/server.ca</var>                           |
 | cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
 | key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
 | acl    | ACL token value used for Consul authentication.                                                                                       | <var>acl=398073a8-5091-4d9c-871a-bbbeb030d1f6</var>        |
-|        | <center> _ *LIGHTHOUSE CONFIGURATION PARAMETERS* _ </center>                                                                          |                                                            |
+|        | <center>LIGHTHOUSE CONFIGURATION PARAMETERS</center>                                                                                  |                                                            |
 | t      | Portworx Lighthouse token for cluster.                                                                                                | <var>t=token-a980f3a8-5091-4d9c-871a-cbbeb030d1e6</var>    |
 | e      | Comma-separated list of environment variables that will be exported to portworx.                                                      | <var>e=API_SERVER=http://lighthouse-new.portworx.com</var> |
 
