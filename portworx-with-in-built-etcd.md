@@ -31,7 +31,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
                  -v ${HDRS}:${HDRS}                            \
-                px-enterprise:1.3.0-beta -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc -b
+                portworx/px-enterprise:1.3.0-beta -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/xvdb -s /dev/xvdc -b
 ```
 
 The following arguments are provided to the PX daemon:
