@@ -17,13 +17,16 @@ Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.
 
 ### Kubernetes users
 
-If you are installing Portworx on Kubernetes, when generating the Portworx Kubernetes spec file:
-1. Use `secretType=vault` to specify the secret type as vault
-2. Use `env=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#portworx-vault-environment-variables) to identify vault endpoint.
+If you are installing Portworx on Kubernetes, when generating the [Portworx Kubernetes spec file](http://install.portworx.com/):
+
+1. Use `st=vault` to specify the secret type as "vault"
+2. Use `e=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#portworx-vault-environment-variables) to identify vault endpoint.
 
 For example:
+
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&secretType=vault&env=VAULT_ADDR=<vault-address>,VAULT_TOKEN=<vault-token>"
+$ curl -o px-spec.yaml \
+  "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&st=vault&env=VAULT_ADDR=<vault-address>,VAULT_TOKEN=<vault-token>"
 $ kubectl apply -f px-spec.yaml
 ```
 
@@ -34,6 +37,7 @@ If you already have a running Portworx installation, [update `/etc/pwx/config.js
 ### Docker & Docker plugin users
 
 If you are installing Portworx as a Docker container or a plugin,
+
 1. Use `-secret_type vault -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as vault and the cluster-wide secret ID.
 2. Use `-e` docker option to expose the [Portworx vault environment variables](#portworx-vault-environment-variables)
 
@@ -98,6 +102,7 @@ This command needs to be run just once for the cluster.
 #### (Optional) Authenticating with Vault using PX CLI
 
 If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
+
 ```
 # /opt/pwx/bin/pxctl secrets vault login
 Enter VAULT_ADDRESS: <vault-endpoint-address>
@@ -105,8 +110,8 @@ Enter VAULT_TOKEN: ********
 Successfully authenticated with Vault.
 ```
 
-__Important: You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes__
+>**Important:**<br/> You need to run this command on all PX nodes, so that you could create and mount encrypted volumes on all nodes.
 
-__Important: Make sure that the secret key has been created in Vault__
+>**Important:**<br/> Make sure that the secret key has been created in Vault.
 
 If the CLI is used to authenticate with Vault, for every restart of PX container it needs to be re-authenticated with Vault by running the `login` command.

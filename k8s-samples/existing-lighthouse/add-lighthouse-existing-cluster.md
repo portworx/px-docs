@@ -1,49 +1,76 @@
-# Add Lighthouse to an existing portworx cluster
+## Add Lighthouse to an existing portworx cluster
 
-### Download the lighthouse yaml
+### Download and install the lighthouse
+
+Step 1: Download the [lighthouse yaml](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/existing-lighthouse/k8-lighthouse.yaml):
+
 ```
 wget https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/existing-lighthouse/k8-lighthouse.yaml
 ```
-### Edit k8-lighthouse.yaml and change the etcd entry to your existing etcd service where portworx is currently running.  You can cat /etc/pwx/config.json to find your etcd service IP and Port info
+
+Step 2: Edit `k8-lighthouse.yaml` and change the `etcd` entry to your existing etcd service where portworx is currently running:
+
 ```
         - etcd:http://<etcd server>:<ETCD PORT>
 ```
-### Change the COMPANY NAME and ADMIN EMAIL 
+
+>**Note:**<br/> You can check `/etc/pwx/config.json` file to find your etcd service IP and Port info (ie. `grep -A2 kvdb /etc/pwx/config.json`)
+
+
+Step 3: Change the COMPANY NAME and ADMIN EMAIL 
+
 ```
        - name: PWX_PX_COMPANY_NAME
           value: <COMPANY NAME>
-        - name: PWX_PX_ADMIN_EMAIL
+       - name: PWX_PX_ADMIN_EMAIL
           value: <ADMIN EMAIL>
 ```
-### Deploy Lighthouse 
+
+Step 4: Deploy Lighthouse 
+
 ```
 kubectl apply -f k8-lighthouse.yaml
 ```
-### Login to Lighthouse at port 30062 
+
+Step 5: Login to Lighthouse at port 30062 
+
 ```
 http://<Your k8 Master>:30062
 ```
-#### ** Login will be the email address you supplied for ADMIN EMAIL and the default password is "admin"
-### Click on create new cluster
 
-### Click on existing cluster and in both name and clusterid insert the name of your portworx cluster and click on create. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/new-cluster.png)   If you do not know the name look in /etc/pwx/config.json 
-### Once the cluster is created it will show a token for the cluster you just created. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/authtoken.png).  You will have to add the logging url to each of your existing nodes /etc/pwx/config.json
+>**Note:**<br/> Login username will be the email address you supplied for ADMIN EMAIL, while the default password is "admin".
+
+
+### Creating a new PX cluster
+
+Step 1: Click on create new cluster
+
+Step 2: Click on existing cluster and in both name and clusterid insert the name of your portworx cluster and click on create. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/new-cluster.png)   If you do not know the name look in `/etc/pwx/config.json`
+
+Step 3: Once the cluster is created it will show a token for the cluster you just created. Screen shot can be found [here](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/existing-lighthouse/authtoken.png).  You will have to add the logging url to each of your existing nodes `/etc/pwx/config.json`
+
 ```
-"loggingurl": "<your-lighthouse-url>/api/stats/listen?token=<Auth-Token>",
+    "loggingurl": "<your-lighthouse-url>/api/stats/listen?token=<Auth-Token>",
 ```
-###### example:
+
+example configuration line:
+
 ```
     "loggingurl": "http://70.0.38.38:30062/api/stats/listen?token-97b7656a-7c86-11e7-a014-428db0678bce",
 ```    
-### You will need to restart the portworx container for the changes to take affect. Once restarted in Lighthouse under nodes you should see the servers start to populate
+Step 4: You will need to restart the portworx container for the changes to take affect. Once restarted in Lighthouse under nodes you should see the servers start to populate
 
-
-### Add API server and Token fileds and create a new px-spec.yaml file for future servers
+Step 5: Add API server and Token fileds and create a new px-spec.yaml file for future servers
 
 ```
-curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://70.0.38.38:2379&token=token-97b7656a-7c86-11e7-a014-428db0678bce&env=API_SERVER=http://70.0.38.38:30062"
+curl -o px-spec.yaml \
+  "http://install.portworx.com?c=mycluster&k=etcd://70.0.38.38:2379&t=token-97b7656a-7c86-11e7-a014-428db0678bce&e=API_SERVER=http://70.0.38.38:30062"
 ```
-### Or you can edit your existing px-spec.yaml file and add the "-t token" and "env API server" fields 
+
+>**Note:**<br/> You can also use the HTML form at [install.portworx.com](http://install.portworx.com), and enter at minimum the _<U>c</U>luster name_, _<U>k</U>ey/value database_, _<U>t</U>oken_, and _<U>e</U>nvironment (API\_SERVER=xxx)_ fields.
+
+
+Step 5b: Or you can edit your existing `px-spec.yaml` file and add the `"-t", "<token>"` and `"env:API_SERVER"` fields, ie:
 
 ```
       containers:
@@ -54,31 +81,27 @@ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://
           args:
              ["-k etcd://70.0.38.38:2379",
               "-c mycluster",
-              "",
-              "",
-              "-a -f",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "-t token-97b7656a-7c86-11e7-a014-428db0678bce",
+              "-a", "-f",
+              "-t", "token-97b7656a-7c86-11e7-a014-428db0678bce",
               "-x", "kubernetes"]
           env:
            - name: API_SERVER
              value: http://70.0.38.38:30062
 ```             
-### Update the daemonset so new pods will automatically use your lighthouse server
+
+Step 6: Update the daemonset so new pods will automatically use your lighthouse server
 
 ```
 kubectl update -f px-spec.yaml            
 ```
 
-### Verify the daemonset has been updated.  You should see the -t "token" and the API_SERVER fields populated
+Step 7: Verify the daemonset has been updated.  You should see the `-t <token>` and the `API_SERVER` fields populated
 
 ```
-kubectl describe daemonset portworx  -n kube-system
+kubectl describe daemonset portworx -n kube-system
 ```
+
+example output:
 
 ```
 Pod Template:

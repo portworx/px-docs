@@ -21,130 +21,187 @@ Portworx can run alongside Kubernetes and provide Persistent Volumes to other ap
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
-## Deploy PX with Kubernetes 1.6+
-Kubernetes-1.6 [release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0) includes the Portworx native driver support which allows Dynamic Volume Provisioning.
+## Deploy PX with Kubernetes
+Since Kubernetes [v1.6 release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0), Kubernetes includes the Portworx native driver support which allows Dynamic Volume Provisioning.
 
 The native portworx driver in Kubernetes supports the following features:
+
 1. Dynamic Volume Provisioning
 2. Storage Classes
 3. Persistent Volume Claims
 4. Persistent Volumes
 
+
+Portworx also comes with two install options for Kubernetes:
+
+1. PX-OCI - runs Portworx as OCI (Open Container Initiative) container [**RECOMMENDED**]
+2. PX-Container - runs Portworx as Docker container
+
+
 ## Prerequisites
-* Portworx recommends running with Kubernetes 1.6.5+ Cluster.
-    * If your Kubernetes cluster is between 1.6.0 and 1.6.4, set `master=true` when creating the spec in the Install section below.
-    * If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
-* You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
-* Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.
-* Ensure all nodes running PX are synchronized in time and NTP is configured
-* A clustered key-value database (etcd or consul). For etcd installation instructions refer this [doc](/maintain/etcd.html).
+
+* *VERSIONS*: Portworx recommends running with Kubernetes 1.7.5 or newer
+    - If your Kubernetes cluster version is between 1.6.0 and 1.6.4, you will need to set `mas=true` when creating the spec (see [install section](#install) below), to allow Portworx to run on the Kubernetes master node.
+    - If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
+* *SHARED MOUNTS*: If you are running Docker v1.12, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propogation.html)), as otherwise Kubernetes will not be able to install Portworx.<br/> Newer versions of Docker have shared mounts propagation already enabled, so no additional actions are required.
+* *FIREWALL*: Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.<br/> Also ensure ports 9001-9015 are open for "localhost" (generally, this is a default firewalls setting, so in most cases no actions will be required to enable "localhost" ports).
+* *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
+* *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
+* *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `s=/dev/sdb,/dev/sdc3`) will be automatically formatted by PX.
 
 ## Install
 
-PX can be deployed with a single command in Kubernetes as a `DaemonSet` with the following:
-```
+PX can be deployed with a single command as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) with the following:
+
+```bash
 # Download the spec - substitute your parameters below.
-K8S_VERSION=`kubectl version --short | grep Server | awk '{print $3}'`
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etc.company.net:2379&k8sVersion=$K8S_VERSION"
+VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
+curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&k=etcd://etc.company.net:2379&kbver=$VER"
 
 # Verify that the contents of px-spec.yaml are correct.
-$ vi px-spec.yaml
+vi px-spec.yaml
 
 # Apply the spec.
-$ kubectl apply -f px-spec.yaml
-```
-Before you apply this command, make sure you change the custom parameters (_cluster_ and _kvdb_) to match your environment.
+kubectl apply -f px-spec.yaml
 
-Below are all parameters that can be given in the query string:
-
-| Key         	| Description                                                                                                                                                                              	| Example                                           	|
-|-------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------------------------	|
-| cluster     	| (Required) Specifies the unique name for the Portworx cluster.                                                                                                                           	| cluster=test_cluster                              	|
-| kvdb        	| (Required) Points to your key value database, such as an etcd cluster or a consul cluster. Specify comma-separated list of kvdb endpoints.                                               	| kvdb=etcd:http(s)://etcd.fake.net:2379              |
-| k8sVersion   | (Optional) Specifies the Kubernetes version. (Use the server version in the `kubectl version` output.)                                                                                   	| k8sVersion=v1.8.0                           	      |
-| drives      	| (Optional) Specify comma-separated list of drives.                                                                                                                                       	| drives=/dev/sdb,/dev/sdc                          	|
-| diface      	| (Optional) Specifies the data interface. This is useful if your instances have non-standard network interfaces.                                                                          	| diface=eth1                                       	|
-| miface      	| (Optional) Specifies the management interface. This is useful if your instances have non-standard network interfaces.                                                                    	| miface=eth1                                       	|
-| coreos       	|  REQUIRED if target nodes are running coreos.                                                                                                                                         	| coreos=true                                         |
-| master     	| (Optional) If true, PX will run on the master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)                                                            	| master=true                                  	      |
-| zeroStorage 	| (Optional) Instructs PX to run in zero storage mode on kubernetes master.                                                                                                                	| zeroStorage=true                                  	|
-| force       	| (Optional) Instructs PX to use any available, unused and unmounted drives or partitions.,PX will never use a drive or partition that is mounted.                                         	| force=true                                        	|
-| etcdPasswd  	| (Optional) Username and password for ETCD authentication in the form user:password                                                                                                       	| etcdPasswd=username:password                      	|
-| etcdCa      	| (Optional) Location of CA file for ETCD authentication.                                                                                                                                  	| etcdCa=/path/to/server.ca                         	|
-| etcdCert    	| (Optional) Location of certificate for ETCD authentication.                                                                                                                              	| etcdCert=/path/to/server.crt                      	|
-| etcdKey     	| (Optional) Location of certificate key for ETCD authentication.                                                                                                                          	| etcdKey=/path/to/server.key                       	|
-| acltoken    	| (Optional) ACL token value used for Consul authentication.                                                                                                                               	| acltoken=398073a8-5091-4d9c-871a-bbbeb030d1f6     	|
-| token       	| (Optional) Portworx lighthouse token for cluster.                                                                                                                                        	| token=a980f3a8-5091-4d9c-871a-cbbeb030d1e6        	|
-| env         	| (Optional) Comma-separated list of environment variables that will be exported to portworx.                                                                                              	| env=API_SERVER=http://lighthouse-new.portworx.com 	|
-| secretType   	| (Optional) Instructs PX from which secrets endpoint to fetch secrets from. Supported: vault, aws and kvdb                                                                                	| secretType=vault                                   	|
-| clusterSecretKey | (Required for vault secret type) Sets the cluster-wide secretID. This secret will be used to fetch the secret stored in Vault. The secret will be used as a passphrase for encrypting all the volumes 	| clusterSecretKey=mysecretkey        	|
-
-#### Examples
-```
-# To specify drives
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&drives=/dev/sdb,/dev/sdc"
-
-# To specify multiple kvdb endpoints
-$ curl -o px-spec.yaml "http:install.portworx.com?cluster=mycluster&kvdb=etcd://etcd1.fake.net:2379,etcd://etcd2.fake.net:2379&drives=/dev/sdb"
-
-# To run on coreos
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&coreos=true"
-
-# To run in master in zero storage mode and use a specific drive for other nodes
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&zeroStorage=true&drives=/dev/sdb"
+# Monitor the deployment
+kubectl get pods -o wide -n kube-system -l name=portworx
 ```
 
+>**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [http://install.portworx.com](http://install.portworx.com) and use the prepared HTML form.
 
-If you are having issues, refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](/knowledgebase/faqs.html).
+Below are all parameters that can be given in the query string  (see [install.portworx.com](http://install.portworx.com)).
 
->**Note:** If using secure etcd provide "https" in the URL and make sure all the certificates are in a directory which is bind mounted inside PX container. (ex.: /etc/pwx)
+| Value  | Description                                                                                                                           | Example                                                    |
+|:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
+|        | <center> _ *REQUIRED PARAMETERS* _ </center>                                                                                          |                                                            |
+| type   | Select Portworx deployment type (_oci_ for OCI container, _dock_ for Docker container)                                                | <var>type=oci</var>                                        |
+| c      | Specifies the unique name for the Portworx cluster.                                                                                   | <var>c=test_cluster</var>                                  |
+| k      | Your key value database, such as an etcd cluster or a consul cluster.                                                                 | <var>k=etcd:http://etcd.fake.net:2379</var>                |
+|        | <center> _ *OPTIONAL PARAMETERS* _ </center>                                                                                          |                                                            |
+| s      | Specify comma-separated list of drives.                                                                                               | <var>s=/dev/sdb,/dev/sdc</var>                             |
+| d      | Specify data network interface. This is useful if your instances have non-standard network interfaces.                                | <var>d=eth1</var>                                          |
+| m      | Specify management network interface. This is useful if your instances have non-standard network interfaces.                          | <var>m=eth1</var>                                          |
+| kbver  | Specify Kubernetes version (current default is 1.7)                                                                                   | <var>kbver=1.8.4</var>                                     |
+| coreos | REQUIRED if target nodes are running coreos.                                                                                          | <var>coreos=true</var>                                     |
+| mas    | Specify if PX should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)      | <var>mas=true</var>                                        |
+| z      | Instructs PX to run in zero storage mode on Kubernetes master.                                                                        | <var>z=true</var>                                          |
+| f      | Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted. | <var>f=true</var>                                          |
+| st     | Select the secrets type (_aws_, _kvdb_ or _vault_)                                                                                    | <var>st=vault</var>                                        |
+|        | <center> _ *KVDB CONFIGURATION PARAMETERS* _ </center>                                                                                |                                                            |
+| pwd    | Username and password for ETCD authentication in the form user:password                                                               | <var>pwd=username:password</var>                           |
+| ca     | Location of CA file for ETCD authentication.                                                                                          | <var>ca=/path/to/server.ca</var>                           |
+| cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
+| key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
+| acl    | ACL token value used for Consul authentication.                                                                                       | <var>acl=398073a8-5091-4d9c-871a-bbbeb030d1f6</var>        |
+|        | <center> _ *LIGHTHOUSE CONFIGURATION PARAMETERS* _ </center>                                                                          |                                                            |
+| t      | Portworx Lighthouse token for cluster.                                                                                                | <var>t=token-a980f3a8-5091-4d9c-871a-cbbeb030d1e6</var>    |
+| e      | Comma-separated list of environment variables that will be exported to portworx.                                                      | <var>e=API_SERVER=http://lighthouse-new.portworx.com</var> |
+
+
+>**Note:**<br/> If using secure etcd provide "https" in the URL and make sure all the certificates are in a directory which is bind mounted inside PX container. (ex.: /etc/pwx)
+
+If you are still experiencing issues, please refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](/knowledgebase/faqs.html).
+
 
 
 #### Restricting PX to certain nodes
-To restrict Portworx to only a subset of nodes in the Kubernetes cluster, you can label the minion nodes.  For example, to prevent Portworx from starting on minion-X:
+To restrict Portworx to install on only a subset of nodes in the Kubernetes cluster, please set the `px/enabled=false` Kubernetes label on the minion nodes you _do not_ wish to install Portworx on.  For example, to prevent Portworx from installing and starting on _minion2_ and _minion5_ nodes, run the following:
 
 ```
-$ kubectl label nodes minion-X "px/enabled=false" --overwrite
+$ kubectl label nodes minion2 "px/enabled=false" --overwrite
+$ kubectl label nodes minion5 "px/enabled=false" --overwrite
 ```
+
+>**Note:**<br/> If you are using the PX-OCI containers, and the PX-OCI has already been deployed on your nodes, please use the `px/enabled=remove` label instead. <br/>Note that with PX-OCI containers, the `px/enabled=false` removes only the Portworx "oci-monitor" component, while retaining PX-OCI service. Applying the `px/enabled=remove` label will uninstall both PX-OCI service, and the "oci-monitor".
+
 
 #### Scaling
 Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
-#### Installing in environments behind a proxy
-Portworx container needs to fetch the kernel headers to install the px kernel module. If your cluster runs behind a proxy, expose `PX_HTTP_PROXY` and/or `PX_HTTPS_PROXY` environment variables to point to your proxy when starting the DaemonSet.
+#### Installing behind the HTTP proxy
+During the installation Portworx may require access to the Internet, to fetch kernel headers if they are not available locally on the host system.  If your cluster runs behind the HTTP proxy, you will need to expose `PX_HTTP_PROXY` and/or `PX_HTTPS_PROXY` environment variables to point to your HTTP proxy when starting the DaemonSet.
 
-Use `env=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when generating the DaemonSet spec. For example:
+Use `e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when generating the DaemonSet spec. For example:
+
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379&env=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
+$ curl -o px-spec.yaml \
+  "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
 ```
 
 ## Uninstall
-Uninstalling or deleting the portworx daemon set only removes the portworx containers from the nodes. As the configurations files which PX use are persisted on the nodes the storage devices and the data volumes are still intact. These portworx volumes can be used again if the PX containers are started with the same configuration files.
 
-You can uninstall Portworx from the cluster using:
-```
-$ kubectl delete -f <px-spec.yaml>
-```
+Uninstalling or deleting the portworx daemonset only removes the portworx containers from the nodes. As the configurations files which PX use are persisted on the nodes the storage devices and the data volumes are still intact. These portworx volumes can be used again if the PX containers are started with the same configuration files.
 
-Here px-spec.yaml is the spec file used to create the Portworx cluster. If you don't have access to this file any longer, you can use:
-```
-$ kubectl delete -f "http://install.portworx.com?cluster=mycluster&kvdb=etcd://etcd.fake.net:2379"
-```
+>**IMPORTANT:**<br/> Please note that the PX-OCI service is running independently of Docker and Kubernetes services. If you deployed Portworx as PX-OCI Daemonset, you will first need to explicitly uninstall it using `px/enabled=remove` label (see below).
 
->**Note:**<br/>During uninstall, the configuration files (/etc/pwx/config.json and /etc/pwx/.private.json) are not deleted.
+* You can uninstall **Portworx OCI** (`type=oci`) from the cluster using:
 
-## Wipe off PX Cluster
+  ```bash
+  # [PX-OCI] installations - step 1) remove PX-OCI service first
+  kubectl label nodes --all px/enabled=remove --overwrite
+  
+  # [PX-OCI] installations - step 2) confirm PX service is uninstalled (may take a few minutes)
+  kubectl get pods -o wide -n kube-system -l name=portworx   # repeat until all pods terminated
+  
+  # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
+  kubectl delete -f px-spec.yaml
+  
+  # Alternatively delete PX using the Web-form:
+  kubectl delete -f 'http://install.portworx.com?type=oci'
+  ```
+
+* To uninstall **non-OCI Portworx** (`type=dock`) from the cluster, please use:
+
+  ```bash
+  # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
+  kubectl delete -f px-spec.yaml
+  
+  # Alternatively delete PX using the Web-form:
+  kubectl delete -f 'http://install.portworx.com?type=dock'
+  ```
+
+>**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
+
+## Service control (PX-OCI only)
+
+One can control the PX-OCI service using the Kubernetes labels:
+
+* stop / start / restart the PX-OCI service
+  * note: this is the equivalent of running `systemctl stop portworx`, `systemctl start portworx` ... on the node
+
+  ```
+  kubectl label nodes minion2 px/service=start
+  kubectl label nodes minion5 px/service=stop
+  kubectl label nodes --all px/service=restart
+  ```
+
+* enable / disable the PX-OCI service
+  * note: this is the equivalent of running `systemctl enable portworx`, `systemctl disable portworx` on the node
+
+  ```
+  kubectl label nodes minion2 px/service=enable
+  kubectl label nodes minion5 px/service=disable
+  ```
+  
+
+## Wipe off PX Cluster configuration
 The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
 
-You can completely wipe PX cluster by deleting the configuration files under `/etc/pwx` on all nodes. If the portworx pods are running you can run the following command:
+You can remove PX cluster configuration by deleting the configuration files under `/etc/pwx` directory on all nodes:
 
-```
-for pod in $(kubectl get pods -n kube-system -l name=portworx | awk -F" " '{print $1}' | grep -v NAME); do  kubectl -n kube-system exec -it $pod rm -- -rf /etc/pwx/; done
-```
+ * If the portworx pods are running, you can run the following command:
 
-If the portworx pods are not running you need to remove `/etc/pwx` from all the nodes.
+  ```bash
+  PX_PODS=$(kubectl get pods -n kube-system -l name=portworx | awk '/^portworx/{print $1}')
+  for pod in $PX_PODS; do
+      kubectl -n kube-system exec -it $pod -- rm -rf /etc/pwx/
+  done
+  ```
 
->**Note**<br/>If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a new clusterid in the daemonset spec file
+* otherwise, if the portworx pods are not running, you can remove PX cluster configuration by manually removing the contents of `/etc/pwx` directory on all the nodes.
+
+>**Note**<br/>If you are wiping off the cluster to re-use the nodes for installing a brand new PX cluster, make sure you use a different ClusterID in the DaemonSet spec file  (ie. `-c myUpdatedClusterID`).
 
 ## Cloud Installation
 Portworx-ready Kubernetes clusters can be deployed through Terraform, using the Terraporx repository, on Digital Ocean and Google Clould Platform
@@ -154,3 +211,11 @@ To deploy a Portworx-ready Kubernetes cluster on GCP, use [this Terraporx reposi
 
 ### Digital Ocean
 To deploy a Portworx-ready Kubernetes cluster on Digital Ocean, use [this Terraporx repository](https://github.com/portworx/terraporx/tree/master/digital_ocean/kubernetes_ubuntu16)
+
+
+## TROUBLESHOOTING:
+
+* Q: My Kubernetes labels are not working -- I labeled a node with `px/enabled=remove` (or `px/service=restart`), and Portworx is not uninstalling (or, restarting)!  How do I fix this?
+	* A1: On a "busy cluster", Kubernetes can take some time until it processes the node-labels change, and notifies Portowrx service -- please allow a few minutes for labels to be processed.
+	* A2: Sometimes it may happen that Kubernetes labels processing stops altogether - in this case please reinstall the "oci-monitor" component by applying and then deleting the `px/enabled=false` label:<br> `kubectl label nodes --all px/enabled=false; sleep 30; kubectl label nodes --all px/enabled-`
+		* this should reinstall/redeploy the "oci-monitor" component without disturbing the PX-OCI service or disrupting the storage, and the Kubernetes labels should work afterwards
