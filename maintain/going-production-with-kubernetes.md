@@ -97,6 +97,12 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
   ```
   
+* PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When
+  PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
+  create the volume with the next available `iopriority` level. 
+  
+* 
+  
 * For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
   different zones. For e.g., see below for the partial output of `pxctl status`
   
@@ -116,12 +122,27 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   
   This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
   is created, it will have the replicas automatically created in other nodes in other zones.
-
-* For on-prem installs, Portworx recommends deploying the replicas for a given values across racks. This can be achieved 
-  by passing the rack parameter via the `PWX_RACK` environment variable, passed in via `/etc/pwx/px_env` file.
+ 
+* For on-prem installs, Portworx recommends deploying the replicas for a given volume across racks so a rack power loss 
+  does not result in the entire volume becoming inaccessible. This can be achieved by passing the rack parameter 
+  via the `PWX_RACK` environment variable, passed in via `/etc/pwx/px_env` file.
   
   This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information on how this can be done with the
   environment variable as well as how the rack info can be passed along via Kubernetes. 
+  
+  
+* Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
+
+  ```
+  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --zones=us-east-1,us-east-2,us-east-3 
+  ```
+* Volumes can be created in different racks using `--racks` option and passing the rack labels when creating the volume
+
+  ```
+  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3 
+  ```
+  
+  Please ensure the PX containers are started with the corresponding rack parameters.
  
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
   then the volumes need to enabled with `--sticky` flag
