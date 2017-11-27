@@ -98,11 +98,24 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   ```
   
 * For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
-  different zones. For e.g., see below for the output of `pxctl status`
+  different zones. For e.g., see below for the partial output of `pxctl status`
   
- 
- This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
- is created, it will have the replicas automatically created in other nodes in other zones.
+  ```
+  sudo /opt/pwx/bin/pxctl status
+   Status: PX is operational
+   License: Trial (expires in 23 days)
+   Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
+	  IP: 172.31.51.89
+ 	  Local Storage Pool: 2 pools
+	  POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+	  0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
+	  1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
+    ...
+    ...
+  ```
+  
+  This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
+  is created, it will have the replicas automatically created in other nodes in other zones.
 
 * For on-prem installs, Portworx recommends deploying the replicas for a given values across racks. This can be achieved 
   by passing the rack parameter via the environment variable. 
