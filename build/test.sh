@@ -78,6 +78,28 @@ if [[ ${UNDERSCORES} -ne 0 ]]; then
     EXITAS=1
 fi
 
+# Find files without a defined meta description
+DESCFAIL=0
+DESCFAILS=()
+
+HTMLFILES=$(find "${BASE}/_site" -name '*.html')
+for FILE in ${HTMLFILES}; do
+    DESCCOUNT=$(cat "${FILE}" | pup -n meta[name="description"])
+
+    if [[ ${DESCCOUNT} -ne 1 ]]; then
+        DESCFAILS+=("${FILE}")
+        DESCFAIL=1
+    fi
+done
+
+if [[ ${DESCFAIL} -eq 1 ]]; then
+    echo -en '\033[0;31mFAIL '
+    echo "The following pages do not contain a meta description"
+    printf '%s\n' "${DESCFAILS[@]}"
+    EXITAS=1
+fi
+
+# Exit as 1 if there's a failure
 if [[ ${EXITAS} -eq 1 ]]; then
     exit 1
 fi
