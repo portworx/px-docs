@@ -11,18 +11,16 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 # WIP DOC
 
-## DAY 0 Operations
+## DAY 1 Operations
 
 ### Initial Software Setup for Production
 
-* Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - 
+* Deployment - Follow  instructions to deploy Portworx correctly in the scheduler of choice - 
   Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
   
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the 
-    container orchestrator to ensure maximum stability. Refer to the following 
-    [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -39,46 +37,36 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 ### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001, 9002, 9003, 9010, 9012, 9014 
+* Make sure the following ports are open in all the servers. 9001, 9002, 9003, 9004
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
-  * Data network is specified giving the '-d' switch and Management networks with the '-m' switch can be configured by giving this as a 
-    parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
-    
-  * Refer to this kubernetes spec for Portworx Daeemonset on how this can be configured. [spec](px-spec.yaml)
+  * Data network is specified giving the '-d' switch and Management networks with the '-m' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics to enable it in your scheduler.
   
-  The management and data interface must be given as follows:
-  
-   ```
-   args:
-     ["-k", "etcd:http://etc.fake.net:2379", "-c", "test_cluster", "-d", "eth0", "-m", "eth1", "-a", "-f",
-     "-x", "kubernetes"]
-   ```
-  Note in the case above, data traffic will be routed through `eth0` and management traffic is routed through `eth1`
-  
-  * It is recommended to create a bonded ethernet port for each data and management interface for improved availability 
+  * It is recommended to create a bonded ethernet port for  data interface for improved availability 
     and performance.
   
 ### Configuring and Provisioning Underlying Storage
 
-* Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
-  If it is a cloud deployment, ensure you have enough cloud disks attached. 
-  
-  * For AWS ASG, Portworx supports automatic management of EBS volumes. 
-    It is recommended to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
+ 
+####  Selecting drives for an installaton
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
 
-* PX can classify drive media into different performance levels and offer them as pools for volume 
-  configuration and application storage. These levels are called `io_priority` and they are off the levels 
-  `high`, `medium` and `low`
-  
-* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system
+* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
 
-* This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels.
+* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed manually as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
 
+* This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels
+
+
+####  Working with drives with AWS Auto scaling group
+
+Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage PX nodes,then you should to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
+
+### PX Node Topology [TODO]
 
 ### Volume Management Best Practices
 
