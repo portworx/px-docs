@@ -32,19 +32,15 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 3.10.0-327.22.2.el7.x86_64
 ```
 
-* Ensure the shared mount propagation is enabled
-  Refer to this [page](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html#checking-whether-shared-mounts-are-enabled) for checking and enabling shared mount propogation is enabled. 
-
 ### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001, 9002, 9003, 9004
+* Make sure the following ports are open in all the servers. 9001-9014
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
   * Data network is specified giving the '-d' switch and Management networks with the '-m' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics to enable it in your scheduler.
   
-  * It is recommended to create a bonded ethernet port for  data interface for improved availability 
-    and performance.
+  * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
   
 ### Configuring and Provisioning Underlying Storage
 
@@ -57,7 +53,7 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 * PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
 
-* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed manually as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
+* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
 
 * This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels
 
@@ -66,7 +62,9 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage PX nodes,then you should to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
 
-### PX Node Topology [TODO]
+### PX Node Topology
+
+PX replicated volumes distributes data across failure domains. On-premise failure domains can be passed in as described [here](https://docs.portworx.com/manage/update-px-rack.html). For cloud deployments, zones and regions are detected automatically and these are used to place replicated data.
 
 ### Volume Management Best Practices
 
