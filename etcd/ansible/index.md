@@ -2,6 +2,7 @@
 layout: page
 title: "Install 'etcd3' cluster on BareMetal or VMs"
 sidebar: home_sidebar
+meta-description: "Rapidly deploy a three node Portworx cluster using our Ansible playbooks, find out how here!"
 ---
 
 The `ansible` script in this directory can be used to deploy a 

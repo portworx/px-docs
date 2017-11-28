@@ -4,7 +4,7 @@ title: "CLI Reference–Credentials"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
-meta-descriptions: "Trying to create, list, validate or delete credentials for cloud providers? Follow this step-by-step tutorial from Portworx!"
+meta-description: "Trying to create, list, validate or delete credentials for cloud providers? Follow this step-by-step tutorial from Portworx!"
 ---
 
 * TOC

@@ -4,6 +4,7 @@ title: "Objectstore on PX Cluster"
 keywords: cloud, objectstore
 redirect_from:
   - /objectstore.html
+meta-description: "Learn how to deploy highly available S3 compliant object storage on Docker with Portworx"
 ---
 
 ## Objectstore on PX Cluster

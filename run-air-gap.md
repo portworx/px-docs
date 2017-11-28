@@ -3,6 +3,7 @@ layout: page
 title: "Running PX-Developer and PX-Enterprise in 'air-gap' environments"
 keywords: portworx, air-gap
 sidebar: home_sidebar
+meta-descriptions: "Learn how to deploy your Portworx cluster in an environment with no outside connectivity."
 ---
 
 Environments that do not permit any outside connectivity are considered an "air-gap" environment.

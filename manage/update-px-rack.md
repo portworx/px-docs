@@ -4,6 +4,7 @@ title: "Updating Portworx Rack Info"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/px-rack.html"
+meta-description: "Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.""
 ---
 
 Portworx nodes can be made aware of the rack on which they are a placed. Portworx can use this rack information to influence the volume replica placement decisions. There are two ways in which you can provide this information to PX nodes based on your scheduler.
