@@ -222,7 +222,14 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx 
     will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This
     [page](https://docs.portworx.com/cloud/aws/asg.html#scaling-the-cluster-up) desribes how PX handles the 
-    volume management in a auto-slcaing cluster. 
+    volume management in a auto-scaling cluster. 
+
+#### Scaling out a cluster on-prem
+
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster
+
+    
+ 
 
 ### Cluster Capacity Expansion
 
