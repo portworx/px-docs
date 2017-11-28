@@ -45,7 +45,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ### Configuring and Provisioning Underlying Storage
 
  
-####  Selecting drives for an installaton
+####  Selecting drives for an installation
+
 * Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
@@ -114,9 +115,6 @@ Failure domains in terms of RACK information can be passed in as described [here
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level. 
   
- 
-  
-  
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
   ```
@@ -126,8 +124,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
   ```
   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3 
-  ```
-  
+  ``` 
   Please ensure the PX containers are started with the corresponding rack parameters.
  
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
@@ -211,7 +208,11 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 #### Scaling out a cluster on-prem
 
-* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](https://docs.portworx.com/maintain/scale-out.html) shows how to scale up a existing cluster by adding more nodes
+TODO: *Update the above page to show runc*
+
+* Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the 
+  DC/OS PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
 
     
  
