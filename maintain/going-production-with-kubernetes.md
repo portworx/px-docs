@@ -11,7 +11,7 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 # WIP DOC
 
-## DAY 1 Operations
+## DAY 0 Operations
 
 ### Initial Software Setup for Production
 
@@ -26,10 +26,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Check and ensure minimum 4 cores and 4GB of RAM are allocated for Portworx. 
-  The minimum configuration supports light workloads and is primary used for POCs
-* For database workloads similar to MySQL or Postgres, Portworx reocmmends 8 Cores and 8GB of RAM
-* The base operating system of the server supports linux kernel 3.10+
+* Check and ensure a *minimum* 2 cores and 4GB of RAM are allocated for Portworx. 
+* The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
 
 ```
 [centos@ip-172-31-51-89 ~]$ uname -r
@@ -45,12 +43,12 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
-  * Data and Management networks can be configured by giving this as a 
+  * Data network is specified giving the '-d' switch and Management networks with the '-m' switch can be configured by giving this as a 
     parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
     
   * Refer to this kubernetes spec for Portworx Daeemonset on how this can be configured. [spec](px-spec.yaml)
   
-  The mgmt and data interface must be given as follows:
+  The management and data interface must be given as follows:
   
    ```
    args:
