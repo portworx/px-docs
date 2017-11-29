@@ -12,7 +12,9 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.6 Release notes
 
+* Additional performance improvements
 
 ## 1.2.11.5 Release notes
 
