@@ -15,7 +15,7 @@ meta-description: "Lighthouse monitors and manages your PX cluster and storage a
 
 Lighthouse can monitor and manage your PX clusters and storage. This guide shows you how you can run [Lighthouse](http://lighthouse-new.portworx.com/login) locally.
 
->**Note:**<br/>You must have an enterprise license to be able to download the `portworx/px-lighthouse` image.  Please contact support@portworx.com for access to this image.
+>**Note:**<br/>You must have an enterprise license to be able to download and install the `portworx/px-lighthouse` image.  Please contact support@portworx.com for access to this image and the install instructions.
 
 ## Connect Lighthouse to your Portworx Cluster
 Lighthouse runs as a Docker container and has the same minumum requirements as the Portworx storage solution. Please consult [this guide](https://docs.portworx.com/#minimum-requirements) for the minumum requirements.
@@ -26,7 +26,6 @@ Lighthouse connects to an existing PX cluster by talking to the same KVDB that y
 * Influxdb: Light house stores the performance data of your PX cluster in this time series DB.
 
 Setup Influxdb by following instructions on [InfluxDB](https://hub.docker.com/r/library/influxdb/).
-
 
 ## Connect to Lighthouse
 Once you have Lighthouse installed, visit *http://{IP_ADDRESS}:80* in your browser to access your locally running PX-Lighthouse. 
