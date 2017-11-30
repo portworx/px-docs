@@ -214,10 +214,16 @@ TODO: *Update the above page to show runc*
 * Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the 
   DC/OS PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
 
-    
- 
-
+   
 ### Cluster Capacity Expansion
+
+* Cluster storage capacity can be expanded by adding more drives each node.
+* Drives with similar capacity (within 1GB capacity difference) will be grouped together as a same pool
+* Drives can be added per node and PX will add that to the closest pool size by drive size.
+* Before adding drives to the node, the node will need to be taken into maintenance mode
+* Ensure the volumes in the node have replicas in other nodes
+  * if the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
+  * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 
 ### Server Replacements and Upgrades
 
