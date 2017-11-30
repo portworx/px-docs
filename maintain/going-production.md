@@ -27,6 +27,7 @@ meta-description: "Are you ready for production?"
 * Ensure all the required ports are open as defined in the PX-Enterprise requirements
 * Configure separate networks for Data and Management networks to isolate the traffic
 
+
 ### Configuring and Provisioning Underlying Storage
 
 * Disks - If this is a on-prem installation, ensure there is enough storage available per node for PX storage pools.
