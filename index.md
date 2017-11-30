@@ -9,6 +9,7 @@ redirect_from:
   - /getting-started/px-enterprise.html
   - /getting-started/px-developer.html
   - /hadoop.html
+  - /coming_soon.html	
 meta-description: "Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!"
 ---
 
