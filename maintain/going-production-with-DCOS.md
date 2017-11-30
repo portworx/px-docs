@@ -15,12 +15,9 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 
 ### Initial Software Setup for Production
 
-* Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system 
-  Refer to the install instructions for running PX as a DC/OS framework [page](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html). This deploys PX as a OCI container and as a framework in DC/OS
- 
- (OR)
- 
-  * Deploy PX directly as [OCI container](https://docs.portworx.com/runc/)
+* Deployment - Follow  instructions to deploy Portworx correctly in the scheduler of choice - 
+  Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
+  * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will 
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
