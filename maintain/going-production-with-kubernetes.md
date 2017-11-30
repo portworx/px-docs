@@ -155,13 +155,14 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   ```
   sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
   ```
-  
+
 * For applications that require shared access from multiple containers running in different hosts, 
   Portworx recommends running  shared volumes. Shared volumes can be configured as follows:
 
   ```
   pxctl volume create wordpressvol --shared --size=100 --repl=3
   ```
+  
   This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
   how to create them and update the configuration for the volumes 
 
@@ -177,14 +178,17 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   ```
   pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
   Volume successfully snapped: 1152602487227170184
-  ```  
+  ```
+  
 * Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots 
   to be automatically created without user intervention.
   
   ```
   pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
-  ``` 
+  ```
+  
 * Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
+
 
 * Cloudsnaps - Follow [DR best practices](dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster,
   Portworx volumes can be restored from an offsite backup
@@ -207,20 +211,6 @@ While Prometheus can be deployed as a container within the container orchestrato
 ### Volume Cleanup Steps (a.k.a Stuck Volume Recovery)
 
 ### Scaling out a cluster nodes in the Cloud and On-Prem
-
-#### Scaling out a cluster in cloud
-
-* The best way to scale a cluster is via ASG integration on AWS
-* This feature is called Stateful Autoscaling and is described [here](https://docs.portworx.com/cloud/aws/asg.html#stateful-autoscaling)
-  * Perform sizing of your data needs and determine the amount and type of storage (EBS volumes) needed per ecs instance.
-  * Create EBS volume [templates](https://docs.portworx.com/cloud/aws/asg.html#create-ebs-volume-templates) to 
-    match the number of EBS volumes needed per EC2 instance
-  * Create a [Stateful AMI](https://docs.portworx.com/cloud/aws/asg.html#create-a-stateful-ami) to associate 
-    with your auto-scaling group
-  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx 
-    will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This
-    [page](https://docs.portworx.com/cloud/aws/asg.html#scaling-the-cluster-up) desribes how PX handles the 
-    volume management in a auto-slcaing cluster. 
 
 ### Cluster Capacity Expansion
 
