@@ -373,5 +373,6 @@ Pool ID: 1
   * Decommission the PX node (Refer to `pxctl cluster delete`)
   * Ensure all volumes have replicas in other nodes if you still need to access the data
   * Replace the bad drive(s) with new drive(s)
-  * Add the node to the cluster as a new node (refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html))
+  * Add the node to the cluster as a new node 
+     (refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html))
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`
