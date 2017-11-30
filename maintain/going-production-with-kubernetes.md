@@ -3,7 +3,7 @@ layout: page
 title: "Operations Guide to deploy Portworx in Production in DC/OS Clusters"
 keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
-meta-description: "Portworx Operations Guide for DC/OS Deployments"
+meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ---
 
 * TOC
