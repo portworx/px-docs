@@ -186,8 +186,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   ``` 
 * Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
 
-* Cloudsnaps - Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and 
-  setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
+* Cloudsnaps - Follow [DR best practices](dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster,
+  Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
