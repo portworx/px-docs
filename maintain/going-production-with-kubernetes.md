@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Operations Guide to deploy Portworx in Production in DC/OS Clusters"
+title: "Operations Guide to deploy Portworx in Production in Kubernetes Clusters"
 keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
 meta-description: "Portworx Operations Guide for Kubernetes Deployments"
@@ -17,9 +17,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 * Deployment - Follow  instructions to deploy Portworx correctly in the scheduler of choice - 
   Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
+  
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
-  * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will 
-    form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
   * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
@@ -274,75 +273,5 @@ TODO: *Update the above page to show runc*
 
 ### Disaster Recovery with Cloudsnaps
 
-* It is recommended to setup cloudsnaps for volume backup and recovery to handle DR scenarios
-* Cloudsnaps are also good way to perform cluster to cluster data migration
-* Cloudsnaps can work with Amazon S3, Azure Blob, Google Cloud Storage or any S3 compatible object store
-* Cloudsnaps stores the volume snaps in the cloud and on import, can roll up all the snaps and import a point-in-time copy of the volume into the cluster
-* It is recommended to take atleast one cloudsnap a day for each volume in production in the cluster
-* Cloudsnaps can be scheduled via the Portworx CLI for hourly, daily, weekly or monthly snaps.
-* Cloudsnaps can also be scheduled to happen at a particular time. It is recommended to schedule cloudsnaps at a time when the application data traffic is light to ensure faster back ups.
-* Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and 
-  setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
-
 ### Drive Replacements
 
-* Any drive in a given node can be replaced by another drive in the same node
-* In order to perform a drive replacement, the PX node must be put into `maintenance mode`
-
-#### Step 1: Enter Maintenance mode
-
-```
-/opt/pwx/bin/pxctl service  maintenance --enter
-This is a disruptive operation, PX will restart in maintenance mode.
-Are you sure you want to proceed ? (Y/N): y
-
-PX is not running on this host.
-```
-
-#### Step 2: Replace old drive with a new drive
-
-Ensure the replacement drive is already available in the system. 
-
-For e.g., Replace drive /dev/sde with /dev/sdc
-
-```
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
-"Replace operation is in progress"
-```
-
-Check the replace status
-
-```
-/opt/pwx/bin/pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
-"Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
-```
-
-
-#### Step 3: Exit Maintenance mode 
-
-```
-/opt/pwx/bin/pxctl service  maintenance --exit
-PX is now operational
-```
-
-#### Step 4: Check if the drive has been successfully replaced
-
-```
-/opt/pwx/bin/pxctl service drive show
-PX drive configuration:
-Pool ID: 0
-	IO_Priority: LOW
-	Size: 15 TiB
-	Status: Online
-	Has meta data: No
-	Drives:
-	1: /dev/sdc, 3.0 GiB allocated of 7.3 TiB, Online
-	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
-Pool ID: 1
-	IO_Priority: HIGH
-	Size: 1.7 TiB
-	Status: Online
-	Has meta data: Yes
-	Drives:
-	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
-```
