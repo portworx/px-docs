@@ -9,8 +9,6 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * TOC
 {:toc}
 
-## DAY 1 Operations
-
 ### Initial Software Setup for Production
 
 * Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - 
@@ -123,41 +121,22 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
   * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
 
-## Day 2 Operations
+### Hardware Replacements and Upgrades
 
-### Hung Node Recovery
+  * It is recommended to setup fault monitoring for the nodes used the in the container orchestrator.
 
-### Volume Cleanup Steps (a.k.a Stuck Volume Recovery)
+#### Server Upgrades and Replacements
 
-### Scaling out a cluster nodes in the Cloud and On-Prem
+#### Disk Upgrades and Replacements
 
-### Cluster Capacity Expansio
-Upgrades: Docker, DCOS, PX, Host
-
-### Server Replacements and Upgrades
-
-### Networking Upgrades and Replacements
+#### Networking Upgrades and Replacements
 
 ### Software Upgrades
 
-#### Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
+* Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
   latest snapshot and cloudsnap before performing upgrades
 
-#### Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
+* Container Orchestrator upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
-#### OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
+* OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
   Ensure kernel-devel packages are installed after a OS migration
-  
-#### Docker Upgrades
-
-
-## Day 3 Operations
-
-### Handling Lost or Stale Nodes on the Cloud and On-Prem
-
-### Volume Data Recovery
-
-### Disaster Recovery with Cloudsnaps
-
-### Drive Replacements
-
