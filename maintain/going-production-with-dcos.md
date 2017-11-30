@@ -376,3 +376,8 @@ Pool ID: 1
   * Add the node to the cluster as a new node 
      (refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html))
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`
+  
+  
+  
+  
+  
