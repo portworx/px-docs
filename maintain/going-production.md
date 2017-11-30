@@ -11,13 +11,10 @@ meta-description: "Are you ready for production?"
 
 ### Initial Software Setup for Production
 
-* Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - 
-  Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
+* Deployment - Follow all instructions to deploy Portworx correctly in the scheduler of choice - Refer to the install instructions [page](https://docs.portworx.com/#install-with-a-container-orchestrator)
   * Ensure PX container is deployed as [OCI container](https://docs.portworx.com/runc/)
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the 
-    container orchestrator to ensure maximum stability. Refer to the following [page
-    (https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd - Ensure etcd is properly configured and setup. Setup etcd as a 3-node etcd cluster outside the container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -38,21 +35,17 @@ meta-description: "Are you ready for production?"
   * For AWS ASG, Portworx supports automatic management of EBS volumes. 
     It is recommended to use the ASG [feature](https://docs.portworx.com/cloud/aws/asg.html)
 
-* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
-  enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
+* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
 
 ### Volume Management Best Practices
 
-* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. 
-  Refer to the alerts page for more information
+* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Refer to the alerts page for more information
 
 ### Data Protection for Containers
 
-* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the 
-  case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information.
+* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures. Visit the [DR best practices](dr-best-practices.html) page for more information.
 
-* Cloudsnaps - Follow [DR best practices](dr-best-practices.html) and setup a periodic cloudsnaps so in case of a disaster,
-  Portworx volumes can be restored from an offsite backup
+* Cloudsnaps - Follow DR best practices and setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
