@@ -242,18 +242,23 @@ TODO: *Update the above page to show runc*
 #### Portworx Software Upgrades 
 
   * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
-  * Ensure there are cloudsnaps that are taken 
+  * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken for all the volumes
   * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html) to perform the upgrades
   * If you are running PX as a systemd service, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade.html)
   
 
-#### Container Orchestrator Upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
+#### DC/OS Upgrades
 
-#### OS upgrades - Ensure all volumes have a snapshot before performing underlying OS upgrades. 
-  Ensure kernel-devel packages are installed after a OS migration
-  
-#### Docker Upgrades
+* Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
+* Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
+* After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
+* Check if the DC/OS services via marathon and any other frameworks can mount the PX volumes from the marathon UI or the DC/OS UI
 
+
+#### OS upgrades and Docker Upgrades . 
+ 
+ Ensure kernel-devel packages are installed after a OS migration
+ 
 
 ## Day 3 Operations
 
