@@ -239,10 +239,8 @@ TODO: *Update the above page to show runc*
 
 ### Software Upgrades
 
-#### Portworx Software Upgrades 
-
-  * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
-  * Ensure there are cloudsnaps that are taken 
+#### Portworx Software Upgrades - Work with Portworx Support before planning major upgrades. Ensure all volumes have the 
+  latest snapshot and cloudsnap before performing upgrades
 
 #### Container Orchestrator Upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
