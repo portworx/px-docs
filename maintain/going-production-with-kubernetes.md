@@ -255,19 +255,14 @@ TODO: *Update the above page to show runc*
 
 #### OS upgrades and Docker Upgrades . 
  
-* Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure kernel-devel packages are installed after a OS migration
 * If PX is run as a OCI container, Docker Upgrades and Restarts do not impact PX runtime. So recommend running PX as a OCI container
-
+* 
  
 
 ## Day 3 Operations
 
 ### Handling Lost or Stale Nodes on the Cloud and On-Prem
-
-* Lost or Stale Nodes can be removed from the PX cluster for force-decommissioning the node from the cluster
-* The command used to remove a node is `pxctl cluster delete -f`
-* For e.g., if a specific node is offline but it no longer exists, use ` pxctl cluster delete -f <node id>` to remove the node from the cluster
 
 ### Volume Data Recovery
 
