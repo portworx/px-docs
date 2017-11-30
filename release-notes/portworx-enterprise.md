@@ -12,7 +12,9 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.6 Release notes
 
+* Provide capability to drop system cache on-demand (for a select workloads and large memory system) and turn it off by default
 
 ## 1.2.11.5 Release notes
 

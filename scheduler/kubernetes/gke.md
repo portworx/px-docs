@@ -158,7 +158,7 @@ After the controller is in Running statue you can [use PV claims to dynamically 
 
 ### Notes
 * This spec is for Kubernetes v1.7.8. If you are using another version of Kubernetes please update the tag in the image
-to match that version.
+to match that version. You can get the Kubernetes server version from the GKE console as well as by running `kubectl version`.
 
 * If you encounter an error with the cluster role permission (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create a clusterrolebinding for your user using the following commands:
 ```
