@@ -64,33 +64,7 @@ Portworx supports automatic management of EBS volumes. If you are using AWS ASG 
 
 ### PX Node Topology
 
-PX replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
-
-### Topology in cloud environments 
-
-PX  auto-detects availabilty zones and regions and provisions replicas across 
-  different zones. For e.g., see below for the partial output of `pxctl status`
-  
-  ```
-  sudo /opt/pwx/bin/pxctl status
-   Status: PX is operational
-   License: Trial (expires in 23 days)
-   Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
-	  IP: 172.31.51.89
- 	  Local Storage Pool: 2 pools
-	  POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
-	  0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
-	  1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
-    ...
-    ...
-  ```
-  
-  This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
-  is created, it will have the replicas automatically created in other nodes in other zones.
- 
-### Toppology in on-premise deployments:
-Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-rack.html)
-  
+PX replicated volumes distributes data across failure domains. On-premise failure domains can be passed in as described [here](https://docs.portworx.com/manage/update-px-rack.html). For cloud deployments, zones and regions are detected automatically and these are used to place replicated data.
 
 ### Volume Management Best Practices
 
@@ -114,7 +88,32 @@ Failure domains in terms of RACK information can be passed in as described [here
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level. 
   
+* For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
+  different zones. For e.g., see below for the partial output of `pxctl status`
+  
+  ```
+  sudo /opt/pwx/bin/pxctl status
+   Status: PX is operational
+   License: Trial (expires in 23 days)
+   Node ID: a17f382d-b2ef-41b8-81fc-d9b86d56b5d1
+	  IP: 172.31.51.89
+ 	  Local Storage Pool: 2 pools
+	  POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+	  0	LOW		raid0		64 GiB	1.1 GiB	Online	b	us-east-1
+	  1	LOW		raid0		128 GiB	65 GiB	Online	b	us-east-1
+    ...
+    ...
+  ```
+  
+  This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
+  is created, it will have the replicas automatically created in other nodes in other zones.
  
+* For on-prem installs, Portworx recommends deploying the replicas for a given volume across racks so a rack power loss 
+  does not result in the entire volume becoming inaccessible. This can be achieved by passing the rack parameter 
+  via the `PWX_RACK` environment variable, passed in via `/etc/pwx/px_env` file.
+  
+  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information on how this can be done with the
+  environment variable as well as how the rack info can be passed along via Kubernetes. 
   
   
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
