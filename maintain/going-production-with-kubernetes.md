@@ -49,7 +49,6 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   * Refer to this kubernetes spec for Portworx Daeemonset on how this can be configured. [spec](px-spec.yaml)
   
   The mgmt and data interface must be given as follows:
-  
    ```
    args:
      ["-k", "etcd:http://etc.fake.net:2379", "-c", "test_cluster", "-d", "eth0", "-m", "eth1", "-a", "-f",
