@@ -120,8 +120,9 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * For on-prem installs, Portworx recommends deploying the replicas for a given values across racks. This can be achieved 
   by passing the rack parameter via the `PWX_RACK` environment variable, passed in via `/etc/pwx/px_env` file.
   
-  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information on how this can be done with the
-  environment variable as well as how the rack info can be passed along via Kubernetes. 
+  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information on how this can be done and 
+  also via Kubernetes. 
+ 
  
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
   then the volumes need to enabled with `--sticky` flag
