@@ -222,16 +222,11 @@ TODO: *Update the above page to show runc*
 * Drives can be added per node and PX will add that to the closest pool size by drive size.
 * Before adding drives to the node, the node will need to be taken into maintenance mode
 * Ensure the volumes in the node have replicas in other nodes
-  * If the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
+  * if the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 * Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node. 
 
 ### Server Replacements and Upgrades
-
-* Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
-* Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
-* Use `pxctl cluster delete` command to manually remove the node from the cluster
-* Follow the instructions in this page to [delete](https://docs.portworx.com/maintain/scale-down.html#prevention-of-data-loss) nodes in the cluster
 
 ### Networking Upgrades and Replacements
 
