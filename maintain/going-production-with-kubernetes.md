@@ -243,6 +243,9 @@ TODO: *Update the above page to show runc*
 
   * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
   * Ensure there are cloudsnaps that are taken 
+  * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html) to perform the upgrades
+  * If you are running PX as a systemd service, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade.html)
+  
 
 #### Container Orchestrator Upgrades - Ensure all volumes are cloud-snapped before performing scheduler upgrades
 
