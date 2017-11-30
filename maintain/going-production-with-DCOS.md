@@ -191,19 +191,6 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Hung Node Recovery
 
-* A PX node may hang or appeart to hang because of any of the following reasons
-  * Underlying media being too slow to respond and thus PX trying to error recovery of the media
-  * Kernel hangs or panics that are impacting overall operations of the system
-  * Other applications that are not properly constrainted putting heavy memory pressure on the system 
-  * Applications consuming a lot of CPU that are not properly constrained
-  
-* Docker Daemon issues where Docker itself has hung and thus resulting on all other containers not responding properly
-
-* Running PX as a OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as PX runs as a OCI container and not as a docker container thus eliminating the docker dependency
-
-* If PX appears to not respond, a restart of the PX OCI container via `systemctl` would help. 
-* Any PX restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
-
 ### Stuck Volume Detection and Resolution
 
 * With DC/OS, it is possible that even after the application container terminates, a volume is left attached. 
