@@ -94,6 +94,7 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   
   ```
   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
+
   ```
   
 * For cloud environments like AWS, PX can auto-detect different availabilty zones and thus can provision replicas across 
@@ -139,19 +140,22 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   
   ```
    sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
+
   ```
   
 * The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
  
   ```
   sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
+
   ```
 
 * For applications that require shared access from multiple containers running in different hosts, 
-  Portworx recommends running  shared volumes. Shared volumes can be configured as follows:
+  Portworx recommends running  shared volumes. Shared volumes can be configured as follows;
 
   ```
   pxctl volume create wordpressvol --shared --size=100 --repl=3
+
   ```
   
   This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
