@@ -188,8 +188,6 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Hung Node Recovery
 
-### Volume Cleanup Steps (a.k.a Stuck Volume Recovery)
-
 ### Scaling out a cluster nodes in the Cloud and On-Prem
 
 #### Scaling out a cluster in cloud
@@ -257,7 +255,9 @@ TODO: *Update the above page to show runc*
 
 #### OS upgrades and Docker Upgrades . 
  
- Ensure kernel-devel packages are installed after a OS migration
+* Ensure kernel-devel packages are installed after a OS migration
+* If PX is run as a OCI container, Docker Upgrades and Restarts do not impact PX runtime. So recommend running PX as a OCI container
+* 
  
 
 ## Day 3 Operations
