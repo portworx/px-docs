@@ -226,16 +226,14 @@ TODO: *Update the above page to show runc*
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
 * Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node. 
 
-### Server and Networking Replacements and Upgrades
+### Server Replacements and Upgrades
 
 * Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
 * Follow the instructions in this page to [delete](https://docs.portworx.com/maintain/scale-down.html#prevention-of-data-loss) nodes in the cluster
-* Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
-* The server can be replaced as well
-* Once the replacement is done, the node can be joined back to the cluster by going through the steps described in the scaling-out the cluster section
 
+### Networking Upgrades and Replacements
 
 ### Software Upgrades
 
