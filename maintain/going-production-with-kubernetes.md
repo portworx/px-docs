@@ -40,10 +40,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * Make sure the following ports are open in all the servers. 9001, 9002, 9003, 9010, 9012, 9014 
 
 * Configure separate networks for Data and Management networks to isolate the traffic
-
   * Data and Management networks can be configured by giving this as a 
     parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
-    
   * Refer to this kubernetes spec for Portworx Daeemonset on how this can be configured. [spec](px-spec.yaml)
   
   The mgmt and data interface must be given as follows:
@@ -52,9 +50,9 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
      ["-k", "etcd:http://etc.fake.net:2379", "-c", "test_cluster", "-d", "eth0", "-m", "eth1", "-a", "-f",
      "-x", "kubernetes"]
    ```
-  Note in the case above, data traffic will be routed through `eth0` and management traffic is routed through `eth1`
+    
   
-  * it is recommended to create a bonded ethernet port for each data and management interface for improved availability and performance.
+  Note in the case above, data traffic will be routed through `eth0` and management traffic is routed through `eth1`
   
 ### Configuring and Provisioning Underlying Storage
 
@@ -71,35 +69,15 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. 
   Monitor for for Volume Space Low alerts
-  
-  ```
+
   30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
-  ```
 
 * For applications needing node level availability and read parallelism across nodes, it is recommended to set the 
   volumes with replication factor 2 or replication factor 3
   
-  Here is how one can configure a volume with replication factor 3 for e.g.,
-  
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
-
-  ```
-  
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
   then the volumes need to enabled with Sticky Flag
-  
-  ```
-   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
-
-  ```
-  
-* For applications that require shared access from multiple containers running in different hosts, Portworx recommends running shared volumes. Shared volumes can be configured as follows;
-
-```
-pxctl volume create wordpressvol --shared --size=100 --repl=3
-
-```
+ 
 
 ### Data Protection for Containers
 
