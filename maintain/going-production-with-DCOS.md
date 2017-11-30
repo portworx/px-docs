@@ -174,7 +174,8 @@ Failure domains in terms of RACK information can be passed in as described [here
   ``` 
 * Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
 
-* For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
+* Cloudsnaps - Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and 
+  setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Alerts and Monitoring for Production
 
@@ -190,15 +191,6 @@ While Prometheus can be deployed as a container within the container orchestrato
 ## Day 2 Operations
 
 ### Hung Node Recovery
-
-### Stuck Volume Detection and Resolution
-
-* With DC/OS, it is possible that even after the application container terminates, a volume is left attached. 
-  This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by 
-  an application, it can be attached to any other node in the system
-  
-* With this attach operation, the PX will automatically manage the volume attach status with no user intervention required 
-  and continue to serve the volume I/Os even a container attaches to the same volume from a different node. 
 
 ### Scaling out a cluster nodes in the Cloud and On-Prem
 
