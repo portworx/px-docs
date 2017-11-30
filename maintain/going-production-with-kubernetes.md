@@ -107,18 +107,17 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   
 * The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
  
-  ```
-  sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
+```
+sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
 
-  ```
+```
 
-* For applications that require shared access from multiple containers running in different hosts, 
-  Portworx recommends running  shared volumes. Shared volumes can be configured as follows;
+* For applications that require shared access from multiple containers running in different hosts, Portworx recommends running shared volumes. Shared volumes can be configured as follows;
 
-  ```
-  pxctl volume create wordpressvol --shared --size=100 --repl=3
+```
+pxctl volume create wordpressvol --shared --size=100 --repl=3
 
-  ```
+```
 
 ### Data Protection for Containers
 
