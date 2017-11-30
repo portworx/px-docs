@@ -131,7 +131,8 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Scaling out a cluster nodes in the Cloud and On-Prem
 
-### Cluster Capacity Expansion
+### Cluster Capacity Expansio
+Upgrades: Docker, DCOS, PX, Host
 
 ### Server Replacements and Upgrades
 
