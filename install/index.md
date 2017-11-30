@@ -4,6 +4,7 @@ title: "Deployment Overview"
 keywords: portworx, architecture, storage, container, cluster, server node
 sidebar: home_sidebar
 redirect_from: "/overview.html"
+meta-description: "Learn how to install Portworx, a storage cluster which enables you to run stateful containerized workloads."
 ---
 
 Portworx storage is deployed as a container and runs on a cluster of servers. Application containers provision storage directly through the Docker [volume plugins](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f) API or the Docker [command-line](https://docs.docker.com/engine/extend/plugins_volume/#command-line-changes:be52bcf493d28afffae069f235814e9f). Administrators and DevOps can alternatively pre-provision storage through the Portworx command-line tool (**pxctl**) and then set storage policies using the PX-Enterprise web console.

@@ -5,6 +5,7 @@ keywords: portworx, px-developer, px-enterprise, install, configure, container, 
 sidebar: home_sidebar
 redirect_from:
   - /run-with-docker-ent.html
+meta-description: "Learn how to run Portworx Developer edition for use with the Docker command line."
 ---
 
 * TOC

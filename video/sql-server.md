@@ -4,6 +4,7 @@ title: "Microsoft SQL Server on PX Video"
 keywords: Microsoft, SQL Server, portworx, high-availability,  container, storage
 sidebar: home_sidebar
 redirect_from: "/video/sql_server.html"
+meta-description: "Watch a five-minute hands-on video on how to deploy a stateful Microsoft SQL server in containers using Portworx."
 ---
 
 ><br/>Portworx is a ![Microsoft Logo](/images/mssqllogo.png){:height="85px" width="79px"} [Microsoft SQL Server high availability partner](https://docs.microsoft.com/en-us/sql/sql-server/partner-hadr-sql-server)

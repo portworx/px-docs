@@ -4,6 +4,7 @@ title: "Run PX with CoreOS"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
 redirect_from: "/run-with-docker-coreos.html"
+meta-description: "Learn how to deploy stateful containerized workloads on your CoreOS cluster using Portworx!"
 ---
 
 * TOC

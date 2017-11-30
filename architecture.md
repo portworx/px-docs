@@ -3,6 +3,7 @@ layout: page
 title: "How it Works"
 keywords: portworx, px-enterprise, px-developer, containers, storage, architecture
 sidebar: home_sidebar
+meta-description: "Learn how a Portworx cluster is architected in order to provide persistence for stateful Docker containers."
 ---
 
 * TOC
