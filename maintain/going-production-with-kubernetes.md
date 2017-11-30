@@ -69,15 +69,6 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
 
-* PX can classify drive media into different performance levels and offer them as pools for volume 
-  configuration and application storage. These levels are called `io_priority` and they are off the levels 
-  `high`, `medium` and `low`
-  
-* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system
-
-* This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels.
-
-
 ### Volume Management Best Practices
 
 * Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. 
@@ -98,20 +89,13 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   ```
   
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
-  then the volumes need to enabled with `--sticky` flag
+  then the volumes need to enabled with Sticky Flag
   
   ```
    sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
 
   ```
   
-* The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
- 
-```
-sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
-
-```
-
 * For applications that require shared access from multiple containers running in different hosts, Portworx recommends running shared volumes. Shared volumes can be configured as follows;
 
 ```
