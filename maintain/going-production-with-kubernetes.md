@@ -22,9 +22,7 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Check and ensure minimum 4 cores and 4GB of RAM are allocated for Portworx. 
-  The minimum configuration supports light workloads and is primary used for POCs
-* For database workloads similar to MySQL or Postgres, Portworx reocmmends 8 Cores and 8GB of RAM
+* Check and Ensure minimum 4 cores and 4GB of RAM are allocated for Portworx. The minimum configuration
 * Ensure the base operating system of the server supports linux kernel 3.10+
 * Ensure the shared mount propagation is enabled
 
@@ -36,11 +34,6 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   * Data and Management networks can be configured by giving this as a 
     parameter when the PX is started by through the PX-Spec that is applied to each minion to have PX run as a daemonset
   * Here is how this can be configured.
-  
-  ```
-  TODO: add px.yaml spec from a k8s node that shows how the mgmt interface is configured
-  TODO: Add screenshots of the new configuration wizard
-  ```
   
   * A node that has been successfully configured would look like this when its config.json is inspected.
   ```
