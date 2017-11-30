@@ -224,6 +224,7 @@ TODO: *Update the above page to show runc*
 * Ensure the volumes in the node have replicas in other nodes
   * if the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
+* Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node. 
 
 ### Server Replacements and Upgrades
 
