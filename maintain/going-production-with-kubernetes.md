@@ -118,10 +118,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   is created, it will have the replicas automatically created in other nodes in other zones.
 
 * For on-prem installs, Portworx recommends deploying the replicas for a given values across racks. This can be achieved 
-  by passing the rack parameter via the `PWX_RACK` environment variable, passed in via `/etc/pwx/px_env` file.
-  
-  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information on how this can be done and 
-  also via Kubernetes. 
+  by passing the rack parameter via the environment variable. 
+  This [link](https://docs.portworx.com/manage/update-px-rack.html) gives more information.
  
  
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
