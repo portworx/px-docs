@@ -21,10 +21,14 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```
+# Get latest stable release tag (ie. portworx/px-enterprise:1.2.11.6)
+$ latest_stable=$(curl -fsSL 'http://install.portworx.com?type=dock' | awk '/image: / {print $2}')
+
+# Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    portworx/px-enterprise:1.2.11.6
+    $latest_stable
 ```
 
 >**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
@@ -135,10 +139,11 @@ If you already had PX running as a Docker container and now want to upgrade to r
 Step 1: Download and deploy the PX OCI bundle
 
 ```
+$ latest_stable=$(curl -fsSL 'http://install.portworx.com?type=dock' | awk '/image: / {print $2}')
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    portworx/px-enterprise:1.2.11.4
+    $latest_stable
 ```
 
 Step 2: Inspect your existing PX-Containers, record arguments and any custom mounts:
@@ -237,10 +242,11 @@ To upgrade the OCI bundle, please run the installation with the "--upgrade" opti
 After the upgrade, you will need to restart the Portworx service.
 
 ```
+$ latest_stable=$(curl -fsSL 'http://install.portworx.com?type=dock' | awk '/image: / {print $2}')
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    portworx/px-enterprise:1.2.11.4 --upgrade
+    $latest_stable --upgrade
 $ sudo systemctl daemon-reload
 $ sudo systemctl restart portworx
 ```
