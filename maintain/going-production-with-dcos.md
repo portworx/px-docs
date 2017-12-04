@@ -291,7 +291,7 @@ TODO: *Update the above page to show runc*
 
 * Lost or Stale Nodes can be removed from the PX cluster for force-decommissioning the node from the cluster
 * The command used to remove a node is `pxctl cluster delete -f`
-* For e.g., if a specific node is offline but it no longer exists, use ` pxctl cluster delete -f <node id>` to remove the node from the cluster
+* For e.g., if a specific node is offline but it no longer exists, use ` pxctl cluster delete -f node-id` to remove the node from the cluster
 
 ### Volume Data Recovery
 
