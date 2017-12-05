@@ -15,7 +15,14 @@ Portworx is supported on GKE provisioned on [Ubuntu Node Images](https://cloud.g
 
 You can create a 3 node GKE cluster with the gcloud cli using the following command:
 ```
-gcloud container clusters create [CLUSTER_NAME] --image-type=ubuntu --zone=[ZONE_NAME]
+$ gcloud container clusters create [CLUSTER_NAME] --image-type=ubuntu --zone=[ZONE_NAME]
+```
+
+You can set the default cluster with the following command:
+```
+$ gcloud container clusters get-credentials [CLUSTER_NAME] --zone=[ZONE_NAME]
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for gke-cluster-01.
 ```
 
 More information about the gcloud command for GKE can be found here: [https://cloud.google.com/kubernetes-engine/docs/clusters/operations](https://cloud.google.com/kubernetes-engine/docs/clusters/operations)
@@ -170,4 +177,11 @@ $ kubectl create clusterrolebinding myname-cluster-admin-binding --clusterrole=c
 Clusterrolebinding "myname-cluster-admin-binding" created
 ```
 
+>**Note:**<br/> GKE instances under certain scenarios do not automatically re-attach the persistent disks used by PX.
 
+Under the following scenarios, GKE will spin up a new VM as a replacement for older VMs with the same node name. However the previously attached persistent disks are not re-attached.
+* When you halt a VM in GKE cluster
+* When you upgrade GKE between different kubernetes version.
+* Increasing the size of the node pool.
+
+Currently you will have to manually re-attach the persistent disk to the new VM and then restart portworx. If you face any issues with GKE reach out to us on [slack](http://slack.portworx.com)
