@@ -12,7 +12,21 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.7
+
+
+### Fixed issues
+
+* Suppress un-necessary log prints about cache flush
+* PWX-4272 Handle remote host shutdowns gracefully for shared volumes. In the past this could leave stray TCP connections.
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts
+
 ## 1.2.11.6 Release notes
+
+### Fixed issues
 
 * Provide capability to drop system cache on-demand (for a select workloads and large memory system) and turn it off by default
 
@@ -20,7 +34,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Key Features and Changes
 
-* Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
 
 ## 1.2.11.4 Release notes
 
@@ -31,8 +45,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Fixed issues
 
-* Ignore `sticky` flag when purging old snapshots after a cloudsnap is completed.
-* `pxctl status` shows the first interface IP address instead of the mgmt. IP
+* PWX-4224 Ignore `sticky` flag when purging old snapshots after a cloudsnap is completed.
+* PWX-4220 `pxctl status` shows the first interface IP address instead of the mgmt. IP
 
 ## 1.2.11.3 Release notes
 
