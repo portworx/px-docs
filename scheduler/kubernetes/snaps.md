@@ -58,6 +58,21 @@ spec:
       storage: 6Gi
 ```
 Note the format of the `name` field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name "px-snap-1" of the source PVC "px-vol-1" in the "prod" namespace.
+>**Note:**<br/> Annotations support is available from PX Version 1.2.11.6
+
+For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+
+```yaml
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list"]
+```
+
+You can run the following command to edit your existing Portworx ClusterRole
+
+```
+$ kubectl edit clusterrole node-get-put-list-role
+```
 
 ##### Snapshot of a snapshot
 
