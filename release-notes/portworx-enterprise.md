@@ -22,7 +22,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Errata 
 
-* Do not manually unmount a volume by using linux `umount` command for shared volume mounts
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata to applies to the previous versions of PX as well.
 
 ## 1.2.11.6 Release notes
 
