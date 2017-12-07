@@ -25,6 +25,10 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
 * When the px container boots on a node for the first time, it attempts to download kernel headers to compile it's kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be `` `yum install kernel-headers-`uname -r` `` and  `` yum install kernel-devel-`uname -r` ``
 * If one of the px nodes is in maintenance mode, this could be because one or more of the drives has failed. In this mode, you can replace up to one failed drive. If there are multiple drive failures, a node can be decommissioned from the cluster. Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
+* After you labeled a node with `px/enabled=remove` (or `px/service=restart`), and Portworx is not uninstalling (or, restarting):
+	* On a "busy cluster", Kubernetes can take some time until it processes the node-labels change, and notifies Portowrx service -- please allow a few minutes for labels to be processed.
+	* Sometimes it may happen that Kubernetes labels processing stops altogether - in this case please reinstall the "oci-monitor" component by applying and then deleting the `px/enabled=false` label:<br> `kubectl label nodes --all px/enabled=false; sleep 30; kubectl label nodes --all px/enabled-`
+		* this should reinstall/redeploy the "oci-monitor" component without disturbing the PX-OCI service or disrupting the storage, and the Kubernetes labels should work afterwards
 
 ### PVC creation
 If the PVC creation is failing, this could be due the following reasons
