@@ -37,7 +37,7 @@ Portworx also comes with two install options for Kubernetes:
 1. PX-OCI - runs Portworx as OCI (Open Container Initiative) container [**RECOMMENDED**]
 2. PX-Container - runs Portworx as Docker container
 
-
+<a name="prerequisites"></a>
 ## Prerequisites
 
 * *VERSIONS*: Portworx recommends running with Kubernetes 1.7.5 or newer
@@ -49,19 +49,22 @@ Portworx also comes with two install options for Kubernetes:
 * *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
 * *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `s=/dev/sdb,/dev/sdc3`) will be automatically formatted by PX.
 
+<a name="install"></a>
 ## Install
+
+If you are installing on [Openshift](https://www.openshift.com/), follow [these instructions](/scheduler/kubernetes/openshift-install.html).
 
 PX can be deployed with a single command as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) with the following:
 
 ```bash
-# Download the spec - substitute your parameters below.
+# Download the spec - substitute your parameters below
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&k=etcd://etc.company.net:2379&kbver=$VER"
 
-# Verify that the contents of px-spec.yaml are correct.
+# Verify that the contents of px-spec.yaml are correct
 vi px-spec.yaml
 
-# Apply the spec.
+# Apply the spec
 kubectl apply -f px-spec.yaml
 
 # Monitor the deployment
@@ -69,6 +72,8 @@ kubectl get pods -o wide -n kube-system -l name=portworx
 ```
 
 >**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [http://install.portworx.com](http://install.portworx.com) and use the prepared HTML form.
+
+>**Openshift Users:**<br/> Make sure you use `osft=true` when generating the spec.
 
 Below are all parameters that can be given in the query string  (see [install.portworx.com](http://install.portworx.com)).
 
@@ -84,6 +89,7 @@ Below are all parameters that can be given in the query string  (see [install.po
 | m      | Specify management network interface. This is useful if your instances have non-standard network interfaces.                          | <var>m=eth1</var>                                          |
 | kbver  | Specify Kubernetes version (current default is 1.7)                                                                                   | <var>kbver=1.8.4</var>                                     |
 | coreos | REQUIRED if target nodes are running coreos.                                                                                          | <var>coreos=true</var>                                     |
+| osft | REQUIRED if installing on Openshift.                                                                                          | <var> osft =true</var>                                     |
 | mas    | Specify if PX should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)      | <var>mas=true</var>                                        |
 | z      | Instructs PX to run in zero storage mode on Kubernetes master.                                                                        | <var>z=true</var>                                          |
 | f      | Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted. | <var>f=true</var>                                          |
@@ -211,11 +217,3 @@ To deploy a Portworx-ready Kubernetes cluster on GCP, use [this Terraporx reposi
 
 ### Digital Ocean
 To deploy a Portworx-ready Kubernetes cluster on Digital Ocean, use [this Terraporx repository](https://github.com/portworx/terraporx/tree/master/digital_ocean/kubernetes_ubuntu16)
-
-
-## TROUBLESHOOTING:
-
-* Q: My Kubernetes labels are not working -- I labeled a node with `px/enabled=remove` (or `px/service=restart`), and Portworx is not uninstalling (or, restarting)!  How do I fix this?
-	* A1: On a "busy cluster", Kubernetes can take some time until it processes the node-labels change, and notifies Portowrx service -- please allow a few minutes for labels to be processed.
-	* A2: Sometimes it may happen that Kubernetes labels processing stops altogether - in this case please reinstall the "oci-monitor" component by applying and then deleting the `px/enabled=false` label:<br> `kubectl label nodes --all px/enabled=false; sleep 30; kubectl label nodes --all px/enabled-`
-		* this should reinstall/redeploy the "oci-monitor" component without disturbing the PX-OCI service or disrupting the storage, and the Kubernetes labels should work afterwards
