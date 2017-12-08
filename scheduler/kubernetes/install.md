@@ -153,8 +153,11 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
   kubectl delete -f px-spec.yaml
   
-  # Alternatively delete PX using the Web-form:
-  kubectl delete -f 'http://install.portworx.com?type=oci'
+  # Alternatively delete PX using the Web-form (if using GKE, please include kbver)
+  kubectl delete -f 'http://install.portworx.com?type=oci&kbver=1.7.8-gke.0'
+  
+  # Finally, remove the px/enabled label
+  kubectl label nodes --all px/enabled-
   ```
 
 * To uninstall **non-OCI Portworx** (`type=dock`) from the cluster, please use:
@@ -163,8 +166,11 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
   kubectl delete -f px-spec.yaml
   
-  # Alternatively delete PX using the Web-form:
-  kubectl delete -f 'http://install.portworx.com?type=dock'
+  # Alternatively delete PX using the Web-form (if using GKE, please include kbver)
+  kubectl delete -f 'http://install.portworx.com?type=dock&kbver=1.7.8-gke.0'
+  
+  # Finally, remove the px/enabled label
+  kubectl label nodes --all px/enabled-
   ```
 
 >**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
