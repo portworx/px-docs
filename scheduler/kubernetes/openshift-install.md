@@ -10,6 +10,8 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 * TOC
 {:toc}
 
+>**Note:**<br/> Portworx only supports Openshift 3.7 and above.
+
 ## Deploy
 
 1. Ensure you have followed the general [Portworx prerequisites for Kubernetes](/scheduler/kubernetes/install.html#prereqs-section)
