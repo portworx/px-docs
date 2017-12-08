@@ -144,33 +144,30 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
 * You can uninstall **Portworx OCI** (`type=oci`) from the cluster using:
 
   ```bash
-  # [PX-OCI] installations - step 1) remove PX-OCI service first
+  # step 1) we first remove PX-OCI service
   kubectl label nodes --all px/enabled=remove --overwrite
   
-  # [PX-OCI] installations - step 2) confirm PX service is uninstalled (may take a few minutes)
-  kubectl get pods -o wide -n kube-system -l name=portworx   # repeat until all pods terminated
+  # step 2) monitor the pod termination, until all terminated
+  kubectl get pods -o wide -n kube-system -l name=portworx
   
-  # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
+  # step 3a) If you deployed using custom px-spec.yaml file, we recommend uninstall using same file:
   kubectl delete -f px-spec.yaml
   
-  # Alternatively delete PX using the Web-form (if using GKE, please include kbver)
+  # step 3b) Alternatively, delete PX configs using the Web-form (if using GKE, please include kbver param)
   kubectl delete -f 'http://install.portworx.com?type=oci&kbver=1.7.8-gke.0'
   
-  # Finally, remove the px/enabled label
+  # step 4) Finally, remove the 'px/enabled' label from your nodes
   kubectl label nodes --all px/enabled-
   ```
 
 * To uninstall **non-OCI Portworx** (`type=dock`) from the cluster, please use:
 
   ```bash
-  # If you deployed using your custom px-spec.yaml file, we recommend you uninstall using the same spec-file:
+  # If you deployed using custom px-spec.yaml file, we recommend uninstall using same file:
   kubectl delete -f px-spec.yaml
   
-  # Alternatively delete PX using the Web-form (if using GKE, please include kbver)
+  # Alternatively, delete PX using the Web-form (if using GKE, please include kbver param)
   kubectl delete -f 'http://install.portworx.com?type=dock&kbver=1.7.8-gke.0'
-  
-  # Finally, remove the px/enabled label
-  kubectl label nodes --all px/enabled-
   ```
 
 >**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
