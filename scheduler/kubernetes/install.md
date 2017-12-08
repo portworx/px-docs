@@ -17,7 +17,7 @@ meta-description: "Find out how to install PX within a Kubernetes cluster and ha
 
 Portworx can run alongside Kubernetes and provide Persistent Volumes to other applications running on Kubernetes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
->**Note:**<br/>OpenShift and Kubernetes Pre 1.6 users, please follow [these instructions](flexvolume.html).
+>**Note:**<br/>If you are running Kubernetes 1.5 and below, please follow [these instructions](flexvolume.html).
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
