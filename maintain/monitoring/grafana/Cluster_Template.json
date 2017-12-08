@@ -1130,6 +1130,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Portworx Cluster Status Copy",
+  "title": "Portworx Cluster Status",
   "version": 1
 }
