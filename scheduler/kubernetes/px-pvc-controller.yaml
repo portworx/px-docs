@@ -1,3 +1,12 @@
+# The following YAML-spec installs portworx-pvc-controller, which is required
+# in GKE/OpenShift kubernetes environments to expose Portworx PVC-volumes to
+# nodes.
+#
+# If installing manually, you many need to adjust the
+# "apiVersion: rbac.authorization.k8s.io/<VERSION>" tag to match your cluster:
+# - kubernetes 1.6.x and 1.7.x use "<VERSION> = v1beta1" while
+# - kubernetes 1.8.x uses "<VERSION> = v1".
+#
 apiVersion: v1
 kind: ServiceAccount
 metadata:
