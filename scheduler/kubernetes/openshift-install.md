@@ -12,7 +12,7 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 
 ## Deploy
 
-1. Ensure you have followed the general [Portworx prerequisites for Kubernetes](/scheduler/kubernetes/install.html#prerequisites)
+1. Ensure you have followed the general [Portworx prerequisites for Kubernetes](/scheduler/kubernetes/install.html#prereqs-section)
 
 2. Add Portworx service accounts to the privileged security context
 
@@ -21,7 +21,7 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 	$ oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
 	```
 
-3. Generate px spec using [instructions given here](/scheduler/kubernetes/install.html#install). Make sure you give `osft=true` as part of the parameters while generating the spec.
+3. Generate px spec using [instructions given here](/scheduler/kubernetes/install.html#install-section). Make sure you give `osft=true` as part of the parameters while generating the spec.
 
 4. Install px
 	

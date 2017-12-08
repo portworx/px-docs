@@ -37,7 +37,7 @@ Portworx also comes with two install options for Kubernetes:
 1. PX-OCI - runs Portworx as OCI (Open Container Initiative) container [**RECOMMENDED**]
 2. PX-Container - runs Portworx as Docker container
 
-<a name="prerequisites"></a>
+<a name="prereqs-section"></a>
 ## Prerequisites
 
 * *VERSIONS*: Portworx recommends running with Kubernetes 1.7.5 or newer
@@ -49,7 +49,7 @@ Portworx also comes with two install options for Kubernetes:
 * *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
 * *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `s=/dev/sdb,/dev/sdc3`) will be automatically formatted by PX.
 
-<a name="install"></a>
+<a name="install-section"></a>
 ## Install
 
 If you are installing on [Openshift](https://www.openshift.com/), follow [these instructions](/scheduler/kubernetes/openshift-install.html).
