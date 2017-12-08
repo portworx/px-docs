@@ -56,7 +56,7 @@ PX can be deployed with a single command as a [Kubernetes DaemonSet](https://kub
 ```bash
 # Download the spec - substitute your parameters below.
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&k=etcd://etc.company.net:2379&kbver=$VER"
+curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&type=oci&k=etcd://etc.company.net:2379&kbver=$VER"
 
 # Verify that the contents of px-spec.yaml are correct.
 vi px-spec.yaml
