@@ -12,8 +12,17 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.2.11.7
+## 1.2.11.8
 
+### Fixed issues
+
+* Disable resyncs read-only snaps on node failbacks.
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata to applies to the previous versions of PX as well.
+
+## 1.2.11.7
 
 ### Fixed issues
 
