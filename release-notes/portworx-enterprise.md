@@ -16,7 +16,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Fixed issues
 
-* Disable resyncs read-only snaps on node failbacks.
+* Fix resync mechanism for read-only snapshots
 * Improve log space utilization by removing old log files based on space usage
 
 
