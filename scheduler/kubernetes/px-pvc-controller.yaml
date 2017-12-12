@@ -45,6 +45,7 @@ metadata:
   name: portworx-pvc-controller
   namespace: kube-system
 spec:
+  replicas: 3
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -61,10 +62,11 @@ spec:
       containers:
       - command:
         - kube-controller-manager
-        - --leader-elect=false
+        - --leader-elect=true
         - --address=0.0.0.0
         - --controllers=persistentvolume-binder
         - --use-service-account-credentials=true
+        - --leader-elect-resource-lock=configmaps
         image: gcr.io/google_containers/kube-controller-manager-amd64:v1.7.8
         livenessProbe:
           failureThreshold: 8
