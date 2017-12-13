@@ -14,22 +14,24 @@ PX Logs management on Kubernetes using Fluentd.
 PX runs as a daemonset on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a separate lifecycle than that of the container that creates it. 
 
 ## Log Collection
-Fluentd is a log collector which enables you to log everything in a unified manner. Fluentd uses JSON as the log collection format. 
+Fluentd is a log collector which enables you to log everything in a unified manner. It is able to collect logs from multiple configured sources, process them and push them to one or more configured targets. 
 
-
-### Install fluentd on your kubernetes cluster.
 The following instructions allows you to ship your Portworx logs to an S3 bucket managed by Portworx. 
 
-Write to support@portworx.com or reach out to us on Slack [![](/images/slack.png){:height="24px" width="24px" alt="Slack" .slack-icon}](http://slack.portworx.com)
+#### Request S3 bucket
+Portworx will provision a S3 bucket that will be used to capture logs from all your kubernetes nodes.
 
-requesting for an S3 bucket to enable remote storage of the PX cluster logs.
-Portworx would provide you with a specification file which needs to be applied on kubernetes. 
+To request S3 bucket, write to support@portworx.com or reach out to us on Slack [![](/images/slack.png){:height="24px" width="24px" alt="Slack" .slack-icon}](http://slack.portworx.com)
 
+Portworx would provide you with a Kubernetes `Secret` spec file. This file contains S3 endpoint details.
+
+#### Apply S3 credentials
 Apply the spec file provided by portworx with the following command. 
 For eg: If the filename provided by Portworx is `fluentd-k8s-secrets.yaml` 
 
 `kubectl apply -f <fluentd-k8s-secrets.yaml>` 
 
+#### Deploy fluentd
 Create a file named ```fluentd-spec.yaml``` with the following contents and apply the configuration using `kubectl apply -f fluentd-spec.yaml`
 ```
 ---
