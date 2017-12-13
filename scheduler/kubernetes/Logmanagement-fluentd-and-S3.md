@@ -23,24 +23,15 @@ The following instructions allows you to ship your Portworx logs to an S3 bucket
 Write to support@portworx.com or reach out to us on Slack [![](/images/slack.png){:height="24px" width="24px" alt="Slack" .slack-icon}](http://slack.portworx.com)
 
 requesting for an S3 bucket to enable remote storage of the PX cluster logs.
-Portworx would provide you with a few secrets which need to be applied as part of the specs to be deployed on kubernetes. 
+Portworx would provide you with a specification file which needs to be applied on kubernetes. 
 
-Apply the below configurations, subsitute the provided secrets in the below specification. 
+Apply the spec file provided by portworx with the following command. 
+For eg: If the filename provided by Portworx is `fluentd-k8s-secrets.yaml` 
 
-Create a file named ```fluentd-secrets-spec.yaml``` and apply the configuration using `kubectl`
+`kubectl apply -f <fluentd-k8s-secrets.yaml>` 
+
+Create a file named ```fluentd-spec.yaml``` with the following contents and apply the configuration using `kubectl apply -f fluentd-spec.yaml`
 ```
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: fluentd-px-secrets
-  namespace: kube-system
-type: Opaque
-data:
-  AWS_KEY_ID: #Substitute the AWS_KEY_ID Provided by Portworx
-  AWS_SECRET_KEY_ID: #Substitute the AWS_SECRET_KEY_ID Provided by Portworx
-  S3_BUCKET: #Substitute the S3_BUCKET Provided by Portworx
-  S3_REGION: #Substitute the S3_REGION Provided by Portworx
 ---
 apiVersion: v1
 kind: ServiceAccount
