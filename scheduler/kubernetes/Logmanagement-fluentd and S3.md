@@ -11,7 +11,7 @@ sidebar: home_sidebar
 PX Logs management on Kubernetes using Fluentd. 
 
 ## PX Logs on Kubernetes
-PX runs as a deamonset on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a seperate lifecycle than that of the container that creates it. 
+PX runs as a daemonset on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a separate lifecycle than that of the container that creates it. 
 
 ## Log Collection
 Fluentd is a log collector which enables you to log everything in a unified manner. Fluentd uses JSON as the log collection format. 
@@ -20,12 +20,14 @@ Fluentd is a log collector which enables you to log everything in a unified mann
 ### Install fluentd on your kubernetes cluster.
 The following instructions allows you to ship your Portworx logs to an S3 bucket managed by Portworx. 
 
-Write to support@portworx.com requesting for an S3 bucket to enable remote storage of the PX cluster logs.
+Write to support@portworx.com or reach out to us on Slack [![](/images/slack.png){:height="24px" width="24px" alt="Slack" .slack-icon}](http://slack.portworx.com)
+
+requesting for an S3 bucket to enable remote storage of the PX cluster logs.
 Portworx would provide you with a few secrets which need to be applied as part of the specs to be deployed on kubernetes. 
 
 Apply the below configurations, subsitute the provided secrets in the below specification. 
 
-Create a file named ```fluentd-spec.yaml``` and apply the configuration using `kubectl`
+Create a file named ```fluentd-secrets-spec.yaml``` and apply the configuration using `kubectl`
 ```
 ---
 apiVersion: v1
@@ -300,6 +302,4 @@ spec:
             path: /mnt
 
 ```
-This configuration would enable cluster level logging for the Portworx Pods and publish those logs to an S3 bucket. 
-
-If you would like to setup an Elastic search cluster to ingest the Portworx and the Kubernetes cluster logs please follow the instructions as below. 
+This configuration would enable cluster level logging for the Portworx Pods and publish those logs to an S3 bucket. The logs would be retained for 91 days in the S3 bucket. 
