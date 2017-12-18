@@ -24,7 +24,9 @@ You have 2 options for migrating applications.
 
 ### 2. Decommission Portworx
 1. Follow [this guide](/maintain/scale-down.html) to decommission the Portworx node from the cluster.
-2. Set the `px/enabled` label to `false` on the node using: `kubectl label nodes <node> "px/enabled=false" --overwrite`
+2. Stop the portworx systemd service: `kubectl label nodes <node> "px/service=stop" --overwrite`. _This step is required only if PX is deployed as OCI_.
+3. Disable the portworx systemd service: `kubectl label nodes <node> "px/service=disable" --overwrite`. _This step is required only if PX is deployed as OCI_.
+4. Set the `px/enabled` label to `false` on the node using: `kubectl label nodes <node> "px/enabled=false" --overwrite`
     * This will remove the Portworx container from this node since the Portworx DaemonSet spec file uses a node anti-affinity rule that causes it to _not_ run on nodes that have the label: `px/enabled=false`
     * If you have an older Portworx DaemonSet spec, ensure the spec has the following section.
     ```yaml
