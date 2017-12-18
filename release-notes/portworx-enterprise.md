@@ -12,6 +12,22 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+## 1.2.11.9
+
+### Fixed issues
+
+* Pass volume name as part of the metrics end point so Prometheus/Grafana can display with volume name
+* Add current ha level of the volume and io_priority of the volumes to the metrics endpoint
+* Abort all pending I/Os the the pxd device during a reboot so speed up reboots
+* Move the px-ns internal port from 7000 to 9013
+* Remove the unnecessary warning string "Data is not local to the node"
+
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+
 ## 1.2.11.8
 
 ### Fixed issues
