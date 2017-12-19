@@ -144,10 +144,11 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
 
 You can uninstall Portworx from the cluster using:
 
-1. Remove the PX-OCI service
+1. Remove the Portworx systemd service and terminate pods by labelling nodes as below. On each node, Portworx monitors this label and will start removing itself when the label is applied.
 ```bash
 kubectl label nodes --all px/enabled=remove --overwrite
 ```
+
 2. Monitor the PX pods until all of them are terminated
 ```bash
 kubectl get pods -o wide -n kube-system -l name=portworx
