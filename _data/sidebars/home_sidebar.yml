@@ -2,16 +2,38 @@
 
   - title: Get Started
     folderitems:
-    - title: Install
-      url: /#install
-    - title: Quick Start
-      url: /getting-started/asap.html
-  - title: Schedulers
+    - title: Install with a Container Orchestrator
+      url: /#install-with-a-container-orchestrator
+    - title: Install with OCI runC and systemd
+      folderitems:
+      - title: Install
+        url: /runc/
+      - title: Upgrade
+        url: /runc/#upgrading-from-px-containers-to-px-oci
+      - title: Install Arguments
+        url: /runc/options.html
+    - title: DIY Demo
+      url: /getting-started/diy.html
+    - title: Developer Edition
+      url: /developer/index.html
+    - title: Licensing
+      url: /getting-started/px-licensing.html
+  - title: Container Orchestrators
     folderitems:
     - title: Kubernetes
       folderitems:
       - title: Install
         url: /scheduler/kubernetes/install.html
+      - title: Upgrade
+        url: /scheduler/kubernetes/upgrade.html
+      - title: Stateful applications
+        folderitems:
+        - title: Cassandra
+          url: /scheduler/kubernetes/cassandra-k8s.html
+        - title: Kafka
+          url: /scheduler/kubernetes/kafka-k8s.html
+        - title: Elastic Search and Kibana
+          url: /scheduler/kubernetes/elasticstack-kibana-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -20,28 +42,44 @@
             url: /scheduler/kubernetes/dynamic-provisioning.html
           - title: Using Pre-provisioned Volumes
             url: /scheduler/kubernetes/preprovisioned-volumes.html
-          - title: Create PVCs from snapshots
+          - title: Create and use snapshots
             url: /scheduler/kubernetes/snaps.html
+          - title: Create shared PVCs
+            url: /scheduler/kubernetes/shared-volumes.html
         - title: Run Statefulsets
-          url: /scheduler/kubernetes/statefulsets.html    
+          url: /scheduler/kubernetes/statefulsets.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Troubleshoot and Get Support
+          url: /scheduler/kubernetes/support.html
+        - title: Decommission a node
+          url: /scheduler/kubernetes/k8s-node-decommission.html
+        - title: Enter Portworx maintenance mode
+          url: /scheduler/kubernetes/k8s-node-maintenance.html
+        - title: Manage PX logs using ELK and Fluentd
+          url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+    - title: Google Container Engine
+      url: /scheduler/kubernetes/gke.html
+    - title: Azure Container Engine
+      url: /scheduler/kubernetes/aks.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
+      - title: Upgrade
+        url: /scheduler/mesosphere-dcos/upgrade.html
       - title: Stateful frameworks
         folderitems:
         - title: About
           url: /scheduler/mesosphere-dcos/frameworks.html
         - title: Cassandra
           url: /scheduler/mesosphere-dcos/cassandra.html
-        - title: HDFS & Hadoop
-          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html  
+        - title: HDFS &amp; Hadoop
+          url: /scheduler/mesosphere-dcos/hadoop-hdfs.html
         - title: Kafka
-          url: /scheduler/mesosphere-dcos/kafka.html   
+          url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch
           url: /scheduler/mesosphere-dcos/elasticsearch.html
       - title: How To
@@ -52,36 +90,32 @@
           url: /scheduler/mesosphere-dcos/inline.html
         - title: Scaling stateful applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
+        - title: Cleanup frameworks
+          url: /scheduler/mesosphere-dcos/framework-cleanup.html
       - title: FAQ
         folderitems:
         - title: How Portworx Volumes work with DCOS
-          url: /scheduler/mesosphere-dcos/portworx_volumes.html
+          url: /scheduler/mesosphere-dcos/portworx-volumes.html
     - title: Docker
       folderitems:
       - title: Install
-        folderitems:
-        - title: Docker Swarm or UCP
-          url: /scheduler/docker/install-px-docker-service.html
-        - title: Docker Standalone
-          url: /scheduler/docker/install.html
+        url: /scheduler/docker/install-standalone.html
+      - title: Upgrade
+        url: /runc/#upgrading-from-px-containers-to-px-oci
       - title: How To
         folderitems:
-        - title: Create and Manage Data Volumes
-          url: /scheduler/docker/volumes.html
-        - title: Test with Swarm
+        - title: Use PX with Swarm
           url: /scheduler/docker/swarm.html
-        - title: Starting PX via systemd
-          url: /scheduler/docker/systemd.html
-      - title: FAQ
-        folderitems:
         - title: How Portworx Volumes work with Docker
-          url: /scheduler/docker/volume_plugin.html
+          url: /scheduler/docker/volume-plugin.html
     - title: Rancher
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
   - title: About Data Volumes
     folderitems:
+    - title: Create and Manage Data Volumes
+      url: /manage/volumes.html
     - title: Shared Volumes
       url: /manage/shared-volumes.html
     - title: Snapshots
@@ -92,28 +126,40 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
+    - title: Updating Portworx Rack Info
+      url: /manage/update-px-rack.html
+    - title: Legacy and External Access
+      folderitems:
+      - title: NFS
+        url: /applications/nfs.html
+      - title: Object Storage
+        url: /applications/object-storage.html
   - title: Cloud Reference Guides
     folderitems:
     - title: AWS
       folderitems:
-      - title: CloudFormation
-        url: /cloud/aws/cloudformation.html
       - title: ECS
         url: /cloud/aws/ecs.html
+      - title: KOPS
+        url: /cloud/aws/kops-asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
     - title: Azure
-      url: /cloud/azure.html
+      folderitems:
+      - title: Portworx on Azure
+        url: /cloud/azure/azure.html
+      - title: Azure Container Engine with DCOS
+        url: /cloud/azure/dcos-acs-engine.html
+      - title: Azure Container Engine with Kubernetes
+        url: /cloud/azure/k8s-acs-engine.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
       url: /cloud/packet.html
-    - title: Digital Ocean
-      url: /cloud/digital_ocean.html
+    - title: DigitalOcean
+      url: /cloud/digitalocean.html
     - title: Rackspace
       url: /cloud/rackspace.html
-    - title: Terraform and Terraporx
-      url: /cloud/terraform.html
     - title: Cloud Backups
       url: /cloud/backups.html
   - title: CLI and API Reference
@@ -122,8 +168,6 @@
       folderitems:
       - title: Basics
         url: /control/status.html
-      - title: Credentials
-        url: /control/credentials.html
       - title: Volume
         url: /control/volume.html
       - title: Snaps
@@ -132,16 +176,34 @@
         url: /control/cluster.html
       - title: Service
         url: /control/service.html
-      - title: Cloud
-        url: /control/cloud.html
       - title: Host
         url: /control/host.html
+      - title: Cloud
+        url: /control/cloud.html
+      - title: Credentials
+        url: /control/credentials.html
+      - title: License
+        url: /control/license.html
+    - title: Installation Arguments to Portworx
+      url: /runc/options.html
     - title: REST API
       url: /control/rest-api.html
     - title: Node config data
       url: /control/config-json.html
   - title: Operate and Maintain
     folderitems:
+    - title: Monitoring and Alerts
+      folderitems:
+      - title: Monitoring
+        url: /maintain/monitoring/index.html
+      - title: Prometheus
+        url: /maintain/monitoring/prometheus/index.html
+      - title: Alerts integration with Prometheus
+        url: /maintain/monitoring/alerting.html
+      - title: Grafana
+        url: /maintain/monitoring/grafana/index.html
+      - title: Alerts Reference
+        url: /maintain/monitoring/portworx-alerts.html
     - title: Performance
       folderitems:
       - title: FIO
@@ -166,54 +228,60 @@
       url: /maintain/storageless-nodes.html
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
-    - title: Portworx integration with Prometheus
-      url: /maintain/prometheus.html
+    - title: DR Best Practices
+      url: /maintain/dr-best-practices.html
   - title: Application Solutions
     folderitems:
-    - title: Databases
+    - title: Big Data
       folderitems:
-      - title: MySQL
-        url: /applications/mysql.html
       - title: Cassandra
         folderitems:
         - title: Deployment
           url: /applications/cassandra.html
         - title: Measuring Performance
           url: /applications/cassandra-px-perf-test.html
+        - title: Snapshots
+          url: /applications/cassandra-snaps.html
+      - title: Hadoop and HDFS
+        url: /applications/hadoop-docker.html
+    - title: Databases
+      folderitems:
+      - title: MySQL
+        url: /applications/mysql.html
       - title: PostgreSQL
         url: /applications/postgres.html
-    - title: Messaging 
+      - title : Microsoft SQL Server
+        url: /applications/mssql-server.html
+    - title: Messaging
       folderitems:
       - title: Redis
         url: /applications/redis.html
       - title: Kafka
         url: /applications/kafka.html
-    - title: External Access
-      folderitems:
-      - title: NFS
-        url: /applications/nfs.html
-      - title: Object Storage
-        url: /applications/object-storage.html
-    - title: Applications
-      folderitems:
-      - title: Docker Registry
-        url: /applications/docker-registry.html
-      - title: Wordpress
-        url: /applications/docker-compose.html
-      - title: Jenkins with Portworx
-        url: /applications/jenkins.html
+    - title: Docker Registry
+      url: /applications/docker-registry.html
+    - title: Wordpress
+      url: /applications/docker-compose.html
+    - title: Jenkins
+      url: /applications/jenkins.html
+  - title: Encryption
+    folderitems:
+    - title: Portworx with Vault
+      url: /secrets/portworx-with-vault.html
+    - title: Portworx with AWS KMS
+      url: /secrets/portworx-with-aws-kms.html
   - title: Lighthouse
     folderitems:
+    - title: Install Lighthouse 
+      url: /enterprise/lighthouse.html
     - title: Manage PX via Lighthouse
-      url: /enterprise/portworx-via-lighthouse.html
-    - title: Run Lighthouse on-prem
-      url: /enterprise/on-premise-lighthouse.html
-    - title: Run Lighthouse with Secure etcd
-      url: /enterprise/lighthouse-with-secure-etcd.html
-    - title: Add Existing PX Node to Lighthouse
-      url: /enterprise/add-existing-px-node-to-lighthouse.html
-    - title: Cluster Alerting Preferences 
-      url: /enterprise/cluster-alerting.html
+      folderitems:
+      - title: Manage the PX cluster
+        url: /enterprise/portworx-via-lighthouse.html
+      - title: Add Existing PX Nodes to Lighthouse
+        url: /enterprise/add-existing-px-node-to-lighthouse.html
+      - title: Alerting Preferences
+        url: /enterprise/cluster-alerting.html
   - title: Knowledge Base
     folderitems:
     - title: Running with an SDN
@@ -230,8 +298,6 @@
       url: /knowledgebase/sles-12-sp1.html
     - title: FAQs
       url: /knowledgebase/faqs.html
-    - title: Troubleshooting
-      url: /knowledgebase/troubleshooting.html
   - title: Release Notes
     folderitems:
     - title: About 1.x
@@ -240,6 +306,14 @@
       url: /release-notes/portworx-enterprise.html
     - title: Lighthouse On-Prem Release Notes
       url: /release-notes/on-premise-lighthouse.html
+  - title: Open Source Resources
+    folderitems:
+    - title: OpenStorage.org
+      url: https://github.com/libopenstorage
+    - title: Torpedo for CSI and Kubernetes
+      url: https://github.com/portworx/torpedo
+    - title: Graph Drivers for Docker
+      url: https://github.com/portworx/lcfs
   - title: Video Demos
     folderitems:
     - title: Mesos, Mesosphere and Marathon
@@ -255,4 +329,8 @@
     - title: Portwork QuickStart Explainer
       url: /video/quickstart.html
     - title: Hadoop on Portworx on DCOS
-      url: /video/hadoop_px_dcos.html
+      url: /video/hadoop-px-dcos.html
+    - title: Microsoft SQL Server with High Availability
+      url: /video/sql-server.html
+    - title: SQL Server on Kubernetes
+      url: /video/sql-server-on-k8s.html

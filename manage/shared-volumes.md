@@ -4,6 +4,7 @@ title: "Shared Volumes"
 keywords: portworx, shared volumes, global namespace
 sidebar: home_sidebar
 redirect_from: "/shared-volumes.html"
+meta-description: "Learn to create and use shared volumes to access the same Docker volume from multiple containers. See for youself!"
 ---
 
 * TOC
@@ -11,11 +12,15 @@ redirect_from: "/shared-volumes.html"
 
 Through shared volumes (also known as a **global namespace**), a single volume's filesystem is concurrently available to multiple containers running on multiple hosts.
 
+>**Note:**<br/>You do not need to use shared volumes to have your data accessible on any host in the cluster.  Any PX volumes can be exclusively accessed from any host as long as they are not simultaneously accessed.  Shared volumes are for providing simultaneous (concurrent or shared) access to a volume from multiple hosts at the same time.
+
 A typical pattern is for a single container to have one or more volumes. Conversely, many scenarios would benefit from multiple containers being able to access the same volume, possibly from different hosts. Accordingly, the shared volume feature enables a single volume to be read/write accessible by multiple containers. Example use cases include:
 
 * A technical computing workload sourcing its input and writing its output to a shared volume.
 * Scaling a number of Wordpress containers based on load while managing a single shared volume.
 * Collecting logs to a central location
+
+>**Note:**<br/>Usage of shared volumes for databases is not recommended, since they have a small metadata overhead.
 
 ## Create shared volumes
 To create a Portworx shared volume, use the `pxctl` command or `docker volume create`.
@@ -52,11 +57,10 @@ host2# docker run -it --name box1  -v my_shared_vol:/data --volume-driver=pxd  b
 
 All writes and modifications to files and directories will be immediately available to consumers of the shared volume. Concurrency of files is handled by the volume's filesystem.
 
-### Use shared volumes externally
+### Use shared volumes via NFS
 Any nodes outside of the Portworx cluster can access a shared volume through NFS with the following format:
 
 ```
-mount -o nolock HOSTNAME:/var/lib/osd/pxns/my_shared_vol  /local_mnt
+mount HOSTNAME:/var/lib/osd/pxns/my_shared_vol  /local_mnt
 ```
 
-The "-o nolock" is a temporary restriction, as is the requirement HOSTNAME must correspond to the host where the volume is attached.

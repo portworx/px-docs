@@ -4,6 +4,7 @@ title: "Dynamic volume creation through DCOS"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume, inline, dynamic volumes
 sidebar: home_sidebar
 redirect_from: "/create-manage-storage-volumes.html"
+meta-description: "Read the overview on how volumes can be created dynamically through DCOS. Gain a better understanding of dynamic volumes here!"
 ---
 
 * TOC
@@ -22,7 +23,7 @@ For example, a PX inline spec can be specified as the following:
 	},
 	{
 		"key": "volume",
-		"value": "size=100G,repl=3,cos=3,name=mysql_vol:/var/lib/mysql"
+		"value": "size=100G,repl=3,io_priority=high,name=mysql_vol:/var/lib/mysql"
 	}],
 ```
 
@@ -31,7 +32,7 @@ The above command will create a volume called mysql_vol with an initial size of 
 Each spec key must be comma separated.  The following are supported key value pairs:
 
 ```
-IO priority      - cos=[1,2,3]
+IO priority      - io_priority=[1,2,3] or [high,medium,low]
 Volume size      - size=[1..9][G|M|T]
 HA factor        - repl=[1,2,3]
 Block size       - bs=[4096...]

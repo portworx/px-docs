@@ -25,7 +25,7 @@ Supported bare metal cloud providers are
 * Rackspace
 * Packet.io
 
-When chosing an instance, verify that you meet the minimum requirements available on [the Portworx enterpris getting started guide.](/getting-started/px-enterprise.html#step-1-verify-requirements)
+When chosing an instance, verify that you meet the minimum requirements available on [the Portworx enterpris getting started guide.](/#minimum-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
@@ -45,7 +45,7 @@ Note: Portworx requires Docker to allow shared mounts.  This is standard as of D
 ## Step 3: Deploy PX with Kubernetes
 At this point, you have everything you need to deploy Portworx with Kubernetes to create a hyperconverged compute with storage cluster.
 
-Visit [Run Portworx with Kubernetes](/scheduler/kubernetes.html) to get portworx and kubernetes running on all the nodes in your cluster.
+Visit [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html) to get portworx and kubernetes running on all the nodes in your cluster.
 
 ## An example BOM
 In an example deployment, we used GCE to deploy a 30 node Portworx with Kubernetes cluster.  The cost breakdown (minus the Portworx Enterprise licence fees) to run this 30 node cluster per hour was as follows:

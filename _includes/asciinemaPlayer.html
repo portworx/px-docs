@@ -1,0 +1,6 @@
+<!-- asciinema-player -->
+{% if layout.amp %}
+<asciinema-player autoplay loop="{{include.loop}}" poster="{{include.poster}}" src="/casts/{{ include.cast }}"></asciinema-player>
+{% else %}
+<asciinema-player autoplay loop="{{include.loop}}" poster="{{include.poster}}" src="/casts/{{ include.cast }}"></asciinema-player>
+{% endif %}

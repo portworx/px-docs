@@ -3,6 +3,8 @@ layout: page
 title: "Run pods on same host as a volume"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
+redirect_from:
+  - /kubernetes-with-scheduler-convergence.html
 ---
 
 ## Using scheduler convergence
@@ -10,7 +12,7 @@ When a pod runs on the same host as its volume, it is known as convergence or hy
 
 By modifying your pod spec files you can influence kubernetes to schedule pods on nodes where the volume is located.
 
-### Using pre-provsioned volumes
+### Using pre-provisioned volumes
 If you have already created Portworx volumes out of band without using Kubernetes you can still influence the scheduler to schedule a pod on specific set of nodes.
 
 Lets say you created two volumes viz. `vol1` and `vol2`
@@ -74,7 +76,7 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
+      preferredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
           - key: "pvc-high-01"

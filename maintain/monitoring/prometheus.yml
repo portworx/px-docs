@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 1m
+  scrape_timeout: 10s
+  evaluation_interval: 1m
+rule_files:
+  - px.rules
+scrape_configs:
+  - job_name: 'PX'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['px-node-01-IP:9001','px-node-02-IP:9001','px-node-03-IP:9001']
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alert-manager-ip:9093"

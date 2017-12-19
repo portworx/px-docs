@@ -5,7 +5,8 @@ output: web
 topnav_title: Portworx Documentation
 # this appears on the top navigation bar next to the home button
 
-site_title: Portworx Documentation 
+
+site_title: ""
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: Portworx
@@ -29,6 +30,7 @@ exclude:
   - build/
   - Gemfile
   - Gemfile.lock
+  - node_modules/
 # these are the files and directories that jekyll will exclude from the build
 
 feedback_subject_line: Portworx Documentation Feedback
@@ -111,7 +113,7 @@ google_analytics: UA-64247527-1
 
 # Endless thanks for this incredible Theme!  http://idratherbewriting.com/documentation-theme-jekyll/
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-sitemap
 

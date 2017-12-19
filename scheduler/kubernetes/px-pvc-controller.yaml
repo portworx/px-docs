@@ -1,0 +1,86 @@
+# The following YAML-spec installs portworx-pvc-controller, which is required
+# in GKE/OpenShift kubernetes environments to expose Portworx PVC-volumes to
+# nodes.
+#
+# If installing manually, you many need to adjust the
+# "apiVersion: rbac.authorization.k8s.io/<VERSION>" tag to match your cluster:
+# - kubernetes 1.6.x and 1.7.x use "<VERSION> = v1beta1" while
+# - kubernetes 1.8.x uses "<VERSION> = v1".
+#
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: portworx-pvc-controller-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+   name: portworx-pvc-controller-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: portworx-pvc-controller-role-binding
+subjects:
+- kind: ServiceAccount
+  name: portworx-pvc-controller-account
+  namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: portworx-pvc-controller-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  labels:
+    tier: control-plane
+  name: portworx-pvc-controller
+  namespace: kube-system
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      labels:
+        name: portworx-pvc-controller
+        tier: control-plane
+    spec:
+      containers:
+      - command:
+        - kube-controller-manager
+        - --leader-elect=true
+        - --address=0.0.0.0
+        - --controllers=persistentvolume-binder
+        - --use-service-account-credentials=true
+        - --leader-elect-resource-lock=configmaps
+        image: gcr.io/google_containers/kube-controller-manager-amd64:v1.7.8
+        livenessProbe:
+          failureThreshold: 8
+          httpGet:
+            host: 127.0.0.1
+            path: /healthz
+            port: 10252
+            scheme: HTTP
+          initialDelaySeconds: 15
+          timeoutSeconds: 15
+        name: portworx-pvc-controller-manager
+        resources:
+          requests:
+            cpu: 200m
+      hostNetwork: true
+      serviceAccountName: portworx-pvc-controller-account
+

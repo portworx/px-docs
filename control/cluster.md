@@ -1,9 +1,10 @@
 ---
 layout: page
-title: "CLI Reference"
+title: "CLI Reference–Cluster"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
+meta-description: "This guide shows you how to use the PXCL CLI to perform cluster operations.  Try today!"
 ---
 
 * TOC

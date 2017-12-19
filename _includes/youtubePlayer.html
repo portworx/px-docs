@@ -5,5 +5,21 @@
     layout="responsive"
     width="480" height="270"></amp-youtube>
 {% else %}
-<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ include.id }}" frameborder="0" allowfullscreen></iframe>
+<div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+    {% if include.title %}
+        <h2>
+            <span itemprop="name">{{ include.title }}</span>
+            {% if include.date %}
+                <small>{{ include.date | date: "%e %B %Y" }}</small>
+                <meta itemprop="uploadDate" content="{{ include.date }}" />
+            {% endif %}
+        </h2>
+    {% endif %}
+    {% if include.description %}
+        <span itemprop="description">{{ include.description }} <br/></span>
+    {% endif %}
+    <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/{{ include.id }}/mqdefault.jpg" />
+    <meta itemprop="embedURL" content="https://www.youtube.com/embed/{{ include.id }}" />
+    <iframe style="max-width:100%" width="560" height="315" src="https://www.youtube.com/embed/{{ include.id }}" frameborder="0" allowfullscreen></iframe>
+</div>
 {% endif %}

@@ -4,6 +4,7 @@ title: "Manage MySQL Database Volumes with Portworx"
 keywords: portworx, container, mysql, storage
 sidebar: home_sidebar
 redirect_from: "/mysql.html"
+meta-description: "Check out this three minute video illustrating how to set up a three-node cluster for mysql and add more capacity on the fly."
 ---
 
 * TOC
@@ -20,7 +21,7 @@ To create a highly available storage volume for mysql, run the following command
 
 ```
 # docker volume create -d pxd --name mysql_volume --opt \
-        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4
+        size=4 --opt block_size=64 --opt repl=3 --opt io_profile=db --opt fs=ext4
 ```
 
 That command creates a volume called `mysql_volume`.  This volume has a replication factor of 3, which means that the data will be protected on 3 separate nodes.  We will use this volume to protect the `mysql` instances data.

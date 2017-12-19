@@ -1,9 +1,13 @@
 ---
 layout: page
-title: "FAQs"
+title: "Frequently Asked Questions Portworx"
 keywords: portworx, faqs
 sidebar: home_sidebar
-redirect_from: "/px-faqs.html"
+redirect_from:
+  - /px-faqs.html
+  - /knowledgebase/troubleshooting.html
+  - /troubleshooting.html
+meta-description: "Find answers to all the most frequently asked questions about Portworx.  Explore our FAQ today!"
 ---
 
 * TOC
@@ -13,15 +17,19 @@ redirect_from: "/px-faqs.html"
 Portworx clusters can run in the cloud or on premise.  The volume format is the same, regardless of running in the cloud or on-prem.  When running in the cloud, Portworx aggregates and virtualizes the various underlying cloud volumes.
 
 ### Is there a Hardware/Software compatibility list?
-Hardware : No. But there are minimum resource recommendation listed [here](/getting-started/px-enterprise.html#step-1-verify-requirements) 
+Hardware : No. But there are minimum resource recommendation listed [here](/#minimum-requirements) 
 
 Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 
 ### Can Portworx work with any drive vendor?
 Yes.  Portworx can recognize any drive and its type, capacity and IOPS capability and use it appropriately for the given workload.
 
-### Do I need to create a RAID group or do I present all the drives to Portworx individually?
-There is no nead to pre-prepare a RAID group.  Portworx will appropriately place raid drives into different tiers based on their profile.
+### Should I use a H/W RAID controller, or should I present all the drives to Portworx individually?
+Portworx prefers a H/W RAID controller, if available.
+
+###  Device names are not guaranteed to be consistent. Drive lettters can change, as is the case if using Openstack.  Is there a way for Portworx to use UUID instead of device names?
+
+PX automatically uses UUID after the drive has been specified.  You don't need to worry about drive letters changing.
 
 ### Does Portworx need to take over all the disks on a given server?
 No.  You can explicitly allow/disallow drives that participate in a Portworx cluster. In PX-Enterprise, this notion of device delegation/participation is exposed through the "Server Profile".

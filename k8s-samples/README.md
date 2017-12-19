@@ -5,16 +5,8 @@ keywords: portworx, kubernetes, converged
 sidebar: home_sidebar
 ---
 
-# Portworx Volume
-
-  - [Portworx](#portworx)
-  - [Prerequisites](#prerequisites)
-  - [Examples](#examples)
-    - [Using Pre-provisioned Portworx Volumes](#pre-provisioned)
-      - [Running Pod](#running-pod)
-      - [Persistent Volumes](#persistent-volumes)
-    - [Using Dynamic Provisioning](#dynamic-provisioning)
-      - [Storage Class](#storage-class)
+* TOC
+{:toc}
 
 ## Portworx
 
@@ -24,7 +16,7 @@ or cloud instances into converged, highly available compute and storage nodes
 ## Prerequisites
 
 - A Portworx instance running on all of your Kubernetes nodes. For
-  more information on how you can install Portworx can be found [here](http://docs.portworx.com)
+  more information on how you can install Portworx can be found [here](/)
 
 ## Examples
 
@@ -67,7 +59,7 @@ The following examples assumes that you already have a running Kubernetes cluste
 
    [Download example](portworx-volume-pod.yaml?raw=true)
 
-   Make sure to replace <vol-id> and <fs-type> in the above spec with
+   Make sure to replace &lt;vol-id&gt; and &lt;fs-type&gt; in the above spec with
    the ones that you used while creating the volume.
 
    Create the Pod.
@@ -106,7 +98,7 @@ The following examples assumes that you already have a running Kubernetes cluste
           fsType:   "<fs-type>"
       ```
 
-      Make sure to replace <vol-id>, <size> and <fs-type> in the above spec with
+      Make sure to replace &lt;vol-id&gt;, &lt;size&gt; and &lt;fs-type&gt; in the above spec with
       the ones that you used while creating the volume.
 
       [Download example](portworx-volume-pv.yaml?raw=true)
@@ -250,7 +242,7 @@ create Portworx volumes out of band and they will be created automatically.
        io_priority:  "high"
      ```
 
-     [Download example](portworx-volume-sc-high.yaml?raw=true)
+     [Download example](portworx-volume-sc.yaml?raw=true)
 
      Creating the storageclass:
 
@@ -555,9 +547,9 @@ spec:
       mountPath: /var/lib/mysql
   volumes:
   - name: snap-01
-    # This Portworx volume must already exist.
+    # name and volumeID must be the same for snapshot restore
     portworxVolume:
-      volumeID: "vol1"
+      volumeID: snap-01
 ````
 Inspect that the database shows the cloned tables in the new mysql instance.
 
@@ -589,5 +581,5 @@ mysql> show tables;
 
 ````
 <!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
-[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/volumes/portworx/README.md?pixel)]()
+[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/volumes/portworx/README.md?pixel){:width="1px" height="1px"}]()
 <!-- END MUNGE: GENERATED_ANALYTICS -->

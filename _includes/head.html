@@ -1,17 +1,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }}{% endif %}">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 <meta name="keywords" content="{{page.tags}}{% if page.tags %}, {% endif %} {{page.keywords}}">
-<title>{{ page.title }} | {{ site.site_title }}</title>
+<title>{{ page.title }}</title>
 
-<link rel="preload" href="/css/bundle.css" as="style" onload="this.rel='stylesheet'">
+<link rel="preload" href="/css/bundle.css?v={{ 'now' | date: '%s' }}" as="style" onload="this.rel='stylesheet'">
 
-<noscript>
-    <link rel="stylesheet" href="/css/bundle.css" />
-</noscript>
+    <link rel="stylesheet" href="/css/bundle.css?v={{ 'now' | date: '%s' }}" />
+    <link rel="stylesheet" href="/css/asciinema-player.css?v={{ 'now' | date: '%s' }}" />
 
-<!-- This needs some minification -->
 <style type="text/css">
     {% include critical.css %}
 </style>
@@ -21,13 +18,14 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 
-<script defer src="/js/jquery.min.js"></script>
-<script defer src="/js/jquery.cookie.min.js"></script>
-<script defer src="{{ "/js/jquery.navgoco.min.js" }}"></script>
+<script defer src="/js/jquery.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="/js/jquery.cookie.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="/js/jquery.navgoco.min.js?v={{ 'now' | date: '%s' }}" id="ngcload"></script>
 
-<script defer src="/js/bootstrap.min.js"></script>
-<script defer src="/js/anchor.min.js"></script>
-<script defer src="{{ "/js/customscripts.js" }}"></script>
+<script defer src="/js/bootstrap.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="/js/anchor.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script defer src="{{ "/js/customscripts.js" }}?v={{ 'now' | date: '%s' }}"></script>
+<script src="{{ "/js/asciinema-player.js" }}"></script>
 
 <link rel="shortcut icon" href="{{ "/images/favicon.ico"  }}">
 
@@ -40,9 +38,15 @@
 
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "feed.xml" | prepend: site.url }}">
 
-<link rel="amphtml" href="https://amp-docs.portworx.com{{ page.url }}">
-<link rel="canonical" href="https://docs.portworx.com{{ page.url }}">
+<link rel="amphtml" href="https://amp-docs.portworx.com{{ page.url }}" data-proofer-ignore>
+<link rel="canonical" href="https://docs.portworx.com{{ page.url }}" data-proofer-ignore>
 
 {% if site.google_analytics and jekyll.environment == 'production' %}
 {% include google_analytics.html %}
 {% endif %}
+
+{% if page.meta-description %}
+    <meta name="description" content="{{ page.meta-description }}"/>
+{% endif %}
+
+{% include marketo_analytics.html %}

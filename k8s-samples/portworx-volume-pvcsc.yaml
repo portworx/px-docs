@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: pvcsc001
   annotations:
-    volume.beta.kubernetes.io/storage-class: portworx-io-priority-high
+    volume.beta.kubernetes.io/storage-class: portworx-sc
 spec:
   accessModes:
     - ReadWriteOnce

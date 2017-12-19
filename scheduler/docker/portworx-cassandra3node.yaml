@@ -1,0 +1,79 @@
+version: '3'
+services:
+  cassandra-1:
+    image: cassandra
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-1
+    volumes:
+    - volume1:/var/lib/cassandra
+    ports:
+    - "7000"
+    networks:
+      default:
+  cassandra-2:
+    image: cassandra
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-2
+      CASSANDRA_SEEDS: cassandra-1
+    depends_on:
+      - cassandra-1
+    volumes:
+    - volume2:/var/lib/cassandra
+    ports:
+    - "7000"
+    networks:
+      default:
+  cassandra-3:
+    image: cassandra
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-3
+      CASSANDRA_SEEDS: cassandra-1
+    depends_on:
+      - cassandra-2
+    volumes:
+    - volume3:/var/lib/cassandra
+    ports:
+    - "7000"
+    networks:
+      default:
+volumes:
+  volume1:
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
+  volume2:
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
+  volume3:
+    driver: pxd
+    driver_opts:
+      size: "4"
+      block_size: "64"
+      repl: "2"
+      fs: "ext4"
+networks:
+  default:
+    external:
+       name: cassandra-net

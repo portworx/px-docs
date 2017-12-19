@@ -1,8 +1,9 @@
 ---
 layout: page
-title: "Performance"
+title: "SQL Performance"
 keywords: portworx, cos, class of service, production, performance, overhead
 sidebar: home_sidebar
+meta-description: "View Portworx erformance as measured by running a mysql workload against the baremetal server and then against a PX volume on that same server."
 ---
 
 * TOC

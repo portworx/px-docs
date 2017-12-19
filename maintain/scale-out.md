@@ -4,6 +4,7 @@ title: "Scaling-out an existig PX Cluster"
 keywords: scale-up, storage, add new nodes
 sidebar: home_sidebar
 redirect_from: "/scale-up-nodes-with-storage.html"
+meta-description: "This document illustrates how to add a new node with attached storage to a PX cluster.  Scale out your cluster today!"
 ---
 
 * TOC
@@ -60,15 +61,12 @@ The storage is available at /dev/dm-1
 ### Add this node to the PX Cluster
 
 Below is an example of how to run PX in a new node so it joins an existing cluster. 
-Note how docker run command is invoked with a cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID to which we want to add the new node
-
-```
-docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins \
--v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared \
--v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src \
--e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise -t token-bb4bcf4b-d394-11e6-afae-0242ac110002 \
--m team0:0 -d team0 -s /dev/dm-1
-```
+* Follow the instructions in the Installing 
+  [PX as OCI](https://docs.portworx.com/scheduler/docker/install-standalone.html#install-px-via-oci-runc) 
+  page on starting PX in a new node
+* Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID 
+  to which we want to add the new node
+* Use the same CLUSTER_ID as the ID of the cluster which you want the node to join for the -c parameter
 
 Note the -s /dev/dm-1 command which picks up the storage that comes with the new node and the same cluster token 
 ensures that the node is added to the same cluster. 

@@ -3,7 +3,9 @@ layout: page
 title: "Adding storage to existing PX Cluster Nodes"
 keywords: scale-up
 sidebar: home_sidebar
-redirect_from: "/scale-up.html"
+redirect_from:
+  - /scale-up.html
+meta-description: "Discover how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added.  Try it for yourself today."
 ---
 
 * TOC
@@ -130,6 +132,24 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 sudo /opt/pwx/bin/pxctl service drive add /dev/dm-1
 Adding device  /dev/dm-1 ...
 Drive add  successful. Requires restart (Exit maintenance mode).
+```
+
+### Rebalance the storage pool
+
+**Drive addition must be followed by pool rebalance operation to spreads data across all available drives in the pool.**
+
+For e.g., If the drive was added to pool 0
+
+```
+/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation start
+Done: "Pool 0: Balance is running"
+```
+
+Check the rebalance status and wait for completion.
+
+```
+/opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
+Done: "Pool 0: Balance is not running"
 ```
 
 ### Exit Maintenance Mode

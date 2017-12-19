@@ -1,0 +1,65 @@
+#marketing-nav{
+  a {
+    cursor: pointer;
+  }
+
+  font-family: 'Libre Franklin', sans-serif;
+
+  #searchform {
+    display: none;
+  }
+
+  #top-nav {
+    max-height: none;
+  }
+
+  input {
+    margin-top: 9px;
+  }
+
+  #top-nav li{
+
+
+    &>a {
+      clear: both;
+      background-color: transparent !important;
+      text-transform: capitalize;
+      border: none;
+      transition: all 0.5s ease;
+    }
+
+    &.open {
+      &>a {
+        color: #ddd;
+      }
+      &>ul {
+        display: block !important;
+      }
+    }
+  }
+
+  a[href^="http://"]:after, a[href^="https://"]:after {
+    content: none;
+  }
+
+  hr {
+    margin: 0 25% !important;
+    width: 50%;
+  }
+
+  :last-child:after {
+    border-bottom: none !important;
+  }
+
+  .navbar-toggle {
+    background: none !important;
+  }
+
+  .mobile-close {
+    font-size: 1.5em !important;
+  }
+
+  #menu-item-2006 a {
+    border-bottom: 2px solid #f36621 !important;
+  }
+}

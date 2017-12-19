@@ -3,7 +3,10 @@ layout: page
 title: "Portworx with Flannel SDN and User Namespaces"
 keywords: portworx, flannel, docker, sdn, userns
 sidebar: home_sidebar
-redirect_from: "/portworx-flannel-userns.html"
+redirect_from:
+  - /portworx-flannel-userns.html
+  - /reference-architecture/sdn.html
+meta-description: "This guide shows how to configure and run Portworx with User Namespaces under a Flannel SDN. Start using Portworx today!"
 ---
 
 * TOC

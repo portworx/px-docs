@@ -26,7 +26,7 @@ Create the storageclass:
 
 ```
 # kubectl create -f \
-   examples/volumes/portworx/portworx-volume-sc-high.yaml
+   examples/volumes/portworx/portworx-volume-sc.yaml
 ```
 
 Example:
@@ -35,23 +35,21 @@ Example:
      kind: StorageClass
      apiVersion: storage.k8s.io/v1beta1
      metadata:
-       name: portworx-io-priority-high
+       name: portworx-sc
      provisioner: kubernetes.io/portworx-volume
      parameters:
        repl: "1"
-       snap_interval:   "70"
-       io_priority:  "high"
 ```
-[Download example](/k8s-samples/portworx-volume-sc-high.yaml?raw=true)
+[Download example](/k8s-samples/portworx-volume-sc.yaml?raw=true)
 
 Verifying storage class is created:
 
 ```
-# kubectl describe storageclass portworx-io-priority-high
-     Name: 	        	portworx-io-priority-high
+# kubectl describe storageclass portworx-sc
+     Name: 	        	portworx-sc
      IsDefaultClass:	        No
      Annotations:		<none>
      Provisioner:		kubernetes.io/portworx-volume
-     Parameters:		io_priority=high,repl=1,snapshot_interval=70
+     Parameters:		repl=1
      No events.
 ```

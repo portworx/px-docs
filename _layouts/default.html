@@ -1,40 +1,44 @@
 ---
 layout: compress
 ---
+
 <!DOCTYPE html>
 <head>
     {% include head.html %}
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             $(document).ready(function() {
-                /* Initialize navgoco with default options */
-                $("#mysidebar").navgoco({
-                    caretHtml: '',
-                    accordion: true,
-                    openClass: 'active', /* open */
-                    save: false, /* leave false or nav highlighting doesn't work right */
-                    cookie: {
-                        name: 'navgoco',
-                        expires: false,
-                        path: '/'
-                    },
-                    slide: {
-                        duration: 400,
-                        easing: 'swing'
-                    }
-                });
-
                 $("#collapseAll").click(function(e) {
                     e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', false);
+                    $("#sidebar>.nav").navgoco('toggle', false);
                 });
 
                 $("#expandAll").click(function(e) {
                     e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', true);
+                    $("#sidebar>.nav").navgoco('toggle', true);
                 });
 
                 $('[data-toggle="tooltip"]').tooltip();
+            });
+        });
+
+        var ngc = document.querySelector('#ngcload');
+        ngc.addEventListener('load', function() {
+            /* Initialize navgoco with default options */
+            $("#sidebar>.nav").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', /* open */
+                save: false, /* leave false or nav highlighting doesn't work right */
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
             });
         });
     </script>
@@ -54,27 +58,68 @@ layout: compress
     </script>
     {% endif %}
 
+    {% include breadcrumbcrawl.html nav=site.data.sidebars.home_sidebar path='' %}
+
+    {% include schema/breadcrumbs.html activePath=activePath %}
 </head>
 <body>
 
-{% include topnav.html %}
+<div id="marketing-nav" class="marketing-styles">
+	{% capture topnav %}
+        {% include topnav.html %}
+    {% endcapture %}
+    {{ topnav | replace: 'href="/', 'href="https://portworx.com/' | replace: 'href="#"', ' ' }}
+</div>
+
 <!-- Page Content -->
 <div class="container">
-    <div class="col-lg-12">&nbsp;</div>
+
     <!-- Content Row -->
     <div class="row">
         <!-- Sidebar Column -->
-        <div class="col-md-3">
-          {% include sidebar.html %}
+        <div class="col-md-3 side-nav">
+          {% include sidebar.html activePath=activePath %}
         </div>
     <!-- Content Column -->
     <div class="col-md-9">
+    	<div id="algolia-search">
+    		<input type="text" class="form-control header-form input aa-input" name="algoliainput" id="algoliainput" placeholder="Search the Portworx documentation" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-labelledby="s" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+    	</div>
+
         {{content}}
+        <div class="text-right"><a class="btn" href="https://github.com/portworx/px-docs/blob/gh-pages/{{ page.path }}" data-proofer-ignore>Edit this page on Github</a></div>
     </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
-    </div>
+</div>
+
+<div id="marketing-footer" class="marketing-styles">
+    {% capture footer %}
+        {% include footer.html %}
+    {% endcapture %}
+    {{ footer | 
+         replace: 'href="/', 'href="https://portworx.com/' |
+         replace: 'href="http://127.0.0.1/', 'href="https://portworx.com/' | 
+         replace: 'src="http://127.0.0.1/', 'src="https://portworx.com/' |
+         replace: 'href="#"', ' ' 
+    }}
+</div>
+
+<!--start search-->
+<!-- at the end of the BODY -->
+<script defer type="text/javascript" src="/js/docsearch.min.js?v={{ 'now' | date: '%s' }}"></script>
+<script type="text/javascript"> 
+window.addEventListener('DOMContentLoaded', function() {
+    docsearch({
+        apiKey: '94701e6663ea3899bf379b1609403bf9',
+        indexName: 'portworx',
+        inputSelector: '#algolia-search>input',
+        debug: false /* Set debug to true if you want to inspect the dropdown */
+    });
+});
+</script>
+<!--end search-->
 
 </body>
 {% if site.google_analytics %}

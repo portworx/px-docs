@@ -4,6 +4,7 @@ title: "About PX 1.x"
 keywords: portworx, px-enterprise, release notes
 sidebar: home_sidebar
 redirect_from: "/about-1-x.html"
+meta-description: "Portworx 1.0 release notes."
 ---
 
 * TOC
@@ -41,9 +42,9 @@ Following are the supported limits as tested and qualified by Portworx.
 
 * OS Versions: Linux kernel versions 3.10.x through 4.4.x
 * Docker versions: Minimum 1.10
-* For minimum hardware recommendations, refer to [Get Started with PX-Enterprise](/getting-started/px-enterprise.html).
+* For minimum hardware recommendations, refer to [Get Started with PX-Enterprise](/#install-with-a-container-orchestrator).
 
-## Schedulers
+## Supported Schedulers
 
 PX-Enterprise is tested and qualified against the following schedulers:
 

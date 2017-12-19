@@ -3,7 +3,8 @@ layout: page
 title: "Run PX with Docker"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, add nodes
 sidebar: home_sidebar
-redirect_from: "/run-with-docker.html"
+redirect_from:
+  - /run-with-docker-ent.html
 ---
 
 * TOC
@@ -11,7 +12,7 @@ redirect_from: "/run-with-docker.html"
 
 To install and configure PX via the Docker CLI, use the command-line steps in this section.
 
->**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. If you have an existing KVDB, you may use that.  If you want to set one up, see the [etcd example](/run-etcd.html) for PX
+>**Important:**<br/>PX stores configuration metadata in a KVDB (key/value store), such as Etcd or Consul. We recommend setting up a dedicated kvdb for PX to use. If you want to set one up, see the [etcd example](/maintain/etcd.html) for PX
 
 ### Install and configure Docker
 
@@ -65,7 +66,7 @@ sudo docker run --restart=always --name px -d --net=host       \
                  -v /opt/pwx/bin:/export_bin                   \
                  -v /var/run/docker.sock:/var/run/docker.sock  \
                  -v /var/cores:/var/cores                      \
-		 -v ${HDRS}:${HDRS}                            \
+                 -v ${HDRS}:${HDRS}                            \
                 portworx/px-dev -k etcd://myetc.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdb -s /dev/sdc
 ```
 
@@ -77,20 +78,20 @@ Where the following arguments are provided to the PX daemon:
 
 -k
 	> Points to your key value database, such as an etcd cluster or a consul cluster.
-	
+
 -userpwd
        > username and password for ETCD authentication in the form <user_name>:<passwd>
- 
+
 -ca
        > location of CA file for ETCD authentication
-       
--cert 
+
+-cert
 	> location of certificate for ETCD authentication
 
--key 
+-key
 	> location of certificate key for ETCD authentication
 
--acltoken 
+-acltoken
 	> ACL token value used for Consul authentication
 
 -c
@@ -160,13 +161,13 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
    ```
    # sudo mkdir -p /etc/pwx
    ```
-   
+
 3. Move the configuration file to that directory. This directory later gets passed in on the Docker command line.
 
    ```
    # sudo cp -p config.json /etc/pwx
    ```
-   
+
 4. Edit the config.json to include the following:
    * `clusterid`: This string identifies your cluster and must be unique within your etcd key/value space.
    * `kvdb`: This is the etcd connection string for your etcd key/value store.
@@ -176,7 +177,7 @@ https://raw.githubusercontent.com/portworx/px-dev/master/conf/config.json
 Example config.json:
 
 
-```
+```json
    {
       "clusterid": "make this unique in your k/v store",
       "dataiface": "bond0",
@@ -196,7 +197,7 @@ Example config.json:
 
 >**Important:**<br/>If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 
-Please also ensure "logginurl:" is specificed in config.json. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like Prometheus
+Please also ensure "loggingurl:" is specificed in config.json. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like Prometheus
 
 You can now start the Portworx container with the following run command:
 
@@ -291,7 +292,7 @@ Global Storage Pool
 	Total Capacity	:  192 GiB
 ```
 
-For more on using **pxctl**, see the [CLI Reference](/control/cli.html).
+For more on using **pxctl**, see the [CLI Reference](/control/status.html).
 
 You have now completed setup of Portworx on your first server. To increase capacity and enable high availability, repeat the same steps on each of the remaining two servers. Run **pxctl** status to view the cluster status. Then, to continue with examples of running stateful applications and databases with Docker and PX, see [Application Solutions](/application-solutions.html).
 

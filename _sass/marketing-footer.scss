@@ -1,0 +1,13 @@
+#marketing-footer {
+    a:after {
+       content: '';
+    }
+
+    &>footer{
+        margin-bottom: 0 !important;
+    }
+
+    input {
+        line-height: 20px !important;
+    }
+}

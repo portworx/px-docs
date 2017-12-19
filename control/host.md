@@ -1,9 +1,10 @@
 ---
 layout: page
-title: "CLI Reference"
+title: "CLI Reference–Host"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
+meta-description: "This guide shows you how to use the PXCL CLI to perform host operations. Try today."
 ---
 
 * TOC
@@ -54,6 +55,14 @@ sudo /opt/pwx/bin/pxctl host attach cliencr
 Volume successfully attached at: /dev/mapper/pxd-enc1013237432577873530
 ```
 
+If you are trying to attach an encrypted volume and if the node in which the encrypted volume is being attached to is not authenticated with the secrets endpoint, then you will get the following error message
+
+```
+sudo /opt/pwx/bin/pxctl host attach  vol3
+attach: Not authenticated with the secrets endpoint
+```
+Ensure that the node is authenticated with the secretes endpoint. Refer to the Encrypted Volumes section.
+
 #### pxctl host detach
 `pxctl host detach` command is used to detach a volume from a host
 ```
@@ -67,10 +76,10 @@ ID                      NAME            SIZE    HA      SHARED  ENCRYPTED       
 772733390943400581      demovolume      5 GiB   2       no      no              LOW             1       up - detached
 ```
 #### pxctl host mount
-`pxctl host mount` mounts a volume locally on a node at a path, say /mnt/demodir
+`pxctl host mount` mounts a volume locally on a node at a path, say /var/lib/osd/demodir (note that the path /var/lib/osd is chosen because that is the designated propagated mount directory)
 ```
-sudo /opt/pwx/bin/pxctl host mount demovolume /mnt/demodir
-Volume demovolume successfully mounted at /mnt/demodir
+sudo /opt/pwx/bin/pxctl host mount demovolume /var/lib/osd/demodir
+Volume demovolume successfully mounted at /var/lib/osd/demodir
 ```
 Running "volume list" will now show something like:
 ```
@@ -109,6 +118,6 @@ Volume  :  772733390943400581
 #### pxctl host unmount
 `pxctl host unmount` unmounts a volume from a host
 ```
-sudo /opt/pwx/bin/pxctl host unmount demovolume /mnt/demodir
-Volume demovolume successfully unmounted at /mnt/demodir
+sudo /opt/pwx/bin/pxctl host unmount demovolume /var/lib/osd/demodir
+Volume demovolume successfully unmounted at /var/lib/osd/demodir
 ```

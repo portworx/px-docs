@@ -3,7 +3,8 @@ layout: page
 sidebar: home_sidebar
 title: "Get Started with PX-Enterprise"
 keywords: portworx, px-developer, container, storage, requirements
-redirect_from: "/get-started-px-enterprise.html"
+redirect_from:
+  - /get-started-px-enterprise.html
 ---
 
 * TOC
@@ -16,7 +17,7 @@ redirect_from: "/get-started-px-enterprise.html"
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Enterprise exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
-* A kev/value store such as Etcd 2.0 or Consul 0.7.0
+* A key/value store such as Etcd 3.0 or Consul 0.7.0
 * Minimum resources per server:
   * 4 CPU cores
   * 4 GB RAM
@@ -28,34 +29,23 @@ redirect_from: "/get-started-px-enterprise.html"
 * Maximum nodes per cluster:
   * 1000 server nodes
 * Open network ports:
-  * Ports 9000 - 9005 must be open for internal network traffic between nodes running PX
+  * Ports 9001 - 9004 must be open for internal network traffic between nodes running PX
 
 ## Step 2: Install and run PX-Enterprise
 
-See our quick start guides:
+Select an operating environment to install Portworx:
 
-* [Run PX-Enterprise with Docker](/run-with-docker-ent.html)
-
-Run Portworx with schedulers:
-
-* [Run Portworx with Kubernetes](/scheduler/kubernetes.html)
+* [Run Portworx with Kubernetes](/scheduler/kubernetes/install.html)
 * [Run Portworx with Mesosphere](/scheduler/mesosphere-dcos/install.html)
-* [Run Portworx with Rancher](/scheduler/rancher.html)
+* [Run Portworx with Docker](/scheduler/docker/install-standalone.html)
+* [Run Portworx with Rancher](/scheduler/rancher/install.html)
 
-Run stateful containers with Docker volumes:
+Run stateful containers with Portworx:
 
 * [Application Solutions](/application-solutions.html)
 
-Use **pxctl** ([CLI Reference](/control/cli.html)) to directly:
+Use **pxctl** ([CLI Reference](/control/status.html)) to directly:
 
 * View the cluster global capacity and health
-* Create, inspect, and delete storage volumes
-* Attach policies for IOPs prioritization, maximum volume size, and enable storage replication
-
-If you run into an issue:
-
-* [Troubleshooting](/knowledgebase/troubleshooting.html)
-
-As you use PX-Enterprise, please share your feedback and ask questions. Find the team on [Google Groups](https://groups.google.com/forum/#!forum/portworx).
-
-If your requirements extend beyond the scope of PX-Enterprise, please [contact Portworx](http://portworx.com/contact-us/) for information on PX-Enterprise. You can take a tour of the PX-Enterprise console [here](#step-3-take-a-tour-of-the-px-enterprise-web-console).
+* Create and manage storage volumes
+* Advanced management of the PX cluster

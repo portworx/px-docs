@@ -5,16 +5,18 @@ keywords: portworx, PX-Developer, container, Mesos, Mesosphere, Marathon, storag
 sidebar: home_sidebar
 youtubeId : hQojYux3ono
 redirect_from: "/video-dcos.html"
+meta-description: "Want more in depth explanations of how to run and configure Portworx with DCOS? Portworx is available in the DCOS Universe. Watch the video for more!"
 ---
-
-* TOC
-{:toc}
 
 Portworx is available in the DCOS Universe.
 
-## Watch the video
-Here is a short video that shows how to configure and run Portworx with DCOS:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "hQojYux3ono"
+    date = "2017-03-21"
+    title = "Running Portworx with DCOS"
+    description = "Here is a short video that shows how to configure and run Portworx with DCOS"
+%}
 
 
 ## See the Documentation

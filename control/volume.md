@@ -1,9 +1,10 @@
 ---
 layout: page
-title: "CLI Reference"
+title: "CLI Reference–Volume"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
+meta-description: "Explore the CLI reference guide for managing container data volumes using Portworx. Try it today!"
 ---
 
 * TOC
@@ -88,37 +89,52 @@ Volume successfully created: 508499868375963168
 ```
 
 For creating volumes with high, medium or low priority, use the following command. If the requested priority is not available, the command will create the next available priority automatically.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create clihigh --size=1 --repl=3 --iopriority=high
 ```
+##### Aggregated Volumes
 
 For creating an aggregated volume, use the following command.
 ```
 sudo /opt/pwx/bin/pxctl volume create cliaggr --size=1 --repl=2 --aggregation_level=3
 ```
+##### Sticky Volumes
 
 If you want to create a volume that cannot be deleted via other methods and can only be deleted via `pxctl`, use the --sticky flag
+
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale --size=1 --repl=3 --sticky
 ```
 
+##### Volume Sets
+
 For volumes that get created as volume sets, use --scale parameter. This parameter will help you create volumes with similar attributes in each container host in the case of highly scale-out scheduler driven environments. 
+
 ```
 sudo /opt/pwx/bin/pxctl volume create cliscale1 --size=1 --repl=3 --scale=100
 ```
+
+##### Encrypted Volumes
 
 For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cluster secret key. A different key maybe passed too.
 ```
 sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
 ```
 
+##### Passing Zones and Rack Information
+
 To create volumes within specific zones and/or racks in your deployment use the --zones and --racks options in the volume create command. Specifying zone/rack during volume creation will try to provision storage from the nodes in the specified zone/rack.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create volZoneA --size=100 --zones=a  --repl=2
 sudo /opt/pwx/bin/pxctl volume create volDefRack --racks=defaultRack --repl=2 --size=100
 ```
 
+##### Volume Distribution to Different Nodes
+
 To distribute volumes on different set of nodes, use --group option. In case there maybe an ambiguous condition use --enforce_cg to enforce group during volume creation. Note: --nodes option takes precedence over the node exclusion from --group option.
+
 ```
 sudo /opt/pwx/bin/pxctl volume create volFinGrp --group finance --enforce_cg
 ```
@@ -587,6 +603,21 @@ Here is the output of the volume alerts.
 ```
 25	970758537931791410	Feb 26 22:02:04 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated from 1 to 2
 26	970758537931791410	Feb 26 22:58:17 UTC 2017	NOTIFY		Volume operation success	Volume (Id: 970758537931791410 Name: clitest) HA updated 
+```
+#### pxctl volume ha-update cancel
+
+`pxctl volume ha-update cancel` is a command that can be used to cancel an ongoing request to ha-update a volume
+NOTE: Volume may need to be in attached state for this operation.
+```
+sudo /opt/pwx/bin/pxctl volume ha-update --repl=2 volcanc
+Update Volume Replication: Replication update started successfully for volume volcanc
+sudo /opt/pwx/bin/pxctl volume ha-update --cancel volcanc
+Update Volume Replication: Replication update canceled for volume volcanc
+```
+An alert is raised when we run this command.
+```
+sudo /opt/pwx/bin/pxctl sv alerts show
+33162 VOLUME 845339212632295104 Jul 26 03:14:42 UTC 2017 NOTIFY Volume operation success Volume volcanc (845339212632295104) ha-increase canceled
 ```
 
 #### pxctl volume stats

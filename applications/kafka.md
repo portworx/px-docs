@@ -3,7 +3,10 @@ layout: page
 title: "Run Kafka on Portworx Volumes for Topic Persistence"
 keywords: portworx, px-developer, cassandra, database, cluster, storage
 sidebar: home_sidebar
-redirect_from: "/run-kafka-on-px.html"
+redirect_from:
+  - /run-kafka-on-px.html
+  - /run-kafka
+meta-description: "Portworx can enable persistent data streams for kafka clusters. To learn how with these steps and tips, try it for yourself today!"
 ---
 
 * TOC
@@ -28,9 +31,11 @@ docker run -d --name kafka --volume-driver=pxd \
 **Get the IP address of Zookeeper and Kafka services.**
 
 ```
+{% raw %}
 ZK_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' zookeeper)
 
 KAFKA_IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' kafka)
+{% endraw %}
 ```
 
 **Create a Kafka Topic named “foobar”.**

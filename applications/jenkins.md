@@ -4,6 +4,7 @@ title: "Deploy Jenkins on Portworx"
 keywords: portworx, jenkins
 sidebar: home_sidebar
 redirect_from: "/jenkins.html"
+meta-description: "Use Portworx to simplify the deployment of Jenkins running as a container. Check out our example to see for yourself!"
 ---
 
 * TOC
@@ -58,3 +59,11 @@ Configure the Admin User
 Start Using Jenkins
 
 ![Start Using Jenkins](/images/jenkins4.png){:width="2560px" height="1258px"}
+
+## How to speed up Jenkins
+
+Be sure to read ["How to speed up Jenkins builds"](https://portworx.com/speed-up-jenkins-builds/) on the ways in which Portworx can help improve Jenkins performance and speed up CI/CD workloads.  
+
+## Highly Resilient Jenkins Using Docker Swarm
+
+Be sure to read ["Highly Resilient Jenkins Using Docker Swarm"](https://portworx.com/jenkins-docker-swarm/) on way to deploy fault-tolerant on Docker Swarm with Portworx

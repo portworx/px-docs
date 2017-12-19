@@ -3,7 +3,9 @@ layout: page
 title: "Run Portworx on Docker Datacenter"
 keywords: portworx, PX-Developer, container, docker datacenter, docker ucp, docker universal control plane, storage
 sidebar: home_sidebar
-redirect_from: "/portworx-on-ddc.html"
+redirect_from: 
+ - /portworx-on-ddc.html
+ - /run_portworx_on_ddc.html
 ---
 
 * TOC
@@ -98,11 +100,12 @@ Labels:
 
 ## Step 4: Install Portworx 
 
-Follow the instructions for [Getting Started with Portworx Enterprise](/getting-started/px-enterprise.html)
+Follow the instructions for [Getting Started with Portworx Enterprise](/#install-with-a-container-orchestrator)
 
-Follow the instructions for [Creating a PX-Enterprise Cluster](create-px-enterprise-cluster.html)
+Follow the instructions for [Creating a PX-Enterprise Cluster](/enterprise/portworx-via-lighthouse.html#step-1-provision-a-cluster-in-the-px-enterprise-console)
 
-On each of the UCP Nodes, install Portworx **either** through interactive mode by running the [bootstrap curl command](create-px-enterprise-cluster.html#step-2-run-discovery-and-bootstrap-on-a-server-node), 
+On each of the UCP Nodes, install Portworx **either** through interactive mode by running the [bootstrap curl 
+command](/enterprise/portworx-via-lighthouse.html#step-2-run-discovery-and-bootstrap-on-a-server-node), 
 **or** in a scripted/autmated method by [running px-enterprise manually](/px-usage.html) and using the token-ID from the Lighthouse "Get Startup Script" window.
 
 ## Step 5: Launch a container

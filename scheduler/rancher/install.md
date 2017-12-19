@@ -4,7 +4,10 @@ title: "Run Portworx with Rancher"
 keywords: portworx, PX-Developer, container, Rancher, storage
 sidebar: home_sidebar
 youtubeId: yGjDxDLyS78
-redirect_from: "/run-with-rancher.html"
+redirect_from:
+  - /run-with-rancher.html
+  - /scheduler/rancher.html
+  - /deploy_px_with_rancher.html
 ---
 
 * TOC
@@ -12,9 +15,13 @@ redirect_from: "/run-with-rancher.html"
 
 You can use PX-Developer to implement storage for Rancher. Portworx pools your servers' capacity and is deployed as a container. This section, qualified using Rancher v1.5.5, Cattle v0.178.3, describes how to use Portworx within Rancher.
 
-## Watch the video
-Here is a short video that shows how to configure and run Portworx with Rancher:
-{% include youtubePlayer.html id=page.youtubeId %}
+{%
+    include youtubePlayer.html
+    id = "yGjDxDLyS78"
+    title = "Running Portworx with Rancher"
+    description = "Here is a short video that shows how to configure and run Portworx with Rancher"
+%}
+
 
 ## Step 1: Install Rancher
 
@@ -62,54 +69,96 @@ From the Library Catalog, select the Portworx volume plugin driver.  Configure w
 * Use Disks: -s /dev/xvdb, for the referenced AMI images; otherwise see storage options from [here](/install/docker.html#run-px)
 * Headers Directory : /usr/src, for the referenced AMI images; /lib/modules if using with CoreOS
 
-## Step 5: Label hosts that run Portworx (optional)
 
-If Portworx is only running on a subset of nodes in the cluster, then these nodes will require node labels, 
-so that jobs requiring the Portworx driver will only run on nodes that have Portworx installed and running.
+## Step 5: Launch jobs with docker-compose / rancher-compose
 
-If new hosts are added through the GUI, be sure to create a label with the following key-value pair: `fabric : px`
+Here are some sample compose scripts that bring up wordpress stacks, referencing Portworx volumes:
 
-As directed, copy from the clipboard and paste on to the new host. The form for the command follows. Use IP addresses that are appropriate for your environment.
-
-```
-sudo docker run -e CATTLE_AGENT_IP="192.168.33.12"  \
-                -e CATTLE_HOST_LABELS='pxfabric=px-cluster1'  \
-                -d --privileged                    \ 
-                -v /var/run/docker.sock:/var/run/docker.sock   \
-                -v /var/lib/rancher:/var/lib/rancher           \
-                rancher/agent:v1.0.2 http://192.168.33.10:8080/v1/scripts/98DD3D1ADD1F0CE368B5:1470250800000:IVpsBQEDjYGHDEULOfGjt9qgA
-
+**docker-compose.yml:**
 ```
 
-* Notice the `CATTLE_HOST_LABELS`, which indicates that this node participates in a Portworx fabric called "px-cluster1".
-
-## Step 4: Launch jobs, specifying host affinity
-
-When launching new jobs, be sure to include a label, indicating the job's affinity for running on a host (Ex: "px-fabric=px-cluster1)".
-
-The `label` clause should look like the following:
-
+version: '2'
+volumes:
+  anchsand-db:
+    driver_opts:
+      repl: '3'
+      size: '5'
+    driver: pxd
+  anchsand-data:
+    driver_opts:
+      repl: '3'
+      size: '5'
+    driver: pxd
+services:
+  wordpress:
+    image: wordpress
+    volumes:
+    - anchsand-data:/var/www/html
+    links:
+    - db:mysql
+    labels:
+      io.rancher.container.pull_image: always
+  lb:
+    image: wordpress
+    ports:
+    - 8026:8026/tcp
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+    - anchsand-db:/var/lib/mysql
 ```
-labels:
-    io.rancher.scheduler.affinity:host_label: pxfabric=px-cluster1
+
+**rancher-compose.yml**
 ```
-
-Following is an example for starting Elasticsearch. The "docker-compose.yml" file is:
-
-```yaml
-elasticsearch:
-  image: elasticsearch:latest
-  command: elasticsearch -Des.network.host=0.0.0.0
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-  volume_driver: pxd
-  volumes:
-    - elasticsearch1:/usr/share/elasticsearch/data
-  labels:
-      io.rancher.scheduler.affinity:host_label: pxfabric=px-cluster1
-```
-
-* Notice the `pxd` volume driver as well as the volume itself (`elasticsearch1`).
-*The referenced volume can be a volume name, a volume ID, or a snapshot ID.  
-
+version: '2'
+services:
+  wordpress:
+    scale: 2
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 80
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  lb:
+    start_on_create: true
+    lb_config:
+      certs: []
+      config: |-
+        timeout client 2400000
+        timeout server 2400000
+      port_rules:
+      - priority: 1
+        protocol: http
+        service: wordpress
+        source_port: 8026
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      reinitializing_timeout: 60000
+  db:
+    scale: 1
+    start_on_create: true
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 3306
+ ```
+ 
+      

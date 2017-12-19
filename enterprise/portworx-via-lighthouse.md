@@ -3,7 +3,10 @@ layout: page
 title: "Manage PX-Enterprise via Lighthouse"
 keywords: portworx, px-enterprise, cluster, container, storage
 sidebar: home_sidebar
-redirect_from: "/launch-via-lighthouse.html"
+redirect_from:
+  - /launch-via-lighthouse.html
+  - /create-px-enterprise-cluster.html
+meta-description: "Lighthouse is a management and GUI to create PX clusters and launch PX nodes to join your clusters. Learn how to manage PX clusters via the Lighthouse today."
 ---
 
 * TOC
@@ -81,7 +84,7 @@ Bootstrap script also saves your selection as a unique *Hardware Profile*. You c
 
 You can add new servers nodes to the existing cluster by running the bootstrap script for a cluster. Server nodes can have different Server Profiles, where some servers might contribute little or no storage to the cluster.
 
->**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see [Step 1: Verify requirements](/getting-started/px-developer.html#step-1-verify-requirements).
+>**Important:**<br/>For server node connections, use a low-latency network, as opposed to spanning a WAN. For more details, see [Step 1: Verify requirements](/#minimum-requirements).
 
 At this point you will have a PX-Enterprise cluster that you will be able to monitor from PX-Enterprise console.
 
