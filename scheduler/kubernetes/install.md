@@ -124,14 +124,7 @@ $ kubectl label nodes minion5 "px/enabled=false" --overwrite
 Portworx is deployed as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Therefore it automatically scales as you grow your Kubernetes cluster.  There are no additional requirements to install Portworx on the new nodes in your Kubernetes cluster.
 
 #### Installing behind the HTTP proxy
-During the installation Portworx may require access to the Internet, to fetch kernel headers if they are not available locally on the host system.  If your cluster runs behind the HTTP proxy, you will need to expose `PX_HTTP_PROXY` and/or `PX_HTTPS_PROXY` environment variables to point to your HTTP proxy when starting the DaemonSet.
-
-Use `e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when generating the DaemonSet spec. For example:
-
-```
-$ curl -o px-spec.yaml \
-  "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
-```
+During the installation Portworx may require access to the Internet, to fetch kernel headers if they are not available locally on the host system.  If your cluster runs behind the HTTP proxy, you will need to expose `PX_HTTP_PROXY` and/or `PX_HTTPS_PROXY` environment variables to point to your HTTP proxy when starting the DaemonSet. [Passing environment variables](https://docs.portworx.com/runc/options.html#env-variables).
 
 ## Uninstall
 
@@ -144,16 +137,16 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   ```bash
   # step 1) we first remove PX-OCI service
   kubectl label nodes --all px/enabled=remove --overwrite
-  
+
   # step 2) monitor the pod termination, until all terminated
   kubectl get pods -o wide -n kube-system -l name=portworx
-  
+
   # step 3a) If you deployed using custom px-spec.yaml file, we recommend uninstall using same file:
   kubectl delete -f px-spec.yaml
-  
+
   # step 3b) Alternatively, delete PX configs using the Web-form (if using GKE, please include kbver param)
   kubectl delete -f 'http://install.portworx.com?type=oci&kbver=1.7.8-gke.0'
-  
+
   # step 4) Finally, remove the 'px/enabled' label from your nodes
   kubectl label nodes --all px/enabled-
   ```
@@ -163,7 +156,7 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   ```bash
   # If you deployed using custom px-spec.yaml file, we recommend uninstall using same file:
   kubectl delete -f px-spec.yaml
-  
+
   # Alternatively, delete PX using the Web-form (if using GKE, please include kbver param)
   kubectl delete -f 'http://install.portworx.com?type=dock&kbver=1.7.8-gke.0'
   ```
@@ -190,7 +183,7 @@ One can control the PX-OCI service using the Kubernetes labels:
   kubectl label nodes minion2 px/service=enable
   kubectl label nodes minion5 px/service=disable
   ```
-  
+
 
 ## Wipe off PX Cluster configuration
 The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
