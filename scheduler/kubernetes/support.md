@@ -72,8 +72,9 @@ Please run the following commands on any one of the nodes running Portworx:
 # kubectl version
 # kubectl logs -n kube-system -l name=portworx --tail=1000
 # kubectl get pods -n kube-system -l name=portworx -o wide
-# kubectl exec $(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}') -n kube-system -- /opt/pwx/bin/pxctl status
-# kubectl exec $(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}') -n kube-system -- /opt/pwx/bin/pxctl volume list
+# PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+# kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
+# kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
 ```
 Include above logs when contacting us.
 
