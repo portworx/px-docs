@@ -3,6 +3,7 @@
 ```
    -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
    -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
+   -e key=value              Specify extra environment variables
    -v <dir:dir[:shared,ro]>  Specify extra mounts
    -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
    -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
@@ -14,7 +15,7 @@
    -a                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
    -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
    -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
-   -token <token>            [OPTIONAL] Portworx lighthouse token for cluster
+   -t <token>                [OPTIONAL] Portworx lighthouse token for cluster
   
 ```
 
