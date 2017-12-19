@@ -27,6 +27,7 @@ This is a minor update to address an issue with installing a reboot service whil
 * Abort all pending I/Os the the pxd device during a reboot so speed up reboots
 * Move the px-ns internal port from 7000 to 9013
 * Remove the unnecessary warning string "Data is not local to the node"
+* Add px_ prefix to all volume labels
 
 ### Errata 
 
