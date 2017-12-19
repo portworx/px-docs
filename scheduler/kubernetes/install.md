@@ -137,6 +137,10 @@ $ curl -o px-spec.yaml \
   "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
 ```
 
+## Upgrade
+
+For information about upgrading Portworx inside Kubernetes, please refer to the dedicated [upgrade page](/scheduler/kubernetes/upgrade.html).
+
 ## Uninstall
 
 Uninstalling or deleting the portworx daemonset only removes the portworx containers from the nodes. As the configurations files which PX use are persisted on the nodes the storage devices and the data volumes are still intact. These portworx volumes can be used again if the PX containers are started with the same configuration files.
