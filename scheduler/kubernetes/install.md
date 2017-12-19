@@ -8,6 +8,7 @@ redirect_from:
   - /scheduler/kubernetes.html
   - /scheduler/kubernetes/
   - /cloud/azure/k8s_tectonic.html
+  - /run-with-kube.md
 
 meta-description: "Find out how to install PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
