@@ -3,6 +3,8 @@ layout: page
 title: "Run PX under runC"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
+redirect_from:
+  - /scheduler/docker/systemd.html
 ---
 
 * TOC
@@ -13,7 +15,8 @@ Running Portworx as a runC container eliminates any cyclical dependancies betwee
 
 To install and configure PX to run directly with runC, please use the configuration steps described in this section.
 
->**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
+>**Note 1:**<br/>If you are running PX with either `Kubernetes` or `Mesosphere DC/OS`, it is recommended to use the orchestrator specific installation instructions for those environments.
+>**Note 2:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
 
 ## Install the PX OCI bundle
 Portworx provides a Docker based installation utility to help deploy the PX OCI
@@ -32,8 +35,6 @@ $ sudo docker run --entrypoint /runc-entry-point.sh \
 ```
 
 >**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
-
->**Note:**<br/>The `--privileged=true` flag has been included for backward compatibility.  You may omit this flag when using a newer Docker version (ie. v1.13 or higher), also when installing on systems that do not have SELinux enabled.
 
 ## Running PX under runC
 

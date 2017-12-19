@@ -33,27 +33,16 @@ You will need to create a master AMI that you will associate with your auto scal
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  Please **do not 
-start 
-PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
 
-This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
+>**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
+
+This AMI will ensure that PX is able to launch on startup.  Ensure that the `stateless AMI` specifies the `-z` option so that PX installs as a storage-less node:
 
 ```bash
-ExecStart=/usr/bin/docker run --net=host --privileged=true \
-      --cgroup-parent=/system.slice/px-enterprise.service \
-      -v /run/docker/plugins:/run/docker/plugins     \
-      -v /var/lib/osd:/var/lib/osd:shared            \
-      -v /dev:/dev                                   \
-      -v /etc/pwx:/etc/pwx                           \
-      -v /opt/pwx/bin:/export_bin                    \
-      -v /var/run/docker.sock:/var/run/docker.sock   \
-      -v /var/cores:/var/cores                       \
-      -v ${HOSTDIR}:${HOSTDIR}                       \
-      --name=%n \
-      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379  -z
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+       -k etcd://myetc.company.com:2379 -z
 ```
-
 >**Note:**The `-z` option instructs PX to come up as a stateless node.
 
 At this point, these nodes will be able to join and leave the cluster dynamically.
@@ -86,32 +75,22 @@ The PX instance that is launching will use the above information to either alloc
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  Please **do not 
-start 
-PX** while creating the master AMI.
+3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  
 
-This AMI will ensure that PX is able to launch on startup.  Change the `ExecStart` to look as follows:
+>**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
+
+This AMI will ensure that PX is able to launch on startup.  Ensure that the `storage AMI` specifies the `-s` option with the EBS volume template.  This ensures that PX installs as a storage node:
 
 ```bash
-ExecStart=/usr/bin/docker run --net=host --privileged=true \
-      --cgroup-parent=/system.slice/px-enterprise.service \
-      -v /run/docker/plugins:/run/docker/plugins     \
-      -v /var/lib/osd:/var/lib/osd:shared            \
-      -v /dev:/dev                                   \
-      -v /etc/pwx:/etc/pwx                           \
-      -e AWS_ACCESS_KEY_ID=XXX-YYY-ZZZ               \
-      -e AWS_SECRET_ACCESS_KEY=XXX-YYY-ZZZ           \
-      -v /opt/pwx/bin:/export_bin:shared             \
-      -v /var/run/docker.sock:/var/run/docker.sock   \
-      -v /var/cores:/var/cores                       \
-      -v ${HOSTDIR}:${HOSTDIR}                       \
-      --name=%n \
-      portworx/px-enterprise -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s vol-0743df7bf5657dad8 -s vol-0055e5913b79fb49d   
+$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+       -k etcd://myetc.company.com:2379 -z
 ```
 
 >**Note:**There are 2 new env variables passed into the ExecStart.  These are AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
 
 >**Note:** -s vol-0743df7bf5657dad8 and -s vol-0055e5913b79fb49d - you can pass multiple EBS volumes to use as templates. If these volumes are unavailable, then volumes identical to these will be automatically created.
+
+>**Note:** The cluster ID is the same as the ID used for the storage-less nodes.
 
 ### Cloud-Init
 Optionally, EBS template information can be provided by the `user-data` in [cloud-init](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html).
