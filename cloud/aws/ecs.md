@@ -51,17 +51,13 @@ Create a custom IAM role and Select Role Type "Amazon EC2 Role for Container Ser
      }
 
 
-
 Use the created custom IAM role `ECS` for this ECS cluster and the security group should allow inbound ssh access from your network.
 
 Your EC2 instances must have the correct IAM role set.  Follow these [IAM instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html).
 
-
-
 After the ECS cluster "ecs-demo1" successfully launched, the corresponding EC2 instances that belong to this ECS cluster can be found under the "ECS instance" tab of ECS console or from AWS EC2 console. Each of this EC2 instance is running with an amazon-ecs-agent in docker container.
 
 ![ecs-clust-create](/images/aws-ecs-setup_withPX_003xx.PNG "ecs-3"){:width="1723px" height="863px"}.
-
 
 #### Add storage capacity to each EC2 instance
 Provisioning storage to these EC2 instances by creating new EBS volumes and attaching them to these EC2 instances.  Portworx will be using these EBS volumes to provision storage to your containers. Below we are creating a 20GB EBS volume on the same region "us-east-1b" of the launched EC2 instances. Ensure all ECS instances are attached with the EBS volumes.
@@ -75,46 +71,9 @@ Note that there is no need to format the EBS volumes once they are created and a
 
 ### Step 2: Deploy Portworx
 
->**Important:**<br/>
-ssh into each of the EC2 instances and configure docker for shared mount on "/"
+Install PX on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
 
-     $ ssh -i ~/.ssh/id_rsa ec2-user@52.91.191.220
-     $ sudo mount --make-shared /
-     $ sudo sed -i.bak -e \
-            's:^\(\ \+\)"$unshare" -m -- nohup:\1"$unshare" -m --propagation shared -- nohup:' \
-	         /etc/init.d/docker
-     $ sudo service docker restart
-
-
-
-Run Portworx on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
-
-Portworx requires a 3-node etcd cluster to be running for storing cluster configuration.
-
-Follow the instructions here for spinning up a [etcd cluster](/maintain/etcd.html)
-
-Launch PX containers, you will have to log into each of ECS instance and run the following command for this step. Change the etcd IP and cluster ID for your PX cluster deployment.
-
-
-      $ sudo docker run --restart=always --name px -d --net=host \
-                   --privileged=true                             \
-                   -v /run/docker/plugins:/run/docker/plugins    \
-                   -v /var/lib/osd:/var/lib/osd:shared           \
-                   -v /dev:/dev                                  \
-                   -v /etc/pwx:/etc/pwx                          \
-                   -v /opt/pwx/bin:/export_bin:shared            \
-                   -v /var/run/docker.sock:/var/run/docker.sock  \
-                   -v /var/cores:/var/cores                      \
-                   -v /usr/src:/usr/src                          \
-                   portworx/px-dev -daemon -k etcd://172.31.31.61:4001 -c <Enter your unique cluster ID> -a -z -f
-
-On above the etcd is also deployed as in docker container and is running on one of the EC2 instance; thus the etcd IP is using the internal IP address of the EC2 instance "172.31.31.61".
-
-Make sure you enter a cluster ID that is unique if your etcd server is going to be used for multiple PX clusters.
-
-In the example above, we are using the -a option which will pick up all the available unformatted drives to be added to the local storage pool. Alternatively, a user can point the the drive they want to be selected to be added to the Portworx pool by using the -s option instead of the -a option (-s /dev/xvdc -s /dev/xvdd)
-
-
+To install PX on each ECS instance, follow the instructions [here](/runc/index.html).
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
 From your linux workstation download and setup AWS ECS CLI utilities
