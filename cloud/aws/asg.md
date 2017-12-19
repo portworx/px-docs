@@ -33,7 +33,7 @@ You will need to create a master AMI that you will associate with your auto scal
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
+3. Configure this instance to run PX in storage-less mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
 
 >**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
 
@@ -75,7 +75,7 @@ The PX instance that is launching will use the above information to either alloc
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX.  Install Docker and follow [these](/scheduler/docker/systemd.html) instructions to configure the image to run PX.  
+3. Configure this instance to run PX in storage mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
 
 >**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
 
