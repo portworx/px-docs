@@ -33,18 +33,18 @@
 -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
 ```
 
-##### env-variables:
+##### environment-variables:
 ```
 PX_HTTP_PROXY		[OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
 PX_HTTPS_PROXY		[OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.
 PX_ENABLE_CACHE_FLUSH	[OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=yes.
 ```
 
-Setting environment variables can be done using the -e option. When generating the daemonset spec using -e query param (-e<VAR>=<VAL>,<VAR>=<VAL>,...).
+Setting environment variables can be done using the -e option. When generating the daemonset spec using -e query param (-eVAR=VAL,VAR=VAL,...).
 ```
 $ curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
 ```
-PX Runc command line install (-e <VAR>=<VAL>).
+PX Runc command line install (-e VAR=VAL).
 ```
 $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -e PX_ENABLE_CACHE_FLUSH=yes -k etcd://myetc.company.com:2379 -s /dev/xvdb -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
