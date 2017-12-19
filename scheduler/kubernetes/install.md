@@ -18,8 +18,6 @@ meta-description: "Find out how to install PX within a Kubernetes cluster and ha
 
 Portworx can run alongside Kubernetes and provide Persistent Volumes to other applications running on Kubernetes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
->**Note:**<br/>If you are running Kubernetes 1.5 and below, please follow [these instructions](flexvolume.html).
-
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
 ## Deploy PX with Kubernetes
@@ -32,18 +30,11 @@ The native portworx driver in Kubernetes supports the following features:
 3. Persistent Volume Claims
 4. Persistent Volumes
 
-
-Portworx also comes with two install options for Kubernetes:
-
-1. PX-OCI - runs Portworx as OCI (Open Container Initiative) container [**RECOMMENDED**]
-2. PX-Container - runs Portworx as Docker container
-
 <a name="prereqs-section"></a>
 ## Prerequisites
 
 * *VERSIONS*: Portworx recommends running with Kubernetes 1.7.5 or newer
     - If your Kubernetes cluster version is between 1.6.0 and 1.6.4, you will need to set `mas=true` when creating the spec (see [install section](#install) below), to allow Portworx to run on the Kubernetes master node.
-    - If your Kubernetes cluster is older than 1.6, follow [these](flexvolume.html) instructions to run Kubernetes with flexvolume (not recommended and has limited features).
 * *SHARED MOUNTS*: If you are running Docker v1.12, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propogation.html)), as otherwise Kubernetes will not be able to install Portworx.<br/> Newer versions of Docker have shared mounts propagation already enabled, so no additional actions are required.
 * *FIREWALL*: Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.<br/> Also ensure ports 9001-9015 are open for "localhost" (generally, this is a default firewalls setting, so in most cases no actions will be required to enable "localhost" ports).
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
@@ -70,6 +61,10 @@ kubectl apply -f px-spec.yaml
 
 # Monitor the deployment
 kubectl get pods -o wide -n kube-system -l name=portworx
+
+# Monitor Portworx cluster status
+PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 
 >**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [http://install.portworx.com](http://install.portworx.com) and use the prepared HTML form.
@@ -81,7 +76,6 @@ Below are all parameters that can be given in the query string  (see [install.po
 | Value  | Description                                                                                                                           | Example                                                    |
 |:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
 |        | <center>REQUIRED PARAMETERS</center>                                                                                                  |                                                            |
-| type   | Select Portworx deployment type (_oci_ for OCI container, _dock_ for Docker container)                                                | <var>type=oci</var>                                        |
 | c      | Specifies the unique name for the Portworx cluster.                                                                                   | <var>c=test_cluster</var>                                  |
 | k      | Your key value database, such as an etcd cluster or a consul cluster.                                                                 | <var>k=etcd:http://etcd.fake.net:2379</var>                |
 |        | <center>OPTIONAL PARAMETERS</center>                                                                                                  |                                                            |
