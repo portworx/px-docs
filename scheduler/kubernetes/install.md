@@ -11,6 +11,7 @@ redirect_from:
   - /run-with-kube.md
   - /scheduler/kubernetes/flexvolume.html
   - /run-with-kube.md
+  - /scheduler/kubernetes/flexvolume.html
 
 meta-description: "Find out how to install PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
