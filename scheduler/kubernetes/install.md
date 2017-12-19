@@ -113,12 +113,12 @@ If you are still experiencing issues, please refer to [Troubleshooting PX on Kub
 To restrict Portworx to run on only a subset of nodes in the Kubernetes cluster, we can use the `px/enabled` Kubernetes label on the minion nodes you _do not_ wish to install Portworx on.  Below are examples to prevent Portworx from installing and starting on _minion2_ and _minion5_ nodes.
 
 If Portworx Daemonset is not yet deployed in your cluster:
-  ```bash
+  ```
   $ kubectl label nodes minion2 minion5 px/enabled=false --overwrite
   ```
 
 If Portworx has already been deployed in your cluster:
-  ```bash
+  ```
   $ kubectl label nodes minion2 minion5 px/enabled=remove --overwrite
   ```
     
