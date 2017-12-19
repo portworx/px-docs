@@ -50,24 +50,24 @@ $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -e PX_ENABLE_CACHE_FLUSH=ye
 ```
 Manually add arguments to the .yaml configuration file.
 ```
-	...
-	...
+  ...
+  ...
 
-      containers:
-        - name: portworx
-          image: portworx/oci-monitor:1.2.11.7
-          terminationMessagePath: "/tmp/px-termination-log"
-          imagePullPolicy: Always
-          args:
-            ["-k", "etcd:http://etcdv3-01.portworx.com:2379", "-c", "hose-gke-cluster-1", "-a", "-f",
-             "-x", "kubernetes"]
-          env:
-            - name: "PX_TEMPLATE_VERSION"
-              value: "v2"
-	    - name: "PX_ENABLE_CACHE_FLUSH"
-	      value: "yes"
+containers:
+  - name: portworx
+    image: portworx/oci-monitor:1.2.11.7
+    terminationMessagePath: "/tmp/px-termination-log"
+      imagePullPolicy: Always
+      args:
+        ["-k", "etcd:http://etcdv3-01.portworx.com:2379", "-c", "hose-gke-cluster-1", "-a", "-f",
+         "-x", "kubernetes"]
+      env:
+        - name: "PX_TEMPLATE_VERSION"
+          value: "v2"
+	- name: "PX_ENABLE_CACHE_FLUSH"
+	  value: "yes"
 
-	...
-	...
+  ...
+  ...
 
 ```
