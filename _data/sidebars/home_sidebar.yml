@@ -138,8 +138,6 @@
     folderitems:
     - title: AWS
       folderitems:
-      - title: CloudFormation
-        url: /cloud/aws/cloudformation.html
       - title: ECS
         url: /cloud/aws/ecs.html
       - title: KOPS
