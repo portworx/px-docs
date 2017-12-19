@@ -54,10 +54,21 @@ If the PVC creation is failing, this could be due the following reasons
   * The application container found existing data in the mounted PVC volume and was expecting an empty volume.
 
 ### Useful commands
-* List PX pods: `kubectl get pods -l name=portworx -n kube-system`
+* List PX pods: `kubectl get pods -l name=portworx -n kube-system -o wide`
 * Describe PX pods: `kubectl describe pods -l name=portworx -n kube-system`
-* Get PX cluster status: `kubectl exec $(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}') -n kube-system -- /opt/pwx/bin/pxctl status`
-* List PX volumes: `kubectl exec $(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}') -n kube-system -- /opt/pwx/bin/pxctl volume list`
+* Get PX cluster status:
+
+  ```bash
+  $ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+  $ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
+  ```
+* List PX volumes:
+
+  ```bash
+  $ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+  $ kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
+  ```
+
 * Portworx logs
   * If you have deployed PX as OCI, for each node running Portworx: `journalctl -lu portworx`
   * If you have deployed PX as docker containers: `kubectl logs -n kube-system -l name=portworx --tail=99999`
