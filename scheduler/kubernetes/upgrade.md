@@ -10,23 +10,18 @@ sidebar: home_sidebar
 
 This guide describes the procedure how to upgrade Portworx in Kubernetes environment as OCI container, which is the default and recommended method of running Portworx in Kubernetes.
 
-We assume you have deployed Portworx as [Kubernetes Daemonset](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) using instructions provided at our [install page](/scheduler/kubernetes/install.html).
-
 
 >**IMPORTANT:**<br/>We do not recommend upgrading Portworx using [Kubernetes instructions](https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/) (e.g. via `kubectl set image ds/portworx portworx=portworx/XXXX:### -n kube-system`).<br/>
->Instead, whenever possible, we recommend using the [install.portworx.com](http://install.portworx.com) site to generate latest recommended YAML-spec, and re-apply the spec to upgrade Portworx.
+>Instead, please follow the instructions below for best practice how to upgrade Portworx in Kubernetes environment.
 
 
->**NOTE**: This procedure will also automatically migrate all legacy PX-Container deployments into the OCI containers.  If you are looking for legacy instructions how to upgrade PX-Container deployments, you can find them [here](/scheduler/kubernetes/upgrade-legacy.html).
+## Upgrading Portworx
 
-
-## Upgrading PX-OCI
-
-The PX-OCI Daemonset is using `RollingUpdate` update strategy, which greatly simplifies the upgrade process.
+The Portworx Daemonset is using `RollingUpdate` update strategy, which greatly simplifies the upgrade process.
 
 ### Step 1) Apply updated YAML-spec
 
-The upgrade the PX-OCI, we will just have to re-apply the YAML spec-file generated from the [install.portworx.com](http://install.portworx.com) site.  The same applies if we want to migrate from the deprecated PX-Container to the recommended PX-OCI daemonset.
+The upgrade Portworx, we will just have to re-apply the YAML spec-file generated from the [install.portworx.com](http://install.portworx.com) site, which is very similar to how we [installed Portworx](/scheduler/kubernetes/install.html#install).
 
 
 **OPTION a)**:<br/>
@@ -64,7 +59,7 @@ Once you have applied the new YAML-spec, Kubernetes will start applying the Port
 
 ### Step 2) Monitor the rolling upgrade
 
-<U>ROLLOUT STATUS</U>:<br/>
+<U>Rollout status</U>:<br/>
 One can monitor the upgrade process by running the "kubectl rollout status" command:
 
 ```
@@ -79,8 +74,8 @@ daemon set "portworx" successfully rolled out
 
 Note that this command will inform us of general upgrade progress, but it will not point on which exact node is being upgraded and when.
 
-<U>NODES PORTWORX PODS STATUS</U>:<br/>
-To get more information about the status of Portworx daemonset across the nodes, we can run the following command:
+<U>Pods status</U>:<br/>
+To get more information about the status of Portworx daemonset across the nodes, run:
 
 ```
 $ kubectl get pods -o wide -n kube-system -l name=portworx
@@ -94,16 +89,18 @@ portworx-x29h9   0/1       ContainerCreating   0          0s        192.168.56.7
 As we can see in the example output above:
 
 * looking at the STATUS/READY, we can tell that the rollout-upgrade is currently creating the container on the "minion2" node
-* looking at AGE, we can tell that
-	* "minion4" and "minion5" have Portworx up for 16 days (likely still on old version, and to be upgraded), while the
-	* "minion3" has Portworx up for only 5 minutes (likely just upgraded and restarted)
+* looking at AGE, we can tell that:
+   - "minion4" and "minion5" have Portworx up for 16 days (likely still on old version, and to be upgraded), while the
+   - "minion3" has Portworx up for only 5 minutes (likely just upgraded and restarted)
 * if we keep on monitoring, we will observe that the upgrade will not switch to the "next" node until STATUS is "Running" and the READY is 1/1 (meaning, the "readynessProbe" reports Portworx service is fully up).
 
-<U>PORTWORX CLUSTER LIST</U>:<br/>
-Finally, one can also run the following command to inspect the Portworx cluster:
+<U>Portworx cluster list</U>:<br/>
+Finally, one can run the following command to inspect the Portworx cluster:
 
 ```
-minion1$ /opt/pwx/bin/pxctl cluster list
+$ px_pod=$(kubectl get pods -n kube-system -l name=portworx -o jsonpath='{.items[0].metadata.name}')
+$ kubectl exec -it $px_pod -n kube-system /opt/pwx/bin/pxctl status
+
 [...]
 Nodes in the cluster:
 ID      DATA IP         CPU             MEM TOTAL       MEM FREE        CONTAINERS      VERSION                 STATUS
@@ -112,11 +109,16 @@ minion4 192.168.56.73   3.836317        4.0 GB          3.0 GB          N/A     
 minion3 192.168.56.72   3.324808        4.1 GB          3.3 GB          N/A             1.2.11.9-8aa25b7        Online
 minion2 192.168.56.71   3.316327        4.1 GB          3.2 GB          N/A             1.2.11.9-8aa25b7        Online
 ```
-* from the output above, we can confirm that the
-	* "minion4" and "minion5" are still on the old Portworx version (1.2.11.4), while
-	* "minion3" and "minion2" have already been upgraded to the latest version (in our case, v1.2.11.9).
+* from the output above, we can confirm that the:
+   - "minion4" and "minion5" are still on the old Portworx version (1.2.11.4), while
+   - "minion3" and "minion2" have already been upgraded to the latest version (in our case, v1.2.11.9).
 
 
-## Migrating PX-Container to PX-OCI daemonset
+## Migrating from Legacy Portworx
 
-There are no special instructions required to migrate your old PX-Container into the latest PX-OCI Daemonset - please follow the instructions listed at [Upgrading PX-OCI](#upgrading-px-oci) to generate a new YAML spec-file using [install.portworx.com](http://install.portworx.com).
+The legacy Portworx installations (v1.2.10 and older) have been deploying as PX-Containers Kubernetes daemonsets (i.e. Portworx running directly as Docker container), but since then we have changed the deployments as via [OCI runC](/runc/runc/index.html), which eliminates cyclical dependancies, speeds up service restarts, and brings other improvements.
+
+There are no special instructions required to migrate your old PX-Container into the latest OCI runC Daemonset - please follow the instructions listed [above](#upgrading-portworx) to generate a new YAML spec-file, reapply it on your Kubernetes cluster, and this will automatically migrate Portworx to OCI containers deployment.
+
+
+>**NOTE**:<br/>Since Portworx v1.2.11 installing PX-Containers as Kubernetes daemonset is no longer recommended.  If you are looking for legacy instructions how to manually upgrade and retain PX-Container deployment, you can find them [here](/scheduler/kubernetes/upgrade-legacy.html).
