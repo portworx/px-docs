@@ -12,6 +12,11 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.11.10
+This is a minor update to address an issue with installing a reboot service while upgrading a runC container.
+
+### Fixed issues
+* When upgrading a runC container, the new version will correctly install a reboot service.  A reboot service (systemd service) is needed to reduce the wait time before a PX device returns with a timeout when the PX service is down.  Without this reboot service, a node can take 10 minutes to reboot.
 
 ## 1.2.11.9
 
@@ -22,7 +27,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Abort all pending I/Os the the pxd device during a reboot so speed up reboots
 * Move the px-ns internal port from 7000 to 9013
 * Remove the unnecessary warning string "Data is not local to the node"
-
+* Add px_ prefix to all volume labels
 
 ### Errata 
 
@@ -34,7 +39,6 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 * Fix resync mechanism for read-only snapshots
 * Improve log space utilization by removing old log files based on space usage
-
 
 ### Errata 
 

@@ -3,6 +3,7 @@
 ```
 -oci <dir>                Specify OCI directory (dfl: /opt/pwx/oci)
 -sysd <file>              Specify SystemD service file (dfl: /etc/systemd/system/portworx.service)
+-e key=value              Specify extra environment variables
 -v <dir:dir[:shared,ro]>  Specify extra mounts
 -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
 -k                        [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
@@ -14,7 +15,7 @@
 -a                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
 -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
 -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
--token <token>            [OPTIONAL] Portworx lighthouse token for cluster
+-t <token>                [OPTIONAL] Portworx lighthouse token for cluster
 
 ```
 
@@ -40,15 +41,12 @@ PX_HTTPS_PROXY		[OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PR
 PX_ENABLE_CACHE_FLUSH	[OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=yes.
 ```
 
-Setting environment variables can be done using the -e option. When generating the daemonset spec using -e query param (-eVAR=VAL,VAR=VAL,...).
-```
-$ curl -o px-spec.yaml "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
-```
-PX Runc command line install (-e VAR=VAL).
+Setting environment variables can be done using the -e option.  During PX Runc command line install (-e VAR=VAL).
 ```
 $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID -e PX_ENABLE_CACHE_FLUSH=yes -k etcd://myetc.company.com:2379 -s /dev/xvdb -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
-Manually add arguments to the .yaml configuration file.
+
+Or by manually adding the arguments to the .yaml configuration file.
 ```
   ...
   ...
