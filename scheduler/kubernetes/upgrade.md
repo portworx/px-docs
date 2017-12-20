@@ -116,7 +116,7 @@ minion2 192.168.56.71   3.316327        4.1 GB          3.2 GB          N/A     
 
 ## Migrating from Legacy Portworx
 
-The legacy Portworx installations (v1.2.10 and older) have been deploying as PX-Containers Kubernetes daemonsets (i.e. Portworx running directly as Docker container), but since then we have changed the deployments as via [OCI runC](/runc/runc/index.html), which eliminates cyclical dependancies, speeds up service restarts, and brings other improvements.
+The legacy Portworx installations (v1.2.10 and older) have been deploying as PX-Containers Kubernetes daemonsets (i.e. Portworx running directly as Docker container), but since then we have changed the deployments as via [OCI runC](/runc/index.html), which eliminates cyclical dependancies, speeds up service restarts, and brings other improvements.
 
 There are no special instructions required to migrate your old PX-Container into the latest OCI runC Daemonset - please follow the instructions listed [above](#upgrading-portworx) to generate a new YAML spec-file, reapply it on your Kubernetes cluster, and this will automatically migrate Portworx to OCI containers deployment.
 
