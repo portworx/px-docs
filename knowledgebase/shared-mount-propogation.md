@@ -54,7 +54,7 @@ $ sudo systemctl restart docker
 
 ### RedHat/CentOS Configuration and Shared Mounts
 
-1. Follow the Docker installation guide, [Red Hat Enterprise Linux](https://docs.docker.com/engine/installation/linux/rhel/) and then start the Docker service.
+1. Follow the Docker installation guide for [Red Hat Enterprise Linux](https://www.docker.com/docker-red-hat-enterprise-linux-rhel)/[Centos](https://docs.docker.com/engine/installation/linux/centos/) and then start the Docker service.
 
 2. Verify that your Docker version is 1.10 or later:
 ```
@@ -79,7 +79,7 @@ $ sudo systemctl restart docker
 ### Ubuntu Configuration and Shared Mounts
 
 1. SSH into your first server.
-2. Follow the Docker installation guide for [Ubuntu](https://docs.docker.com/engine/installation/linux/ubuntulinux/):
+2. Follow the Docker installation guide for [Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/):
 
 3. Verify that your Docker version is 1.10 or later. In your SSH window, run:
 ```
