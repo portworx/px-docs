@@ -137,7 +137,7 @@ Use `e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when
     "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
   ```
 
-Alternative ways for providing environment variables can be found at [passing environment variables](/runc/options.html#environment-variables).
+To view a list of all Portworx environment variables, go to [passing environment variables](/runc/options.html#environment-variables).
 
 ## Upgrade
 
