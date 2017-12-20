@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
->**IMPORTANT:**<br/> This method of upgrading portworx is DEPRECATED.  If you are running Portworx as PX-Container DaemonSet, we highly reccomend to migrate it into the OCI containers by following the [upgrade instructions](/scheduler/kubernetes/upgrade.html#migrating-px-container-to-px-oci-daemonset).
+>**IMPORTANT:**<br/> This method of upgrading portworx is DEPRECATED.  If you are running Portworx as PX-Container DaemonSet, we highly reccomend to migrate it into the OCI containers by following the [upgrade instructions](/scheduler/kubernetes/upgrade.html#migrating-from-legacy-portworx).
 
 This guide walks through upgrading Portworx deployed as a PX-Container DaemonSet in a Kubernetes cluster.  For instructions how to upgrade OCI containers DaemonSet, please follow the same [upgrade instructions](/scheduler/kubernetes/upgrade.html).
 
