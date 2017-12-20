@@ -82,5 +82,15 @@ spec:
           requests:
             cpu: 200m
       hostNetwork: true
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "name"
+                    operator: In
+                    values:
+                    - portworx-pvc-controller
+              topologyKey: "kubernetes.io/hostname"
       serviceAccountName: portworx-pvc-controller-account
 
