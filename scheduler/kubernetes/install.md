@@ -55,7 +55,11 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 #### Generating the spec
 
-To generate the spec file, head on to [http://install.portworx.com](http://install.portworx.com) and fill in the parameters.
+To generate the spec file, head on to [http://install.portworx.com](http://install.portworx.com) and fill in the parameters. When filing the `kbver` (Kubernetes version) on the page, use output of: 
+
+```bash
+kubectl version --short | awk -Fv '/Server Version: /{print $3}'
+```
 
 Alternately, you can use `curl` to generate the spec as described in [Generating Portworx Kubernetes spec using curl](/scheduler/kubernetes/px-k8s-spec-curl.html).
 
