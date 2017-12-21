@@ -79,11 +79,11 @@ To get more information about the status of Portworx daemonset across the nodes,
 
 ```
 $ kubectl get pods -o wide -n kube-system -l name=portworx
-NAME             READY     STATUS              RESTARTS   AGE       IP              NODE
-portworx-9njsl   1/1       Running             0          16d       192.168.56.73   minion4
-portworx-fxjgw   1/1       Running             0          16d       192.168.56.74   minion5
-portworx-fz2wf   1/1       Running             0          5m        192.168.56.72   minion3
-portworx-x29h9   0/1       ContainerCreating   0          0s        192.168.56.71   minion2
+NAME             READY   STATUS              RESTARTS   AGE   IP              NODE
+portworx-9njsl   1/1     Running             0          16d   192.168.56.73   minion4
+portworx-fxjgw   1/1     Running             0          16d   192.168.56.74   minion5
+portworx-fz2wf   1/1     Running             0          5m    192.168.56.72   minion3
+portworx-x29h9   0/1     ContainerCreating   0          0s    192.168.56.71   minion2
 ```
 
 As we can see in the example output above:
@@ -98,20 +98,20 @@ As we can see in the example output above:
 Finally, one can run the following command to inspect the Portworx cluster:
 
 ```
-$ px_pod=$(kubectl get pods -n kube-system -l name=portworx -o jsonpath='{.items[0].metadata.name}')
-$ kubectl exec -it $px_pod -n kube-system /opt/pwx/bin/pxctl status
+$ PX_POD=$(kubectl get pods -n kube-system -l name=portworx -o jsonpath='{.items[0].metadata.name}')
+$ kubectl exec -it $PX_POD -n kube-system /opt/pwx/bin/pxctl cluster list
 
 [...]
 Nodes in the cluster:
-ID      DATA IP         CPU             MEM TOTAL       MEM FREE        CONTAINERS      VERSION                 STATUS
-minion5 192.168.56.74   1.530612        4.0 GB          3.1 GB          N/A             1.2.11.4-3598f81        Online
-minion4 192.168.56.73   3.836317        4.0 GB          3.0 GB          N/A             1.2.11.4-3598f81        Online
-minion3 192.168.56.72   3.324808        4.1 GB          3.3 GB          N/A             1.2.11.9-8aa25b7        Online
-minion2 192.168.56.71   3.316327        4.1 GB          3.2 GB          N/A             1.2.11.9-8aa25b7        Online
+ID      DATA IP         CPU        MEM TOTAL  ...   VERSION             STATUS
+minion5 192.168.56.74   1.530612   4.0 GB     ...   1.2.11.4-3598f81    Online
+minion4 192.168.56.73   3.836317   4.0 GB     ...   1.2.11.4-3598f81    Online
+minion3 192.168.56.72   3.324808   4.1 GB     ...   1.2.11.10-421c67f   Online
+minion2 192.168.56.71   3.316327   4.1 GB     ...   1.2.11.10-421c67f   Online
 ```
 * from the output above, we can confirm that the:
    - "minion4" and "minion5" are still on the old Portworx version (1.2.11.4), while
-   - "minion3" and "minion2" have already been upgraded to the latest version (in our case, v1.2.11.9).
+   - "minion3" and "minion2" have already been upgraded to the latest version (in our case, v1.2.11.10).
 
 
 ## Migrating from Legacy Portworx
