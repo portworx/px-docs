@@ -19,37 +19,36 @@ This guide describes the procedure how to upgrade Portworx in Kubernetes environ
 
 The Portworx Daemonset is using `RollingUpdate` update strategy, which greatly simplifies the upgrade process.
 
-### Step 1) Apply updated YAML-spec
+### Step 1: Apply updated YAML-spec
 
 To upgrade Portworx, we will just have to re-apply the YAML spec-file generated from the [install.portworx.com](http://install.portworx.com) site, which is very similar to how we [installed Portworx](/scheduler/kubernetes/install.html#install).
 
 
 **OPTION a)**:<br/>
-If you have the original URL that you used to generate your first YAML-spec, you can just download and reapply the updated YAML-spec from the same URL, e.g.:<br/>`kubectl apply -f '<original http://install.portworx.com/... url>'`.
-
+If you have the original URL that you used to generate your first YAML-spec, you can just download and reapply the updated YAML-spec from the same URL, e.g.:<br/>`kubectl apply -f '<original http://install.portworx.com/... url>'`<br/>
+>**HINT**: If you have preseved the original YAML-spec from your previous install or upgrade, take a look at the first line of the spec-file (i.e. `head px-spec.yaml`), it should contain a comment with the URL used to generate it.
 
 
 **OPTION b)**:<br/>
 If you did not preserve the original installation URL, not to worry, in most cases the configuration is very easy to reconstruct using your current Kubernetes configuration, like so:
 
 ```
-$ kubectl get ds/portworx -n kube-system \
-  -o jsonpath='{.spec.template.spec.containers[*].args}'
+$ kubectl get ds/portworx -n kube-system -o jsonpath='{.spec.template.spec.containers[*].args}'
 
-[-k etcd:http://etcd1.acme.net:2379,etcd:http://etcd2.acme.net:2379 \
- -c cluster123 -s /dev/sdb1 -s /dev/sdc -x kubernetes]
+[-k etcd:http://etcd1.acme.net:2379,etcd:http://etcd2.acme.net:2379 -c cluster123 \
+ -s /dev/sdb1 -s /dev/sdc -x kubernetes]
 ```
-* you can ignore the '-x kubernetes' parameter (will be applied by default), also
-* if you were using separate devices, you will need to collapse multiple "-s dev1 -s dev2 ..." into a single parameter "s=dev1,dev2"
+* if you were using multiple storage devices, you will need to collapse them into a single parameter (i.e. "-s dev1 -s dev2 ..." => "s=dev1,dev2"),
+* you can ignore the "-x kubernetes" parameter (will be applied by default).
 
 You can re-enter the parameters on the YAML web-form at [install.portworx.com](http://install.portworx.com), or convert them manually.
-The final YAML-spec from our example above would look similar to this:
+The final YAML-spec URL from our example above would look similar to this:
 
 ```bash
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -o oci-spec.yaml \
-   'http://install.portworx.com?c=cluster123&k=etcd:http://etcd1.acme.net:2379,etcd:http://etcd2.acme.net:2379&s=/dev/sdb1,/dev/sdc&kbver=$VER'
-kubectl apply -f oci-spec.yaml
+curl -o px-spec.yaml \
+   "http://install.portworx.com?c=cluster123&k=etcd:http://etcd1.acme.net:2379,etcd:http://etcd2.acme.net:2379&s=/dev/sdb1,/dev/sdc&kbver=$VER"
+kubectl apply -f px-spec.yaml
 ```
 
 
@@ -57,7 +56,7 @@ kubectl apply -f oci-spec.yaml
 Once you have applied the new YAML-spec, Kubernetes will start applying the Portworx upgrade in a "RollingUpdate" fashion, one node at a time.
 
 
-### Step 2) Monitor the rolling upgrade
+### Step 2: Monitor the rolling upgrade
 
 <U>Rollout status</U>:<br/>
 One can monitor the upgrade process by running the "kubectl rollout status" command:
@@ -72,7 +71,7 @@ Waiting for rollout to finish: 3 of 4 updated pods are available...
 daemon set "portworx" successfully rolled out
 ```
 
-Note that this command will inform us of general upgrade progress, but it will not point on which exact node is being upgraded and when.
+Note that this command will inform us of general upgrade progress, but it will not point out which exact node is being upgraded and when.
 
 <U>Pods status</U>:<br/>
 To get more information about the status of Portworx daemonset across the nodes, run:
@@ -88,11 +87,11 @@ portworx-x29h9   0/1     ContainerCreating   0          0s    192.168.56.71   mi
 
 As we can see in the example output above:
 
-* looking at the STATUS/READY, we can tell that the rollout-upgrade is currently creating the container on the "minion2" node
+* looking at the STATUS and READY, we can tell that the rollout-upgrade is currently creating the container on the "minion2" node
 * looking at AGE, we can tell that:
    - "minion4" and "minion5" have Portworx up for 16 days (likely still on old version, and to be upgraded), while the
-   - "minion3" has Portworx up for only 5 minutes (likely just upgraded and restarted)
-* if we keep on monitoring, we will observe that the upgrade will not switch to the "next" node until STATUS is "Running" and the READY is 1/1 (meaning, the "readynessProbe" reports Portworx service is fully up).
+   - "minion3" has Portworx up for only 5 minutes (likely just finished upgrade and restarted Portworx)
+* if we keep on monitoring, we will observe that the upgrade will not switch to the "next" node until STATUS is "Running" and the READY is 1/1 (meaning, the "readynessProbe" reports Portworx service is operational).
 
 <U>Portworx cluster list</U>:<br/>
 Finally, one can run the following command to inspect the Portworx cluster:
