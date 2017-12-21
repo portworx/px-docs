@@ -11,13 +11,11 @@ redirect_from: "/run-with-docker-ucp.html"
 
 You can use Portworx to implement storage for Docker Universal Control Plane (UCP). This section is qualified using Docker 1.11 and Universal Control Plane 1.1.2.
 
-## Step 1: Install and license Docker UCP
+## Step 1: Install Docker UCP
 
-Follow the instructions for [Installing Docker UCP](https://docs.docker.com/ucp/installation/install-production).
+Follow the instructions for [Installing Docker UCP](https://docs.docker.com/datacenter/ucp/2.2/guides/).
 
 >**Note:**<br/>You must run Docker Commercially Supported (CS) Engine.
-
-After installing Docker UCP, you must [license your installation](https://docs.docker.com/ucp/installation/license).
 
 ## Step 2: Update your docker.service file
 
