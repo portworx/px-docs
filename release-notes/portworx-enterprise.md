@@ -17,7 +17,7 @@ This is a minor update to enhance meta data performance on a shared namespace vo
 
 ### Fixed issues
 * Readdir performance for directories with a large number of files (greater 128K file count in a single directory)
-* Support longer EBS device names
+* PX running on AWS AutoScalingGroup now handles existing devices attached with names such as `/dev/xvdcw` which have an extra letter at the end.
 * Occasionally, containers that use shared volumes could get a "transport end point disconnected" error when PX restarts.  This has been resolved.
 * Fixed an issue where Portworx failed to resolve Kubernetes services by their DNS names if user sets the Portworx DaemonSet DNS Policy as `ClusterFirstWithHostNet`.
 
