@@ -12,6 +12,15 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.12.0
+This is a minor update to enhance meta data performance on a shared namespace volume.
+
+### Fixed issues
+* Readdir performance for directories with a large number of files (greater 128K file count in a single directory)
+* Support longer EBS device names
+* Occasionally, containers that use shared volumes could get a "transport end point disconnected" error when PX restarts.  This has been resolved.
+* Fixed an issue where Portworx failed to resolve Kubernetes services by their DNS names if user sets the Portworx DaemonSet DNS Policy as `ClusterFirstWithHostNet`.
+
 ## 1.2.11.10
 This is a minor update to address an issue with installing a reboot service while upgrading a runC container.
 
