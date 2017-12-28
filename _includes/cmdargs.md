@@ -36,9 +36,10 @@
 
 ##### environment-variables:
 ```
-PX_HTTP_PROXY		[OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
-PX_HTTPS_PROXY		[OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.
-PX_ENABLE_CACHE_FLUSH	[OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=yes.
+PX_HTTP_PROXY         [OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
+PX_HTTPS_PROXY        [OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.
+PX_ENABLE_CACHE_FLUSH [OPTIONAL] Enable cache flush deamon. Set PX_ENABLE_CACHE_FLUSH=true.
+PX_ENABLE_NFS         [OPTIONAL] Enable the PX NFS daemon. Set PX_ENABLE_NFS=true.
 ```
 
 Setting environment variables can be done using the -e option.  During PX Runc command line install (-e VAR=VAL).
