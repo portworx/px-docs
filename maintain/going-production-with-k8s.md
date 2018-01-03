@@ -35,7 +35,7 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 ### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001-9014
+* Make sure the following ports are open in all the servers. 9001-9015
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
@@ -154,21 +154,9 @@ Failure domains in terms of RACK information can be passed in as described [here
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the 
   case of app failures. 
   
-* Portworx support 64 snapshots per volume
+* Portworx support 64 snapshots per volume. 
 
-* Each snapshot can be taken manually via the `pxctl snap create` command. For e.g.,
-
-  ```
-  pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
-  Volume successfully snapped: 1152602487227170184
-  ```  
-* Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots 
-  to be automatically created without user intervention.
-  
-  ```
-  pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
-  ``` 
-* Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
+* Refer to this [document](https://docs.portworx.com/manage/snapshots.html) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
 
 * Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
