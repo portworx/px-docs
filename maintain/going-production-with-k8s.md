@@ -170,6 +170,57 @@ Failure domains in terms of RACK information can be passed in as described [here
   ``` 
 * Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
 
+* Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
+
+```yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+  metadata:
+    name: portworx-repl-1-snap-internal
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
+  snap_interval: "240"
+```
+
+* You can use annotations in Kubernetes to perform on-demand snapshot operations from within Kubernetes. 
+
+Portworx uses a special annotation `px/snapshot-source-pvc` which can be used to identify the name of the source PVC whose snapshot needs to be taken.
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: prod
+  name: ns.prod-name.px-snap-1
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
+    px/snapshot-source-pvc: px-vol-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 6Gi
+```
+Note the format of the `name` field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name "px-snap-1" of the source PVC "px-vol-1" in the "prod" namespace.
+>**Note:**<br/> Annotations support is available from PX Version 1.2.11.6
+
+For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+
+```yaml
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list"]
+```
+
+You can run the following command to edit your existing Portworx ClusterRole
+
+```
+$ kubectl edit clusterrole node-get-put-list-role
+```
+* Refer to the [Snapshots document](https://docs.portworx.com/manage/snapshots.html) in the Kubernetes section of the docs for more up to date information on snapshots.
+
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
 ### Alerts and Monitoring for Production
