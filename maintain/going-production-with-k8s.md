@@ -1,9 +1,9 @@
 ---
 layout: page
-title: "Operations Guide to deploy Portworx in Production in DC/OS Clusters"
-keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+title: "Operations Guide to deploy Portworx in Production in Kubernetes Clusters"
+keywords: kuberntes, operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
-meta-description: "Portworx Operations Guide for DC/OS Deployments"
+meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ---
 
 * TOC
@@ -13,17 +13,15 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 ## DAY 1 Operations
 
 ### Initial Software Setup for Production
-
-* Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system 
-  Refer to the install instructions for running PX as a DC/OS framework [page](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html). This deploys PX as a OCI container and as a framework in DC/OS
  
- (OR)
- 
-  * Deploy PX directly as [OCI container](https://docs.portworx.com/runc/)
+  * Follow the instructions in the [k8s install](https://docs.portworx.com/scheduler/kubernetes/install.html) 
+    page in the docs. 
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will 
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. 
+    Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also 
+    configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -47,7 +45,6 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
   
 ### Configuring and Provisioning Underlying Storage
 
- 
 ####  Selecting drives for an installation
 
 * Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
@@ -92,7 +89,7 @@ PX  auto-detects availabilty zones and regions and provisions replicas across
   This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
   is created, it will have the replicas automatically created in other nodes in other zones.
  
-### Toppology in on-premise deployments:
+### Topology in on-premise deployments:
 Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-rack.html)
   
 
@@ -205,7 +202,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Stuck Volume Detection and Resolution
 
-* With DC/OS, it is possible that even after the application container terminates, a volume is left attached. 
+* With K8s, it is possible that even after the application container terminates, a volume is left attached. 
   This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by 
   an application, it can be attached to any other node in the system
   
@@ -234,7 +231,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 TODO: *Update the above page to show runc*
 
 * Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the 
-  DC/OS PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
+  PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
 
    
 ### Cluster Capacity Expansion
@@ -265,16 +262,15 @@ TODO: *Update the above page to show runc*
 
   * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
   * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken for all the volumes
-  * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html) to perform the upgrades
-  * If you are running PX as a systemd service, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade.html)
+  * Upgrades can be done following this [link](https://docs.portworx.com/scheduler/kubernetes/install.html#upgrade) 
+ 
   
 
-#### DC/OS Upgrades
+#### Kubernetes Upgrades
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
-* Check if the DC/OS services via marathon and any other frameworks can mount the PX volumes from the marathon UI or the DC/OS UI
 
 
 #### OS upgrades and Docker Upgrades . 
