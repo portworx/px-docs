@@ -52,9 +52,9 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
 
-* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
+* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` (or `priority_io` in kubernetes px spec) and they offer the levels  `high`, `medium` and `low`
 
-* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
+* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
 
 * This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels
 
@@ -105,47 +105,93 @@ Failure domains in terms of RACK information can be passed in as described [here
 * For applications needing node level availability and read parallelism across nodes, it is recommended to set the 
   volumes with replication factor 2 or replication factor 3
   
-  Here is how one can configure a volume with replication factor 3 for e.g.,
-  
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
-  ```
-  
+  Following storeclass shows how to create a SC for a PVC with replication factor of 3.
+  ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+ ```
+    
 * PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level. 
   
+  ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+ ```
+  
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --zones=us-east-1,us-east-2,us-east-3 
-  ```
+For e.g., for PX cluster running on AWS, 
+
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   zones: "us-east-1a"
+ ```
 * Volumes can be created in different racks using `--racks` option and passing the rack labels when creating the volume
 
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3 
-  ``` 
-  Please ensure the PX containers are started with the corresponding rack parameters.
- 
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+ ```
+
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
   then the volumes need to enabled with `--sticky` flag
   
-  ```
-   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
-  ```
-  
-* The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
- 
-  ```
-  sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
-  ```
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+   sticky: "true"
+ ```
   
 * For applications that require shared access from multiple containers running in different hosts, 
-  Portworx recommends running  shared volumes. Shared volumes can be configured as follows:
+  Portworx recommends running  shared volumes. Shared volumes can be configured as follows by adding `shared: "true" ` to the storage class:
+ 
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+   shared: "true"
+ ```
 
-  ```
-  pxctl volume create wordpressvol --shared --size=100 --repl=3
-  ```
   This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
   how to create them and update the configuration for the volumes 
 
