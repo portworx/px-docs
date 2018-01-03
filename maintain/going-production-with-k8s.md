@@ -230,9 +230,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](https://docs.portworx.com/maintain/scale-out.html) shows how to scale up a existing cluster by adding more nodes
 TODO: *Update the above page to show runc*
 
-* Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the 
-  PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
-
+* In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
    
 ### Cluster Capacity Expansion
 
@@ -249,6 +247,7 @@ TODO: *Update the above page to show runc*
 
 * Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
+* Delete PX from the node by setting the PX/Enabled=remove [label](https://docs.portworx.com/scheduler/kubernetes/install.html#uninstall)
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
 * Follow the instructions in this page to [delete](https://docs.portworx.com/maintain/scale-down.html#prevention-of-data-loss) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
