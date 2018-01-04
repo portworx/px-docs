@@ -261,7 +261,11 @@
     - title: Docker Registry
       url: /applications/docker-registry.html
     - title: Wordpress
-      url: /applications/docker-compose.html
+        folderitems:
+      - title: Wordpress Docker compose
+        url: /applications/docker-compose.html
+      - title: Wordpress Kubernetes
+        url: /applications/docker-compose.html
     - title: Jenkins
       url: /applications/jenkins.html
   - title: Encryption
