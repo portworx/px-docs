@@ -47,7 +47,12 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 
 ####  Selecting drives for an installation
 
-* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. 
+
+This can be specificed in the args section of the px-spec.yaml used for installing PX as a daemonset.
+
+```
+
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
@@ -106,7 +111,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   volumes with replication factor 2 or replication factor 3
   
   Following storeclass shows how to create a SC for a PVC with replication factor of 3.
-  ```yaml
+ ```yaml
  kind: StorageClass
  apiVersion: storage.k8s.io/v1beta1
  metadata:
@@ -120,7 +125,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level. 
   
-  ```yaml
+ ```yaml
  kind: StorageClass
  apiVersion: storage.k8s.io/v1beta1
  metadata:
