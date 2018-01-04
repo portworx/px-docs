@@ -6,7 +6,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "hideControls": false,
-  "id": 12,
+  "id": 1,
   "links": [],
   "refresh": "1m",
   "rows": [
@@ -37,7 +37,7 @@
           "id": 32,
           "interval": null,
           "links": [],
-          "mappingType": 1,
+          "mappingType": 2,
           "mappingTypes": [
             {
               "name": "value to text",
@@ -58,8 +58,18 @@
           "rangeMaps": [
             {
               "from": "0",
-              "text": "",
+              "text": "All members online",
               "to": "0"
+            },
+            {
+              "from": "1",
+              "text": "Member offline",
+              "to": "1"
+            },
+            {
+              "from": "2",
+              "text": "Members offline",
+              "to": "1000"
             }
           ],
           "span": 4,
@@ -72,7 +82,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size)",
+              "expr": "min(px_cluster_status_cluster_size)-min(px_cluster_status_storage_nodes_online)",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "",
@@ -100,7 +110,7 @@
             {
               "op": "=",
               "text": "Members Offline",
-              "value": "2,1000"
+              "value": "3"
             }
           ],
           "valueName": "current"
@@ -242,6 +252,7 @@
           "targets": [
             {
               "expr": "min(px_cluster_status_storage_nodes_online)",
+              "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
               "step": 2
@@ -284,7 +295,7 @@
           "id": 33,
           "interval": null,
           "links": [],
-          "mappingType": 1,
+          "mappingType": 2,
           "mappingTypes": [
             {
               "name": "value to text",
@@ -302,7 +313,18 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
-          "rangeMaps": [],
+          "rangeMaps": [
+            {
+              "from": "2",
+              "text": "Quorum Unhealthy",
+              "to": "1000"
+            },
+            {
+              "from": "",
+              "text": "Quorum Healthy",
+              "to": ""
+            }
+          ],
           "span": 4,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -313,7 +335,8 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "max(px_cluster_status_cluster_quorum)",
+              "expr": "min(px_cluster_status_cluster_size)/count(px_cluster_status_cluster_quorum)",
+              "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
               "step": 2
@@ -334,7 +357,7 @@
             {
               "op": "=",
               "text": "Quorum Unhealthy",
-              "value": "2"
+              "value": "0"
             }
           ],
           "valueName": "current"
@@ -1130,6 +1153,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Portworx Cluster Status Copy",
-  "version": 1
+  "title": "Portworx Cluster Status",
+  "version": 2
 }
