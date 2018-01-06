@@ -52,7 +52,10 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 This can be specificed in the args section of the px-spec.yaml used for installing PX as a daemonset.
 
 ```
-
+          args:
+            ["-k", "etcd://example.etcd.server:2379", "-d", "eth0", "-m", "eth1",  "-c", "testcluster", "-a", "-f",
+             "-x", "kubernetes"]
+```
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
