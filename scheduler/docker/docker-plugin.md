@@ -297,3 +297,6 @@ installation](#install-px-plugin) (ie. command `docker plugin inspect pxd` shoul
 
 * Q: Docker startup is slow, logs show Docker is trying to access `/run/docker/plugins/pxd.sock` file.
 	* A: The `/run/docker/plugins/pxd.sock` file should have been removed when the PX-Container services have been stopped.  If by any chance this file still exists on the host, please remove it manually.
+
+* Q: Are you getting a No such file or directory message when you use SELinux?
+	* A1: Portworx has a solution to resolve the issue [SELinux](#install-px-plugin) (ie. command `docker plugin inspect pxd` should work).  Reinstall plugin otherwise.
