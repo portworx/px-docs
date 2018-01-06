@@ -288,8 +288,6 @@
       url: /knowledgebase/sdn.html
     - title: Shared Mount Propogation
       url: /knowledgebase/shared-mount-propogation.html
-    - title: SELinux
-      url: /knowledgebase/selinux.html
     - title: Devicemapper Thinpool setup
       url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces
