@@ -299,4 +299,4 @@ installation](#install-px-plugin) (ie. command `docker plugin inspect pxd` shoul
 	* A: The `/run/docker/plugins/pxd.sock` file should have been removed when the PX-Container services have been stopped.  If by any chance this file still exists on the host, please remove it manually.
 
 * Q: Are you getting a No such file or directory message when you use SELinux?
-	* A1: Portworx has a solution to resolve the issue [SELinux](#/knowledgebase/selinux.html).
+	* A1: Portworx has a solution to resolve the issue [SELinux](#/knowledgebase/selinux.md).
