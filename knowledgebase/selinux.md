@@ -3,7 +3,7 @@ layout: page
 title: "PX with SELinux"
 keywords: portworx, troubleshooting, logs, issue
 sidebar: home_sidebar
-redirect_from: "/selinux.html"
+redirect_from: "/scheduler/docker/docker-plugin.html"
 meta-description: "Are you getting a No such file or directory message when you use SELinux? Portworx has a solution to resolve the issue."
 ---
 
