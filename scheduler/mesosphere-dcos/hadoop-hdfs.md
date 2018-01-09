@@ -29,7 +29,7 @@ The Portworx-hadoop service can be found in the DC/OS catalog:
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 ```
-$ dcos package install --yes hadoop-px
+$ dcos package install --yes portworx-hadoop
 ```
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
@@ -65,12 +65,12 @@ provided during install, one for each of the Journal, Name and Data nodes.
 
 ![Hadoop-PX volumes](/images/dcos-hadoop-px-volume-list.png){:width="655px" height="200px"}
 
-If you run the "dcos service" command you should see the hadoop-px service in ACTIVE state with 13 running tasks
+If you run the "dcos service" command you should see the portworx-hadoop service in ACTIVE state with 13 running tasks
 
 ```
 $ dcos service
 NAME                         HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID                                         
-hadoop-px                 10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113  
+portworx-hadoop           10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113  
 marathon                  10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001  
 metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000  
 ```
