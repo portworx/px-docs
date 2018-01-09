@@ -17,9 +17,6 @@ storage](https://portworx.com/use-case/persistent-storage-dcos/).  With [Portwor
 * Achieve higher density by running multiple Cassandra rings on the same DC/OS hosts and
 * Simplify deployments
 
-Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
-repositories to your DCOS cluster to install the services mentioned here. 
-
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 >**Note:**<br/>This framework is only supported directly by Portworx.
@@ -28,17 +25,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
 ## Install
-### Adding the repository for the service
-
-For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
-
-Run the following command to add the repository to your DCOS cluster:
-
-```
-$ dcos package repo add --index=0 cassandra https://px-dcos.s3.amazonaws.com/v2/cassandra/cassandra.json
-```
-
-Once you have run the above command you should see the Cassandra-PX service available in your universe
+The Portworx-Cassandra service can be found in the DC/OS catalog:
 
 ![Cassandra-PX in DCOS Universe](/images/dcos-cassandra-px-universe.png){:width=2597px" height="1287px"}
 
