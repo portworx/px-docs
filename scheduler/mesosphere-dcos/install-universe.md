@@ -72,7 +72,7 @@ sudo systemctl restart dcos-mesos-slave.service
 For CentOS and RHEL:
 ```
 sudo mkdir -p /etc/docker/certs.d/master.mesos:5001
-sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt http://master.mesos:8082/certs/domain.crt
+sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt http://master.mesos:8083/certs/domain.crt
 sudo systemctl restart docker
 sudo curl -o /etc/pki/ca-trust/source/anchors/master.registry.pem http://master.mesos:8083/certs/domain.crt
 sudo update-ca-trust
