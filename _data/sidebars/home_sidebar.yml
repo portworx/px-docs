@@ -234,6 +234,10 @@
       url: /maintain/maintenance-mode.html
     - title: DR Best Practices
       url: /maintain/dr-best-practices.html
+    - title: Operations Guide for Running Portworx in Production
+      folderitems:
+      - title: Running Portworx in Production with DC/OS
+        url: /maintain/going-production-with-dcos.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
