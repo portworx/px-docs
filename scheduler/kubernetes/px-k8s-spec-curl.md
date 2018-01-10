@@ -44,9 +44,7 @@ Below are all parameters that can be given in the query string.
 | cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
 | key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
 | acl    | ACL token value used for Consul authentication.                                                                                       | <var>acl=398073a8-5091-4d9c-871a-bbbeb030d1f6</var>        |
-|        | <center>LIGHTHOUSE CONFIGURATION PARAMETERS</center>                                                                                  |                                                            |
-| t      | Portworx Lighthouse token for cluster.                                                                                                | <var>t=token-a980f3a8-5091-4d9c-871a-cbbeb030d1e6</var>    |
-| e      | Comma-separated list of environment variables that will be exported to portworx.                                                      | <var>e=API_SERVER=http://lighthouse-new.portworx.com</var> |
+| e      | Comma-separated list of environment variables that will be exported to portworx.                                                      | <var>e=MYENV1=myvalue1,MYENV2=myvalue2</var> |
 
 
 >**Note:**<br/> If using secure etcd provide "https" in the URL and make sure all the certificates are in the `/etc/pwx/` directory on each host which is bind mounted inside PX container.
