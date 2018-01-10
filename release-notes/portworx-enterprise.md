@@ -12,6 +12,12 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+## 1.2.12.1
+This is a minor update to support Openshift with SELinux enabled as well as verify with SPECTRE/Meltdown kernel patches
+
+* Verified with the latest kernel patches for SPECTRE/Meltdown issue for all major Linux distros
+
 ## 1.2.12.0
 This is a minor update to enhance meta data performance on a shared namespace volume.
 
