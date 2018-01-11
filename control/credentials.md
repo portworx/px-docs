@@ -50,8 +50,18 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 `pxctl credentials create` is used to create/configure credentials for various cloud providers
 ```
 sudo /opt/pwx/bin/pxctl cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
+
 Credentials created successfully
 ```
+
+Note: If you encounter warning message as below while are creating credential. Need set up secrets before credential creation, As per following any one of the options ([kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html),[aws](https://docs.portworx.com/secrets/portworx-with-aws-kms.html), or [vault](https://docs.portworx.com/secrets/portworx-with-vault.html)).
+```sudo /opt/pwx/bin/pxctl cred create --provider s3 --s3-access-key AKIAIG7PIZ7GRFM3CAGQ --s3-secret-key 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 --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
+
+Not authenticated with the secrets endpoint
+```
+
+
+
 
 #### pxctl credentials delete
 `pxctl credentials delete` is used to delete the credentials from the cloud providers.
