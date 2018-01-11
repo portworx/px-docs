@@ -55,9 +55,9 @@ Credentials created successfully
 ```
 Troubleshooting Notes: 
 +If you encounter a warning message with "Not authenticated with the secrets endpoint", then you should first create a secrets endpoint. You can create the secrets by one of the following options:
-1)  ([kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html)
+1) [kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html)
 2) [aws](https://docs.portworx.com/secrets/portworx-with-aws-kms.html)
-3) [vault](https://docs.portworx.com/secrets/portworx-with-vault.html)). 
+3) [vault](https://docs.portworx.com/secrets/portworx-with-vault.html). 
 
 
 #### pxctl credentials delete
