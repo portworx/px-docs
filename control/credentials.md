@@ -53,14 +53,8 @@ sudo /opt/pwx/bin/pxctl cred create --provider s3 --s3-access-key AAAAAAAAAAAAAA
 
 Credentials created successfully
 ```
-
-Note: If you encounter warning message as below while creating credential. Need set up secrets endpoint before credential creation, As per following any one of the options ([kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html),[aws](https://docs.portworx.com/secrets/portworx-with-aws-kms.html), or [vault](https://docs.portworx.com/secrets/portworx-with-vault.html)).
-```sudo /opt/pwx/bin/pxctl cred create --provider s3 --s3-access-key AKIAIG7PIZ7GRFM3CAGQ --s3-secret-key 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 --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
-
-Not authenticated with the secrets endpoint
-```
-
-
+Troubleshooting Notes: 
+If you encounter warning message with "Not authenticated with the secrets endpoint", create a secrets endpoint before credential creation. You can create secrets by one of the following options ([kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html),[aws](https://docs.portworx.com/secrets/portworx-with-aws-kms.html), or [vault](https://docs.portworx.com/secrets/portworx-with-vault.html)). 
 
 
 #### pxctl credentials delete
