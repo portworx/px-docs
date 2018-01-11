@@ -4,6 +4,7 @@ title: "Portworx with AWS KMS"
 sidebar: home_sidebar
 redirect_from:
   - /enterprise/portworx-with-aws-kms.html
+meta-description: "Learn how to utilize AWS KMS to manage your Portworx volume encryption."
 ---
 
 * TOC

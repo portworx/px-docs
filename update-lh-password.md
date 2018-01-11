@@ -3,6 +3,7 @@ layout: page
 title: "Update lighthouse user password from CLI"
 keywords: lighthouse
 sidebar: home_sidebar
+meta-description: "It is possible to change a password for your Portworx Lighthouse cluster, follow the steps here."
 ---
 
 ### Steps to update Lighthouse user password from CLI

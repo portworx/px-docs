@@ -2,6 +2,8 @@
 layout: page
 title: "Upgrade Portworx on DCOS"
 keywords: portworx, container, dcos, storage, Docker, mesos
+sidebar: home_sidebar
+meta-description: "Updating Portworx version on your DCOS cluster is simple. Follow this guide to find out how."
 redirect_from:
  - /scheduler/mesosphere-dcos/upgrade_new.html
  - /scheduler/mesosphere-dcos/upgrade-new.html

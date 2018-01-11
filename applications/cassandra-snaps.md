@@ -3,6 +3,7 @@ layout: page
 title: "Taking Consistent Cassandra Snapshots"
 keywords: portworx, px-developer, cassandra, database, cluster, storage, snapshots, snaps, backup
 sidebar: home_sidebar
+meta-description: "Learn how to maintain consistent snapshots for Cassandra with Portworx by flushing data."
 ---
 
 * TOC

@@ -4,6 +4,7 @@ sidebar: home_sidebar
 title: "Portworx Licensing"
 keywords: portworx, px-enterprise, px-developer, requirements
 redirect_from: "/knowledgebase/support.html"
+meta-description: "Find out more information about the Portworx licensing model."
 ---
 
 * TOC

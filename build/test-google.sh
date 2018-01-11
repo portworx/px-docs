@@ -10,7 +10,7 @@ CACHEPATH="${BASE}/.doclink-cache.json"
 HTTPDOMAIN="http://${DOMAIN}"
 HTTPSDOMAIN="https://${DOMAIN}"
 
-curl -o ${CACHEPATH} https://portworx.com/.doclink-cache.json
+curl --silent -o ${CACHEPATH} https://portworx.com/.doclink-cache.json
 
 echo "Testing pages exist locally"
 FAIL=0

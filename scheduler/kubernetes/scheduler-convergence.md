@@ -5,6 +5,7 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 sidebar: home_sidebar
 redirect_from:
   - /kubernetes-with-scheduler-convergence.html
+meta-description: "Learn how to improve volume latency on Kubernetes by using convergence when using Portworx."
 ---
 
 ## Using scheduler convergence
