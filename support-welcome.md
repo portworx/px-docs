@@ -3,7 +3,7 @@ layout: page
 title: "Welcome to Portworx Support"
 sidebar: home_sidebar
 redirect_from: /support_welcome.html
-meta-description: "Portworx offer a variery of support methods, find out how to get in touch with us.""
+meta-description: "Portworx offer a variery of support methods, find out how to get in touch with us."
 ---
 
 Thank you for being a valued Portworx customer.   

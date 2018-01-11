@@ -3,7 +3,7 @@ layout: page
 title: "Kubernetes Examples for Native Portworx Volume Driver"
 keywords: portworx, kubernetes, converged
 sidebar: home_sidebar
-meta-description: "Learn some methods in which to deploy Portworx onto Kubernetes using native volume drivers to provide persistent state to your containers.""
+meta-description: "Learn some methods in which to deploy Portworx onto Kubernetes using native volume drivers to provide persistent state to your containers."
 ---
 
 * TOC

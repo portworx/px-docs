@@ -6,7 +6,7 @@ sidebar: home_sidebar
 redirect_from: 
  - /portworx-on-ddc.html
  - /run_portworx_on_ddc.html
-meta-description: "It is possible to run Portworx on your Docker Datacenter cluster to run stateful containerized workloads. Learn more here!""
+meta-description: "It is possible to run Portworx on your Docker Datacenter cluster to run stateful containerized workloads. Learn more here!"
 ---
 
 * TOC
