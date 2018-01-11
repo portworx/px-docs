@@ -68,7 +68,8 @@ communicate with Portworx using the Service and
 [dynamically provision volumes](/scheduler/kubernetes/dynamic-provisioning.html).
 
 ### Starting PV binder controller
-If you used the Web HTML form at [http://install.portworx.com](http://install.portworx.com) to build your YAML spec, please make sure to specify the exact Kubernetes server version (ie. `kbver=1.8.4-gke.0`). You can get the Kubernetes server version from the GKE console as well as by running `kubectl version`.
+If you used the Web HTML form at [https://install.portworx.com](https://install.portworx.com) to build your YAML spec, please make sure to specify the exact Kubernetes 
+server version (ie. `kbver=1.8.4-gke.0`). You can get the Kubernetes server version from the GKE console as well as by running `kubectl version`.
 
 In this case, the generated YAML will contain all the necessary configuration (including the [PV binder controller](https://docs.portworx.com/scheduler/kubernetes/px-pvc-controller.yaml)), and you will not need to deploy the PV binder controller manually.
 
