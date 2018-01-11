@@ -12,7 +12,67 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+## 1.2.12.1
+This is a minor update to support Openshift with SELinux enabled as well as verify with SPECTRE/Meltdown kernel patches
+
+* Verified with the latest kernel patches for SPECTRE/Meltdown issue for all major Linux distros
+
+## 1.2.12.0
+This is a minor update to enhance meta data performance on a shared namespace volume.
+
+### Fixed issues
+* Readdir performance for directories with a large number of files (greater 128K file count in a single directory)
+* PX running on AWS AutoScalingGroup now handles existing devices attached with names such as `/dev/xvdcw` which have an extra letter at the end.
+* Occasionally, containers that use shared volumes could get a "transport end point disconnected" error when PX restarts.  This has been resolved.
+* Fixed an issue where Portworx failed to resolve Kubernetes services by their DNS names if user sets the Portworx DaemonSet DNS Policy as `ClusterFirstWithHostNet`.
+
+## 1.2.11.10
+This is a minor update to address an issue with installing a reboot service while upgrading a runC container.
+
+### Fixed issues
+* When upgrading a runC container, the new version will correctly install a reboot service.  A reboot service (systemd service) is needed to reduce the wait time before a PX device returns with a timeout when the PX service is down.  Without this reboot service, a node can take 10 minutes to reboot.
+
+## 1.2.11.9
+
+### Fixed issues
+
+* Pass volume name as part of the metrics end point so Prometheus/Grafana can display with volume name
+* Add current ha level of the volume and io_priority of the volumes to the metrics endpoint
+* Abort all pending I/Os the the pxd device during a reboot so speed up reboots
+* Move the px-ns internal port from 7000 to 9013
+* Remove the unnecessary warning string "Data is not local to the node"
+* Add px_ prefix to all volume labels
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+
+## 1.2.11.8
+
+### Fixed issues
+
+* Fix resync mechanism for read-only snapshots
+* Improve log space utilization by removing old log files based on space usage
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+
+## 1.2.11.7
+
+### Fixed issues
+
+* Suppress un-necessary log prints about cache flush
+* PWX-4272 Handle remote host shutdowns gracefully for shared volumes. In the past this could leave stray TCP connections.
+
+### Errata 
+
+* Do not manually unmount a volume by using linux `umount` command for shared volume mounts. This errata applies to the previous versions of PX as well.
+
 ## 1.2.11.6 Release notes
+
+### Fixed issues
 
 * Provide capability to drop system cache on-demand (for a select workloads and large memory system) and turn it off by default
 
@@ -20,7 +80,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Key Features and Changes
 
-* Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](https://docs.portworx.com/scheduler/kubernetes/snaps.html#using-annotations)
 
 ## 1.2.11.4 Release notes
 
@@ -31,8 +91,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Fixed issues
 
-* Ignore `sticky` flag when purging old snapshots after a cloudsnap is completed.
-* `pxctl status` shows the first interface IP address instead of the mgmt. IP
+* PWX-4224 Ignore `sticky` flag when purging old snapshots after a cloudsnap is completed.
+* PWX-4220 `pxctl status` shows the first interface IP address instead of the mgmt. IP
 
 ## 1.2.11.3 Release notes
 

@@ -106,24 +106,11 @@ az group deployment create \
 
 where $RGNAME corresponds to the resource group name created above, and $NAME corresonds to the above value used for `dnsPrefix`
 
-
 ### Install Portworx
 
-Login to the Kubernetes master node.
-Download and run the Portworx [all-in-one kubernetes installation script for acs-engine](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/px_startall_acs_engine.sh)
+Login to the Kubernetes master node and install PX by following the instructions found [here](/scheduler/kubernetes/install.html).
 
 Refer to [Portworx Docs](/) for further information on:
 * [Storage Classes and PVCs](/scheduler/kubernetes/dynamic-provisioning.html)
 * [Scheduler Convergence](/scheduler/kubernetes/scheduler-convergence.html)
 * [Troubleshooting](/scheduler/kubernetes/support.html)
-
-
-
-
-
-
-
-
-
-
-

@@ -129,15 +129,26 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 ### Add the new drive to cluster to increase the storage
 
 ```
-sudo /opt/pwx/bin/pxctl service drive add /dev/dm-1
+sudo /opt/pwx/bin/pxctl service drive add /dev/dm-1 --operation start
 Adding device  /dev/dm-1 ...
-Drive add  successful. Requires restart (Exit maintenance mode).
+"Drive add done: Storage rebalance is in progress"
 ```
 
 ### Rebalance the storage pool
 
-**Drive addition must be followed by pool rebalance operation to spreads data across all available drives in the pool.**
+**Pool rebalance is a must to spread data across all available drives in the pool.**
 
+Check the rebalance status and wait for completion.
+
+```
+/opt/pwx/bin/pxctl sv drive add --drive /dev/dm-1 --operation status
+"Drive add: Storage rebalance running: 1 out of about 9 chunks balanced (2 considered),  89% left"
+
+/opt/pwx/bin/pxctl sv drive add --drive /dev/dm-1 --operation status
+"Drive add: Storage rebalance complete"
+```
+
+In case drive add operation did not start a rebalance, start it manually.
 For e.g., If the drive was added to pool 0
 
 ```
@@ -151,7 +162,6 @@ Check the rebalance status and wait for completion.
 /opt/pwx/bin/pxctl service drive rebalance --poolID 0 --operation status
 Done: "Pool 0: Balance is not running"
 ```
-
 ### Exit Maintenance Mode
 
 ```

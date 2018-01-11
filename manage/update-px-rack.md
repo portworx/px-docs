@@ -12,6 +12,7 @@ Portworx nodes can be made aware of the rack on which they are a placed. Portwor
 ### Updating rack info in a Kubernetes cluster.
 
 Using kubernetes node labels Portworx nodes can be informed about the rack on which they are running. The specific node label to use is ``px/rack=rack1``, where ``px/rack`` is the key, while ``rack1`` is the value identifying the rack of which the node is a part of.
+Please make sure the label is a string not starting with a special character or a number.
 
 #### Requirements
 Before updating kubernetes node labels double check the permissions listed on Portworx's ClusterRole `node-get-put-list-role`:
@@ -79,7 +80,7 @@ If kubernetes node labels is not the preferred way of updating rack information 
 
 ### Updating rack information through environment variables
 
-Portworx can be made aware of its rack information through ``PWX_RACK`` environment variable. These environment variables  can be provided through
+Portworx can be made aware of its rack information through ``PWX_RACK`` environment variable. These environment variables can be provided through
 the ```/etc/pwx/px_env``` file. A sample file looks like this
 
 ```
@@ -89,6 +90,6 @@ the ```/etc/pwx/px_env``` file. A sample file looks like this
 PWX_RACK=rack3
 ```
 
-Add the ```PWX_RACK=<rack-id>``` entry to the end of this file and bounce the PX container. On every PX restart, all the variables defined in ``/etc/pwx/px_env`` will be exported as environment variables in the PX container.
+Add the ```PWX_RACK=<rack-id>``` entry to the end of this file and bounce the PX container. On every PX restart, all the variables defined in ``/etc/pwx/px_env`` will be exported as environment variables in the PX container. Please make sure the label is a string not starting with a special character or a number.
 
 >**Note:** this method requires a reboot of the PX container.

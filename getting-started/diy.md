@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /get-started-asap.html
   - /getting-started/asap.html
+  - /cloud/aws/cloudformation.html
 meta-description: "This tutorial shows you how you can quickly and easily deploy Portworx on AWS CloudFormation in under 10 minutes.  Try it today!"
 ---
 
@@ -25,7 +26,7 @@ This template includes the following to enable Portworx deployments:
 ### Configure and Launch the Portworx stack
 
 
-<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/cf-templates-1oefrvxk1p71o-us-east-1/Portworx_CoreOS_Stack_v1.2_Feb06_2017" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" width="144px" height="27px" class="cf-stack"></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=PX-STACK&amp;templateURL=https://s3.amazonaws.com/px-quickstart/px-quickstart-runc.json" rel="nofollow noreferrer" target="_blank"><img src="https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg" alt="Launch Stack" width="144px" height="27px" class="cf-stack"></a></p>
 
 - Click the "Launch Stack" button above.  The Portworx Template is automatically loaded into CloudFormation.   Click **Next**
 

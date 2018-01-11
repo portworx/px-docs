@@ -15,9 +15,9 @@ This guide is based on the DCOS guide to install a local universe: https://docs.
 
 ### Download the pre-requisites
 First you will need to download 3 files and transfer them to each of you DCOS Master nodes
-* [dcos-local-px-universe-http.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px/docker/local-universe/dcos-local-px-universe-http.service)
-* [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px/docker/local-universe/dcos-local-px-universe-registry.service)
-* [local-universe.tar.gz](https://px-dcos.s3.amazonaws.com/local-universe.tar.gz)
+* [dcos-local-px-universe-http.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-http.service)
+* [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-registry.service)
+* [local-universe.tar.gz](https://px-dcos.s3.amazonaws.com/local-universe_1.10_01082017.tar.gz)
 
 ### Install the services
 On each of your Master nodes run the following steps
@@ -50,7 +50,7 @@ sudo systemctl status dcos-local-px-universe-registry
 Run the dcos command to add the newly deployed universe to your DCOS cluster
 
 ```
-dcos package repo add local-universe http://master.mesos:8082/repo --index=0
+dcos package repo add local-universe http://master.mesos:8083/repo --index=0
 ```
 
 ### Add the docker registry as a trusted store on each agent
@@ -60,10 +60,10 @@ To do this, run the following command on each agent node, including public agent
 
 For CoreOS:
 ```
-sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
-sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
+sudo mkdir -p /etc/docker/certs.d/master.mesos:5001
+sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt http://master.mesos:8083/certs/domain.crt
 sudo systemctl restart docker
-sudo curl -o /etc/ssl/certs/master.registry.pem http://master.mesos:8082/certs/domain.crt
+sudo curl -o /etc/ssl/certs/master.registry.pem http://master.mesos:8083/certs/domain.crt
 sudo update-ca-certificates
 echo CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt | sudo tee -a /opt/mesosphere/etc/mesos-slave-common
 sudo systemctl restart dcos-mesos-slave.service
@@ -71,10 +71,10 @@ sudo systemctl restart dcos-mesos-slave.service
 
 For CentOS and RHEL:
 ```
-sudo mkdir -p /etc/docker/certs.d/master.mesos:5000
-sudo curl -o /etc/docker/certs.d/master.mesos:5000/ca.crt http://master.mesos:8082/certs/domain.crt
+sudo mkdir -p /etc/docker/certs.d/master.mesos:5001
+sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt http://master.mesos:8083/certs/domain.crt
 sudo systemctl restart docker
-sudo curl -o /etc/pki/ca-trust/source/anchors/master.registry.pem http://master.mesos:8082/certs/domain.crt
+sudo curl -o /etc/pki/ca-trust/source/anchors/master.registry.pem http://master.mesos:8083/certs/domain.crt
 sudo update-ca-trust
 echo CURL_CA_BUNDLE=/etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt | sudo tee -a /opt/mesosphere/etc/mesos-slave-common
 sudo systemctl restart dcos-mesos-slave.service
@@ -88,4 +88,4 @@ see if the packages are available.
 ### Using docker images from local registry
 
 If you want to use any images from the newly deployed registry, you will need to update the image names when starting the
-services. For example, to use the Portworx docker images, you would use "master.mesos:5000/portworx/px-enterprise:tag"
+services. For example, to use the Portworx docker images, you would use "master.mesos:5001/portworx/px-enterprise:tag"

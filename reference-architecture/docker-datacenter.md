@@ -32,16 +32,16 @@ The recommended deployent of Portworx with DDC is bare-metal Linux or Azure.
 ## Step 1: Obtain DDC License
 
 Running Docker UCP will require a license from Docker for use past the 30-day trial period.
-Visit the [Docker Store](https://store.docker.com/bundles/docker-datacenter/purchase?plan=free-trial) to obtain a [DDC license](https://docs.docker.com/ucp/installation/license).
+Visit the [Docker Store](https://store.docker.com/bundles/docker-datacenter/purchase?plan=free-trial) to obtain a DDC license.
 
 ## Step 2: Install Docker CSE on Nodes
 
 DDC requires that the Docker CSE to be installed.
-Follow instructions to install [Docker CSE](https://docs.docker.com/cs-engine/install/)
+Follow instructions to install [Docker CSE](https://docs.docker.com/cs-engine/1.13/)
 
 ## Step 3:  Install Docker UCP
 
-Follow the instructions for [Installing Docker UCP](https://docs.docker.com/ucp/installation/install-production).
+Follow the instructions for [Installing Docker UCP](https://docs.docker.com/datacenter/ucp/2.2/guides/).
 
 ## Step 3a: (Optional) Update your docker.service file
 
