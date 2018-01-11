@@ -55,8 +55,7 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 #### Generating the spec
 
-To generate the spec file, head on to [https://install.portworx.com](https://install.portworx.com) and fill in the parameters. When filing the `kbver` (Kubernetes version) 
-on the page, use output of: 
+To generate the spec file, head on to [https://install.portworx.com](https://install.portworx.com) and fill in the parameters. When filing the `kbver` (Kubernetes version) on the page, use output of: 
 
 ```bash
 kubectl version --short | awk -Fv '/Server Version: /{print $3}'

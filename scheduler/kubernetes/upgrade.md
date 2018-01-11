@@ -21,13 +21,11 @@ The Portworx Daemonset is using `RollingUpdate` update strategy, which greatly s
 
 ### Step 1: Apply updated YAML-spec
 
-To upgrade Portworx, we will just have to re-apply the YAML spec-file generated from the [install.portworx.com](https://install.portworx.com) site, which is very similar to 
-how we [installed Portworx](/scheduler/kubernetes/install.html#install).
+To upgrade Portworx, we will just have to re-apply the YAML spec-file generated from the [install.portworx.com](https://install.portworx.com) site, which is very similar to how we [installed Portworx](/scheduler/kubernetes/install.html#install).
 
 
 **OPTION a)**:<br/>
-If you have the original URL that you used to generate your first YAML-spec, you can just download and reapply the updated YAML-spec from the same URL, e.g.:<br/>`kubectl 
-apply -f '<original https://install.portworx.com/... url>'`<br/>
+If you have the original URL that you used to generate your first YAML-spec, you can just download and reapply the updated YAML-spec from the same URL, e.g.:<br/>`kubectl apply -f '<original https://install.portworx.com/... url>'`<br/>
 >**HINT**: If you have preseved the original YAML-spec from your previous install or upgrade, take a look at the first line of the spec-file (i.e. `head px-spec.yaml`), it should contain a comment with the URL used to generate it.
 
 

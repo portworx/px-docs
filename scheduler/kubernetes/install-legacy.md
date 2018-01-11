@@ -59,8 +59,7 @@ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0
 kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 
->**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [https://install.portworx.com](https://install.portworx.com) and use the 
-prepared HTML form.
+>**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [https://install.portworx.com](https://install.portworx.com) and use the prepared HTML form.
 
 >**Openshift Users:**<br/> Make sure you use `osft=true` when generating the spec.
 

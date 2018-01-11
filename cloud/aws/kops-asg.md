@@ -60,8 +60,7 @@ Once your KOPS cluster is online, install Portworx by customizing and executing 
 
 Example:
 ```
-$ curl -o px-spec.yaml "https://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=<enter your 
-details>,AWS_SECRET_ACCESS_KEY=<enter your details>”
+$ curl -o px-spec.yaml "https://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=<enter your details>,AWS_SECRET_ACCESS_KEY=<enter your details>”
 $ kubectl apply -f px-spec.yaml
 daemonset "portworx" created
 ```
