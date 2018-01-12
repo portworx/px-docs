@@ -65,7 +65,7 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 #### Generating the spec
 
-To generate the spec file, head on to [http://install.portworx.com](http://install.portworx.com) and fill in the parameters. When filing the `kbver` (Kubernetes version) on the page, use output of: 
+To generate the spec file, head on to [https://install.portworx.com](https://install.portworx.com) and fill in the parameters. When filing the `kbver` (Kubernetes version) on the page, use output of: 
 
 ```bash
 kubectl version --short | awk -Fv '/Server Version: /{print $3}'
@@ -125,7 +125,7 @@ Use `e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when
  
   ```
   $ curl -o px-spec.yaml \
-    "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
+    "https://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
   ```
 
 To view a list of all Portworx environment variables, go to [passing environment variables](/runc/options.html#environment-variables).
@@ -179,7 +179,7 @@ kubectl get pods -o wide -n kube-system -l name=portworx
     b. If you don't, you can use the Web form:
     ```bash
     VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-    kubectl delete -f 'http://install.portworx.com?kbver=$VER'
+    kubectl delete -f 'https://install.portworx.com?kbver=$VER'
     ```
 
 4. Remove the 'px/enabled' label from your nodes
