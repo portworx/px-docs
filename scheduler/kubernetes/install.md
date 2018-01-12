@@ -32,14 +32,13 @@ The native portworx driver in Kubernetes supports the following features:
 3. Persistent Volume Claims
 4. Persistent Volumes
 
-<a name="interactive-tutorials"></a>
 ## Interactive Tutorial
 
 Below tutorial gives a high level overview on installing Portworx on Kubernetes.
 
 {%
-    include katacoda-px-k8s.html 
-    id = "0zTjOly0vkA"
+    include katacoda-px-k8s.html
+    id = "portworx/deploy-px-k8s"
     description = "Tutorial to install Portworx on Kubernetes"
 %}
 

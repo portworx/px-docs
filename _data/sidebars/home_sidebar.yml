@@ -27,7 +27,7 @@
       - title: Upgrade
         url: /scheduler/kubernetes/upgrade.html
       - title: Interactive tutorials
-        url: /scheduler/kubernetes/install.html#interactive-tutorials
+        url: /scheduler/kubernetes/install.html#interactive-tutorial
       - title: Stateful applications
         folderitems:
         - title: Cassandra
