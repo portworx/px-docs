@@ -10,9 +10,6 @@ meta-description: "Find out how to install the Kafka service on your DCOS cluste
 
 This guide will help you to install the Kafka service on your DCOS cluster backed by PX volumes for persistent storage.
 
-Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
-repositories to your DCOS cluster to install the services mentioned here. 
-
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 >**Note:**<br/>This framework is only supported directly by Portworx.
@@ -65,27 +62,27 @@ provided during install, one for each of the Brokers.
 
 ![Kafka-PX volumes](/images/dcos-kafka-px-volume-list.png){:width="655px" height="200px"}
 
-If you run the "dcos service" command you should see the kafka-px service in ACTIVE state with 3 running tasks
+If you run the "dcos service" command you should see the portworx-kafka service in ACTIVE state with 3 running tasks
 
 
      $ dcos service
-     NAME                  HOST             ACTIVE  TASKS  CPU   MEM      DISK   ID                                         
+     NAME                           HOST             ACTIVE  TASKS  CPU   MEM      DISK   ID                                         
      portworx-kafka      ip-10-0-3-116.ec2.internal   True     3    3.0  6144.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0038  
-     marathon           10.0.7.49            True     2    2.0  2048.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0001  
-     metronome          10.0.7.49            True     0    0.0   0.0      0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0000  
-     portworx   ip-10-0-1-127.ec2.internal   True     4    3.3  4096.0    25.0   66d598b0-2f90-4d0a-9567-8468a9979190-0031  
-     portworx   ip-10-0-2-42.ec2.internal    True     3    1.2  3168.0  12288.0  66d598b0-2f90-4d0a-9567-8468a9979190-0032
+     marathon                    10.0.7.49            True     2    2.0  2048.0    0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0001  
+     metronome                   10.0.7.49            True     0    0.0   0.0      0.0    66d598b0-2f90-4d0a-9567-8468a9979190-0000  
+     portworx            ip-10-0-1-127.ec2.internal   True     4    3.3  4096.0    25.0   66d598b0-2f90-4d0a-9567-8468a9979190-0031  
+     portworx            ip-10-0-2-42.ec2.internal    True     3    1.2  3168.0  12288.0  66d598b0-2f90-4d0a-9567-8468a9979190-0032
 
 
 ## Verify Setup
 
-From the DCOS client; install the new command for kafka-px
+From the DCOS client; install the new command for portworx-kafka
 
       $ dcos package install portworx-kafka --cli
 
 Find out all the kafka broker endpoints
 
-      $ dcos portowrx-kafka endpoints broker
+      $ dcos portworx-kafka endpoints broker
       {
        "address": [
         "10.0.2.82:1025",
@@ -93,17 +90,17 @@ Find out all the kafka broker endpoints
         "10.0.3.101:1029"
        ],
       "dns": [
-      "kafka-2-broker.kafka.mesos:1025",
-      "kafka-0-broker.kafka.mesos:1025",
-      "kafka-1-broker.kafka.mesos:1029"
+      "kafka-2-broker.portworx-kafka.mesos:1025",
+      "kafka-0-broker.portworx-kafka.mesos:1025",
+      "kafka-1-broker.portworx-kafka.mesos:1029"
        ],
-      "vip": "broker.kafka.l4lb.thisdcos.directory:9092"
+      "vip": "broker.portworx-kafka.l4lb.thisdcos.directory:9092"
       }
 
 Find out the zookeeper endpoint for the create kafka service
 
      $ dcos portworx-kafka endpoints zookeeper
-     master.mesos:2181/dcos-service-kafka
+     master.mesos:2181/dcos-service-portworx-kafka
 
 
 Create a topic, from the DCOS client use dcos command to create a test topic ``test-one`` with replication set to three
@@ -123,9 +120,9 @@ Connect to the master node and launch a kafka client container.
 Produce a message and send to all kafka brokers
 
    
-     $  echo "Hello, World." | ./kafka-console-producer.sh --broker-list kafka-2-broker.kafka.mesos:1025,kafka-0-broker.kafka.mesos:1025,kafka-1-broker.kafka.mesos:1029 --topic test-one
+     $  echo "Hello, World." | ./kafka-console-producer.sh --broker-list kafka-2-broker.portworx-kafka.mesos:1025,kafka-0-broker.portworx-kafka.mesos:1025,kafka-1-broker.portworx-kafka.mesos:1029 --topic test-one
 
 Consume the message
 
-     $ ./kafka-console-consumer.sh --zookeeper master.mesos:2181/dcos-service-kafka --topic test-one --from-beginning
+     $ ./kafka-console-consumer.sh --zookeeper master.mesos:2181/dcos-service-portworx-kafka --topic test-one --from-beginning
      Hello, World.

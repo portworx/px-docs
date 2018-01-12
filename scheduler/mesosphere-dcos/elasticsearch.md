@@ -10,9 +10,6 @@ meta-description: "Find out how to install the ElasticSearch service on your DCO
 
 This guide will help you to install the Elasticsearch service on your DCOS cluster backed by PX volumes for persistent storage.
 
-Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
-repositories to your DCOS cluster to install the services mentioned here. 
-
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 >**Note:**<br/>This framework is only supported directly by Portworx.
@@ -20,17 +17,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
-## Adding the repository for the service:
-
-For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
-
-Run the following command to add the repository to your DCOS cluster:
-
-```
- $ dcos package repo add --index=0 elastic-px https://px-dcos.s3.amazonaws.com/v1/elastic/elastic.zip
-```
-
-Once you have run the above command you should see the Cassandra-PX service available in your universe
+The Portworx-ElasticSearch service can be found in the DC/OS catalog:
 
 ![Elasticsearch-PX in DCOS Universe](/images/elasticsearch-px-universe-001.PNG){:width="1031px" height="561px"}
 
@@ -38,7 +25,7 @@ Once you have run the above command you should see the Cassandra-PX service avai
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 ```
-$ dcos package install --yes elastic-px
+$ dcos package install --yes portworx-elastic
 ```
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
@@ -66,14 +53,14 @@ Monitor the DCOS service screen untill all ``9 + 1`` tasks are completed.
 ![Elasticsearch install status](/images/elasticsearch-px-universe-005.PNG){:width="966px" height="521px"}
 
 
-From the DCOS workstation, verify the service, look for ``elastic``
+From the DCOS workstation, verify the service, look for ``portworx-elastic``
 
      $ dcos service
-     NAME                  HOST             ACTIVE  TASKS  CPU     MEM      DISK   ID
-     elastic    ip-10-0-1-194.ec2.internal   True     9    7.1   19556.0    0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0003
-     etcd       ip-10-0-2-56.ec2.internal    True     3    3.3    6240.0  12288.0  41474f9b-6b81-44ba-ad2c-184f71efbb26-0002
-     marathon           10.0.5.179           True     7    10.7  12416.0    0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0000
-     metronome          10.0.5.179           True     0    0.0     0.0      0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0001
+     NAME                        HOST             ACTIVE  TASKS  CPU     MEM      DISK   ID
+     portworx-elastic ip-10-0-1-194.ec2.internal   True     9    7.1   19556.0    0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0003
+     etcd             ip-10-0-2-56.ec2.internal    True     3    3.3    6240.0  12288.0  41474f9b-6b81-44ba-ad2c-184f71efbb26-0002
+     marathon                 10.0.5.179           True     7    10.7  12416.0    0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0000
+     metronome                10.0.5.179           True     0    0.0     0.0      0.0    41474f9b-6b81-44ba-ad2c-184f71efbb26-0001
 
 From the DCOS workstation, verify the task; it will show ``9`` tasks.
 
@@ -82,7 +69,7 @@ From the DCOS workstation, verify the task; it will show ``9`` tasks.
       coordinator-0-node  10.0.0.236  root    R    coordinator-0-node__1287a918-20a1-4c1d-a008-3426ebb4e229
       data-0-node         10.0.2.96   root    R    data-0-node__f7e584a7-1684-4ce9-80b8-2b112e02aa02
       data-1-node         10.0.0.236  root    R    data-1-node__47e5b205-82f9-4950-851f-c9eda469dd19
-      elastic             10.0.1.194  root    R    elastic.0eedb90c-3c06-11e7-aa5d-6a7db698255f
+      portworx-elastic    10.0.1.194  root    R    elastic.0eedb90c-3c06-11e7-aa5d-6a7db698255f
       ingest-0-node       10.0.1.194  root    R    ingest-0-node__23c02a10-9e36-4e97-bb8a-7a8fd6657f7b
       kibana-0-node       10.0.2.56   root    R    kibana-0-node__550a1a8c-e508-470d-926a-ff0461d3b561
       master-0-node       10.0.1.194  root    R    master-0-node__69072b45-423a-4bd1-a181-0115277d5a63
@@ -96,7 +83,7 @@ In the above example, the DCOS Mesos cluster is running with 1 master, 1 public 
 ![Elasticsearch example setup](/images/elasticsearch-px-universe-006.PNG){:width="816px" height="404px"}
 
 
-When the last elasticsearch  component with ID ``elastic.XXXX`` that is the scheduler service shows green, and all 
+When the last elasticsearch  component with ID ``portworx-elastic.XXXX`` that is the scheduler service shows green, and all 
 elasticsearch tasks are in Running (green) status, you should be ready to start using the elasticsearch in DCOS.
 
 ![Elasticsearch service running](/images/elasticsearch-px-universe-007.PNG){:width="962px" height="500px"}
@@ -121,17 +108,17 @@ The PX volumes for all elasticsearch task components are automatically created, 
 
 Find the elastic search coordinator endpoint from DCOS workstation
 
-     $ dcos elastic endpoints coordinator
+     $ dcos portworx-elastic endpoints coordinator
      {
         "address": [
         "10.0.0.236:1029",
         "10.0.0.236:1030"
          ],
         "dns": [
-        "coordinator-0-node.elastic.mesos:1029",
-        "coordinator-0-node.elastic.mesos:1030"
+        "coordinator-0-node.portworx-elastic.mesos:1029",
+        "coordinator-0-node.portworx-elastic.mesos:1030"
         ],
-       "vip": "coordinator.elastic.l4lb.thisdcos.directory:9300"
+       "vip": "coordinator.portworx-elastic.l4lb.thisdcos.directory:9300"
      }
      
 SSH to the DCOS master node; from the DCOS workstation use ``dcos node ssh`` command
@@ -141,7 +128,7 @@ SSH to the DCOS master node; from the DCOS workstation use ``dcos node ssh`` com
 From the DCOS master node, run the Elasticsearch REST API to the coordinator address at port 9200. The default credential is ``elastic:changeme`` for the coordinator. A json output from coordinator node is shown below by accessing the coordinator port ``9200``.
 
     
-    $ curl -s -u elastic:changeme http://coordinator.elastic.l4lb.thisdcos.directory:9200
+    $ curl -s -u elastic:changeme http://coordinator.portworx-elastic.l4lb.thisdcos.directory:9200
      {
         "name" : "coordinator-0-node",
         "cluster_name" : "elastic",
@@ -159,7 +146,7 @@ From the DCOS master node, run the Elasticsearch REST API to the coordinator add
 
 Loading sample data in REST API from DCOS master node. Below showing an example of inserting a json document.
 
-     $ curl -s -u elastic:changeme -XPUT 'coordinator.elastic.l4lb.thisdcos.directory:9200/books/book/2' -d '
+     $ curl -s -u elastic:changeme -XPUT 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2' -d '
        {
          "title": "test book 1",
          "author": "bok hun",
@@ -171,7 +158,7 @@ Loading sample data in REST API from DCOS master node. Below showing an example 
 
 Verify the inserted document 
 
-     $ curl -s -u elastic:changeme -XGET 'coordinator.elastic.l4lb.thisdcos.directory:9200/books/book/2?pretty'
+     $ curl -s -u elastic:changeme -XGET 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2?pretty'
        {
          "_index" : "books",
          "_type" : "book",
@@ -189,7 +176,7 @@ Verify the inserted document
     
 Repeat inserting 4 more sample documents, then issue a search query to look for string "java" in the entered document.
 
-     $ curl -s -u elastic:changeme -XPOST 'coordinator.elastic.l4lb.thisdcos.directory:9200/books/book/_search' '
+     $ curl -s -u elastic:changeme -XPOST 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/_search' '
       {
          "query" :
          {
@@ -202,7 +189,7 @@ Repeat inserting 4 more sample documents, then issue a search query to look for 
 
 ### Kibana in DCOS
 
-The kibana URL is ``http://<dcos_url>/service/elastic/kibana/login`` ; and the default login ID and password is ``elastic`` and ``changeme``.
+The kibana URL is ``http://<dcos_url>/service/portworx-elastic/kibana/login`` ; and the default login ID and password is ``elastic`` and ``changeme``.
 
 Login to the Kibana
 

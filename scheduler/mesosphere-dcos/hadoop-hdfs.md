@@ -14,9 +14,6 @@ The Data and Yarn nodes will be co-located on the same physical host.
 
 The number of Data and Yarn nodes can be set during install. They can also be updated after install to scale the service.
 
-Since the stateful services in DCOS universe do not have support for external volumes, you will need to add additional
-repositories to your DCOS cluster to install the services mentioned here. 
-
 The source code for these services can be found here: [Portworx DCOS-Commons Frameworks](https://github.com/portworx/dcos-commons)
 
 >**Note:**<br/>This framework is only supported directly by Portworx.
@@ -24,17 +21,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
-## Adding the repository for the service:
-
-For this step you will need to login to a node which has the dcos cli installed and is authenticated to your DCOS cluster.
-
-Run the following command to add the repository to your DCOS cluster:
-
-```
-$ dcos package repo add --index=0 hadoop-px https://px-dcos.s3.amazonaws.com/v1/hadoop-px/hadoop-px.zip
-```
-
-Once you have run the above command you should see the Hadoop-PX service available in your universe
+The Portworx-hadoop service can be found in the DC/OS catalog:
 
 ![Hadoop-PX in DCOS Universe](/images/dcos-hadoop-px-universe.png){:width="655px" height="200px"}
 
@@ -42,7 +29,7 @@ Once you have run the above command you should see the Hadoop-PX service availab
 ### Default Install
 If you want to use the defaults, you can now run the dcos command to install the service
 ```
-$ dcos package install --yes hadoop-px
+$ dcos package install --yes portworx-hadoop
 ```
 You can also click on the  “Install” button on the WebUI next to the service and then click “Install Package”.
 
@@ -78,12 +65,12 @@ provided during install, one for each of the Journal, Name and Data nodes.
 
 ![Hadoop-PX volumes](/images/dcos-hadoop-px-volume-list.png){:width="655px" height="200px"}
 
-If you run the "dcos service" command you should see the hadoop-px service in ACTIVE state with 13 running tasks
+If you run the "dcos service" command you should see the portworx-hadoop service in ACTIVE state with 13 running tasks
 
 ```
 $ dcos service
 NAME                         HOST                    ACTIVE  TASKS  CPU    MEM    DISK  ID                                         
-hadoop-px                 10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113  
+portworx-hadoop           10.0.0.135                  True     13   9.0  32768.0  0.0   5c6438b2-1f63-4c23-b62a-ad0a7d354a91-0113  
 marathon                  10.0.4.21                   True     1    1.0   1024.0  0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0001  
 metronome                 10.0.4.21                   True     0    0.0    0.0    0.0   01d86b9c-ca2c-4c3c-9d9f-d3a3ef3e3911-0000  
 ```
