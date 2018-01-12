@@ -1,0 +1,11 @@
+{% if layout.amp %}
+The interactive tutorial is not available on the mobile site. <a href="https://docs.portworx.com{{ page.url }}">Click here</a> to go to the full documentation page.
+{% else %}
+<script src="//katacoda.com/embed.js"></script>
+
+<div id="deploy-px-k8s"
+    data-katacoda-id="{{ include.id }}"
+    data-katacoda-color="004d7f"
+    style="height: 600px; padding-top: 20px;">
+</div>
+{% endif %}
