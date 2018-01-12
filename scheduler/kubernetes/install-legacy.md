@@ -43,7 +43,7 @@ PX can be deployed with a single command as a [Kubernetes DaemonSet](https://kub
 ```bash
 # Download the spec - substitute your parameters below
 VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-curl -o px-spec.yaml "http://install.portworx.com?type=docker&c=mycluster&k=etcd://etc.company.net:2379&kbver=$VER"
+curl -o px-spec.yaml "https://install.portworx.com?type=docker&c=mycluster&k=etcd://etc.company.net:2379&kbver=$VER"
 
 # Verify that the contents of px-spec.yaml are correct
 vi px-spec.yaml
@@ -59,11 +59,11 @@ PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0
 kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 
->**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [http://install.portworx.com](http://install.portworx.com) and use the prepared HTML form.
+>**IMPORTANT:**<br/> To simplify the installation and entering the parameters, please head on to [https://install.portworx.com](https://install.portworx.com) and use the prepared HTML form.
 
 >**Openshift Users:**<br/> Make sure you use `osft=true` when generating the spec.
 
-Below are all parameters that can be given in the query string  (see [install.portworx.com](http://install.portworx.com)).
+Below are all parameters that can be given in the query string  (see [install.portworx.com](https://install.portworx.com)).
 
 | Value  | Description                                                                                                                           | Example                                                    |
 |:-------|:--------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------|
@@ -116,7 +116,7 @@ Use `e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>` query param when
 
 ```
 $ curl -o px-spec.yaml \
-  "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
+  "https://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&e=PX_HTTP_PROXY=<http-proxy>,PX_HTTPS_PROXY=<https-proxy>"
 ```
 
 ## Uninstall
@@ -131,7 +131,7 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   
   # Alternatively, delete PX using the Web-form
   VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-  kubectl delete -f 'http://install.portworx.com?type=dock&kbver=$VER'
+  kubectl delete -f 'https://install.portworx.com?type=dock&kbver=$VER'
   ```
 
 >**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.

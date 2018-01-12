@@ -64,10 +64,10 @@ Step 5: Add API server and Token fileds and create a new px-spec.yaml file for f
 
 ```
 curl -o px-spec.yaml \
-  "http://install.portworx.com?c=mycluster&k=etcd://70.0.38.38:2379&t=token-97b7656a-7c86-11e7-a014-428db0678bce&e=API_SERVER=http://70.0.38.38:30062"
+  "https://install.portworx.com?c=mycluster&k=etcd://70.0.38.38:2379&t=token-97b7656a-7c86-11e7-a014-428db0678bce&e=API_SERVER=http://70.0.38.38:30062"
 ```
 
->**Note:**<br/> You can also use the HTML form at [install.portworx.com](http://install.portworx.com), and enter at minimum the _<U>c</U>luster name_, _<U>k</U>ey/value database_, _<U>t</U>oken_, and _<U>e</U>nvironment (API\_SERVER=xxx)_ fields.
+>**Note:**<br/> You can also use the HTML form at [install.portworx.com](https://install.portworx.com), and enter at minimum the _<U>c</U>luster name_, _<U>k</U>ey/value database_, _<U>t</U>oken_, and _<U>e</U>nvironment (API\_SERVER=xxx)_ fields.
 
 
 Step 5b: Or you can edit your existing `px-spec.yaml` file and add the `"-t", "<token>"` and `"env:API_SERVER"` fields, ie:
