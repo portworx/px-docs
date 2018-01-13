@@ -34,13 +34,7 @@ The native portworx driver in Kubernetes supports the following features:
 
 ## Interactive Tutorial
 
-Below tutorial gives a high level overview on installing Portworx on Kubernetes.
-
-{%
-    include katacoda-px-k8s.html
-    id = "portworx/deploy-px-k8s"
-    description = "Tutorial to install Portworx on Kubernetes"
-%}
+Following [this interactive tutorial](https://www.katacoda.com/portworx/scenarios/deploy-px-k8s) to get a high level overview on installing Portworx on Kubernetes.
 
 <a name="prereqs-section"></a>
 ## Prerequisites
