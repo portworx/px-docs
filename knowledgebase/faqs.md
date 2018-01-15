@@ -32,21 +32,19 @@ Portworx prefers a H/W RAID controller, if available.
 PX automatically uses UUID after the drive has been specified.  You don't need to worry about drive letters changing.
 
 ### Does Portworx need to take over all the disks on a given server?
-No.  You can explicitly allow/disallow drives that participate in a Portworx cluster. In PX-Enterprise, this notion of device delegation/participation is exposed through the "Server Profile".
-A "Server Profile" determines which nodes will be allowed to automatically join a cluster, based on their H/W profile.
-Similarly, the "Server Profile" determines which devices should not be allowed to participate in the Portworx Fabric.
+No. PX does not have to take over all the disks on a given servers. The devices that PX can be selected by giving the drive path with -s option when bringing up PX. Check your relevant scheduler install instructions to pass the drive parameter
 
 ### Can Portworx work with iSCSI or FC and make use of existing legacy storage (EMC, NetApp, Nexenta, etc.)?
-Yes. Any block storage presented to a host can be used within a Portworx cluster.
+Yes. Any block storage presented to a host can be used with a Portworx cluster. Portworx can virtualize any standard block device exported other vendors' storage arrays or software products like CEPH, GlusterFS etc and make them much more reliable and enable cloud-native applications to run onthem.
 
 ### Does Portworx come as a hardware appliance?
-No.  We are software-only, deployed as a container
+No.  Portworx software-only, deployed as a OCI container
 
 ### Can storage be added to a server and used after the server has joined the cluster?
-Yes.  With 'pxctl service add /dev/xyz' additional storage gets dynamically incorporated into the the global capacity pool.
+Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](https://docs.portworx.com/maintain/scale-up.html) to learn more about
 
 ### What happens when a drive fails?
-Portworx will enter maintenance mode.  In this mode, you can replace up to one failed drive.  If there are multiple drive failures, a node can be decommissioned from the cluster.  Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
+On a drive failure, Portworx enters will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. PX needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](https://docs.portworx.com/maintain/maintenance-mode.html) to learn more about maintenance mode operations. 
 
 ### Do servers in a cluster need to be all be configured exactly the same?
 No.  Servers in a Portworx cluster can use block storage of any type, profile, capacity and performance class.
