@@ -44,12 +44,12 @@ No.  Portworx software-only, deployed as a OCI container
 Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](https://docs.portworx.com/maintain/scale-up.html) to learn more about
 
 ### What happens when a drive fails?
-On a drive failure, Portworx enters will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. PX needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](https://docs.portworx.com/maintain/maintenance-mode.html) to learn more about maintenance mode operations. 
+On a drive failure, Portworx will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. PX needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](https://docs.portworx.com/maintain/maintenance-mode.html) to learn more about maintenance mode operations. 
 
 ### Do servers in a cluster need to be all be configured exactly the same?
 No.  Servers in a Portworx cluster can use block storage of any type, profile, capacity and performance class.
 Devices of different performance classes (i.e flash or spinning drives) will be automatically detected and grouped accordingly.
-Portworx also supports "head-only" mode, where a node participates in a cluster, but contributes no storage to the fabric.
+Portworx also supports storageless mode, where a node participates in a cluster, but contributes no storage to the fabric.
 
 ### Are read operations parallelized?
 Yes, if replication is > 1, then different blocks will be read from different servers.   We multi-source the read operations across nodes for high-performance.
@@ -59,7 +59,7 @@ No.  Currently only one instance of PX per server is allowed.
 
 ### Can Portworx work in a multi-cloud environment?
 Yes absolutely you can create a fabric, based on servers across multiple different cloud providers.
-However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a volume snapshot under one cloud, and then mount that snapshot in another cloud.
+However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a cloudsnap under one cloud, and then import and mount that snapshot in another cloud. Refer to [Multi-Cloud Backup operations](https://docs.portworx.com/cloud/backups.html) on how to create Cloudsnaps and import them to any cluster you want
 
 ### Can I access my data outside of Portworx volume, or is it only for containers?
 With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside of a container context.
@@ -68,11 +68,11 @@ Among the possible use cases:
 * Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
 Please see the documentation [here](/manage/shared-volumes.html), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
 
-### How are snapshots implemented?    Thick clones or Thin copy-on-write?
-Thin copy-on-write
+### How are snapshots implemented?    Thick clones or Thin clones?
+Portworx snapshots are redirect-on-write snapshots and are thin clones. 
 
 ### What's the largest cluster size that's been tested?  Supported?
-We support 20 nodes for the 1.0 release of PX-Enterprise.  But this is only a QA/qualification limit.
+Portworx PX-Enterprise supports 1000 nodes in the same cluster.  But this is only a QA/qualification limit.
 
 ### How quickly is node failure detected?
 On the order of milliseconds. 
