@@ -73,20 +73,19 @@ spec:
 
 ## B.	 Create a Secret for MySQL Password
 A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
+
 ## 3.	Create the Secret object from the following command:
 
-kubectl create secret generic mysql-pass --from-file=password.txt
+`kubectl create secret generic mysql-pass --from-file=password.txt`
 
 or 
 
-kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD
+`kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD`
 
 
 ## 4.	Verify that the Secret exists by running the following command:
 
-kubectl get secrets
-
-
+`kubectl get secrets`
 
 
 C.	 Deploy MySQL with portworx
@@ -94,7 +93,7 @@ The following manifest describes a single-instance MySQL Deployment. The MySQL c
 
 ## 5.	Deploy MySQL from the mysql.yaml file:
 
-kubectl create -f mysql.yaml
+`kubectl create -f mysql.yaml`
 
 ```
 apiVersion: v1
@@ -156,7 +155,7 @@ The following manifest describes a three-instance WordPress Deployment and Servi
 
 ## 6.	Deploy wordpress from the wordpress.yaml file:
 
-kubectl create -f wordpress-deployment.yaml
+`kubectl create -f wordpress-deployment.yaml`
 
 ```
 apiVersion: v1
@@ -218,20 +217,21 @@ spec:
 ## 7.	Verify Pods and Get WordPress Service by running the following command:
 
 
-kubectl get pods
+`kubectl get pods`
 
-kubectl get services wordpress
+`kubectl get services wordpress`
+
 E.	 Cleaning up
 "Deleting secret for mysql”
-kubectl delete secret mysql-pass
+`kubectl delete secret mysql-pass`
 
 "Deleting wordpress..."
-kubectl delete -f wordpress.yaml
-kubectl delete -f wordpress-vol.yaml
+`kubectl delete -f wordpress.yaml`
+`kubectl delete -f wordpress-vol.yaml`
 
 "Deleting mysql for wordpress"
-kubectl delete -f mysql.yaml
-kubectl delete -f mysql-vol.yaml
+`kubectl delete -f mysql.yaml`
+`kubectl delete -f mysql-vol.yaml`
 
 
 Note: Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running.
