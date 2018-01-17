@@ -40,6 +40,10 @@ Yes. Any block storage presented to a host can be used with a Portworx cluster. 
 ### Does Portworx come as a hardware appliance?
 No.  Portworx software-only, deployed as a OCI container
 
+### What are different container orchestrators support my Portworx?
+
+Portworx supports all major container orchestrators and platforms like Kubernetes, Mesos, Swarm, Openshift, Tectonic, DC/OS, Docker UCP, Nomad and others. 
+
 ### Can storage be added to a server and used after the server has joined the cluster?
 Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](https://docs.portworx.com/maintain/scale-up.html) to learn more about
 
@@ -86,6 +90,12 @@ Yes.  Management traffic (for configuration) and statistics traffic will travel 
 Traffic associated with replication and resynchronization will travel over "dataiface".
 Please see the [config-json file definition](/control/config-json.html).  
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
+
+### Does Portworx support volume encryption? 
+Yes, Portworx PX-Enterprise supports data encryption-at-rest and also encryption-in-fligt as data is replicated between multiple PX nodes within a data center or across data centers or clouds. PX-Enterprise supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
+
+### How can safely backup and restore my data with Portworx?
+Portworx PX-Enterprise supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want. 
 
 ## Did we miss your question? 
 If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:{{site.feedback_email}}?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>
