@@ -14,11 +14,11 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 
 Note: The files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes tutorial.
 
-A.	 Create Porworx PersistentVolume
+## A.	 Create Porworx PersistentVolume
 Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
-1.	Create MySQL Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- mysql-vol.yaml
-
+## 1.	Create MySQL Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- mysql-vol.yaml
+```
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
@@ -40,11 +40,11 @@ spec:
   resources:
     requests:
       storage: 2Gi
+```
 
 
-
-2.	Create WordPress Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- wordpress-vol.yaml
-
+## 2.	Create WordPress Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- wordpress-vol.yaml
+```
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
 metadata:
@@ -69,11 +69,11 @@ spec:
   resources:
     requests:
       storage: 1Gi
+```
 
-
-B.	 Create a Secret for MySQL Password
+## B.	 Create a Secret for MySQL Password
 A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
-3.	Create the Secret object from the following command:
+## 3.	Create the Secret object from the following command:
 
 kubectl create secret generic mysql-pass --from-file=password.txt
 
@@ -82,7 +82,7 @@ or
 kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD
 
 
-4.	Verify that the Secret exists by running the following command:
+## 4.	Verify that the Secret exists by running the following command:
 
 kubectl get secrets
 
@@ -92,11 +92,11 @@ kubectl get secrets
 C.	 Deploy MySQL with portworx
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
 
-5.	Deploy MySQL from the mysql.yaml file:
+## 5.	Deploy MySQL from the mysql.yaml file:
 
 kubectl create -f mysql.yaml
 
-
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -148,17 +148,17 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pvc-1
+```
 
 
-
-D.	 Deploy WordPress
+## D.	 Deploy WordPress
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
 
-6.	Deploy wordpress from the wordpress.yaml file:
+## 6.	Deploy wordpress from the wordpress.yaml file:
 
 kubectl create -f wordpress-deployment.yaml
 
-
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -212,10 +212,10 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pv-claim
+```
 
 
-
-7.	Verify Pods and Get WordPress Service by running the following command:
+## 7.	Verify Pods and Get WordPress Service by running the following command:
 
 
 kubectl get pods
