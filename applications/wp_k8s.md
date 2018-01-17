@@ -234,7 +234,6 @@ kubectl delete -f mysql.yaml
 kubectl delete -f mysql-vol.yaml
 
 
-
 Note: Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running.
 
 
