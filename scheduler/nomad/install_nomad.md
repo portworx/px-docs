@@ -34,7 +34,7 @@ Portworx on an existing Nomad system.
 The following arguments should be customized as per the local environment:
 ```
 args = [ "-c", "curl http://get.portworx.com | sh ; /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 -c pxcluster -f -a -d eth0 -m eth0" ]
-``
+```
 
 Nomad has a very natural alignment with `consul`.
 Therefore having Portworx use `consul` as the clustered `kvdb` when 
