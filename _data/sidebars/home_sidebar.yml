@@ -275,7 +275,7 @@
       - title: Wordpress deployment by Docker
         url: /applications/docker-compose.html
       - title: Wordpress deployment by Kubernetes
-        url: /applications/wp_k8s.html
+        url: /applications/wp-k8s.html
     - title: Jenkins
       url: /applications/jenkins.html
   - title: Encryption
