@@ -117,7 +117,7 @@ sudo docker plugin enable pxd
 ```
 
 <a name="docker-switch-v1-v2"></a>
-#### Upgrading Portworx Container to Portworx v2 Docker plugin
+#### Migrating Portworx Container to Portworx v2 Docker plugin
 
 Note that one cannot run the PX-Container and PX-Plugin at the same time.
 If you have previously installed Portworx as a Docker container (the "legacy
@@ -171,6 +171,12 @@ containers/applications that use the PX-Volumes:
   }
 ]
 ```
+
+#### Migrating Portworx v2 Docker plugin to PX-OCI or Portworx Container
+
+If you require a migration from Portworx v2 Docker plugin to [PX-OCI](/runc) or
+plain [Portworx Container](/scheduler/docker/docker-container.html) - please
+[contact support](mailto:support@portworx.com).
 
 
 #### Optional - running with a custom config.json
