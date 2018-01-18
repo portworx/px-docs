@@ -14,7 +14,7 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 
 Note: The files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes tutorial.
 
-## Create Porworx PersistentVolume
+# Create Porworx PersistentVolume
 Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
 # Create MySQL Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- mysql-vol.yaml
@@ -71,7 +71,7 @@ spec:
       storage: 1Gi
 ```
 
-## Create a Secret for MySQL Password
+# Create a Secret for MySQL Password
 A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
 
 # Create the Secret object from the following command:
@@ -150,7 +150,7 @@ spec:
 ```
 
 
-## Deploy WordPress
+# Deploy WordPress
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
 
 # Deploy wordpress from the wordpress.yaml file:
