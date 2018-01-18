@@ -15,9 +15,11 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 Note: The files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes tutorial.
 
 # Create Portworx PersistentVolume
+
 Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
 # Create MySQL Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- mysql-vol.yaml
+
 ```
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
@@ -41,7 +43,6 @@ spec:
     requests:
       storage: 2Gi
 ```
-
 
 # Create WordPress Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- wordpress-vol.yaml
 ```
@@ -72,6 +73,7 @@ spec:
 ```
 
 # Create a Secret for MySQL Password
+
 A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
 
 # Create the Secret object from the following command:
@@ -88,7 +90,8 @@ or
 `kubectl get secrets`
 
 
-C.	 Deploy MySQL with portworx
+# Deploy MySQL with portworx
+
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
 
 # Deploy MySQL from the mysql.yaml file:
@@ -151,6 +154,7 @@ spec:
 
 
 # Deploy WordPress
+
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
 
 # Deploy wordpress from the wordpress.yaml file:
@@ -221,19 +225,25 @@ spec:
 
 `kubectl get services wordpress`
 
-E.	 Cleaning up
+# Cleaning up
+
 "Deleting secret for mysql”
+
 `kubectl delete secret mysql-pass`
 
 "Deleting wordpress..."
+
 `kubectl delete -f wordpress.yaml`
+
 `kubectl delete -f wordpress-vol.yaml`
 
 "Deleting mysql for wordpress"
+
 `kubectl delete -f mysql.yaml`
+
 `kubectl delete -f mysql-vol.yaml`
 
 
-Note: Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running.
+`Note:` Portworx PersistentVolume would allow you to recreate the Deployments and Services at this point without losing data, but hostPath loses the data as soon as the Pod stops running.
 
 
