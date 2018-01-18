@@ -17,7 +17,7 @@ This documentation explains about how to deploy a WordPress site and a MySQL dat
 
 A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator, and a PersistentVolumeClaim (PVC) is a set amount of storage in a PV. PersistentVolumes and PersistentVolumeClaims are independent from Pod lifecycles and preserve data through restarting, rescheduling, and even deleting Pods in kubernetes.
 
-`Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes vesrion.
+`Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes.
 
 ### Create Portworx PersistentVolume
 
