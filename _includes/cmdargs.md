@@ -47,7 +47,7 @@ PX_ENABLE_NFS         [OPTIONAL] Enable the PX NFS daemon. Set PX_ENABLE_NFS=tru
 ```
 
 NOTE: Setting environment variables can be done using the `-e` option, during [PX-OCI](/runc/#step-2-configure-px-under-runc)
-or [PX Docker Container](scheduler/docker/docker-container.html) command line install (e.g. add `-e VAR=VALUE` option).
+or [PX Docker Container](/scheduler/docker/docker-container.html) command line install (e.g. add `-e VAR=VALUE` option).
 
 ```bash
 # Example PX-OCI config with extra "PX_ENABLE_CACHE_FLUSH" environment variable

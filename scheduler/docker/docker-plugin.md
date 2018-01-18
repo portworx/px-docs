@@ -175,7 +175,7 @@ containers/applications that use the PX-Volumes:
 #### Migrating Portworx v2 Docker plugin to PX-OCI or Portworx Container
 
 If you require a migration from Portworx v2 Docker plugin to [PX-OCI](/runc) or
-plain [Portworx Container](scheduler/docker/docker-container.html) - please
+plain [Portworx Container](/scheduler/docker/docker-container.html) - please
 [contact support](mailto:support@portworx.com).
 
 
