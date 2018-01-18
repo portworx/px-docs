@@ -6,8 +6,11 @@ sidebar: home_sidebar
 redirect_from:
 meta-description: "Wordpress solution with Kubernetes. Use PX volume driver to create new volumes or reuse existing ones."
 ---
+
 * TOC
 {:toc}
+
+# Summary
 
 Deploying WordPress and MySQL with Portworx Persistent Volumes by Kubernetes
 This documentation explains about how to deploy a WordPress site and a MySQL database using kubernetes. 
@@ -20,7 +23,7 @@ Note: The files provided in this tutorial are using beta Deployment APIs and are
 
 Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
-# Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
+## Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
  `mysql-vol.yaml`
 
@@ -48,7 +51,7 @@ spec:
       storage: 2Gi
 ```
 
-# Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC) 
+## Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC) 
 
 `wordpress-vol.yaml`
 ```
@@ -82,7 +85,7 @@ spec:
 
 A Secret is an object that stores a piece of sensitive data like a password or key. The manifest files are already configured to use a Secret, but you have to create your own Secret. Note: To protect the Secret from exposure, neither get nor describe show its contents.
 
-# Create the Secret object from the following command:
+### Create the Secret object from the following command:
 
 `kubectl create secret generic mysql-pass --from-file=password.txt`
 
@@ -91,7 +94,7 @@ or
 `kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD`
 
 
-# Verify that the Secret exists by running the following command:
+### Verify that the Secret exists by running the following command:
 
 `kubectl get secrets`
 
@@ -100,7 +103,7 @@ or
 
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
 
-# Deploy MySQL from the mysql.yaml file:
+### Deploy MySQL from the mysql.yaml file:
 
 `kubectl create -f mysql.yaml`
 
@@ -163,7 +166,7 @@ spec:
 
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
 
-# Deploy wordpress from the wordpress.yaml file:
+### Deploy wordpress from the wordpress.yaml file:
 
 `kubectl create -f wordpress-deployment.yaml`
 
@@ -223,9 +226,7 @@ spec:
           claimName: wp-pv-claim
 ```
 
-
-# Verify Pods and Get WordPress Service by running the following command:
-
+### Verify Pods and Get WordPress Service by running the following command:
 
 `kubectl get pods`
 
