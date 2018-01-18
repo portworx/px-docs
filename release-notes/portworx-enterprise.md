@@ -12,6 +12,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.14
+This is a minor update to support the older linux kernel versions (4.4.0.x) that gets with Ubuntu distributions
 
 ## 1.2.12.1
 This is a minor update to support Openshift with SELinux enabled as well as verify with SPECTRE/Meltdown kernel patches
