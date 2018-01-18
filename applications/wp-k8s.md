@@ -234,17 +234,17 @@ spec:
 
 ### Cleaning up
 
-"Deleting secret for mysql”
+* Deleting secret for mysql
 
 `kubectl delete secret mysql-pass`
 
-"Deleting wordpress..."
+* Deleting wordpress
 
 `kubectl delete -f wordpress.yaml`
 
 `kubectl delete -f wordpress-vol.yaml`
 
-"Deleting mysql for wordpress"
+* Deleting mysql for wordpress
 
 `kubectl delete -f mysql.yaml`
 
