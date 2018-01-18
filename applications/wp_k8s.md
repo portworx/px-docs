@@ -14,7 +14,7 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 
 Note: The files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes tutorial.
 
-# Create Porworx PersistentVolume
+# Create Portworx PersistentVolume
 Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
 # Create MySQL Portworx PersistentVolume(PV) and PersistanctVolumeClaim(PVC)- mysql-vol.yaml
