@@ -90,6 +90,8 @@
           url: /scheduler/mesosphere-dcos/zookeeper.html
       - title: How To
         folderitems:
+        - title: Running Portworx in Production with DC/OS
+          url: /maintain/going-production-with-dcos.html
         - title: Constraining Applications to PX nodes
           url: /scheduler/mesosphere-dcos/constraints.html
         - title: Dynamically creating volumes
