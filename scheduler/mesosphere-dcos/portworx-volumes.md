@@ -39,7 +39,7 @@ Here's how you would specify Portworx as a volume driver in a task begin launche
         },
         {
           "key": "volume",
-          "value": "size=500,name=px_vol:/data"
+          "value": "repl=3,size=500,name=px_vol:/data"
         }
       ]
     ],
