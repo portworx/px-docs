@@ -48,6 +48,7 @@ Note: 'alert-manager-ip' is the IP address of the node where AlertManager is run
 ### Prometheus alerts rules file
 
 Copy [px.rules](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
+For Prometheus v2.0.0 and above, rules file is available [here]
 
 ### Run Prometheus
 
