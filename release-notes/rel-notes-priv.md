@@ -14,7 +14,13 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.0-rc2 
 
-TBD
+### Feature updatee and noteworthy changes
+
+* Improved snapshot workflows 
+* Improved resync performance when a node is down for a long time and restarted
+* Improved performance for database workloads by seperating transaction logs to a seperate device
+* https support for API end-points
+* Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
 
 
 
