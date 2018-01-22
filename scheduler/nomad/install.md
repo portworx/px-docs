@@ -27,7 +27,7 @@ Current use of Portworx with Nomad is **experimental**.
 ## Install
 
 Portworx deploys on Nomad as a `system` job.  
-Please use [this job file](https://docs.portworx.com/scheduler/nomad/portworx.nomad) as a reference for deploying 
+Please use [this job file](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/scheduler/nomad/portworx.nomad) as a reference for deploying 
 Portworx on an existing Nomad system.
 
 The following arguments to `px-runc` should be customized as per the local environment:
