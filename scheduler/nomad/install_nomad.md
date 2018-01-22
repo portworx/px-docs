@@ -12,7 +12,7 @@ meta-description: "Install and consume Portworx from within a Nomad cluster."
 * TOC
 {:toc}
 
-**__[Experimental]__**
+**[Experimental]**
 Nomad is a scheduler and job orchestrator from HashiCorp for managing a 
 cluster of machines and running applications on them. 
 Nomad abstracts away machines and the location 
@@ -22,9 +22,9 @@ Portworx can run within Nomad and provide persistent volumes to other
 applications running on Nomad. This section describes how to deploy and consume 
 Portworx within a Nomad cluster. 
 
-Current use of Portworx with Nomad is **__experimental__**.
+Current use of Portworx with Nomad is **experimental**.
 
-# Install
+## Install
 
 Portworx deploys on Nomad as a `system` job.  
 Please use [this job file](/scheduler/nomad/portworx.nomad) as a reference for deploying 
@@ -49,7 +49,7 @@ deployed through Nomad makes common sense.
 When doing so, `consul` can be referenced locally on all nodes,
 as with `127.0.0.1:8500`
 
-## Hashi-porx
+### Hashi-porx
 
 As a community resource, please refer to the [hashi-porx](https://github.com/portworx/terraporx/tree/master/aws/hashi-porx) repository for a full-stack deployment of consul, nomad, vault, the Hashi UI, and Portworx all deployed through Terraform on AWS.
 
@@ -57,7 +57,7 @@ When using the `hashi-porx` stack, the status for the Nomad and Consul clusters
 can be accessed through the GUI via the `nomad_url` output variable, which refers to port 3000 
 of the external load balancer.
 
-# Monitor Portworx cluster status
+## Monitor Portworx cluster status
 
 Nomad jobs can be monitored through the GUI (port 3000) or the REST API (port 4646).
 
@@ -81,7 +81,7 @@ nomad logs AllocID
 ```
 where `AllocID` refers to a valid Allocation ID.
 
-# Scaling
+## Scaling
 Portworx is deployed through the Nomad `system` scheduler, which behaves similarly
 to a Kubernetes `daemonset`.  The `system` scheduler is used to register jobs 
 that should be run on all clients meeting a job's constraints. 
@@ -95,9 +95,9 @@ If using the `hashi-porx` stack on AWS, simply change the corresponding nomad cl
 auto-scaling group (via GUI or API) to have the desired number of nodes/servers.
 The new servers will be automatically provisioned and configured, with consul, nomad and Portworx.
 
-# Upgrade
+## Upgrade
 
-## Upgrade via GUI
+### Upgrade via GUI
 To upgrade Portworx via the Hashi GUI, select the 'portworx' job.
 Select the 'edit' icon on the upper right side.
 Change the `px-enterprise` tag to the desired release.
@@ -109,14 +109,14 @@ Save the job.
 Upgrade time will depend on the node configuration.
 Expect the full upgrade through Nomad to take around 1 hour for AWS t2.medium clients.
 
-## Upgrade via CLI
+### Upgrade via CLI
 Update the Nomad job file to reflect the desired Portworx release tag.
 Run `nomad plan` and `nomad run` accordingly.
 Upgrade time will depend on the node configuration.
 Expect the full upgrade through Nomad to take around 1 hour for AWS t2.medium clients.
 
 
-# Using and Accessing Portworx
+## Using and Accessing Portworx
 Portworx volumes can be easily accessed through the Nomad `docker` driver 
 by referencing the `pxd` volume driver.
 ```
@@ -138,7 +138,7 @@ by referencing the `pxd` volume driver.
 
 A complete example for launching MySQL can be found [here](https://github.com/portworx/terraporx/blob/master/aws/hashi-porx/nomad/examples/mysql.nomad)
 
-# Storage On Demand
+## Storage On Demand
 Portworx provides an important feature that enables applications to have storage provisioned on demand, 
 rather than requiring storage to be pre-provisioned.
 
