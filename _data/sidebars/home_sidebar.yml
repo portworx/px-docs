@@ -120,6 +120,10 @@
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
+    - title: Nomad
+      folderitems:
+      - title: Install
+        url: /scheduler/nomad/install_nomad.html
   - title: About Data Volumes
     folderitems:
     - title: Create and Manage Data Volumes
