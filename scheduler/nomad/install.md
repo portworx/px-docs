@@ -27,12 +27,16 @@ Current use of Portworx with Nomad is **experimental**.
 ## Install
 
 Portworx deploys on Nomad as a `system` job.  
-Please use [this job file](/scheduler/nomad/portworx.nomad) as a reference for deploying 
+Please use [this job file](https://docs.portworx.com/scheduler/nomad/portworx.nomad) as a reference for deploying 
 Portworx on an existing Nomad system.
 
 The following arguments to `px-runc` should be customized as per the local environment:
 ```
-args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh  --rm -i --privileged=true -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.12.1 --upgrade ; /opt/pwx/bin/runc delete -f portworx; /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 -c pxcluster -f -a -d eth0 -m eth0" ]
+args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh  --rm -i --privileged=true \
+                      -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  \
+                      portworx/px-enterprise:1.2.12.1 --upgrade ;\
+                /opt/pwx/bin/runc delete -f portworx; \
+                /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 -c pxcluster -f -a -d eth0 -m eth0" ]
 ```
 
 The above command has 3 parts:
@@ -103,7 +107,7 @@ Select the 'edit' icon on the upper right side.
 Change the `px-enterprise` tag to the desired release.
 Example:
 ```
-    ... -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.14 --upgrade
+    ... -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.14 --upgrade
 ```
 Save the job.
 Upgrade time will depend on the node configuration.
@@ -142,7 +146,7 @@ A complete example for launching MySQL can be found [here](https://github.com/po
 Portworx provides an important feature that enables applications to have storage provisioned on demand, 
 rather than requiring storage to be pre-provisioned.
 
-The feature, also refered to as `inline volume creation` is documented [here](https://docs.portworx.com/manage/volumes.html#inline-volume-spec)
+The feature, also refered to as `inline volume creation` is documented [here](/manage/volumes.html#inline-volume-spec)
 
 Using this feature can be seen in the above example in the `volumes` clause.
 Note than all relevent Portworx volume metadata can be specified through this mechanism.
