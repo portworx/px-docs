@@ -14,7 +14,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.0-rc2 
 
-### Feature updatee and noteworthy changes
+### Feature updates and noteworthy changes
 
 * Improved snapshot workflows 
 * Improved resync performance when a node is down for a long time and restarted
