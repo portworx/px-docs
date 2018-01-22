@@ -22,6 +22,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
 * Integrated kvdb 
+* Object store (S3) support
 
 
 
