@@ -21,6 +21,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Improved performance for database workloads by seperating transaction logs to a seperate device
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
+* Integrated kvdb 
 
 
 
