@@ -123,7 +123,7 @@
     - title: Nomad
       folderitems:
       - title: Install
-        url: /scheduler/nomad/install_nomad.html
+        url: /scheduler/nomad/install.html
   - title: About Data Volumes
     folderitems:
     - title: Create and Manage Data Volumes
