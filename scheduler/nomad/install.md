@@ -27,16 +27,18 @@ Current use of Portworx with Nomad is **experimental**.
 ## Install
 
 Portworx deploys on Nomad as a `system` job.  
-Please use [this job file](https://docs.portworx.com/scheduler/nomad/portworx.nomad) as a reference for deploying 
+Please use [this job file](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/scheduler/nomad/portworx.nomad) as a reference for deploying 
 Portworx on an existing Nomad system.
 
 The following arguments to `px-runc` should be customized as per the local environment:
 ```
-args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh  --rm -i --privileged=true \
+args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh \
+                      --rm -i --privileged=true \
                       -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  \
                       portworx/px-enterprise:1.2.12.1 --upgrade ;\
                 /opt/pwx/bin/runc delete -f portworx; \
-                /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 -c pxcluster -f -a -d eth0 -m eth0" ]
+                /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 \
+                      -c pxcluster -f -a -d eth0 -m eth0" ]
 ```
 
 The above command has 3 parts:
