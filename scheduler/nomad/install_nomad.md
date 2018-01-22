@@ -35,7 +35,7 @@ The following arguments to `px-runc` should be customized as per the local envir
 args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh  --rm -i --privileged=true -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.12.1 --upgrade ; /opt/pwx/bin/runc delete -f portworx; /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 -c pxcluster -f -a -d eth0 -m eth0" ]
 ```
 
-THe above command has 3 parts:
+The above command has 3 parts:
 
 1. Install (or upgrade) the Portworx runC bootstrap 
 2. Delete any existing Portworx runC containers that may be active
