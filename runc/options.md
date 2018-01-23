@@ -18,7 +18,7 @@ The following arguments can be provided to PX, which will in turn pass them to t
 >These options are for `runC`.  While these options are a superset of the now deprecated `docker run` method of starting PX, they can still be used with the Docker version of PX.
 
 ```
-Usage: /opt/pwx/bin/px-runc <run|install> [options]
+Usage: /opt/pwx/bin/px-runc install [options]
 ```
 
 {% include cmdargs.md %}

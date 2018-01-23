@@ -85,7 +85,7 @@ $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
 The following arguments can be provided to the `px-runc` helper tool, which will in turn pass them to the PX daemon:
 
 ```
-Usage: /opt/pwx/bin/px-runc <run|install> [options]
+Usage: /opt/pwx/bin/px-runc install [options]
 ```
 
 {% include cmdargs.md %}
@@ -114,23 +114,6 @@ Once you install the PX OCI bundle and `systemd` configuration from the steps ab
 $ sudo systemctl daemon-reload
 $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
-```
-
-#### Interactive mode
-Alternatively, one might prefer to first start the PX interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:
-
-```bash
-# Invoke PX interactively, abort with CTRL-C when confirmed it's running:
-$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
-    -k etcd://myetc.company.com:2379 \
-    -s /dev/xvdb
-
-[...]
-> time="2017-08-18T20:34:23Z" level=info msg="Cloud backup schedules setup done"
-> time="2017-08-18T20:34:23Z" level=info msg="Starting REST service on socket : /run/docker/plugins/pxd.sock"
-> time="2017-08-18T20:34:23Z" level=info msg="Starting REST service on socket : /var/lib/osd/driver/pxd.sock"
-> time="2017-08-18T20:34:23Z" level=info msg="PX is ready on Node: 53f5e87b... CLI accessible at /opt/pwx/bin/pxctl."
-[ hit Ctrl-C ]
 ```
 
 ## Upgrading the PX OCI bundle
