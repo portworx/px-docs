@@ -27,7 +27,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Issues addressed
 
-* Ask a confirmation question for `pxctl volume delete` operations
+* PWX-4518 - Add a confirmation prompt for `pxctl volume delete` operations
 * PWX-4504 - Show all the volumes present in the node in the CLI
 * PWX-4475 - Parse io_profile in inline volume spec
 * PWX-4479 - Fix io_priority versions when labeling cloudsnaps
