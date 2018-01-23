@@ -22,6 +22,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Improved performance for database workloads by separating transaction logs to a seperate device
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
+* Provide ability to transfer licenses between two clusters
 * Integrated kvdb - Early Access - Limited Release
 * Object store (S3) support - Beta
 
@@ -35,6 +36,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4378 - Add read/write latency stats to the volume statistics
 * PWX-4923 - Add vol_ prefix to read/write volume latency statistics
 * PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath was unmounted via unmount command
+* PWX-4372 - Gracefully handle trial license expiry and PX cluster reinstall
+
 
 
 
