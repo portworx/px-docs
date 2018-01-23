@@ -12,8 +12,6 @@
         url: /runc/#upgrading-from-px-containers-to-px-oci
       - title: Install Arguments
         url: /runc/options.html
-    - title: DIY Demo
-      url: /getting-started/diy.html
     - title: Developer Edition
       url: /developer/index.html
     - title: Licensing
@@ -160,6 +158,8 @@
         url: /cloud/aws/kops-asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
+      - title: Cloud Formation, DIY Demo
+        url: /getting-started/diy.html
     - title: Azure
       folderitems:
       - title: Portworx on Azure
