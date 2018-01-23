@@ -16,13 +16,27 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Feature updates and noteworthy changes
 
+* Volume create command additions to include volume clone command and integrate snap commands
 * Improved snapshot workflows 
 * Improved resync performance when a node is down for a long time and restarted
 * Improved performance for database workloads by seperating transaction logs to a seperate device
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
-* Integrated kvdb 
-* Object store (S3) support
+* Integrated kvdb - Early Access - Limited Release
+* Object store (S3) support - Beta
+
+### Issues addressed
+
+* Ask a confirmation question for `pxctl volume delete` operations
+* PWX-4504 - Show all the volumes present in the node in the CLI
+* PWX-4475 - Parse io_profile in inline volume spec
+* PWX-4479 - Fix io_priority versions when labeling cloudsnaps
+* Delete cloudsnap schedules if volume has been deleted
+* PWX-4378 - Add read/write latency stats to the volume statistics
+* PWX-4923 - Add vol_ prefix to read/write volume latency statistics
+* PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath was unmounted via unmount command
+
+
 
 
 
