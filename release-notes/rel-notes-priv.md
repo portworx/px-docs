@@ -19,7 +19,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Volume create command additions to include volume clone command and integrate snap commands
 * Improved snapshot workflows 
 * Improved resync performance when a node is down for a long time and restarted
-* Improved performance for database workloads by seperating transaction logs to a seperate device
+* Improved performance for database workloads by separating transaction logs to a seperate device
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
 * Integrated kvdb - Early Access - Limited Release
