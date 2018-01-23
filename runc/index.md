@@ -101,9 +101,9 @@ px-runc install -k etcd://70.0.1.65:2379 -c MY_CID -f -a -x kubernetes -v /var/l
 
 Using consul:
 ```
-px-runc run -k consul://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
-px-runc install -k consul://70.0.2.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
-px-runc install -k consul://70.0.2.65:2379 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
+px-runc run -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
+px-runc install -k consul://70.0.2.65:8500 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 ##### Modifying the PX configuration
