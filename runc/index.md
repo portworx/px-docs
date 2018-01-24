@@ -37,7 +37,7 @@ The installation and setup of PX OCI bundle is a 3-step process:
 3. Enable and start Portworx service
 
 <a name="install_step1"></a>
-### Step 1: Install the PX OCI bundle
+#### Step 1: Install the PX OCI bundle
 Portworx provides a Docker based installation utility to help deploy the PX OCI
 bundle.  This bundle can be installed by running the following Docker container
 on your host system:
