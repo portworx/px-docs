@@ -1,27 +1,34 @@
 ---
 layout: page
-title: "WordPress and MySQL with Portworx Persistent Volumes by Kubernetes"
+title: "How to run WordPress and MySQL on Kubernetes using Portworx"
 keywords: portworx, Wordpress, application stack, kubernetes, Persistent Storage, Persistent Volume, Persistent Volume Claim. 
 sidebar: home_sidebar
 redirect_from:
-meta-description: "Wordpress solution with Kubernetes. Use PX volume driver to create new volumes or reuse existing ones."
+meta-description: "This article describes how operate WordPress on Kubernetes. You will learn how to run a high performance MySQL database for WordPress as well as use shared volumes for file uploads."
 ---
 
 * TOC
 {:toc}
 
 ## Summary
+ 
+This document explains about how to deploy a WordPress site and a MySQL database using Kubernetes. Portworx solves two critical issues for WordPress running in containers.  Running a high performance, HA MySQL database and using shared volumes for file uploads.
 
-Deploying WordPress and MySQL with Portworx Persistent Volumes by Kubernetes. 
-This documentation explains about how to deploy a WordPress site and a MySQL database using kubernetes. 
+By combining these two features of Portworx with a Kubernetes cluster we get a WordPress instance with the following abilities:
+
+* automatically replicate the MySQL data for HA
+* horizontally scale the WordPress PHP container using multi-writer semantics for the file-uploads directory
+* automatically repair itself in the event of a node failure
+
+This document makes use of Kubernetes storage primitives PersistentVolumes (PV) and PersistentVolumeClaims (PVC).
 
 A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator, and a PersistentVolumeClaim (PVC) is a set amount of storage in a PV. PersistentVolumes and PersistentVolumeClaims are independent from Pod lifecycles and preserve data through restarting, rescheduling, and even deleting Pods in kubernetes.
 
-`Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes.
+`Note:` The spec files provided in this tutorial are using beta Deployment APIs and are specific to Kubernetes version 1.8 and above. If you wish to use this tutorial with an earlier version of Kubernetes, please update the beta API appropriately, or reference earlier versions of kubernetes.
 
 ### Create Portworx PersistentVolume
 
-Kubernetes supports many different types of PersistentVolumes, this step covers portworx volume. Both applications WordPress and MySQL uses portworx as PersistentVolumes and PersistentVolumeClaims to store data.
+Kubernetes supports many different types of PersistentVolumes, this step covers Portworx volumes. Both WordPress and MySQL will use Portworx as PersistentVolumes and PersistentVolumeClaims to store data.
 
 #### Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
@@ -99,7 +106,7 @@ or
 `kubectl get secrets`
 
 
-### Deploy MySQL with portworx
+### Deploy MySQL with Portworx
 
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
 
@@ -164,9 +171,9 @@ spec:
 
 ### Deploy WordPress
 
-The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
+The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a Portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
 
-#### Deploy wordpress from the wordpress.yaml file:
+#### Deploy WordPress from the wordpress.yaml file:
 
 `kubectl create -f wordpress-deployment.yaml`
 
