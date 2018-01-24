@@ -30,6 +30,18 @@ Portworx deploys on Nomad as a `system` job.
 Please use [this job file](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/scheduler/nomad/portworx.nomad) as a reference for deploying 
 Portworx on an existing Nomad system.
 
+Portworx runs on the Nomad clients.   As a requirement, Nomad clients must be configured
+with the following client options:
+```
+client {
+  enabled = true
+  options {
+    "driver.raw_exec.enable" = "1"
+    "docker.privileged.enabled" = "true"
+  }
+}
+```
+
 The following arguments to `px-runc` should be customized as per the local environment:
 ```
 args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh  --rm -i --privileged=true \
