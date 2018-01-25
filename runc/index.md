@@ -85,8 +85,12 @@ $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
 The following arguments can be provided to the `px-runc` helper tool, which will in turn pass them to the PX daemon:
 
 ```
-Usage: /opt/pwx/bin/px-runc <run|install> [options]
+Usage: /opt/pwx/bin/px-runc <install|run> [options]
 ```
+
+##### parameter:
+* `install`: Creates configuration files and systemd service unit file.
+* `run`: Runs Portworx in foreground; used by systemd to start the portworx service.
 
 {% include cmdargs.md %}
 
@@ -94,14 +98,14 @@ Usage: /opt/pwx/bin/px-runc <run|install> [options]
 ##### Examples:
 Using etcd:
 ```
-px-runc run -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
 px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 px-runc install -k etcd://70.0.1.65:2379 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
 Using consul:
 ```
-px-runc run -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
+px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
 px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
 px-runc install -k consul://70.0.2.65:8500 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
@@ -125,7 +129,7 @@ $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
 ```
 
-##### Interactive mode
+##### ADVANCED USAGE: Interactive/Foreground mode
 Alternatively, one might prefer to first start the PX interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:
 
 ```bash
