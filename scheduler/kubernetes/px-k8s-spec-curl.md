@@ -32,6 +32,7 @@ Below are all parameters that can be given in the query string.
 | d      | Specify data network interface. This is useful if your instances have non-standard network interfaces.                                | <var>d=eth1</var>                                          |
 | m      | Specify management network interface. This is useful if your instances have non-standard network interfaces.                          | <var>m=eth1</var>                                          |
 | kbver  | Specify Kubernetes version (current default is 1.7)                                                                                   | <var>kbver=1.8.4</var>                                     |
+| stork  | Specify if you want to install STORK                                                                                        | <var>stork=true</var>                                     |
 | coreos | REQUIRED if target nodes are running coreos.                                                                                          | <var>coreos=true</var>                                     |
 | osft | REQUIRED if installing on Openshift.                                                                                          | <var> osft =true</var>                                     |
 | mas    | Specify if PX should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false)      | <var>mas=true</var>                                        |
