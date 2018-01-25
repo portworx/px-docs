@@ -14,6 +14,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.0-rc2 
 
+Note: Upgrade to 1.3 requires a node restart
+
 ### Feature updates and noteworthy changes
 
 * Volume create command additions to include volume clone command and integrate snap commands
