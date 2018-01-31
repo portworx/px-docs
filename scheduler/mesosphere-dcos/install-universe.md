@@ -11,7 +11,7 @@ redirect_from: "/scheduler/mesosphere-dcos/install_universe.html"
 This guide will help you install the Portworx Universe for DCOS which contains the Portworx service as well as other services
 inlcuding Hadoop, Cassandra, Elastic Search and Kafka which can utilize Portworx Volumes.
 
-This guide is based on the DCOS guide to install a local universe: https://docs.mesosphere.com/1.10/administering-clusters/deploying-a-local-dcos-universe/
+This guide is based on the DCOS guide to install a local universe: [https://docs.mesosphere.com/1.10/administering-clusters/deploying-a-local-dcos-universe/](https://docs.mesosphere.com/1.10/administering-clusters/deploying-a-local-dcos-universe/)
 
 ### Download the pre-requisites
 First you will need to download 3 files and transfer them to each of you DCOS Master nodes
@@ -55,7 +55,7 @@ dcos package repo add local-universe http://master.mesos:8083/repo --index=0
 
 ### Add the docker registry as a trusted store on each agent
 
-On each agent node you will need to download the certificate from the newly deployed Docker regitry to set is as trusted.
+On each agent node you will need to download the certificate from the newly deployed Docker registry to set is as trusted.
 To do this, run the following command on each agent node, including public agents.
 
 ```
@@ -70,10 +70,10 @@ sudo ln -s /var/lib/dcos/pki/tls/certs/px-docker-registry-ca.crt /var/lib/dcos/p
 
 ### Verify local Universe available from DCOS
 
-To verify that the local Unviverse has been configured succsfully, log in to the DCOS UI and look at Universe->Packages to
+To verify that the local Universe has been configured successfully, log in to the DCOS UI and look at Universe->Catalog to
 see if the packages are available.
 
 ### Using docker images from local registry
 
-If you want to use any images from the newly deployed registry, you will need to update the image names when starting the
-services. For example, to use the Portworx docker images, you would use "master.mesos:5001/portworx/px-enterprise:tag"
+If you want to use any images from the newly deployed registry, you will need to update the image names to point to it when starting the services. For example, to use the Portworx docker images, you would use
+"master.mesos:5001/portworx/px-enterprise:tag"
