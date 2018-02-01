@@ -25,7 +25,7 @@ PostgreSQL has earned a strong reputation for its reliability, data integrity, a
     
 *	It has native programming interfaces for C/C++, Java, .Net, Perl, Python, Ruby, Tcl, ODBC, among others, and exceptional documentation.
 
-PostgreSQL on portworx and kubernetes helped to utilize resources even much better than virtual machines and also provide isolation from other apps which are deployed on the same machine.
+PostgreSQL on Portworx and kubernetes helped to utilize resources even much better than virtual machines and also provide isolation from other apps which are deployed on the same machine.
 
 ### Prerequisites
 To follow this guide you need -
