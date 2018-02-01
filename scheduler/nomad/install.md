@@ -69,7 +69,7 @@ as with `127.0.0.1:8500`
 
 ### Hashi-porx
 
-As a community resource, please refer to the [hashi-porx](https://github.com/portworx/terraporx/tree/master/aws/hashi-porx) repository for a full-stack deployment of consul, nomad, vault, the Hashi UI, and Portworx all deployed through Terraform on AWS.
+As a community resource, please refer to the [hashi-porx](https://github.com/portworx/terraporx/tree/master/hashi-porx/aws) repository for a full-stack deployment of consul, nomad, vault, the Hashi UI, and Portworx all deployed through Terraform on AWS.
 
 When using the `hashi-porx` stack, the status for the Nomad and Consul clusters
 can be accessed through the GUI via the `nomad_url` output variable, which refers to port 3000 
@@ -154,7 +154,7 @@ by referencing the `pxd` volume driver.
     ...
 ```
 
-A complete example for launching MySQL can be found [here](https://github.com/portworx/terraporx/blob/master/aws/hashi-porx/nomad/examples/mysql.nomad)
+A complete example for launching MySQL can be found [here](https://github.com/portworx/terraporx/blob/master/hashi-porx/aws/nomad/examples/mysql.nomad)
 
 ## Storage On Demand
 Portworx provides an important feature that enables applications to have storage provisioned on demand, 
