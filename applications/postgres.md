@@ -27,14 +27,14 @@ PostgreSQL has earned a strong reputation for its reliability, data integrity, a
 
 PostgreSQL on portworx and kubernetes helped to utilize resources even much better than virtual machines and also provide isolation from other apps which are deployed on the same machine.
 
-### Prerequisites
+### Prerequisites:
 To follow this guide you need -
 
 *	Kubernetes Cluster
 
 *	3 node Portworx storage Cluster
 
-### Step 1 - Create PostgreSQL Portworx StorageClass(sc)
+### Step 1 - Create PostgreSQL Portworx StorageClass(sc):
 Create a file name called `px-postgres-sc.yaml` for Portworx StorageClass(sc) for PostgreSQL.
 
 ```
@@ -51,7 +51,7 @@ parameters:
 ```
 `sudo kubectl apply -f px-postgres-sc.yaml`
 
-### Step 2 - Create PostgreSQL Portworx PersistentVolumeClaim(pvc)
+### Step 2 - Create PostgreSQL Portworx PersistentVolumeClaim(pvc):
 Create a file name called `px-postgres-vol.yaml` for Portworx PersistentVolumeClaim(pvc) for PostgreSQL.
 
 ```
@@ -73,7 +73,7 @@ spec:
 ```
 `sudo kubectl apply -f px-postgres-vol.yaml`
 
-### Step 3 - Deploy PostgreSQL using Kubernetes Deployment
+### Step 3 - Deploy PostgreSQL using Kubernetes Deployment:
  
 Deploying PostgreSQL on Kubernetes have following prerequisites. 
 Create a file name `px-postgres-app.yaml` for PostgreSQL. 
@@ -146,7 +146,7 @@ spec:
 
 `sudo kubectl apply -f px-postgres-app.yaml`
 
-### Validate StorageClass(sc), PersistentVolumeClaim(pvc) and PostgreSQL Deployment.
+### Validate StorageClass(sc), PersistentVolumeClaim(pvc) and PostgreSQL Deployment:
 ```
 ubuntu@node1:~$ sudo kubectl get sc
 NAME             PROVISIONER                     AGE
@@ -160,7 +160,7 @@ postgres-86cb8587c4-l9r48   2/2       Running   0          1h
 ```
 Note that you could run multiple instances of postgrSQL server on the same host, each with its own unique persistent volume mapped, and each with its own unique IP Address published.
  
-### Access PostgreSQL DB Server and Validate 
+### Access PostgreSQL DB Server and Validate:
  
 To access via docker exec:
 
@@ -202,7 +202,7 @@ root@postgres-86cb8587c4-l9r48:/# exit
 
 ```
 
-### Database recoverability with Portworx snapshots
+### Database recoverability with Portworx snapshots:
 
 Use pxctl to create recoverable snapshots of your volume
 To take a recoverable snapshot of the postgresql-server instance for a point in time, use the pxctl CLI:
