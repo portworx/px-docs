@@ -156,9 +156,9 @@ NAME            STATUS    VOLUME                                     CAPACITY   
 postgres-data   Bound     pvc-60e43292-06e3-11e8-96b4-022185d04910   1Gi        RWO            px-postgres-sc   1h
 ubuntu@node1:~$ sudo kubectl get pod
 NAME                        READY     STATUS    RESTARTS   AGE
-postgres-86cb8587c4-l9r48   2/2       Running   0          1h
+postgres-86cb8587c4-l9r48   1/1       Running   0          1h
 ```
-Note that you could run multiple instances of postgrSQL server on the same host, each with its own unique persistent volume mapped, and each with its own unique IP Address published.
+
  
 ### Access PostgreSQL DB Server and Validate 
  
@@ -166,7 +166,7 @@ To access via docker exec:
 
 ```
 ubuntu@node2:~$ sudo docker ps -a | grep postgres
-345d3d8e5739        harshpx/docker-pgbench@sha256:5688dc4647d387cd66484b9061ad50c9cb0ba351bef6c171caee52fee3c66d38                                           "/run.sh"                57 minutes ago      Up 57 minutes                                 k8s_pgbench_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
+k8s_pgbench_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
 e7bb6aa3586f        postgres@sha256:2f4c2e4db86a1762de96a2331eb4791f91b6651d923792d66d0f4d53c8d67eed                                                         "docker-entrypoint..."   57 minutes ago      Up 57 minutes                                 k8s_postgres_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
 f44e191530c7        gcr.io/google_containers/pause-amd64:3.0                                                                                                 "/pause"                 58 minutes ago      Up 58 minutes                                 k8s_POD_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
 ubuntu@node2:~$ sudo docker exec -it e7bb6aa3586f bin/bash
