@@ -32,10 +32,10 @@ To follow this guide you need -
 
 *	Kubernetes Cluster
 
-*	3 node Portworx storage Cluster
+*	3-node Portworx cluster running on Kubernetes.
 
-### Step 1 - Create PostgreSQL Portworx StorageClass(sc)
-Create a file name called `px-postgres-sc.yaml` for Portworx StorageClass(sc) for PostgreSQL.
+### Step 1 - Create PostgreSQL Portworx StorageClass
+Create a file name called `px-postgres-sc.yaml` for Portworx StorageClass for PostgreSQL.
 
 ```
 
@@ -49,10 +49,10 @@ parameters:
    repl: "2"
 
 ```
-`sudo kubectl apply -f px-postgres-sc.yaml`
+`kubectl apply -f px-postgres-sc.yaml`
 
-### Step 2 - Create PostgreSQL Portworx PersistentVolumeClaim(pvc)
-Create a file name called `px-postgres-vol.yaml` for Portworx PersistentVolumeClaim(pvc) for PostgreSQL.
+### Step 2 - Create PostgreSQL Portworx PersistentVolumeClaim
+Create a file name called `px-postgres-vol.yaml` for Portworx PersistentVolumeClaim for PostgreSQL.
 
 ```
 
@@ -71,7 +71,7 @@ spec:
        storage: 1Gi
 
 ```
-`sudo kubectl apply -f px-postgres-vol.yaml`
+`kubectl apply -f px-postgres-vol.yaml`
 
 ### Step 3 - Deploy PostgreSQL using Kubernetes Deployment
  
@@ -109,10 +109,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: px/running
-                operator: NotIn
-                values:
-                - "false"
               - key: px/enabled
                 operator: NotIn
                 values:
@@ -144,17 +140,17 @@ spec:
 
  Now let's deploy PostgreSQL using following commands:
 
-`sudo kubectl apply -f px-postgres-app.yaml`
+`kubectl apply -f px-postgres-app.yaml`
 
-### Validate StorageClass(sc), PersistentVolumeClaim(pvc) and PostgreSQL Deployment.
+### Validate StorageClass, PersistentVolumeClaim and PostgreSQL Deployment.
 ```
-ubuntu@node1:~$ sudo kubectl get sc
+ubuntu@node1:~$ kubectl get sc
 NAME             PROVISIONER                     AGE
 px-postgres-sc   kubernetes.io/portworx-volume   1h
-ubuntu@node1:~$ sudo kubectl get pvc
+ubuntu@node1:~$ kubectl get pvc
 NAME            STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS     AGE
 postgres-data   Bound     pvc-60e43292-06e3-11e8-96b4-022185d04910   1Gi        RWO            px-postgres-sc   1h
-ubuntu@node1:~$ sudo kubectl get pod
+ubuntu@node1:~$ kubectl get pod
 NAME                        READY     STATUS    RESTARTS   AGE
 postgres-86cb8587c4-l9r48   1/1       Running   0          1h
 ```
@@ -165,11 +161,11 @@ postgres-86cb8587c4-l9r48   1/1       Running   0          1h
 To access via docker exec:
 
 ```
-ubuntu@node2:~$ sudo docker ps -a | grep postgres
+ubuntu@node2:~$ docker ps -a | grep postgres
 k8s_pgbench_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
 e7bb6aa3586f        postgres@sha256:2f4c2e4db86a1762de96a2331eb4791f91b6651d923792d66d0f4d53c8d67eed                                                         "docker-entrypoint..."   57 minutes ago      Up 57 minutes                                 k8s_postgres_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
 f44e191530c7        gcr.io/google_containers/pause-amd64:3.0                                                                                                 "/pause"                 58 minutes ago      Up 58 minutes                                 k8s_POD_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
-ubuntu@node2:~$ sudo docker exec -it e7bb6aa3586f bin/bash
+ubuntu@node2:~$ docker exec -it e7bb6aa3586f bin/bash
 root@postgres-86cb8587c4-l9r48:/#
 root@postgres-86cb8587c4-l9r48:/# psql
 psql (9.5.10)
