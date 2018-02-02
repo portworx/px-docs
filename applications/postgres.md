@@ -75,7 +75,8 @@ spec:
 
 We are recommending to use ["Stork"](https://docs.portworx.com/scheduler/kubernetes/stork.html#using-stork-with-your-applications) for postgres pod deployment as a scheduler.  Stork is an opensource project that helps achieve even tighter integration of Portworx with Kubernetes. It allows users to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes.  Stork consists of 2 components, the stork scheduler, and an extender. Both of these components run in HA mode with three replicas by default.
  
-For the below deployment uses `schedulerName: stork` instead of  `schedulerName: default-scheduler`  in postgres pod deployment spec file `px-postgres-app.yaml`
+Below postgres pod deployment spec file `px-postgres-app.yaml`
+uses `schedulerName: stork` instead of  `schedulerName: default-scheduler`
 
 Deploying PostgreSQL on Kubernetes have following prerequisites. 
  
