@@ -75,7 +75,7 @@
       - title: Universe for Air-gapped clusters
         url: /scheduler/mesosphere-dcos/install-universe.html
       - title: Upgrade
-        url: /scheduler/mesosphere-dcos/upgrade.html
+        url: /scheduler/mesosphere-dcos/upgrade-oci.html
       - title: Stateful frameworks
         folderitems:
         - title: About
