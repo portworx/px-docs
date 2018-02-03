@@ -164,12 +164,10 @@ postgres-86cb8587c4-l9r48   1/1       Running   0          1h
 To access via docker exec:
 
 ```
-ubuntu@node2:~$ docker ps -a | grep postgres
-k8s_pgbench_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
-e7bb6aa3586f        postgres@sha256:2f4c2e4db86a1762de96a2331eb4791f91b6651d923792d66d0f4d53c8d67eed                                                         "docker-entrypoint..."   57 minutes ago      Up 57 minutes                                 k8s_postgres_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
-f44e191530c7        gcr.io/google_containers/pause-amd64:3.0                                                                                                 "/pause"                 58 minutes ago      Up 58 minutes                                 k8s_POD_postgres-86cb8587c4-l9r48_default_7a8af36e-06e3-11e8-96b4-022185d04910_0
-
-ubuntu@node2:~$ docker exec -it e7bb6aa3586f bin/bash
+ubuntu@node1:~$ kubectl get pod
+NAME                              READY     STATUS    RESTARTS   AGE
+postgres-5d8767bb94-wdp2d         1/1       Running   0          1m
+ubuntu@node1:~$ kubectl exec -it postgres-5d8767bb94-wdp2d bash
 root@postgres-86cb8587c4-l9r48:/#
 root@postgres-86cb8587c4-l9r48:/# psql
 psql (9.5.10)
