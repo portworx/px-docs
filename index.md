@@ -16,7 +16,7 @@ meta-description: "Find out more about Portworx, the persistent storage solution
 * TOC
 {:toc}
 
-Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via container orchestrators such as Kubernetes, Marathon and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume block, file and object storage services directly through the scheduler.
+Portworx is a software defined persistent storage solution designed and purpose built for applications deployed as containers, via container orchestrators such as Kubernetes, Marathon, Nomad, and Swarm.  It is a clustered block storage solution and provides a Cloud-Native layer from which containerized stateful applications programmatically consume block, file and object storage services directly through the scheduler.
 Portworx volumes are always hyper-converged.  That is, they are exposed on the same host where the application container executes.
 
 Portworx technology:
