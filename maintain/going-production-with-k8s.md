@@ -22,6 +22,8 @@ meta-description: "Portworx Operations Guide for Kubernetes Deployments"
   * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. 
     Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also 
     configure it for maximum stability.
+  * Ensure you have Stork, the storage orchestrator for Kubernetes from Portworx, installed per the instructions [here](https://docs.portworx.com/scheduler/kubernetes/stork.html#install). 
+  
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -202,6 +204,8 @@ For e.g., for PX cluster running on AWS,
 
   This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
   how to create them and update the configuration for the volumes 
+  
+* In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 
 ### Data Protection for Containers
 
@@ -263,6 +267,8 @@ $ kubectl edit clusterrole node-get-put-list-role
 ```
 * Refer to the [Snapshots document](https://docs.portworx.com/manage/snapshots.html) in the Kubernetes section of the docs for more up to date information on snapshots.
 
+* If you have installed Stork, the snapshot operations can be executed via Stork. Follow the [link](https://github.com/libopenstorage/stork/tree/master#creating-snapshots) to see how snapshots can be done with Stork. 
+
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
 ### Alerts and Monitoring for Production
@@ -275,6 +281,7 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Configure Grafana via this [template](monitoring/grafana/index.html)
   * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
   * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
+  
 
 ## Day 2 Operations
 
