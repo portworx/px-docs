@@ -24,6 +24,13 @@ NOTE: Please ensure that your mesos private agents have unmounted block devices 
 ### (Optional) Deploy an AWS Portworx-ready cluster 
 Using [this AWS CloudFormation template](/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is "Portworx-ready".
 
+### Pre-install (only required if moving from a Portworx Docker installation)
+If you are moving from a Docker install or Portworx to an OCI install, please make sure that the Portworx service is stopped 
+on all the agents before updating to the OCI install. To do this run the following command on all your private agents:
+```
+$ sudo systemctl stop portworx
+```
+
 ### Deploy Portworx
 The Portworx service is available in the DCOS universe, you can find it by typing the name in the search bar.
 
