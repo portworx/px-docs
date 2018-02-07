@@ -24,7 +24,6 @@ Note: Upgrade to 1.3 requires a node restart
 * Improved performance for database workloads by separating transaction logs to a seperate device
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
-* Provide ability to transfer licenses between two clusters
 * Integrated kvdb - Early Access - Limited Release
 * Object store (S3) support - Beta
 
