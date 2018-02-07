@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.3.0-rc2 
+## 1.3.0-rc4 
 
 Note: Upgrade to 1.3 requires a node restart
 
