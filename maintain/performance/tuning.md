@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "IO Profile tuning on PX volumes"
+title: "Performance Tuning"
 keywords: portworx, px-enterprise, storage, volume, create volume, clone volume, performance
 sidebar: home_sidebar
 meta-description: "Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!"
@@ -9,7 +9,6 @@ redirect_from:
   - /manage/io-profile.html
 ---
 
-# Performance Tuning
 Portworx has best practices for both global container level optimization, as well as volume granular optimization.
 
 ## Global performance tuning
@@ -18,7 +17,6 @@ As of PX version 1.3, it is recommended to use a journal device top absorb PX me
 The journal device should be 2GB.  Using a larger device will not help, since PX will only use 2GB of the journal device.  The journal device can be specified via the `-j` option during installation, documented [here](/runc/options.html#options).
 
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/maintain/add-journal-dev.html).
-
 
 ## Volume granular performance tuning
 By default, PX will try to auto tune the IO profile setting for a given volume by learning from the access patterns.  However, this algorithm can be overridden and a specific profile can be chosen.
