@@ -254,6 +254,8 @@
       folderitems:
       - title: Running Portworx in Production with DC/OS
         url: /maintain/going-production-with-dcos.html
+      - title: Running Portworx in Production with Kubernetes
+        url: /maintain/going-production-with-k8s.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
