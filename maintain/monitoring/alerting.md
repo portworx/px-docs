@@ -4,6 +4,7 @@ title: "Alerting with Portworx"
 keywords: portworx, prometheus, grafana, alertmanager, cluster, storage
 sidebar: home_sidebar
 redirect_from: "/alerting.html"
+meta-description: "Learn how to configure Prometheus to enable you to visualize your Portworx cluster status within Grafana."
 ---
 
 This guide shows you how to configure prometheus to monitor your portworx node and visualize your cluster status and activities in Grafana. We will also configure AlertManager to send email alerts.
@@ -47,6 +48,7 @@ Note: 'alert-manager-ip' is the IP address of the node where AlertManager is run
 ### Prometheus alerts rules file
 
 Copy [px.rules](https://github.com/portworx/px-docs/blob/gh-pages/maintain/monitoring/px.rules) file, and save it as ${PROMETHEUS_CONF}/px.rules.
+For Prometheus v2.0.0 and above, rules file is available [here](https://github.com/portworx/px-docs/blob/prometheus_update_rules_file/maintain/monitoring/px.rules.yml).
 
 ### Run Prometheus
 

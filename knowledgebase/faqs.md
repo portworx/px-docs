@@ -32,26 +32,28 @@ Portworx prefers a H/W RAID controller, if available.
 PX automatically uses UUID after the drive has been specified.  You don't need to worry about drive letters changing.
 
 ### Does Portworx need to take over all the disks on a given server?
-No.  You can explicitly allow/disallow drives that participate in a Portworx cluster. In PX-Enterprise, this notion of device delegation/participation is exposed through the "Server Profile".
-A "Server Profile" determines which nodes will be allowed to automatically join a cluster, based on their H/W profile.
-Similarly, the "Server Profile" determines which devices should not be allowed to participate in the Portworx Fabric.
+No. PX does not have to take over all the disks on a given servers. The devices that PX can be selected by giving the drive path with -s option when bringing up PX. Check your relevant scheduler install instructions to pass the drive parameter
 
 ### Can Portworx work with iSCSI or FC and make use of existing legacy storage (EMC, NetApp, Nexenta, etc.)?
-Yes. Any block storage presented to a host can be used within a Portworx cluster.
+Yes. Any block storage presented to a host can be used with a Portworx cluster. Portworx can virtualize any standard block device exported other vendors' storage arrays or software products like CEPH, GlusterFS etc and make them much more reliable and enable cloud-native applications to run onthem.
 
 ### Does Portworx come as a hardware appliance?
-No.  We are software-only, deployed as a container
+No.  Portworx software-only, deployed as a OCI container
+
+### What are different container orchestrators support my Portworx?
+
+Portworx supports all major container orchestrators and platforms like Kubernetes, Mesos, Swarm, Openshift, Tectonic, DC/OS, Docker UCP, Nomad and others. 
 
 ### Can storage be added to a server and used after the server has joined the cluster?
-Yes.  With 'pxctl service add /dev/xyz' additional storage gets dynamically incorporated into the the global capacity pool.
+Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](https://docs.portworx.com/maintain/scale-up.html) to learn more about
 
 ### What happens when a drive fails?
-Portworx will enter maintenance mode.  In this mode, you can replace up to one failed drive.  If there are multiple drive failures, a node can be decommissioned from the cluster.  Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
+On a drive failure, Portworx will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. PX needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](https://docs.portworx.com/maintain/maintenance-mode.html) to learn more about maintenance mode operations. 
 
 ### Do servers in a cluster need to be all be configured exactly the same?
 No.  Servers in a Portworx cluster can use block storage of any type, profile, capacity and performance class.
 Devices of different performance classes (i.e flash or spinning drives) will be automatically detected and grouped accordingly.
-Portworx also supports "head-only" mode, where a node participates in a cluster, but contributes no storage to the fabric.
+Portworx also supports storageless mode, where a node participates in a cluster, but contributes no storage to the fabric.
 
 ### Are read operations parallelized?
 Yes, if replication is > 1, then different blocks will be read from different servers.   We multi-source the read operations across nodes for high-performance.
@@ -61,7 +63,7 @@ No.  Currently only one instance of PX per server is allowed.
 
 ### Can Portworx work in a multi-cloud environment?
 Yes absolutely you can create a fabric, based on servers across multiple different cloud providers.
-However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a volume snapshot under one cloud, and then mount that snapshot in another cloud.
+However, we recommend that individual scale-out applications run within the context of a single cloud provider for the sake of performance and latency.    For a fabric that spans cloud providers, you can take a cloudsnap under one cloud, and then import and mount that snapshot in another cloud. Refer to [Multi-Cloud Backup operations](https://docs.portworx.com/cloud/backups.html) on how to create Cloudsnaps and import them to any cluster you want
 
 ### Can I access my data outside of Portworx volume, or is it only for containers?
 With "Shared Volumes", a Portworx volume can be NFS mounted (read/write) outside of a container context.
@@ -70,11 +72,11 @@ Among the possible use cases:
 * Providing a "data bridge" for moving from non-containerized workloads towards containerized workloads
 Please see the documentation [here](/manage/shared-volumes.html), or view our [YouTube Demo](https://www.youtube.com/watch?v=AIVABlClYAU)
 
-### How are snapshots implemented?    Thick clones or Thin copy-on-write?
-Thin copy-on-write
+### How are snapshots implemented?    Thick clones or Thin clones?
+Portworx snapshots are redirect-on-write snapshots and are thin clones. 
 
 ### What's the largest cluster size that's been tested?  Supported?
-We support 20 nodes for the 1.0 release of PX-Enterprise.  But this is only a QA/qualification limit.
+Portworx PX-Enterprise supports 1000 nodes in the same cluster.  But this is only a QA/qualification limit.
 
 ### How quickly is node failure detected?
 On the order of milliseconds. 
@@ -88,6 +90,12 @@ Yes.  Management traffic (for configuration) and statistics traffic will travel 
 Traffic associated with replication and resynchronization will travel over "dataiface".
 Please see the [config-json file definition](/control/config-json.html).  
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
+
+### Does Portworx support volume encryption? 
+Yes, Portworx PX-Enterprise supports data encryption-at-rest and also encryption-in-fligt as data is replicated between multiple PX nodes within a data center or across data centers or clouds. PX-Enterprise supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
+
+### How can safely backup and restore my data with Portworx?
+Portworx PX-Enterprise supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want. 
 
 ## Did we miss your question? 
 If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:{{site.feedback_email}}?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>

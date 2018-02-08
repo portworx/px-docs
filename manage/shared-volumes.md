@@ -61,7 +61,6 @@ All writes and modifications to files and directories will be immediately availa
 Any nodes outside of the Portworx cluster can access a shared volume through NFS with the following format:
 
 ```
-mount -o nolock HOSTNAME:/var/lib/osd/pxns/my_shared_vol  /local_mnt
+mount HOSTNAME:/var/lib/osd/pxns/my_shared_vol  /local_mnt
 ```
 
-The "-o nolock" is a temporary restriction, as is the requirement HOSTNAME must correspond to the host where the volume is attached.

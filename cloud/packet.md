@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
   - /portworx-on-packet.html
   - /portworx_on_packet.html
+meta-description: "Portworx can help you run stateful workloads with Docker. Find out how to deploy upon Packet.net servers!"
 ---
 
 * TOC

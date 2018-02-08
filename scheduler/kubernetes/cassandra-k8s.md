@@ -3,6 +3,7 @@ layout: page
 title: "Deploy Cassandra with Portworx on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, cassandra
 sidebar: home_sidebar
+meta-description: "See how Portworx can be used to deploy stateful Cassandra on top of Kubernetes. Try it today!"
 ---
 
 * TOC
@@ -469,7 +470,7 @@ cassandra-4   1/1       Running             0          14h
 cassandra-1   0/1       Running   0         4s
 cassandra-1   1/1       Running   0         28s
 
-kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": status.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",
@@ -526,7 +527,7 @@ The kubernetes statefulset would schedule the pod which was running on the node 
 
 Cluster State Before k8s-1 was deleted:
 ```
-kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": tatus.podIP}'
+kubectl get pods -l app=cassandra -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": status.podIP}'
 {
   "name": "cassandra-0",
   "hostname": "k8s-5",

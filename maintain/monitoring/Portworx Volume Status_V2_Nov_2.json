@@ -86,7 +86,7 @@
             {
               "expr": "px_volume_halevel",
               "intervalFactor": 2,
-              "legendFormat": "volumeid - {{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 2
             }
@@ -138,7 +138,7 @@
             {
               "expr": "px_volume_capacity_bytes",
               "intervalFactor": 2,
-              "legendFormat": "volumeid - {{volumeid}} - on - {{host}}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 2
             }
@@ -193,7 +193,7 @@
             {
               "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
               "intervalFactor": 2,
-              "legendFormat": "volumeid - {{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 2
             }
@@ -255,7 +255,7 @@
             {
               "expr": "px_volume_depth_io{volumeid=~\"$volumeid\"}",
               "intervalFactor": 2,
-              "legendFormat": "{{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 10
             }
@@ -263,7 +263,7 @@
           "thresholds": [],
           "timeFrom": "1h",
           "timeShift": null,
-          "title": "Volume Depth IO",
+          "title": "Volume IO Depth",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -335,7 +335,7 @@
             {
               "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
               "intervalFactor": 2,
-              "legendFormat": "{{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 10
             }
@@ -428,7 +428,7 @@
               "expr": "px_volume_vol_read_latency_seconds{volumeid=~\"$volumeid\"}",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 10
             }
@@ -509,7 +509,7 @@
               "expr": "px_volume_vol_write_latency_seconds{volumeid=~\"$volumeid\"}",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "{{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 10
             }
@@ -590,7 +590,7 @@
             {
               "expr": "irate(px_volume_iops{volumeid=~\"$volumeid\"}[5m])",
               "intervalFactor": 2,
-              "legendFormat": "{{volumeid}}",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 2
             }
@@ -636,7 +636,94 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": true,
-      "title": "Volume Write Stats",
+      "title": "Volume Latency Stats",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 28,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "px_volume_iops",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ volumename }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Volume IOPS",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "IOPS",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
       "titleSize": "h6"
     },
     {
@@ -678,18 +765,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(px_volume_writethroughput{volumeid=~\"$volumeid\"}[5m]) ",
+              "expr": "px_volume_readthroughput{volumeid=~\"$volumeid\"}",
               "format": "time_series",
               "intervalFactor": 4,
-              "legendFormat": "{{volumeid}}_writethroughput",
-              "refId": "A",
-              "step": 20
-            },
-            {
-              "expr": "irate(px_volume_readthroughput{volumeid=~\"$volumeid\"}[5m])",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumeid}}_readthroughput",
+              "legendFormat": "{{volumename}}",
               "refId": "B",
               "step": 20
             }
@@ -697,7 +776,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Volume Throughput",
+          "title": "Volume Read Throughput",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -714,7 +793,7 @@
           "yaxes": [
             {
               "format": "bytes",
-              "label": "Bytes/second read (-) / write (+)",
+              "label": "Bytes/second",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -737,11 +816,13 @@
           "dashes": false,
           "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
-          "id": 24,
+          "id": 29,
           "legend": {
             "alignAsTable": true,
             "avg": true,
             "current": true,
+            "hideEmpty": true,
+            "hideZero": true,
             "max": false,
             "min": false,
             "show": true,
@@ -749,9 +830,9 @@
             "values": true
           },
           "lines": true,
-          "linewidth": 1,
+          "linewidth": 2,
           "links": [],
-          "nullPointMode": "null",
+          "nullPointMode": "connected",
           "percentage": false,
           "pointradius": 5,
           "points": false,
@@ -763,10 +844,10 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "irate(px_volume_iops[5m]) ",
+              "expr": "px_volume_writethroughput{volumeid=~\"$volumeid\"} ",
               "format": "time_series",
               "intervalFactor": 4,
-              "legendFormat": "{{volumeid}}_iops",
+              "legendFormat": "{{volumename}}",
               "refId": "A",
               "step": 20
             }
@@ -774,7 +855,7 @@
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Volume IOs",
+          "title": "Volume Write Throughput",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -790,8 +871,8 @@
           },
           "yaxes": [
             {
-              "format": "short",
-              "label": "IO/second read (-) / write (+)",
+              "format": "bytes",
+              "label": "Bytes/second",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -812,7 +893,169 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": true,
-      "title": "Volume Read Stats",
+      "title": "Volume Throughput Stats",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 27,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate( px_disk_stats_read_bytes[5m] )",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ disk }} - {{ host }} ",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disk Read Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Bytes per Second",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 26,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate( px_disk_stats_write_bytes[5m] )",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{ disk }} - {{ host }} ",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disk Write Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Bytes per Second",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Disk Stats",
       "titleSize": "h6"
     }
   ],

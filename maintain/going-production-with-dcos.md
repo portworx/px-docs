@@ -190,7 +190,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Hung Node Recovery
 
-* A PX node may hang or appeart to hang because of any of the following reasons
+* A PX node may hang or appear to hang because of any of the following reasons
   * Underlying media being too slow to respond and thus PX trying to error recovery of the media
   * Kernel hangs or panics that are impacting overall operations of the system
   * Other applications that are not properly constrainted putting heavy memory pressure on the system 

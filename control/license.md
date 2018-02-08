@@ -4,6 +4,7 @@ title: "CLI Reference–License"
 keywords: portworx, pxctl, command-line tool, cli, reference,license
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
+meta-description: "Learn how to manage licenses using the Portworx CLI."
 ---
 
 * TOC

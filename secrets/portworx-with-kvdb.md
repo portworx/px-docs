@@ -2,6 +2,7 @@
 layout: page
 title: "Portworx with etcd"
 sidebar: home_sidebar
+meta-description: "Test storing your encryption keys with etcd for encrypted Portworx volumes."
 ---
 
 Portworx uses etcd as kvdb to store configuration data. This can also be used store your encryption keys/secrets, credentials or passwords. Since secrets are stored in plain text in kvdb, it is recommended for testing purposes only.

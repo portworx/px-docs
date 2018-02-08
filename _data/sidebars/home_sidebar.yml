@@ -12,8 +12,6 @@
         url: /runc/#upgrading-from-px-containers-to-px-oci
       - title: Install Arguments
         url: /runc/options.html
-    - title: DIY Demo
-      url: /getting-started/diy.html
     - title: Developer Edition
       url: /developer/index.html
     - title: Licensing
@@ -26,6 +24,10 @@
         url: /scheduler/kubernetes/install.html
       - title: Upgrade
         url: /scheduler/kubernetes/upgrade.html
+      - title: Interactive tutorials
+        url: /scheduler/kubernetes/install.html#interactive-tutorial
+      - title: Using Stork
+        url: /scheduler/kubernetes/stork.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
@@ -34,6 +36,8 @@
           url: /scheduler/kubernetes/kafka-k8s.html
         - title: Elastic Search and Kibana
           url: /scheduler/kubernetes/elasticstack-kibana-k8s.html
+        - title: WordPress and MySQL
+          url: /applications/wp-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -60,16 +64,18 @@
           url: /scheduler/kubernetes/k8s-node-maintenance.html
         - title: Manage PX logs using ELK and Fluentd
           url: /scheduler/kubernetes/logmanagement-efk-k8s.html
-    - title: Google Container Engine
+    - title: Google Kubernetes Engine
       url: /scheduler/kubernetes/gke.html
-    - title: Azure Container Engine
+    - title: Azure Container Service
       url: /scheduler/kubernetes/aks.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
+      - title: Universe for Air-gapped clusters
+        url: /scheduler/mesosphere-dcos/install-universe.html
       - title: Upgrade
-        url: /scheduler/mesosphere-dcos/upgrade.html
+        url: /scheduler/mesosphere-dcos/upgrade-oci.html
       - title: Stateful frameworks
         folderitems:
         - title: About
@@ -82,8 +88,14 @@
           url: /scheduler/mesosphere-dcos/kafka.html
         - title: Elasticsearch
           url: /scheduler/mesosphere-dcos/elasticsearch.html
+        - title: CouchDB
+          url: /scheduler/mesosphere-dcos/couchdb.html
+        - title: Zookeeper
+          url: /scheduler/mesosphere-dcos/zookeeper.html
       - title: How To
         folderitems:
+        - title: Running Portworx in Production with DC/OS
+          url: /maintain/going-production-with-dcos.html
         - title: Constraining Applications to PX nodes
           url: /scheduler/mesosphere-dcos/constraints.html
         - title: Dynamically creating volumes
@@ -112,6 +124,10 @@
       folderitems:
       - title: Install
         url: /scheduler/rancher/install.html
+    - title: Nomad
+      folderitems:
+      - title: Install
+        url: /scheduler/nomad/install.html
   - title: About Data Volumes
     folderitems:
     - title: Create and Manage Data Volumes
@@ -138,14 +154,14 @@
     folderitems:
     - title: AWS
       folderitems:
-      - title: CloudFormation
-        url: /cloud/aws/cloudformation.html
       - title: ECS
         url: /cloud/aws/ecs.html
       - title: KOPS
         url: /cloud/aws/kops-asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
+      - title: Cloud Formation, DIY Demo
+        url: /getting-started/diy.html
     - title: Azure
       folderitems:
       - title: Portworx on Azure
@@ -206,8 +222,10 @@
         url: /maintain/monitoring/grafana/index.html
       - title: Alerts Reference
         url: /maintain/monitoring/portworx-alerts.html
-    - title: Performance
+    - title: Performance and Tuning
       folderitems:
+      - title: Tuning
+        url: /maintain/performance/tuning.html
       - title: FIO
         url: /maintain/performance/fio.html
       - title: SQL
@@ -232,6 +250,12 @@
       url: /maintain/maintenance-mode.html
     - title: DR Best Practices
       url: /maintain/dr-best-practices.html
+    - title: Operations Guide for Running Portworx in Production
+      folderitems:
+      - title: Running Portworx in Production with DC/OS
+        url: /maintain/going-production-with-dcos.html
+      - title: Running Portworx in Production with Kubernetes
+        url: /maintain/going-production-with-k8s.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
@@ -263,7 +287,11 @@
     - title: Docker Registry
       url: /applications/docker-registry.html
     - title: Wordpress
-      url: /applications/docker-compose.html
+      folderitems:
+      - title: Wordpress deployment by Docker
+        url: /applications/docker-compose.html
+      - title: Wordpress deployment by Kubernetes
+        url: /applications/wp-k8s.html
     - title: Jenkins
       url: /applications/jenkins.html
   - title: Encryption
@@ -274,7 +302,7 @@
       url: /secrets/portworx-with-aws-kms.html
   - title: Lighthouse
     folderitems:
-    - title: Install Lighthouse 
+    - title: Install Lighthouse
       url: /enterprise/lighthouse.html
     - title: Manage PX via Lighthouse
       folderitems:
@@ -290,8 +318,6 @@
       url: /knowledgebase/sdn.html
     - title: Shared Mount Propogation
       url: /knowledgebase/shared-mount-propogation.html
-    - title: SELinux
-      url: /knowledgebase/selinux.html
     - title: Devicemapper Thinpool setup
       url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces

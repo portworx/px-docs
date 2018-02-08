@@ -12,6 +12,11 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
+## Lighthouse 1.1.11 Release notes
+
+* Monitoring-only version of lighthouse with create/delete/snap/node decommissioning disabled
+
+
 ## Lighthouse 1.1.10 Release notes
 
 ### Key Fixes

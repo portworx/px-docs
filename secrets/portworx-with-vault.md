@@ -17,7 +17,7 @@ Peruse [this section](https://www.vaultproject.io/intro/getting-started/install.
 
 ### Kubernetes users
 
-If you are installing Portworx on Kubernetes, when generating the [Portworx Kubernetes spec file](http://install.portworx.com/):
+If you are installing Portworx on Kubernetes, when generating the [Portworx Kubernetes spec file](https://install.portworx.com/):
 
 1. Use `st=vault` to specify the secret type as "vault"
 2. Use `e=KEY1=VALUE1,KEY2=VALUE2` to set [Portworx vault environment variables](#portworx-vault-environment-variables) to identify vault endpoint.
@@ -26,7 +26,7 @@ For example:
 
 ```
 $ curl -o px-spec.yaml \
-  "http://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&st=vault&env=VAULT_ADDR=<vault-address>,VAULT_TOKEN=<vault-token>"
+  "https://install.portworx.com?c=mycluster&k=etcd://etcd.fake.net:2379&st=vault&env=VAULT_ADDR=<vault-address>,VAULT_TOKEN=<vault-token>"
 $ kubectl apply -f px-spec.yaml
 ```
 

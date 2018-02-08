@@ -3,6 +3,7 @@ layout: page
 title: "SQL Server with Persistent Storage"
 keywords: portworx, container, microsoft, sqlserver, persistent storage, docker, kubernetes
 sidebar: home_sidebar
+meta-description: "Run Microsoft SQL server with persistent storage and Docker using Portworx. Learn more with our simple guide!"
 ---
 
 * TOC

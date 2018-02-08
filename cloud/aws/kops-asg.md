@@ -48,37 +48,30 @@ $ KOPS create cluster \
 ## Prepare the key-value database (etcd):
 Portworx requires a key-value database such as etcd for configuring storage. Either point to your external etcd or Follow this steps to set up new [etcd](https://docs.portworx.com/maintain/etcd.html#tuning-etcd) Cluster. we are starting our own etcd.
 
-## Create EBS volume 
-
+## Create EBS volume templates
 Create atleast one EBS volume. This volume will serve as a template EBS volume. On every node where PX is brought up as a storage node, a new EBS volume identical to the template volume will be created. 
 
 Ensure that these EBS volumes are created in the same region as the auto scaling group (KOPS cluster).
 
 Record the EBS volume ID (e.g. `vol-04e2283f1925ec9ee`), this will be passed in to PX as a parameter.
 
-## Prepare Portworx Spec for KOPS auto scaling group (ASG):
-
-Update and curl below PX spec URL. Make sure you change the custom parameters (cluster, kvdb , aws environment variables and volume template name) to match your environment.
-For further information, refer to the explanation of the parameters that can be given on the curl query string [here](https://docs.portworx.com/scheduler/kubernetes/install.html).
+## Prepare a Portworx Spec for KOPS auto scaling group (ASG):
+Once your KOPS cluster is online, install Portworx by customizing and executing the commands below.  Make sure you change the custom parameters (cluster, kvdb , aws environment variables and volume template name) to match your environment.
 
 Example:
 ```
-$ curl -o px-spec.yaml "http://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=<enter your details>,AWS_SECRET_ACCESS_KEY=<enter your details>”
+$ curl -o px-spec.yaml "https://install.portworx.com/?cluster=mycluster&kvdb=etcd://172.20.60.36:2379&drives=vol-04e2283f1925ec9ee&env=AWS_ACCESS_KEY_ID=<enter your details>,AWS_SECRET_ACCESS_KEY=<enter your details>”
+$ kubectl apply -f px-spec.yaml
+daemonset "portworx" created
 ```
 
 >**Note:**<br/>There are 2 env variables passed into the px-spec.yaml. These are the KOPS IAM user AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY used for authentication.
 
 >**Note:**<br/>The volume template is passed in as drives=vol-04e2283f1925ec9ee.
 
-## Deploy Portworx
-Now deploy Portworx into your Kubernetes KOPS cluster by applying the spec file:
-```
-$ kubectl create -f px-spec.yaml
+The complete PX installation documentation for Kubernetes can be found at the [Kubernetes install guide](/scheduler/kubernetes/install.html).
 
-daemonset "portworx" created
-```
-
-List the pods and verify that the Portworx daemonset is running:
+Once PX has been installed, list the pods and verify that the PX daemonset is running:
 ```
 $ admin@ip-172-20-60-36:~$ kubectl get pods --all-namespaces | grep portworx
 kube-system   portworx-2kst8                                                       1/1       Running   0          32m
@@ -89,6 +82,7 @@ kube-system   portworx-sxl59                                                    
 Kubernetes may take a few minutes to download the Portworx container images and start the cluster.
 
 Portworx will dynamically create it's local EBS volumes based on the template.  Check the status of Portworx with the following command:
+
 ```
 $ admin@ip-172-20-33-196:~$ /opt/pwx/bin/pxctl status
 Status: PX is operational

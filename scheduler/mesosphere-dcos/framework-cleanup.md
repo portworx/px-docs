@@ -53,14 +53,17 @@ sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
 sudo systemctl daemon-reload
 ```
 		
-Remove the Portworx config from all the nodes
+Remove the Portworx config and files from all the nodes
 ```
-rm -rf /etc/pwx
+sudo rm -rf /etc/pwx
+sudo umount /opt/pwx/oci 
+sudo rm -rf /opt/pwx
 ```
 
 Also remove the Portworx kernel module from all the nodes
 ```
 sudo rmmod px -f
+
 ```
 
 NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
