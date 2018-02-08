@@ -222,8 +222,10 @@
         url: /maintain/monitoring/grafana/index.html
       - title: Alerts Reference
         url: /maintain/monitoring/portworx-alerts.html
-    - title: Performance
+    - title: Performance and Tuning
       folderitems:
+      - title: Tuning
+        url: /maintain/performance/tuning.html
       - title: FIO
         url: /maintain/performance/fio.html
       - title: SQL
