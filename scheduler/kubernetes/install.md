@@ -129,6 +129,8 @@ For information about upgrading Portworx inside Kubernetes, please refer to the 
 
 ## Service control 
 
+>**NOTE:** You should not stop the Portworx systemd service while applications are still using it. Doing so can cause docker and applications to hang on the system. Migrate all application pods using `kubectl drain` from the node before stopping the Portworx systemd service.
+
 One can control the Portworx systemd service using the Kubernetes labels:
 
 * stop / start / restart the PX-OCI service
