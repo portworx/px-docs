@@ -53,12 +53,14 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 
 ### 2. Add the journal device to the node
 
-A journal device  is recommended to be an SSD/NVME.
+A journal device  is recommended to be an SSD/NVME. 
 
 ```
-sudo /opt/pwx/bin/pxctl service drive add -d /dev/journal-dev --journal
-Successfully added journal device /dev/journal-dev0p1
+sudo /opt/pwx/bin/pxctl service drive add -d /dev/nvme01 --journal
+Successfully added journal device /dev/nvme010p1
 ```
+
+NOTE: The journal device is expected to not have any filesystem on it, This can be verified by running `blkid /dev/nvme01`. If it has a filesystem on it and you still want to use it as a journal device, the filesystem should be removed by running `wipefs -a /dev/nvme01`
 
 ### 3. Exit maintenance mode
 
