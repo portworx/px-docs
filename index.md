@@ -63,13 +63,13 @@ Read more about how Portworx provides storage volumes to your application contai
   * Unlimited for the Enterprise Edition
   * 3 for the Developer Edition
 * Open network ports:
-  * Ports 9001, 9002, 9003, 9010, 9012, 9014 must be open for internal network traffic between nodes running PX
+  * Ensure ports 9001-9015 are open between the Kubernetes nodes that will run Portworx.
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
   synchronized between all the nodes
- * Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
-   Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
-   
-   Also, you can use this ansible playbook to deploy a 
+* Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
+  Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) 
+  
+  Also, you can use this ansible playbook to deploy a 
     [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
 
 ## Install
