@@ -6,6 +6,7 @@ sidebar: home_sidebar
 redirect_from:
  - /runpx.html
  - /run-with-docker.html
+ - /scheduler/docker/install-px-docker-service.html
 ---
 
 * TOC
