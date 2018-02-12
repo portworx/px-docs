@@ -28,6 +28,7 @@ Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s env
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a seperate device
 * Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. (TBD: Point to documentation on how the signature can be erased drives can be reused)
+* Per volume cache attributes for shared volumes
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
