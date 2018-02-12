@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.3.0-rc4 
+## 1.3.0-rc5 (staging)
 
 Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
