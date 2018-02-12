@@ -12,6 +12,25 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.18.0
+
+### Fixed issues
+
+* Improve file import and untar performance when shared volumes are used by Wordpress and tune for wordpress plugin behavior
+
+### Errata (Errata remains the same from 1.2.11.0 release)
+
+* PWX-3982 After putting a node into maintenance mode, adding drives, and then running "pxctl service m --exit", the message "Maintenance operation is in progress, cancel operation or wait for completion" doesn't specify which operation hasn't completed. Workaround: Use pxctl to query the status of all three drive operations (add, replace, rebalance). pxctl then reports which drive operations are in progress and allows exiting from maintenance mode if all maintenance operations are completed.
+* PWX-4014 The pxctl cloudsnap schedule command creates multiple backups for the scheduled time. This issue has no functional impact and will be resolved in the upcoming release.
+* PWX-4016 When running under Kubernetes, adding a node label for a scheduled cloudsnap fails with the error "Failed to update k8s node". A node label isn't needed for cloudsnaps because they are read-only and used only for backup to the cloud.
+* PWX-4017 An incremental cloudsnap backup command fails with the message "Failed to open snap for backup". Logs indicates that the backup wasn't found on at least on one of the nodes where the volume was provisioned. Workaround: Trigger another backup manually on the nodes that failed.
+* PWX-4021 In case of a failure while a read-only snapshot create operation is in progress, Portworx might fail to come back up. This can happen if the failure coincides with snapshot creation's file system freeze step, which is required to fence incoming IOs during the operation. To recover from this issue, reboot the node.
+* PWX-4027 Canceling a service drive replace operation fails with the message "Replace cancel failed - Not in progress". However, if you try to exit maintenance mode, the status message indicates that a maintenance operation is in progress. Workaround: Wait for the drive replace operation to finish. The replace operation might be in a state where it can't be canceled. Cancel operations are performed when possible.
+* PWX-4039 When running Ubuntu on Azure, an XFS volume format fails. Do not use XFS volumes when running Ubuntu on Azure.
+* PWX-4043 When a Portworx POD gets deleted in Kubernetes, no alerts are generated to indicate the POD deletion via kubectl.
+* PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
+
+
 ## 1.2.16.0
 
 This is a minor update with performance enhancements for shared volumes to support large number of directories and files.
@@ -224,6 +243,7 @@ This is a minor update to address an issue with installing a reboot service whil
 * PWX-4083 When volume is in a down state due to a create failure, but is still attached without a shared volume export, the detach fails with the error "Mountpath is not mounted".
 * PWX-4085 When running under Kubernetes, too many instances of this message get generated: “Kubernetes node watch channel closed. Restarting the watch.."
 * PWX-4131 Specifying -a or -A for providing disks to PX needs to handle mpath & raid drives/partitions as well
+* PWX-     When PX runs in 100s of nodes, a few nodes show high memory usage. 
 
 ### Errata
 
