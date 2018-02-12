@@ -14,7 +14,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.0-rc4 
 
-Note: Upgrade to 1.3 requires a node restart
+Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
 ### Feature updates and noteworthy changes
 
@@ -24,17 +24,21 @@ Note: Upgrade to 1.3 requires a node restart
   * Clones - full volume copy created from a snapshot
   * Changes to snapshot CLI. See Snapshot CLI reference guide
   * Creating scheduled snapshots policies per volume
-
+  * PWX-4517 - Change `snap_interval` to `periodic`
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a seperate device
+* Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. (TBD: Point to documentation on how the signature can be erased drives can be reused)
+* Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
 * Integrated kvdb - Early Access - Limited Release
 * Object store (S3) support - Beta
 
+
 ### Issues addressed
 
 * PWX-4518 - Add a confirmation prompt for `pxctl volume delete` operations
+* PWX-4655 - Improve "PX Cluster Not In Quorum" Message in `pxctl status` to give additional information. 
 * PWX-4504 - Show all the volumes present in the node in the CLI
 * PWX-4475 - Parse io_profile in inline volume spec
 * PWX-4479 - Fix io_priority versions when labeling cloudsnaps
@@ -43,6 +47,14 @@ Note: Upgrade to 1.3 requires a node restart
 * PWX-4923 - Add vol_ prefix to read/write volume latency statistics
 * PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath was unmounted via unmount command
 * PWX-4372 - Gracefully handle trial license expiry and PX cluster reinstall
+* PWX-4544 - PX OCI install is unable to proceed with aquasec container installed
+* PWX-4531 - Add OS Distribution and Kernel version display in `pxctl status`
+* PWX-4547 - cloudsnap display catalog with volume name hits "runtime error: index out of range"
+* PWX-4585 - handle kvdb server timeouts with improved retry mechanism
+* PWX-4665 - Do not allow drive add to a pool if a rebalance operation is already in progress
+* PWX-4691 - Do not allow snapshots on down nodes or if the node is maintenance mode
+* PWX-4397 - Set the correct zone information for all replica-sets
+* PWX-4375 - Add `pxctl upgrade` support for OCI containers
 
 
 
