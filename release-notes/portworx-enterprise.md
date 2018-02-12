@@ -67,6 +67,9 @@ This is a minor update to enhance meta data performance on a shared namespace vo
 * PX running on AWS AutoScalingGroup now handles existing devices attached with names such as `/dev/xvdcw` which have an extra letter at the end.
 * Occasionally, containers that use shared volumes could get a "transport end point disconnected" error when PX restarts.  This has been resolved.
 * Fixed an issue where Portworx failed to resolve Kubernetes services by their DNS names if user sets the Portworx DaemonSet DNS Policy as `ClusterFirstWithHostNet`.
+* PWX- 4078 When PX runs in 100s of nodes, a few nodes show high memory usage. 
+
+
 
 ## 1.2.11.10
 This is a minor update to address an issue with installing a reboot service while upgrading a runC container.
@@ -243,8 +246,6 @@ This is a minor update to address an issue with installing a reboot service whil
 * PWX-4083 When volume is in a down state due to a create failure, but is still attached without a shared volume export, the detach fails with the error "Mountpath is not mounted".
 * PWX-4085 When running under Kubernetes, too many instances of this message get generated: “Kubernetes node watch channel closed. Restarting the watch.."
 * PWX-4131 Specifying -a or -A for providing disks to PX needs to handle mpath & raid drives/partitions as well
-* PWX-     When PX runs in 100s of nodes, a few nodes show high memory usage. 
-
 ### Errata
 
 * PWX-3982 After putting a node into maintenance mode, adding drives, and then running "pxctl service m --exit", the message "Maintenance operation is in progress, cancel operation or wait for completion" doesn't specify which operation hasn't completed. Workaround: Use pxctl to query the status of all three drive operations (add, replace, rebalance). pxctl then reports which drive operations are in progress and allows exiting from maintenance mode if all maintenance operations are completed.
