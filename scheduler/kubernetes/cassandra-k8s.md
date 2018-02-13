@@ -75,7 +75,7 @@ metadata:
   name: cassandra
 spec:
   serviceName: cassandra
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
       - name: cassandra
-        image: gcr.io/google-samples/cassandra:v11
+        image: gcr.io/google-samples/cassandra:v12
         imagePullPolicy: Always
         ports:
         - containerPort: 7000
