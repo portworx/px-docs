@@ -13,6 +13,8 @@ When a pod runs on the same host as its volume, it is known as convergence or hy
 
 By modifying your pod spec files you can influence kubernetes to schedule pods on nodes where the volume is located.
 
+>**Note:**<br/>The recommended method to run your pods hyperconverged is to use [stork](/scheduler/kubernetes/stork.html).  This document describes how you can accomplish hyperconvergence via labels.
+
 ### Using pre-provisioned volumes
 If you have already created Portworx volumes out of band without using Kubernetes you can still influence the scheduler to schedule a pod on specific set of nodes.
 
