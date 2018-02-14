@@ -42,6 +42,8 @@ metadata:
 provisioner: kubernetes.io/portworx-volume
 parameters:
    repl: "2"
+   group: "elastic_vg"
+   fg: "true"
 ---
 
 kubectl apply -f portworx-sc.yaml
@@ -53,6 +55,8 @@ In this section we will create an ES cluster with
 -	3 master nodes using a Kubernetes `Deployment`
 -	3 data nodes using a Kubernetes `Statefulset` backed by Portworx volumes
 -	2 client node using a Kubernetes `Deployment`
+
+All pods will use the stork scheduler to enable them to be placed closer to where their data is located.
 
 Create ```es-master-svc.yaml``` with the following content
 
@@ -92,6 +96,8 @@ spec:
         component: elasticsearch
         role: master
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       initContainers:
       - name: init-sysctl
         image: busybox

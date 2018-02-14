@@ -109,6 +109,7 @@ or
 ### Deploy MySQL with Portworx
 
 The following manifest describes a single-instance MySQL Deployment. The MySQL container mounts the Portworx PersistentVolume at /var/lib/mysql. The MYSQL_ROOT_PASSWORD environment variable sets the database password from the Secret.
+The deployment uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
 
 #### Deploy MySQL from the mysql.yaml file:
 
@@ -144,6 +145,8 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       containers:
       - image: mysql:5.6
         imagePullPolicy: 
@@ -172,6 +175,7 @@ spec:
 ### Deploy WordPress
 
 The following manifest describes a three-instance WordPress Deployment and Service. It uses many of the same features like a Portworx PVC for persistent storage and a Secret for the password. But it also uses a different setting: type: NodePort. This setting exposes WordPress to traffic from outside of the cluster
+This deployment also uses stork as the scheduler to enable the pods to be placed closer to where their data is located.
 
 #### Deploy WordPress from the wordpress.yaml file:
 
@@ -209,6 +213,8 @@ spec:
         app: wordpress
         tier: frontend
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       containers:
       - image: wordpress:4.8-apache
         name: wordpress
