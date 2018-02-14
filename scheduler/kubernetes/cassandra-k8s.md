@@ -57,7 +57,8 @@ provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "2"
   priority_io: "high"
-
+  group: "cassandra_vg"
+  fg: "true"
 ```
 Apply the configuration
 
@@ -66,6 +67,7 @@ kubectl apply -f px-storageclass.yml
 ```
 Create the Statefulset for Cassandra with 3 replicas.
 The PodSpec in the statefulset specifies the container image of Cassandra. Statefulsets ensures a sticky and unique identity to the pods. The ordinal index ensures this identity to the Pods.  
+It also uses the stork scheduler to enable pods to be placed closer to where their data is located.
 
 Create a ```cassandra-statefulset.yml``` with the following content
 ```
@@ -81,6 +83,8 @@ spec:
       labels:
         app: cassandra
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       containers:
       - name: cassandra
         image: gcr.io/google-samples/cassandra:v11

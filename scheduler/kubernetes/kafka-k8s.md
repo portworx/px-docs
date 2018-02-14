@@ -9,7 +9,8 @@ meta-description: "See how you can deploy Apache Kafka with Zookeeper on Kuberne
 * TOC
 {:toc}
 
-These below instructions will provide you a step by step guide in deploying Apache Kafka and Zookeeper with Portworx on Kubernetes. 
+These below instructions will provide you a step by step guide in deploying Apache Kafka and Zookeeper with Portworx on Kubernetes.
+Both these deployments will use stork as the scheduler to enable their pods to be placed closer to where their data is located.
 
 Kubernetes provides management of stateful workloads using Statefulsets. Apache Kafka is a distributed streaming platform. [Apache Kafka](https://kafka.apache.org/) is used in multiple cases where the need might be to provide realtime streaming of data to systems or in using it as an enterprise messaging system. 
 Apache Kafka uses [Zookeeper](https://zookeeper.apache.org/) for maintaining configurations and distributed synchronization. 
@@ -36,6 +37,8 @@ provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "1"
   priority_io: "high"
+  group: "zk_vg"
+  fg: "true"
 ---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
@@ -45,6 +48,8 @@ provisioner: kubernetes.io/portworx-volume
 parameters:
   repl: "2"
   priority_io: "high"
+  group: "kafka_vg"
+  fg: "true"
 ---
 
 kubectl apply -f portworx-sc.yaml
@@ -115,6 +120,8 @@ spec:
       annotations:
         pod.alpha.kubernetes.io/initialized: "true"
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -477,6 +484,8 @@ spec:
         app: kafka
       annotations:
     spec:
+      # Use the stork scheduler to enable more efficient placement of the pods
+      schedulerName: stork
       terminationGracePeriodSeconds: 30
       affinity:
         nodeAffinity:
