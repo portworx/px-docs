@@ -12,6 +12,10 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.2.20.0
+
+Minor update to enhance write performance for remote moounts with shared volumes
+
 ## 1.2.18.0
 
 ### Fixed issues
