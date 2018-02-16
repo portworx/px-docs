@@ -1,3 +1,11 @@
+---
+layout: page
+title: "Portworx Pre-Install Check"
+keywords: install, pre-flight, pre-check
+sidebar: home_sidebar
+---
+
+
 The portworx/px-pre-flight container performs a number of checks which can be run on a node or cluster of nodes.  
 It evaluates each node separately and outputs information on whether PX will possibly have a problem running on the node.
 
