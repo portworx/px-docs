@@ -56,6 +56,8 @@ Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s env
 * PWX-4691 - Do not allow snapshots on down nodes or if the node is maintenance mode
 * PWX-4397 - Set the correct zone information for all replica-sets
 * PWX-4375 - Add `pxctl upgrade` support for OCI containers
+* PWX-4733 - Remove Swarm Node ID check dependencies for PX bring up
+
 
 
 
