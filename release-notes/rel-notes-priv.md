@@ -14,7 +14,9 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.0 (WIP)
 
-Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
+Upgrade Note 1: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
+
+Uprade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
 
 ### Feature updates and noteworthy changes
 
@@ -24,17 +26,19 @@ Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s env
   * Clones - full volume copy created from a snapshot
   * Changes to snapshot CLI. See Snapshot CLI reference guide
   * Creating scheduled snapshots policies per volume
-  * PWX-4517 - Change `snap_interval` parameter to `periodic`
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a seperate device
 * Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. (TBD: Point to documentation on how the signature can be erased drives can be reused)
 * Per volume cache attributes for shared volumes
-* Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
   * Added command `pxctl cloud list` to list all the drives created via ASG
 * Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
 * Object store (S3) support - Beta
+
+### New CLI Additions and changes to existing ones
+* Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
+* Change `snap_interval` parameter to `periodic`
 
 
 ### Issues addressed
@@ -44,7 +48,6 @@ Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s env
 * PWX-4504 - Show all the volumes present in the node in the CLI
 * PWX-4475 - Parse io_profile in inline volume spec
 * PWX-4479 - Fix io_priority versions when labeling cloudsnaps
-* Delete cloudsnap schedules if volume has been deleted
 * PWX-4378 - Add read/write latency stats to the volume statistics
 * PWX-4923 - Add vol_ prefix to read/write volume latency statistics
 * PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath was unmounted via unmount command
@@ -61,6 +64,10 @@ Note: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s env
 * PWX-4484 - Limit replication factor increases to a limit of three at a time within a cluster and one per node
 * PWX-4090 - Reserve space in each pool to handle rebalance operations
 * PWX-4544 - Handle ./aquasec file during OCI-Install so PX can be installed in environments with aquasec
+* PWX-4497 - Enable minio to mount shared volumes
+* PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, replica nodes and replication add
+* PWX-4884 - Prevent replication factor increases if all the nodes in the cluster are not running 1.3.0
+* PWX-4504 - Show all the volumes present on a node in CLI with a `--node` option
 
 
 
