@@ -79,10 +79,10 @@ OPTIONS:
 
    *--snap_interval is deprecated*
    --periodic min,k                     snapshot interval in minutes, keeps up to count k, (default: 5))
-   					 0 disables snaps
+   					0 disables snaps
    --daily hh:mm,k --sd hh:mm,k         daily snapshot at specified hh:mm, keeps up to count k (default: 7)
-   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm, keeps up to count k (default: 5)
-   --monthly value, --sm value          monthly snapshot at specified day@hh:mm, k (default: 12)	
+   --weekly value, --sw value,k         weekly snapshot at specified weekday@hh:mm, keeps up to count k (default: 5)
+   --monthly value, --sm value,k        monthly snapshot at specified day@hh:mm, keeps up to count k (default: 12)	
    --policy value, --sp value           policy names separated by comma
    
    --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
@@ -153,6 +153,37 @@ To distribute volumes on different set of nodes, use --group option. In case the
 sudo /opt/pwx/bin/pxctl volume create volFinGrp --group finance --enforce_cg
 ```
 
+An example of how to use snapshot schedule during volume creates
+
+```
+/opt/pwx/bin/pxctl volume create *--daily 23:50,30 --periodic 60,24 --weekly sunday@10:10* vx1
+Volume successfully created: 836228556646454877
+root@70-0-39-240:/home/ub# /opt/pwx/bin/pxctl v i vx1
+Volume    :  836228556646454877
+    Name                 :  vx1
+    Size                 :  1.0 GiB
+    Format               :  ext4
+    HA                   :  1
+    IO Priority          :  LOW
+    Creation time        :  Feb 19 17:38:27 UTC 2018
+    Snapshot             :  *periodic 1h0m0s,keep last 24, daily @23:50,keep last 30, weekly Sunday@10:10,keep last 5*
+    Shared               :  no
+    Status               :  up
+    State                :  detached
+    Reads                :  0
+    Reads MS             :  0
+    Bytes Read           :  0
+    Writes               :  0
+    Writes MS            :  0
+    Bytes Written        :  0
+    IOs in progress      :  0
+    Bytes used           :  32 MiB
+    Replica sets on nodes:
+        Set  0
+          Node          :  70.0.39.241 (Pool 0)
+    Replication Status     :  Detached (edited)
+```
+
 #### pxctl volume list
 
 `pxctl volume list` or `pxctl v l` lists the volumes that have been created so far.
@@ -171,6 +202,8 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 611963153912324950	volDefRack	100 GiB 2	no	no		LOW		1	up - detached
 839994139757433916	volFinGrp	1 GiB	1	no	no		LOW		1	up - detached
 ```
+
+
 
 #### pxctl volume delete
 
