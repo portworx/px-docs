@@ -67,10 +67,24 @@ OPTIONS:
    --scale value, --sc value            auto scale to max number [1..1024] (default: 1)
    --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
    --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
+
+*The below options are valid for all 1.2.x releases*
+
    --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
-   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
-   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
+   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm 
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm 
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm 
+
+*From 1.3.0 version, the above options are modified as follows*
+
+   *--snap_interval is deprecated*
+   --periodic min,k                     snapshot interval in minutes, keeps up to count k, (default: 5))
+   					0 disables snaps
+   --daily hh:mm,k --sd hh:mm,k         daily snapshot at specified hh:mm, keeps up to count k (default: 7)
+   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm, keeps up to count k (default: 5)
+   --monthly value, --sm value          monthly snapshot at specified day@hh:mm, k (default: 12)	
+   --policy value, --sp value           policy names separated by comma
+   
    --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
    --nodes value                        comma-separated Node Ids
    --zones value                        comma-separated Zone names
