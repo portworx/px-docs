@@ -1,4 +1,14 @@
+---
+layout: page
+title: "CLI Reference–Secrets"
+keywords: portworx, pxctl, command-line tool, cli, reference, secrets, aws, vault, kms, kubernetes, password, login
+sidebar: home_sidebar
+redirect_from: "/cli-reference.html"
+meta-description: "Explore the CLI reference guide for storing secrets for cloudsnaps and encryption. Try it today!"
+---
 
+* TOC
+{:toc}
 
 ```
 /opt/pwx/bin/pxctl secrets -h
