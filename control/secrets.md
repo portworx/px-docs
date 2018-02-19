@@ -31,3 +31,17 @@ COMMANDS:
 OPTIONS:
   --help, -h  show help
 ```
+
+Following are the examples of some of the usages. Please refer to the `pxctl credentials` page for a more comprehensive discussion on how to use credentials and secrets together.
+
+For AWS, the usage is as follows:
+
+```
+# pxctl secrets aws login
+Enter AWS_ACCESS_KEY_ID [Hit Enter to ignore]: ********************
+Enter AWS_SECRET_ACCESS_KEY [Hit Enter to ignore]: ****************************************
+Enter AWS_SECRET_TOKEN_KEY [Hit Enter to ignore]:
+Enter AWS_CMK [Hit Enter to ignore]: ***********************
+Enter AWS_REGION [Hit Enter to ignore]: us-east-1
+Successfully authenticated with AWS.
+```
