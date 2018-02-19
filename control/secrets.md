@@ -10,6 +10,8 @@ meta-description: "Explore the CLI reference guide for storing secrets for cloud
 * TOC
 {:toc}
 
+The `pxctl secrets` command helps the user store the secrets in different kinds of secrets store and help manage the secrets and access keys in a secure, production-ready manner. 
+
 ```
 /opt/pwx/bin/pxctl secrets -h
 NAME:
