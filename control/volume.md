@@ -79,7 +79,7 @@ OPTIONS:
 
    *--snap_interval is deprecated*
    --periodic min,k                     snapshot interval in minutes, keeps up to count k, (default: 5))
-   					0 disables snaps
+   					 0 disables snaps
    --daily hh:mm,k --sd hh:mm,k         daily snapshot at specified hh:mm, keeps up to count k (default: 7)
    --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm, keeps up to count k (default: 5)
    --monthly value, --sm value          monthly snapshot at specified day@hh:mm, k (default: 12)	
