@@ -44,7 +44,7 @@ on your host system:
 
 ```bash
 # Get latest stable release tag (ie. portworx/px-enterprise:1.2.11.6)
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock' | awk '/image: / {print $2}')
+$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 $ sudo docker run --entrypoint /runc-entry-point.sh \
