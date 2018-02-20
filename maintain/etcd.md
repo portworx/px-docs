@@ -73,4 +73,4 @@ $ etcd --snapshot-count=5000
 For a more detailed setup, maintenance and tuning information refer the following coreos etcd reference docs.
 - [Maintenance](https://coreos.com/etcd/docs/latest/op-guide/maintenance.html)
 - [Tuning](https://coreos.com/etcd/docs/latest/tuning.html)
-- [Troubleshooting](https://coreos.com/etcd/docs/3.2.7/op-guide/recovery.html)
+- [Troubleshooting](https://coreos.com/etcd/docs/latest/op-guide/recovery.html)
