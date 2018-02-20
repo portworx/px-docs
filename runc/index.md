@@ -50,7 +50,7 @@ $ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock' | awk '/im
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    $latest_stable
+    portworx/px-enterprise
 ```
 
 >**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
