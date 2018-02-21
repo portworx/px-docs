@@ -165,7 +165,7 @@
       - title: Portworx on Azure
         url: /cloud/azure/azure.html
       - title: Azure Kubernetes Service
-        url: /scheduler/kubernetes/aks.html
+        url: /cloud/azure/aks.html
       - title: Azure Container Engine with Kubernetes
         url: /cloud/azure/k8s-acs-engine.html
       - title: Azure Container Engine with DCOS
@@ -173,7 +173,7 @@
     - title: Google Cloud Platform (GCP)
       folderitems:
       - title: Google Kubernetes Engine
-        url: /scheduler/kubernetes/gke.html
+        url: /cloud/gcp/gke.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
