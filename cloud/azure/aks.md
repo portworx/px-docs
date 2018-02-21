@@ -49,11 +49,10 @@ Make note of the `appId` and `password`
 Create the AKS cluster using either by Azure CLI or Azure Portal as per [AKS docs page](https://docs.microsoft.com/en-us/azure/aks/). 
 
 ###  Attach Data Disk to Azure VM
-Follow the instructions from Azure documentation [How to attach a data disk to a Linux VM in the Azure portal
+Follow the instructions from Azure documentation [How to attach a data disk to a AKS nodes in the Azure portal
 ](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-attach-disk-portal/)
 
 Your deployment will look something like following:
-
 
 ![Azure Add Disk](/images/azure-add-disk.png "Add Disk"){:width="1483px" height="477px"}
 
@@ -62,7 +61,7 @@ Your deployment will look something like following:
 
 Once AKS cluster created and disk added, Please make sure and verify that you meet the [minimum requirements](/#minimum-requirements), Portworx recommends a minimum cluster size of 3 nodes.
 
-Login to the Kubernetes master node and install PX by following the instructions found [here](/scheduler/kubernetes/install.html).
+Install PX by following the instructions found [here](/scheduler/kubernetes/install.html).
 
 Refer to [Portworx Docs](/) for further information on:
 * [Storage Classes and PVCs](/scheduler/kubernetes/dynamic-provisioning.html)
