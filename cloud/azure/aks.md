@@ -35,7 +35,7 @@ example locations:
 <br>`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
 
 
-* az group create --name <region-name> --location <location> 
+* az group create --name "region-name" --location "location"
 
 ### Create a service principal in Azure AD
 
