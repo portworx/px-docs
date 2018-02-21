@@ -34,6 +34,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4039 When running Ubuntu on Azure, an XFS volume format fails. Do not use XFS volumes when running Ubuntu on Azure.
 * PWX-4043 When a Portworx POD gets deleted in Kubernetes, no alerts are generated to indicate the POD deletion via kubectl.
 * PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
+* Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
 
 
 ## 1.2.16.0
