@@ -16,12 +16,12 @@ meta-description: "Follow these four steps to run Portworx on Azure. Try it toda
 This guide shows you how you can easily deploy Portworx on [**Azure**](https://azure.microsoft.com/en-us/)
 
 ### Step 1: Provision Virtual Machine
-When chosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
+When choosing an instance, verify that you meet the [minimum requirements](/#minimum-requirements)
 
 Portworx recommends a minimum cluster size of 3 nodes.
 
 ### Step 2: Attach Data Disk to Azure VM
-Follow the instuctions from Azure documentation [How to attach a data disk to a Linux VM in the Azure portal
+Follow the instructions from Azure documentation [How to attach a data disk to a Linux VM in the Azure portal
 ](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-attach-disk-portal/)
 
 Your deployment will look something like following:

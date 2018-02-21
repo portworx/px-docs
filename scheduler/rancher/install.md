@@ -162,3 +162,10 @@ services:
  ```
  
       
+## `WARNING:`
+
+Please stop running below mentioned containers in the rancher env, Unless you are sure about those functionalities. Because it caused more trouble in the environment and portworx volumes. 
+
+1. Janitor - Unless you are sure about match [patterns](https://github.com/rancher/community-catalog/tree/master/templates/janitor) for Janitor container, Please don't run this in Rancher env. Because by default it will delete any unused image, and any orphaned volume. It will also remove any stopped containers that are taking up space; note that this may not be what you want if you are using stopped containers to hold volumes. If you are using 'run-once' sidekick containers that mount a volume, then these containers may be removed by Janitor.
+
+2. cAdvisor (container advisor) is an open-source project. It is implemented as a daemon process that collects, aggregates, processes, and exports information about running containers. also, it provides users with resource usage information about running containers. This process holds the portworx volumes and causes the trouble. 
