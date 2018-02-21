@@ -13,4 +13,4 @@ echo ${TOPNAV} > "${BASE}/_includes/topnav.html"
 echo ${FOOTER} > "${BASE}/_includes/footer.html"
 
 CSS=$(wget -qO "${BASE}/_sass/marketing-styles.scss" --no-check-certificate --header="Host: portworx.com" https://${WEBIP}/wp-content/themes/portworx/css/master.css)
-gsed -i '/@charset "UTF-8";/d' "${BASE}/_sass/marketing-styles.scss"
+gsed -i '/@charset "UTF-8";/g' "${BASE}/_sass/marketing-styles.scss"
