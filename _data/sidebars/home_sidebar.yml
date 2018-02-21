@@ -154,7 +154,7 @@
         url: /cloud/aws/ecs.html
       - title: Amazon Elastic Kubernetes Service (EKS)
         url: /cloud/aws/eks.html
-      - title: Kubernetes Operations (KOPS)
+      - title: KOPS (Kubernetes Operations)
         url: /cloud/aws/kops-asg.html
       - title: Auto Scaling Group (ASG)
         url: /cloud/aws/asg.html
