@@ -154,9 +154,9 @@
         url: /cloud/aws/ecs.html
       - title: Amazon Elastic Kubernetes Service (EKS)
         url: /cloud/aws/eks.html
-      - title: KOPS
+      - title: Kubernetes Operations (KOPS)
         url: /cloud/aws/kops-asg.html
-      - title: Auto Scaling
+      - title: Auto Scaling Group (ASG)
         url: /cloud/aws/asg.html
       - title: Cloud Formation, DIY Demo
         url: /getting-started/diy.html
@@ -164,15 +164,15 @@
       folderitems:
       - title: Portworx on Azure
         url: /cloud/azure/azure.html
-      - title: Azure Kubernetes Service
+      - title: Azure Kubernetes Service (AKS)
         url: /cloud/azure/aks.html
-      - title: Azure Container Engine 
+      - title: Azure Container Engine with Kubernetes
         url: /cloud/azure/k8s-acs-engine.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos-acs-engine.html
     - title: Google Cloud Platform (GCP)
       folderitems:
-      - title: Google Kubernetes Engine
+      - title: Google Kubernetes Engine (GKE)
         url: /cloud/gcp/gke.html
     - title: SoftLayer
       url: /cloud/softlayer.html
