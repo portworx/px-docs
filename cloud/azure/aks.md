@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Azure Managed Kubernetes Service (AKS) "
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce, aks, Azure
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aks, Azure
 sidebar: home_sidebar
 ---
 
