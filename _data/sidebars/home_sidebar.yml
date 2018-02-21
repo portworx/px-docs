@@ -64,10 +64,6 @@
           url: /scheduler/kubernetes/k8s-node-maintenance.html
         - title: Manage PX logs using ELK and Fluentd
           url: /scheduler/kubernetes/logmanagement-efk-k8s.html
-    - title: Google Kubernetes Engine
-      url: /scheduler/kubernetes/gke.html
-    - title: Azure Container Service
-      url: /scheduler/kubernetes/aks.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -152,24 +148,32 @@
         url: /applications/object-storage.html
   - title: Cloud Reference Guides
     folderitems:
-    - title: AWS
+    - title: Amazon Web Services(AWS)
       folderitems:
-      - title: ECS
+      - title: Amazon Elastic Container Service (ECS)
         url: /cloud/aws/ecs.html
+      - title: Amazon Elastic Kubernetes Service (EKS)
+        url: /cloud/aws/eks.html
       - title: KOPS
         url: /cloud/aws/kops-asg.html
       - title: Auto Scaling
         url: /cloud/aws/asg.html
       - title: Cloud Formation, DIY Demo
         url: /getting-started/diy.html
-    - title: Azure
+    - title: Microsoft Azure
       folderitems:
       - title: Portworx on Azure
         url: /cloud/azure/azure.html
+      - title: Azure Kubernetes Service
+        url: /cloud/azure/aks.html
+      - title: Azure Container Engine 
+        url: /cloud/azure/k8s-acs-engine.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos-acs-engine.html
-      - title: Azure Container Engine with Kubernetes
-        url: /cloud/azure/k8s-acs-engine.html
+    - title: Google Cloud Platform (GCP)
+      folderitems:
+      - title: Google Kubernetes Engine
+        url: /cloud/gcp/gke.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
