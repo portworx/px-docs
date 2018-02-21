@@ -22,13 +22,20 @@ Install the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure
 ### Create Azure Resource Group and Location
 
 Pick a name for the Azure Resource Group and choose a LOCATION value
-among the following:  
+among the following: 
+
+Get the Azure locations using azure CLI command:
+
+* az account list-locations
+
+example locations:
 `centralus,eastasia,southeastasia,eastus,eastus2,westus,westus2,northcentralus`
 <br>`southcentralus,westcentralus,northeurope,westeurope,japaneast,japanwest`
 <br>`brazilsouth,australiasoutheast,australiaeast,westindia,southindia,centralindia`
 <br>`canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth`
 
-* az group create --name "$RGNAME" --location "$LOCATION"
+
+* az group create --name <region-name> --location <location> 
 
 ### Create a service principal in Azure AD
 
