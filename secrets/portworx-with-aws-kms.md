@@ -10,6 +10,8 @@ meta-description: "Learn how to utilize AWS KMS to manage your Portworx volume e
 * TOC
 {:toc}
 
+>**NOTE:**<br/> The following feature does not work with PX 1.2.20 due to changes in API on the KMS side. We are working wtih AWS in fixing this and will push out a new update.
+
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
 
 ## Deploying Portworx
