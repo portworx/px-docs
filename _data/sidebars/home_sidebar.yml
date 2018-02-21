@@ -166,7 +166,7 @@
         url: /cloud/azure/azure.html
       - title: Azure Kubernetes Service
         url: /cloud/azure/aks.html
-      - title: Azure Container Engine with Kubernetes
+      - title: Azure Container Engine 
         url: /cloud/azure/k8s-acs-engine.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos-acs-engine.html
