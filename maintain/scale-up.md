@@ -11,7 +11,7 @@ meta-description: "Discover how to add a new node to a PX cluster and how to add
 * TOC
 {:toc}
 
-## Adding Storage to exising PX Cluster Nodes 
+## Adding Storage to exising PX Cluster Nodes
 
 This section illustrates how to add a new node to a PX cluster and how to add additional storage to the PX Cluster once a new node is added
 
@@ -21,7 +21,7 @@ This section illustrates how to add a new node to a PX cluster and how to add ad
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a56a4821-6f17-474d-b2c0-3e2b01cd0bc3
-	IP: 147.75.198.197 
+	IP: 147.75.198.197
  	Local Storage Pool: 2 pools
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		200 GiB	1.0 GiB	Online	default	default
@@ -56,7 +56,7 @@ Here is how the cluster would look like after a new node is added without any st
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185 
+	IP: 147.75.104.185
  	Local Storage Pool: 0 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	No storage pool
@@ -106,7 +106,7 @@ Check if the node is in maintenance mode
 sudo /opt/pwx/bin/pxctl status
 PX is in maintenance mode.  Use the service mode option to exit maintenance mode.
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185 
+	IP: 147.75.104.185
  	Local Storage Pool: 0 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	No storage pool
@@ -129,7 +129,7 @@ AlertID	Resource	ResourceID				Timestamp	Severity	AlertType		Description
 ### Add the new drive to cluster to increase the storage
 
 ```
-sudo /opt/pwx/bin/pxctl service drive add /dev/dm-1 --operation start
+sudo /opt/pwx/bin/pxctl service drive add --drive /dev/dm-1 --operation start
 Adding device  /dev/dm-1 ...
 "Drive add done: Storage rebalance is in progress"
 ```
@@ -177,7 +177,7 @@ As seen below, the 100G of additional capacity is available with total capacity 
 sudo /opt/pwx/bin/pxctl status
 Status: PX is operational
 Node ID: a0b87836-f115-4aa2-adbb-c9d0eb597668
-	IP: 147.75.104.185 
+	IP: 147.75.104.185
  	Local Storage Pool: 1 pool
 	Pool	IO_Priority	Size	Used	Status	Zone	Region
 	0	LOW		100 GiB	1.0 GiB	Online	default	default
@@ -195,8 +195,3 @@ Global Storage Pool
 	Total Used    	:  4.3 GiB
 	Total Capacity	:  620 GiB
 ```
-
-
-
-
-
