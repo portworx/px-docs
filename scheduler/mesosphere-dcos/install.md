@@ -63,6 +63,8 @@ With PX Enterprise you can increase the number of nodes in the PX Cluster to a v
 NOTE: If you are trying to use block devices that already have a filesystem on them, either add the "-f" option to "Portworx Options" to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
 ![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
+>**Note:**<br/>For a full list of installtion options, please look [here](/runc/options.html#options).
+
 #### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can
 be changed during install. This can not be updated once the service has been started so please make sure you have enough
