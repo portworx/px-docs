@@ -9,17 +9,17 @@ sidebar: home_sidebar
 {:toc}
 
 ### Overview
-The [Azure Managed Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes) (aks-engine) generates ARM (Azure Resource Manager) templates for Kubernetes enabled clusters in Microsoft Azure.
+The [Azure Managed Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes) (aks-engine) generates the Azure Resource Manager(ARM) templates for Kubernetes enabled clusters in the Microsoft Azure Environment.
 
 ### Install `azure CLI`
 Install the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
 
-### Login to Azure and Set Subscription
+### Login to the Azure and Set Subscription
 
 * az login
 * az account set --subscription "Your-Azure-Subscription-UUID"
 
-### Create Azure Resource Group and Location
+### Create the Azure Resource Group and Location
 
 Pick a name for the Azure Resource Group and choose a LOCATION value
 among the following: 
@@ -56,7 +56,7 @@ Make note of the `appId` and `password`
 Create the AKS cluster using either by Azure CLI or Azure Portal as per [AKS docs page](https://docs.microsoft.com/en-us/azure/aks/). 
 
 ###  Attach Data Disk to Azure VM
-Follow the instructions from Azure documentation [How to attach a data disk to a AKS nodes in the Azure portal
+Follow the instructions from the Azure documentation [How to attach a data disk to a AKS nodes in the Azure portal
 ](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-attach-disk-portal/)
 
 Your deployment will look something like following:
@@ -66,7 +66,7 @@ Your deployment will look something like following:
 
 ### Install Portworx
 
-Once AKS cluster created and disk added, Please make sure and verify that you meet the [minimum requirements](/#minimum-requirements), Portworx recommends a minimum cluster size of 3 nodes.
+Once the AKS cluster created and disk added, Please make sure and verify that you meet the [minimum requirements](/#minimum-requirements), Portworx recommends a minimum cluster size of 3 nodes.
 
 Install PX by following the instructions found [here](/scheduler/kubernetes/install.html).
 
