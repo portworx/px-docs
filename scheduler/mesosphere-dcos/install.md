@@ -60,7 +60,8 @@ is enabled this config value will be ignored.
 If you have been given access to the Enterprise version of PX you can replace px-dev:latest with px-enterprise:latest.
 With PX Enterprise you can increase the number of nodes in the PX Cluster to a value greater than 3.
 
-NOTE: If you are trying to use block devices that already have a filesystem on them, either add the "-f" option to "Portworx Options" to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
+>**Note:**<br/>If you are trying to use block devices that already have a filesystem on them, either add the "-f" option to "Portworx Options" to force Portworx to use these disks or wipe the filesystem using wipefs command before installing.
+
 ![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
 >**Note:**<br/>For a full list of installtion options, please look [here](/runc/options.html#options).
