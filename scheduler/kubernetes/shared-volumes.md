@@ -93,21 +93,21 @@ Starting pod-1
 Example:
 
 ```yaml
-     apiVersion: v1
-     kind: Pod
-     metadata:
-       name: pod1
-     spec:
-       containers:
-       - name: test-container
-         image: gcr.io/google_containers/test-webserver
-         volumeMounts:
-         - name: test-volume
-           mountPath: /test-portworx-volume
-       volumes:
-       - name: test-volume
-         persistentVolumeClaim:
-           claimName: px-shared-pvc
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+spec:
+  containers:
+  - name: test-container
+    image: gcr.io/google_containers/test-webserver
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-portworx-volume
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: px-shared-pvc
 ```
 [Download example](/k8s-samples/portworx-volume-shared-pod-1.yaml?raw=true)
 
@@ -119,21 +119,21 @@ Starting pod-2
 Example:
 
 ```yaml
-     apiVersion: v1
-     kind: Pod
-     metadata:
-       name: pod2
-     spec:
-       containers:
-       - name: test-container
-         image: gcr.io/google_containers/test-webserver
-         volumeMounts:
-         - name: test-volume
-           mountPath: /test-portworx-volume
-       volumes:
-       - name: test-volume
-         persistentVolumeClaim:
-           claimName: px-shared-pvc
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+spec:
+  containers:
+  - name: test-container
+    image: gcr.io/google_containers/test-webserver
+    volumeMounts:
+    - name: test-volume
+      mountPath: /test-portworx-volume
+  volumes:
+  - name: test-volume
+    persistentVolumeClaim:
+      claimName: px-shared-pvc
 ```
 [Download example](/k8s-samples/portworx-volume-shared-pod-2.yaml?raw=true)
 
