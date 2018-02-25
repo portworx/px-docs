@@ -36,7 +36,7 @@ Note the ``shared`` field in the list of parameters is set to true.
 Verifying storage class is created:
 
 ```
-# kubectl describe storageclass portworx-sc
+# kubectl describe storageclass px-shared-sc
 Name:	  	   px-shared-sc
 IsDefaultClass:	   No
 Annotations:	   <none>
