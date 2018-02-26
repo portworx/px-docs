@@ -66,11 +66,22 @@ Your deployment will look something like following:
 
 ### Install Portworx
 
-Once the AKS cluster created and disk added, Please make sure and verify that you meet the [minimum requirements](/#minimum-requirements), Portworx recommends a minimum cluster size of 3 nodes.
+Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Following sections describe how to generate the spec files and apply them.
 
-Install PX by following the instructions found [here](/scheduler/kubernetes/install.html).
+#### Generating the spec
 
-Refer to [Portworx Docs](/) for further information on:
-* [Storage Classes and PVCs](/scheduler/kubernetes/dynamic-provisioning.html)
-* [Scheduler Convergence](/scheduler/kubernetes/scheduler-convergence.html)
-* [Troubleshooting](/scheduler/kubernetes/support.html)
+{% include k8s-spec-generate.md %}
+
+#### Applying the spec
+
+Once you have generated the spec file, deploy Portworx.
+
+```bash
+$ kubectl apply -f px-spec.yaml
+```
+
+{% include k8s-monitor-install.md %}
+
+### Deploy a sample application
+
+Now that you have Portworx installed, checkout various examples of [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).

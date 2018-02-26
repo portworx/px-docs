@@ -7,54 +7,68 @@ sidebar: home_sidebar
 meta-description: "Find out how to install PX within a Openshift cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
+![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
+
 * TOC
 {:toc}
 
->**Note:**<br/> Portworx only supports Openshift 3.7 and above.
+## Prerequisites
 
-## Deploy
+{% include k8s-prereqs.md %}
 
-1. Ensure you have followed the general [Portworx prerequisites for Kubernetes](/scheduler/kubernetes/install.html#prereqs-section)
+**Version**
 
-2. Add Portworx service accounts to the privileged security context
+Portworx supports Openshift 3.7 and above.
 
-	```bash
-	$ oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-account
-	$ oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
-	```
+## Install
 
-3. Generate px spec using [instructions given here](/scheduler/kubernetes/install.html#install-section). Make sure you give `osft=true` as part of the parameters while generating the spec.
+Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Following sections describe how to generate the spec files and apply them.
 
-4. Install px
-	
-	```bash
-	$ oc apply -f px-spec.yaml
-	```
+### Add Portworx service accounts to the privileged security context
 
-## Test
+```bash
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-account
+oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
+```
+
+### Generate the spec
+
+>**Note:**<br/> Make sure you give _osft=true_ as part of the parameters while generating the spec.
+
+{% include k8s-spec-generate.md %}
+
+
+### Apply the spec
+
+Once you have generated the spec file, deploy Portworx.	
+```bash
+oc apply -f px-spec.yaml
+```
+
+{% include k8s-monitor-install.md %}
+
+## Deploy a sample application
 
 We will test if the installation was successful using a persistent mysql deployment.
 
-* Create a Portworx StorageClass
+* Create a Portworx StorageClass by applying following spec:
 
-```bash
-cat <<EOF | oc create -f -
+```
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
 metadata:
     name: px-demo-sc
 provisioner: kubernetes.io/portworx-volume
 parameters:
-   repl: "1"
-EOF
+   repl: "3"
 ```
 * Log into Openshift console: https://MASTER-IP:8443/console
 
 * Create a new project "hello-world".
 
 * Import and deploy [this mysql application template](/k8s-samples/px-mysql-openshift.json?raw=true)
-    * For `STORAGE_CLASS_NAME`, we use the storage class `px-demo-sc` created in step before.
+    * For _STORAGE\\_CLASS\\_NAME_, we use the storage class _px-demo-sc_ created in step before.
 
 * Verify mysql deployment is active.
 
-If you are experiencing issues, please refer to [Troubleshooting PX on Kubernetes](support.html) and [General FAQs](/knowledgebase/faqs.html).
+You can find other examples at [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).
