@@ -292,3 +292,31 @@ OPTIONS:
 
 Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`.
 
+## Volume Clone
+
+You can create a clone from the volume or from a snapshot. This is done using the `pxctl volume clone` command
+```
+NAME:
+   pxctl volume clone - Create a clone volume
+
+USAGE:
+   pxctl volume clone [command options] volume-name-or-ID
+
+OPTIONS:
+   --name value             user friendly name
+   --label pairs, -l pairs  list of comma-separated name=value pairs
+```
+
+## Volume Restore
+
+You can restore the volume from the snapshot. THis is done using the `pxctl volume restore` command
+```
+NAME:
+   pxctl volume restore - Restore volume from snapshot
+
+USAGE:
+   pxctl volume restore [command options] volume-name-or-ID
+   
+OPTIONS:
+   --snapshot value, -s value  snapshot-name-or-ID
+```
