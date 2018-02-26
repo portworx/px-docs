@@ -5,13 +5,19 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent 
 sidebar: home_sidebar
 ---
 
+![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
+
 * TOC
 {:toc}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your Google Kurbenetes Engine (GKE) cluster.
 
-## Create GKE cluster
-Portworx is supported on GKE provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images).
+## Prerequisites
+
+{% include k8s-prereqs.md %}
+
+## Create a GKE cluster
+Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images).
 
 You can create a 3 node GKE cluster with the gcloud cli using the following command:
 ```
@@ -25,7 +31,7 @@ Fetching cluster endpoint and auth data.
 kubeconfig entry generated for gke-cluster-01.
 ```
 
-More information about the gcloud command for GKE can be found here: [https://cloud.google.com/kubernetes-engine/docs/clusters/operations](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
+More information about the gcloud command for GKE can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
 
 ## Add disks to nodes
 
@@ -52,48 +58,27 @@ Once the persistent disks have been created, [attach a disk to each instance](ht
 gcloud compute instances attach-disk [INSTANCE_NAME] --disk [DISK_NAME]
 ```
 
-## Install Portworx
+## Install
 
-Once your GKE cluster is online and you have attached persistent disks to your nodes, install Portworx using the [Kubernetes install guide](/scheduler/kubernetes/install.html).
+Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Following sections describe how to generate the spec files and apply them.
 
-## Dynamic provisioner on GKE
-Dynamic provisioning of volumes in Kubernetes is done through the Persistent Volume (PV) binder controller running on the
-master nodes. This controller communicates with Portworx running on minions using a Kubernetes Service. But these Services
-are not accessible from the master nodes in GKE. Due to this the PV binder contoller can not communicate with Portworx
-running on the minions.
+### Generate the spec
 
-To overcome this, we need to run the PV binder controller as a pod on one of the minions. This controller would
-listen for new PV claims and bind them. Since this controller is running on one of the minions it is able to
-communicate with Portworx using the Service and 
-[dynamically provision volumes](/scheduler/kubernetes/dynamic-provisioning.html).
+{% include k8s-spec-generate.md %}
 
-### Starting PV binder controller
-If you used the Web HTML form at [https://install.portworx.com](https://install.portworx.com) to build your YAML spec, please make sure to specify the exact Kubernetes server version (ie. `kbver=1.8.4-gke.0`). You can get the Kubernetes server version from the GKE console as well as by running `kubectl version`.
+### Applying the spec
 
-In this case, the generated YAML will contain all the necessary configuration (including the [PV binder controller](https://docs.portworx.com/scheduler/kubernetes/px-pvc-controller.yaml)), and you will not need to deploy the PV binder controller manually.
+Once you have generated the spec file, deploy Portworx.
 
-#### Manual deployment of PV binder controller pod
-To deploy the PV binder controller pod manually, save [the PV binder controller spec](https://docs.portworx.com/scheduler/kubernetes/px-pvc-controller.yaml) to a file and then apply it using kubectl:
-
-```
-$ curl -o px-pvc-controller.yaml \
-    https://docs.portworx.com/scheduler/kubernetes/px-pvc-controller.yaml
-
-# Update the kubernetes versions in the spec (if required)
-$ vi px-pvc-controller.yaml
-
-$ kubectl apply -f px-pvc-controller.yaml
+```bash
+$ kubectl apply -f px-spec.yaml
 ```
 
-Once the spec has been applied, please validate that the pod has reached "Running" state:
+{% include k8s-monitor-install.md %}
 
-```
-$ kubectl get pods -n kube-system
-NAME                                      READY     STATUS    RESTARTS   AGE
-...
-portworx-pvc-controller-2561368997-5s35p  1/1       Running   0          43s
-...
-```
+## Deploy a sample application
+
+Now that you have Portworx installed, checkout various examples of [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).
 
 ## Troubleshooting Notes
 
@@ -111,12 +96,6 @@ portworx-pvc-controller-2561368997-5s35p  1/1       Running   0          43s
    Clusterrolebinding "myname-cluster-admin-binding" created
    ```
 
-* The `kubectl apply ...` command fails with "error validating":
-   - This likely happened because of a version discrepancy between the "kubectl" client and Kubernetes backend server (ie. using "kubectl" v1.8.4 to apply spec to Kubernetes server v1.6.13-gke.0).
-   - To fix this, you can either:
-      1. Downgrade the "kubectl" version to match your server's version, or
-      2. Reapply the spec with client-validation turned off,  e.g.:<br/>`kubectl apply --validate=false ...`
-
 * GKE instances under certain scenarios do not automatically re-attach the persistent disks used by PX.
    - Under the following scenarios, GKE will spin up a new VM as a replacement for older VMs with the same node name: 
       * Halting a VM in GKE cluster
@@ -124,5 +103,3 @@ portworx-pvc-controller-2561368997-5s35p  1/1       Running   0          43s
       * Increasing the size of the node pool
    - However, in these cases the previously attached persistent disks will not be re-attached automatically.
    - Currently you will have to manually re-attach the persistent disk to the new VM and then restart portworx on that node.
-
-If you face any issues with GKE, reach out to us on [slack](http://slack.portworx.com).
