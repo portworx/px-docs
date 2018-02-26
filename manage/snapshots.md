@@ -42,6 +42,7 @@ OPTIONS:
 Use `pxctl snap create` to make a new snapshot of a volume.
 A typical example looks like this:
 
+
 ```
 # pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
 Volume successfully snapped: 1152602487227170184
