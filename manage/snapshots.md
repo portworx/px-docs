@@ -44,11 +44,6 @@ The string of digits in the output is the volume ID of the new snapshot.  You ca
 to the snapshot in subsequent `pxctl` commands.  The label values allow you to tag the snapshot with descriptive information of your choosing. 
 You can use them to filter the output of the `pxctl volume list` command.
 
-To see more detailed information for a snapshot, you can use `pxctl volume inspect` command
-```
-# /opt/pwx/bin/pxctl volume inspect mysnap
-```
-
 There is an implementation limit of 64 snapshots per volume.
 
 ### Listing Snapshots
@@ -123,65 +118,8 @@ Delete volume 'mysnap', proceed ? (Y/N): y
 Volume mysnap successfully deleted.
 ```
 
-### Snapshot Schedules
+### Schedule Policy
 
-Snapshot schedules can be created either during volume create or via policies.
-Scheduled snapshots have names of the form `<Parent-Name>_<freq>_<creation_time>`, where `<freq>` denotes the schedule frequency, i.e., periodic, daily, weekly, monthly.
-For example,
-```
-myvol_periodic_2018_Feb_26_21_12
-myvol_daily_2018_Feb_26_12_00
-```
-
-1. Creation of snapshot schedules during volume create
-```
-NAME:
-   pxctl volume create - Create a volume
-
-USAGE:
-   pxctl volume create [command options] volume-name
-
-OPTIONS:
-   --shared                                      make this a globally shared namespace volum
-   --secure                                      encrypt this volume using AES-256
-   --secret_key value                            secret_key to use to fetch secret_data for the PBKDF2 function
-   --use_cluster_secret                          Use cluster wide secret key to fetch secret_data
-   --label pairs, -l pairs                       list of comma-separated name=value pairs
-   --size value, -s value                        volume size in GB (default: 1)
-   --fs value                                    filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --block_size size, -b size                    block size in Kbytes (default: 32)
-   --repl factor, -r factor                      replication factor [1..3] (default: 1)
-   --scale value, --sc value                     auto scale to max number [1..1024] (default: 1)
-   --io_priority value, --iop value              IO Priority: [high|medium|low] (default: "low")
-   --journal                                     Journal data for this volume
-   --io_profile value, --prof value              IO Profile: [sequential|random|db|db_remote] (default: "sequential")
-   --sticky                                      sticky volumes cannot be deleted until the flag is disabled [on | off]
-   --aggregation_level level, -a level           aggregation level: [1..3 or auto] (default: "1")
-   --nodes value                                 comma-separated Node Ids
-   --zones value                                 comma-separated Zone names
-   --racks value                                 comma-separated Rack names
-   --group value, -g value                       group
-   --enforce_cg, --fg                            enforce group during provision
-   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
-   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-   --policy value, --sp value                    policy names separated by comma
-```
-
-There are four scheduling options [--periodic, --daily, --weekly and --monthly], which you can combine as desired.
-The example below sets a schedule of periodic snapshot for every 60 min and daily snapshot at 8:00am and weekly snapshot on friday at 23:30pm and monthly snapshot on the 1st of the month at 6:00am.
-```
-pxctl volume create --periodic 60 --daily @08:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
-```
-
-The example below keeps a count of 10 periodic snapshot that triggers every 120 min and 3 daily snapshots that tirggers at 8:00am
-```
-pxctl volume create --periodic 120,10 --daily @08:00,3 myvol
-```
-Once the count is reached, the oldest existing one will be deleted if necessary.
-
-2. Creation of snapshot schedules via policies
 To create a snapshot policy, use `pxctl sched-policy create` command.
 ```
 NAME:
@@ -202,11 +140,93 @@ The below example creates a policy `p1` with periodic and weekly schedules.
 # pxctl sched-policy create --periodic 60,5 --weekly sunday@12:00,4 p1
 ```
 
+Schedule policies can be addded to the volume either during  volume create or after volume create.
+```
+# pxctl volume create --policy p1 vol1
+# pxctl volume snap-interval-update --policy p2 vol1 
+``` 
+
+### Listing Schedule Policies
+
+To list the schedule policies, Use `pxctl sched-policy  list` command
+```
+NAME:
+   pxctl sched-policy list - List all schedule policies
+
+USAGE:
+      pxctl sched-policy list [arguments...]
+```
+
+### Update Schedule Policy
+
+To update the schedule policy, Use `pxctl sched-policy  update` command
+```
+NAME:
+  pxctl sched-policy update - Update a schedule policy
+
+USAGE:
+   pxctl sched-policy update [command options] policy-name
+
+OPTIONS:
+   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
+   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+```
+
+### Delete Schedule Policy
+
+To delete the schedule policy, Use `pxctl sched-policy delete` command.
+```
+NAME:
+   pxctl sched-policy delete - Delete a schedule policy
+
+USAGE:
+   pxctl sched-policy delete policy-name
+```
+
+### Snapshot Schedules
+
+Creation of snapshot schedules during volume create uses four scheduling options [--periodic, --daily, --weekly and --monthly], which you can combine as desired.
+Scheduled snapshots have names of the form `<Parent-Name>_<freq>_<creation_time>`, where `<freq>` denotes the schedule frequency, i.e., periodic, daily, weekly, monthly.
+For example,
+```
+myvol_periodic_2018_Feb_26_21_12
+myvol_daily_2018_Feb_26_12_00
+```
+
+The example below sets a schedule of periodic snapshot for every 60 min and daily snapshot at 8:00am and weekly snapshot on friday at 23:30pm and monthly snapshot on the 1st of the month at 6:00am.
+```
+pxctl volume create --periodic 60 --daily @08:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
+```
+
+The example below keeps a count of 10 periodic snapshot that triggers every 120 min and 3 daily snapshots that tirggers at 8:00am
+```
+pxctl volume create --periodic 120,10 --daily @08:00,3 myvol
+```
+Once the count is reached, the oldest existing one will be deleted if necessary.
+
+
 ### Changing Snapshot Schedule
 
 To change the snapshot schedule for a given volume, use `pxctl volume snap-interval-update` command
 ```
-# pxctl volume snap-interval-update p1,p2
+NAME:
+   pxctl volume snap-interval-update - Update volume configuration
+
+USAGE:
+   pxctl volume snap-interval-update [command options] volume-name-or-ID
+
+OPTIONS:
+   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
+   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+   --policy value, --sp value                    policy names separated by comma
+```
+
+In the below example, the old snapshot schedule is replaced with 5 daily snapshot triggering at 15:00pm  
+```
 # pxctl volume snap-interval-update --daily @15:00,5 myvol
 ```
 
