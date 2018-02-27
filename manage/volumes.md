@@ -139,3 +139,48 @@ Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl vol
 {% include pxctl/volume/volume-snap-help-1.2.md %}
 
 Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`
+
+## Volume Clone
+
+#### PX version 1.3 and higher
+
+In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
+```
+NAME:
+   pxctl volume clone - Create a clone volume
+
+USAGE:
+   pxctl volume clone [command options] volume-name-or-ID
+
+OPTIONS:
+   --name value             user friendly name
+   --label pairs, -l pairs  list of comma-separated name=value pairs
+```
+
+In the below example, `myvol_clone` is the clone from the parent volume `myvol`
+```
+# pxctl volume clone -name myvol_clone myvol
+Volume clone successful: 55898055774694370
+```
+
+## Volume Restore
+
+#### PX version 1.3 and higher
+
+In order to restore a volume from snapshot, Use `pxctl volume restore` command.
+```
+NAME:
+   pxctl volume restore - Restore volume from snapshot
+
+USAGE:
+   pxctl volume restore [command options] volume-name-or-ID
+
+OPTIONS:
+   --snapshot value, -s value  snapshot-name-or-ID
+```
+
+In the below example parent volume `myvol` is restored from its snapshot `mysnap`. Make sure volume is detached in order to restore from the snapshot.
+```
+# pxctl volume restore --snapshot mysnap myvol
+Successfully started restoring volume myvol from mysnap.
+```
