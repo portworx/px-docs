@@ -242,7 +242,7 @@ pxctl volume snap-interval-update --periodic 0 myvol
 
 If a schedule is set on a volume and to view that schedule use `pxctl volume inspect` command.
 ```
-# /opt/pwx/bin/pxctl v i myvol
+# pxctl volume inspect myvol
 Volume	:  1125771388930868153
 	Name            	 :  myvol
 	Size            	 :  1.0 GiB
