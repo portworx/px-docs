@@ -24,7 +24,6 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 
 * Volume create command additions to include volume clone command and integrate snap commands
 * Improved snapshot workflows 
-  * Group snapshots
   * Clones - full volume copy created from a snapshot
   * Changes to snapshot CLI. See Snapshot CLI reference guide
   * Creating scheduled snapshots policies per volume
@@ -41,7 +40,6 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
-
 
 ### Issues addressed
 
