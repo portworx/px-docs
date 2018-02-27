@@ -272,7 +272,7 @@ Note the use of the `-j` flag.
 
 ## Volume Clone
 
-You can create a clone from the volume or from a snapshot. This is done using the `pxctl volume clone` command
+In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
 ```
 NAME:
    pxctl volume clone - Create a clone volume
@@ -285,7 +285,7 @@ OPTIONS:
    --label pairs, -l pairs  list of comma-separated name=value pairs
 ```
 
-In the below example, `myvol_clone` is the clone of parent volume `myvol`
+In the below example, `myvol_clone` is the clone from the parent volume `myvol`
 ```
 # pxctl volume clone -name myvol_clone myvol
 Volume clone successful: 55898055774694370
@@ -293,7 +293,7 @@ Volume clone successful: 55898055774694370
 
 ## Volume Restore
 
-You can restore the volume from the snapshot. THis is done using the `pxctl volume restore` command
+In order to restore a volume from snapshot, Use `pxctl volume restore` command.
 ```
 NAME:
    pxctl volume restore - Restore volume from snapshot
