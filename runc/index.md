@@ -12,7 +12,7 @@ redirect_from:
 
 ## Why runC
 
-Running Portworx as a runC container eliminates any cyclical dependancies between a Docker container consuming storage from the Portworx container.  It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.
+Running Portworx as a runC container eliminates any cyclical dependencies between a Docker container consuming storage from the Portworx container.  It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.
 
 To install and configure PX to run directly with runC, please use the configuration steps described in this section.
 
