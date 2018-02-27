@@ -143,7 +143,8 @@ The below example creates a policy `p1` with periodic and weekly schedules.
 Schedule policies can be addded to the volume either during  volume create or after volume create.
 ```
 # pxctl volume create --policy p1 vol1
-# pxctl volume snap-interval-update --policy p2 vol1 
+(or)
+# pxctl volume snap-interval-update --policy p1 vol1 
 ``` 
 
 ### Listing Schedule Policies
