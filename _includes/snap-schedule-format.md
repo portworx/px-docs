@@ -1,0 +1,1 @@
+Following are the accepted formats:<br><br>periodic=_mins_,_snaps-to-keep_ <br>daily=_hh:mm_,_snaps-to-keep_ <br>weekly=_weekday@hh:mm_,_snaps-to-keep_  <br>monthly=_day@hh:mm_,_snaps-to-keep_<br><br> _snaps-to-keep_ is optional. Periodic, Daily, Weekly and Monthly keep last 5, 7, 5 and 12 snapshots by default respectively.
