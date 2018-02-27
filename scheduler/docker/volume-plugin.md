@@ -54,11 +54,30 @@ Options:
     --opt io_priority=value             IO Priority: [high|medium|low] (default: "low")
     --opt sticky                        sticky volumes cannot be deleted until the flag is disabled [on | off]
     --opt snap_interval=value           snapshot interval in minutes, 0 disables snaps (default: 0)
+    --opt snap_schedule=value           snapshot schedule specification. PX 1.3 and higher. (See "Scheduled snapshots" below)
     --opt aggregation_level=value       aggregation level: [1..3 or auto] (default: "1")
     --opt nodes=value                   comma-separated Node Id(s)
 
 ```
 #### Snapshot
+
+**Scheduled snapshots**
+
+Scheduled snapshots are only available in Portworx 1.3 and higher.
+
+Use the _snap_schedule_ option to specify the snapshot schedule.
+
+{% include snap-schedule-format.md %}
+
+Some examples of snapshots schedules are:
+
+* snap_schedule="periodic=60,10"
+* snap_schedule="daily=12:00,4"
+* snap_schedule="weekly=sunday@12:00,2"
+* snap_schedule="monthly=15@12:00"
+
+
+**On-demand snapshots**
 
 There is no explicit Snapshot operation via Docker plugin API. However, this can be achieved via the create operation. Specifying a `parent` operation will create a snapshot.
 
