@@ -38,7 +38,7 @@ Uprade Note 2: Ensure all nodes in PX cluster are running 1.3 version before inc
 
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
-* Change `snap_interval` parameter to `periodic`
+* Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 
 
 ### Issues addressed
@@ -68,6 +68,12 @@ Uprade Note 2: Ensure all nodes in PX cluster are running 1.3 version before inc
 * PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, replica nodes and replication add
 * PWX-4884 - Prevent replication factor increases if all the nodes in the cluster are not running 1.3.0
 * PWX-4504 - Show all the volumes present on a node in CLI with a `--node` option
+* PWX-4824 - `pxctl volume inspect` doesn't show replication set information properly when one ndoe is out of quorum
+* PWX-4784 - Support SELinux in 4.12.x kernels and above by setting SELinux context correctly
+* PWX-4812 - Handle Kernel upgrades correctly
+* PWX-4814 - Synchronize snapshot operations per node
+* PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
+* PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
 
 
 
