@@ -13,13 +13,17 @@ meta-description: "Learn to scale a Portworx cluster up or down on AWS with Auto
 * TOC
 {:toc}
 
-This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling**](https://aws.amazon.com/autoscaling/)
+This document describes how you can easily scale a Portworx cluster up or down on AWS using [**Auto Scaling Groups**](https://aws.amazon.com/autoscaling/)
 
 ## About Stateful Auto Scaling
 In order to determine if stateful auto scaling is needed in your environment, read [this blog](https://portworx.com/auto-scaling-groups-ebs-docker/) to get an overview of what this feature does.
 
 ## Configure the Auto Scaling Group
-Use [this](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) tutorial to set up an auto scaling group.
+Use the [AWS tutorial](http://docs.aws.amazon.com/autoscaling/latest/userguide/GettingStartedTutorial.html) to set up an auto scaling group.
+
+## Portworx in an Auto Scaling Group
+
+{% include asg/px-asg-intro.md %}
 
 ## Stateless Autoscaling
 When your Portworx instances do not have any local storage, they are called `head-only` or `stateless` nodes.  They still participate in the PX cluster and can provide volumes to any client container on that node.  However, they strictly consume storage from other stateful PX instances.
@@ -33,7 +37,7 @@ You will need to create a master AMI that you will associate with your auto scal
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX in storage-less mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
+3. Configure this instance to run PX in storage-less mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.
 
 >**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
 
@@ -52,16 +56,9 @@ When your Portworx instances have storage associated with them, they are called 
 
 This section explains specific functionality that Portworx provides to easily integrate your auto scaling environment with your stateful PX nodes and optimally manage stateful applications across a variable number of nodes in the cluster.
 
-## Create EBS volume templates
-Create various EBS volume templates for PX to use.  PX will use these templates as a reference when creating new EBS volumes while scaling up.
+## EBS volume template
 
-For example, create two volumes as:
-```
-vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
-vol-0055e5913b79fb49d: 1000 GiB GP2
-```
-
-Ensure that these EBS volumes are created in the same region as the auto scaling group.
+{% include asg/ebs-template.md %}
 
 ## Create a stateful AMI
 Now you will need to create a master AMI that you will associate with your auto scaling group.  This AMI will be configured with Docker and for PX to start via `systemd`.
@@ -75,7 +72,7 @@ The PX instance that is launching will use the above information to either alloc
 
 1. Select a base AMI from the AWS market place.
 2. Launch an instance from this AMI.
-3. Configure this instance to run PX in storage mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.  
+3. Configure this instance to run PX in storage mode.  Install Docker and follow [these](/runc/index.html) instructions to configure the image to run the PX runC container.
 
 >**Note:**<br/>Please **do not start PX** while creating the master AMI.  If you do, then the AMI will have already been initialized as a new PX node.
 
@@ -107,43 +104,15 @@ portworx:
       - vol-0055e5913b79fb49d
 ```
 
-PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one. 
+PX will use the EBS volume IDs as volume template specs.  Each PX instance that is launched will either grab a free EBS volume that matches the template, or create a new one.
 
 Note that even though each instance is launched with the same `user-data` and hence the same EBS volume template, during runtime, each PX instance will figure out which actual EBS volume to use.
 
-### Instance Privileges
+### AWS Requirements
 
-A final option is to create each instance such that it has the authority to create EBS volumes without the access keys.  With this method (in conjunction with starting PX via `systemd`), the AWS_ACCESS_KEY_ID and the AWS_SECRET_ACCESS_KEY do not need to be provided. Instead you can associate an AWS IAM role with the ec2 instances that are spun in your ASG. More details about creating such an EC2 IAM role and corresponding AWS policy can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
+{% include asg/aws-prereqs.md %}
 
 Following is an example policy that has all the required permissions
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "<stmt-id>",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:AttachVolume",
-                "ec2:DetachVolume",
-                "ec2:CreateTags",
-                "ec2:CreateVolume",
-                "ec2:DeleteTags",
-                "ec2:DeleteVolume",
-                "ec2:DescribeTags",
-                "ec2:DescribeVolumeAttribute",
-                "ec2:DescribeVolumesModifications",
-                "ec2:DescribeVolumeStatus",
-                "ec2:DescribeVolumes",
-                "ec2:DescribeInstances"
-            ],
-            "Resource": [
-                "*"
-            ]
-        }
-    ]
-}
-```
 
 ## Scaling the Cluster Up
 For each instance in the auto scale group, the following process takes place on the first boot (Note that the `user-data` is made available only during the first boot of an instance):
@@ -181,4 +150,3 @@ In the case of ASG, if you want to scale down your PX cluster, you will not be a
 
 1. When starting a PX cluster with AWS Auto Scaling, you will not be able to use this cluster's configuraion on any other nodes which are not started by ASG.
 2. If PX is unable to attach an ESB volume, it will retry, during which node index might get increased. This should be okay and should not affect any cluster, volume operations.
-
