@@ -12,7 +12,7 @@ redirect_from:
 Portworx has best practices for both global container level optimization, as well as volume granular optimization.
 
 ## Global performance tuning
-As of PX version 1.3, it is recommended to use a journal device top absorb PX metadata writes.  Journal writes are small with frequent syncs and therefore only SSD/NVME should be configured as a journal device.
+As of PX version 1.3, it is recommended to use a journal device to absorb PX metadata writes.  Journal writes are small with frequent syncs and therefore only SSD/NVME should be configured as a journal device.
 
 The journal device should be 2GB.  Using a larger device will not help, since PX will only use 2GB of the journal device.  The journal device can be specified via the `-j` option during installation, documented [here](/runc/options.html#options).
 
