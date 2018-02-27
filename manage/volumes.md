@@ -270,25 +270,43 @@ To inspect the volume in `json` format:
 
 Note the use of the `-j` flag.
 
-## Volume snapshots
-You can take snapshots of PX volumes.  Snapshots are thin and do not take additional space.  PX snapshots use branch-on-write so that there is no additional copy when a snapshot is written to.  This is done through B+ Trees.
+## Volume Clone
 
+In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
 ```
-# pxctl snap -h
 NAME:
-   pxctl snap - Manage volume snapshots
+   pxctl volume clone - Create a clone volume
 
 USAGE:
-   pxctl snap command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-     list, l    List volume snapshots in the cluster
-     delete, d  Delete a volume snapshot
+   pxctl volume clone [command options] volume-name-or-ID
 
 OPTIONS:
-   --help, -h  show help
+   --name value             user friendly name
+   --label pairs, -l pairs  list of comma-separated name=value pairs
 ```
 
-Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`.
+In the below example, `myvol_clone` is the clone from the parent volume `myvol`
+```
+# pxctl volume clone -name myvol_clone myvol
+Volume clone successful: 55898055774694370
+```
 
+## Volume Restore
+
+In order to restore a volume from snapshot, Use `pxctl volume restore` command.
+```
+NAME:
+   pxctl volume restore - Restore volume from snapshot
+
+USAGE:
+   pxctl volume restore [command options] volume-name-or-ID
+   
+OPTIONS:
+   --snapshot value, -s value  snapshot-name-or-ID
+```
+
+In the below example parent volume `myvol` is restored from its snapshot `mysnap`. Make sure volume is detached in order to restore from the snapshot.
+```
+# pxctl volume restore --snapshot mysnap myvol
+Successfully started restoring volume myvol from mysnap.
+```
