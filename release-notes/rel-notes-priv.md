@@ -16,7 +16,9 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 Upgrade Note 1: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
-Uprade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+Upgrade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+
+Upgrade Note 3: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
 
 ### Feature updates and noteworthy changes
 
@@ -74,6 +76,10 @@ Uprade Note 2: Ensure all nodes in PX cluster are running 1.3 version before inc
 * PWX-4814 - Synchronize snapshot operations per node
 * PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
 * PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
+* PWX-
+
+### Errata
+
 
 
 
