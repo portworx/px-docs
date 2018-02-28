@@ -18,19 +18,8 @@ Snapshots can be created explicitly by `pxctl snapshot create` commands or throu
 ## `pxctl` Snapshot Commands
 
 Snapshots are managed with the `pxctl volume snapshot` command.
-```
-NAME:
-   pxctl volume snapshot - Manage volume snapshots
 
-USAGE:
-   pxctl volume snapshot command [command options] [arguments...]
-
-COMMANDS:
-   create, c  Create a volume snapshot
-
-OPTIONS:
-   --help, -h  show help
-```
+{% include pxctl/volume/volume-snap-help-1.3.md %}
 
 ### Creation Snapshots
 
@@ -48,75 +37,16 @@ There is an implementation limit of 64 snapshots per volume.
 
 ### Listing Snapshots
 
-Snapshots are listed using pxctl volume list command.
-```
-NAME:
-   pxctl volume list - List volumes in the cluster
+{% include pxctl/volume/volume-list-help-1.3.md %}
 
-USAGE:
-   pxctl volume list [command options]
-
-OPTIONS:
-   --all, -a                 show all volumes, including snapshots
-   --node-id value           show all volumes whose replica is present on the given node
-   --name value              volume name used during creation if any
-   --label pairs, -l pairs   list of comma-separated name=value pairs
-   --snapshot, -s            show all snapshots (read-only volumes)
-   --snapshot-schedule, --ss show all schedule created snapshots
-   --parent value, -p value  show all snapshots created for given volume
-```
-
-User created snapshots can be listed using one of the following ways
-```
-# pxctl volume list --all
-ID			NAME									SIZE	HA	SHARED	ENCRYPTED	COMPRESSED	IO_PRIORITY	SCALE	STATUS
-234835613696329810	mysnap									1 GiB	1	no	no		no		LOW		1	up - detached
-1125771388930868153	myvol									1 GiB	1	no	no		no		LOW		1	up - detached
-```
-(or)
-```
-# pxctl volume list --snapshot
-ID			NAME									SIZE	HA	SHARED	ENCRYPTED	COMPRESSED	IO_PRIORITY	SCALE	STATUS
-234835613696329810	mysnap									1 GiB	1	no	no		no		LOW		1	up - detached
-```
-
-All scheduled snapshots can be listed using  --snapshot-schedule option.
-```
-# pxctl volume list --snapshot-schedule
-ID			NAME									SIZE	HA	SHARED	ENCRYPTED	COMPRESSED	IO_PRIORITYSCALE	STATUS
-423119103642927058	myvol_periodic_2018_Feb_26_21_12					1 GiB	1	no	no		no		LOW		1up - detached
-```
-
-You can filter the results with the --parent and --label options. For instance, --parent myvol will show only snapshots whose parent is myvol, i.e., mysnap in this example.
-Giving labels restricts the list to snapshots that have all of the specified labels. For instance, --label fabric=wool would again show mysnap but --label fabric=cotton would produce an empty list.
-```
-# pxctl volume list --parent myvol --snapshot
-ID			NAME	SIZE	HA	SHARED	ENCRYPTED	COMPRESSED	IO_PRIORITY	SCALE	STATUS
-234835613696329810	mysnap	1 GiB	1	no	no		no		LOW		1	up - detached
-
-# pxctl volume list --parent myvol --snapshot --label fabric=wool
-ID			NAME	SIZE	HA	SHARED	ENCRYPTED	COMPRESSED	IO_PRIORITY	SCALE	STATUS
-234835613696329810	mysnap	1 GiB	1	no	no		no		LOW		1	up - detached
-```
+{% include pxctl/volume/volume-snap-list-1.3.md %}
 
 ### Deleting Snapshots
 
-Snapshot can be deleted using `pxctl volume delete` command.
-```
-NAME:
-   pxctl volume delete - Delete a volume
+{% include pxctl/volume/volume-snap-delete-help-1.3.md %}
 
-USAGE:
-   pxctl volume delete volume-name-or-ID
+{% include pxctl/volume/volume-snap-delete-1.3.md %}
 
-```
-
-The argument is the name or ID of the snapshot that you wish to delete. The snapshot must be detached in order to delete it.
-```
-# pxctl volume delete mysnap
-Delete volume 'mysnap', proceed ? (Y/N): y
-Volume mysnap successfully deleted.
-```
 
 ### Schedule Policy
 
