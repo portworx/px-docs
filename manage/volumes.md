@@ -73,16 +73,16 @@ PX supports passing the volume spec inline along with the volume name.  This is 
 For example, a PX inline spec can be specified as the following:
 
 ```
-# docker volume create -d pxd io_priority=high,size=10G,repl=3,name=demovolume
+# docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
 ```
 
 This is useful when you need to create a volume dynamically while using docker run.  For example, the following command will create a volume and launch the container dynamically:
 
 ```
-# docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,name=demovolume:/data busybox sh
+# docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume:/data busybox sh
 ```
 
-The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3 and a IO priority level of 3 and start the busybox container.
+The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3, snap scheudle with periodic and daily snapshot creation and a IO priority level of high and start the busybox container.
 
 Each spec key must be comma separated.  The following are supported key value pairs:
 
@@ -94,6 +94,7 @@ Block size       - bs=[4096...]
 Shared volume    - shared=true
 File System      - fs=[xfs|ext4]
 Encryption       - passphrase=secret
+snap_schedule    - "periodic=mins#k;daily=hh:mm#k;weekly=weekday@hh:mm#k;monthly=day@hh:mm#k" where k is the number of snapshots to retain.
 ```
 
 These inline specs can be passed in through the scheduler application template.  For example, below is a snippet from a marathon configuration file:
