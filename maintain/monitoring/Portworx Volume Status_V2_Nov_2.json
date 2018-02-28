@@ -1,16 +1,13 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__requires": [
-    {
+  "__inputs": [{
+    "name": "DS_PROMETHEUS",
+    "label": "prometheus",
+    "description": "",
+    "type": "datasource",
+    "pluginId": "prometheus",
+    "pluginName": "Prometheus"
+  }],
+  "__requires": [{
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -36,17 +33,15 @@
     }
   ],
   "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
+    "list": [{
+      "builtIn": 1,
+      "datasource": "-- Grafana --",
+      "enable": true,
+      "hide": true,
+      "iconColor": "rgba(0, 211, 255, 1)",
+      "name": "Annotations & Alerts",
+      "type": "dashboard"
+    }]
   },
   "editable": true,
   "gnetId": null,
@@ -55,18 +50,14 @@
   "id": null,
   "links": [],
   "refresh": "1m",
-  "rows": [
-    {
+  "rows": [{
       "collapse": false,
       "height": "50",
-      "panels": [
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+      "panels": [{
+          "columns": [{
+            "text": "Current",
+            "value": "current"
+          }],
           "datasource": "${DS_PROMETHEUS}",
           "filterNull": false,
           "fontSize": "100%",
@@ -82,27 +73,23 @@
           },
           "span": 3,
           "styles": [],
-          "targets": [
-            {
-              "expr": "px_volume_halevel",
-              "intervalFactor": 2,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_halevel",
+            "intervalFactor": 2,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 2
+          }],
           "timeFrom": "1m",
           "title": "Volume HA Level",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [{
+            "text": "Current",
+            "value": "current"
+          }],
           "datasource": "${DS_PROMETHEUS}",
           "filterNull": false,
           "fontSize": "100%",
@@ -118,43 +105,37 @@
             "desc": true
           },
           "span": 6,
-          "styles": [
-            {
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "bytes"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "px_volume_capacity_bytes",
-              "intervalFactor": 2,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
+          "styles": [{
+            "colorMode": null,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 0,
+            "pattern": "/.*/",
+            "thresholds": [],
+            "type": "number",
+            "unit": "bytes"
+          }],
+          "targets": [{
+            "expr": "px_volume_capacity_bytes",
+            "intervalFactor": 2,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 2
+          }],
           "timeFrom": "1m",
           "title": "Volume Sizes",
           "transform": "timeseries_aggregations",
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [{
+            "text": "Current",
+            "value": "current"
+          }],
           "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "filterNull": false,
@@ -170,34 +151,30 @@
             "desc": true
           },
           "span": 3,
-          "styles": [
-            {
-              "colorMode": "row",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [
-                "60",
-                "70"
-              ],
-              "type": "number",
-              "unit": "percent"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
-              "intervalFactor": 2,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
+          "styles": [{
+            "colorMode": "row",
+            "colors": [
+              "rgba(50, 172, 45, 0.97)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(245, 54, 54, 0.9)"
+            ],
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 0,
+            "pattern": "Current",
+            "thresholds": [
+              "60",
+              "70"
+            ],
+            "type": "number",
+            "unit": "percent"
+          }],
+          "targets": [{
+            "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
+            "intervalFactor": 2,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 2
+          }],
           "timeFrom": "1m",
           "title": "Volume Usage Status",
           "transform": "timeseries_aggregations",
@@ -214,8 +191,7 @@
     {
       "collapse": false,
       "height": 250,
-      "panels": [
-        {
+      "panels": [{
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -251,15 +227,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_depth_io{volumeid=~\"$volumeid\"}",
-              "intervalFactor": 2,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_depth_io{volumeid=~\"$volumeid\"}",
+            "intervalFactor": 2,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 10
+          }],
           "thresholds": [],
           "timeFrom": "1h",
           "timeShift": null,
@@ -277,8 +251,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "none",
               "label": "",
               "logBase": 1,
@@ -331,15 +304,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
-              "intervalFactor": 2,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
+          "targets": [{
+            "expr": "(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
+            "intervalFactor": 2,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 10
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -357,8 +328,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "percent",
               "label": "",
               "logBase": 1,
@@ -380,15 +350,14 @@
       "repeat": null,
       "repeatIteration": null,
       "repeatRowId": null,
-         "showTitle": true,
+      "showTitle": true,
       "title": "Volume Usage",
       "titleSize": "h6"
     },
     {
       "collapse": false,
       "height": 250,
-      "panels": [
-        {
+      "panels": [{
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -418,15 +387,13 @@
           "span": 12,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_iops",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ volumename }}",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_iops",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ volumename }}",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -444,8 +411,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "IOPS",
               "logBase": 1,
@@ -463,7 +429,7 @@
             }
           ]
         },
-          {
+        {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -493,15 +459,13 @@
           "span": 12,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "irate(px_volume_iops{volumeid=~\"$volumeid\"}[5m])",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ volumename }}",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "irate(px_volume_iops{volumeid=~\"$volumeid\"}[5m])",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ volumename }}",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -519,8 +483,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "IOPS",
               "logBase": 1,
@@ -549,8 +512,7 @@
     {
       "collapse": false,
       "height": 250,
-      "panels": [
-        {
+      "panels": [{
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -583,16 +545,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_read_bytes{volumeid=~\"$volumeid\"}",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "B",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_read_bytes{volumeid=~\"$volumeid\"}",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "B",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -610,8 +570,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "bytes",
               "label": "Bytes",
               "logBase": 1,
@@ -662,16 +621,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_written_bytes{volumeid=~\"$volumeid\"} ",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_written_bytes{volumeid=~\"$volumeid\"} ",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -689,8 +646,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "bytes",
               "label": "Bytes",
               "logBase": 1,
@@ -741,16 +697,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_readthroughput{volumeid=~\"$volumeid\"}",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "B",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_readthroughput{volumeid=~\"$volumeid\"}",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "B",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -768,8 +722,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "bytes",
               "label": "Bytes/second",
               "logBase": 1,
@@ -820,16 +773,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_writethroughput{volumeid=~\"$volumeid\"} ",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_writethroughput{volumeid=~\"$volumeid\"} ",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -847,8 +798,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "bytes",
               "label": "Bytes/second",
               "logBase": 1,
@@ -866,7 +816,7 @@
             }
           ]
         },
-         {
+        {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -899,16 +849,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_vol_read_latency_seconds{volumeid=~\"$volumeid\"}",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "B",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_vol_read_latency_seconds{volumeid=~\"$volumeid\"}",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "B",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -926,8 +874,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "s",
               "label": "",
               "logBase": 1,
@@ -978,16 +925,14 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_volume_vol_write_latency_seconds{volumeid=~\"$volumeid\"}",
-              "format": "time_series",
-              "intervalFactor": 4,
-              "legendFormat": "{{volumename}}",
-              "refId": "A",
-              "step": 20
-            }
-          ],
+          "targets": [{
+            "expr": "px_volume_vol_write_latency_seconds{volumeid=~\"$volumeid\"}",
+            "format": "time_series",
+            "intervalFactor": 4,
+            "legendFormat": "{{volumename}}",
+            "refId": "A",
+            "step": 20
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -998,15 +943,14 @@
             "value_type": "individual"
           },
           "type": "graph",
-           "xaxis": {
+          "xaxis": {
             "buckets": null,
             "mode": "time",
             "name": null,
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "s",
               "label": "",
               "logBase": 1,
@@ -1035,8 +979,7 @@
     {
       "collapse": false,
       "height": 250,
-      "panels": [
-        {
+      "panels": [{
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
@@ -1066,15 +1009,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "irate( px_disk_stats_read_bytes[5m] )",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ disk }} - {{ host }} ",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "irate( px_disk_stats_read_bytes[5m] )",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ disk }} - {{ instance }} ",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -1092,8 +1033,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "Bytes per Second",
               "logBase": 1,
@@ -1141,15 +1081,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "irate( px_disk_stats_write_bytes[5m] )",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ disk }} - {{ host }} ",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "irate( px_disk_stats_write_bytes[5m] )",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ disk }} - {{ instance }} ",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -1167,8 +1105,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "Bytes per Second",
               "logBase": 1,
@@ -1216,15 +1153,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_disk_stats_read_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ disk }} - {{ host }} ",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "px_disk_stats_read_bytes",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ disk }} - {{ instance }} ",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -1242,8 +1177,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "Bytes",
               "logBase": 1,
@@ -1291,15 +1225,13 @@
           "span": 6,
           "stack": false,
           "steppedLine": false,
-          "targets": [
-            {
-              "expr": "px_disk_stats_write_bytes",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ disk }} - {{ host }} ",
-              "refId": "A"
-            }
-          ],
+          "targets": [{
+            "expr": "px_disk_stats_write_bytes",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ disk }} - {{ instance }} ",
+            "refId": "A"
+          }],
           "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
@@ -1317,8 +1249,7 @@
             "show": true,
             "values": []
           },
-          "yaxes": [
-            {
+          "yaxes": [{
               "format": "short",
               "label": "Bytes",
               "logBase": 1,
@@ -1349,28 +1280,26 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": "${DS_PROMETHEUS}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "VolumeID",
-        "multi": true,
-        "name": "volumeid",
-        "options": [],
-        "query": "label_values(px_volume_usage_bytes,volumeid)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": [{
+      "allValue": null,
+      "current": {},
+      "datasource": "${DS_PROMETHEUS}",
+      "hide": 0,
+      "includeAll": true,
+      "label": "VolumeID",
+      "multi": true,
+      "name": "volumeid",
+      "options": [],
+      "query": "label_values(px_volume_usage_bytes,volumeid)",
+      "refresh": 1,
+      "regex": "",
+      "sort": 0,
+      "tagValuesQuery": "",
+      "tags": [],
+      "tagsQuery": "",
+      "type": "query",
+      "useTags": false
+    }]
   },
   "time": {
     "from": "now-1h",
