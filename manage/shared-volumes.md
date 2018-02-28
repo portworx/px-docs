@@ -38,7 +38,7 @@ Note the "SHARED" status of the volume, in the above output.
 You can also use `docker volume create` as
 
 ```
-# docker volume create --driver pxd --opt shared=true --opt size-10G demovol
+# docker volume create --driver pxd --opt shared=true --opt size=10G demovol
 ```
 
 ## Use shared volumes
