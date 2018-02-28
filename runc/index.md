@@ -5,6 +5,8 @@ keywords: portworx, px-developer, px-enterprise, plugin, install, configure, con
 sidebar: home_sidebar
 redirect_from:
   - /scheduler/docker/systemd.html
+  - /scheduler/docker/upgrade-standalone.html
+  - /scheduler/docker/upgrade-px-plugin.html
 ---
 
 * TOC
@@ -16,19 +18,21 @@ Running Portworx as a runC container eliminates any cyclical dependencies betwee
 
 To install and configure PX to run directly with runC, please use the configuration steps described in this section.
 
+If you are already running PX as a docker container and need to migrate to OCI, following the [migration steps](/runc#upgrading-from-px-containers-to-px-oci).
+
 >**Note:**<br/>It is highly recommended to include the steps outlined in this document in a systemd unit file, so that PX starts up correctly on every reboot of a host.  An example unit file is shown below.
+
+## Install
 
 ### Prerequisites
 
-* *SYSTEMD*: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system (i.e. `systemctl` command works).
+* *SYSTEMD*: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system (i.e. _systemctl_ command works).
     - Note, if you are running Ubuntu 16.04, CentoOS 7 or CoreOS v94 (or newer) the "systemd" is already installed and no actions will be required.
-* *SCHEDULERS*: If you are installing PX into `Kubernetes` or `Mesosphere DC/OS` cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
+* *SCHEDULERS*: If you are installing PX into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
 * *FIREWALL*: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
 * *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
 * *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`) will be automatically formatted by PX.
-
-### Install
 
 The installation and setup of PX OCI bundle is a 3-step process:
 
@@ -43,7 +47,7 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```bash
-# Get latest stable release tag (ie. portworx/px-enterprise:1.2.11.6)
+# Get latest stable release tag (ie. portworx/px-enterprise:1.2.22)
 $ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
@@ -57,13 +61,13 @@ $ sudo docker run --entrypoint /runc-entry-point.sh \
 
 #### Step 2: Configure PX under runC
 
-Now that you have downloaded and installed the PX OCI bundle, you can use the the `px-runc install` command from the bundle to configure `systemd` to start PX runC.
+Now that you have downloaded and installed the PX OCI bundle, you can use the the `px-runc install` command from the bundle to configure systemd to start PX runC.
 
-The `px-runc` command is a helper-tool that does the following:
+The _px-runc_ command is a helper-tool that does the following:
 
 1. prepares the OCI directory for runC
 2. prepares the runC configuration for PX
-3. used by `systemd` to start the PX OCI bundle
+3. used by systemd to start the PX OCI bundle
 
 Installation examples:
 
@@ -80,22 +84,22 @@ $ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -v /var/lib/kubelet:/var/lib/kubelet:shared
 ```
 
-##### Command-line arguments to PX runC
+##### Command-line arguments
 
-The following arguments can be provided to the `px-runc` helper tool, which will in turn pass them to the PX daemon:
+The following arguments can be provided to the _px-runc_ helper tool, which will in turn pass them to the PX daemon:
 
 ```
 Usage: /opt/pwx/bin/px-runc <install|run> [options]
 ```
 
-##### parameter:
-* `install`: Creates configuration files and systemd service unit file.
-* `run`: Runs Portworx in foreground; used by systemd to start the portworx service.
+**Mode of operation**
+* **install**: Creates configuration files and systemd service unit file.
+* **run**: Runs Portworx in foreground; used by systemd to start the portworx service.
 
 {% include cmdargs.md %}
 
+##### Examples
 
-##### Examples:
 Using etcd:
 ```
 px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
@@ -120,7 +124,7 @@ After the initial installation, you can modify the following files and restart t
 * OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
 
 #### Step 3: Starting PX runC
-Once you install the PX OCI bundle and `systemd` configuration from the steps above, you can start and control PX runC directly via `systemd`:
+Once you install the PX OCI bundle and systemd configuration from the steps above, you can start and control PX runC directly via systemd:
 
 ```bash
 # Reload systemd configurations, enable and start Portworx service
@@ -129,7 +133,7 @@ $ sudo systemctl enable portworx
 $ sudo systemctl start portworx
 ```
 
-##### ADVANCED USAGE: Interactive/Foreground mode
+##### Advanced usage: Interactive/Foreground mode
 Alternatively, one might prefer to first start the PX interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:
 
 ```bash
@@ -146,19 +150,42 @@ $ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
 [ hit Ctrl-C ]
 ```
 
-### Upgrading the PX OCI bundle
+<a name="upgrade-px-oci"></a>
+## Upgrading the PX OCI bundle
 
-To upgrade the OCI bundle, please re-run the [installation Step 1](#install_step1) with the `--upgrade` option.
+To upgrade the OCI bundle, simply re-run the [installation Step 1](#install_step1) with the `--upgrade` option.
 After the upgrade, you will need to restart the Portworx service.
 
 <!--EDITING NOTE: DO NOT correct the "?type=dock" below; test the commands before modifying-->
 ```bash
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock' | awk '/image: / {print $2}')
+$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
     $latest_stable --upgrade
 $ sudo systemctl restart portworx
+```
+
+## Uninstalling the PX OCI bundle
+
+To uninstall the PX OCI bundle, please run the following:
+
+```bash
+# 1: Remove systemd service (if any)
+$ sudo systemctl stop portworx
+$ sudo systemctl disable portworx
+$ sudo rm -f /etc/systemd/system/portworx*.service
+
+# NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
+
+# 2: Unmount oci (if required)
+$ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
+
+# 3: Remove binary files
+$ sudo rm -fr /opt/pwx
+
+# 4: [OPTIONAL] Remove configuration files
+$ sudo rm -fr /etc/pwx
 ```
 
 <a name="upgrading-from-px-containers-to-px-oci"></a>
@@ -169,7 +196,7 @@ Step 1: Download and deploy the PX OCI bundle
 
 <!--EDITING NOTE: DO NOT correct the "?type=dock" below; test the commands before modifying-->
 ```bash
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock' | awk '/image: / {print $2}')
+$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 $ sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
@@ -224,29 +251,6 @@ $ sudo systemctl start portworx
 ```
 
 Once you confirm the PX Container -> PX runC upgrade worked, you can permanently delete the `px-enterprise` docker container.
-
-
-### Uninstalling the PX OCI bundle
-
-To uninstall the PX OCI bundle, please run the following:
-
-```bash
-# 1: Remove systemd service (if any)
-$ sudo systemctl stop portworx
-$ sudo systemctl disable portworx
-$ sudo rm -f /etc/systemd/system/portworx*.service
-
-# NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
-
-# 2: Unmount oci (if required)
-$ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
-
-# 3: Remove binary files
-$ sudo rm -fr /opt/pwx
-
-# 4: [OPTIONAL] Remove configuration files
-$ sudo rm -fr /etc/pwx
-```
 
 ### Logging and Log files
 

@@ -1,4 +1,4 @@
-##### options:
+**Options**
 
 ```
 -c                        [REQUIRED] Specifies the cluster ID that this PX instance is to join
@@ -24,7 +24,7 @@
 -sysd <file>              [OPTIONAL] Specify SystemD service file (default: /etc/systemd/system/portworx.service)
 ```
 
-##### kvdb-options:
+**KVDB options**
 ```
 -userpwd <user:passwd>    [OPTIONAL] Username and password for ETCD authentication
 -ca <file>                [OPTIONAL] Specify location of CA file for ETCD authentication
@@ -33,13 +33,13 @@
 -acltoken <token>         [OPTIONAL] ACL token value used for Consul authentication
 ```
 
-##### secrets-options:
+**Secrets options**
 ```
 -secret_type <aws|kvdb|vault>   [OPTIONAL] Specify the secret type to be used by Portworx for cloudsnap and encryption features.
 -cluster_secret_key <id>        [OPTIONAL] Specify the cluster wide secret key to be used when using AWS KMS or Vault for volume encryption.
 ```
 
-##### environment-variables:
+**Environment variables**
 ```
 PX_HTTP_PROXY         [OPTIONAL] If running behind an HTTP proxy, set the PX_HTTP_PROXY variables to your HTTP proxy.
 PX_HTTPS_PROXY        [OPTIONAL] If running behind an HTTPS proxy, set the PX_HTTPS_PROXY variables to your HTTPS proxy.

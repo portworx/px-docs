@@ -33,10 +33,10 @@ Instructions on generating the Portworx spec for Kubernetes are available [here]
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).
 
-#### Docker & Docker plugin users
+#### Other users
 
-If you are installing Portworx as a Docker container or a plugin,
-1. Use `-secret_type aws -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as AWS and the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
+During installation,
+1. Use argument `-secret_type aws -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as AWS and the cluster-wide secret ID. This kms data key associated with the secretID will be used as a passphrase for encrypting volumes.
 2. Use `-e` docker option to expose the [Portworx AWS KMS environment variables](#portworx-aws-kms-environment-variables)
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-aws-kms-credentials-to-configjson).

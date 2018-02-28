@@ -9,7 +9,7 @@
       - title: Install
         url: /runc/
       - title: Upgrade
-        url: /runc/#upgrading-from-px-containers-to-px-oci
+        url: /runc/#upgrade-px-oci
       - title: Install Arguments
         url: /runc/options.html
     - title: Developer Edition
@@ -135,7 +135,7 @@
       - title: Install
         url: /scheduler/docker/install-standalone.html
       - title: Upgrade
-        url: /runc/#upgrading-from-px-containers-to-px-oci
+        url: /runc/#upgrade-px-oci
       - title: How To
         folderitems:
         - title: Use PX with Swarm

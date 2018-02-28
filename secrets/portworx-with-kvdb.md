@@ -13,9 +13,9 @@ If you are installing Portworx on Kubernetes, use `secretType=kvdb` when generat
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#kvdb-config-json).
 
-### Docker & Docker plugin users
+### Other users
 
-If you are installing Portworx as a Docker container or a plugin, use `-secret_type kvdb` when starting Portworx to specify the secret type as kvdb.
+During installation, use argument `-secret_type kvdb` when starting Portworx to specify the secret type as kvdb.
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#kvdb-config-json).
 
