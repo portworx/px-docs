@@ -4,6 +4,8 @@ title: "Dynamic Portworx Volume Creation by Kubernetes Operations(KOPS)"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
 sidebar: home_sidebar
 redirect_from: "/cloud/aws/kops_asg.html"
+meta-description: "This page describes how to setup a production ready Portworx cluster using Kubernetes Kops.
+You will learn how to dynamically provision persistent volumes using AWS Autoscaling groups to spin up EC2 instances."
 ---
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}

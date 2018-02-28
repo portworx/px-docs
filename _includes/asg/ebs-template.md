@@ -1,4 +1,4 @@
-An EBS volume templates defines a set of EBS volumes that Portworx will use as a reference. Create atleast one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
+An EBS volume templates defines a set of EBS volumes that Portworx will use as a reference. Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
 
 For example, create two volumes as:
 ```

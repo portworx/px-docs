@@ -3,6 +3,7 @@ layout: page
 title: "Dynamic Provisioning on Google Kubernetes Engine (GKE)"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 sidebar: home_sidebar
+meta-description: "This page describes how to setup a production ready Portworx cluster in a GKE environment"
 ---
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
@@ -97,7 +98,7 @@ Now that you have Portworx installed, checkout various examples of [applications
    ```
 
 * GKE instances under certain scenarios do not automatically re-attach the persistent disks used by PX.
-   - Under the following scenarios, GKE will spin up a new VM as a replacement for older VMs with the same node name: 
+   - Under the following scenarios, GKE will spin up a new VM as a replacement for older VMs with the same node name:
       * Halting a VM in GKE cluster
       * Upgrading GKE between different kubernetes version
       * Increasing the size of the node pool
