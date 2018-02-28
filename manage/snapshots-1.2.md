@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Snapshot Reference"
+title: "Create and Manage Snapshots 1.2"
 keywords: portworx, pxctl, snapshot, reference
 sidebar: home_sidebar
 redirect_from: "/snapshot.html"

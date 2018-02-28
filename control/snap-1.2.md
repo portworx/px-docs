@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "CLI Reference–Snapshots"
+title: "CLI Reference–Snapshots-1.2"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
