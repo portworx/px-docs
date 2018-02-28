@@ -83,6 +83,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster
 * PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number 
              of volume inspects are done
+* PWX-4525 - `pxctl status` shows invalid cluster summary in some nodes when performing an upgrade from 1.2 to 1.3
 
 
 ### Errata
