@@ -53,7 +53,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4479 - Fix io_priority versions when labeling cloudsnaps
 * PWX-4378 - Add read/write latency stats to the volume statistics
 * PWX-4923 - Add vol_ prefix to read/write volume latency statistics
-* PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath was unmounted via unmount command
+* PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath 
+             was unmounted via unmount command
 * PWX-4372 - Gracefully handle trial license expiry and PX cluster reinstall
 * PWX-4544 - PX OCI install is unable to proceed with aquasec container installed
 * PWX-4531 - Add OS Distribution and Kernel version display in `pxctl status`
@@ -68,7 +69,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4090 - Reserve space in each pool to handle rebalance operations
 * PWX-4544 - Handle ./aquasec file during OCI-Install so PX can be installed in environments with aquasec
 * PWX-4497 - Enable minio to mount shared volumes
-* PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, replica nodes and replication add
+* PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, 
+             replica nodes and replication add
 * PWX-4884 - Prevent replication factor increases if all the nodes in the cluster are not running 1.3.0
 * PWX-4504 - Show all the volumes present on a node in CLI with a `--node` option
 * PWX-4824 - `pxctl volume inspect` doesn't show replication set information properly when one ndoe is out of quorum
@@ -79,7 +81,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
 * PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
 * PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster
-* PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number of volume inspects are done
+* PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number 
+             of volume inspects are done
 
 
 ### Errata
