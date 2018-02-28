@@ -24,10 +24,14 @@
         folderitems:
         - title: Openshift
           url: /scheduler/kubernetes/openshift-install.html
+        - title: AWS (Amazon Web Services)
+          folderitems:
+          - title: KOPS (Kubernetes Operations)
+            url: /cloud/aws/kops-asg.html
+          - title: Amazon Elastic Kubernetes Service (EKS)
+            url: /cloud/aws/eks.html
         - title: GKE (Google Container Engine)
           url: /cloud/gcp/gke.html
-        - title: KOPS (Kubernetes Operations)
-          url: /cloud/aws/kops-asg.html
         - title: Azure
           folderitems:
           - title: Azure Kubernetes Service (AKS)
@@ -36,8 +40,6 @@
             url: /cloud/azure/k8s-acs-engine.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
-        - title: Amazon Elastic Kubernetes Service (EKS)
-          url: /cloud/aws/eks.html
       - title: Interactive tutorials
         url: /scheduler/kubernetes/install.html#interactive-tutorial
       - title: Using Stork

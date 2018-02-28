@@ -28,7 +28,7 @@ Portworx supports the following features in Kubernetes:
 Based on your Kubernetes distro, proceed to one of the following pages:
 * [Openshift](/scheduler/kubernetes/openshift-install.html)
 * [GKE](/cloud/gcp/gke.html)
-* [KOPS](/cloud/aws/kops-asg.html)
+* [KOPS on AWS](/cloud/aws/kops-asg.html)
 * [Azure Container Engine](/cloud/azure/k8s-acs-engine.html/)
 * [Azure Managed Kubernetes Service (AKS)](/cloud/azure/aks.html)
 * [All Other distros](/scheduler/kubernetes/install.html)

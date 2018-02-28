@@ -3,7 +3,6 @@ layout: page
 title: "Control Portworx systemd service on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
-
 meta-description: "Find out how to manually control the Portworx systemd service in your Kubernetes cluster"
 ---
 

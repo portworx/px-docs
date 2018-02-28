@@ -3,7 +3,6 @@ layout: page
 title: "Scale or restrict Portworx nodes on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
-
 meta-description: "Find out how to scale or restrict Portworx nodes in your Kubernetes cluster"
 ---
 
