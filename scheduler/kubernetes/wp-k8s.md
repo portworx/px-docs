@@ -5,6 +5,8 @@ keywords: portworx, Wordpress, application stack, kubernetes, Persistent Storage
 sidebar: home_sidebar
 redirect_from:
 meta-description: "This article describes how operate WordPress on Kubernetes. You will learn how to run a high performance MySQL database for WordPress as well as use shared volumes for file uploads."
+redirect_from:
+  - /applications/wp-k8s.html
 ---
 
 * TOC

@@ -29,6 +29,11 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 	* On a "busy cluster", Kubernetes can take some time until it processes the node-labels change, and notifies Portowrx service -- please allow a few minutes for labels to be processed.
 	* Sometimes it may happen that Kubernetes labels processing stops altogether - in this case please reinstall the "oci-monitor" component by applying and then deleting the `px/enabled=false` label:<br> `kubectl label nodes --all px/enabled=false; sleep 30; kubectl label nodes --all px/enabled-`
 		* this should reinstall/redeploy the "oci-monitor" component without disturbing the PX-OCI service or disrupting the storage, and the Kubernetes labels should work afterwards
+* The `kubectl apply ...` command fails with "error validating":
+   - This likely happened because of a version discrepancy between the "kubectl" client and Kubernetes backend server (ie. using "kubectl" v1.8.4 to apply spec to Kubernetes server v1.6.13-gke.0).
+   - To fix this, you can either:
+      1. Downgrade the "kubectl" version to match your server's version, or
+      2. Reapply the spec with client-validation turned off,  e.g.:<br/>`kubectl apply --validate=false ...`
 
 ### PVC creation
 If the PVC creation is failing, this could be due the following reasons

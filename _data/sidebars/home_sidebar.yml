@@ -21,9 +21,25 @@
     - title: Kubernetes
       folderitems:
       - title: Install
-        url: /scheduler/kubernetes/install.html
-      - title: Upgrade
-        url: /scheduler/kubernetes/upgrade.html
+        folderitems:
+        - title: Openshift
+          url: /scheduler/kubernetes/openshift-install.html
+        - title: AWS (Amazon Web Services)
+          folderitems:
+          - title: KOPS (Kubernetes Operations)
+            url: /cloud/aws/kops-asg.html
+          - title: Amazon Elastic Kubernetes Service (EKS)
+            url: /cloud/aws/eks.html
+        - title: GKE (Google Container Engine)
+          url: /cloud/gcp/gke.html
+        - title: Azure
+          folderitems:
+          - title: Azure Kubernetes Service (AKS)
+            url: /cloud/azure/aks.html
+          - title: Azure Container Engine with Kubernetes
+            url: /cloud/azure/k8s-acs-engine.html
+        - title: Kubernetes (Other)
+          url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
         url: /scheduler/kubernetes/install.html#interactive-tutorial
       - title: Using Stork
@@ -37,7 +53,7 @@
         - title: Elastic Search and Kibana
           url: /scheduler/kubernetes/elasticstack-kibana-k8s.html
         - title: WordPress and MySQL
-          url: /applications/wp-k8s.html
+          url: /scheduler/kubernetes/wp-k8s.html
       - title: How To
         folderitems:
         - title: Create PVCs
@@ -56,12 +72,22 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+      - title: Operate and Maintain
+        folderitems:
+        - title: Upgrade
+          url: /scheduler/kubernetes/upgrade.html
+        - title: Uninstall
+          url: /scheduler/kubernetes/uninstall.html
+        - title: Scale or Restrict
+          url: /scheduler/kubernetes/k8s-scale-restrict.html
         - title: Troubleshoot and Get Support
           url: /scheduler/kubernetes/support.html
         - title: Decommission a node
           url: /scheduler/kubernetes/k8s-node-decommission.html
         - title: Enter Portworx maintenance mode
           url: /scheduler/kubernetes/k8s-node-maintenance.html
+        - title: Control Portworx systemd service
+          url: /scheduler/kubernetes/k8s-px-systemd-service.html
         - title: Manage PX logs using ELK and Fluentd
           url: /scheduler/kubernetes/logmanagement-efk-k8s.html
     - title: Mesosphere DC/OS
@@ -295,7 +321,7 @@
       - title: Wordpress deployment by Docker
         url: /applications/docker-compose.html
       - title: Wordpress deployment by Kubernetes
-        url: /applications/wp-k8s.html
+        url: /scheduler/kubernetes/wp-k8s.html
     - title: Jenkins
       url: /applications/jenkins.html
   - title: Encryption

@@ -23,25 +23,21 @@ You have 2 options for migrating applications.
     * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
 ### 2. Decommission Portworx
-1. Follow [this guide](/maintain/scale-down.html) to decommission the Portworx node from the cluster.
-2. Stop the portworx systemd service: `kubectl label nodes <node> px/service=stop --overwrite`. _This step is required only if PX is deployed as OCI_.
-3. Disable the portworx systemd service: `kubectl label nodes <node> px/service=disable --overwrite`. _This step is required only if PX is deployed as OCI_.
-4. Set the `px/enabled` label to `false` on the node using: `kubectl label nodes <node> px/enabled=false --overwrite`
-    * This will remove the Portworx container from this node since the Portworx DaemonSet spec file uses a node anti-affinity rule that causes it to _not_ run on nodes that have the label: `px/enabled=false`
-    * If you have an older Portworx DaemonSet spec, ensure the spec has the following section.
-    ```yaml
-        spec:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: px/enabled
-                    operator: NotIn
-                    values:
-                    - "false"
-    ```
-    * You can use `kubectl edit ds portworx -n kube-system` to update the spec or if you have a saved spec file, update the file and `kubectl apply` it. 
+
+To decommission Portworx, perform the following steps:
+
+**a) Remove Portworx from the cluster**
+
+Follow [this guide](/maintain/scale-down.html) to decommission the Portworx node from the cluster.
+
+**b) Remove Portworx installation from the node**
+
+Apply the _px/enabled=remove_ label and it will remove the existing Portworx systemd service. It will also apply the _px/enabled=false_ label to stop Portworx from running in future.
+
+For example, below command will remove existing Portworx installation from _minion2_ and also ensure that Portworx pod doesn't run there in future.
+```
+kubectl label nodes minion2 px/enabled=remove --overwrite
+```
 
 >**Decommission from Kubernetes:**<br/> If the plan is to decommission this node altogether from the Kubernetes cluster, no further steps are needed.
 
