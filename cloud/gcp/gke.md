@@ -3,7 +3,7 @@ layout: page
 title: "Dynamic Provisioning on Google Kubernetes Engine (GKE)"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, gke, gce
 sidebar: home_sidebar
-meta-description: "This page describes how to setup a production ready Portworx cluster in a GKE environment"
+meta-description: "This page describes how to setup a production ready Portworx cluster in a Google Kubernetes Engine (GKE)."
 ---
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
