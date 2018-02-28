@@ -12,6 +12,12 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+## 1.2.22.0
+
+* Support SELinux enable in kernels 4.12.x and above
+* Support automatic kernel upgrades. If you expect your environment to upgrade kernels automatically, Portworx recommends to uprade to 1.2.22.0
+
 ## 1.2.20.0
 
 * Minor update to enhance write performance for remote moounts with shared volumes
