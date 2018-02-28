@@ -29,7 +29,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
   * Creating scheduled snapshots policies per volume
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a seperate device
-* Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. (TBD: Point to documentation on how the signature can be erased drives can be reused)
+* Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. 
+  (TBD: Point to documentation on how the signature can be erased drives can be reused)
 * Per volume cache attributes for shared volumes
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
@@ -40,6 +41,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
+* Add schduler information in `pxctl status` display
+* TBD: Add info about cloudvolumes CLI
 
 ### Issues addressed
 
@@ -74,7 +77,10 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4814 - Synchronize snapshot operations per node
 * PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
 * PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
-* PWX-
+* PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
+* PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster
+* PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number of volume inspects are done
+
 
 ### Errata
 
