@@ -67,7 +67,7 @@ spec:
   portworxVolume:
     volumeID: testvol
 ```
-Above `PersistentVolume` references an existing Portworx volume `testvol` created using pxctl. Notice that it also has labels. We'll soon see how they can be useful.
+Above `PersistentVolume` references an existing Portworx volume `testvol` (Notice that metadata.name and spec.portworxVolume.volumeID must be volume-name-or-ID)  created using pxctl.Notice that it also has labels. We'll soon see how they can be useful.
 
 #### Creating PersistentVolumeClaim
 
