@@ -57,6 +57,10 @@ kubect apply -f px-spec.yaml
 
 {% include k8s-monitor-install.md %}
 
+### Corelating EBS volumes with Portworx nodes
+
+{% include asg/cli.md list="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive list" inspect="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal" %}
+
 ## Deploy a sample application
 
 Now that you have Portworx installed, checkout various examples of [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).
