@@ -11,7 +11,7 @@ meta-description: "Explore the CLI reference guide for taking snapshots of conta
 {:toc}
 
 #### PX version 1.2
-To know Portworx snapshots CLI Reference, see [Snapshot 1.2](/control/snapshots-1.2.html).
+To know Portworx snapshots CLI Reference, see [Snapshot 1.2](/control/snap-1.2.html).
 
 #### PX version 1.3 and higher
-To know Portworx snapshots CLI Reference, see [Snapshot 1.3](/control/snapshots-1.3.html).
+To know Portworx snapshots CLI Reference, see [Snapshot 1.3](/control/snap-1.3.html).
