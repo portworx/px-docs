@@ -34,11 +34,11 @@ Instructions on generating the Portworx spec for Kubernetes are available [here]
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-vault-credentials-to-configjson).
 
-### Docker & Docker plugin users
+### Other users
 
-If you are installing Portworx as a Docker container or a plugin,
+During installation,
 
-1. Use `-secret_type vault -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as vault and the cluster-wide secret ID.
+1. Use argument `-secret_type vault -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as vault and the cluster-wide secret ID.
 2. Use `-e` docker option to expose the [Portworx vault environment variables](#portworx-vault-environment-variables)
 
 If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#adding-vault-credentials-to-configjson).

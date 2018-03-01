@@ -442,7 +442,7 @@ No new features in 1.2.1. This is a patch release.
 * [AWS Auto-scaling integration with Portworx](/cloud/aws/asg.html) managing EBS volumes for EC2 instances in AWS ASG 
 * [Multi-cloud Backup and Restore](/cloud/backups.html) of Portworx Volumes 
 * [Encrypted Volumes](/manage/encrypted-volumes.html) with Data-at-rest and Data-in-flight encryption
-* [Docker V2 Plugin Support](/scheduler/docker/docker-plugin.html)
+* Docker V2 Plugin Support
 * [Prometheus Integeration](/maintain/monitoring/prometheus/index.html)
 * [Hashicorp Vault](/secrets/portworx-with-vault.html), [AWS KMS integration](/secrets/portworx-with-aws-kms.html) and 
   Docker Secrets Integration

@@ -7,6 +7,7 @@ redirect_from:
  - /runpx.html
  - /run-with-docker.html
  - /scheduler/docker/install-px-docker-service.html
+ - /scheduler/docker/docker-plugin.html
 ---
 
 * TOC
