@@ -398,5 +398,3 @@
       url: https://katacoda.com/portworx/scenarios/deploy-px-k8s
     - title: Persistent Volumes on Kubernetes
       url: https://katacoda.com/portworx/scenarios/px-k8s-vol-basic
-    - title: SQL Server High-Availability with Kubernetes
-      url: https://katacoda.com/portworx/scenarios/px-k8s-sql-ha
