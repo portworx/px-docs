@@ -392,3 +392,11 @@
       url: /video/sql-server.html
     - title: SQL Server on Kubernetes
       url: /video/sql-server-on-k8s.html
+  - title: Live Sandbox Demos
+    folderitems:
+    - title: Portworx on Kubernetes
+      url: https://katacoda.com/portworx/scenarios/deploy-px-k8s
+    - title: Persistent Volumes on Kubernetes
+      url: https://katacoda.com/portworx/scenarios/px-k8s-vol-basic
+    - title: SQL Server High-Availability with Kubernetes
+      url: https://katacoda.com/portworx/scenarios/px-k8s-sql-ha
