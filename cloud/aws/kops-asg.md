@@ -57,7 +57,7 @@ kubect apply -f px-spec.yaml
 
 {% include k8s-monitor-install.md %}
 
-### Co-relating EBS volumes with Portworx nodes
+### Corelating EBS volumes with Portworx nodes
 
 {% include asg/cli.md %}
 
