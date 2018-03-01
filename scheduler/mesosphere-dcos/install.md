@@ -64,7 +64,7 @@ With PX Enterprise you can increase the number of nodes in the PX Cluster to a v
 
 ![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
->**Note:**<br/>For a full list of installtion options, please look [here](/runc/options.html#Options).
+>**Note:**<br/>For a full list of installtion options, please look [here](/runc/options.html#opts).
 
 #### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can

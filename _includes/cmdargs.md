@@ -1,3 +1,4 @@
+<a name="opts"></a>
 **Options**
 
 ```
