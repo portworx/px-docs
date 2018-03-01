@@ -42,7 +42,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
-* TBD: Add info about cloudvolumes CLI
+* Add info about cloudvolumes CLI [k8s](https://docs.portworx.com/cloud/aws/kops-asg.html#corelating-ebs-volumes-with-portworx-nodes) [others](https://docs.portworx.com/cloud/aws/asg.html#corelating-ebs-volumes-with-portworx-nodes)
 
 ### Issues addressed
 
