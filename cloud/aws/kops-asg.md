@@ -59,7 +59,7 @@ kubect apply -f px-spec.yaml
 
 ### Corelating EBS volumes with Portworx nodes
 
-{% include asg/cli.md %}
+{% include asg/cli.md list="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive list" inspect="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal" %}
 
 ## Deploy a sample application
 

@@ -8,7 +8,9 @@ and their attachment information.
 Run the following command to display all the cloud drives being used by Portworx.
 
 ```
-# /opt/pwx/bin/pxctl clouddrive list
+
+{{ include.list }}
+
 Cloud Drives Summary
         Number of nodes in the cluster:  3
         Number of drive sets in use:  3
@@ -27,7 +29,8 @@ Drive Set List
 Run the following command to display more information about the drives attached on a node.
 
 ```
-# /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
+
+{{ include.inspect }}
 
 Drive Set Configuration
         Number of drives in the Drive Set:  2
