@@ -184,7 +184,7 @@ $ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/p
 # 3: Remove binary files
 $ sudo rm -fr /opt/pwx
 
-# 4: [OPTIONAL] Remove configuration files
+# 4: [OPTIONAL] Remove configuration files. Doing this means UNRECOVERABLE DATA LOSS.
 $ sudo rm -fr /etc/pwx
 ```
 
