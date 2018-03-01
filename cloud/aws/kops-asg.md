@@ -57,6 +57,10 @@ kubect apply -f px-spec.yaml
 
 {% include k8s-monitor-install.md %}
 
+### Co-relating EBS volumes with Portworx nodes
+
+{% include asg/cli.md %}
+
 ## Deploy a sample application
 
 Now that you have Portworx installed, checkout various examples of [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).

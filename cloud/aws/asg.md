@@ -146,6 +146,10 @@ When you scale the cluster down, the EBS volume (if any) associated with this in
 
 In the case of ASG, if you want to scale down your PX cluster, you will not be able to use methods mentioned in [Scale-Down Nodes](/maintain/scale-down.html#removing-a-functional-node-from-a-cluster). You can still reduce the size of your Auto Scaling Group, while making sure to maintain PX cluster quorum.
 
+## Co-relating EBS volumes with Portworx nodes
+
+{% include asg/cli.md %}
+
 ## Note
 
 1. When starting a PX cluster with AWS Auto Scaling, you will not be able to use this cluster's configuraion on any other nodes which are not started by ASG.
