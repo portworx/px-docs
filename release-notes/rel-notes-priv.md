@@ -35,7 +35,6 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
   * Added command `pxctl cloud list` to list all the drives created via ASG
 * Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
-* Object store (S3) support - Beta
 
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
