@@ -45,7 +45,7 @@ Below are all parameters that can be given in the query string.
 | cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
 | key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
 | acl    | ACL token value used for Consul authentication.                                                                                       | <var>acl=398073a8-5091-4d9c-871a-bbbeb030d1f6</var>        |
-| e      | Comma-separated list of environment variables that will be exported to portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/runc/options.html#environment-variables).
+| e      | Comma-separated list of environment variables that will be exported to portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/runc/options.html#env-variables).
                                                       | <var>e=MYENV1=myvalue1,MYENV2=myvalue2</var> |
 
 
