@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Upgrade Portworx on Kubernetes"
+title: "Upgrade Portworx to 1.3 on Kubernetes"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
