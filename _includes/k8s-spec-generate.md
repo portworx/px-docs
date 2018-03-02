@@ -1,8 +1,6 @@
-To generate the spec file, head on to [https://install.portworx.com](https://install.portworx.com) and fill in the parameters. When filing the _kbver_ (Kubernetes version) on the page, use output of: 
+To generate the spec file for the stable 1.2 release, head on to [https://install.portworx.com](https://install.portworx.com).
 
-```
-kubectl version --short | awk -Fv '/Server Version: /{print $3}'
-```
+To generate the spec file for the latest 1.3 release, head on to [http://install.portworx.com:8080](http://install.portworx.com:8080).
 
 Alternately, you can use curl to generate the spec as described in [Generating Portworx Kubernetes spec using curl](/scheduler/kubernetes/px-k8s-spec-curl.html).
 
