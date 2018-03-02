@@ -13,6 +13,99 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 {:toc}
 
 
+## 1.3.0 
+
+Upgrade Note 1: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
+
+Upgrade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+
+Upgrade Note 3: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
+
+### Feature updates and noteworthy changes
+
+* Volume create command additions to include volume clone command and integrate snap commands
+* Improved snapshot workflows 
+  * Clones - full volume copy created from a snapshot
+  * Changes to snapshot CLI.
+  * Creating scheduled snapshots policies per volume
+* Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
+* Improved performance for database workloads by separating transaction logs to a seperate journal device
+* Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. 
+* Per volume cache attributes for shared volumes
+* https support for API end-points
+* Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
+  * Added command `pxctl cloud list` to list all the drives created via ASG
+* Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
+
+### New CLI Additions and changes to existing ones
+* Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
+* Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
+* Add schduler information in `pxctl status` display
+* Add info about cloudvolumes CLI [k8s](https://docs.portworx.com/cloud/aws/kops-asg.html#corelating-ebs-volumes-with-portworx-nodes) , [others](https://docs.portworx.com/cloud/aws/asg.html#corelating-ebs-volumes-with-portworx-nodes)
+* `pxctl service add --journal -d <device>` to add journal device support
+
+### Issues addressed
+
+* PWX-4518 - Add a confirmation prompt for `pxctl volume delete` operations
+* PWX-4655 - Improve "PX Cluster Not In Quorum" Message in `pxctl status` to give additional information. 
+* PWX-4504 - Show all the volumes present in the node in the CLI
+* PWX-4475 - Parse io_profile in inline volume spec
+* PWX-4479 - Fix io_priority versions when labeling cloudsnaps
+* PWX-4378 - Add read/write latency stats to the volume statistics
+* PWX-4923 - Add vol_ prefix to read/write volume latency statistics
+* PWX-4288 - Handle app container restarts attached to a shared volume if the mountpath 
+             was unmounted via unmount command
+* PWX-4372 - Gracefully handle trial license expiry and PX cluster reinstall
+* PWX-4544 - PX OCI install is unable to proceed with aquasec container installed
+* PWX-4531 - Add OS Distribution and Kernel version display in `pxctl status`
+* PWX-4547 - cloudsnap display catalog with volume name hits "runtime error: index out of range"
+* PWX-4585 - handle kvdb server timeouts with improved retry mechanism
+* PWX-4665 - Do not allow drive add to a pool if a rebalance operation is already in progress
+* PWX-4691 - Do not allow snapshots on down nodes or if the node is maintenance mode
+* PWX-4397 - Set the correct zone information for all replica-sets
+* PWX-4375 - Add `pxctl upgrade` support for OCI containers
+* PWX-4733 - Remove Swarm Node ID check dependencies for PX bring up
+* PWX-4484 - Limit replication factor increases to a limit of three at a time within a cluster and one per node
+* PWX-4090 - Reserve space in each pool to handle rebalance operations
+* PWX-4544 - Handle ./aquasec file during OCI-Install so PX can be installed in environments with aquasec
+* PWX-4497 - Enable minio to mount shared volumes
+* PWX-4551 - Improve `pxctl volume inspect` to show pools on which volumes are allocated, 
+             replica nodes and replication add
+* PWX-4884 - Prevent replication factor increases if all the nodes in the cluster are not running 1.3.0
+* PWX-4504 - Show all the volumes present on a node in CLI with a `--node` option
+* PWX-4824 - `pxctl volume inspect` doesn't show replication set information properly when one ndoe is out of quorum
+* PWX-4784 - Support SELinux in 4.12.x kernels and above by setting SELinux context correctly
+* PWX-4812 - Handle Kernel upgrades correctly
+* PWX-4814 - Synchronize snapshot operations per node
+* PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
+* PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
+* PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
+* PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster
+* PWX-4777 - Fix issues with `pxctl volume inspect` on shared volumes hanging when a large number 
+             of volume inspects are done
+* PWX-4525 - `pxctl status` shows invalid cluster summary in some nodes when performing an upgrade from 1.2 to 1.3
+* PWX-3071 - Provide ability to force detach a remote mounted PX volume from a single node when node is down
+
+
+
+### Errata
+
+* PWX-3982 After putting a node into maintenance mode, adding drives, and then running "pxctl service m --exit", the message "Maintenance operation is in progress, cancel operation or wait for completion" doesn't specify which operation hasn't completed. Workaround: Use pxctl to query the status of all three drive operations (add, replace, rebalance). pxctl then reports which drive operations are in progress and allows exiting from maintenance mode if all maintenance operations are completed.
+
+* PWX-4016 When running under Kubernetes, adding a node label for a scheduled cloudsnap fails with the error "Failed to update k8s node". A node label isn't needed for cloudsnaps because they are read-only and used only for backup to the cloud.
+
+* PWX-4021 In case of a failure while a read-only snapshot create operation is in progress, Portworx might fail to come back up. This can happen if the failure coincides with snapshot creation's file system freeze step, which is required to fence incoming IOs during the operation. To recover from this issue, reboot the node.
+
+* PWX-4027 Canceling a service drive replace operation fails with the message "Replace cancel failed - Not in progress". However, if you try to exit maintenance mode, the status message indicates that a maintenance operation is in progress. Workaround: Wait for the drive replace operation to finish. The replace operation might be in a state where it can't be canceled. Cancel operations are performed when possible.
+
+* PWX-4039 When running Ubuntu on Azure, an XFS volume format fails. Do not use XFS volumes when running Ubuntu on Azure.
+
+* PWX-4043 When a Portworx POD gets deleted in Kubernetes, no alerts are generated to indicate the POD deletion via kubectl.
+
+* PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
+
+* Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
+
 ## 1.2.22.0
 
 * Support SELinux enable in kernels 4.12.x and above
