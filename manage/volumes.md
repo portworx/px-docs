@@ -15,29 +15,7 @@ meta-description: "Create, manage and inspect storage volumes with pxctl CLI. Di
 
 To create and manage volumes, use `pxctl volume`. You can use the created volumes directly with Docker with the `-v` option.
 
-```
-NAME:
-   pxctl volume - Manage volumes
-
-USAGE:
-   pxctl volume command [command options] [arguments...]
-
-COMMANDS:
-     create, c             Create a volume
-     list, l               List volumes in the cluster
-     update                Update volume settings
-     ha-update, u          Update volume HA level
-     snap-interval-update  Update volume configuration
-     inspect, i            Inspect a volume
-     requests              Show all pending requests
-     delete, d             Delete a volume
-     stats, st             Volume Statistics
-     alerts, a             Show volume related alerts
-     import                Import data into a volume
-
-OPTIONS:
-   --help, -h  show help
-```
+{% include pxctl/volume/volume-help-1.3.md %}
 
 ## Create volumes
 Portworx creates volumes from the global capacity of a cluster. You can expand capacity and throughput by adding a node to the cluster. Portworx protects storage volumes from hardware and node failures through automatic replication.
@@ -72,32 +50,7 @@ Set policies on a volume through the options parameter.  These options can also 
 
 Show the available options through the --help command, as shown below:
 
-```
-# pxctl volume create --help
-NAME:
-   pxctl volume create - Create a volume
-
-USAGE:
-   pxctl volume create [command options] volume-name
-
-OPTIONS:
-   --shared                             make this a globally shared namespace volume
-   --passphrase value                   passphrase to use for the PBKDF2 function
-   --label pairs, -l pairs              list of comma-separated name=value pairs
-   --size value, -s value               volume size in GB (default: 1)
-   --fs value                           filesystem to be laid out: none|xfs|ext4 (default: "ext4")
-   --block_size size, -b size           block size in Kbytes (default: 32)
-   --repl factor, -r factor             replication factor [1..3] (default: 1)
-   --scale value, --sc value            auto scale to max number [1..1024] (default: 1)
-   --io_priority value, --iop value     IO Priority: [high|medium|low] (default: "low")
-   --sticky                             sticky volumes cannot be deleted until the flag is disabled [on | off]
-   --snap_interval min, --si min        snapshot interval in minutes, 0 disables snaps (default: 0)
-   --daily hh:mm, --sd hh:mm            daily snapshot at specified hh:mm
-   --weekly value, --sw value           weekly snapshot at specified weekday@hh:mm
-   --monthly value, --sm value          monthly snapshot at specified day@hh:mm
-   --aggregation_level level, -a level  aggregation level: [1..3 or auto] (default: "1")
-   --nodes value                        comma-separated Node Id(s)
-```
+{% include pxctl/volume/volume-create-help-1.3.md %}
 
 ### Create with Docker
 All `docker volume` commands are reflected into Portworx storage. For example, a `docker volume create` command provisions a storage volume in a Portworx storage cluster.
@@ -120,16 +73,16 @@ PX supports passing the volume spec inline along with the volume name.  This is 
 For example, a PX inline spec can be specified as the following:
 
 ```
-# docker volume create -d pxd io_priority=high,size=10G,repl=3,name=demovolume
+# docker volume create -d pxd io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume
 ```
 
 This is useful when you need to create a volume dynamically while using docker run.  For example, the following command will create a volume and launch the container dynamically:
 
 ```
-# docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,name=demovolume:/data busybox sh
+# docker run --volume-driver pxd -it -v io_priority=high,size=10G,repl=3,snap_schedule="periodic=60#4;daily=12:00#3",name=demovolume:/data busybox sh
 ```
 
-The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3 and a IO priority level of 3 and start the busybox container.
+The above command will create a volume called demovolume with an initial size of 10G, HA factor of 3, snap scheudle with periodic and daily snapshot creation and a IO priority level of high and start the busybox container.
 
 Each spec key must be comma separated.  The following are supported key value pairs:
 
@@ -141,6 +94,7 @@ Block size       - bs=[4096...]
 Shared volume    - shared=true
 File System      - fs=[xfs|ext4]
 Encryption       - passphrase=secret
+snap_schedule    - "periodic=mins#k;daily=hh:mm#k;weekly=weekday@hh:mm#k;monthly=day@hh:mm#k" where k is the number of snapshots to retain.
 ```
 
 These inline specs can be passed in through the scheduler application template.  For example, below is a snippet from a marathon configuration file:
@@ -163,132 +117,71 @@ To use Portworx volumes across nodes and multiple containers, see [Shared Volume
 ## Inspect volumes
 Volumes can be inspected for their settings and usage using the `pxctl volume inspect` sub menu.
 
-```
-# pxctl volume inspect v1
-Volume  :  774553971874590484
-        Name                     :  v1
-        Size                     :  1000 GiB
-        Format                   :  ext4
-        HA                       :  1
-        IO Priority              :  LOW
-        Shared                   :  no
-        Status                   :  up
-        State                    :  Attached: 5533acd1-655e-4247-a780-3272bfc863fd
-        Device Path              :  /dev/pxd/pxd774553971874590484
-        Reads                    :  94
-        Reads MS                 :  0
-        Bytes Read               :  606208
-        Writes                   :  2448
-        Writes MS                :  1842492
-        Bytes Written            :  158642176
-        IOs in progress          :  0
-        Bytes used               :  139 MiB
-        Replica sets on nodes:
-                Set  0
-                        Node     :  172.31.8.91
-                Set  1
-                        Node     :  172.12.8.92
-```
+{% include pxctl/volume/volume-inspect-example.md %}
 
 You can also inspect multiple volumes in one command.
 
-To inspect the volume in `json` format:
+To inspect the volume in `json` format, use the `-j` flag. Following is a sample output of:
 
-```
-# pxctl -j volume inspect v1
-```
-
-```json
-[{
- "id": "774553971874590484",
- "source": {
-  "parent": "",
- },
- "readonly": false,
- "locator": {
-  "name": "v1"
- },
- "ctime": "2016-12-17T18:47:07Z",
- "spec": {
-  "ephemeral": false,
-  "size": "1073741824000",
-  "format": "ext4",
-  "block_size": "32768",
-  "ha_level": "1",
-  "cos": "low",
-  "dedupe": false,
-  "snapshot_interval": 0,
-  "shared": false,
-  "replica_set": {
-
-  },
-  "aggregation_level": 1,
-  "encrypted": false,
-  "passphrase": "",
-  "snapshot_schedule": ""
- },
- "usage": "145285120",
- "last_scan": "2016-12-17T18:47:07Z",
- "format": "ext4",
- "status": "up",
- "state": "attached",
- "attached_on": "5533acd1-655e-4247-a780-3272bfc863fd",
- "device_path": "/dev/pxd/pxd774553971874590484",
- "attach_path": [
-  "/var/lib/osd/mounts/v1"
- ],
- "replica_sets": [
-  {
-   "nodes": [
-    "5533acd1-655e-4247-a780-3272bfc863fd"
-   ]
-  }
- ],
- "error": "",
- "runtime_state": [
-  {
-   "runtime_state": {
-    "FullResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-    "ID": "0",
-    "ReadQuorum": "1",
-    "ReadSet": "[0]",
-    "ReplicaSetCurr": "[0]",
-    "ReplicaSetNext": "[0]",
-    "ResyncBlocks": "[{0 0} {-1 0} {-1 0} {-1 0} {-1 0}]",
-    "RuntimeState": "clean",
-    "TimestampBlocksPerNode": "[0 0 0 0 0]",
-    "TimestampBlocksTotal": "0",
-    "WriteQuorum": "1",
-    "WriteSet": "[0]"
-   }
-  }
- ],
- "secure_device_path": "",
- "background_processing": false
-}]
-```
-
-Note the use of the `-j` flag.
+{% include pxctl/volume/volume-inspect-json-example.md %}
 
 ## Volume snapshots
+
 You can take snapshots of PX volumes.  Snapshots are thin and do not take additional space.  PX snapshots use branch-on-write so that there is no additional copy when a snapshot is written to.  This is done through B+ Trees.
 
+#### PX version 1.3 and higher
+
+{% include pxctl/volume/volume-snap-help-1.3.md %}
+
+Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
+
+#### PX version 1.2
+
+{% include pxctl/volume/volume-snap-help-1.2.md %}
+
+Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`
+
+## Volume Clone
+
+#### PX version 1.3 and higher
+
+In order to create a volume clone from volume/snapshot, Use `pxctl volume clone` command.
 ```
-# pxctl snap -h
 NAME:
-   pxctl snap - Manage volume snapshots
+   pxctl volume clone - Create a clone volume
 
 USAGE:
-   pxctl snap command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-     list, l    List volume snapshots in the cluster
-     delete, d  Delete a volume snapshot
+   pxctl volume clone [command options] volume-name-or-ID
 
 OPTIONS:
-   --help, -h  show help
+   --name value             user friendly name
+   --label pairs, -l pairs  list of comma-separated name=value pairs
 ```
 
-Snapshot volumes can be used as any other regular volume.  For example, they can be passed into `docker run -v snapshot:/mount_path`.
+In the below example, `myvol_clone` is the clone from the parent volume `myvol`
+```
+# pxctl volume clone -name myvol_clone myvol
+Volume clone successful: 55898055774694370
+```
 
+## Volume Restore
+
+#### PX version 1.3 and higher
+
+In order to restore a volume from snapshot, Use `pxctl volume restore` command.
+```
+NAME:
+   pxctl volume restore - Restore volume from snapshot
+
+USAGE:
+   pxctl volume restore [command options] volume-name-or-ID
+
+OPTIONS:
+   --snapshot value, -s value  snapshot-name-or-ID
+```
+
+In the below example parent volume `myvol` is restored from its snapshot `mysnap`. Make sure volume is detached in order to restore from the snapshot.
+```
+# pxctl volume restore --snapshot mysnap myvol
+Successfully started restoring volume myvol from mysnap.
+```

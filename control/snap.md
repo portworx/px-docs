@@ -10,58 +10,8 @@ meta-description: "Explore the CLI reference guide for taking snapshots of conta
 * TOC
 {:toc}
 
-### Snapshot Operations
-```
-sudo /opt/pwx/bin/pxctl snap --help
-NAME:
-   pxctl snap - Manage volume snapshots
+#### PX version 1.2
+To know Portworx snapshots CLI Reference, see [Snapshot 1.2](/control/snap-1.2.html).
 
-USAGE:
-   pxctl snap command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-     list, l    List volume snapshots in the cluster
-     delete, d  Delete a volume snapshot
-
-OPTIONS:
-   --help, -h  show help
-```
-#### pxctl snap create
-`pxctl snap create` creates a snapshot of a volume. The different options and ways to use are shown below:
-```
-sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap1_on_vQuorum1 --label temp=true,cluster=devops
-Volume successfully snapped: 376113877104406866
-sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap2_on_vQuorum1 --label temp=true,cluster=production
-Volume successfully snapped: 1097649911014990908
-sudo /opt/pwx/bin/pxctl snap create vQuorum1 --name Snap3_on_vQuorum1 --label temp=false,cluster=production --readonly
-Volume successfully snapped: 118252956373660375
-```
-* Examples 1, 2 show how could you use labels which can then be used to filter your snapshot list in the display
-* Example 3 shows how to make a snapshot readonly
-
-#### pxctl snap list
-`pxctl snap list` lists all snapshots:
-```
-sudo /opt/pwx/bin/pxctl snap list
-ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-118252956373660375      Snap3_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-```
-To list snapshots based on filter values:
-```
-sudo /opt/pwx/bin/pxctl snap list --label temp=true
-ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-1097649911014990908     Snap2_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-sudo /opt/pwx/bin/pxctl snap list --label cluster=devops
-ID                      NAME                    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     SCALE   STATUS
-376113877104406866      Snap1_on_vQuorum1       50 GiB  2       no      no              LOW             1       up - detached
-```
-#### pxctl snap delete
-`pxctl snap delete` deletes snapshots (make sure they are detached through host commands):
-```
-sudo /opt/pwx/bin/pxctl snap delete Snap3_on_vQuorum1
-Snapshot Snap3_on_vQuorum1 successfully deleted.
-```
+#### PX version 1.3 and higher
+To know Portworx snapshots CLI Reference, see [Snapshot 1.3](/control/snap-1.3.html).
