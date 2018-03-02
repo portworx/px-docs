@@ -29,6 +29,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 | snap_schedule     	| Snapshot schedule (PX 1.3 and higher). {% include snap-schedule-format.md %}          	| snap_schedule: periodic=60,10<br><br>snap_schedule: daily=12:00,4<br><br>snap_schedule: weekly=sunday@12:00,2<br><br>snap_schedule: monthly=15@12:00     	|
 | snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60                                                                                                                                                                                                      	| snap_interval: "120"     	|
 | sticky     	| Flag to create sticky volumes that cannot be deleted until the flag is disabled                                                                                                                                                                                                      	| sticky: "true"     	|
+| journal     	| (PX 1.3 and higher) Flag to indicate if you want to use journal device for the volume's metadata. This will use the journal device that you used when installing Portworx. As of PX version 1.3, it is recommended to use a journal device to absorb PX metadata writes. Default: false                                                                                                                                                                                             	| journal: "true"     	|
 
 ### Provision volumes
 #### Step1: Create Storage Class.

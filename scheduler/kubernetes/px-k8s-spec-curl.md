@@ -44,6 +44,7 @@ Below are all parameters that can be given in the query string.
 | z      | Instructs PX to run in zero storage mode on Kubernetes master.                                                                        | <var>z=true</var>                                          |
 | f      | Instructs PX to use any available, unused and unmounted drives or partitions. PX will never use a drive or partition that is mounted. | <var>f=true</var>                                          |
 | st     | Select the secrets type (_aws_, _kvdb_ or _vault_)                                                                                    | <var>st=vault</var>                                        |
+| j      | (PX 1.3 and higher) Specify a separate block device as a journaling device for px metadata.                                                               | <var>j=/dev/sde</var>                                      |
 |        | <center>KVDB CONFIGURATION PARAMETERS</center>                                                                                        |                                                            |
 | pwd    | Username and password for ETCD authentication in the form user:password                                                               | <var>pwd=username:password</var>                           |
 | ca     | Location of CA file for ETCD authentication.                                                                                          | <var>ca=/path/to/server.ca</var>                           |
