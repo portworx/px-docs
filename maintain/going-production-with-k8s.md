@@ -275,6 +275,9 @@ $ kubectl edit clusterrole node-get-put-list-role
 
 Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
+>**Note:**<br/> Please remember to setup cadvisor and nodexporter properly so they mount the '/' partition as ro:slave.
+Refer to this [link](https://docs.portworx.com/maintain/monitoring/#using-node_exporter-and-cadvisor-alongside-portworx) for more information
+
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx's production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
   * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
