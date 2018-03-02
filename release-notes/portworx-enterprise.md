@@ -23,19 +23,20 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 
 ### Feature updates and noteworthy changes
 
-* Volume create command additions to include volume clone command and integrate snap commands
 * Improved snapshot workflows 
-  * Clones - full volume copy created from a snapshot
-  * Changes to snapshot CLI.
-  * Creating scheduled snapshots policies per volume
+  * Separate writeable clones from read-only snapshots.
+  * Improved snapshot CLI
+  * Improved snapshot schedules
+  * Volume create command additions to include volume clone command and integrate snapshote commands
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
-* Improved performance for database workloads by separating transaction logs to a seperate journal device
+* Improved performance for database workloads by separating transaction logs to a separate journal device
+* Improved Replication 2 and 3 streaming write performance.
 * Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. 
 * Per volume cache attributes for shared volumes
-* https support for API end-points
+* HTTPS support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
-  * Added command `pxctl cloud list` to list all the drives created via ASG
-* Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
+  * Add CLI to manage cloud drives
+* Integrated KV store eliminates need for external KV store. Early Access - Limited Release for small clusters less than 10 nodes
 
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
@@ -48,7 +49,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 
 * PWX-4518 - Add a confirmation prompt for `pxctl volume delete` operations
 * PWX-4655 - Improve "PX Cluster Not In Quorum" Message in `pxctl status` to give additional information. 
-* PWX-4504 - Show all the volumes present in the node in the CLI
+* PWX-4504 - Show all the volumes that have data in a node in the CLI
 * PWX-4475 - Parse io_profile in inline volume spec
 * PWX-4479 - Fix io_priority versions when labeling cloudsnaps
 * PWX-4378 - Add read/write latency stats to the volume statistics
