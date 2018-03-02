@@ -16,7 +16,7 @@ sidebar: home_sidebar
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade.html#docker-to-oci).
+You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade-1.3.html#docker-to-oci).
 
 To upgrade, run the below curl command.
 
@@ -131,4 +131,4 @@ Things to keep in mind when generating the new spec file:
 
 Since Portworx v1.2.11, the recommended method of installing Portworx is using OCI. If your Portworx DaemonSet image is _portworx/oci-monitor_, you are already running as OCI and this section is not relavent to your cluster.
 
-If your Portworx DaemonSet image is _portworx/px-enterprise_, you are running Portworx as Docker containers. It is recommended you first [migrate to OCI using these steps](/scheduler/kubernetes/upgrade.html#docker-to-oci). Once migrated to OCI, you can use the [OCI upgrade instructions](/scheduler/kubernetes/upgrade.html#oci-upgrade).
+If your Portworx DaemonSet image is _portworx/px-enterprise_, you are running Portworx as Docker containers. It is recommended you first [migrate to OCI using these steps](/scheduler/kubernetes/upgrade-1.3.html#docker-to-oci). Once migrated to OCI, you can use the [OCI upgrade instructions](/scheduler/kubernetes/upgrade-1.3.html#oci-upgrade).
