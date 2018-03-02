@@ -29,8 +29,9 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
   * Improved snapshot schedules
   * Volume create command additions to include volume clone command and integrate snapshote commands
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
-* Improved performance for database workloads by separating transaction logs to a separate journal device
-* Improved Replication 2 and 3 streaming write performance.
+* Support for separate journal device for Portworx transaction logs.
+* Improved performance for database workloads with journal device
+* Improved streaming write performance for replication factor 2 and 3 volumes.
 * Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. 
 * Per volume cache attributes for shared volumes
 * HTTPS support for API end-points
@@ -41,7 +42,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 ### New CLI Additions and changes to existing ones
 * Added `pxctl service node-wipe` to wipe PX metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
-* Add schduler information in `pxctl status` display
+* Add schduler, OS, kernel information in `pxctl status` display
 * Add info about cloudvolumes CLI [k8s](https://docs.portworx.com/cloud/aws/kops-asg.html#corelating-ebs-volumes-with-portworx-nodes) , [others](https://docs.portworx.com/cloud/aws/asg.html#corelating-ebs-volumes-with-portworx-nodes)
 * `pxctl service add --journal -d <device>` to add journal device support
 
