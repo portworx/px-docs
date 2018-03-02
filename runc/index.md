@@ -42,13 +42,25 @@ The installation and setup of PX OCI bundle is a 3-step process:
 
 <a name="install_step1"></a>
 #### Step 1: Install the PX OCI bundle
+
 Portworx provides a Docker based installation utility to help deploy the PX OCI
 bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
+##### To get the stable 1.2 release
 ```bash
-# Get latest stable release tag (ie. portworx/px-enterprise:1.2.22)
 $ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+
+# Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
+$ sudo docker run --entrypoint /runc-entry-point.sh \
+    --rm -i --privileged=true \
+    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+    $latest_stable
+```
+
+#####  To get the latest 1.3 release
+```bash
+$ latest_stable=$(curl -fsSL 'http://install.portworx.com:8080?type=dock&stork=false' | awk '/image: / {print $2}')
 
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 $ sudo docker run --entrypoint /runc-entry-point.sh \
