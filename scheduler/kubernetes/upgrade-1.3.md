@@ -14,7 +14,7 @@ sidebar: home_sidebar
 <a name="oci-upgrade"></a>
 ## Upgrading Portworx
 
-This guide describes the procedure to upgrade Portworx running as OCI container using our opensource project [talisman](https://github.com/portworx/talisman).
+This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
 You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade.html#docker-to-oci).
 
