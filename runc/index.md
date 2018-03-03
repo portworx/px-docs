@@ -47,7 +47,7 @@ Portworx provides a Docker based installation utility to help deploy the PX OCI
 bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
-##### To get the stable 1.2 release
+##### To get the 1.2 release
 ```bash
 $ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
 
@@ -58,7 +58,7 @@ $ sudo docker run --entrypoint /runc-entry-point.sh \
     $latest_stable
 ```
 
-#####  To get the latest 1.3 release
+##### To get the 1.3 release
 ```bash
 $ latest_stable=$(curl -fsSL 'http://install.portworx.com:8080?type=dock&stork=false' | awk '/image: / {print $2}')
 

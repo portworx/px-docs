@@ -1,6 +1,6 @@
-To generate the spec file for the stable 1.2 release, head on to [https://install.portworx.com](https://install.portworx.com).
+To generate the spec file for the 1.2 release, head on to [1.2 install page](https://install.portworx.com).
 
-To generate the spec file for the latest 1.3 release, head on to [http://install.portworx.com:8080](http://install.portworx.com:8080).
+To generate the spec file for the 1.3 release, head on to [1.3 install page](http://install.portworx.com:8080).
 
 Alternately, you can use curl to generate the spec as described in [Generating Portworx Kubernetes spec using curl](/scheduler/kubernetes/px-k8s-spec-curl.html).
 
