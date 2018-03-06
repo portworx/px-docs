@@ -14,7 +14,7 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 
 ## Prerequisites
 
-{% include k8s-prereqs.md %}
+{% include px-prereqs.md %}
 
 **Version**
 

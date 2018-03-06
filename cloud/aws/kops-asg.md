@@ -21,7 +21,7 @@ This is a guide to setup a production ready Portworx cluster using Kubernetes (K
 
 ## Prerequisites
 
-{% include k8s-prereqs.md %}
+{% include px-prereqs.md %}
 
 **KOPS cluster in AWS**
 

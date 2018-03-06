@@ -12,6 +12,8 @@ meta-description: "You can use Portworx to provide storage for your stateful ser
 
 You can use Portworx to provide storage for your Docker Swarm services. Portworx pools your servers capacity and turns your servers or cloud instances into converged, highly available compute and storage nodes. This section describes how to deploy PX within a Docker Swarm cluster and have PX provide highly available volumes to any application deployed via Docker Swarm.
 
+## Install Portworx
+
 Below steps demonstrate how to set up a three-node cluster for [Jenkins](https://jenkins.io/) and use a Portworx volume.
 
 ### Create a volume

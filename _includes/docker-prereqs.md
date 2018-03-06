@@ -14,7 +14,7 @@ If you are running Docker v1.12, you *must* configure Docker to allow shared mou
 
 **Firewall**
 
-Ensure ports 9001-9015 are open between the Kubernetes nodes that will run Portworx.
+Ensure ports 9001-9015 are open between the nodes that will run Portworx.
 
 **NTP**
 
