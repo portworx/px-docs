@@ -442,6 +442,10 @@ None
 * Retain environment variables when PX is upgraded via `pxctl upgrade` command
 * Improve handling for encrypted scale volumes
 
+### Errata
+
+* When PX-Enterprise is run on a large number of nodes, there is potential memory leak and a few nodes show high memory usage.
+  This issue is resolved in 1.2.12.0 onwards. Workaround is to restart the PX-Enterprise container
 
 ## 1.2.8 Release notes
 
