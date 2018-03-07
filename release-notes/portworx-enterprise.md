@@ -149,6 +149,11 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
 * Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
 
+## 1.2.16.1
+
+This is a minor update which adds a new flag to limit or disable the generation of core files (`-e PXCORESIZE=<size>`). 
+A value of 0 will disable cores 
+
 
 ## 1.2.16.0
 
@@ -442,6 +447,10 @@ None
 * Retain environment variables when PX is upgraded via `pxctl upgrade` command
 * Improve handling for encrypted scale volumes
 
+### Errata
+
+* When PX-Enterprise is run on a large number of nodes, there is potential memory leak and a few nodes show high memory usage.
+  This issue is resolved in 1.2.12.0 onwards. Workaround is to restart the PX-Enterprise container
 
 ## 1.2.8 Release notes
 
