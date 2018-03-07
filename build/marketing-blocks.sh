@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BASE="${DIR}/.."
-WEBIP='138.68.21.6'
+WEBIP='portworx.com'
 
 WEBSITECONTENT=$(wget -qO- --no-check-certificate --header="Host: portworx.com" https://${WEBIP}/)
 
@@ -13,4 +13,5 @@ echo ${TOPNAV} > "${BASE}/_includes/topnav.html"
 echo ${FOOTER} > "${BASE}/_includes/footer.html"
 
 CSS=$(wget -qO "${BASE}/_sass/marketing-styles.scss" --no-check-certificate --header="Host: portworx.com" https://${WEBIP}/wp-content/themes/portworx/css/master.css)
-gsed -i '/@charset "UTF-8";/g' "${BASE}/_sass/marketing-styles.scss"
+
+gsed -ir 's/@charset "UTF-8";//' "${BASE}/_sass/marketing-styles.scss"
