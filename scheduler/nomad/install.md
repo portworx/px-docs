@@ -47,7 +47,7 @@ The following arguments to `px-runc` should be customized as per the local envir
 args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh \
                       --rm -i --privileged=true \
                       -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  \
-                      portworx/px-enterprise:1.2.12.1 --upgrade ;\
+                      portworx/px-enterprise:1.2.22 --upgrade ;\
                 /opt/pwx/bin/runc delete -f portworx; \
                 /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 \
                       -c pxcluster -f -a -d eth0 -m eth0" ]
@@ -121,7 +121,7 @@ Select the 'edit' icon on the upper right side.
 Change the `px-enterprise` tag to the desired release.
 Example:
 ```
-    ... -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.14 --upgrade
+    ... -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.22 --upgrade
 ```
 Save the job.
 Upgrade time will depend on the node configuration.
