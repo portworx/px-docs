@@ -20,7 +20,7 @@ Follow [this interactive tutorial](https://www.katacoda.com/portworx/scenarios/d
 
 ## Prerequisites
 
-{% include k8s-prereqs.md %}.
+{% include px-prereqs.md %}.
 
 ## Install
 

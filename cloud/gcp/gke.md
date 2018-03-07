@@ -15,7 +15,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 ## Prerequisites
 
-{% include k8s-prereqs.md %}
+{% include px-prereqs.md %}
 
 ## Create a GKE cluster
 Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images).

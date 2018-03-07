@@ -43,107 +43,15 @@ The installation and setup of PX OCI bundle is a 3-step process:
 <a name="install_step1"></a>
 #### Step 1: Install the PX OCI bundle
 
-Portworx provides a Docker based installation utility to help deploy the PX OCI
-bundle.  This bundle can be installed by running the following Docker container
-on your host system:
-
-##### To get the 1.2 release
-```bash
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
-
-# Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
-$ sudo docker run --entrypoint /runc-entry-point.sh \
-    --rm -i --privileged=true \
-    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    $latest_stable
-```
-
-##### To get the 1.3 release
-```bash
-$ latest_stable=$(curl -fsSL 'http://install.portworx.com:8080?type=dock&stork=false' | awk '/image: / {print $2}')
-
-# Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
-$ sudo docker run --entrypoint /runc-entry-point.sh \
-    --rm -i --privileged=true \
-    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-    $latest_stable
-```
-
->**Note:**<br/>Running the PX OCI bundle does not require Docker, but Docker will still be required to _install_ the PX OCI bundle.  If you do not have Docker installed on your target hosts, you can download this Docker package and extract it to a root tar ball and manually install the OCI bundle.
+{% include runc/runc-install-bundle.md %}
 
 #### Step 2: Configure PX under runC
 
-Now that you have downloaded and installed the PX OCI bundle, you can use the the `px-runc install` command from the bundle to configure systemd to start PX runC.
-
-The _px-runc_ command is a helper-tool that does the following:
-
-1. prepares the OCI directory for runC
-2. prepares the runC configuration for PX
-3. used by systemd to start the PX OCI bundle
-
-Installation examples:
-
-```bash
-# EXAMPLE-1: Basic installation
-$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
-    -k etcd://myetc.company.com:2379 \
-    -s /dev/xvdb -s /dev/xvdc
-
-# EXAMPLE-2: Installation configured for Kubernetes:
-$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
-    -k etcd://myetc.company.com:2379 \
-    -s /dev/xvdb -s /dev/xvdc -x kubernetes \
-    -v /var/lib/kubelet:/var/lib/kubelet:shared
-```
-
-##### Command-line arguments
-
-The following arguments can be provided to the _px-runc_ helper tool, which will in turn pass them to the PX daemon:
-
-```
-Usage: /opt/pwx/bin/px-runc <install|run> [options]
-```
-
-**Mode of operation**
-* **install**: Creates configuration files and systemd service unit file.
-* **run**: Runs Portworx in foreground; used by systemd to start the portworx service.
-
-{% include cmdargs.md %}
-
-##### Examples
-
-Using etcd:
-```
-px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
-px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
-px-runc install -k etcd://70.0.1.65:2379 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
-```
-
-Using consul:
-```
-px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2
-px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s8 -m enp0s8
-px-runc install -k consul://70.0.2.65:8500 -c MY_CID -f -a -x kubernetes -v /var/lib/kubelet:/var/lib/kubelet:shared
-```
-
-##### Modifying the PX configuration
-
-Since PX OCI bundle has _two_ configuration files, it is recommended to initially install the bundle by using the `px-runc install ...` command as described above, rather than supplying custom configuration files.
-
-After the initial installation, you can modify the following files and restart the PX runC container:
-
-* PX configuration file at `/etc/pwx/config.json` (see [details](https://docs.portworx.com/control/config-json.html)), or
-* OCI spec file at `/opt/pwx/oci/config.json` (see [details](https://github.com/opencontainers/runtime-spec/blob/master/spec.md)).
+{% include runc/runc-configure-portworx.md %}
 
 #### Step 3: Starting PX runC
-Once you install the PX OCI bundle and systemd configuration from the steps above, you can start and control PX runC directly via systemd:
 
-```bash
-# Reload systemd configurations, enable and start Portworx service
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable portworx
-$ sudo systemctl start portworx
-```
+{% include runc/runc-enable-portworx.md %}
 
 ##### Advanced usage: Interactive/Foreground mode
 Alternatively, one might prefer to first start the PX interactively (for example, to verify the configuration parameters were OK and the startup was successful), and then install it as a service:

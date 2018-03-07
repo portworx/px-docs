@@ -133,7 +133,11 @@
     - title: Docker
       folderitems:
       - title: Install
-        url: /scheduler/docker/install-standalone.html
+        folderitems:
+        - title: Standalone
+          url: /scheduler/docker/install-standalone.html
+        - title: Swarm
+          url: /scheduler/docker/install-swarm.html
       - title: Upgrade
         url: /runc/#upgrade-px-oci
       - title: How To
