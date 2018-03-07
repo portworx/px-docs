@@ -358,8 +358,6 @@
       url: /knowledgebase/faqs.html
   - title: Release Notes
     folderitems:
-    - title: About 1.x
-      url: /release-notes/portworx-1.x.html
     - title: PX-Enterprise Release Notes
       url: /release-notes/portworx-enterprise.html
     - title: Lighthouse On-Prem Release Notes
