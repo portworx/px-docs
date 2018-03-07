@@ -106,6 +106,8 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 
 * Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
 
+* When shared volumes are configured with io_profile=cms, it results in the px-ns process restarting occasionally.
+
 ## 1.2.22.0
 
 * Support SELinux enable in kernels 4.12.x and above
