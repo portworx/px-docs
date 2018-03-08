@@ -43,4 +43,4 @@ An example of a mysql deployment which uses Stork as the scheduler can be found
 
 With Stork you can create and restore snapshots of Portworx volumes from Kubernetes. Instructions to
 perform these operations can be found
-[here](https://github.com/libopenstorage/stork/tree/master#creating-snapshots)
+[here](/scheduler/kubernetes/snaps.html)
