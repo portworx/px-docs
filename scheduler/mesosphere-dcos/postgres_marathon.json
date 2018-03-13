@@ -1,0 +1,42 @@
+{
+  "id": "/postgres",
+  "cpus": 1,
+  "instances": 1,
+  "mem": 512,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "postgres:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 5432,
+          "hostPort": 5432,
+          "protocol": "tcp",
+          "name": "postgres"
+        }
+      ],
+	  "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "pxd"
+        },
+        {
+          "key": "volume",
+          "value": "size=100,repl=2,name=postgres_vol:/var/lib/postgresql/data"
+        }
+       ]
+    }
+  },
+  "env": {
+    "POSTGRES_PASSWORD": "password"
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 30,
+    "expungeAfterSeconds": 30
+  },
+  "upgradeStrategy": {
+    "maximumOverCapacity": 0,
+    "minimumHealthCapacity": 0
+  }
+}

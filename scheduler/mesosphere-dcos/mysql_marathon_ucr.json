@@ -1,0 +1,59 @@
+{
+  "id": "/mysql",
+  "cmd": "/entrypoint.sh --datadir=/mnt/mesos/sandbox/mysql",
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 256,
+  "disk": 0,
+  "gpus": 0,
+  "constraints": [],
+  "fetch": [],
+  "storeUrls": [],
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "MESOS",
+    "volumes": [
+      {
+        "containerPath": "mysql",
+        "mode": "RW",
+        "external": {
+          "size": 500,
+          "name": "mysqlvolume",
+          "provider": "dvdi",
+          "options": {
+            "dvdi/repl": "2",
+            "dvdi/driver": "pxd"
+          }
+        }
+      }
+    ],
+    "docker": {
+      "image": "mysql:5.7.12"
+    }
+  },
+  "healthChecks": [],
+  "readinessChecks": [],
+  "dependencies": [],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 30,
+    "expungeAfterSeconds": 30
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "portDefinitions": [
+    {
+      "port": 10006,
+      "protocol": "tcp",
+      "name": "default"
+    }
+  ],
+  "requirePorts": true,
+  "env": {
+    "MYSQL_ROOT_PASSWORD": "password"
+  }
+}
