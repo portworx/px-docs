@@ -1,10 +1,9 @@
 ---
 layout: page
-title: "Dynamic Portworx Volume Creation by Kubernetes Operations(KOPS)"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, KOPS, pv, persistent disk, aws, EBS
+title: "Dynamic Portworx Volume Creation by running Kubernetes on AWS Autoscaling groups (ASG)"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, aws, EBS
 sidebar: home_sidebar
-redirect_from: "/cloud/aws/kops_asg.html"
-meta-description: "This page describes how to setup a production ready Portworx cluster using Kubernetes Kops.
+meta-description: "This page describes how to setup a production ready Portworx cluster using Kubernetes on AWS Autoscaling groups (ASG).
 You will learn how to dynamically provision persistent volumes using AWS Autoscaling groups to spin up EC2 instances."
 ---
 
@@ -13,7 +12,7 @@ You will learn how to dynamically provision persistent volumes using AWS Autosca
 * TOC
 {:toc}
 
-This is a guide to setup a production ready Portworx cluster using Kubernetes (KOPS+AWS) environment that allows you to dynamically provision persistent volumes. KOPS helps you create, destroy, upgrade and maintain production-grade, highly available, Kubernetes clusters. Under the hood KOPS uses AWS Autoscaling groups (ASG) to spin up EC2 instances.
+This is a guide to setup a production ready Portworx cluster using Kubernetes on AWS Autoscaling groups (ASG). This allows you to dynamically provision persistent volumes.
 
 ## Portworx in an Auto Scaling Group
 
@@ -26,13 +25,10 @@ This is a guide to setup a production ready Portworx cluster using Kubernetes (K
 In AWS, this can be done through the security group of the VPC to which your instances belong.
 "%}
 
-**KOPS cluster in AWS**
-
-Detailed instructions on how to setup a KOPS cluster in AWS are documented [here](https://github.com/kubernetes/KOPS/blob/master/docs/aws.md).
-
 ## AWS Requirements
 
 {% include asg/aws-prereqs.md %}
+
 
 ## EBS volume template
 
@@ -47,10 +43,9 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 ### Generate the Portworx Spec
 
-When generating the spec, following parameters are important for KOPS:
-1. __AWS environment variables__: In the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the KOPS IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. If you are using instance privileges you can ignore setting the environment variables.
-
-2. __Volume template__: In the drives option (_s_), specific the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
+When generating the spec, following parameters are important:
+1. __Volume template__: In the drives option (_s_), specific the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
+2. __AWS environment variables__: If you are using instance privileges to provide AWS permissions you can ignore setting the environment variables. If you are using environment variables, in the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. 
 
 {% include k8s-spec-generate.md %}
 

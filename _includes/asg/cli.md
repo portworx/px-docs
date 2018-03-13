@@ -1,7 +1,7 @@
 Portworx when running in ASG mode provides a set of CLI commands to display the information about all EBS volumes
 and their attachment information.
 
->**Note:**Following commands are only available for PX version > 1.3
+>**Note:** Following commands are only available for PX version > 1.3
 
 #### Listing all Cloud Drives
 
