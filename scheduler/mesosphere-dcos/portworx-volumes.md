@@ -24,32 +24,10 @@ dvdcli talks to Portworx using the docker plugin API, see here to understand Por
 ### Marathon framework
 
 #### Docker containers
-Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Docker container. This would mount the Portworx volume under /data
-```
-{
-  ...
-  "container": {
-    "type": "DOCKER",
-    "docker": {
-     ...
-      "parameters": [
-        {
-          "key": "volume-driver",
-          "value": "pxd"
-        },
-        {
-          "key": "volume",
-          "value": "repl=3,size=500,name=px_vol:/data"
-        }
-      ]
-    ],
-    ...
-  }
-}
-```
-
-You can also speciy additional driver options for the volume as key=value pairs in the parameters. For example to create a
-volume with replication factor 3:
+You can specify Portworx as a volume driver in a task begin launched via Marathon as Docker container.
+You can also specify additional driver options for the volume as key=value pairs in the parameters. For example to create a
+volume with replication factor 3 and mount it under /data you would add the
+following lines in your marathon spec:
 
 ```
 {
@@ -73,39 +51,14 @@ volume with replication factor 3:
   }
 }
 ```
-
-
+An example spec file for mysql can be found [here](/scheduler/mesosphere-dcos/mysql_marathon.json)
 
 #### Mesos/UCR containers
 
-Here's how you would specify Portworx as a volume driver in a task begin launched via Marathon as Mesos/UCR container. This would mount the Portworx volume under /data
-```
-{
-  ...
-  "cmd" : ...,
-  "container" : {
-    "type": "MESOS",
-    "volumes": [
-      {
-        "containerPath": "/data",
-        "mode": "RW",
-        "external": {
-          "size": 500,
-          "name": "px_vol",
-          "provider": "dvdi",
-          "options": {
-            "dvdi/driver": "pxd"
-          }
-        }
-      }
-    ],
-    ...
-  }
-}
-```
-
+You can specify Portworx as a volume driver in a task begin launched via Marathon as Mesos/UCR container. This would mount the Portworx volume under /data
 You can also speciy additional driver options for the volume as key:value pairs. For example to create a volume with
-replication factor 3:
+replication factor 3 and mount it under /data in the container you would add the
+following lines in your marathon spec:
 
 ```
 {
@@ -132,12 +85,13 @@ replication factor 3:
   }
 }
 ```
+An example spec file for mysql can be found [here](/scheduler/mesosphere-dcos/mysql_marathon_ucr.json)
 
 #### Provisioning Volumes
 
 If the volume `px_vol` does not already exist, a new volume with default parameters will be created. The volume will be
 mounted under `/data` in the container Heres's how you can specify inline paramters for volume creation:
-See this [link](https://github.com/portworx/px-docs/blob/gh-pages/scheduler/mesosphere-dcos/inline.md) for more information
+See this [link](/scheduler/mesosphere-dcos/inline.html) for more information
 
 
 ### Custom Frameworks:

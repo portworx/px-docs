@@ -1,0 +1,50 @@
+{
+  "id": "/mysql",
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 256,
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mysql:5.7.12",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 3306,
+          "hostPort": 32000,
+          "servicePort": 10002,
+          "protocol": "tcp",
+          "name": "default"
+        }
+      ],
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "pxd"
+        },
+        {
+          "key": "volume",
+          "value": "size=100,repl=2,name=mysql_vol:/var/lib/mysql"
+        }
+      ],
+      "forcePullImage": false
+    }
+  },
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 30,
+    "expungeAfterSeconds": 30
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "requirePorts": true,
+  "env": {
+    "MYSQL_ROOT_PASSWORD": "password"
+  }
+}
