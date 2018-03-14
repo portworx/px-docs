@@ -27,11 +27,11 @@ The spec follows the following format:
     * _gp2_
     * _io1_ (For io1 volumes specifying the iops value is mandatory.)
 * __size__: This is the size of the EBS volume in GB
-* __iops__: This is the required IOs per second from the created EBS volume.
+* __iops__: This is the required IOs per second from the EBS volume.
 
 See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above parameters.
 
-### Examples
+#### Examples
 
 * `"type=gp2,size=200"`
 * `"type=gp2,size=100","type=io1,size=200,iops=1000"`

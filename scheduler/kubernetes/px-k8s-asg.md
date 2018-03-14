@@ -44,7 +44,7 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 ### Generate the Portworx Spec
 
 When generating the spec, following parameters are important:
-1. __Volume template__: In the drives option (_s_), specific the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
+1. __Volume template__: In the drives option (_s_), specify the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
 2. __AWS environment variables__: If you are using instance privileges to provide AWS permissions you can ignore setting the environment variables. If you are using environment variables, in the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. 
 
 {% include k8s-spec-generate.md %}
