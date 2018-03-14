@@ -63,8 +63,8 @@ Above command will run a Kubernetes Job that will perform following operations:
 
 * Detect the key value store that was being used for Portworx from the DaemonSet spec and wipe the Portworx cluster metadata from it.
 * Remove Portworx systemd files from all nodes.
-* Remove `/etc/pwx` and `/opt/pwx` from all nodes.
-* Wipe all metadata from block devices that Portworx would have used.
+* Removes directories `/etc/pwx` and `/opt/pwx` from all nodes.
+* Removes Portworx fingerprint data from all the storage devices used by Portworx. It also removes all the volume data from the storage devices.
 * Delete all Portworx Kubernetes spec objects.
 
 ### Portworx 1.2
