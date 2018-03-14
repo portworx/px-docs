@@ -47,8 +47,27 @@ kubectl label nodes --all px/enabled-
 
 >**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
 
-## Delete PX Cluster configuration
+## Uninstall and Delete PX Cluster configuration
+
 The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
+
+### Portworx 1.3 and higher
+
+You can use the following command to wipe your entire Portworx cluster.
+
+```
+curl -fsL http://install.portworx.com:8080/px-wipe | bash
+```
+
+Above command will run a Kubernetes Job that will perform following operations:
+
+* Detect the key value store that was being used for Portworx from the DaemonSet spec and wipe the Portworx cluster metadata from it.
+* Remove Portworx systemd files from all nodes.
+* Remove `/etc/pwx` and `/opt/pwx` from all nodes.
+* Wipe all metadata from block devices that Portworx would have used.
+* Delete all Portworx Kubernetes spec objects.
+
+### Portworx 1.2
 
 You can remove PX cluster configuration by deleting the configuration files under `/etc/pwx` directory on all nodes:
 
