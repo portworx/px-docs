@@ -47,7 +47,7 @@ kubectl label nodes --all px/enabled-
 
 >**Note:**<br/>During uninstall, the Portworx configuration files under `/etc/pwx/` directory are preserved, and will not be deleted.
 
-## Uninstall and Delete PX Cluster configuration
+## Delete PX Cluster configuration
 
 The commands used in this section are DISRUPTIVE and will lead to loss of all your data volumes. Proceed with CAUTION.
 
