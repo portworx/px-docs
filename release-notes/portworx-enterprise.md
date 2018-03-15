@@ -34,6 +34,10 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * Per volume cache attributes for shared volumes
 * https support for API end-points
 * Portworx Open-Storage scaling groups support for AWS ASG - Workflow improvements
+  * Allow specifying input EBS volumes in the format "type=gp2,size=100". (this is documented)
+  * Instead of adding labels to EBS volumes, PX now stores all the information related to them in kvdb. 
+    All the EBS volumes it creates and attaches are listed in kvdb and this information is then used to 
+    find out EBS volumes being used by PX nodes
   * Added command `pxctl cloud list` to list all the drives created via ASG
 * Integrated kvdb - Early Access - Limited Release for small clusters less than 10 nodes
 
