@@ -92,7 +92,7 @@ Please see the [config-json file definition](/control/config-json.html).
 Regardless, all data requests between the container and the PX volume driver will be handled locally on that host.
 
 ### Does Portworx support volume encryption? 
-Yes, Portworx PX-Enterprise supports data encryption-at-rest and also encryption-in-fligt as data is replicated between multiple PX nodes within a data center or across data centers or clouds. PX-Enterprise supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
+Yes, Portworx PX-Enterprise supports data encryption-at-rest and also encryption-in-flight as data is replicated between multiple PX nodes within a data center or across data centers or clouds. PX-Enterprise supports encrypted volumes and integration with key management software like Vault, AWS KMS, Kubernetes Secrets etc
 
 ### How can safely backup and restore my data with Portworx?
 Portworx PX-Enterprise supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want. 
