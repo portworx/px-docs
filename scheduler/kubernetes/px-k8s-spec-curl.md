@@ -17,11 +17,11 @@ Below is an example of using curl to generate the Portworx spec file. Review the
 ```bash
 $ VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 
-# For the stable 1.2 release
+# For the 1.3 release
 $ curl -L -o px-spec.yaml "https://install.portworx.com?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 
-# For the latest 1.3 release
-$ curl -L -o px-spec.yaml "http://install.portworx.com:8080?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
+# For the 1.2 release
+$ curl -L -o px-spec.yaml "https://install.portworx.com/v1.2?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 ```
 
 Below are all parameters that can be given in the query string.
