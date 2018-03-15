@@ -65,6 +65,9 @@ kubect apply -f px-spec.yaml
 
 ### Corelating EBS volumes with Portworx nodes
 
+Portworx when running in ASG mode provides a set of CLI commands to display the information about all EBS volumes
+and their attachment information.
+
 {% include asg/cli.md list="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive list" inspect="# kubectl exec -it $PX_POD /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal" %}
 
 ## Deploy a sample application

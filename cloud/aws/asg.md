@@ -148,6 +148,9 @@ In the case of ASG, if you want to scale down your PX cluster, you will not be a
 
 ## Corelating EBS volumes with Portworx nodes
 
+Portworx when running in ASG mode provides a set of CLI commands to display the information about all EBS volumes
+and their attachment information.
+
 {% include asg/cli.md list="# /opt/pwx/bin/pxctl clouddrive list" inspect="# /opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal" %}
 
 ## Note
