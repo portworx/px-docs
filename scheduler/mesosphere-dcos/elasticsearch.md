@@ -17,6 +17,8 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 
 Please make sure you have installed [Portworx on DCOS](/scheduler/mesosphere-dcos/install.html) before proceeding further.
 
+Running this framework requires a priveleged user that can run sudo without tty access (See [here](https://www.shell-tips.com/2014/09/08/sudo-sorry-you-must-have-a-tty-to-run-sudo)). The default user for this framework is set to `nobody`. If `'nobody` does not have the appropriate priveleges please update the user during install.
+
 The Portworx-ElasticSearch service can be found in the DC/OS catalog:
 
 ![Elasticsearch-PX in DCOS Universe](/images/elasticsearch-px-universe-001.PNG){:width="1031px" height="561px"}
