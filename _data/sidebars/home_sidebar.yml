@@ -236,6 +236,8 @@
         url: /control/cloud.html
       - title: Credentials
         url: /control/credentials.html
+      - title: CloudDrives (ASG)
+        url: /control/asg-clouddrive.html
       - title: License
         url: /control/license.html
     - title: Installation Arguments to Portworx
