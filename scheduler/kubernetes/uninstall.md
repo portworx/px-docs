@@ -56,7 +56,7 @@ The commands used in this section are DISRUPTIVE and will lead to loss of all yo
 You can use the following command to wipe your entire Portworx cluster.
 
 ```
-curl -fsL https://install.portworx.com/px-wipe | bash
+curl -fsL http://install.portworx.com:8080/px-wipe | bash
 ```
 
 Above command will run a Kubernetes Job that will perform following operations:
