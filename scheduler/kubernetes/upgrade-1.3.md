@@ -115,17 +115,11 @@ curl -fsL http://install.portworx.com:8080/upgrade | bash -s -- --scaledownshare
 
 If your Portworx DaemonSet image is _portworx/oci-monitor_, you are already running as OCI and this section is not relavent to your cluster.
 
-The legacy Portworx installations (v1.2.10 and older) had deployed the core Portworx engine as Docker containers, but since then we have changed the deployments to run Portworx via [OCI runC](/runc/index.html), which eliminates cyclical dependancies, speeds up service restarts, and brings other improvements.
+The legacy Portworx installations had deployed the core Portworx engine as Docker containers, but since then we have changed the deployments to run Portworx via [OCI runC](https://github.com/opencontainers/runc), which eliminates cyclical dependencies with docker and kubelet, speeds up service restarts, and brings other improvements.
 
-To migrate to OCI, please follow the [install instructions](/scheduler/kubernetes/install.html) to generate a new YAML spec-file, reapply it on your Kubernetes cluster, and this will automatically migrate Portworx to OCI containers deployment.
+When deployed as OCI, Portworx runs an OCI monitor as a DaemonSet. The OCI monitor pod on each node manages the lifecycle of a systemd service that actually runs the Portworx storage engine as a runc container.
 
-Things to keep in mind when generating the new spec file:
-
-1. If you are running a 1.2 release, specify _px=portworx/oci-monitor:\<your-1.2-image>_ so that you don't end up upgrading Portworx to a new version. For example: _px=portworx/oci-monitor:1.2.14_.
-2. You should give the same parameters that you gave when generating the original spec. If you don't remember the parameters, you can get them using following steps:
-    * Get the current portworx arguments: `kubectl get ds/portworx -n kube-system -o jsonpath='{.spec.template.spec.containers[*].args}'`.
-    * Map each argument into it's corresponding query parameter to generate the spec.
-    * If you were using multiple storage devices, you will need to collapse them into a single parameter (i.e. “-s dev1 -s dev2 …” => “s=dev1,dev2”).
+To migrate to OCI, please follow the [migration instructions](/scheduler/kubernetes/docker-to-oci.html).
 
 ## Upgrading Legacy Portworx running as Docker containers
 
