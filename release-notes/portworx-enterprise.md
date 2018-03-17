@@ -28,6 +28,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
   * Clones - full volume copy created from a snapshot
   * Changes to snapshot CLI.
   * Creating scheduled snapshots policies per volume
+  * ***Important*** From 1.3 onwards, all snapshots are readonly. If the user wishes to create a read/write snapshot, a volume    clone can be created from the snapshot
 * Improved resync performance when a node is down for a long time and restarted with accumulated data in the surviving nodes
 * Improved performance for database workloads by separating transaction logs to a seperate journal device
 * Added PX signature to drives so drives cannot be accidentally re-used even if the cluster has been deleted. 
