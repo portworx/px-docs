@@ -156,6 +156,10 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * PWX-4050 For a Portworx cluster that's about 100 nodes or greater: If the entire cluster goes down with all the nodes off line, as nodes come on line a few nodes get restarted because they are marked offline. A short while after, the system converges and the entire cluster becomes operational. No user intervention required.
 * Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
 
+## 1.2.16.2
+
+* This is a minor update that fixes volume size not updating whenever the content of the encrypted volume is deleted
+
 ## 1.2.16.1
 
 This is a minor update which adds a new flag to limit or disable the generation of core files (`-e PXCORESIZE=<size>`). 
