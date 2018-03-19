@@ -123,7 +123,17 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 839994139757433916	volFinGrp	1 GiB	1	no	no		LOW		1	up - detached
 ```
 
+#### pxctl volume list --node-id
 
+`pxctl volume list --node-id` lists volumes that have data on specified node.
+
+```
+pxctl volume list --node-id target_node_id
+ 
+ID                      NAME             SIZE    HA      SHARED  ENCRYPTED      IO_PRIORITY     SCALE   STATUS
+970758537931791410      clitest17        1 GiB   3       no      no             LOW             1       up - detached
+1013237432577873530     cliencr          2 GiB   3       no      yes            LOW             1       up - detached
+```
 
 #### pxctl volume delete
 
