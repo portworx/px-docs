@@ -74,7 +74,7 @@ $ kubectl edit clusterrole node-get-put-list-role
 
 ##### Clone from a snapshot
 
-You can restore a clone from a snapshot using the following spec file. In 1.3 and higher releases, this is required to create a read-write clone of an existing snapshot as snapshots are read only.
+You can restore a clone from a snapshot using the following spec file. In 1.3 and higher releases, this is required to create a read-write clone as snapshots are read only.
 
 ```yaml
 kind: PersistentVolumeClaim
@@ -83,7 +83,7 @@ metadata:
   namespace: prod
   name: ns.prod-name.px-snap-restore
   annotations:
-    volume.beta.kubernetes.io/storage-class: px-sc-2
+    volume.beta.kubernetes.io/storage-class: px-sc
     px/snapshot-source-pvc: px-snap-1
 spec:
    accessModes:
@@ -104,13 +104,31 @@ apiVersion: v1
   metadata:
     name: name.snap001-source.pvc001
     annotations:
-      volume.beta.kubernetes.io/storage-class: portworx-repl-1-snap-internal
+      volume.beta.kubernetes.io/storage-class: px-sc
 spec:
   resources:
     requests:
       storage: 1Gi
 ```
 Note the format of the “name” field. The format is `name.<new_snap_name>-source.<old_volume_name>`. Above example references the parent (source) persistent volume claim _pvc001_ and creates a snapshot by the name _snap001_.
+
+##### Clone from a snapshot
+
+You can restore a clone from a snapshot using the following spec file. In 1.3 and higher releases, this is required to create a read-write clone as snapshots are read only.
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: name.rollback001-source.snap001
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
+spec:
+  resources:
+    requests:
+      storage: 1Gi 
+```
+Note we used used the existing snapshot name in the source part of the inline spec.
 
 ### Using snapshots
 
