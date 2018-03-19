@@ -23,16 +23,17 @@ More detailed set of hardware requirements as recommended by etcd can be found [
 
 ### Setup
 
-Use one of the two listed methods to setup etcd.
+You can use one of the following methods to setup an etcd cluster
 
-#### Manual Setup
+#### Setup ETCD cluster with static set of nodes
 
-It is highly recommended to follow the detailed step by step process provided by etcd to setup a brand new multi-node cluster.
+If you have 3 static nodes where you want to run etcd follow [this](/maintain/etcd-quick-setup.html) guide to setup systemd services for an etcd cluster.
 
-Follow the steps listed [here](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
+#### Setup ETCD cluster using CoreOS documentation
 
+Follow [this](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
 
-#### Ansible Playbook
+#### Setup ETCD cluster using Ansible Playbook
 
 Follow [this](https://github.com/portworx/px-docs/blob/gh-pages/etcd/ansible/index.md) ansible playbook to install a 3 node etcd cluster.
 
