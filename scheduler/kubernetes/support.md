@@ -46,6 +46,20 @@ If the PVC creation is failing, this could be due the following reasons
 * Describe the PVC using `kubectl describe pvc <pvc-name>` and look at errors in the events section which might be causing failure of the PVC creation.
 * Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
 
+### DNS policy updates
+If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pods-dns-policy) parameter for the PX-OCI service, please also restart the PX-OCI service(s) after changing/editing the YAML-spec:
+
+  ```bash
+  # Apply change to DNS-Policy, wait for change to propagate (rollout) to all the nodes
+  $ kubectl apply -f px_oci-updatedDnsPolicy.yaml
+  $ kubectl rollout status -n kube-system ds/portworx
+  
+  # Request restart of PX-OCI services, clear the node-label afterwards
+  $ kubectl label nodes --all px/service=restart --overwrite
+  # [OPTIONAL] Clean up the node-label after services restarted
+  $ sleep 30; kubectl label nodes --all px/service-
+  ```
+
 ### Application pods
 * Ensure Portworx container is running on the node where the application pod is scheduled. This is required for Portworx to mount the volume into the pod.
 * Ensure the PVC used by the application pod is in "Bound" state.
@@ -82,6 +96,7 @@ If the PVC creation is failing, this could be due the following reasons
 
 ### Collecting Logs from PX
 Please run the following commands on any one of the nodes running Portworx:
+
 ```
 # uname -a
 # docker version
