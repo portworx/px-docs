@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Creating a PVC from a Snapshot (Deprecated)"
+title: "Creating a PVC from a Snapshot"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots
 sidebar: home_sidebar
 ---
