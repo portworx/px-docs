@@ -84,7 +84,7 @@ metadata:
   name: ns.prod-name.px-snap-restore
   annotations:
     volume.beta.kubernetes.io/storage-class: px-sc-2
-    px/snapshot-source-pvc: ns.prod-name.px-snap-1
+    px/snapshot-source-pvc: px-snap-1
 spec:
    accessModes:
      - ReadWriteOnce
@@ -93,7 +93,7 @@ spec:
        storage: 2Gi
 ```
 
-The above example restores a volume from the source snapshot PVC _ns.prod-name.px-snap-1_ in the _prod_ namespace.
+The above example restores a volume from the source snapshot PVC _px-snap-1_ in the _prod_ namespace. Now that you don't have give the entire source PVC name for _px/snapshot-source-pvc_ but just the name part _px-snap-1_.
 
 #### Using inline spec
 
