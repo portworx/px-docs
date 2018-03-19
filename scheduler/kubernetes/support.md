@@ -54,7 +54,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   $ kubectl apply -f px_oci-updatedDnsPolicy.yaml
   $ kubectl rollout status -n kube-system ds/portworx
   
-  # Request restart of PX-OCI services, clear the node-label afterwards
+  # Request restart of PX-OCI services
   $ kubectl label nodes --all px/service=restart --overwrite
   # [OPTIONAL] Clean up the node-label after services restarted
   $ sleep 30; kubectl label nodes --all px/service-
