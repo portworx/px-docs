@@ -56,20 +56,31 @@ Read more about how Portworx provides storage volumes to your application contai
 * Minimum resources dedicated to Portworx per server:
   * 4 CPU cores
   * 4 GB RAM
-* Additional resources recommended per server:
+* Additional resources **recommended** per server:
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
   * Unlimited for the Enterprise Edition
   * 3 for the Developer Edition
 * Open network ports:
-  * Ensure ports 9001-9015 are open between the Kubernetes nodes that will run Portworx.
+  * Ensure ports 9001-9016 are open between all nodes that will run Portworx.
 * All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
   synchronized between all the nodes
 * Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
   Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) 
   
-  Also, you can use this ansible playbook to deploy a 
+Portworx can run with heterogenously configured servers, including servers with different cpu/memory configurations.
+Portworx can also run with servers that have different local storage profiles (number and size of disks/SSD/NVMe, etc.)
+There is a definite benefit (but not an absolute requirement) for servers to have local storage to contribute, 
+since providing local storage enables high-performance features such as scheduler hyper-convergance.
+Nodes that do not contribute local storage can still fully participate in a Portworx cluster. 
+However data access for any jobs scheduled on a "storage-less" or "head-only" node will be via implicit network access.
+
+From an operational standpoint, Portworx **recommends** installing on all nodes within a cluster. 
+Having Portworx installed on all nodes eliminates the overhead of configuring scheduler "constraints" that would then 
+be needed to prohibit a job from running on a node where Portworx is not installed.
+
+This ``ansible`` playbook can be used to deploy a 
     [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
 
 
