@@ -1,0 +1,9 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace 
+  namespace: kube-system
+  labels:
+    alertmanager: portworx
+spec:
+  replicas: 3
