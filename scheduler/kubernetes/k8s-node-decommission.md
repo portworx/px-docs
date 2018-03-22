@@ -90,3 +90,5 @@ spec:
 
 ### 4. Uncordon the node
 You can now uncordon the node using: `kubectl uncordon <node>`
+
+If you want to have Portworx start on this node at a later point in time and join as a new node, follow the [node rejoin steps](/scheduler/kubernetes/k8s-node-rejoin.html).
