@@ -106,6 +106,6 @@ The following example shows how to use constraints for running `mysql` only on n
       "maximumOverCapacity" : 0.0
 }
 ```
-[Download example](//scheduler/mesosphere-dcos/px-marathon-mysql-constraints.json?raw=true)
+[Download example](/scheduler/mesosphere-dcos/px-marathon-mysql-constraints.json?raw=true)
 
 
