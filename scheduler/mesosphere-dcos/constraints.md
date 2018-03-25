@@ -129,3 +129,51 @@ on agent nodes where the "pxfabric" attribute is set.   For example:
     }]
 }
 ```
+
+## Consume Portworx with constraints
+The following example shows how to use constraints for running `mysql` only on nodes where Portworx is installed.
+
+```json
+{
+    "id": "mysql",
+    "cpus": 0.5,
+    "mem": 256,
+    "instances": 1,
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "mysql:5.6.27",
+            "parameters": [
+                    {
+                       "key": "volume-driver",
+                       "value": "pxd"
+                    },
+                    {
+                       "key": "volume",
+                       "value": "mysql_vol:/var/lib/mysql"
+                    }],
+            "network": "BRIDGE",
+              "portMappings": [
+                {
+                  "containerPort": 3306,
+                  "hostPort": 32000,
+                  "protocol": "tcp"
+                }
+                ]
+        }
+    },
+    "constraints": [
+            [
+              "pxfabric",
+              "LIKE",
+              "pxclust1"
+            ]],
+    "env": {
+        "MYSQL_ROOT_PASSWORD": "password"
+    },
+      "minimumHealthCapacity" :0,
+      "maximumOverCapacity" : 0.0
+}
+```
+[Download example](/px-marathon-mysql-constraints.json?raw=true)
+
