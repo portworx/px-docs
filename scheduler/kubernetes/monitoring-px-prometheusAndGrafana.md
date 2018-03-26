@@ -152,7 +152,6 @@ spec:
         runAsUser: 65534
       serviceAccountName: prometheus-operator
 ```
-You can alternatively also download it from [prometheus-operator.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/01-prometheus-operator.yaml)
 
 `kubectl apply -f <prometheus-operator.yaml>` 
  
@@ -177,7 +176,6 @@ spec:
   - port: px-api
     targetPort: 9001
 ```
-You can alternatively also download it from [service-monitor.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/02-service-monitor.yaml)
 
 `kubectl apply -f <service-monitor.yaml>` 
 
@@ -208,7 +206,6 @@ receivers:
 ```
 `kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml`
 
-You can alternatively also download it from [alertmanager.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/04-alertmanager.yaml)
 
 Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster. 
 ```
@@ -224,7 +221,6 @@ spec:
 ```
 `kubectl apply -f alertmanager-cluster.yaml`
 
-You can alternatively also download it from [alertmanager-cluster.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/03-alertmanager-cluster.yaml)
 
 Create a file named `alertmanager-service.yaml` with the following contents and apply the spec
 
@@ -246,8 +242,6 @@ spec:
     alertmanager: portworx
 ```
 `kubectl apply -f alertmanager-service.yaml`
-You can alternatively also download it from [alertmanager-service.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/05-alertmanager-service.yaml)
-
 
 #### Install Prometheus
 
@@ -363,7 +357,6 @@ data:
           summary: Portworx cluster member(s) is(are) down.
 ```
 `kubectl apply -f prometheus-rules.yaml`
-You can alternatively also download it from [prometheus-rules.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/06-prometheus-rules.yaml)
 
 Create a file named `prometheus-cluster.yaml` with the following contents and apply the spec
 ```
@@ -455,7 +448,6 @@ spec:
 ---
 ```
 `kubectl apply -f prometheus-cluster.yaml`
-You can alternatively also download files from [prometheus-cluster.yaml](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/prometheus/07-prometheus-cluster.yaml)
 
 #### Post Install verification
 
