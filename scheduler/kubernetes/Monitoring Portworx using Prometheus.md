@@ -1,21 +1,21 @@
 ---
 layout: page
-title: "Monitoring Portworx using Prometheus"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor
+title: "Monitoring Portworx using Prometheus and Grafana"
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana
 sidebar: home_sidebar
 ---
 
 * TOC
 {:toc}
 
-Monitoring Portworx using Prometheus
+Monitoring Portworx using Prometheus and Grafana
 
 ## About Prometheus
-Prometheus is an opensource monitoring and alerting toolkit. The Prometheus consists of several components some of which are listed below.
+Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists of several components some of which are listed below.
 - The Prometheus server which scrapes(collects) and stores time series data based on a pull mechanism.
 - A rules engine which allows generation of Alerts based on the scraped metrices.  
 - An alertmanager for handling alerts.  
-- multiple integrations for graphing and dashboarding. 
+- Multiple integrations for graphing and dashboarding. 
 
 In this document we would explore the monitoring of Portworx via Prometheus. The integration is natively supported by Portworx since portworx stands up metrics on a REST endpoint which can readily be scraped by Prometheus. 
 
@@ -33,11 +33,14 @@ The Servicemonitor CRD allows the definition of how kubernetes services could be
 - Alertmanager
 The Alertmanager CRD allows the definition of an Alertmanager instance within the kubernetes cluster. The alertmanager expects a valid configuration in the form of a `secret` called `alertmanager-name`
 
+## About Grafana
+Grafana is a dashboarding and visualization tool with integrations to several timeseries datasources. It is used to create dashboards for the monitoring data with customisable visualizations. We would use Prometheus as the source of data to view Portworx monitoring metrics. 
+
 ### Prerequisites
 - A running Portworx cluster. 
 
 #### Install the Prometheus Operator
-Create a file named `prometheus-operator.yaml` with the below contents and apply the spec on your kubernetes cluster. 
+Create a file named `prometheus-operator.yaml` with the below contents and apply the spec . 
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -155,7 +158,7 @@ You can alternatively also download it from [prometheus-operator.yaml](https://g
  
 #### Install the Service Monitor
 
-Create a file named `service-monitor.yaml` with the below contents and apply that on your kubernetes cluster. 
+Create a file named `service-monitor.yaml` with the below contents and apply the spec . 
 ```
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -180,7 +183,7 @@ You can alternatively also download it from [service-monitor.yaml](https://githu
 
 #### Install the Alertmanager
 Create a file named `alertmanager.yaml` with the following contents and create a secret from it. 
-Make sure you add the relevant email addresses in the below confi. 
+Make sure you add the relevant email addresses in the below config. 
 ```
 global:
   # The smarthost and SMTP sender used for mail notifications.
@@ -456,5 +459,98 @@ You can alternatively also download files from [prometheus-cluster.yaml](https:/
 
 #### Post Install verification
 
-Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluser endpoints as well as the Alerting rules as specified earlier. 
+Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier. 
 
+#### Installing Grafana
+
+Download the below files in a folder named `grafanaConfigurations`
+
+Download the custom [Portworx dashboard](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/dashboards/Portworx_Volume_template.json) created for Grafana to view Portworx Volume metrics. 
+
+Download the Grafana [dashboard configuration](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/config/dashboardConfig.yaml) file 
+
+Create a configmap from the above files with the below command
+`kubectl create configmap grafana-config --from-file=$(pwd)/grafanaConfigurations -nkube-system` 
+
+Create a file named `grafana-deployment.yaml` with the below contents and apply the spec.
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    nodePort: 30950
+  selector:
+    app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - image: grafana/grafana
+        name: grafana
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: GF_AUTH_BASIC_ENABLED
+            value: "true"
+          - name: GF_AUTH_ANONYMOUS_ENABLED
+            value: "false"
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 3000
+        volumeMounts:
+        - name: grafana-config
+          mountPath: /etc/grafana/provisioning/dashboards/config.yaml
+          subPath: config.yaml
+        - name: dashboard-templates
+          mountPath: /var/lib/grafana/dashboards
+      volumes:
+      - name: grafana-config
+        configMap:
+          name: grafana-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: dashboard-templates
+        configMap:
+          name: grafana-config
+```
+
+`kubectl apply -f grafana-deployment.yaml`
+
+Access the Grafana dashboard by navigating at the `Nodeport 30950`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated. 
+Navigate to Configurations --> Datasources. 
+Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
+
+![grafanadatasource](/images/datasource-creation-grafana.png){:width="655px" height="200px"}
+
+#### Post install verification
+
+Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics. 
+![grafanadashboard](/images/grafana-portworx-dashboard.png){:width="655px" height="200px"}
