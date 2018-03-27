@@ -273,6 +273,7 @@ TODO: *Update the above page to show runc*
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
+* Due to a [bug in DCOS](https://jira.mesosphere.com/browse/DCOS_OSS-2103) the Portworx service file will get removed after an upgrade. Please run `dcos portworx plan force-restart deploy portworx-deploy` after the DCOS upgrade to re-deploy the service file.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
 * Check if the DC/OS services via marathon and any other frameworks can mount the PX volumes from the marathon UI or the DC/OS UI
 
