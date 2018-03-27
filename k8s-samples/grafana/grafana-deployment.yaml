@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+  selector:
+    app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - image: grafana/grafana
+        name: grafana
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: GF_AUTH_BASIC_ENABLED
+            value: "true"
+          - name: GF_AUTH_ANONYMOUS_ENABLED
+            value: "false"
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 3000
+        volumeMounts:
+        - name: grafana-config
+          mountPath: /etc/grafana/provisioning/dashboards/config.yaml
+          subPath: config.yaml
+        - name: dashboard-templates
+          mountPath: /var/lib/grafana/dashboards
+      volumes:
+      - name: grafana-config
+        configMap:
+          name: grafana-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: dashboard-templates
+        configMap:
+          name: grafana-config
