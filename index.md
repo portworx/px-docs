@@ -49,7 +49,7 @@ Read more about how Portworx provides storage volumes to your application contai
 
 ## Minimum Requirements
 * Linux kernel 3.10 or greater
-* Docker 1.10 or greater.
+* Docker 1.13.1 or greater
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
@@ -68,7 +68,7 @@ Read more about how Portworx provides storage volumes to your application contai
   synchronized between all the nodes
 * Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
   Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) 
-  
+ 
 Portworx can run with heterogenously configured servers, including servers with different cpu/memory configurations.
 Portworx can also run with servers that have different local storage profiles (number and size of disks/SSD/NVMe, etc.)
 There is a definite benefit (but not an absolute requirement) for servers to have local storage to contribute, 
