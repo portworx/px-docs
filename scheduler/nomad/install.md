@@ -147,7 +147,7 @@ by referencing the `pxd` volume driver.
           db = 3306
         }
         volumes = [
-          "name=mysql,size=10,repl=3/:/docker-entrypoint-initdb.d/",
+          "name=mysql,size=10,repl=3/:/var/lib/mysql",
         ]
         volume_driver = "pxd"
     }
