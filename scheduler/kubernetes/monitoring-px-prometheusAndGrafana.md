@@ -8,39 +8,34 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-Monitoring Portworx using Prometheus and Grafana
-
 ## About Prometheus
 Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists of several components some of which are listed below.
 - The Prometheus server which scrapes(collects) and stores time series data based on a pull mechanism.
-- A rules engine which allows generation of Alerts based on the scraped metrices.  
-- An alertmanager for handling alerts.  
-- Multiple integrations for graphing and dashboarding. 
+- A rules engine which allows generation of Alerts based on the scraped metrices.
+- An alertmanager for handling alerts.
+- Multiple integrations for graphing and dashboarding.
 
-In this document we would explore the monitoring of Portworx via Prometheus. The integration is natively supported by Portworx since portworx stands up metrics on a REST endpoint which can readily be scraped by Prometheus. 
+In this document we would explore the monitoring of Portworx via Prometheus. The integration is natively supported by Portworx since portworx stands up metrics on a REST endpoint which can readily be scraped by Prometheus.
 
-The following instructions allows you to monitor Portworx via Prometheus and allow the Alertmanager to provide alerts based on configured rules.  
+The following instructions allows you to monitor Portworx via Prometheus and allow the Alertmanager to provide alerts based on configured rules.
 
-The Prometheus [Operator](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html) creates, configures and manages a prometheus cluster. 
+The Prometheus [Operator](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html) creates, configures and manages a prometheus cluster.
 
-The prometheus operator manages 3 customer resource definitions namely
-- Prometheus
-The Prometheus CRD defines a Prometheus setup to be run on a Kubernetes cluster. The Operator creates a Statefulset for each definition of the Prometheus resource.
+The prometheus operator manages 3 customer resource definitions namely:
+- Prometheus: The Prometheus CRD defines a Prometheus setup to be run on a Kubernetes cluster. The Operator creates a Statefulset for each definition of the Prometheus resource.
 
-- ServiceMonitor
-The Servicemonitor CRD allows the definition of how kubernetes services could be monitored based on label selectors. The Service abstraction allows Prometheus to inturn monitor underlying Pods  
+- ServiceMonitor: The ServiceMonitor CRD allows the definition of how Kubernetes services could be monitored based on label selectors. The Service abstraction allows Prometheus to in turn monitor underlying Pods.
 
-- Alertmanager
-The Alertmanager CRD allows the definition of an Alertmanager instance within the kubernetes cluster. The alertmanager expects a valid configuration in the form of a `secret` called `alertmanager-name`
+- Alertmanager: The Alertmanager CRD allows the definition of an Alertmanager instance within the Kubernetes cluster. The alertmanager expects a valid configuration in the form of a `secret` called `alertmanager-name`.
 
 ## About Grafana
-Grafana is a dashboarding and visualization tool with integrations to several timeseries datasources. It is used to create dashboards for the monitoring data with customisable visualizations. We would use Prometheus as the source of data to view Portworx monitoring metrics. 
+Grafana is a dashboarding and visualization tool with integrations to several timeseries datasources. It is used to create dashboards for the monitoring data with customizable visualizations. We would use Prometheus as the source of data to view Portworx monitoring metrics.
 
 ### Prerequisites
-- A running Portworx cluster. 
+- A running Portworx cluster.
 
 #### Install the Prometheus Operator
-Create a file named `prometheus-operator.yaml` with the below contents and apply the spec . 
+Create a file named `prometheus-operator.yaml` with the below contents and apply the spec.
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -115,7 +110,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus-operator
-  namespace: kube-system  
+  namespace: kube-system
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -153,11 +148,11 @@ spec:
       serviceAccountName: prometheus-operator
 ```
 
-`kubectl apply -f <prometheus-operator.yaml>` 
- 
+`kubectl apply -f <prometheus-operator.yaml>`
+
 #### Install the Service Monitor
 
-Create a file named `service-monitor.yaml` with the below contents and apply the spec . 
+Create a file named `service-monitor.yaml` with the below contents and apply the spec.
 ```
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -170,18 +165,18 @@ spec:
   selector:
     matchLabels:
       name: portworx
-  namespaceSelector: 
+  namespaceSelector:
     any: true
   endpoints:
   - port: px-api
     targetPort: 9001
 ```
 
-`kubectl apply -f <service-monitor.yaml>` 
+`kubectl apply -f <service-monitor.yaml>`
 
 #### Install the Alertmanager
-Create a file named `alertmanager.yaml` with the following contents and create a secret from it. 
-Make sure you add the relevant email addresses in the below config. 
+Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
+Make sure you add the relevant email addresses in the below config.
 ```
 global:
   # The smarthost and SMTP sender used for mail notifications.
@@ -207,12 +202,12 @@ receivers:
 `kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml`
 
 
-Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster. 
+Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster.
 ```
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
-  name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace 
+  name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace
   namespace: kube-system
   labels:
     alertmanager: portworx
@@ -222,7 +217,7 @@ spec:
 `kubectl apply -f alertmanager-cluster.yaml`
 
 
-Create a file named `alertmanager-service.yaml` with the following contents and apply the spec
+Create a file named `alertmanager-service.yaml` with the following contents and apply the spec.
 
 ```
 apiVersion: v1
@@ -245,7 +240,7 @@ spec:
 
 #### Install Prometheus
 
-Create a file named `prometheus-rules.yaml` with the following contents and apply the spec
+Create a file named `prometheus-rules.yaml` with the following contents and apply the spec.
 ```
 kind: ConfigMap
 apiVersion: v1
@@ -264,68 +259,68 @@ data:
         expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 80
         for: 5m
         labels:
-          issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is high.
+          issue: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is high.
           severity: critical
         annotations:
-          description: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over
+          description: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over
             80% used for more than 10 minutes.
-          summary: Portworx volume capacity is at {{$value}}% used.
+          summary: Portworx volume capacity is at {%raw%}{{$value}}{%endraw%}% used.
       - alert: PortworxVolumeUsage
         expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 70
         for: 5m
         labels:
-          issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is critical.
+          issue: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is critical.
           severity: warning
         annotations:
-          description: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over
+          description: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over
             70% used for more than 10 minutes.
-          summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
+          summary: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is at {%raw%}{{$value}}{%endraw%}%
             used.
       - alert: PortworxVolumeWillFill
         expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7 and predict_linear(px_cluster_disk_available_bytes[1h],
           14 * 86400) < 0
         for: 10m
         labels:
-          issue: Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to
+          issue: Disk volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is predicted to
             fill within 2 weeks.
           severity: warning
         annotations:
-          description: Disk volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
+          description: Disk volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over 70%
             full and has been predicted to fill within 2 weeks for more than 10 minutes.
-          summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
+          summary: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over 70%
             full and is predicted to fill within 2 weeks.
       - alert: PortworxStorageUsageCritical
         expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes) < 20
         for: 5m
         labels:
-          issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.
+          issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is high.
           severity: critical
         annotations:
-          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+          description: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over
             80% used for more than 10 minutes.
-          summary: Portworx storage capacity is at {{$value}}% used.
+          summary: Portworx storage capacity is at {%raw%}{{$value}}{%endraw%}% used.
       - alert: PortworxStorageUsage
         expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 30
         for: 5m
         labels:
-          issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.
+          issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is critical.
           severity: warning
         annotations:
-          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+          description: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over
             70% used for more than 10 minutes.
-          summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
+          summary: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is at {%raw%}{{$value}}{%endraw%}%
             used.
       - alert: PortworxStorageWillFill
         expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes))) < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
         for: 10m
         labels:
-          issue: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted
+          issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is predicted
             to fill within 2 weeks.
           severity: warning
         annotations:
-          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+          description: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over
             70% full and has been predicted to fill within 2 weeks for more than 10 minutes.
-          summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70%
+          summary: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over 70%
             full and is predicted to fill within 2 weeks.
       - alert: PortworxStorageNodeDown
         expr: max(px_cluster_status_nodes_storage_down) > 0
@@ -358,7 +353,7 @@ data:
 ```
 `kubectl apply -f prometheus-rules.yaml`
 
-Create a file named `prometheus-cluster.yaml` with the following contents and apply the spec
+Create a file named `prometheus-cluster.yaml` with the following contents and apply the spec.
 ```
 apiVersion: v1
 kind: ServiceAccount
@@ -403,7 +398,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   name: prometheus
-  namespace: kube-system  
+  namespace: kube-system
 spec:
   replicas: 2
   logLevel: debug
@@ -451,18 +446,18 @@ spec:
 
 #### Post Install verification
 
-Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier. 
+Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
 
 #### Installing Grafana
 
 Download the below files in a folder named `grafanaConfigurations`
 
-Download the custom [Portworx dashboard](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/dashboards/Portworx_Volume_template.json) created for Grafana to view Portworx Volume metrics. 
+Download the custom [Portworx dashboard](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/dashboards/Portworx_Volume_template.json) created for Grafana to view Portworx Volume metrics.
 
-Download the Grafana [dashboard configuration](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/config/dashboardConfig.yaml) file 
+Download the Grafana [dashboard configuration](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/config/dashboardConfig.yaml) file
 
 Create a configmap from the above files with the below command
-`kubectl create configmap grafana-config --from-file=$(pwd)/grafanaConfigurations -nkube-system` 
+`kubectl create configmap grafana-config --from-file=$(pwd)/grafanaConfigurations -nkube-system`
 
 Create a file named `grafana-deployment.yaml` with the below contents and apply the spec.
 
@@ -536,13 +531,13 @@ spec:
 
 `kubectl apply -f grafana-deployment.yaml`
 
-Access the Grafana dashboard by navigating at the `Nodeport 30950`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated. 
-Navigate to Configurations --> Datasources. 
+Access the Grafana dashboard by navigating at the `Nodeport 30950`. You would need to create a datasource for the Portworx grafana dashboard metrics to be populated.
+Navigate to Configurations --> Datasources.
 Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtained in the install verification step for Prometheus from the above section.
 
 ![grafanadatasource](/images/datasource-creation-grafana.png){:width="655px" height="200px"}
 
 #### Post install verification
 
-Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics. 
+Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics.
 ![grafanadashboard](/images/grafana-portworx-dashboard.png){:width="655px" height="200px"}
