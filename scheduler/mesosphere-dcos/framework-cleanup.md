@@ -48,6 +48,7 @@ sudo docker rm portworx.service -f
 
 Remove the portworx service file from all the nodes
 ```
+sudo chattr -i /etc/pwx/.private.json
 sudo rm /etc/systemd/system/portworx.service -f
 sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
 sudo systemctl daemon-reload
