@@ -19,11 +19,11 @@ ie ACTIVE should be set to False.
 
 ```
 $ dcos service --inactive
-NAME                     HOST            ACTIVE  TASKS  CPU    MEM      DISK   ID                                         
-cassandra-px  ip-10-0-2-15.ec2.internal   False     2    6.7  27530.0  59890.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051  
-marathon              10.0.4.203          True     4    3.1   3200.0    0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0001  
-metronome             10.0.4.203          True     0    0.0    0.0      0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0000  
-portworx      ip-10-0-2-15.ec2.internal   True     6    1.8   5632.0  16384.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0050 
+NAME                     HOST            ACTIVE  TASKS  CPU    MEM      DISK   ID
+cassandra-px  ip-10-0-2-15.ec2.internal   False    2    6.7  27530.0  59890.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
+marathon              10.0.4.203          True     4    3.1   3200.0    0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0001
+metronome             10.0.4.203          True     0    0.0    0.0      0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0000
+portworx      ip-10-0-2-15.ec2.internal   True     6    1.8   5632.0  16384.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0050
 ```
 
 Then use the `dcos service shutdown` command to shutdown the service
@@ -38,7 +38,7 @@ $ SERVICE_NAME=cassandra-px
 $ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
-## 3. Cleanup PX remnants from slave nodes
+## 3. Cleanup PX remnants from agent nodes
 
 Stop the portworx service on all the nodes and remove the docker container
 ```
@@ -52,21 +52,21 @@ sudo rm /etc/systemd/system/portworx.service -f
 sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
 sudo systemctl daemon-reload
 ```
-		
+
 Remove the Portworx config and files from all the nodes
 ```
+sudo chattr -i /etc/pwx/.private.json
 sudo rm -rf /etc/pwx
-sudo umount /opt/pwx/oci 
+sudo umount /opt/pwx/oci
 sudo rm -rf /opt/pwx
 ```
 
 Also remove the Portworx kernel module from all the nodes
 ```
 sudo rmmod px -f
-
 ```
 
-NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
+NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked
 up by Portworx in the next install. This can be done by running the wipefs command
 ```
 # Use with care since this will wipe data from that disk
@@ -83,9 +83,9 @@ do
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo chattr -i /etc/pwx/.private.json'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /etc/pwx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rmmod px -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sda123' # Replace with your disk names
 done
 ```
-
