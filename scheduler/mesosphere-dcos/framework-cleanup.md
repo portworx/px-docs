@@ -85,7 +85,7 @@ do
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo chattr -i /etc/pwx/.private.json'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /etc/pwx'
-        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo umount /opt/pwx/oci '
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo umount /opt/pwx/oci'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /opt/pwx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rmmod px -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sda123' # Replace with your disk names
