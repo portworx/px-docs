@@ -13,10 +13,7 @@ meta-description: "Learn to take a snapshot of a volume from a Kubernetes persis
 
 This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to use them in pods.
 
->**Note:** Using annotations to manage snapshots has been deprecated. The suggested
-way to manage snapshots on Kuberenetes is now to use STORK. The instructions for
-using annotations can be found
-[here](/scheduler/kubernetes/snaps-annotations.html).
+>**Note:** The suggested way to manage snapshots on Kuberenetes is to use STORK. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/scheduler/kubernetes/snaps-annotations.html).
 
 ## Managing snapshots with `kubectl`
 
