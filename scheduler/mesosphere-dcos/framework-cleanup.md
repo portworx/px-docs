@@ -64,7 +64,6 @@ sudo rm -rf /opt/pwx
 Also remove the Portworx kernel module from all the nodes
 ```
 sudo rmmod px -f
-
 ```
 
 NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
