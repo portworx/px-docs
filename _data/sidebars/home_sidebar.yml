@@ -74,6 +74,8 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Update Portworx Geography Info
+          url: /scheduler/kubernetes/update-px-geography.html
       - title: Operate and Maintain
         folderitems:
         - title: Upgrade
@@ -95,7 +97,7 @@
           - title: Manage PX logs using ELK and Fluentd
             url: /scheduler/kubernetes/logmanagement-efk-k8s.html
           - title: Manage PX using Prometheus and Grafana
-            url: /scheduler/kubernetes/monitoring-px-prometheusAndGrafana.html        
+            url: /scheduler/kubernetes/monitoring-px-prometheusAndGrafana.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -104,7 +106,7 @@
         url: /scheduler/mesosphere-dcos/install-universe.html
       - title: Upgrade
         url: /scheduler/mesosphere-dcos/upgrade-oci.html
-      - title: Stateful frameworks
+      - title: Stateful Frameworks
         folderitems:
         - title: About
           url: /scheduler/mesosphere-dcos/frameworks.html
@@ -126,11 +128,13 @@
           url: /maintain/going-production-with-dcos.html
         - title: Constraining Applications to PX nodes
           url: /scheduler/mesosphere-dcos/constraints.html
-        - title: Dynamically creating volumes
+        - title: Dynamically Creating Volumes
           url: /scheduler/mesosphere-dcos/inline.html
-        - title: Scaling stateful applications
+        - title: Update Portworx Geography Info
+          url: /manage/update-px-geography.html
+        - title: Scaling Stateful Applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
-        - title: Cleanup frameworks
+        - title: Cleanup Frameworks
           url: /scheduler/mesosphere-dcos/framework-cleanup.html
       - title: FAQ
         folderitems:
@@ -174,8 +178,8 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
-    - title: Updating Portworx Rack Info
-      url: /manage/update-px-rack.html
+    - title: Update Portworx Geography Info
+      url: /manage/update-px-geography.html
     - title: Legacy and External Access
       folderitems:
       - title: NFS
