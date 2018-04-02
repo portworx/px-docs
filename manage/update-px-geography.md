@@ -3,7 +3,9 @@ layout: page
 title: "Update Portworx Geography Info"
 keywords: portworx, pxctl, command-line tool, cli, reference, geography, locality, rack, zone, region
 sidebar: home_sidebar
-redirect_from: "/manage/update-px-rack.html"
+redirect_from:
+  - /px-rack.html
+  - /manage/update-px-rack.html
 meta-description: "Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance."
 ---
 
