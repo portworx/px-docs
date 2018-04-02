@@ -74,8 +74,8 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
-        - title: Update Portworx Rack Info
-          url: /scheduler/kubernetes/update-px-rack.html
+        - title: Update Portworx Geography Info
+          url: /scheduler/kubernetes/update-px-geography.html
       - title: Operate and Maintain
         folderitems:
         - title: Upgrade
@@ -130,8 +130,8 @@
           url: /scheduler/mesosphere-dcos/constraints.html
         - title: Dynamically Creating Volumes
           url: /scheduler/mesosphere-dcos/inline.html
-        - title: Update Portworx Rack Info
-          url: /manage/update-px-rack.html
+        - title: Update Portworx Geography Info
+          url: /manage/update-px-geography.html
         - title: Scaling Stateful Applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
         - title: Cleanup Frameworks
@@ -178,8 +178,8 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
-    - title: Update Portworx Rack Info
-      url: /manage/update-px-rack.html
+    - title: Update Portworx Geography Info
+      url: /manage/update-px-geography.html
     - title: Legacy and External Access
       folderitems:
       - title: NFS

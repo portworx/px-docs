@@ -1,15 +1,14 @@
 ---
 layout: page
-title: "Updating Portworx Rack Info in Kubernetes"
-keywords: portworx, pxctl, command-line tool, cli, reference, kubernetes
+title: "Update Portworx Geography Info in Kubernetes"
+keywords: portworx, pxctl, command-line tool, cli, reference, kubernetes, geography, locality, rack, zone, region
 sidebar: home_sidebar
-redirect_from: "/px-rack.html"
 meta-description: "Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance."
 ---
 
-There are different ways in which you can provide this information to PX nodes based on your scheduler. If you want to set the rack and zone information using environment variables, follow the steps on [Update Rack and Zone Info page](https://docs.portworx.com/manage/update-px-rack.html)
+There are different ways in which you can provide this information to Portworx nodes based on your scheduler. If you want to set the rack, zone and region information using environment variables, follow the steps on [Update Geography Info page](/manage/update-px-geography.html)
 
-## Providing rack info to PX using node labels
+## Providing rack info to Portworx using node labels
 
 Using kubernetes node labels Portworx nodes can be informed about the rack on which they are running. The specific node label to use is ``px/rack=rack1``, where ``px/rack`` is the key, while ``rack1`` is the value identifying the rack of which the node is a part of.
 Please make sure the label is a string not starting with a special character or a number.
@@ -95,6 +94,6 @@ parameters:
 
 Any PVC created using the above storage class will have a replication factor of 2 and will have one copy of its data on `rack1` and the other copy on `rack2`
 
-## Providing zone info to PX
+## Providing zone and region info to Portworx
 
-Zone information can only be set using environment variables. Refer [Update Rack and Zone Info page](https://docs.portworx.com/manage/update-px-rack.html)
+Zone and region can only be set using environment variables. Refer to [Update Geography Info page](/manage/update-px-geography.html)
