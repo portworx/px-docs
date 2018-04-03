@@ -12,7 +12,7 @@ Using [Storage Class](https://kubernetes.io/docs/concepts/storage/persistent-vol
 - fs: filesystem to be laid out: none|xfs|ext4 (default: `ext4`)
 - block_size: block size in Kbytes (default: `32`)
 - repl: replication factor [1..3] (default: `1`)
-- io_priority: IO Priority: [high|medium|low] (default: `low`)
+- priority_io: IO Priority: [high|medium|low] (default: `low`)
 - snap_interval: snapshot interval in minutes, 0 disables snaps (default: `0`)
 - aggregation_level: specifies the number of replication sets the volume can be aggregated from (default: `1`)
 - ephemeral: ephemeral storage [true|false] (default `false`)
