@@ -17,7 +17,7 @@ Here are some of the commands that are needed for maintenance operations
 ## Some general maintenance commands
 
 ### Enter Maintenance Mode 
-Run **"pxctl service maintenance --enter"**.
+Run ``pxctl service maintenance --enter``.
 This takes Portworx out of an "Operational" state for a given node.  Perform whatever physical maintenance is needed.
 
 ### Restart Portworx
@@ -25,7 +25,7 @@ Run **"docker restart px-enterprise"**.
 This restarts the Portworx fabric on a given node.
 
 ### Exit Maintenance Mode
-Run **"pxctl service maintenance --exit"**.
+Run ``pxctl service maintenance --exit``.
 This puts Portworx back in to "Operational" state for a given node.
 
 ### Drive management example
