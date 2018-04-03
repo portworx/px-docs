@@ -13,7 +13,7 @@ meta-description: "This guide shows you the basics of using PXCL CLI to perform 
 {:toc}
 
 The Portworx command-line tool, `pxctl`, is available on every node where PX is running.  It is available at the host at `/opt/pwx/bin/pxctl`.  The CLI is designed to accept and display human readable input and output by default.  In addition, every command takes in a `-j` option such that the output is in machine parsable `json` format.
-	
+
 In most production deployments, you will provision volumes directly using Docker or your scheduler (such as a Kubernetes pod spec).  However, pxctl also lets you directly provision and manage storage. In addition, the pxctl has a rich set of cluster wide management features which are explained in this document.
 
 All operations from `pxctl` are reflected back into the containers that use Portworx storage. In addition to what is exposed in Docker volumes, `pxctl`:
@@ -45,16 +45,16 @@ pxctl version 2.2.0-555ffff
 To view all the commands offered by pxctl, type 'pxctl help'
 
 ```
-# sudo /opt/pwx/bin/pxctl help  
+# sudo /opt/pwx/bin/pxctl help
 NAME:
    pxctl - px cli
 
 USAGE:
    pxctl [global options] command [command options] [arguments...]
-   
+
 VERSION:
    1.2.0-75d0dbb
-   
+
 COMMANDS:
      status         Show status summary
      volume, v      Manage volumes
@@ -121,7 +121,7 @@ USAGE:
 
 OPTIONS:
    --tag value, -l value  Specify a PX Docker image tag (default: "latest")
-   
+
 ```
 
 #### pxctl upgrade
@@ -140,9 +140,7 @@ You must make PX login to the secrets endpoint when using encrypted volumes and 
 `pxctl secrets` can be used to configure authentication credentials and endpoints - Vault, Amazon KMS, KVDB are currently supported.
 Vault example (Note: To install and configure Vault, peruse [this link](https://www.vaultproject.io/intro/getting-started/install.html))
 ```
-# sudo /opt/pwx/bin/pxctl secrets vault login
-Enter VAULT_ADDRESS: http://myvault.myorg.com
-Enter VAULT_TOKEN: ***
+# sudo /opt/pwx/bin/pxctl secrets vault login --vault-address http://myvault.myorg.com --vault-token myvaulttoken
 Successfully authenticated with Vault.
 ```
 AWS KMS example
