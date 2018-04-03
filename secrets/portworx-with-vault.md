@@ -101,12 +101,9 @@ This command needs to be run just once for the cluster.
 
 #### (Optional) Authenticating with Vault using PX CLI
 
-If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following commands:
-
+If you do not wish to set Vault environment variables, you can authenticate PX with Vault using PX CLI. Run the following command:
 ```
-# /opt/pwx/bin/pxctl secrets vault login
-Enter VAULT_ADDRESS: <vault-endpoint-address>
-Enter VAULT_TOKEN: ********
+# /opt/pwx/bin/pxctl secrets vault login --vault-address <vault-endpoint-address> --vault-token <vault-token>
 Successfully authenticated with Vault.
 ```
 
