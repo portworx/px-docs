@@ -15,7 +15,7 @@ $ sudo docker run --entrypoint /runc-entry-point.sh \
 
 ##### To get the 1.3 release
 ```bash
-$ latest_stable=$(curl -fsSL 'http://install.portworx.com:8080?type=dock&stork=false' | awk '/image: / {print $2}')
+$ latest_stable=$(curl -fsSL 'https://install.portworx.com:8443?type=dock&stork=false' | awk '/image: / {print $2}')
 
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 $ sudo docker run --entrypoint /runc-entry-point.sh \
