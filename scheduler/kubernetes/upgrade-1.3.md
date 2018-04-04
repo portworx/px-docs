@@ -21,7 +21,7 @@ You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci
 To upgrade, run the below curl command.
 
 ```
-curl -fsL http://install.portworx.com:8080/upgrade | bash -s 
+curl -fsL https://install.portworx.com:8443/upgrade | bash -s 
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -45,7 +45,7 @@ You can invoke the upgrade script with the _-t_ to override the default Portworx
 For example below command upgrades Portworx to _portworx/oci-monitor:1.3.0-rc5_ image.
 
 ```
-curl -fsL http://install.portworx.com:8080/upgrade | bash -s -- -t 1.3.0-rc5
+curl -fsL https://install.portworx.com:8443/upgrade | bash -s -- -t 1.3.0-rc5
 ```
 
 ### Disable scaling down of shared Portworx applications during the upgrade
@@ -54,7 +54,7 @@ You can invoke the upgrade script with _--scaledownsharedapps off_ to skip scali
 
 For example:
 ```
-curl -fsL http://install.portworx.com:8080/upgrade | bash -s -- --scaledownsharedapps off
+curl -fsL https://install.portworx.com:8443/upgrade | bash -s -- --scaledownsharedapps off
 ```
 >**Reboot requirement:**<br/>By default, the upgrade process scales down shared applications as that avoids a node reboot when upgrading between major Portworx versions. Disabling that flag would mean the node would need a reboot before Portworx comes up with the new major version.
 
@@ -107,7 +107,7 @@ minion2 192.168.56.71   3.316327   4.1 GB     ...   1.2.11.10-421c67f   Online
 If the upgrade job crashes unexpectedly and fails to restore shared applications back to their original replica counts, you can run the following command to restore them.
 
 ```
-curl -fsL http://install.portworx.com:8080/upgrade | bash -s -- --scaledownsharedapps off
+curl -fsL https://install.portworx.com:8443/upgrade | bash -s -- --scaledownsharedapps off
 ```
 
 <a name="docker-to-oci"></a>

@@ -21,7 +21,7 @@ $ VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 $ curl -L -o px-spec.yaml "https://install.portworx.com?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 
 # For the latest 1.3 release
-$ curl -L -o px-spec.yaml "http://install.portworx.com:8080?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
+$ curl -L -o px-spec.yaml "https://install.portworx.com:8443?c=mycluster&k=etcd://<ETCD_ADDRESS>:<ETCD_PORT>&kbver=$VER"
 ```
 
 Below are all parameters that can be given in the query string.
