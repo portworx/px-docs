@@ -74,9 +74,13 @@ chmod +x mc
 
 Configure the ``mc`` client to talk to the objectstore
 ```
-./mc config host add portworxs3 http://172.20.0.27:9010 SNKM04SP9P8PCNW6PKDO va11VEismRQm/vFxheby0PMFXEdl2nyKw3AG8udq --api "s3v2"
+./mc config host add portworxs3 http://<node_ip>:9010 \
+     SNKM04SP9P8PCNW6PKDO va11VEismRQm/vFxheby0PMFXEdl2nyKw3AG8udq \
+     --api "s3v2"
 Added `portworxs3` successfully.
 ```
+where ``node_ip`` corresponds to the host IP address.
+Note the ``api "s3v2"`` version.
 
 Create and Show a bucket
 ```
