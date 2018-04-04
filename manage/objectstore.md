@@ -64,13 +64,13 @@ The servers are created with the "us-east-1" region currently.
 The objectstore does not have SSL certificates set up, so you'll need to configure your client accordingly.
 
 ## Test the objectore from an S3 client
-Use the sample steps below to test the objectstore from the 'mc' client utility.
+Use the sample steps below to test the objectstore from the ``mc`` client utility.
 
 Download the ``mc`` utility
 ```
 wget https://dl.minio.io/client/mc/release/linux-amd64/mc 
 chmod +x mc 
-``
+```
 
 Configure the ``mc`` client to talk to the objectstore
 ```
