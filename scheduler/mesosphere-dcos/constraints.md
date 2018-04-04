@@ -53,6 +53,8 @@ If using Apache Mesos:
 # systemctl status mesos-slave -l
 ```
 
+Please note that restarting a dcos/mesos-slave to change the MESOS_ATTRIBUTES will cause the node to register under a new UUID.
+
 ## Deploy Portworx with 'constraints'
 When deploying the Portworx framework you would then add the following constraint to node.placement_constraint
 ```
