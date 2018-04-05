@@ -75,17 +75,17 @@ Install PX on each ECS instance.  Portworx will use the EBS volumes you provisio
 
 The installation and setup of PX OCI bundle is a 4-step process:
 
-  1. Install PX OCI bits
-  2. Configure PX OCI
+  1. Install the PX OCI bundle
+  2. Configure PX under runC
   3. Add Daemon for Portworx OCI service
   4. Enable and start Portworx service
 
   <a name="install_step1"></a>
-  ## Step 1: Install the PX OCI bundle
+  #### Step 1: Install the PX OCI bundle
 
-  {% include runc/runc-install-bundle.md %}
+  {% include ../runc/runc-install-bundle.md %}
 
-  ## Step 2: Configure PX under runC
+  #### Step 2: Configure PX under runC
   ```bash
   #  Basic installation
   $ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
@@ -97,7 +97,7 @@ The installation and setup of PX OCI bundle is a 4-step process:
 
   {% include cmdargs.md %}
 
-  ## Step 3: Install the following file into "/etc/rc.d/init.d/portworx":
+  #### Step 3: Install the following file into "/etc/rc.d/init.d/portworx":
 
   ```bash
   sudo cat > /etc/rc.d/init.d/portworx << '_EOF'
@@ -175,7 +175,7 @@ The installation and setup of PX OCI bundle is a 4-step process:
   _EOF
   ```
 
-  ## Step 4: Enable and activate the Portworx service
+  #### Step 4: Enable and activate the Portworx service
   
   ```
   sudo chmod 777 /etc/init.d/portworx
