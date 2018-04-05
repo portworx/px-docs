@@ -83,7 +83,7 @@ The installation and setup of PX OCI bundle is a 4-step process:
   <a name="install_step1"></a>
   #### Step 1: Install the PX OCI bundle
 
-  {% include ../runc/runc-install-bundle.md %}
+  {% include runc/runc-install-bundle.md %}
 
   #### Step 2: Configure PX under runC
   ```bash
