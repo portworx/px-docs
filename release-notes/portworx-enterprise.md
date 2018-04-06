@@ -12,14 +12,19 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.3.0.1
+
+This is a patch update with the following fix
+
+* PWX-5115 - Fix `nodes` option in [docker inline volume create](https://docs.portworx.com/scheduler/docker/volume-plugin.html#replicaset) and supply nodes value as semicolon separated values
 
 ## 1.3.0 
 
-Upgrade Note 1: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
+*Upgrade Note 1*: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
-Upgrade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+*Upgrade Note 2*: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
 
-Upgrade Note 3: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
+*Upgrade Note 3*: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
 
 ### Feature updates and noteworthy changes
 
