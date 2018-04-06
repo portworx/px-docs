@@ -90,6 +90,7 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
              of volume inspects are done
 * PWX-4525 - `pxctl status` shows invalid cluster summary in some nodes when performing an upgrade from 1.2 to 1.3
 * PWX-3071 - Provide ability to force detach a remote mounted PX volume from a single node when node is down
+* PWX-4772 - Handle storage full conditions more gracefully when the backing store for a px volume gets full
 
 
 
