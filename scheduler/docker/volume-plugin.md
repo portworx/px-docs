@@ -14,7 +14,7 @@ redirect_from:
 
 Portworx implements the [Docker Volume Plugin Specification](https://docs.docker.com/engine/extend/plugins_volume/).
 
-The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdcli](https://github.com/codedellemc/dvdcli).
+The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdi](https://mesosphere.github.io/marathon/docs/external-volumes.html).
 
 ###  Discovery
 
