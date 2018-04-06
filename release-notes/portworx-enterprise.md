@@ -101,6 +101,7 @@ This is a patch update with the following fix
 * PWX-4467 - Fix hangs when successive volume inspects come to the same volume with cloudsnap in progress
 * PWX-4420 - Fix race between POD delete and volume unmounts
 * PWX-4206 - Under certain conditions, creating a snap using k8s PVC creates a new volume instead of snapshot
+* PWX-4207 - Fix nil pointer dereferences when creating snapshots via k8s
 
 
 ### Errata
