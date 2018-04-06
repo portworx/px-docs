@@ -97,7 +97,7 @@ This is a patch update with the following fix
 * PWX-3071 - Provide ability to force detach a remote mounted PX volume from a single node when node is down
 * PWX-4772 - Handle storage full conditions more gracefully when the backing store for a px volume gets full
 * PWX-4757 - Improve PX initialization during boot to handle out of quorum volumes gracefully.
-
+* PWX-4747 - Improve simultaneous large number of volume creates and volume attach/detach in multiple nodes 
 
 
 ### Errata
