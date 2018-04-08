@@ -11,7 +11,7 @@ sidebar: home_sidebar
 This guide describes a recommended workflow for a previously decommissioned node to rejoin the same cluster.
 
 1. Cleanup Portworx metadata on the node
-  * Portworx 1.3 and higher: `/opt/pwx/bin/pxctl sv node-wipe`
+  * Portworx 1.3 and higher: `/opt/pwx/bin/pxctl sv node-wipe --all`
   * Portworx 1.2: `rm -rf /etc/pwx`
 
 2. Restart Portworx pod on the node by cleaning up labels.
