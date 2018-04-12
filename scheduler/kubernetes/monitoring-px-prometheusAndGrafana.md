@@ -31,8 +31,10 @@ The prometheus operator manages 3 customer resource definitions namely:
 ## About Grafana
 Grafana is a dashboarding and visualization tool with integrations to several timeseries datasources. It is used to create dashboards for the monitoring data with customizable visualizations. We would use Prometheus as the source of data to view Portworx monitoring metrics.
 
-### Prerequisites
+## Prerequisites
 - A running Portworx cluster.
+
+## Installation
 
 #### Install the Prometheus Operator
 Create a file named `prometheus-operator.yaml` with the below contents and apply the spec.
