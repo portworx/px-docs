@@ -36,7 +36,7 @@ Grafana is a dashboarding and visualization tool with integrations to several ti
 
 ## Installation
 
-#### Install the Prometheus Operator
+### Install the Prometheus Operator
 Create a file named `prometheus-operator.yaml` with the below contents and apply the spec.
 
 ```
@@ -152,7 +152,7 @@ spec:
 
 `kubectl apply -f <prometheus-operator.yaml>`
 
-#### Install the Service Monitor
+### Install the Service Monitor
 
 Create a file named `service-monitor.yaml` with the below contents and apply the spec.
 ```
@@ -176,7 +176,7 @@ spec:
 
 `kubectl apply -f <service-monitor.yaml>`
 
-#### Install the Alertmanager
+### Install the Alertmanager
 Create a file named `alertmanager.yaml` with the following contents and create a secret from it.
 Make sure you add the relevant email addresses in the below config.
 ```
@@ -240,7 +240,7 @@ spec:
 ```
 `kubectl apply -f alertmanager-service.yaml`
 
-#### Install Prometheus
+### Install Prometheus
 
 Create a file named `prometheus-rules.yaml` with the following contents and apply the spec.
 ```
@@ -446,11 +446,11 @@ spec:
 ```
 `kubectl apply -f prometheus-cluster.yaml`
 
-#### Post Install verification
+### Post Install verification
 
 Navigate to the Prometheus web UI by accessing the service over the `NodePort 30900` . You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
 
-#### Installing Grafana
+### Installing Grafana
 
 Download the below files in a folder named `grafanaConfigurations`
 
@@ -539,7 +539,7 @@ Create a datasource named `prometheus`. Enter the Prometheus endpoint as obtaine
 
 ![grafanadatasource](/images/datasource-creation-grafana.png){:width="655px" height="200px"}
 
-#### Post install verification
+### Post install verification
 
 Select the Portworx volume metrics dashboard on Grafana to view the Portworx metrics.
 ![grafanadashboard](/images/grafana-portworx-dashboard.png){:width="655px" height="200px"}
