@@ -29,6 +29,7 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 ```bash
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-account
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portworx-pvc-controller-account
+oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
 ```
 
 ### Generate the spec
