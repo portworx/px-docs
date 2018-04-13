@@ -42,10 +42,10 @@ This script will also monitor the above operations.
 ### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image.
-For example below command upgrades Portworx to _portworx/oci-monitor:1.3.0-rc5_ image.
+For example below command upgrades Portworx to _portworx/oci-monitor:1.3.1_ image.
 
 ```
-curl -fsL https://install.portworx.com/1.3.0/upgrade | bash -s -- -t 1.3.0-rc5
+curl -fsL https://install.portworx.com/1.3.0/upgrade | bash -s -- -t 1.3.1
 ```
 
 ### Disable scaling down of shared Portworx applications during the upgrade
