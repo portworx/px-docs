@@ -18,10 +18,12 @@ This is a patch release with shared volume performance and stability fixes
 
 ### Key Fixes:
 
-* Make adding and removing k8s node labels asynchronous to help with large number volume creations in parallel
-* Fix nodes option in docker inline volume create and supply nodes value as semicolon separated values
 * Fix namespace client crashes when client list is generated when few client nodes are down.
 * Allow read/write snapshots in k8s annotations
+* Make adding and removing k8s node labels asynchronous to help with large number volume creations in parallel
+* Fix PX crash when a snapshot is taken at the same time as node being marked down because of network failures
+* Fix nodes option in docker inline volume create and supply nodes value as semicolon separated values
+
 
 
 
