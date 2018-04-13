@@ -14,9 +14,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.1 (WIP)
 
-### New Features:
-
-* SharedV4 - New Architecture for Shared Volumes - Limited Release
+This is a patch release with shared volume performance and stability fixes
 
 ### Key Fixes:
 
