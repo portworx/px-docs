@@ -16,7 +16,12 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 
 {% include px-k8s-prereqs.md %}
 
-**Version**
+**Red Hat account**
+
+Portworx container for Openshift resides in [RedHat's container repository](https://access.redhat.com/containers/#/registry.connect.redhat.com/portworx/px-enterprise), and needs to be installed using your Red Hat account's username and password.
+You can register Red Hat account for free at https://www.redhat.com/wapps/ugc/register.html.
+
+**Openshift Version**
 
 Portworx supports Openshift 3.7 and above.
 
@@ -32,9 +37,24 @@ oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:portw
 oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
 ```
 
+### Prepare docker-registry credentials secret
+
+To install Portworx for Openshift, you will require a valid Red Hat account ([register here](https://www.redhat.com/wapps/ugc/register.html)), and configured [Kubernetes secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config) with username/password credentials:
+
+```bash
+# confirm the username/password works  (e.g. user:john-rhel, passwd:s3cret)
+docker login -u john-rhel -p s3cret registry.connect.redhat.com
+> Login Succeeded
+
+# configure username/password as a kubernetes "docker-registry" secret  (e.g. "regcred")
+oc create secret docker-registry regcred --docker-server=registry.connect.redhat.com \
+  --docker-username=john-rhel --docker-password=s3cret --docker-email=test@acme.org \
+  -n kube-system
+```
+
 ### Generate the spec
 
->**Note:**<br/> Make sure you give _osft=true_ as part of the parameters while generating the spec.
+>**Note:**<br/> Make sure to select "[x] Openshift" and provide "Kubernetes docker-registry secret: _regcred_" while generating the spec  (i.e. the spec-URL should have the _osft=true_ and _rsec=regcred_ parameters defined).
 
 {% include k8s-spec-generate.md %}
 
@@ -68,7 +88,7 @@ parameters:
 * Create a new project "hello-world".
 
 * Import and deploy [this mysql application template](/k8s-samples/px-mysql-openshift.json?raw=true)
-    * For _STORAGE\\_CLASS\\_NAME_, we use the storage class _px-demo-sc_ created in step before.
+    * For _STORAGE\_CLASS\_NAME_, we use the storage class _px-demo-sc_ created in step before.
 
 * Verify mysql deployment is active.
 
