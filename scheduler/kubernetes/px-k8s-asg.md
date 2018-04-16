@@ -12,7 +12,7 @@ You will learn how to dynamically provision persistent volumes using AWS Autosca
 * TOC
 {:toc}
 
-This is a guide to setup a production ready Portworx cluster using Kubernetes on AWS Autoscaling groups (ASG). This allows you to dynamically provision persistent volumes.
+This guide explains how to deploy PX as a daemonset in an ASG environment.
 
 ## Portworx in an Auto Scaling Group
 
@@ -33,7 +33,8 @@ In AWS, this can be done through the security group of the VPC to which your ins
 ## EBS volume template
 
 {% include asg/ebs-template.md ebs-vol-addendum="
-We will supply the template(s), when we create the Portworx DaemonSet spec later in this guide.
+
+We will supply these template(s) when we create the Portworx DaemonSet spec later on in this guide.
 "
 %}
 
