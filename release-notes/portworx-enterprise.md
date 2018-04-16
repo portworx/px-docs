@@ -14,6 +14,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.1.1
 
+This is a minor update to the previous 1.3.1 release
+
 * Fix to make node resync process yield better to application I/O  when some of nodes are down for a longer period of time 
   and brought back up thereby triggering the resync process.
 
