@@ -8,36 +8,54 @@ Alternately, you can use curl to generate the spec as described in [Generating P
 If using secure etcd provide "https" in the URL and make sure all the certificates are in the _/etc/pwx/_ directory on each host which is bind mounted inside PX container.
 
 #### Using Secrets to Provision Certificates
->**Note for ASG users:**<br/>When using PX with Auto Scaling Groups in AWS, you should use Secrets to have Kubernetes provision the ETCD certificates.  This way, the certificates will be provisioned on any new EC2 instance automatically.
+It is recommended to use Kubernetes Secrets to provide ETCD certificates to Portworx. This way, the certificates will be automatically mounted when new nodes join the cluster.
 
-Use `kubectl` to create the secret, for example:
-
+Copy all your etcd certificates and key in a folder _etcd-secrets/_ to create a Kubernetes secret from it.
 ```
-# kubectl -n kube-system create secret generic etcd-certs --from-file=etcd-secrets/
+# ls etcd-secrets
+etcd-ca etcd-cert   etcd-key
 ```
 
-Now edit the Portworx spec file to reference the certificates.  For example, assuming the names of the files are `pwx-ca.crt` `pwx-user-cert.crt` and `pwx-user-key.key`, modify the spec file as follows:
-
+Use `kubectl` to create the secret named `px-etcd-certs` from the above files:
 ```
+# kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
+```
+
+Now edit the Portworx spec file to reference the certificates. Given the names of the files are `etcd-ca`, `etcd-cert` and `etcd-key`, modify the _volumeMounts_ and _volumes_ sections as follows:
+```
+  volumeMounts:
   - mountPath: /etc/pwx/etcdcerts
     name: etcdcerts
 ```
 
 ```
+  volumes:
   - name: etcdcerts
     secret:
-      secretName: etcd-certs
+      secretName: px-etcd-certs
       items:
-      - key: pwx-ca.crt
-        path: pwx-ca.crt
-      - key: pwx-user-cert.crt
-        path: pwx-user-cert.crt
-      - key: pwx-user-key.key
-        path: pwx-user-key.key
+      - key: etcd-ca
+        path: pwx-etcd-ca.crt
+      - key: etcd-cert
+        path: pwx-etcd-cert.crt
+      - key: etcd-key
+        path: pwx-etcd-key.key
+```
+
+Now that the certificates are mounted at `/etc/pwx/etcdcerts`, change the portworx container args to use the correct certificate paths:
+```
+  containers:
+  - name: portworx
+    args:
+      ["-c", "test-cluster", "-a", "-f",
+      "-ca", "/etc/pwx/etcdcerts/pwx-etcd-ca.crt",
+      "-cert", "/etc/pwx/etcdcerts/pwx-etcd-cert.crt",
+      "-key", "/etc/pwx/etcdcerts/pwx-etcd-key.key",
+      "-x", "kubernetes"]
 ```
 
 #### Installing behind the HTTP proxy
 
-During the installation Portworx may require access to the Internet, to fetch kernel headers if they are not available locally on the host system.  If your cluster runs behind the HTTP proxy, you will need to expose _PX\_HTTP\_PROXY_ and/or _PX\_HTTPS\_PROXY_ environment variables to point to your HTTP proxy when starting the DaemonSet. 
+During the installation Portworx may require access to the Internet, to fetch kernel headers if they are not available locally on the host system.  If your cluster runs behind the HTTP proxy, you will need to expose _PX\_HTTP\_PROXY_ and/or _PX\_HTTPS\_PROXY_ environment variables to point to your HTTP proxy when starting the DaemonSet.
 
 Use _e=PX\_HTTP\_PROXY=\<http-proxy>,PX\_HTTPS\_PROXY=\<https-proxy>_ query param when generating the DaemonSet spec.
