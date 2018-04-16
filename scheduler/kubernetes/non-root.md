@@ -12,8 +12,8 @@ This document describes how to use portworx volumes with Docker containers runni
 You can add the following section in your Pod spec to set a GID for the portworx volume mount point inside the application container.
 
 ```
-# Allow non-root user to access PersistentVolume
   spec:
+    # Allow non-root user to access PersistentVolume
     securityContext:
       fsGroup: 1000
     containers:
