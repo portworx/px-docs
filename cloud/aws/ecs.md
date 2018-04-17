@@ -78,6 +78,7 @@ The installation and setup of PX OCI bundle is a 4-step process:
   1. Install the PX OCI bundle
   2. Configure PX under runC
   3. Download and Activate the Portworx service
+  4. Enable log rotation
 
   <a name="install_step1"></a>
   #### Step 2.1: Install the PX OCI bundle
@@ -115,6 +116,25 @@ The installation and setup of PX OCI bundle is a 4-step process:
   sudo chmod 755 /etc/rc.d/init.d/portworx
   sudo chkconfig --add portworx
   sudo /etc/init.d/portworx start
+  ```
+  
+  #### Step 2.4: Enable log rotation
+  
+  ```
+  cat > /etc/logrotate.d/portworx << _EOF
+    /var/log/portworx.log {
+      minsize 50M
+      daily
+      rotate 5
+      missingok
+      compress
+      notifempty
+      nocreate
+      postrotate
+          service portworx restart >/dev/null 2>&1 || true
+      endscript
+  }
+  _EOF
   ```
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
