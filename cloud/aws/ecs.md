@@ -73,7 +73,128 @@ Note that there is no need to format the EBS volumes once they are created and a
 
 Install PX on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
 
-To install PX on each ECS instance, follow the instructions [here](/runc/index.html).
+The installation and setup of PX OCI bundle is a 4-step process:
+
+  1. Install the PX OCI bundle
+  2. Configure PX under runC
+  3. Add Daemon for Portworx OCI service
+  4. Enable and start Portworx service
+
+  <a name="install_step1"></a>
+  #### Step 1: Install the PX OCI bundle
+  
+  Portworx provides a Docker based installation utility to help deploy the PX OCI
+  bundle.  This bundle can be installed by running the following Docker container
+  on your host system:
+
+  ##### To get the 1.3 release
+  ```bash
+  $ latest_stable=$(curl -fsSL 'http://install.portworx.com:8080?type=dock&stork=false' | awk '/image: / {print $2}')
+  # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
+  $ sudo docker run --entrypoint /runc-entry-point.sh \
+	  --rm -i --privileged=true \
+      -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+      $latest_stable
+```
+
+  #### Step 2: Configure PX under runC
+  ```bash
+  #  Basic installation
+  $ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
+    -k etcd://myetc.company.com:2379 \
+    -s /dev/xvdb -s /dev/xvdc {{ include.sched-flags }}
+  ``` 
+
+  ##### Command-line arguments
+
+  {% include cmdargs.md %}
+
+  #### Step 3: Install the following file into "/etc/rc.d/init.d/portworx":
+
+  ```bash
+  sudo cat > /etc/rc.d/init.d/portworx << '_EOF'
+  #!/bin/sh 
+  #
+  #       /etc/rc.d/init.d/portworx 
+  #
+  #       Daemon for Portworx OCI service 
+  #
+  # chkconfig:   2345 90 10
+  # description: Daemon for Portworx OCI service 
+
+  ### BEGIN INIT INFO
+  # Provides:             portworx
+  # Required-Start:       $local_fs $remote_fs
+  # Required-Stop:        $local_fs $remote_fs
+  # Should-Start:         docker
+  # Should-Stop:          docker
+  # Default-Start:        2 3 4 5
+  # Default-Stop:         0 1 6
+  # Short-Description:    start and stop portworx service
+  # Description:          Daemon for Portworx OCI service
+  ### END INIT INFO
+
+  # Source function library.
+  [ -f /etc/rc.d/init.d/functions ] && . /etc/rc.d/init.d/functions
+
+  prog="portworx"
+  pidfile="/var/run/$prog.pid"
+  logfile="/var/log/$prog.log"
+
+  [ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+  RETVAL=0
+  case "${1}" in
+        start)
+		        printf "Starting $prog:\t"
+		        nohup /opt/pwx/bin/px-runc run --name $prog > $logfile 2>&1 &
+		        PID=$!
+		        RETVAL=$?
+		        if [ $RETVAL -eq 0 ]; then
+			            echo -n $"  OK  "
+			            echo $PID > $pidfile
+		        else
+			            echo -n $"FAILED"
+		        fi
+                ;;
+        stop)
+		        printf "Stopping $prog:\t"
+		        /opt/pwx/bin/runc kill $prog
+		        RETVAL=$?
+		        if [ $RETVAL -eq 0 ]; then
+			            echo -n $"  OK  "
+			            rm -f $pidfile
+		        else
+			            echo -n $"FAILED"
+		        fi
+                ;;
+
+	    status)
+		        /opt/pwx/bin/runc state $prog
+		        echo
+		        ;;
+
+        force-reload|restart)
+                ${0} stop; sleep 3; ${0} start
+                ;;
+
+        *)
+                echo $"Usage: ${0} {start|stop|restart|status}"
+                ;;
+  esac
+
+  exit $RETVAL
+  _EOF
+  ```
+
+  #### Step 4: Enable and activate the Portworx service
+  
+  ```
+  sudo chmod 777 /etc/init.d/portworx
+  sudo chkconfig --add portworx 
+  sudo /etc/init.d/portworx start
+  ```
+
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
 From your linux workstation download and setup AWS ECS CLI utilities
