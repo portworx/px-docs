@@ -417,7 +417,7 @@
                     "stack": false,
                     "steppedLine": false,
                     "targets": [{
-                        "expr": "px_dev_iodepth{volumeid=~\"$volumeid\"}",
+                        "expr": "px_volume_dev_depth_io{volumeid=~\"$volumeid\"}",
                         "format": "time_series",
                         "intervalFactor": 2,
                         "legendFormat": "{{volumeid}}",
