@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Create shared PVC"
+title: "Use PX volumes (PVCs) with Docker containers running as a non-root user"
 keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
 meta-description: "Use PX volumes (PVCs) with Docker containers running as a non-root user."
