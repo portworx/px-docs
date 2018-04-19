@@ -23,6 +23,41 @@ Apache Kafka uses [Zookeeper](https://zookeeper.apache.org/) for maintaining con
 
 ## Install
 
+### RBAC changes needed , if Kubernetes 1.8+
+
+Create ClusterRole and ClusterRoleBinding to give permission to get nodes.
+Create ```node-reader.yaml``` with the following content.
+
+```
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: node-reader
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kafka-node-reader
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: node-reader
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: kafka
+```
+
+Apply the manifest
+
+```
+kubectl apply -f node-reader.yaml
+```
+
 ### Portworx StorageClass for Volume Provisioning
 
 Portworx provides volume(s) to Zookeeper as well as Kafka. 
