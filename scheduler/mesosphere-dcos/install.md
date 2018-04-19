@@ -21,11 +21,11 @@ through CSI.
 
 NOTE: Please ensure that your mesos private agents have unmounted block devices that can be used by Portworx.
 
-### (Optional) Deploy an AWS Portworx-ready cluster 
+### (Optional) Deploy an AWS Portworx-ready cluster
 Using [this AWS CloudFormation template](/scheduler/mesosphere-dcos/px-ready-aws-cf.html), you can easily deploy a DCOS 1.10 cluster that is "Portworx-ready".
 
 ### Pre-install (only required if moving from a Portworx Docker installation)
-If you are moving from a Docker install or Portworx to an OCI install, please make sure that the Portworx service is stopped 
+If you are moving from a Docker install or Portworx to an OCI install, please make sure that the Portworx service is stopped
 on all the agents before updating to the OCI install. To do this run the following command on all your private agents:
 ```
 $ sudo systemctl stop portworx
@@ -65,6 +65,9 @@ With PX Enterprise you can increase the number of nodes in the PX Cluster to a v
 ![Portworx Install options](/images/dcos-px-install-options.png){:width="655px" height="200px"}
 
 >**Note:**<br/>For a full list of installtion options, please look [here](/runc/options.html#opts).
+
+#### Secrets Options
+To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, refer [Portworx with DC/OS Secrets](/secrets/portworx-with-dcos-secrets.html).
 
 #### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can
