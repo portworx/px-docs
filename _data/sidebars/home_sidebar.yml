@@ -348,6 +348,8 @@
       url: /secrets/portworx-with-vault.html
     - title: Portworx with AWS KMS
       url: /secrets/portworx-with-aws-kms.html
+    - title: Portworx with DC/OS Secrets
+      url: /secrets/portworx-with-dcos-secrets.html
   - title: Lighthouse
     folderitems:
     - title: Install Lighthouse
