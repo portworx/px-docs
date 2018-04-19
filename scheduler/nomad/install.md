@@ -26,40 +26,11 @@ Current use of Portworx with Nomad is **experimental**.
 
 ## Install
 
-Portworx deploys on Nomad as a `system` job.  
-Please use [this job file](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/scheduler/nomad/portworx.nomad) as a reference for deploying 
-Portworx on an existing Nomad system.
+Portworx can install easily through either Terraform or Ansible.
+To install with Terraform, please use the [Portworx Module](https://registry.terraform.io/modules/portworx/portworx-instance/)
+To install with Ansible, please use the [Terraporx Ansible Playbook](https://github.com/portworx/terraporx/tree/master/automation/ansible/portworx)
 
-Portworx runs on the Nomad clients.   As a requirement, Nomad clients must be configured
-with the following client options:
-```
-client {
-  enabled = true
-  options {
-    "driver.raw_exec.enable" = "1"
-    "docker.privileged.enabled" = "true"
-  }
-}
-```
-
-The following arguments to `px-runc` should be customized as per the local environment:
-```
-args = [ "-c", "sudo docker run --entrypoint /runc-entry-point.sh \
-                      --rm -i --privileged=true \
-                      -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx  \
-                      portworx/px-enterprise:1.2.22 --upgrade ;\
-                /opt/pwx/bin/runc delete -f portworx; \
-                /opt/pwx/bin/px-runc run -k consul:http://127.0.0.1:8500 \
-                      -c pxcluster -f -a -d eth0 -m eth0" ]
-```
-
-The above command has 3 parts:
-
-1. Install (or upgrade) the Portworx runC bootstrap 
-2. Delete any existing Portworx runC containers that may be active
-3. Run the Portworx runC container with cluster-specific arguments
-
-All Portworx command line options are documented [here](/runc/options.html)
+Please refer to the [Portworx installation arguments](/runc/options.html) for more detail. 
 
 Nomad has a very natural alignment with `consul`.
 Therefore having Portworx use `consul` as the clustered `kvdb` when 
@@ -75,64 +46,21 @@ When using the `hashi-porx` stack, the status for the Nomad and Consul clusters
 can be accessed through the GUI via the `nomad_url` output variable, which refers to port 3000 
 of the external load balancer.
 
-## Monitor Portworx cluster status
-
-Nomad jobs can be monitored through the GUI (port 3000) or the REST API (port 4646).
-
-For the Nomad REST API, querying the status of the job with ID `portworx` 
-can be done as follows:
-```
-curl http://nomad_url:4646/v1/job/portworx | jq .
-```
-
-From any of the `nomad` client nodes, the CLI command:
-```
-nomad job status portworx
-```
-will retrieve the Nomad `Allocation IDs` for the job `portworx`.
-
-Each Allocation refers to a running instance of Portworx.
-
-The logs for an instance of Portworx can be viewed by referencing the `Allocation ID`:
-```
-nomad logs AllocID
-```
-where `AllocID` refers to a valid Allocation ID.
 
 ## Scaling
-Portworx is deployed through the Nomad `system` scheduler, which behaves similarly
-to a Kubernetes `daemonset`.  The `system` scheduler is used to register jobs 
-that should be run on all clients meeting a job's constraints. 
-The system scheduler is also invoked when clients join the cluster 
-and is useful for deploying and managing tasks that should be present on every node in the cluster.
 
-There are no additional requirements to install Portworx on the new nodes 
-in your Nomad cluster.
-
-If using the `hashi-porx` stack on AWS, simply change the corresponding nomad client 
-auto-scaling group (via GUI or API) to have the desired number of nodes/servers.
-The new servers will be automatically provisioned and configured, with consul, nomad and Portworx.
+A Portworx cluster is uniquely defined by its `kvdb` and `clusterID` parameters.
+As long as these are consistent, a cluster can easily scale up in Terraform, 
+by using the same `kvdb` and `clusterID`, and then increasing the instance `count`.
+Similarly for Ansible, as long as the same `kvdb` and `clusterID` are used,
+any new nodes can automatically join an existing cluster.  (NB: For Ansible,
+be sure to exclude existing nodes from the inventory before running the playbook
+on the new nodes)
 
 ## Upgrade
 
-### Upgrade via GUI
-To upgrade Portworx via the Hashi GUI, select the 'portworx' job.
-Select the 'edit' icon on the upper right side.
-Change the `px-enterprise` tag to the desired release.
-Example:
-```
-    ... -v /etc/pwx:/etc/pwx  portworx/px-enterprise:1.2.22 --upgrade
-```
-Save the job.
-Upgrade time will depend on the node configuration.
-Expect the full upgrade through Nomad to take around 1 hour for AWS t2.medium clients.
-
-### Upgrade via CLI
-Update the Nomad job file to reflect the desired Portworx release tag.
-Run `nomad plan` and `nomad run` accordingly.
-Upgrade time will depend on the node configuration.
-Expect the full upgrade through Nomad to take around 1 hour for AWS t2.medium clients.
-
+Currently for Nomad, Portworx needs to be upgraded through the CLI on a node-by-node basis.
+Please see the [upgrade instructions](/maintain/upgrade.html)
 
 ## Using and Accessing Portworx
 Portworx volumes can be easily accessed through the Nomad `docker` driver 
