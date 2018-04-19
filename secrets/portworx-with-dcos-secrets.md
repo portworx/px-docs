@@ -8,12 +8,20 @@ meta-description: "Portworx can integrate with DC/OS Secrets to store your encry
 * TOC
 {:toc}
 
-Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets and credentials. This guide will get a Portworx cluster connected to DC/OS Secrets. This could be used to store secrets that will be used for encrypting Portworx volumes.
-
+Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets and credentials. This guide will help you configure Portworx to connect to DC/OS Secrets. DC/OS Secrets can then be used to store Portworx secrets for Volume Encryption and Cloud Credentials.
 >**Note:**<br/>Secrets is an DC/OS Enterprise only feature
+
+>**Note:**<br/>Supported from PX Enterprise 1.4 onwards
 
 ### Configuring DC/OS Secrets with Portworx
 
+#### Configuring permissions for Secrets
+To access secrets, Portworx needs credentials of a user. This user should have permissions to access the secrets under a base secrets path. For instance, you can grant permissions to a user to access secrets under `pwx/secrets` base path, using DC/OS enterprise cli:
+```
+# dcos security org users grant <username> dcos:secrets:default:pwx/secrets/* full
+```
+
+#### Enabling Secrets in Portworx
 During installation or when updating an existing Portworx framework, enable the feature from Secrets section.
 
 ![portworx-dcos-secret](/images/dcos-portworx-secrets-setup.png){:width=2597px" height="1287px"}
@@ -24,14 +32,8 @@ The `dcos username secret` and `dcos password secret` are the paths to secrets, 
 
 If you want only Portworx framework to access the username and password secrets path, the path should have prefix same as Portworx service name (default service name is `portworx`).
 
-Grant permissions to the user to manage secrets under path `pwx/secrets` using DC/OS enterprise cli,
-```
-# dcos security org users grant <username> dcos:secrets:default:pwx/secrets/* full
-```
-
 #### Update config.json for existing installation
-
-If the Portworx framework is already installed, we need to update the `/etc/pwx/config.json` on all nodes to start using DC/OS secrets by default. You still need to edit the framework from the above section, so that you don't have to update the *config.json* for new nodes.
+If the Portworx framework is already installed, you will need to update the `/etc/pwx/config.json` on all nodes to start using DC/OS secrets by default. You still need to edit the framework from the above section, so that you don't have to update the *config.json* for new nodes.
 
 Add the following `secret_type` and `cluster_secret_key` fields in the `secret` section to the `/etc/pwx/config.json` on each node in the cluster:
 ```
@@ -44,7 +46,10 @@ Add the following `secret_type` and `cluster_secret_key` fields in the `secret` 
     ...
 }
 ```
->**Note:**<br/>This requires a reboot of the Portworx container
+You need to restart Portworx for the *config.json* to take effect:
+```
+# sudo systemctl restart portworx
+```
 
 ### Key generation with DC/OS
 
