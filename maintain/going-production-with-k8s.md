@@ -360,11 +360,12 @@ TODO: *Update the above page to show runc*
 
 ### Software Upgrades
 
-#### Portworx Software Upgrades
+#### Portworx Upgrades
 
-  * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
-  * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken for all the volumes
-  * Upgrades can be done following this [link](https://docs.portworx.com/scheduler/kubernetes/install.html#upgrade)
+  * Work with Portworx Support before planning major upgrades
+  * Ensure all volumes have up-to-date [snapshots](https://docs.portworx.com/scheduler/kubernetes/snaps-annotations.html#managing-snapshots-through-kubectl)
+  * Ensure all volumes have up-to-date [cloudsnaps](https://docs.portworx.com/cloud/backups.html)
+  * Refer to [Upgrade Portworx on Kubernetes](https://docs.portworx.com/scheduler/kubernetes/upgrade.html)
 
 
 
