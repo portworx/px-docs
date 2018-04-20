@@ -1,12 +1,13 @@
 ---
 layout: page
-title: "Run PX under runC"
+title: "Run Portworx under runC"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
 redirect_from:
   - /scheduler/docker/systemd.html
   - /scheduler/docker/upgrade-standalone.html
   - /scheduler/docker/upgrade-px-plugin.html
+  - /runc/index.html
 ---
 
 * TOC
