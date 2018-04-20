@@ -4,7 +4,7 @@
 #
 #       Daemon for Portworx OCI service
 #
-# chkconfig:   2345 90 10
+# chkconfig:   2345 96 4
 # description: Daemon for Portworx OCI service
 
 ### BEGIN INIT INFO
@@ -33,7 +33,9 @@ RETVAL=0
 case "${1}" in
         start)
 		printf "Starting $prog:\t"
-		nohup /opt/pwx/bin/px-runc run --name $prog > $logfile 2>&1 &
+		date +"%F %T,%3N INFO STARTUP:: Removing stale $prog runC service (if any)" >> $logfile 2>&1
+		/opt/pwx/bin/runc delete -f $prog >> $logfile 2>&1
+		nohup /opt/pwx/bin/px-runc run --name $prog >> $logfile 2>&1 &
 		PID=$!
 		RETVAL=$?
 		if [ $RETVAL -eq 0 ]; then
@@ -51,7 +53,8 @@ case "${1}" in
 		printf "Stopping $prog:\t"
 		pgpid=$(/opt/pwx/bin/runc list | awk '/^portworx/{print $2}')
 		if [ "x$pgpid" != x ] && [ $pgpid -gt 0 ]; then
-                    /opt/pwx/bin/runc kill portworx
+		    date +"%F %T,%3N INFO SHUTDOWN:: Stopping $prog runC service" >> $logfile 2>&1
+		    /opt/pwx/bin/runc kill portworx >> $logfile 2>&1
 		    cnt=0
 		    while [ $cnt -le $max_retries ]; do
 			pids=$(ps --no-headers -o pid -g $pgpid | xargs)
