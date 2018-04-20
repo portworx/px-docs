@@ -36,7 +36,7 @@ If you want only Portworx framework to access the username and password secrets 
 If the Portworx framework is already installed, you will need to update the `/etc/pwx/config.json` on all nodes to start using DC/OS secrets by default. You still need to edit the framework from the above section, so that you don't have to update the *config.json* for new nodes.
 
 Add the following `secret_type` and `cluster_secret_key` fields in the `secret` section to the `/etc/pwx/config.json` on each node in the cluster:
-```
+```json
 {
     "clusterid": "",
     "secret": {
@@ -69,7 +69,7 @@ A cluster wide secret key is a common key that can be used to encrypt all your v
   --secret pwx/secrets/cluster-wide-secret-key
 Successfully set cluster secret key
 ```
-This command needs to be run just once for the cluster. If you have added the cluster secret key through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in *config.json* will be ignored for the one set through the CLI.
+This command needs to be run just once for the cluster. If you have added the [cluster secret key through the *config.json*](#update-configjson-for-existing-installation), the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in *config.json* will be ignored for the one set through the CLI.
 
 #### (Optional) Authenticating with DC/OS Secrets using Portworx cli
 
