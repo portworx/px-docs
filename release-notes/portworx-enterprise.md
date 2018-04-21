@@ -143,6 +143,12 @@ This is a patch update with the following fix
 
 * When shared volumes are configured with io_profile=cms, it results in the px-ns process restarting occasionally.
 
+## 1.2.23.0
+
+This is a minor update that fixes an panic seen in some k8s environments when the user upgraded from a older version of PX to 1.2.22
+
+PWX-5107 - Check if node spec is present before adding the node for volume state change events
+
 ## 1.2.22.0
 
 * Support SELinux enable in kernels 4.12.x and above
