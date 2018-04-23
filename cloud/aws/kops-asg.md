@@ -58,7 +58,7 @@ When generating the spec, following parameters are important for KOPS:
 
 Once you have generated the spec file, deploy Portworx.
 ```bash
-kubect apply -f px-spec.yaml
+kubectl apply -f px-spec.yaml
 ```
 
 {% include k8s-monitor-install.md %}

@@ -12,7 +12,7 @@ You will learn how to dynamically provision persistent volumes using AWS Autosca
 * TOC
 {:toc}
 
-This is a guide to setup a production ready Portworx cluster using Kubernetes on AWS Autoscaling groups (ASG). This allows you to dynamically provision persistent volumes.
+This guide explains how to deploy PX as a daemonset in an ASG environment.
 
 ## Portworx in an Auto Scaling Group
 
@@ -33,7 +33,8 @@ In AWS, this can be done through the security group of the VPC to which your ins
 ## EBS volume template
 
 {% include asg/ebs-template.md ebs-vol-addendum="
-We will supply the template(s), when we create the Portworx DaemonSet spec later in this guide.
+
+We will supply these template(s) when we create the Portworx DaemonSet spec later on in this guide.
 "
 %}
 
@@ -44,7 +45,7 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 ### Generate the Portworx Spec
 
 When generating the spec, following parameters are important:
-1. __Volume template__: In the drives option (_s_), specify the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
+1. __Volume template__: In the drives option(_s_), specify the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
 2. __AWS environment variables__: If you are using instance privileges to provide AWS permissions you can ignore setting the environment variables. If you are using environment variables, in the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. 
 
 {% include k8s-spec-generate.md %}

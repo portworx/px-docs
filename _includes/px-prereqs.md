@@ -1,6 +1,6 @@
 **Key-value store**
 
-Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
+Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions please refer to [this doc](/maintain/etcd.html).
 
 **Storage**
 

@@ -14,7 +14,7 @@ redirect_from:
 
 Portworx implements the [Docker Volume Plugin Specification](https://docs.docker.com/engine/extend/plugins_volume/).
 
-The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdcli](https://github.com/codedellemc/dvdcli).
+The plugin API allows creation, instantiation, and lifecycle management of Portworx volumes. This allows direct use by Docker, Docker swarm, and DCOS via [dvdi](https://mesosphere.github.io/marathon/docs/external-volumes.html).
 
 ###  Discovery
 
@@ -56,9 +56,28 @@ Options:
     --opt snap_interval=value           snapshot interval in minutes, 0 disables snaps (default: 0)
     --opt snap_schedule=value           snapshot schedule specification. PX 1.3 and higher. (See "Scheduled snapshots" below)
     --opt aggregation_level=value       aggregation level: [1..3 or auto] (default: "1")
-    --opt nodes=value                   comma-separated Node Id(s)
+    --opt nodes="value"                 semicolon-separated Node Id(s)
 
 ```
+
+#### Replicaset
+
+**Specify replica nodes**
+
+Multiple nodes through docker volume create is supported from 1.3.0.1
+
+Use the _nodes_ option to specify the nodes you wish the replicas to reside on.
+
+Some valid examples of this are:
+
+* nodes="4c4b3f62-3d23-43fb-9fa0-3b95b3236efc;7adc01d2-7c96-4446-8d2d-8f5e1035ec1e"
+* nodes="4c4b3f62-3d23-43fb-9fa0-3b95b3236efc"
+* nodes='4c4b3f62-3d23-43fb-9fa0-3b95b3236efc;7adc01d2-7c96-4446-8d2d-8f5e1035ec1e'
+* nodes='4c4b3f62-3d23-43fb-9fa0-3b95b3236efc'
+* nodes=4c4b3f62-3d23-43fb-9fa0-3b95b3236efc
+
+It is important to note that the number of nodes should equal the _repl_ option otherwise Portworx will pick a node for the remaining requested replica's.
+
 #### Snapshot
 
 **Scheduled snapshots**

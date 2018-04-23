@@ -229,7 +229,7 @@ bb605ca6-c014-4e6c-8a23-55c967d1a963	10.99.117.135	0.625782	8.4 GB	7.9 GB		N/A		
 Using `pxctl volume ha-update`, here is how to increase the replication factor. Note, the command below sets the volume to replicate to the node with NodeID b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
 
 ```
-sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+sudo /opt/pwx/bin/pxctl volume ha-update --repl=2 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
 ```
 
 Once the replication completes and the new node is added to the replication set, the `pxctl volume inspect` shows both the nodes.
@@ -272,7 +272,7 @@ AlertID	VolumeID		Timestamp			Severity	AlertType			Description
 The ha-update command can also be used to reduce the replication factor as well.
 
 ```
-sudo /opt/pwx/bin/pxctl volume ha-update clitest --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8
+sudo /opt/pwx/bin/pxctl volume ha-update  --repl=1 --node b1aa39df-9cfd-4c21-b5d4-0dc1c09781d8 clitest
 Update Volume Replication: Replication update started successfully for volume clitest
 ```
 Here is the output of the volume inspect command after the replication factor has been reduced to 1

@@ -1,18 +1,4 @@
-An EBS volume template defines a set of EBS volumes that Portworx will use as a reference. There are 2 ways you can provide this template to Portworx.
-
-### Using existing EBS volumes as templates
-
-Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
-
-For example, create two volumes as:
-```
-vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
-vol-0055e5913b79fb49d: 1000 GiB GP2
-```
-
-Ensure that these EBS volumes are created in the same region as the auto scaling group.
-
-Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in to PX as a parameter as a storage device.
+An EBS volume template defines the EBS volume properties that Portworx will use as a reference. There are 2 ways you can provide this template to Portworx.
 
 ### Using a template specification
 
@@ -35,5 +21,20 @@ See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above
 
 * `"type=gp2,size=200"`
 * `"type=gp2,size=100","type=io1,size=200,iops=1000"`
+
+
+### Using existing EBS volumes as templates
+
+You can also reference an existing EBS volume as a template.  Create at least one EBS volume using the AWS console or AWS CLI. This volume (or a set of volumes) will serve as a template EBS volume(s). On every node where PX is brought up as a storage node, a new EBS volume(s) identical to the template volume(s) will be created.
+
+For example, create two volumes as:
+```
+vol-0743df7bf5657dad8: 1000 GiB provisioned IOPS
+vol-0055e5913b79fb49d: 1000 GiB GP2
+```
+
+Ensure that these EBS volumes are created in the same region as the auto scaling group.
+
+Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in to PX as a parameter as a storage device.
 
 {{ include.ebs-vol-addendum }}

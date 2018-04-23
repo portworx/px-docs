@@ -3,7 +3,7 @@ layout: page
 title: "Create shared PVC"
 keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
-meta-description: "Looking for a volume which could be shared between your applications  in a Kubernetes cluster? Follow this step-by-step tutorial on how to use portworx shared volumes with k8s."
+meta-description: "Looking for a volume which could be shared between your applications in a Kubernetes cluster? Follow this step-by-step tutorial on how to use portworx shared volumes with k8s."
 ---
 
 This document describes how to use portworx shared volumes in your Kubernetes cluster.

@@ -62,12 +62,16 @@
             url: /scheduler/kubernetes/snaps.html
           - title: Create shared PVCs
             url: /scheduler/kubernetes/shared-volumes.html
+          - title: Access via non-root users
+            url: /scheduler/kubernetes/non-root.html
         - title: Run Statefulsets
           url: /scheduler/kubernetes/statefulsets.html
         - title: Test Failover
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Update Portworx Geography Info
+          url: /scheduler/kubernetes/update-px-geography.html
       - title: Operate and Maintain
         folderitems:
         - title: Upgrade
@@ -84,8 +88,12 @@
           url: /scheduler/kubernetes/k8s-node-maintenance.html
         - title: Control Portworx systemd service
           url: /scheduler/kubernetes/k8s-px-systemd-service.html
-        - title: Manage PX logs using ELK and Fluentd
-          url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+        - title: Logging and Monitoring
+          folderitems:
+          - title: Manage PX logs using ELK and Fluentd
+            url: /scheduler/kubernetes/logmanagement-efk-k8s.html
+          - title: Manage PX using Prometheus and Grafana
+            url: /scheduler/kubernetes/monitoring-px-prometheusAndGrafana.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
@@ -94,7 +102,7 @@
         url: /scheduler/mesosphere-dcos/install-universe.html
       - title: Upgrade
         url: /scheduler/mesosphere-dcos/upgrade-oci.html
-      - title: Stateful frameworks
+      - title: Stateful Frameworks
         folderitems:
         - title: About
           url: /scheduler/mesosphere-dcos/frameworks.html
@@ -116,11 +124,13 @@
           url: /maintain/going-production-with-dcos.html
         - title: Constraining Applications to PX nodes
           url: /scheduler/mesosphere-dcos/constraints.html
-        - title: Dynamically creating volumes
+        - title: Dynamically Creating Volumes
           url: /scheduler/mesosphere-dcos/inline.html
-        - title: Scaling stateful applications
+        - title: Update Portworx Geography Info
+          url: /manage/update-px-geography.html
+        - title: Scaling Stateful Applications
           url: /scheduler/mesosphere-dcos/volume-scaling.html
-        - title: Cleanup frameworks
+        - title: Cleanup Frameworks
           url: /scheduler/mesosphere-dcos/framework-cleanup.html
       - title: FAQ
         folderitems:
@@ -164,8 +174,8 @@
       url: /manage/encrypted-volumes.html
     - title: Class of Service
       url: /manage/class-of-service.html
-    - title: Updating Portworx Rack Info
-      url: /manage/update-px-rack.html
+    - title: Update Portworx Geography Info
+      url: /manage/update-px-geography.html
     - title: Legacy and External Access
       folderitems:
       - title: NFS
@@ -340,6 +350,8 @@
       url: /secrets/portworx-with-vault.html
     - title: Portworx with AWS KMS
       url: /secrets/portworx-with-aws-kms.html
+    - title: Portworx with DC/OS Secrets
+      url: /secrets/portworx-with-dcos-secrets.html
   - title: Lighthouse
     folderitems:
     - title: Install Lighthouse

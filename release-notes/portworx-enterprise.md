@@ -12,14 +12,38 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.3.1.1
+
+This is a minor update to the previous 1.3.1 release
+
+* Fix to make node resync process yield better to application I/O  when some of nodes are down for a longer period of time 
+  and brought back up thereby triggering the resync process.
+
+## 1.3.1
+
+This is a patch release with shared volume performance and stability fixes
+
+### Key Fixes:
+
+* Fix namespace client crashes when client list is generated when few client nodes are down.
+* Allow read/write snapshots in k8s annotations
+* Make adding and removing k8s node labels asynchronous to help with large number volume creations in parallel
+* Fix PX crash when a snapshot is taken at the same time as node being marked down because of network failures
+* Fix nodes option in docker inline volume create and supply nodes value as semicolon separated values
+
+## 1.3.0.1
+
+This is a patch update with the following fix
+
+* PWX-5115 - Fix `nodes` option in [docker inline volume create](https://docs.portworx.com/scheduler/docker/volume-plugin.html#replicaset) and supply nodes value as semicolon separated values
 
 ## 1.3.0 
 
-Upgrade Note 1: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
+***Upgrade Note 1***: Upgrade to 1.3 requires a node restart in non-k8s environments. In k8s environments, the cluster does a rolling upgrade
 
-Upgrade Note 2: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
+***Upgrade Note 2***: Ensure all nodes in PX cluster are running 1.3 version before increasing replication factor for the volumes
 
-Upgrade Note 3: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
+***Upgrade Note 3***: Container information parsing code has been disabled and hence the PX-Lighthouse up to 1.1.7 version will not show the container information page. This feature will be back in future releases and with the new lighthouse
 
 ### Feature updates and noteworthy changes
 
@@ -90,7 +114,13 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
              of volume inspects are done
 * PWX-4525 - `pxctl status` shows invalid cluster summary in some nodes when performing an upgrade from 1.2 to 1.3
 * PWX-3071 - Provide ability to force detach a remote mounted PX volume from a single node when node is down
-
+* PWX-4772 - Handle storage full conditions more gracefully when the backing store for a px volume gets full
+* PWX-4757 - Improve PX initialization during boot to handle out of quorum volumes gracefully.
+* PWX-4747 - Improve simultaneous large number of volume creates and volume attach/detach in multiple nodes
+* PWX-4467 - Fix hangs when successive volume inspects come to the same volume with cloudsnap in progress
+* PWX-4420 - Fix race between POD delete and volume unmounts
+* PWX-4206 - Under certain conditions, creating a snap using k8s PVC creates a new volume instead of snapshot
+* PWX-4207 - Fix nil pointer dereferences when creating snapshots via k8s
 
 
 ### Errata
@@ -112,6 +142,12 @@ Upgrade Note 3: Container information parsing code has been disabled and hence t
 * Key Management with AWS KMS doesn't work anymore because of API changes on the AWS side. Will be fixed in an upcoming release. Refer to this link for additional details. https://github.com/aws/aws-cli/issues/1043
 
 * When shared volumes are configured with io_profile=cms, it results in the px-ns process restarting occasionally.
+
+## 1.2.23.0
+
+This is a minor update that fixes an panic seen in some k8s environments when the user upgraded from a older version of PX to 1.2.22
+
+PWX-5107 - Check if node spec is present before adding the node for volume state change events
 
 ## 1.2.22.0
 
