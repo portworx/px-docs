@@ -5,7 +5,7 @@
     - title: Install with a Container Orchestrator
       url: /#install-with-a-container-orchestrator
     - title: Install Now
-      url: /install/install_now.html
+      url: /install/install-now.html
     - title: Developer Edition
       url: /developer/index.html
     - title: Licensing
@@ -267,9 +267,9 @@
     - title: Managing OCI runC and systemd
       folderitems:
       - title: Run Portworx under runC
-        url: /runc/
+        url: /maintain/oci-runc.html
       - title: Upgrade
-        url: /runc/#upgrade-px-oci
+        url: /maintain/oci-runc.html#upgrade-px-oci
       - title: Install Arguments
         url: /runc/options.html
     - title: Manage Users and Groups
