@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-Stork is an opensource project that helps achieve even tighter integration of
+Stork is the Portworx's storage scheduler for Kubernetes that helps achieve even tighter integration of
 Portworx with Kubernetes. It allows users to co-locate pods with their data,
 provides seamaless migration of pods in case of storage errors and makes it
 easier to create and restore snapshots of Portworx volumes
@@ -44,3 +44,8 @@ An example of a mysql deployment which uses Stork as the scheduler can be found
 With Stork you can create and restore snapshots of Portworx volumes from Kubernetes. Instructions to
 perform these operations can be found
 [here](/scheduler/kubernetes/snaps.html)
+
+## Contribute
+
+Portworx welcomes contributions to stork, which is open-source and repository is at https://github.com/libopenstorage/stork
+

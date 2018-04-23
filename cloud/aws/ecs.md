@@ -73,7 +73,75 @@ Note that there is no need to format the EBS volumes once they are created and a
 
 Install PX on each ECS instance.  Portworx will use the EBS volumes you provisioned in step 4.
 
-To install PX on each ECS instance, follow the instructions [here](/runc/index.html).
+The installation and setup of PX OCI bundle is a 4-step process:
+
+  1. Install the PX OCI bundle
+  2. Configure PX under runC
+  3. Download and Activate the Portworx service
+  4. Enable log rotation
+
+<a name="install_step1"></a>
+#### Step 2.1: Install the PX OCI bundle
+  
+Portworx provides a Docker based installation utility to help deploy the PX OCI
+bundle.  This bundle can be installed by running the following Docker container
+on your host system:
+
+```bash
+latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+# Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
+sudo docker run --entrypoint /runc-entry-point.sh \
+    --rm -i --privileged=true \
+    -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+    $latest_stable
+```
+
+#### Step 2.2: Configure PX under runC
+
+Now that the PX OCI bundle has been deployed, we have to configure it by running the following:
+
+```bash
+# Basic installation
+sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
+  -k etcd://myetc.company.com:2379 \
+  -s /dev/xvdb -s /dev/xvdc {{ include.sched-flags }}
+``` 
+
+##### Command-line arguments
+
+  {% include cmdargs.md %}
+
+#### Step 2.3: Download and Activate the Portworx service
+
+Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:
+
+```bash
+sudo curl https://docs.portworx.com/cloud/aws/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
+sudo chmod 755 /etc/rc.d/init.d/portworx
+sudo chkconfig --add portworx
+sudo service portworx start
+```
+  
+#### Step 2.4: Enable log rotation
+
+Finally, since the Portworx service creates some amount of log-files, we need to ensure these logs are recycled on regular basis, using systems' "logrotate" service:
+  
+```bash
+cat > /etc/logrotate.d/portworx << _EOF
+/var/log/portworx.log {
+  minsize 50M
+  daily
+  rotate 5
+  missingok
+  compress
+  notifempty
+  nocreate
+  postrotate
+      service portworx restart >/dev/null 2>&1 || true
+  endscript
+}
+_EOF
+```
 
 ### Step 3: Setup ECS task with PX volume from ECS CLI workstation
 From your linux workstation download and setup AWS ECS CLI utilities

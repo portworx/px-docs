@@ -37,7 +37,7 @@ kubectl get pods -o wide -n kube-system -l name=portworx
     b. If you don't, you can use the Web form:
     ```bash
     VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-    kubectl delete -f 'https://install.portworx.com?kbver=$VER'
+    kubectl delete -f "https://install.portworx.com?kbver=$VER"
     ```
 
 4. Remove the 'px/enabled' label from your nodes
@@ -56,7 +56,7 @@ The commands used in this section are DISRUPTIVE and will lead to loss of all yo
 You can use the following command to wipe your entire Portworx cluster.
 
 ```
-curl -fsL http://install.portworx.com:8080/px-wipe | bash
+curl -fsL https://install.portworx.com/1.3/px-wipe | bash
 ```
 
 Above command will run a Kubernetes Job that will perform following operations:
@@ -66,6 +66,8 @@ Above command will run a Kubernetes Job that will perform following operations:
 * Removes directories `/etc/pwx` and `/opt/pwx` from all nodes.
 * Removes Portworx fingerprint data from all the storage devices used by Portworx. It also removes all the volume data from the storage devices.
 * Delete all Portworx Kubernetes spec objects.
+
+Before running the above wipe job, ensure that the Portworx spec is applied on your cluster.
 
 ### Portworx 1.2
 

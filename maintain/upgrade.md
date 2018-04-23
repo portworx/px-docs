@@ -1,19 +1,23 @@
 ---
 layout: page
 title: "Upgrade Portworx"
-keywords: upgrade
+keywords: upgrade, update, portworx
 sidebar: home_sidebar
 redirect_from: "/upgrade.html"
 meta-description: "Looking to upgrade Portworx Enterprise? Follow these step-by-step instructions and find out how you can upgrade today!"
 ---
 
-Please visit the scheduler section in the left hand navigation menu in order to use the correct upgrade instructions for your scheduler.  Depending on the orchestration environment, Portworx has different best practices for the upgrade process.
+If you use a scheduler, refer to its page below
+
+- [Kubernetes](https://docs.portworx.com/scheduler/kubernetes/upgrade.html)
+- [Mesosphere DC/OS](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html)
+- [Docker](https://docs.portworx.com/runc/#upgrade-px-oci)
 
 ## Upgrading Portworx Standalone
 
 If you have deployed Portworx manually (not through a scheduler), then you can directly upgrade Portworx in a rolling manner as described here.
 
-On each node in the cluster , please execute **'pxctl upgrade'** command as shown below.
+On each node in the cluster , please execute `pxctl upgrade` command as shown below.
 
 ```
 # pxctl upgrade px-enterprise

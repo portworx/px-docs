@@ -14,20 +14,20 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 
 ### Initial Software Setup for Production
 
-* Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system 
+* Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system
   Refer to the install instructions for running PX as a DC/OS framework [page](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html). This deploys PX as a OCI container and as a framework in DC/OS
- 
+
  (OR)
- 
+
   * Deploy PX directly as [OCI container](https://docs.portworx.com/runc/)
-  * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will 
+  * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
   * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
-* Check and ensure a *minimum* 2 cores and 4GB of RAM are allocated for Portworx. 
+* Check and ensure a *minimum* 2 cores and 4GB of RAM are allocated for Portworx.
 * The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
 
 ```
@@ -42,18 +42,18 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 * Configure separate networks for Data and Management networks to isolate the traffic
 
   * Data network is specified giving the '-d' switch and Management networks with the '-m' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics to enable it in your scheduler.
-  
+
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
-  
+
 ### Configuring and Provisioning Underlying Storage
 
- 
+
 ####  Selecting drives for an installation
 
 * Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
 
-* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, 
-  enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage. 
+* HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server,
+  enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.
 
 * PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
 
@@ -70,11 +70,11 @@ Portworx supports automatic management of EBS volumes. If you are using AWS ASG 
 
 PX replicated volumes distributes data across failure domains. For on-premise installations, this ensures that a power failure to a rack does not result in data unavailability. For cloud deployments this ensures data availability across zones.
 
-### Topology in cloud environments 
+### Topology in cloud environments
 
-PX  auto-detects availabilty zones and regions and provisions replicas across 
+PX  auto-detects availabilty zones and regions and provisions replicas across
   different zones. For e.g., see below for the partial output of `pxctl status`
-  
+
   ```
   sudo /opt/pwx/bin/pxctl status
    Status: PX is operational
@@ -88,75 +88,75 @@ PX  auto-detects availabilty zones and regions and provisions replicas across
     ...
     ...
   ```
-  
-  This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor 
+
+  This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor
   is created, it will have the replicas automatically created in other nodes in other zones.
- 
+
 ### Toppology in on-premise deployments:
-Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-rack.html)
-  
+Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-geography.html)
+
 
 ### Volume Management Best Practices
 
-* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. 
+* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts.
   Monitor for for Volume Space Low alerts
-  
+
   ```
   30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
   ```
 
-* For applications needing node level availability and read parallelism across nodes, it is recommended to set the 
+* For applications needing node level availability and read parallelism across nodes, it is recommended to set the
   volumes with replication factor 2 or replication factor 3
-  
+
   Here is how one can configure a volume with replication factor 3 for e.g.,
-  
+
   ```
   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
   ```
-  
+
 * PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
-  create the volume with the next available `iopriority` level. 
-  
+  create the volume with the next available `iopriority` level.
+
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
   ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --zones=us-east-1,us-east-2,us-east-3 
+  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --zones=us-east-1,us-east-2,us-east-3
   ```
 * Volumes can be created in different racks using `--racks` option and passing the rack labels when creating the volume
 
   ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3 
-  ``` 
+  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3
+  ```
   Please ensure the PX containers are started with the corresponding rack parameters.
- 
-* If the volumes need to be protected against accidental deletes because of background garbage collecting scripts, 
+
+* If the volumes need to be protected against accidental deletes because of background garbage collecting scripts,
   then the volumes need to enabled with `--sticky` flag
-  
+
   ```
    sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
   ```
-  
+
 * The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
- 
+
   ```
   sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
   ```
-  
-* For applications that require shared access from multiple containers running in different hosts, 
+
+* For applications that require shared access from multiple containers running in different hosts,
   Portworx recommends running  shared volumes. Shared volumes can be configured as follows:
 
   ```
   pxctl volume create wordpressvol --shared --size=100 --repl=3
   ```
-  This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types, 
-  how to create them and update the configuration for the volumes 
+  This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types,
+  how to create them and update the configuration for the volumes
 
 ### Data Protection for Containers
 
-* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the 
-  case of app failures. 
-  
+* Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the
+  case of app failures.
+
 * Portworx support 64 snapshots per volume
 
 * Each snapshot can be taken manually via the `pxctl snap create` command. For e.g.,
@@ -164,13 +164,13 @@ Failure domains in terms of RACK information can be passed in as described [here
   ```
   pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
   Volume successfully snapped: 1152602487227170184
-  ```  
-* Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots 
+  ```
+* Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots
   to be automatically created without user intervention.
-  
+
   ```
   pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
-  ``` 
+  ```
 * Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
 
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
@@ -193,24 +193,24 @@ While Prometheus can be deployed as a container within the container orchestrato
 * A PX node may hang or appear to hang because of any of the following reasons
   * Underlying media being too slow to respond and thus PX trying to error recovery of the media
   * Kernel hangs or panics that are impacting overall operations of the system
-  * Other applications that are not properly constrainted putting heavy memory pressure on the system 
+  * Other applications that are not properly constrainted putting heavy memory pressure on the system
   * Applications consuming a lot of CPU that are not properly constrained
-  
+
 * Docker Daemon issues where Docker itself has hung and thus resulting on all other containers not responding properly
 
 * Running PX as a OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as PX runs as a OCI container and not as a docker container thus eliminating the docker dependency
 
-* If PX appears to not respond, a restart of the PX OCI container via `systemctl` would help. 
+* If PX appears to not respond, a restart of the PX OCI container via `systemctl` would help.
 * Any PX restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
 
 ### Stuck Volume Detection and Resolution
 
-* With DC/OS, it is possible that even after the application container terminates, a volume is left attached. 
-  This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by 
+* With DC/OS, it is possible that even after the application container terminates, a volume is left attached.
+  This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by
   an application, it can be attached to any other node in the system
-  
-* With this attach operation, the PX will automatically manage the volume attach status with no user intervention required 
-  and continue to serve the volume I/Os even a container attaches to the same volume from a different node. 
+
+* With this attach operation, the PX will automatically manage the volume attach status with no user intervention required
+  and continue to serve the volume I/Os even a container attaches to the same volume from a different node.
 
 ### Scaling out a cluster nodes in the Cloud and On-Prem
 
@@ -219,24 +219,24 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The best way to scale a cluster is via ASG integration on AWS
 * This feature is called Stateful Autoscaling and is described [here](https://docs.portworx.com/cloud/aws/asg.html#stateful-autoscaling)
   * Perform sizing of your data needs and determine the amount and type of storage (EBS volumes) needed per ecs instance.
-  * Create EBS volume [templates](https://docs.portworx.com/cloud/aws/asg.html#create-ebs-volume-templates) to 
+  * Create EBS volume [templates](https://docs.portworx.com/cloud/aws/asg.html#create-ebs-volume-templates) to
     match the number of EBS volumes needed per EC2 instance
-  * Create a [Stateful AMI](https://docs.portworx.com/cloud/aws/asg.html#create-a-stateful-ami) to associate 
+  * Create a [Stateful AMI](https://docs.portworx.com/cloud/aws/asg.html#create-a-stateful-ami) to associate
     with your auto-scaling group
-  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx 
+  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx
     will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This
-    [page](https://docs.portworx.com/cloud/aws/asg.html#scaling-the-cluster-up) desribes how PX handles the 
-    volume management in a auto-scaling cluster. 
+    [page](https://docs.portworx.com/cloud/aws/asg.html#scaling-the-cluster-up) desribes how PX handles the
+    volume management in a auto-scaling cluster.
 
 #### Scaling out a cluster on-prem
 
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](https://docs.portworx.com/maintain/scale-out.html) shows how to scale up a existing cluster by adding more nodes
 TODO: *Update the above page to show runc*
 
-* Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the 
+* Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the
   DC/OS PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
 
-   
+
 ### Cluster Capacity Expansion
 
 * Cluster storage capacity can be expanded by adding more drives each node.
@@ -246,7 +246,7 @@ TODO: *Update the above page to show runc*
 * Ensure the volumes in the node have replicas in other nodes
   * If the volumes have replication factor of 1, increase the [replication factor](https://docs.portworx.com/manage/volume-update.html#update-the-volume-replication-level)
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
-* Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node. 
+* Follow the instructions in this [page](https://docs.portworx.com/maintain/scale-up.html) to add storage each node.
 
 ### Server and Networking Replacements and Upgrades
 
@@ -261,29 +261,30 @@ TODO: *Update the above page to show runc*
 
 ### Software Upgrades
 
-#### Portworx Software Upgrades 
+#### Portworx Software Upgrades
 
   * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
   * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken for all the volumes
   * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html) to perform the upgrades
   * If you are running PX as a systemd service, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade.html)
-  
+
 
 #### DC/OS Upgrades
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
+* Due to a [bug in DCOS](https://jira.mesosphere.com/browse/DCOS_OSS-2103) the Portworx service file will get removed after an upgrade. Please run `dcos portworx plan force-restart deploy portworx-deploy` after the DCOS upgrade to re-deploy the service file.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
 * Check if the DC/OS services via marathon and any other frameworks can mount the PX volumes from the marathon UI or the DC/OS UI
 
 
-#### OS upgrades and Docker Upgrades . 
- 
+#### OS upgrades and Docker Upgrades .
+
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure kernel-devel packages are installed after a OS migration
 * If PX is run as a OCI container, Docker Upgrades and Restarts do not impact PX runtime. So recommend running PX as a OCI container
 
- 
+
 
 ## Day 3 Operations
 
@@ -304,7 +305,7 @@ TODO: *Update the above page to show runc*
 * It is recommended to take atleast one cloudsnap a day for each volume in production in the cluster
 * Cloudsnaps can be scheduled via the Portworx CLI for hourly, daily, weekly or monthly snaps.
 * Cloudsnaps can also be scheduled to happen at a particular time. It is recommended to schedule cloudsnaps at a time when the application data traffic is light to ensure faster back ups.
-* Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and 
+* Follow [DR best practices](https://docs.portworx.com/maintain/dr-best-practices.html) and
   setup a periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup
 
 ### Drive Replacements
@@ -324,7 +325,7 @@ PX is not running on this host.
 
 #### Step 2: Replace old drive with a new drive
 
-Ensure the replacement drive is already available in the system. 
+Ensure the replacement drive is already available in the system.
 
 For e.g., Replace drive /dev/sde with /dev/sdc
 
@@ -341,7 +342,7 @@ Check the replace status
 ```
 
 
-#### Step 3: Exit Maintenance mode 
+#### Step 3: Exit Maintenance mode
 
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit
@@ -373,11 +374,6 @@ Pool ID: 1
   * Decommission the PX node (Refer to `pxctl cluster delete`)
   * Ensure all volumes have replicas in other nodes if you still need to access the data
   * Replace the bad drive(s) with new drive(s)
-  * Add the node to the cluster as a new node 
+  * Add the node to the cluster as a new node
      (refer to [adding cluster nodes](https://docs.portworx.com/maintain/scale-out.html))
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`
-  
-  
-  
-  
-  

@@ -1,23 +1,23 @@
 ---
 layout: page
-title: "Portworx with etcd"
+title: "Portworx with KVDB"
 sidebar: home_sidebar
-meta-description: "Test storing your encryption keys with etcd for encrypted Portworx volumes."
+meta-description: "Test storing your encryption keys with KVDB for encrypted Portworx volumes."
 ---
 
-Portworx uses etcd as kvdb to store configuration data. This can also be used store your encryption keys/secrets, credentials or passwords. Since secrets are stored in plain text in kvdb, it is recommended for testing purposes only.
+Portworx uses KVDB to store configuration data. This can also be used store your encryption keys/secrets, credentials or passwords. Since secrets are stored in plain text in KVDB, it is recommended for **testing purposes only**.
 
 ### Kubernetes users
 
-If you are installing Portworx on Kubernetes, use `secretType=kvdb` when generating the Portworx Kubernetes spec file.
+If you are installing Portworx on Kubernetes, select `kvdb` in "Secrets type", when generating the [Portworx Kubernetes spec file](/scheduler/kubernetes/install.html).
 
-If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#kvdb-config-json).
+If you already have a running Portworx installation, [update `/etc/pwx/config.json`](#kvdb-config-json) on each node.
 
 ### Other users
 
 During installation, use argument `-secret_type kvdb` when starting Portworx to specify the secret type as kvdb.
 
-If you already have a running Portworx installation, [update `/etc/pwx/config.json` on each node](#kvdb-config-json).
+If you already have a running Portworx installation, [update `/etc/pwx/config.json`](#kvdb-config-json) on each node.
 
 ### <a name="kvdb-config-json"></a> Adding kvdb as secret store to config.json
 
@@ -37,9 +37,9 @@ Add the following `secret_type` section to the `/etc/pwx/config.json`:
 }
 ```
 
-### Authenticating with kvdb using PX CLI
+### Authenticating with KVDB using PX CLI
 
-You can authenticate PX with Kvdb using PX CLI. Run the following command:
+You can authenticate PX with KVDB using PX CLI. Run the following command:
 
 ```
 # /opt/pwx/bin/pxctl pxctl secrets kvdb login
@@ -49,4 +49,3 @@ Successful Login to Secrets Endpoint!
 If the CLI is used to authenticate with KVDB, for every restart of PX container it needs to be re-authenticated with KVDB by running the `login` command.
 
 __Important: You need to run this command on all PX nodes, so that you could access secrets on all nodes__
-

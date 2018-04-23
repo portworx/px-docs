@@ -41,7 +41,7 @@ Portworx supports replicated volumes where a given volume's data can be replicat
 
 You can also refer to the page of container orchestrator of your choice to see how you can pass this inline in Kubernetes, DC/OS or Docker SWarm/UCP when a container using Portworx volumes gets mounted via these orchestrators. Go [here]( https://docs.portworx.com/#install-with-a-container-orchestrator) for more information.
 
-Also, the case of deployment in on-prem datacenters, Portworx can take in the rack id parameter and place the replicas across racks to tolerate rack power failures. Please refer [here](https://docs.portworx.com/manage/update-px-rack.html) to learn how to set this up.
+Also, the case of deployment in on-prem datacenters, Portworx can take in the rack id parameter and place the replicas across racks to tolerate rack power failures. Please refer [here](https://docs.portworx.com/manage/update-px-geography.html) to learn how to set this up.
 
 #### Recovering data from application errors
 

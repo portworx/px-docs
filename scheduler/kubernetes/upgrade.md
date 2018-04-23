@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Upgrade Portworx on Kubernetes"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
+keywords: portworx, container, Kubernetes, upgrade, update, storage, Docker, k8s, flexvol, pv, persistent disk
 sidebar: home_sidebar
 ---
 
