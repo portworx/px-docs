@@ -7,7 +7,6 @@ redirect_from:
   - /scheduler/docker/systemd.html
   - /scheduler/docker/upgrade-standalone.html
   - /scheduler/docker/upgrade-px-plugin.html
-  - /runc/index.html
 ---
 
 * TOC
