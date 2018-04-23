@@ -76,6 +76,8 @@
           url: /scheduler/kubernetes/failover.html
         - title: Run Hyper Converged
           url: /scheduler/kubernetes/scheduler-convergence.html
+        - title: Configure Kubernetes Secrets
+          url: /secrets/portworx-with-kubernetes-secrets.html
         - title: Update Portworx Geography Info
           url: /scheduler/kubernetes/update-px-geography.html
       - title: Operate and Maintain
