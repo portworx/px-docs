@@ -1,23 +1,22 @@
 ---
 layout: page
-title: "Run Portworx under runC"
+title: "Run PX as OCI Container"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci
 sidebar: home_sidebar
 redirect_from:
   - /scheduler/docker/systemd.html
   - /scheduler/docker/upgrade-standalone.html
   - /scheduler/docker/upgrade-px-plugin.html
-  - /runc/index.html
 ---
 
 * TOC
 {:toc}
 
-## Why runC
+## Why OCI
 
 Running Portworx as a runC container eliminates any cyclical dependencies between a Docker container consuming storage from the Portworx container.  It also enables you to run your Linux containers without a Docker daemon completely, while still getting all of the advantages of a Linux container and cloud native storage from Portworx.
 
-To install and configure PX to run directly with runC, please use the configuration steps described in this section.
+To install and configure PX to run directly with OCI/runC, please use the configuration steps described in this section.
 
 If you are already running PX as a docker container and need to migrate to OCI, following the [migration steps](/runc#upgrading-from-px-containers-to-px-oci).
 
