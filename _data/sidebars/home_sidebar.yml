@@ -277,9 +277,9 @@
     - title: Managing OCI runC and systemd
       folderitems:
       - title: Run Portworx under runC
-        url: /maintain/oci-runc.html
+        url: /runc/index.html
       - title: Upgrade
-        url: /maintain/oci-runc.html#upgrade-px-oci
+        url: /runc#upgrade-px-oci
       - title: Install Arguments
         url: /runc/options.html
     - title: Manage Users and Groups
