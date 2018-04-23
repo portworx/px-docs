@@ -68,6 +68,8 @@
             url: /scheduler/kubernetes/snaps.html
           - title: Create shared PVCs
             url: /scheduler/kubernetes/shared-volumes.html
+          - title: Create encrypted PVCs
+            url: /scheduler/kubernetes/encrypted-volumes.html
           - title: Access via non-root users
             url: /scheduler/kubernetes/non-root.html
         - title: Run Statefulsets
