@@ -14,13 +14,7 @@ meta-description: "This guide will give you an overview of how to use the Encryp
 ## Encrypted Volumes
 This guide will give you an overview of how to use Encryption feature for Portworx volumes. Under the hood Portworx uses libgcrypt library to interface with the dm-crypt module for creating, accessing and managing encrypted devices. Portworx uses the LUKS format of dm-crypt and AES-256 as the cipher with xts-plain64 as the cipher mode.
 
-All the encrypted volumes are protected by a key. Portworx uses a passphrase as a key to encrypt volumes. It is recommended to store these passphrases in a secure secret store. Currently Portworx integrates with following Secret endpoints
-
-1. Vault
-To setup Portworx to work with a Vault endpoint follow these [instructions](/secrets/portworx-with-vault.html)
-
-2. AWS KMS
-To setup Portworx to work with AWS KMS follow these [instructions](/secrets//portworx-with-aws-kms.html)
+All the encrypted volumes are protected by a key. Portworx uses a passphrase as a key to encrypt volumes. It is recommended to store these passphrases in a secure secret store. To know more about the supported secret providers and how to configure them with Portworx, refer the [Setup Secrets Provider](/secrets) page.
 
 ## Creating and using encrypted volumes
 
