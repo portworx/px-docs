@@ -9,7 +9,7 @@ redirect_from: "/cli-reference.html"
 * TOC
 {:toc}
 
-### Service Operations 
+### Service Operations
 ```
 sudo /opt/pwx/bin/pxctl service --help
 NAME:
@@ -35,7 +35,7 @@ OPTIONS:
 ```
 
 #### pxctl service info
-Displays all Version info 
+Displays all Version info
 ```
 sudo /opt/pwx/bin/pxctl service info
 PX Version:  1.1.4-6b35842
@@ -53,7 +53,7 @@ NAME:
 USAGE:
    pxctl service call-home [arguments...]
 ```
-```   
+```
  sudo /opt/pwx/bin/pxctl service call-home enable
 Call home feature successfully enabled
 ```
@@ -67,7 +67,7 @@ NAME:
 USAGE:
    pxctl service logs [arguments...]
 ```
-   
+
 #### pxctl service diags
 When there is an operational failure, you can use pxctl service diags &lt;name-of-px-container&gt; to generate a complete diagnostics package. This package will be automatically uploaded to Portworx. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /tmp/diags.tgz inside the PX container. You can use docker cp to extract the diagnostics package.
 ```
@@ -87,16 +87,16 @@ OPTIONS:
    --upload, -u              upload diags to cloud
    --profile, -p             only dump profile
    --all, -a                 creates a new tgz package with all the available diagnostic information.
-```   
+```
 ```
 sudo /opt/pwx/bin/pxctl service diags --container px-enterprise
 PX container name provided:  px-enterprise
-INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock 
+INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock
 Getting diags files...
 Generated diags: /tmp/diags.tar.gz
 ```
 #### pxctl service maintenance
-Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc... 
+Service maintenance command lets the cluster know that it is going down for maintenance. Once the server is offline you can add/remove drives add memory etc...
 ```
 sudo /opt/pwx/bin/pxctl service maintenance --help
 NAME:
@@ -109,8 +109,8 @@ OPTIONS:
    --exit, -x   exit maintenance mode
    --enter, -e  enter maintenance mode
 ```
-```   
-sudo /opt/pwx/bin/pxctl service maintenance --enter 
+```
+sudo /opt/pwx/bin/pxctl service maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
 ```
@@ -138,7 +138,7 @@ To rebalance the storage across the drives, use pxctl service drive rebalance. T
 
 #### pxctl service drive show
 You can use pxctl service drive show to display drive information on the server
-```   
+```
 sudo /opt/pwx/bin/pxctl service drive show
 PX drive configuration:
 Pool ID: 0
@@ -148,9 +148,9 @@ Pool ID: 0
 	Has meta data: Yes
 	Drives:
 	1: /dev/mapper/volume-e85a42ca, 1.0 GiB allocated of 100 GiB, Online
-```	
-	
-You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command.  To do so the server must be in maintenance mode. 
+```
+
+You can add drives to a server using the /opt/pwx/bin/pxctl service drive add command.  To do so the server must be in maintenance mode.
 ```
 sudo /opt/pwx/bin/pxctl service drive add --help
 NAME:
@@ -166,7 +166,7 @@ Drive add  successful. Requires restart (Exit maintenance mode).
 ```
 #### pxctl service scan
 You can use pxctl service scan to scan for bad blocks on a drive
-```   
+```
  sudo /opt/pwx/bin/pxctl service scan
 NAME:
    pxctl service scan - scan for bad blocks
@@ -186,7 +186,7 @@ OPTIONS:
    --help, -h  show help
 ```
 #### pxctl service alerts
-pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.  
+pxctl service alerts will show cluster wide alerts.  You can also use service alerts to clear and erase alerts.
 ```
 sudo /opt/pwx/bin/pxctl service alerts
 NAME:
@@ -237,4 +237,40 @@ Node	Bytes Sent	Bytes Received
 0	17 TB		278 GB
 1	0 B		0 B
 2	0 B		0 B
+```
+
+#### pxctl service node-wipe
+pxctl service node-wipe deletes all data related to Portworx from the node. It will also wipe the storage device that was provided to Portworx.
+This command can be run only when Portworx is stopped on the node. Run this command if a node needs to be re-initialized.
+
+>**Note:** This is a disruptive command and could lead to data loss. Please use caution.
+
+```
+sudo /opt/pwx/bin/pxctl service node-wipe --help
+NAME:
+   pxctl service node-wipe - Wipes PX configuration data on this node
+
+USAGE:
+   pxctl service node-wipe [command options] [arguments...]
+
+OPTIONS:
+   --storage_devices value, -s value  comma-separated list of storage devices to be wiped.
+   --journal_devices value, -j value  comma-separated list of journal devices to be wiped.
+
+```
+
+Here is an example:
+
+```
+sudo /opt/pwx/bin/pxctl service node-wipe
+This is a distruptive operation.
+It will delete all PX configuration files from this node. Data on the storage disks attached on this node will be irrevocably deleted.
+Are you sure you want to proceed ? (Y/N): y
+This is a distruptive operation.
+It will delete all PX configuration files from this node. Data on the storage disks attached on this node will be irrevocably deleted.
+Are you sure you want to wipe data from the disk: ' /dev/sdb ' (Y/N): y
+/dev/sdb: 8 bytes were erased at offset 0x00010040 (btrfs): 5f 42 48 52 66 53 5f 4d
+Removed PX footprint from device /dev/sdb.
+Failed to find PX journal device. Please re-run the command with -j param if using a journal device.
+Wiped node successfully.
 ```
