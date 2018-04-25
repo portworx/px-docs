@@ -5,9 +5,11 @@ keywords: portworx, container, kubernetes, storage, k8s, flexvol, pv, persistent
 meta-description: "This guide is a step-by-step tutorial on how to provision encrypted volumes using Storage Class parameters."
 ---
 
-Using a Storage Class parameter, you can tell Portworx to encrypt all PVCs created using that Storage Class. Portworx uses the cluster wide secret to encrypt all the volumes created using the secure Storage Class. If you are using Kubernetes Secrets, refer to [setting cluster wide secret key](/secrets/portworx-with-kubernetes-secrets.html#setting-cluster-wide-secret-key). For other secrets provider refer the 'Setting cluster wide secret key' section under the respective [secret provider integration](/secrets).
+Using a Storage Class parameter, you can tell Portworx to encrypt all PVCs created using that Storage Class. Portworx uses a cluster wide secret to encrypt all the volumes created using the secure Storage Class.
 
-#### Step 1: Create a StorageClass
+{% include_relative set-cluster-wide-secret.md %}
+
+#### Step 2: Create a StorageClass
 Create a storage class with `secure` parameter set to `true`.
 ```yaml
 kind: StorageClass
@@ -20,7 +22,7 @@ parameters:
   repl: "3"
 ```
 
-#### Step 2: Create Persistent Volume Claim
+#### Step 3: Create Persistent Volume Claim
 Create a PVC that uses the above `px-secure-sc` storage class.
 ```yaml
 kind: PersistentVolumeClaim
@@ -36,7 +38,7 @@ spec:
       storage: 2Gi
 ```
 
-#### Step 3: Verify the volume
+#### Step 4: Verify the volume
 Once the PVC has been created, verify the volume created in Portworx is encrypted.
 ```
 # PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')

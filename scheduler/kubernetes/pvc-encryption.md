@@ -21,8 +21,9 @@ PVC level encryption is achieved using following PVC annotations:
 >**Note:** To use the PVC level encryption feature, the PVC name has to be in `ns.<namespace_of_pvc>-name.<identifier_for_pvc>` format
 
 ### Encryption using cluster wide secret
-You need to set the cluster wide secret key before you create an encrypted PVC. If you are using Kubernetes Secrets, refer to [setting cluster wide secret key](/secrets/portworx-with-kubernetes-secrets.html#setting-cluster-wide-secret-key). For other secrets provider refer the 'Setting cluster wide secret key' section under the respective [secret provider integration](/secrets).
+{% include_relative set-cluster-wide-secret.md %}
 
+#### Step 2: Create the secure PVC
 If your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then create the PVC as below:
 ```yaml
 kind: PersistentVolumeClaim
