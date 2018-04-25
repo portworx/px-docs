@@ -10,9 +10,9 @@ meta-description: "Learn how to utilize AWS KMS to manage your Portworx volume e
 * TOC
 {:toc}
 
->**NOTE:**<br/> The following feature does not work with PX 1.2.20 due to changes in API on the KMS side. We are working wtih AWS in fixing this and will push out a new update.
-
 Portworx can integrate with AWS KMS to generate and use KMS Datakeys. This guide will get a Portworx cluster up which is connected to an AWS KMS endpoint. The Data Keys created in KMS can be used to encrypt Portworx Volumes.
+
+>**NOTE:**<br/> Supported from PX Enterprise 1.4 onwards
 
 ## Deploying Portworx
 
@@ -113,45 +113,36 @@ If the CLI is used to authenticate with AWS, for every restart of PX container i
 
 ## Key generation with AWS KMS
 
-The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. More info about encrypted 
+The following sections describe the key generation process with PX and AWS KMS. These keys can be used as passphrases for encrypted volumes. More info about encrypted
 volumes [here](/manage/encrypted-volumes.html)
 
-### Using AWS CLI
-You can follow the instructions [here](http://docs.aws.amazon.com/cli/latest/reference/kms/generate-data-key.html) to generate a data key.
-
+Portworx provides the following CLI command to generate AWS KMS Data keys.
 ```
-$ aws-cli generate-data-key-without-plaintext --key-id <cmk> --key_spec <AES_256/AES_128>
-```
+/opt/pwx/bin/pxctl secrets aws generate-kms-data-key --help
+NAME:
+   pxctl secrets aws generate-kms-data-key - Generates a KMS Data Key and associates the given secret_id to it
 
-The above command will return the following two outputs
-- CiphertextBlob -> (blob): The encrypted data encryption key.
-- KeyId -> (string): The identifier of the CMK under which the data encryption key was generated and encrypted
+USAGE:
+   pxctl secrets aws generate-kms-data-key [command options]
 
-Store the ciphertext blob in a file on the host. Provide this file as an input secret key while creating encrypted volumes.
-
-__Important: You need to write the ciphertext blob in a file which is accessible by the PX container. We recommend /var/lib/osd/secrets/__
-
-Here is an example of creating an encrypted volume using such a file
-```
-$ pxctl volume create --secure --secret_key /var/lib/osd/secrets/aws_cipher_blob.txt --size 20 encrypted_volume
+OPTIONS:
+   --secret_id value  Secret Id to associate with the KMS Data Key
 ```
 
+PX associates each KMS Data Key with a unique ```secret_id``` that you provide while creating the encrypted volume. You can use this ```secret_id``` for subsequent operations which require you to provide the secret_key.
 
-### Using PX
-If you do not wish to pre-generate data keys using AWS CLI you can delegate this action to Portworx, and PX will generate the kms data keys for you.
-
-PX associates each kms data key with a unique ```keyID``` that you provide while creating the encrypted volume. You can use this ```keyID``` for subsequent operations which require you to provide the secret_key.
-
-Here is an example of creating an encrypted volume using a unique keyID
+Here is an example of generating a KMS Data Key with ```portworx_secret``` as the secret_id.
 
 ```
-$ pxctl volume create --secure --secret_key my_secret_key --size 20 encrypted_volume
+/opt/pwx/bin/pxctl secrets aws generate-kms-data-key --secret_id portworx_secret
+KMS Data Key successfully created.
 ```
+The above command generates a KMS Data Key and associates it with the ```portworx_secret```. For subsequent operations you can use the same ```portworx_secret```
 
-The above command generates a kms data key and associates it with the ```keyID``` my_secret_key. For subsequent operations you can use the same ```keyID```
+Run the following command to create an encrypted volume using the newly generated KMS Data Key.
 
 ```
-$ pxctl host attach --secret_key my_secret_key encrypted_volume
+$ /opt/pwx/bin/pxctl volume create --secure --secret_key portworx_secret --size 20 encrypted_volume
 ```
 
 ## Setting cluster wide secret key
@@ -161,13 +152,6 @@ A cluster wide secret key is a common key that can be used to encrypt all your v
 # /opt/pwx/bin/pxctl secrets set-cluster-key
 Enter cluster wide secret key: *****
 Successfully set cluster secret key!
-```
-As an input to set-cluster-key command you have the following two options
-1. Provide the path to the pre-generated kms data key. PX will not
-generate a key if a valid path and a valid kms cipher blob text is
-provided.
 
-2. Provide a ```keyID```. If the ```keyID``` was previously used, the
-already generated kms data key will be set as the cluster wide secret
-key. If the ```keyID``` was never used before a new kms data key will
-be generated and set as the cluster wide secret key.
+```
+As an input to the above command you can provide any ```secret_id``` that was used in the ```generate-kms-data-key``` command. From our example we can set the cluster secret key to ```portworx_secret```. This command needs to be run just once for the cluster. If you have added the [cluster secret key through the *config.json*](#adding-aws-kms-credentials-to-configjson), the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in *config.json* will be ignored for the one set through the CLI.
