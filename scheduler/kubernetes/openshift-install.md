@@ -61,6 +61,8 @@ oc create secret docker-registry regcred --docker-server=registry.connect.redhat
 
 ### Apply the spec
 
+>*Openshift 3.9 and above:*<br/> Ensure that the worker nodes where you want Portworx installed has the `node-role.kubernetes.io/compute=true` label. This is required for the DaemonSet pods to run.
+
 Once you have generated the spec file, deploy Portworx.	
 ```bash
 oc apply -f px-spec.yaml
