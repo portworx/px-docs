@@ -1,7 +1,9 @@
 #### Step 1: Create cluster wide secret key
 A cluster wide secret key is a common key that points to a secret value/passphrase which can be used to encrypt all your volumes.
 
-##### Kubernetes Secrets
+Below are the 2 options for creating the cluster wide secret key:
+
+##### Option 1: Kubernetes Secrets
 Create a cluster wide secret in Kubernetes, if not already created:
 ```
 # kubectl -n portworx create secret generic px-vol-encryption \
@@ -17,5 +19,5 @@ Now you have to give Portworx the cluster wide secret key, that acts as the defa
 Successfully set cluster secret key
 ```
 
-##### Other secrets provider
+##### Option 2: Other secrets provider
 Similar to Kubernetes secrets, you can set the cluster wide secret key in the secrets provider that you have configured. Refer to the 'Setting cluster wide secret key' section under the respective [secrets provider integration](/secrets).
