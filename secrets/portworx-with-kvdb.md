@@ -42,7 +42,7 @@ Add the following `secret_type` section to the `/etc/pwx/config.json`:
 You can authenticate PX with KVDB using PX CLI. Run the following command:
 
 ```
-# /opt/pwx/bin/pxctl pxctl secrets kvdb login
+# /opt/pwx/bin/pxctl secrets kvdb login
 Successful Login to Secrets Endpoint!
 ** WARNING, this is probably not what you want to do. This login will not be persisted across PX or node reboots. Please put your login information in /etc/pwx/config.json or refer docs.portworx.com for more information
 ```
