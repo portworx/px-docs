@@ -15,7 +15,7 @@
 -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
 -j                        [OPTIONAL] Specifies a journal device for PX
 -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
--t <token>                [OPTIONAL] Portworx lighthouse token for cluster
+-r <portnumber>           [OPTIONAL] Specifies the portnumber from which PX will start consuming. Ex: 9001 means 9001-9020
 ```
 
 * additional PX-OCI -specific options:
