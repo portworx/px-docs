@@ -179,4 +179,32 @@ The "license file" will need to be uploaded to one of the PX-nodes, and activate
 Finally, please note that the license installation is a non-obtrusive process, which will not interfere with the data stored
 on the PX volumes, nor will it interrupt the active IO operations.
 
+**LICENSE TRANSFER**:
+
+From PX Enterprise 1.4.0 onwards, a valid enterprise license can be transferred between two Portworx clusters. Both Portworx clusters need to be operational at the time of license transer.
+The source cluster must have a valid PX-Enterprise license, while the destination cluster can have either a valid or expired Trial license, PX-Developer, or expired PX-Enterprise license.
+
+License transfer command requires 'clusterUUID' from the source cluster, (available via `pxctl cluster list` command) and remote PX cluster node IP.
+
+```
+#  pxctl license transfer -h
+NAME:
+   pxctl license transfer - Transfer license to remote PX cluster
+
+USAGE:
+   pxctl license transfer <clusterUUID> <remoteIP>
+
+DESCRIPTION:
+   Command swaps licenses between the two Portworx clusters.
+
+   Note that both Portworx clusters need to be operational at the time this
+   command is ran.
+   The source cluster must have a valid PX-Enterprise license, while the
+   destination cluster can have either a valid or expired Trial license,
+   PX-Developer, or expired PX-Enterprise license.
+
+EXAMPLE:
+   pxctl license transfer f91531d9-bf65-46f5-9619-eb99128e3270 10.0.15.201
+```
+
 For information on purchase, upgrades and support, please reach out to us at support@portworx.com
