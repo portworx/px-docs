@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "CLI Reference–GroupSnapshots-1.2"
+title: "GroupSnapshots"
 keywords: portworx, pxctl, command-line tool, cli, reference
 sidebar: home_sidebar
 redirect_from: "/cli-reference.html"
@@ -20,11 +20,7 @@ USAGE:
 OPTIONS:
    --group value, -g value  group id
    --label pairs, -l pairs  list of comma-separated name=value pairs
-   
-```
-#### pxctl group snapshots create
-`pxctl group snap create` creates a snapshot of a volume. The different options and ways to use are shown below:
-```
+
 Take snapshot for volumes with label “v1=x1”:
 
 opt/pwx/bin/pxctl volume snapshot group --label v1=x1
