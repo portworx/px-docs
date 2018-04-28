@@ -1,0 +1,2 @@
+This requires that you already have [STORK](/scheduler/kubernetes/stork.html) installed and running on your
+Kubernetes cluster. If you fetched the Portworx specs from [https://install.portworx.com](https://install.portworx.com) and used the default options, STORK is already installed.
