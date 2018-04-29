@@ -279,3 +279,21 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
 538316104266867971	Backup-Done	1979809411	2m39.761333366s	Sat, 08 Apr 2017 05:20:01 UTC
 ```
+
+#### Deleting a Cloud Backups ###
+
+>**Note:**<br/> This is only supported from PX version 1.4 onwards
+
+You can delete backups from the cloud using the `/opt/pwx/bin/pxctl cloudsnap delete` command. The command will mark a cloudsnap for deletion and a job will take care of deleting objects associated with these backups from the objectstore.
+
+Only cloudsnaps which do not have any dependant cloudsnaps (ie incrementals) can be deleted. If there are dependant cloudsnaps then the command will throw an error with the list of cloudsnaps that need to be deleted first.
+
+For example to delete the backup `pqr9-cl1/538316104266867971-807625803401928868`:
+
+```
+# pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
+Cloudsnap deleted successfully
+# pxctl cloudsnap list
+SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
+dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
+```
