@@ -10,12 +10,15 @@ meta-description: "Trying to create, list, validate or delete credentials for cl
 * TOC
 {:toc}
 
+#### Prerequisite
+The cloud provider credentials are stored in an external secret store. Before you use these commands you should [configure a secret provider of your choice with Portworx](/secrets).
+
 #### pxctl credentials
 This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used, for example, for cloudsnap of volume to the cloud.
 
 Note: It will create a bucket with the portworx cluster ID to use for the backups
 ```
-sudo /opt/pwx/bin/pxctl credentials
+$ /opt/pwx/bin/pxctl credentials
 NAME:
    pxctl credentials - Manage credentials for cloud providers
 
@@ -35,7 +38,7 @@ OPTIONS:
 #### pxctl credentials list
 `pxctl credentials list` is used to list all configured credential keys
 ```
-sudo /opt/pwx/bin/pxctl credentials list
+$ /opt/pwx/bin/pxctl credentials list
 
 S3 Credentials
 UUID						REGION			ENDPOINT			ACCESS KEY			SSL ENABLED	ENCRYPTION
@@ -49,27 +52,25 @@ ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 #### pxctl credentials create
 `pxctl credentials create` is used to create/configure credentials for various cloud providers
 ```
-sudo /opt/pwx/bin/pxctl cred create --provider s3 --s3-access-key AAAAAAAAAAAAAAAA --s3-secret-key XXXXXXXXXXXXXXXX --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
-
+$ /opt/pwx/bin/pxctl cred create \
+  --provider s3 \
+  --s3-access-key ***** \
+  --s3-secret-key ***** \
+  --s3-region us-east-1 \
+  --s3-endpoint s3.amazonaws.com
 Credentials created successfully
 ```
-Troubleshooting Notes: 
-+If you encounter a warning message with "Not authenticated with the secrets endpoint", then you should first create a secrets endpoint. You can create the secrets by one of the following options:
-1) [kvdb](https://docs.portworx.com/secrets/portworx-with-kvdb.html)
-2) [aws](https://docs.portworx.com/secrets/portworx-with-aws-kms.html)
-3) [vault](https://docs.portworx.com/secrets/portworx-with-vault.html). 
-
 
 #### pxctl credentials delete
 `pxctl credentials delete` is used to delete the credentials from the cloud providers.
 ```
-sudo /opt/pwx/bin/pxctl cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+$ /opt/pwx/bin/pxctl cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential deleted successfully
 ```
 
 #### pxctl credentials validate
 `pxctl credentials validate` validates the existing credentials
 ```
-sudo /opt/pwx/bin/pxctl cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+$ /opt/pwx/bin/pxctl cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
 Credential validated successfully
 ```
