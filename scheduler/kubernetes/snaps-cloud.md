@@ -25,7 +25,7 @@ Group snapshots are supported in upcoming Portworx version 1.4 and above.
 
 To create a cloud snapshost, one needs to setup secrets with Portworx which will get used to connect and authenticate with the configured cloud provider.
 
-Follow instructions on the [pxctl credentials](control/credentials.html) page to setup secrets.
+Follow instructions on the [pxctl credentials](/control/credentials.html) page to setup secrets.
 
 ## Taking cloud snapshots
 
