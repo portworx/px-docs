@@ -12,17 +12,21 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.3.1 (WIP)
+## 1.4.0 (WIP)
 
-This is a patch release with shared volume performance and stability fixes
+
+### Key Features
+
+* 3DSnaps - Ability to take application-consistent snapshots cluster wide (Available in 05/14 GA versions)
+  * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label 
+* GCP/GKE automated disk management based on disk templates
+* Provide ability to do a license tranfer from one cluster to another cluster
+* Kubernetes per volume secrets support
+* DC/OS vault integration - Use Vault integrated with DC/OS
+
 
 ### Key Fixes:
 
-* Fix namespace client crashes when client list is generated when few client nodes are down.
-* Allow read/write snapshots in k8s annotations
-* Make adding and removing k8s node labels asynchronous to help with large number volume creations in parallel
-* Fix PX crash when a snapshot is taken at the same time as node being marked down because of network failures
-* Fix nodes option in docker inline volume create and supply nodes value as semicolon separated values
 
 
 
