@@ -17,55 +17,31 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 {% include px-k8s-prereqs.md %}
 
+**PX Version**
+
+Support for GKE is available in upcoming Portworx release 1.4.
+
 ## Create a GKE cluster
-Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images).
 
-You can create a 3 node GKE cluster with the gcloud cli using the following command:
-```
-$ gcloud container clusters create [CLUSTER_NAME] --image-type=ubuntu --zone=[ZONE_NAME]
-```
+Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images). So it is important to specify the node image as **Ubuntu** when creating clusters.
 
-You can set the default cluster with the following command:
-```
-$ gcloud container clusters get-credentials [CLUSTER_NAME] --zone=[ZONE_NAME]
-Fetching cluster endpoint and auth data.
-kubeconfig entry generated for gke-cluster-01.
-```
-
-More information about the gcloud command for GKE can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
-
-## Add disks to nodes
-
-After your GKE cluster is up, you will need to add disks to each of the nodes. These disks will be used by Portworx to create a storage pool.
-
-You can do this by using the `gcloud compute disks create` and `gcloud compute instances attach-disk` commands as described here [https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk](https://cloud.google.com/compute/docs/disks/add-persistent-disk#create_disk).
-
-For example, after you GKE cluster is up, find the compute instances:
-```
-$ gcloud compute instances list
-NAME                                   ZONE           MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP      STATUS
-gke-px-gke-default-pool-6a9f0154-gxfg  us-east1-b     n1-standard-1               10.142.0.4   104.196.156.231  RUNNING
-gke-px-gke-default-pool-6a9f0154-tzj4  us-east1-b     n1-standard-1               10.142.0.3   35.196.233.64    RUNNING
-gke-px-gke-default-pool-6a9f0154-vqpb  us-east1-b     n1-standard-1               10.142.0.2   35.196.124.54    RUNNING
-```
-
-Then for each instance [create a persistent disk](https://cloud.google.com/sdk/gcloud/reference/compute/disks/create):
-```
-gcloud compute disks create [DISK_NAME] --size [DISK_SIZE] --type [DISK_TYPE]
-```
-
-Once the persistent disks have been created, [attach a disk to each instance](https://cloud.google.com/sdk/gcloud/reference/compute/instances/attach-disk):
-```
-gcloud compute instances attach-disk [INSTANCE_NAME] --disk [DISK_NAME]
-```
+More information about creating GKE clusters can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
 
 ## Install
 
 Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Following sections describe how to generate the spec files and apply them.
 
+### Disk template
+
+Portworx takes in a disk spec which gets used to provision GCP persistent disks dynamically.
+
+{% include asg/gcp-template.md %}
+
 ### Generate the spec
 
-{% include k8s-spec-generate.md %}
+{% include k8s-spec-generate.md asg-addendum="
+We will supply the template(s) explained in previous section, when we create the Portworx spec.
+"%}
 
 ### Applying the spec
 

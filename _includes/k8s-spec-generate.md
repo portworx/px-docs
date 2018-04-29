@@ -1,3 +1,5 @@
+{{ include.asg-addendum }}
+
 To generate the spec file for the 1.3 release, head on to [1.3 install page](https://install.portworx.com/1.3/).
 
 To generate the spec file for the 1.2 release, head on to [1.2 install page](https://install.portworx.com/1.2/).
