@@ -280,7 +280,7 @@ SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
 538316104266867971	Backup-Done	1979809411	2m39.761333366s	Sat, 08 Apr 2017 05:20:01 UTC
 ```
 
-#### Deleting a Cloud Backups ###
+#### Deleting a Cloud Backup ###
 
 >**Note:**<br/> This is only supported from PX version 1.4 onwards
 
