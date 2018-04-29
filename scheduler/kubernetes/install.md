@@ -33,6 +33,12 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 {% include k8s-spec-generate.md %}
 
+#### Internal Kvdb (beta)
+
+Portworx can be configured to run with internal kvdb by enabling it in the above spec generator.
+
+>**Note:** Internal Kvdb is in beta and available for PX version > 1.4
+
 #### Applying the spec
 
 Once you have generated the spec file, deploy Portworx.
