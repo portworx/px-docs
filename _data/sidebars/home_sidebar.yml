@@ -361,7 +361,7 @@
     # - title: Install Lighthouse
     #   url: /enterprise/lighthouse.html
     - title: Install Lighthouse
-      url: /enterprise/lighthouse-new.html      
+      url: /enterprise/lighthouse-new.html
     - title: Manage PX via Lighthouse
       folderitems:
       # - title: Manage the PX cluster
@@ -371,11 +371,11 @@
       # - title: Alerting Preferences
       #   url: /enterprise/cluster-alerting.html
       - title: Update Volume
-        url: /enterprise/lighthouse-volume-update.html    
+        url: /enterprise/lighthouse-volume-update.html
       - title: Create Cloud Credentials
-        url: /enterprise/lighthouse-new-create-credentials.html    
-      - title: Create Volume Snapshots      
-        url: /enterprise/lighthouse-snapshots.html     
+        url: /enterprise/lighthouse-new-create-credentials.html
+      - title: Create Volume Snapshots
+        url: /enterprise/lighthouse-snapshots.html
   - title: Knowledge Base
     folderitems:
     - title: Running with an SDN
