@@ -17,6 +17,10 @@ This document will show you how to create cloud snapshots of Portworx volumes an
 
 {% include k8s/stork/stork-prereq.md %}
 
+**PX Version**
+
+Group snapshots are supported in upcoming Portworx version 1.4 and above.
+
 **Configuring cloud secrets**
 
 To create a cloud snapshost, one needs to setup secrets with Portworx which will get used to connect and authenticate with the configured cloud provider.
