@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Create and use cloud snapshots"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
 sidebar: home_sidebar
 meta-description: "Learn to take a cloud snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!"
 ---
@@ -23,15 +23,15 @@ Group snapshots are supported in upcoming Portworx version 1.4 and above.
 
 **Configuring cloud secrets**
 
-To create a cloud snapshost, one needs to setup secrets with Portworx which will get used to connect and authenticate with the configured cloud provider.
+To create a cloud snapshot, one needs to setup secrets with Portworx which will get used to connect and authenticate with the configured cloud provider.
 
 Follow instructions on the [pxctl credentials](/control/credentials.html) page to setup secrets.
 
-## Taking cloud snapshots
+## Creating cloud snapshots
 
 The cloud snapshot method supports the following annotations:
-* __px/snapshot-type__: Indicates the type of snapshot. For cloud snapshots, the value should be **cloud**.
-* __px/cloud-backup-cred-id__: (Optional) This specifies the credentials UUID if you have configured credentials for multiple cloud providers. In a situation where a single cloud provider is configured, this is not required.
+* __portworx/snapshot-type__: Indicates the type of snapshot. For cloud snapshots, the value should be **cloud**.
+* __portworx/cloud-cred-id__: (Optional) This specifies the credentials UUID if you have configured credentials for multiple cloud providers. In a situation where a single cloud provider is configured, this is not required.
 
 **Example**
 
@@ -86,7 +86,7 @@ Spec:
     Kind:  PersistentVolume
     Name:  pvc-f782bf5c-20e7-11e8-931d-0214683e8447
   Portworx Volume:
-    Snapshot Id:  991673881099191762
+    Snapshot Id:  687c60d0-73cb-4055-a08f-33c5ab8d4d8e/149813028909420894-125009403033610837-incr
   Volume Snapshot Ref:
     Kind:  VolumeSnapshot
     Name:  default/mysql-snapshot-2b2150dd-227f-11e8-98cc-0214683e8447
