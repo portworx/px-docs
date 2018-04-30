@@ -13,10 +13,9 @@ Image to be added.
 ## Snapshot collection of labels
 
 Once you've chosen to snapshot a particular volume. Click group snapshot.
-Lighthouse will now give you the options to pick other labels to snapshot aswell.
+Lighthouse will now give you the options to pick other labels to snapshot as well.
 
-When you are Satisfied with your selection. 
-Click snapshot
+When you are Satisfied with your selection, click snapshot.
 
 Image to be added.
 
