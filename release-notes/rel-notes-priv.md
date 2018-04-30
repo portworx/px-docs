@@ -24,7 +24,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Provide ability to do a license tranfer from one cluster to another cluster
 * [Kubernetes per volume secret support](https://docs.portworx.com/scheduler/kubernetes/pvc-encryption.html) to enable 
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
-* DC/OS vault integration - Use Vault integrated with DC/OS
+* DC/OS vault integration - Use [Vault integrated with DC/OS](https://docs.portworx.com/secrets/portworx-with-dcos-secrets.html)
 * Support port mapping used by PX from 9001-9015 to a customer port number range
 
 
