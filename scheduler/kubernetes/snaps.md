@@ -17,10 +17,12 @@ This document will show you how to create snapshots of Portworx volumes and how 
 
 ## Snapshot types
 
-Using STORK, you can take 3 types of snapshots:
+Using STORK, you can take 3 types of snapshots: 
 1. [In-cluster](/scheduler/kubernetes/snaps-in-cluster.html): These are per volume snapshots where the snapshots are stored in the current Portworx cluster's storage pools.
 2. [Cloud](/scheduler/kubernetes/snaps-cloud.html): These snapshots are uploaded to the configured S3-compliant endpoint (e.g AWS S3).
 3. [Group](/scheduler/kubernetes/snaps-group.html): These allow you to snap multiple volumes at the same consistency point.
+
+3DSnaps is the umbrella term that covers PX-Enterprise's capability to provide app-consistent cluster wide snapshots on any node or cloud. 
 
 ## Pre-snap and Post-snap commands
 
