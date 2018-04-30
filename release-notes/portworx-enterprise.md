@@ -18,6 +18,11 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 **Expected GA date: 05/14**
 
+### Notes
+
+* The kubernetes spec generator for 1.4-rc1 can be accessed [here](http://install.portworx.com/1.4.0-rc1)
+* DC/OS PX Framework for 1.4 will be updated shortly. Watch this space!
+* Rancher Catalog for 1.4 will be updated shortly. Watch this space!
 
 ### Key Features
 
