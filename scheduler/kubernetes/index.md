@@ -22,6 +22,7 @@ Portworx supports the following features in Kubernetes:
 3. Encryption
 4. Hyper-convergence
 5. Scheduler extensions with Stork
+5. [CSI](https://kubernetes-csi.github.io/) Support
 6. Rolling upgrades
 
 
