@@ -26,7 +26,7 @@ For the Endpoint you put in either a loadbalancer or a px node that lighthouse c
 
 Click verify cluster. 
 
-If the cluster is reachable lighthouse will auto populate the lcustername
+If the cluster is reachable lighthouse will auto populate the clustername
 Once verified, click on attach. Lighthouse should now show you a cluster card.
 
 ![Lighthouse add new cluster](/images/lh-new-add-cluster.png){:width="1796px" height="600px"}

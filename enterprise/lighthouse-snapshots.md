@@ -14,7 +14,7 @@ Once you have chosen a particular volume, the right bar will populate with volum
 
 ## Snaphot the volume
 
-Click the icon that looks like a archiving box on the right bar. This will bring up the snapshot dialog.
+Click the icon that looks like an archiving box on the right bar. This will bring up the snapshot dialog.
 
 ## Local snapshot
 
