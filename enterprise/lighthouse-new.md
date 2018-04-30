@@ -19,14 +19,14 @@ Visit *http://{IP_ADDRESS}* in the browser and login with admin/Password1
 
 ## Add PX cluster to lighthouse
 
-Any cluster running Portworx 1.4+ can be added to lighthouse.  
+Any cluster running Portworx 1.4.0 and above can be added to lighthouse.  
 After your first login, Lighthouse will ask you to add a cluster.
 
 For the Endpoint you put in either a loadbalancer or a px node that lighthouse can talk to.
 
 Click verify cluster. 
 
-If the cluster is reachable lighthouse will auto populate the clustername
+If the cluster is reachable lighthouse will auto populate the clustername.
 Once verified, click on attach. Lighthouse should now show you a cluster card.
 
 ![Lighthouse add new cluster](/images/lh-new-add-cluster.png){:width="1796px" height="600px"}
