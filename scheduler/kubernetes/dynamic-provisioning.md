@@ -160,8 +160,10 @@ Verifying pod is created:
 ```
 # kubectl get pod pvpod
    NAME      READY     STATUS    RESTARTS   AGE
-   pvpod       1/1     Running   0          48m        
+   pvpod       1/1     Running   0          48m
 ```
+
+{% include k8s-non-root-access.md %}
 
 ### Delete volumes
 For dynamically provisioned volumes using StorageClass and PVC (PersistenVolumeClaim), if a PVC is deleted, the corresponding Portworx volume will also get deleted. This is because Kubernetes, for PVC, creates volumes with a reclaim policy of deletion. So the volumes get deleted on PVC deletion.
