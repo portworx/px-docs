@@ -8,7 +8,7 @@ meta-description: "Want to snapshot multiple volumes based on a label? Now you c
 
 ## Choose a volume you wish to snapshot
 
-![Lighthouse pick snapshot volume](/images/lh-choose-volume.png){:width="1796px" height="600px"}
+Image to be added.
 
 ## Snapshot collection of labels
 
@@ -18,7 +18,7 @@ Lighthouse will now give you the options to pick other labels to snapshot aswell
 When you are Satisfied with your selection. 
 Click snapshot
 
-![Lighthouse group snapshot](/images/lh-group-snapshot.png){:width="1796px" height="600px"}
+Image to be added.
 
 
 
