@@ -38,11 +38,11 @@ The logging is currently captured in the container logs and also written to an o
 ## Invoking pre-check with a simple docker run:
 
  ``` 
- sudo docker run --rm --name px-check --net=host --privileged=true -v /usr/src:/usr/src -v /lib/modules:/lib/modules -v /var/run/docker.sock:/var/run/docker.sock -v /var/log/pxcheck:/var/log/pxcheck:shared portworx/px-pre-flight:2.0.0.0 [-k <keystore urls (comma separated)>] [-kca <Certificate Authority file>] [-m <Mgmnt Iface|IP>] [-d <Data Iface|IP>]
+ sudo docker run --rm --name px-check --net=host --privileged=true -v /usr/src:/usr/src -v /lib/modules:/lib/modules -v /var/run/docker.sock:/var/run/docker.sock -v /dev:/dev -v /var/log/pxcheck:/var/log/pxcheck:shared portworx/px-pre-flight:2.0.0.0 [-k <keystore urls (comma separated)>] [-kca <Certificate Authority file>] [-m <Mgmnt Iface|IP>] [-d <Data Iface|IP>]
 
 e.g.
 
-   sudo docker run --rm --name px-check --net=host --privileged=true -v /usr/src:/usr/src -v /lib/modules:/lib/modules -v /var/run/docker.sock:/var/run/docker.sock -v /var/log/pxcheck:/var/log/pxcheck:shared portworx/px-pre-flight:2.0.0.0 -k http://etcdv3-01.portworx.com:2379 -d enp0s3 -m enp0s3
+   sudo docker run --rm --name px-check --net=host --privileged=true -v /usr/src:/usr/src -v /lib/modules:/lib/modules -v /var/run/docker.sock:/var/run/docker.sock -v /dev:/dev -v /var/log/pxcheck:/var/log/pxcheck:shared portworx/px-pre-flight:2.0.0.0 -k http://etcdv3-01.portworx.com:2379 -d enp0s3 -m enp0s3
 
 ```
 Below is daemonset yaml file which can be used with kubernetes.
@@ -72,6 +72,8 @@ spec:
         volumeMounts:
           - name: dockersock
             mountPath: /var/run/docker.sock
+          - name: dev
+            mountPath: /dev
           - name: usrsrc
             mountPath: /usr/src
           - name: libmodules
@@ -83,6 +85,9 @@ spec:
       - name: dockersock
         hostPath:
           path: /var/run/docker.sock
+      - name: dev
+        hostPath:
+          path: /dev
       - name: usrsrc
         hostPath:
           path: /usr/src
