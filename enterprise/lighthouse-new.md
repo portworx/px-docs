@@ -24,7 +24,7 @@ Visit *http://{IP_ADDRESS}* in the browser and login with admin/Password1
 
 * For the endpoint,  please provide the loadbalancer ip or a IP address of one of the nodes in the PX Cluster.
 
-* Click "Verify Cluster" 
+* Click "Verify" 
 
 * If the cluster is reachable, lighthouse will auto populate the clustername.
    Once verified, click on attach. Lighthouse should now show you a cluster card.
