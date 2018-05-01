@@ -19,15 +19,15 @@ Visit *http://{IP_ADDRESS}* in the browser and login with admin/Password1
 
 ### Add PX cluster to lighthouse
 
-Any cluster running Portworx 1.4.0 and above can be added to lighthouse.  
-After your first login, Lighthouse will ask you to add a cluster.
+**NOTE** Any cluster running Portworx 1.4.0 and above can be added to lighthouse.  
+         At the time of the first login, lighthouse will ask to add a cluster.
 
-For the Endpoint you put in either a loadbalancer or a px node that lighthouse can talk to.
+* For the endpoint,  please provide the loadbalancer ip or a IP address of one of the nodes in the PX Cluster.
 
-Click verify cluster. 
+* Click "Verify Cluster" 
 
-If the cluster is reachable lighthouse will auto populate the clustername.
-Once verified, click on attach. Lighthouse should now show you a cluster card.
+* If the cluster is reachable, lighthouse will auto populate the clustername.
+   Once verified, click on attach. Lighthouse should now show you a cluster card.
 
 ![Lighthouse add new cluster](/images/lh-new-add-cluster.png){:width="1796px" height="600px"}
 
@@ -35,9 +35,10 @@ Once verified, click on attach. Lighthouse should now show you a cluster card.
 
 ![Lighthouse menu](/images/lh-new-menu.png){:width="1796px" height="600px"}
 
-Click manage clusters. You should now see a list of clusters that have been added to Lighthouse.
-Click the trashcan on the right to delete the cluster form Lighthouse.
+* Click on Manage Clusters. 
+* In the cluster list that appears, click on the trashcan link next to the cluster name.
+* This will remove the cluster from Lighthouse Display
 
-This will not remove your cluster from your KVDB. Just entry in lighthouse.
+**NOTE** This will not remove your cluster from your KVDB. Just entry in lighthouse.
 
 ![Lighthouse add new cluster](/images/lh-new-delete-cluster.png){:width="1796px" height="600px"}
