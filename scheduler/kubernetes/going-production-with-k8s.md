@@ -1,9 +1,11 @@
 ---
 layout: page
-title: "Operations Guide to deploy Portworx in Production in DC/OS Clusters"
-keywords: operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
+title: "Operations Guide to deploy Portworx in Production in Kubernetes Clusters"
+keywords: kuberntes, operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
-meta-description: "Portworx Operations Guide for DC/OS Deployments"
+redirect_from:
+  - /maintain/going-production-with-k8s.html
+meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ---
 
 * TOC
@@ -14,16 +16,16 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 
 ### Initial Software Setup for Production
 
-* Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system
-  Refer to the install instructions for running PX as a DC/OS framework [page](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html). This deploys PX as a OCI container and as a framework in DC/OS
-
- (OR)
-
-  * Deploy PX directly as [OCI container](https://docs.portworx.com/runc/)
+  * Follow the instructions in the [k8s install](https://docs.portworx.com/scheduler/kubernetes/install.html)
+    page in the docs.
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also configure it for maximum stability.
+  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability.
+    Refer to the following [page](https://docs.portworx.com/maintain/etcd.html) on how to install etcd and also
+    configure it for maximum stability.
+  * Ensure you have Stork, the storage orchestrator for Kubernetes from Portworx, installed per the instructions [here](https://docs.portworx.com/scheduler/kubernetes/stork.html#install).
+
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -37,7 +39,7 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 
 ### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001-9014
+* Make sure the following ports are open in all the servers. 9001-9015
 
 * Configure separate networks for Data and Management networks to isolate the traffic
 
@@ -47,17 +49,24 @@ meta-description: "Portworx Operations Guide for DC/OS Deployments"
 
 ### Configuring and Provisioning Underlying Storage
 
-
 ####  Selecting drives for an installation
 
-* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](https://docs.portworx.com/#install-with-a-container-orchestrator) for specifics for your scheduler.
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch.
+
+This can be specificed in the args section of the px-spec.yaml used for installing PX as a daemonset.
+
+```
+          args:
+            ["-k", "etcd://example.etcd.server:2379", "-d", "eth0", "-m", "eth1",  "-c", "testcluster", "-a", "-f",
+             "-x", "kubernetes"]
+```
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server,
   enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.
 
-* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
+* PX classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` (or `priority_io` in kubernetes px spec) and they offer the levels  `high`, `medium` and `low`
 
-* The `io_priority` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
+* The `priority_io` of a pool is determined automatically by PX. If the intention is to run low latency transactional workloads like databases on PX, then Portworx recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](https://docs.portworx.com/maintain/maintenance-mode.html#storage-pool-commands)
 
 * This [page](https://docs.portworx.com/manage/class-of-service.html) offers more information on different io_prioirty levels
 
@@ -92,7 +101,7 @@ PX  auto-detects availabilty zones and regions and provisions replicas across
   This node is in us-east-1. If PX is started in other zones, then when a volume with greater than 1 replication factor
   is created, it will have the replicas automatically created in other nodes in other zones.
 
-### Toppology in on-premise deployments:
+### Topology in on-premise deployments:
 Failure domains in terms of RACK information can be passed in as described [here](https://docs.portworx.com/manage/update-px-geography.html)
 
 
@@ -108,70 +117,159 @@ Failure domains in terms of RACK information can be passed in as described [here
 * For applications needing node level availability and read parallelism across nodes, it is recommended to set the
   volumes with replication factor 2 or replication factor 3
 
-  Here is how one can configure a volume with replication factor 3 for e.g.,
-
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high
-  ```
+  Following storeclass shows how to create a SC for a PVC with replication factor of 3.
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+ ```
 
 * PX makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When
   PX cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to
   create the volume with the next available `iopriority` level.
 
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+ ```
+
 * Volumes can be created in different availability zones by using the `--zones` option in the `pxctl volume create` command
 
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --zones=us-east-1,us-east-2,us-east-3
-  ```
+For e.g., for PX cluster running on AWS,
+
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   zones: "us-east-1a"
+ ```
 * Volumes can be created in different racks using `--racks` option and passing the rack labels when creating the volume
 
-  ```
-  sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --racks=dcrack1,dcrack2,dcrack3
-  ```
-  Please ensure the PX containers are started with the corresponding rack parameters.
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+ ```
 
 * If the volumes need to be protected against accidental deletes because of background garbage collecting scripts,
   then the volumes need to enabled with `--sticky` flag
 
-  ```
-   sudo /opt/pwx/bin/pxctl volume create dbasevol --size=1 --repl=3 --iopriority=high --sticky
-  ```
-
-* The `--sticky` flag can be turned on and off using the `pxctl volume update` commands
-
-  ```
-  sudo /opt/pwx/bin/pxctl volume update dbasevol --sticky=off
-  ```
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+   sticky: "true"
+ ```
 
 * For applications that require shared access from multiple containers running in different hosts,
-  Portworx recommends running  shared volumes. Shared volumes can be configured as follows:
+  Portworx recommends running  shared volumes. Shared volumes can be configured as follows by adding `shared: "true" ` to the storage class:
 
-  ```
-  pxctl volume create wordpressvol --shared --size=100 --repl=3
-  ```
+ ```yaml
+ kind: StorageClass
+ apiVersion: storage.k8s.io/v1beta1
+ metadata:
+   name: portworx-sc
+ provisioner: kubernetes.io/portworx-volume
+ parameters:
+   repl: "3"
+   priority_io: "high"
+   racks: "rack1"
+   shared: "true"
+ ```
+
   This [page](https://docs.portworx.com/manage/volumes.html) gives more details on different volume types,
   how to create them and update the configuration for the volumes
+
+* In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
 
 ### Data Protection for Containers
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the
   case of app failures.
 
-* Portworx support 64 snapshots per volume
+* Portworx support 64 snapshots per volume.
 
-* Each snapshot can be taken manually via the `pxctl snap create` command. For e.g.,
+* Refer to this [document](https://docs.portworx.com/manage/snapshots.html) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
 
-  ```
-  pxctl snap create --name mysnap --label color=blue,fabric=wool myvol
-  Volume successfully snapped: 1152602487227170184
-  ```
-* Alternatively, snapshots can be scheduled by creating a hourly, daily or weekly schedule. This will enable the snapshots
-  to be automatically created without user intervention.
+* Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
-  ```
-  pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
-  ```
-* Here is more information on how to setup [snapshots](https://docs.portworx.com/manage/snapshots.html) in PX-Enterprise.
+```yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+  metadata:
+    name: portworx-repl-1-snap-internal
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "1"
+  snap_interval: "240"
+```
+
+* You can use annotations in Kubernetes to perform on-demand snapshot operations from within Kubernetes.
+
+Portworx uses a special annotation `px/snapshot-source-pvc` which can be used to identify the name of the source PVC whose snapshot needs to be taken.
+
+```yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: prod
+  name: ns.prod-name.px-snap-1
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-sc
+    px/snapshot-source-pvc: px-vol-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 6Gi
+```
+Note the format of the `name` field  - `ns.<namespace_of_source_pvc>-name.<name_of_the_snapshot>`. The above example takes a snapshot with the name "px-snap-1" of the source PVC "px-vol-1" in the "prod" namespace.
+>**Note:**<br/> Annotations support is available from PX Version 1.2.11.6
+
+For using annotations Portworx daemon set requires extra permissions to read annotations from PVC object. Make sure your ClusterRole has the following section
+
+```yaml
+- apiGroups: [""]
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list"]
+```
+
+You can run the following command to edit your existing Portworx ClusterRole
+
+```
+$ kubectl edit clusterrole node-get-put-list-role
+```
+* Refer to the [Snapshots document](https://docs.portworx.com/manage/snapshots.html) in the Kubernetes section of the docs for more up to date information on snapshots.
+
+* If you have installed Stork, the snapshot operations can be executed via Stork. Follow the [link](https://github.com/libopenstorage/stork/tree/master#creating-snapshots) to see how snapshots can be done with Stork.
 
 * For DR, It is recommended to setup cloudsnaps as well which is covered in detail in the Day 3 - Cloudsnaps section
 
@@ -179,18 +277,22 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 Portworx recommends setting up monitoring with Prometheus and AlertsManager to ensure monitoring of the data services infrastructure for your containers
 
+>**Note:**<br/> Please remember to setup cadvisor and nodexporter properly so they mount the '/' partition as ro:slave.
+Refer to this [link](https://docs.portworx.com/maintain/monitoring/#using-node_exporter-and-cadvisor-alongside-portworx) for more information
+
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx's production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
-  * Configure Grafana via this [template](monitoring/grafana/index.html)
-  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
-  * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
+  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/maintain/monitoring/prometheus/index.html)
+  * Configure Grafana via this [template](/maintain/monitoring/grafana/index.html)
+  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/maintain/monitoring/alerting.html)
+  * List of Portworx Alerts are documented [here](/maintain/monitoring/portworx-alerts.html)
+
 
 ## Day 2 Operations
 
 ### Hung Node Recovery
 
-* A PX node may hang or appear to hang because of any of the following reasons
+* A PX node may hang or appeart to hang because of any of the following reasons
   * Underlying media being too slow to respond and thus PX trying to error recovery of the media
   * Kernel hangs or panics that are impacting overall operations of the system
   * Other applications that are not properly constrainted putting heavy memory pressure on the system
@@ -205,7 +307,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 ### Stuck Volume Detection and Resolution
 
-* With DC/OS, it is possible that even after the application container terminates, a volume is left attached.
+* With K8s, it is possible that even after the application container terminates, a volume is left attached.
   This volume is still available for use in any other node. PX makes sure that if a a volume is not in use by
   an application, it can be attached to any other node in the system
 
@@ -233,9 +335,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 * The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](https://docs.portworx.com/maintain/scale-out.html) shows how to scale up a existing cluster by adding more nodes
 TODO: *Update the above page to show runc*
 
-* Using DC/OS, if PX is installed as a framework, you can also scale a PX cluster by using the
-  DC/OS PX [framework](https://docs.portworx.com/scheduler/mesosphere-dcos/install.html#scaling-up-portworx-nodes)
-
+* In Kubernetes, PX is deployed as a Daemonset. This enables PX to automatically scale as the cluster scales. So there is no specific action needed from the user to scale PX along with the cluster scaling
 
 ### Cluster Capacity Expansion
 
@@ -252,6 +352,7 @@ TODO: *Update the above page to show runc*
 
 * Servers running PX can be replaced by performing decommissioning of the server to safely remove them from the cluster
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned
+* Delete PX from the node by setting the PX/Enabled=remove [label](https://docs.portworx.com/scheduler/kubernetes/install.html#uninstall)
 * Use `pxctl cluster delete` command to manually remove the node from the cluster
 * Follow the instructions in this page to [delete](https://docs.portworx.com/maintain/scale-down.html#prevention-of-data-loss) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced
@@ -261,21 +362,20 @@ TODO: *Update the above page to show runc*
 
 ### Software Upgrades
 
-#### Portworx Software Upgrades
+#### Portworx Upgrades
 
-  * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrades
-  * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken for all the volumes
-  * If you are using the Portworx DC/OS framework for deploying PX and running PX as OCI format container, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade-oci.html) to perform the upgrades
-  * If you are running PX as a systemd service, follow this [link](https://docs.portworx.com/scheduler/mesosphere-dcos/upgrade.html)
+  * Work with Portworx Support before planning major upgrades
+  * Ensure all volumes have up-to-date [snapshots](https://docs.portworx.com/scheduler/kubernetes/snaps-annotations.html#managing-snapshots-through-kubectl)
+  * Ensure all volumes have up-to-date [cloudsnaps](https://docs.portworx.com/cloud/backups.html)
+  * Refer to [Upgrade Portworx on Kubernetes](https://docs.portworx.com/scheduler/kubernetes/upgrade.html)
 
 
-#### DC/OS Upgrades
+
+#### Kubernetes Upgrades
 
 * Work with Portworx Support before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
 * Ensure there are [cloudsnaps](https://docs.portworx.com/cloud/backups.html) that are taken.
-* Due to a [bug in DCOS](https://jira.mesosphere.com/browse/DCOS_OSS-2103) the Portworx service file will get removed after an upgrade. Please run `dcos portworx plan force-restart deploy portworx-deploy` after the DCOS upgrade to re-deploy the service file.
 * After the migration, relaunch PX and ensure that the entire cluster is online by running `pxctl status`
-* Check if the DC/OS services via marathon and any other frameworks can mount the PX volumes from the marathon UI or the DC/OS UI
 
 
 #### OS upgrades and Docker Upgrades .

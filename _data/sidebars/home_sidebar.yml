@@ -84,6 +84,8 @@
           url: /scheduler/kubernetes/update-px-geography.html
       - title: Operate and Maintain
         folderitems:
+        - title: Running Portworx in Production with Kubernetes
+          url: /scheduler/kubernetes/going-production-with-k8s.html
         - title: Upgrade
           url: /scheduler/kubernetes/upgrade.html
         - title: Uninstall
@@ -110,8 +112,6 @@
         url: /scheduler/mesosphere-dcos/install.html
       - title: Universe for Air-gapped clusters
         url: /scheduler/mesosphere-dcos/install-universe.html
-      - title: Upgrade
-        url: /scheduler/mesosphere-dcos/upgrade-oci.html
       - title: Stateful Frameworks
         folderitems:
         - title: About
@@ -128,10 +128,12 @@
           url: /scheduler/mesosphere-dcos/couchdb.html
         - title: Zookeeper
           url: /scheduler/mesosphere-dcos/zookeeper.html
-      - title: How To
+      - title: Operate and Maintain
         folderitems:
         - title: Running Portworx in Production with DC/OS
-          url: /maintain/going-production-with-dcos.html
+          url: /scheduler/mesosphere-dcos/going-production-with-dcos.html
+        - title: Upgrade
+          url: /scheduler/mesosphere-dcos/upgrade-oci.html
         - title: Constraining Applications to PX nodes
           url: /scheduler/mesosphere-dcos/constraints.html
         - title: Dynamically Creating Volumes
@@ -194,7 +196,7 @@
         url: /applications/object-storage.html
   - title: Cloud Reference Guides
     folderitems:
-    - title: Amazon Web Services(AWS)
+    - title: Amazon Web Services
       folderitems:
       - title: Amazon Elastic Container Service (ECS)
         url: /cloud/aws/ecs.html
@@ -216,7 +218,7 @@
         url: /cloud/azure/k8s-acs-engine.html
       - title: Azure Container Engine with DCOS
         url: /cloud/azure/dcos-acs-engine.html
-    - title: Google Cloud Platform (GCP)
+    - title: Google Cloud
       folderitems:
       - title: Google Kubernetes Engine (GKE)
         url: /cloud/gcp/gke.html
@@ -304,12 +306,6 @@
       url: /maintain/maintenance-mode.html
     - title: DR Best Practices
       url: /maintain/dr-best-practices.html
-    - title: Operations Guide for Running Portworx in Production
-      folderitems:
-      - title: Running Portworx in Production with DC/OS
-        url: /maintain/going-production-with-dcos.html
-      - title: Running Portworx in Production with Kubernetes
-        url: /maintain/going-production-with-k8s.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
@@ -348,7 +344,7 @@
         url: /scheduler/kubernetes/wp-k8s.html
     - title: Jenkins
       url: /applications/jenkins.html
-  - title: Encryption
+  - title: Key Management
     folderitems:
     - title: Portworx with Vault
       url: /secrets/portworx-with-vault.html
@@ -402,6 +398,8 @@
     folderitems:
     - title: OpenStorage.org
       url: https://github.com/libopenstorage
+    - title: STORK
+      url: https://github.com/libopenstorage/stork
     - title: Torpedo for CSI and Kubernetes
       url: https://github.com/portworx/torpedo
     - title: Graph Drivers for Docker
