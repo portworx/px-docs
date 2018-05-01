@@ -39,6 +39,6 @@ Visit *http://{IP_ADDRESS}* in the browser and login with admin/Password1
 * In the cluster list that appears, click on the trashcan link next to the cluster name.
 * This will remove the cluster card from lighthouse cluster landing page 
 
-**NOTE:** This will not remove your cluster from your KVDB. Just entry in lighthouse.
+**NOTE:** This will not remove your cluster from your KVDB. Just the entry in lighthouse.
 
 ![Lighthouse add new cluster](/images/lh-new-delete-cluster.png){:width="1796px" height="600px"}
