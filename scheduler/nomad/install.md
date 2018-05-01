@@ -28,7 +28,7 @@ Current use of Portworx with Nomad is **experimental**.
 
 Portworx can install easily through either Terraform or Ansible.
 * To install with **Terraform**, please use the [Terraform Portworx Module](https://registry.terraform.io/modules/portworx/portworx-instance/)
-* To install with **Ansible**, please use the [Terraporx Ansible Playbook](https://github.com/portworx/terraporx/tree/master/automation/ansible/portworx)
+* To install with **Ansible**, please use the [Ansible Galaxy Role](https://galaxy.ansible.com/portworx/portworx-defaults/)
 
 Please refer to the [Portworx installation arguments](/runc/options.html) for more detail. 
 
