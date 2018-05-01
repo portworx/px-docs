@@ -146,3 +146,5 @@ NAME      READY     STATUS    RESTARTS   AGE
 pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
+
+{% include k8s-non-root-access.md %}

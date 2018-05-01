@@ -112,3 +112,5 @@ spec:
     persistentVolumeClaim:
       claimName: testvol-pvc
 ```
+
+{% include k8s-non-root-access.md %}
