@@ -8,7 +8,7 @@ meta-description: "Volume snaphots from lighthouse."
 
 ### Choose a volume
 
-![Lighthouse pick snapshot volume](/images/lighthouse-new-volume-info.png){:width="1796px" height="600px"}
+![Lighthouse pick snapshot volume](/images/lighthouse-new-volume-info.png){:width="600px" height="600px"}
 
 Once you have chosen a particular volume, the right bar will populate with volume info.
 
