@@ -6,13 +6,13 @@ sidebar: home_sidebar
 meta-description: "Update volume replication."
 ---
 
-## Select a Volume
+### Select a Volume
 
 Select the volume and click the pencil shaped icon on the volume details right hand pane.
 
 ![Lighthouse select volume](/images/lighthouse-new-volume-update-1.png){:width="1796px" height="600px"}
 
-## Update the Volume Replication
+### Update the Volume Replication
 
 Update the replication factor on the Edit Volume pop up.
 
