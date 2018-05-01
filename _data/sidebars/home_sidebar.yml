@@ -360,16 +360,28 @@
       url: /secrets/portworx-with-dcos-secrets.html
   - title: Lighthouse
     folderitems:
+    # - title: Install Lighthouse
+    #   url: /enterprise/lighthouse.html
     - title: Install Lighthouse
-      url: /enterprise/lighthouse.html
+      url: /enterprise/lighthouse-new.html      
     - title: Manage PX via Lighthouse
       folderitems:
-      - title: Manage the PX cluster
-        url: /enterprise/portworx-via-lighthouse.html
-      - title: Add Existing PX Nodes to Lighthouse
-        url: /enterprise/add-existing-px-node-to-lighthouse.html
-      - title: Alerting Preferences
-        url: /enterprise/cluster-alerting.html
+      # - title: Manage the PX cluster
+      #   url: /enterprise/portworx-via-lighthouse.html
+      # - title: Add Existing PX Nodes to Lighthouse
+      #   url: /enterprise/add-existing-px-node-to-lighthouse.html
+      # - title: Alerting Preferences
+      #   url: /enterprise/cluster-alerting.html
+      - title: Filters
+        url: /enterprise/lighthouse-filters.html         
+      - title: Update Volume
+        url: /enterprise/lighthouse-volume-update.html    
+      - title: Create Cloud Credentials
+        url: /enterprise/lighthouse-new-create-credentials.html    
+      - title: Create Volume Snapshots      
+        url: /enterprise/lighthouse-snapshots.html     
+      - title: Group Snapshots
+        url: /enterprise/group-snapshots.html           
   - title: Knowledge Base
     folderitems:
     - title: Running with an SDN
