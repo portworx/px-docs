@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Lighthouse New"
+title: "Lighthouse Setup"
 keywords: portworx, px-developer, px-enterprise, install, configure, container, storage, lighthouse
 meta-description: "Lighthouse monitors and manages your PX cluster and storage and can be run on-prem. Find out how today."
 ---
