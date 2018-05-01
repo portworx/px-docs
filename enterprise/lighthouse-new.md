@@ -5,7 +5,7 @@ keywords: portworx, px-developer, px-enterprise, install, configure, container, 
 meta-description: "Lighthouse monitors and manages your PX cluster and storage and can be run on-prem. Find out how today."
 ---
 
-## Start Lighthouse Container
+### Start Lighthouse Container
 
 ```
 sudo docker run --restart=always                            \
@@ -17,7 +17,7 @@ sudo docker run --restart=always                            \
 
 Visit *http://{IP_ADDRESS}* in the browser and login with admin/Password1
 
-## Add PX cluster to lighthouse
+### Add PX cluster to lighthouse
 
 Any cluster running Portworx 1.4.0 and above can be added to lighthouse.  
 After your first login, Lighthouse will ask you to add a cluster.
@@ -31,7 +31,7 @@ Once verified, click on attach. Lighthouse should now show you a cluster card.
 
 ![Lighthouse add new cluster](/images/lh-new-add-cluster.png){:width="1796px" height="600px"}
 
-## Delete Cluster from lighthouse
+### Delete Cluster from lighthouse
 
 ![Lighthouse menu](/images/lh-new-menu.png){:width="1796px" height="600px"}
 
