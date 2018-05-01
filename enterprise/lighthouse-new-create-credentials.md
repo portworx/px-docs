@@ -6,13 +6,13 @@ sidebar: home_sidebar
 meta-description: "Create Credentials lighthouse."
 ---
 
-## Click on Manage Credentails
+### Click on Manage Credentials
 
 In the snapshots tab , click on the cloud icon on the right side pane. 
 
 ![Lighthouse snapshot tab](/images/lighthouse-new-manage-credentials-1.png){:width="1796px" height="600px"}
 
-## Create New Cloud Credentials
+### Create New Cloud Credentials
 
 Click `New` button on the Manage Credentials page. Three cloud providers are supported [Azure, GCP, Amazon S3].
 Newly created credentials will be validated before creation.
@@ -22,13 +22,13 @@ Newly created credentials will be validated before creation.
 ![Lighthouse new credentials](/images/lighthouse-new-create-new-credentials-1.png){:width="1796px" height="600px"}
 
 
-## Azure Credentials
+### Azure Credentials
 
 Provide the `Account Name` and `Account Key` to create credentals.
 
 ![Lighthouse group snapshot](/images/lighthouse-new-azure-credentials.png){:width="1796px" height="600px"}
 
-## S3 Credentials
+### S3 Credentials
 
 Provide the `Access Key` ,  `Secret Key` , `Region` and `Endpoint`to create S3 credentials.
 
@@ -37,7 +37,7 @@ Provide the `Access Key` ,  `Secret Key` , `Region` and `Endpoint`to create S3 c
 
 ![Lighthouse group snapshot](/images/lighthouse-new-s3-credentials.png){:width="1796px" height="600px"}
 
-## Google Credentials
+### Google Credentials
 
 Provide the `Project ID ` and `JSON Key file ` to create credentals.
 
