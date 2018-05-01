@@ -14,7 +14,7 @@ Once you have chosen a particular volume, the right bar will populate with volum
 
 ### Snaphot the volume
 
-Click the icon that looks like an archiving box on the right bar. This will bring up the snapshot dialog.
+Click ![Lighthouse group snapshot](/images/lh-new-archive-icon.png){:width="24px" height="21px"} on the right bar. This will bring up the snapshot dialog.
 
 ### Local snapshot
 
