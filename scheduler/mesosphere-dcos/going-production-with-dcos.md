@@ -183,10 +183,10 @@ Portworx recommends setting up monitoring with Prometheus and AlertsManager to e
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx's production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (monitoring/prometheus/index.html)
-  * Configure Grafana via this [template](monitoring/grafana/index.html)
-  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](monitoring/alerting.html)
-  * List of Portworx Alerts are documented [here](monitoring/portworx-alerts.html)
+  * Here is how Prometheus can be setup to monitor Portworx [Prometheus] (/maintain/monitoring/prometheus/index.html)
+  * Configure Grafana via this [template](/maintain/monitoring/grafana/index.html)
+  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/maintain/monitoring/alerting.html)
+  * List of Portworx Alerts are documented [here](/maintain/monitoring/portworx-alerts.html)
 
 ## Day 2 Operations
 
