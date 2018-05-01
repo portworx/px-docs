@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Accessing Portworx volumes (PVC/PV) with a non-root user"
+title: "Accessing Portworx volumes with a non-root user"
 keywords: portworx, pre-provisioned volumes, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
 sidebar: home_sidebar
 meta-description: "Find out how to access a Portworx volume (PVC/PV) with a non-root user"
@@ -14,7 +14,7 @@ to allow a specific set of users to access the Persistent Volume as explained be
 
 You can modify the PodSecurityContext section of a Pod to include an ```fsGroup``` field. Here is a snippet of a pod spec file
 
-```
+```yaml
   spec:
     # Allow non-root user to access PersistentVolume
     securityContext:
