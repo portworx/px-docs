@@ -3,6 +3,8 @@ layout: page
 title: "Operations Guide to deploy Portworx in Production in Kubernetes Clusters"
 keywords: kuberntes, operations guide, run book, disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
+redirect_from:
+  - /maintain/going-production-with-k8s.html
 meta-description: "Portworx Operations Guide for Kubernetes Deployments"
 ---
 
