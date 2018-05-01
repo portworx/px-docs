@@ -372,16 +372,12 @@
       #   url: /enterprise/add-existing-px-node-to-lighthouse.html
       # - title: Alerting Preferences
       #   url: /enterprise/cluster-alerting.html
-      - title: Filters
-        url: /enterprise/lighthouse-filters.html         
       - title: Update Volume
         url: /enterprise/lighthouse-volume-update.html    
       - title: Create Cloud Credentials
         url: /enterprise/lighthouse-new-create-credentials.html    
       - title: Create Volume Snapshots      
         url: /enterprise/lighthouse-snapshots.html     
-      - title: Group Snapshots
-        url: /enterprise/group-snapshots.html           
   - title: Knowledge Base
     folderitems:
     - title: Running with an SDN
