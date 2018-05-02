@@ -39,9 +39,7 @@ Portworx takes in a disk spec which gets used to provision GCP persistent disks 
 
 ### Generate the spec
 
-{% include k8s-spec-generate.md asg-addendum="
-We will supply the template(s) explained in previous section, when we create the Portworx spec.
-"%}
+{% include k8s-spec-generate.md  asg-addendum="We will supply the template(s) explained in previous section, when we create the Portworx spec." skip12="true" skip13="true" %}
 
 ### Applying the spec
 
