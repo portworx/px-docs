@@ -19,7 +19,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 **PX Version**
 
-Support for GKE is available in upcoming Portworx release 1.4.
+Support for GKE is available only in portworx release version 1.4 and above.
 
 ## Create a GKE cluster
 
