@@ -18,11 +18,10 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade-1.3.html#docker-to-oci).
 
-To upgrade, run the below curl command.
+To upgrade to the 1.3 stable release, run the curl command: `curl -fsL https://install.portworx.com/1.3/upgrade | bash -s`
 
-```
-curl -fsL https://install.portworx.com/1.3/upgrade | bash -s 
-```
+To upgrade to the 1.4 tech preview release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.0-rc1`
+
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
 
@@ -42,10 +41,10 @@ This script will also monitor the above operations.
 ### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image.
-For example below command upgrades Portworx to _portworx/oci-monitor:1.3.1.1_ image.
+For example below command upgrades Portworx to _portworx/oci-monitor:1.4.0-rc1_ image.
 
 ```
-curl -fsL https://install.portworx.com/1.3/upgrade | bash -s -- -t 1.3.1.1
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.0-rc1
 ```
 
 ### Disable scaling down of shared Portworx applications during the upgrade

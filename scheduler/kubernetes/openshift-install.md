@@ -56,7 +56,7 @@ oc create secret docker-registry regcred --docker-server=registry.connect.redhat
 
 >**Note:**<br/> Make sure to select "[x] Openshift" and provide "Kubernetes docker-registry secret: _regcred_" while generating the spec  (i.e. the spec-URL should have the _osft=true_ and _rsec=regcred_ parameters defined).
 
-{% include k8s-spec-generate.md %}
+{% include k8s-spec-generate.md skip12="true" %}
 
 
 ### Apply the spec
