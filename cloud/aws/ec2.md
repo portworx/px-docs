@@ -32,3 +32,6 @@ You can have your PX cluster dynamically manage the allocation and detachment of
 ## Install Portworx
 Once you have your AWS EC2 infrastructure configured, follow one of these guides to install [Portworx](https://docs.portworx.com/#install)
 
+## Performance Tuniung
+
+>**Note:**<br/>Please reference this guide for tuning your EC2 instances to leverage a journal device: [Performance Tuning](/maintain/performance/tuning.html)
