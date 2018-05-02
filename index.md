@@ -98,12 +98,12 @@ You can run Portworx directly via OCI runC.  This will run Portworx as a standal
 ### Install with a Container Orchestrator
 You can also deploy Portworx via your container orchestrator.  Chose the appropriate installation instructions for your scheduler.
 
-* [Install on Kubernetes](/scheduler/kubernetes)
-* [Install on Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
-* [Install on Docker](/scheduler/docker/install-standalone.html)
-* [Install on GKE](/cloud/gcp/gke.html)
-* [Install on AWS ECS](/cloud/aws/ecs.html)
-* [Install on Rancher](/scheduler/rancher/install.html)
+* [Install with Kubernetes](/scheduler/kubernetes)
+* [Install with Mesosphere DCOS](/scheduler/mesosphere-dcos/install.html)
+* [Install with Docker](/scheduler/docker/install-standalone.html)
+* [Install with GKE](/cloud/gcp/gke.html)
+* [Install with AWS ECS](/cloud/aws/ecs.html)
+* [Install with Rancher](/scheduler/rancher/install.html)
 
 
 ## Join us on Slack!

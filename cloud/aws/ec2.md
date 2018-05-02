@@ -29,3 +29,6 @@ Since PX is a replicated storage solution, we recommend using multiple availabil
 ## Dynamic Provisioning
 You can have your PX cluster dynamically manage the allocation and detachment of your EBS volumes.  This is known as ASG (Auto Scale Group) mode.  Follow this guide to enable [ASG](/cloud/aws/asg.html)
 
+## Install Portworx
+Once you have your AWS EC2 infrastructure configured, follow one of these guides to install [Portworx](https://docs.portworx.com/#install-with-a-container-orchestrator)
+
