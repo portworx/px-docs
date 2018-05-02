@@ -198,6 +198,8 @@
     folderitems:
     - title: Amazon Web Services
       folderitems:
+      - title: Amazon EC2 with EBS
+        url: /cloud/aws/ec2.html
       - title: Amazon Elastic Container Service (ECS)
         url: /cloud/aws/ecs.html
       - title: Amazon Elastic Kubernetes Service (EKS)
