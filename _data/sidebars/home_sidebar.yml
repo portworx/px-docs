@@ -4,8 +4,8 @@
     folderitems:
     - title: Install with a Container Orchestrator
       url: /#install-with-a-container-orchestrator
-    - title: Install Now
-      url: /install/install-now.html
+    - title: Install via Systemd
+      url: /install/install-systemd.html
     - title: Developer Edition
       url: /developer/index.html
     - title: Licensing
