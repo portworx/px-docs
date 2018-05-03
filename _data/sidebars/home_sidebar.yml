@@ -28,7 +28,7 @@
           folderitems:
           - title: KOPS (Kubernetes Operations)
             url: /cloud/aws/kops-asg.html
-          - title: AWS using Auto Scaling Groups (ASG)
+          - title: AWS using Auto Scaling Groups
             url: /scheduler/kubernetes/px-k8s-asg.html
           - title: Elastic Kubernetes Service (EKS)
             url: /cloud/aws/eks.html
