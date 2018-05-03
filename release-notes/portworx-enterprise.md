@@ -43,6 +43,15 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 To be updated soon
 
+## 1.3.1.2
+
+This is a minor update to fix install issues with RHEL Atomic and other fixes.
+
+* RHEL Atomic install fixes
+* Clean up any existing diag files before running diags command again
+* `pxctl upgrade` fixes to pull the latest image information from install.portworx.com
+* improvements in attached device detection logic in some cloud environments
+
 ## 1.3.1.1
 
 This is a minor update to the previous 1.3.1 release
