@@ -30,7 +30,7 @@
             url: /cloud/aws/kops-asg.html
           - title: AWS using Auto Scaling Groups (ASG)
             url: /scheduler/kubernetes/px-k8s-asg.html
-          - title: Amazon Elastic Kubernetes Service (EKS)
+          - title: Elastic Kubernetes Service (EKS)
             url: /cloud/aws/eks.html
         - title: GKE (Google Container Engine)
           url: /cloud/gcp/gke.html
