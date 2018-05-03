@@ -44,7 +44,7 @@ The documentation will now be accessible locally at [http://127.0.0.1:4005/](htt
 
 >**NOTE**:<br>
 If you ancounter _"Liquid Exception: invalid byte sequence in US-ASCII in ..."_ error,
-you should set the LC_CTYPE/LANG environment variables to UTF-8, like so:
+you should set the LC_CTYPE/LANG environment variables to UTF-8, like so:<br>
 `env LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8 bundle exec jekyll serve --port 8088 --host 0.0.0.0`
 
 ## Useful Development Notes
