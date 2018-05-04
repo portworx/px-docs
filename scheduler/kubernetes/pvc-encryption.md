@@ -27,11 +27,11 @@ PVC level encryption is achieved using following PVC annotations:
 If your Storage Class does not have the `secure` flag set, but you want to encrypt the PVC using the same Storage Class, then create the PVC as below:
 ```yaml
 kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: ns.default-name.secure-pvc
-    annotations:
-      px/secure: true
+apiVersion: v1
+metadata:
+  name: ns.default-name.secure-pvc
+  annotations:
+    px/secure: true
 spec:
   storageClass: portworx-sc
   accessModes:
@@ -50,13 +50,13 @@ Similar to the above example, if you want to use the secure Storage Class, but d
 You can encrypt your PVC using a custom secret as follows:
 ```yaml
 kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: ns.default-name.secure-mysql-pvc
-    annotations:
-      px/secret-name: vol-secrets
-      px/secret-namespace: example
-      px/secret-key: mysql-pvc
+apiVersion: v1
+metadata:
+  name: ns.default-name.secure-mysql-pvc
+  annotations:
+    px/secret-name: vol-secrets
+    px/secret-namespace: example
+    px/secret-key: mysql-pvc
 spec:
   storageClass: portworx-sc
   accessModes:
@@ -115,11 +115,11 @@ annotations:
 Other secrets providers like Vault, AWS KMS, DC/OS, etc do not have namespaces. Hence, you need only `px/secret-name` annotation to specify the key to be used for encryption.
 ```yaml
 kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: ns.default-name.secure-mysql-pvc
-    annotations:
-      px/secret-name: your-secret-key
+apiVersion: v1
+metadata:
+  name: ns.default-name.secure-mysql-pvc
+  annotations:
+    px/secret-name: your-secret-key
 spec:
   storageClass: portworx-sc
   accessModes:
