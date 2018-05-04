@@ -459,7 +459,7 @@ Download the custom [Portworx dashboard](https://github.com/portworx/px-docs/blo
 Download the Grafana [dashboard configuration](https://github.com/portworx/px-docs/blob/gh-pages/k8s-samples/grafana/config/dashboardConfig.yaml) file
 
 Create a configmap from the above files with the below command
-`kubectl create configmap grafana-config --from-file=$(pwd)/grafanaConfigurations -nkube-system`
+`kubectl create configmap grafana-config --from-file=$(pwd)/grafanaConfigurations -n kube-system`
 
 Create a file named `grafana-deployment.yaml` with the below contents and apply the spec.
 
@@ -515,8 +515,8 @@ spec:
             port: 3000
         volumeMounts:
         - name: grafana-config
-          mountPath: /etc/grafana/provisioning/dashboards/config.yaml
-          subPath: config.yaml
+          mountPath: /etc/grafana/provisioning/dashboards/dashboardConfig.yaml
+          subPath: dashboardConfig.yaml
         - name: dashboard-templates
           mountPath: /var/lib/grafana/dashboards
       volumes:
@@ -524,8 +524,8 @@ spec:
         configMap:
           name: grafana-config
           items:
-          - key: config.yaml
-            path: config.yaml
+          - key: dashboardConfig.yaml
+            path: dashboardConfig.yaml
       - name: dashboard-templates
         configMap:
           name: grafana-config
