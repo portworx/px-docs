@@ -201,7 +201,7 @@ receivers:
     auth_password: "<sender-email-password>"
 ## Edit the file and create a secret with it using the following command
 ```
-`kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml`
+`kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
 
 
 Create a file named `alertmanager-cluster.yaml` with the below contents and apply the spec on your cluster.
