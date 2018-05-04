@@ -34,6 +34,8 @@
             url: /cloud/azure/aks.html
           - title: Azure Container Engine with Kubernetes
             url: /cloud/azure/k8s-acs-engine.html
+        - title: Kubernetes on DC/OS
+          url: /scheduler/mesosphere-dcos/kubernetes.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
@@ -104,6 +106,8 @@
       folderitems:
       - title: Install
         url: /scheduler/mesosphere-dcos/install.html
+      - title: Kubernetes on DC/OS
+        url: /scheduler/mesosphere-dcos/kubernetes.html
       - title: Universe for Air-gapped clusters
         url: /scheduler/mesosphere-dcos/install-universe.html
       - title: Stateful Frameworks
