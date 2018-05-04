@@ -4,14 +4,8 @@
     folderitems:
     - title: Install with a Container Orchestrator
       url: /#install-with-a-container-orchestrator
-    - title: Install with OCI runC and systemd
-      folderitems:
-      - title: Install
-        url: /runc/
-      - title: Upgrade
-        url: /runc/#upgrade-px-oci
-      - title: Install Arguments
-        url: /runc/options.html
+    - title: Install via Systemd
+      url: /install/install-systemd.html
     - title: Developer Edition
       url: /developer/index.html
     - title: Licensing
@@ -290,6 +284,14 @@
         url: /maintain/performance/sql.html
       - title: NOSQL
         url: /maintain/performance/nosql.html
+    - title: Managing OCI runC and systemd
+      folderitems:
+      - title: Run Portworx under runC
+        url: /runc/index.html
+      - title: Upgrade
+        url: /runc#upgrade-px-oci
+      - title: Install Arguments
+        url: /runc/options.html
     - title: Manage Users and Groups
       url: /maintain/users-groups.html
     - title: Upgrade Portworx
