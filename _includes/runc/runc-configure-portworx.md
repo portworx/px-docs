@@ -10,7 +10,8 @@ Installation example:
 
 ```bash
 #  Basic installation
-$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb -s /dev/xvdc {{ include.sched-flags }}
 ```
