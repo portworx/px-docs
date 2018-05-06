@@ -117,6 +117,7 @@ Step 1: Download and deploy the PX OCI bundle
 <!--EDITING NOTE: DO NOT correct the "?type=dock" below; test the commands before modifying-->
 ```bash
 latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+
 sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
@@ -161,10 +162,12 @@ Step 4: Stop PX-Container and start PX runC
 
 ```bash
 # Disable and stop PX Docker container
+
 sudo docker update --restart=no px-enterprise
 sudo docker stop px-enterprise
 
 # Set up and start PX OCI as systemd service
+
 sudo systemctl daemon-reload
 sudo systemctl enable portworx
 sudo systemctl start portworx
