@@ -58,7 +58,7 @@ Alternatively, one might prefer to first start the PX interactively (for example
 
 ```bash
 # Invoke PX interactively, abort with CTRL-C when confirmed it's running:
-$ sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
+sudo /opt/pwx/bin/px-runc run -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb
 
@@ -78,12 +78,12 @@ After the upgrade, you will need to restart the Portworx service.
 
 <!--EDITING NOTE: DO NOT correct the "?type=dock" below; test the commands before modifying-->
 ```bash
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
-$ sudo docker run --entrypoint /runc-entry-point.sh \
+latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
     $latest_stable --upgrade
-$ sudo systemctl restart portworx
+sudo systemctl restart portworx
 ```
 
 ## Uninstalling the PX OCI bundle
@@ -92,20 +92,20 @@ To uninstall the PX OCI bundle, please run the following:
 
 ```bash
 # 1: Remove systemd service (if any)
-$ sudo systemctl stop portworx
-$ sudo systemctl disable portworx
-$ sudo rm -f /etc/systemd/system/portworx*.service
+sudo systemctl stop portworx
+sudo systemctl disable portworx
+sudo rm -f /etc/systemd/system/portworx*.service
 
 # NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
 
 # 2: Unmount oci (if required)
-$ grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
+grep -q '/opt/pwx/oci /opt/pwx/oci' /proc/self/mountinfo && sudo umount /opt/pwx/oci
 
 # 3: Remove binary files
-$ sudo rm -fr /opt/pwx
+sudo rm -fr /opt/pwx
 
 # 4: [OPTIONAL] Remove configuration files. Doing this means UNRECOVERABLE DATA LOSS.
-$ sudo rm -fr /etc/pwx
+sudo rm -fr /etc/pwx
 ```
 
 <a name="upgrading-from-px-containers-to-px-oci"></a>
@@ -116,8 +116,8 @@ Step 1: Download and deploy the PX OCI bundle
 
 <!--EDITING NOTE: DO NOT correct the "?type=dock" below; test the commands before modifying-->
 ```bash
-$ latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
-$ sudo docker run --entrypoint /runc-entry-point.sh \
+latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
     $latest_stable
@@ -152,7 +152,7 @@ Step 3: Install the PX OCI bundle
 Remember to use the arguments from your PX Docker installation.
 
 ```bash
-$ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -k etcd://myetc.company.com:2379 \
     -s /dev/xvdb
 ```
@@ -161,13 +161,13 @@ Step 4: Stop PX-Container and start PX runC
 
 ```bash
 # Disable and stop PX Docker container
-$ sudo docker update --restart=no px-enterprise
-$ sudo docker stop px-enterprise
+sudo docker update --restart=no px-enterprise
+sudo docker stop px-enterprise
 
 # Set up and start PX OCI as systemd service
-$ sudo systemctl daemon-reload
-$ sudo systemctl enable portworx
-$ sudo systemctl start portworx
+sudo systemctl daemon-reload
+sudo systemctl enable portworx
+sudo systemctl start portworx
 ```
 
 Once you confirm the PX Container -> PX runC upgrade worked, you can permanently delete the `px-enterprise` docker container.
@@ -180,23 +180,23 @@ For example:
 
 ```bash
 # Monitor the Portworx logs
-$ sudo journalctl -f -u portworx
+sudo journalctl -f -u portworx
 
 # Get a slice of Portworx logs
-$ sudo journalctl -u portworx --since 09:00 --until "1 hour ago"
+sudo journalctl -u portworx --since 09:00 --until "1 hour ago"
 ```
 
 However, if you prefer to capture Portworx service logs in a separate log file, you will need to modify your host system as follows:
 
 ```bash
 # Create a rsyslogd(8) rule to separate out the PX logs:
-$ sudo cat > /etc/rsyslog.d/23-px-runc.conf << _EOF
+sudo cat > /etc/rsyslog.d/23-px-runc.conf << _EOF
 :programname, isequal, "px-runc" /var/log/portworx.log
 & stop
 _EOF
 
 # Create logrotate(8) configuration to periodically rotate the logs:
-$ sudo cat > /etc/logrotate.d/portworx << _EOF
+sudo cat > /etc/logrotate.d/portworx << _EOF
 /var/log/portworx.log {
     daily
     rotate 7
@@ -210,5 +210,5 @@ $ sudo cat > /etc/logrotate.d/portworx << _EOF
 _EOF
 
 # Signal syslogd to reload the configurations:
-$ sudo pkill -HUP syslogd
+sudo pkill -HUP syslogd
 ```
