@@ -37,3 +37,4 @@ Please use the following guides:
 * [Dynamic Provisioning](/scheduler/kubernetes/dynamic-provisioning.html)
 * [Using Pre-provisioned volumes](/scheduler/kubernetes/preprovisioned-volumes.html)
 * [Creating and using snapshots](/scheduler/kubernetes/snaps.html)
+* [Volume encryption](/scheduler/kubernetes/storage-class-encryption.html)
