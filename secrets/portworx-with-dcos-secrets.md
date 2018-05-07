@@ -18,7 +18,7 @@ Portworx can integrate with DC/OS Secrets to store your encryption keys/secrets 
 #### Configuring permissions for Secrets
 To access secrets, Portworx needs credentials of a user. This user should have permissions to access the secrets under a base secrets path. For instance, you can grant permissions to a user to access secrets under `pwx/secrets` base path, using DC/OS enterprise cli:
 ```
-# dcos security org users grant <username> dcos:secrets:default:pwx/secrets/* full
+# dcos security org users grant <username> dcos:secrets:default:/pwx/secrets/* full
 ```
 
 #### Enabling Secrets in Portworx
