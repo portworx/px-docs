@@ -220,30 +220,18 @@ Storage pools are automatically created by selected like disks in terms of capac
 Help for storage pool commands is available as:
 
 ```
-/opt/pwx/bin/pxctl service pool -h
-
+/opt/pwx/bin/pxctl sv pool update --help
 NAME:
    pxctl service pool update - Update pool properties
 
 USAGE:
-   pxctl service pool update [command options] pool ID
+   pxctl service pool update [command options] poolID
 
 OPTIONS:
    --io_priority value  io_priority: low|medium|high
+   --labels value       comma separated name=value pairs (default: "NoLabel")
+   --resize value       resize: max
 
-[root@ip-172-31-2-134 porx]# bin/pxctl service pool -h
-NAME:
-   pxctl service pool - Storage pool maintenance
-
-USAGE:
-   pxctl service pool command [command options] [arguments...]
-
-COMMANDS:
-     show    Show pools
-     update  Update pool properties
-
-OPTIONS:
-   --help, -h  show help
 ```
 
 ### List Storage pools
@@ -290,3 +278,53 @@ To update pool 0 priority to 'MEDIUM'
 ```
  /opt/pwx/bin/pxctl service pool update 0 --io_priority medium
 ```
+
+### Update Storage pool size
+
+Here is how the command to update pool size will work. It will dynamically update the pool size so that the volumes hosted on this pool can also be expanded dynamically. This comes in very handy when running in the cloud where for expanding the pools the underlying cloud volumes (for e.g., Amazon AWS EBS or Azure Managed Disks) can be dynamically expanded during run-time. 
+
+First, here is the status of a sample cluster
+
+```
+opt/pwx/bin/pxctl status
+Status: PX is operational
+License: Trial (expires in 28 days)
+Node ID: 72d2dca0-613e-4a82-b3d7-6e5de673a09f
+	IP: 70.0.0.83
+ 	Local Storage Pool: 2 pools
+	POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+	0	HIGH		raid0		1.7 TiB	10 GiB	Online	default	default
+	1	HIGH		raid0		40 GiB	471 MiB	Online	default	default
+	Local Storage Devices: 3 devices
+	Device	Path			Media Type		Size		Last-Scan
+	0:1	/dev/sdd		STORAGE_MEDIUM_SSD	894 GiB		06 May 18 16:38 PDT
+	0:2	/dev/sdf		STORAGE_MEDIUM_SSD	894 GiB		06 May 18 16:38 PDT
+	1:1	/dev/mapper/vg-lvol1	STORAGE_MEDIUM_MAGNETIC	40 GiB		06 May 18 16:38 PDT
+	total				-			1.8 TiB
+```
+Here is how the pool 1 with device mapper volumes to the maximum size of its underlying disks
+
+```
+/opt/pwx/bin/pxctl sv pool update --resize=max 1
+Pool properties updated
+
+Check status after pool resize: 
+[root@PDC-DELL15 ~]# /opt/pwx/bin/pxctl status
+Status: PX is operational
+License: Trial (expires in 28 days)
+Node ID: 72d2dca0-613e-4a82-b3d7-6e5de673a09f
+	IP: 70.0.0.83
+ 	Local Storage Pool: 2 pools
+	POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+	0	HIGH		raid0		1.7 TiB	10 GiB	Online	default	default
+	1	HIGH		raid0		60 GiB	471 MiB	Online	default	default
+	Local Storage Devices: 3 devices
+	Device	Path			Media Type		Size		Last-Scan
+	0:1	/dev/sdd		STORAGE_MEDIUM_SSD	894 GiB		06 May 18 16:41 PDT
+	0:2	/dev/sdf		STORAGE_MEDIUM_SSD	894 GiB		06 May 18 16:41 PDT
+	1:1	/dev/mapper/vg-lvol1	STORAGE_MEDIUM_MAGNETIC	60 GiB		06 May 18 16:41 PDT
+	total				-			1.8 TiB
+```
+
+
+
