@@ -33,7 +33,7 @@ metadata:
   annotations:
     px/secure: true
 spec:
-  storageClass: portworx-sc
+  storageClassName: portworx-sc
   accessModes:
   - ReadWriteOnce
   resources:
@@ -58,7 +58,7 @@ metadata:
     px/secret-namespace: example
     px/secret-key: mysql-pvc
 spec:
-  storageClass: portworx-sc
+  storageClassName: portworx-sc
   accessModes:
   - ReadWriteOnce
   resources:
@@ -121,7 +121,7 @@ metadata:
   annotations:
     px/secret-name: your-secret-key
 spec:
-  storageClass: portworx-sc
+  storageClassName: portworx-sc
   accessModes:
   - ReadWriteOnce
   resources:

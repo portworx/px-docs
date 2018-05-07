@@ -26,11 +26,11 @@ parameters:
 Create a PVC that uses the above `px-secure-sc` storage class.
 ```yaml
 kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: secure-pvc
+apiVersion: v1
+metadata:
+  name: secure-pvc
 spec:
-  storageClass: px-secure-sc
+  storageClassName: px-secure-sc
   accessModes:
   - ReadWriteOnce
   resources:
