@@ -23,7 +23,7 @@ Note, that currently this deployment mode is available only as a _Tech Preview_ 
 ## Install
 
 ### Install using the Portworx spec generator
-When installing Portworx through [install.portworx.com](https://install.portworx.com)
+When installing Portworx through [install.portworx.com/1.4](https://install.portworx.com/1.4)
 you can select CSI as the model to use for deployment.
 
 If you are using [curl to fetch the Portworx
