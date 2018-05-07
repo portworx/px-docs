@@ -48,6 +48,8 @@
         url: /scheduler/kubernetes/install.html#interactive-tutorial
       - title: Using Stork
         url: /scheduler/kubernetes/stork.html
+      - title: Deploying using CSI
+        url: /scheduler/kubernetes/csi.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
