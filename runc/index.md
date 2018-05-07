@@ -132,11 +132,11 @@ Inspect the mounts so these can be provided to the runC installer.
 
 ```bash
 # Inspect Arguments
-{% raw %}$ sudo docker inspect --format '{{.Args}}' px-enterprise {% endraw %}
+{% raw %}sudo docker inspect --format '{{.Args}}' px-enterprise {% endraw %}
 [ -c MY_CLUSTER_ID -k etcd://myetc.company.com:2379 -s /dev/xvdb ]
 
 # Inspect Mounts
-{% raw %}$ sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool {% endraw %}
+{% raw %}sudo docker inspect --format '{{json .Mounts}}' px-enterprise | python -mjson.tool {% endraw %}
 [...]
     {
         "Destination": "/var/lib/kubelet",
