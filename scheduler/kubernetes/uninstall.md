@@ -37,7 +37,7 @@ kubectl get pods -o wide -n kube-system -l name=portworx
     b. If you don't, you can use the Web form:
     ```bash
     VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-    kubectl delete -f "https://install.portworx.com?kbver=$VER"
+    kubectl delete -f "https://install.portworx.com?ctl=true&kbver=$VER"
     ```
 
 4. Remove the 'px/enabled' label from your nodes
