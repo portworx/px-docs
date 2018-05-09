@@ -44,6 +44,10 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 To be updated soon
 
+## 1.3.1.4
+
+This is a minor update that improves degraded cluster performance when one or more nodes are down for a long time and brought back online that starts the resync process
+
 ## 1.3.1.2
 
 This is a minor update to fix install issues with RHEL Atomic and other fixes.
