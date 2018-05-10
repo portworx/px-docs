@@ -9,7 +9,7 @@ redirect_from: "/etcd.html"
 * TOC
 {:toc}
 
-Portworx requires a key-value database such as etcd for configuring storage. A highly availbale clustered etcd with persistent storage is preferred.
+Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.
 
 ### Requirements
 For production Portworx clusters we recommend the following configuration of an etcd cluster:
