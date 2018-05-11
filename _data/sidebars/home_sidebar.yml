@@ -26,9 +26,9 @@
           url: /scheduler/kubernetes/openshift-install.html
         - title: AWS (Amazon Web Services)
           folderitems:
-          - title: KOPS (Kubernetes Operations)
+          - title: Kubernetes Operations (KOPS)
             url: /cloud/aws/kops-asg.html
-          - title: AWS using Auto Scaling Groups
+          - title: Auto Scaling Groups (ASG)
             url: /scheduler/kubernetes/px-k8s-asg.html
           - title: Elastic Kubernetes Service (EKS)
             url: /cloud/aws/eks.html
