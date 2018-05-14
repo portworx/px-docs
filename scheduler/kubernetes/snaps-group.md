@@ -192,7 +192,7 @@ metadata:
   namespace: dev
   annotations:
     portworx/snapshot-type: local
-    namespace: dev
+    portworx/namespace: dev
 spec:
   persistentVolumeClaimName: mysql-data
 ```
