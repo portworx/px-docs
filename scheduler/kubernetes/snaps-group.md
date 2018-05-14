@@ -36,7 +36,7 @@ If both annotations and group ID are specified above, all PVCs that either match
 
 #### Creating snapshots of all PVCs that match certain annotations
 
-In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *portworx/tier: prod* and *portworx/type: db*.
+In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*.
 
 Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
