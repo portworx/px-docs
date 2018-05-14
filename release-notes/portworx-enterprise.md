@@ -57,8 +57,11 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4897 - Allow more time for resync to complete before changing the replication status
 * PWX-5295 - Fix a nil pointer access during cloudsnap credential delete
 * PWX-5006 - Tune data written between successive syncs depending on ingress write speed
-
-
+* PWX-5203 - Cancel any in-progress ha increase operations that are pending on the node if the node is decommission
+* PWX-5138 - Add startup options for air-gapped deployments
+* PWX-4816 - Check for and add lvm devices when handling -a option for device list
+* PWX-4609 - Allow canceling of replcition increase operations for attached volumes
+* PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 
 ## 1.3.1.4
 
