@@ -16,7 +16,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 **Preview Release Only - NOT FOR PRODUCTION**
 
-**Expected GA date: 05/21**
+**Expected GA date: 05/14**
 
 ### Notes
 
