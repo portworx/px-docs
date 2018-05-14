@@ -39,9 +39,6 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
   port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
 * Provide ability to do a [license tranfer](https://docs.portworx.com/getting-started/px-licensing.html#px-enterprise-license) from one cluster to another cluster
 
-
-
-
 ### Key Fixes:
 
 * PWX-5360 - Handle disk partitions in node wipe command
@@ -61,7 +58,9 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5138 - Add startup options for air-gapped deployments
 * PWX-4816 - Check for and add lvm devices when handling -a option for device list
 * PWX-4609 - Allow canceling of replcition increase operations for attached volumes
+* PWX-4765 - Fix resource contention issues when running heavy load on multiple shared volumes on many nodes
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
+* PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
 ## 1.3.1.4
 
