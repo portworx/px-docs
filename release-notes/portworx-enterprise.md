@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.4.0-rc1 
+## 1.4.0-rc2 
 
 **Preview Release Only - NOT FOR PRODUCTION**
 
@@ -33,6 +33,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * [Kubernetes per volume secret support](https://docs.portworx.com/scheduler/kubernetes/pvc-encryption.html) to enable 
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](https://docs.portworx.com/secrets/portworx-with-dcos-secrets.html)
+* Support Pool Resize - Available in Maintenance Mode only
 * Container Storage Interface (CSI) [Tech Preview](https://docs.portworx.com/scheduler/kubernetes/csi.html) 
 * Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting 
   port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
@@ -40,9 +41,24 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 
 
+
 ### Key Fixes:
 
-To be updated soon
+* PWX-5360 - Handle disk partitions in node wipe command
+* PWX-5351 - Reduce the `pxctl volume list` time taken when a large number of volumes are present
+* PWX-5365 - Fix cases where cloudsnap progress appears stopped because of time sychronization
+* PWX-5271 - Set default journal device size to 2GB
+* PWX-5341 - Prune out trailing `/` in storage device name before using it
+* PWX-5214 - Use device uuid when checking for valid mounts when using device mapper devices instead of the device names
+* PWX-5242 - Provide facility to add metadata journal devices to an existing cluster
+* PWX-5287 - Clean up px_env variables as well when using node wipe command
+* PWX-5322 - Unmount shared volume on shared volume source mount only on PX restarts
+* PWX-5319 - Use excl open for open device checks
+* PWX-4897 - Allow more time for resync to complete before changing the replication status
+* PWX-5295 - Fix a nil pointer access during cloudsnap credential delete
+* PWX-5006 - Tune data written between successive syncs depending on ingress write speed
+
+
 
 ## 1.3.1.4
 
