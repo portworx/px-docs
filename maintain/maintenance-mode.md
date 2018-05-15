@@ -83,7 +83,7 @@ Pool ID: 1
 /opt/pwx/bin/pxctl service  maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
-PX is not running on this host.
+Entering maintenance mode...
 ```
 
 ### Step 2: Add drive to the system
@@ -129,7 +129,7 @@ Done: "Pool 0: Balance is not running"
 
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit
-PX is now operational
+Exiting maintenance mode...
 ```
 
 Check if the drive is added using drive show command
@@ -163,8 +163,7 @@ Pool ID: 1
 /opt/pwx/bin/pxctl service  maintenance --enter
 This is a disruptive operation, PX will restart in maintenance mode.
 Are you sure you want to proceed ? (Y/N): y
-
-PX is not running on this host.
+Entering maintenance mode...
 ```
 
 ### Step 2: Replace old drive with a new drive
@@ -190,7 +189,7 @@ Check the replace status
 
 ```
 /opt/pwx/bin/pxctl service  maintenance --exit
-PX is now operational
+Exiting maintenance mode...
 ```
 
 ### Step 4: Check if the drive has been successfully replaced
@@ -214,7 +213,7 @@ Pool ID: 1
 	Drives:
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
-## Storage pool commands
+## Storage pool maintenance
 Storage pools are automatically created by selected like disks in terms of capacity and capability. These pools are classified as High/Medium/Low based on IOPS and latency. 
 
 Help for storage pool commands is available as:
@@ -222,16 +221,6 @@ Help for storage pool commands is available as:
 ```
 /opt/pwx/bin/pxctl service pool -h
 
-NAME:
-   pxctl service pool update - Update pool properties
-
-USAGE:
-   pxctl service pool update [command options] pool ID
-
-OPTIONS:
-   --io_priority value  io_priority: low|medium|high
-
-[root@ip-172-31-2-134 porx]# bin/pxctl service pool -h
 NAME:
    pxctl service pool - Storage pool maintenance
 
@@ -269,24 +258,57 @@ Pool ID: 1
 	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
 ```
 
-### Update Storage pool priority classification
+### Update Storage pool
 
-Portworx benchmarks drives and classifies them as high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classification. This can be done like so:
 ```
 /opt/pwx/bin/pxctl service update -h
+
 NAME:
    pxctl service pool update - Update pool properties
 
 USAGE:
-   pxctl service pool update [command options] pool ID
+   pxctl service pool update [command options] poolID 
 
 OPTIONS:
    --io_priority value  io_priority: low|medium|high
-
+   --labels value       comma separated name=value pairs (default: "NoLabel")
+   --resize             extend pool to maximum available physical storage
 ```
 
-To update pool 0 priority to 'MEDIUM'
+During create each pool is benchmarked and assigned an io_prioriy classification automatically - high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classification.
+To update pool 0 priority classification to 'MEDIUM'
 
 ```
- /opt/pwx/bin/pxctl service pool update 0 --io_priority medium
+/opt/pwx/bin/pxctl service pool update 0 --io_priority medium
+Pool properties updated
 ```
+
+A pool can also be resized (extended) if the underlying physical storage (drive/partition/volumes) get resized. It can be extended to use all available physical storage. 
+To resize pool 0
+
+### Step 1: Enter Maintenance mode
+
+```
+/opt/pwx/bin/pxctl service  maintenance --enter
+This is a disruptive operation, PX will restart in maintenance mode.
+Are you sure you want to proceed ? (Y/N): y
+Entering maintenance mode...
+```
+
+### Step 2: Resize drive(s)
+
+Use appropriate utility - fdisk, lvresize, aws cli etc. to resize the drive. If the pool is backed by more than one drive, each drive in the pool needs to be resized first before the pool can be resized.
+
+### Step 3: Resize pool
+```
+/opt/pwx/bin/pxctl service pool update 0 --resize
+Pool properties updated
+```
+
+### Step 3: Exit Maintenance mode 
+
+```
+/opt/pwx/bin/pxctl service  maintenance --exit
+Exiting maintenance mode...
+```
+
