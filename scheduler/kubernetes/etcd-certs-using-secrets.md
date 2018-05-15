@@ -21,7 +21,7 @@ Use `kubectl` to create the secret named `px-etcd-certs` from the above files:
 # kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
 ```
 
-Notice that the secret has 3 keys `ca.crt`, `client.crt` and `client.key`, that coincide with their corresponding file names. We will use these keys in the Portworx spec file to reference the certificates.
+Notice that the secret has 3 keys `ca.crt`, `client.crt` and `client.key`, corresponding to file names in the `etcd-secrets` folder. We will use these keys in the Portworx spec file to reference the certificates.
 ```
 # kubectl -n kube-system describe secret px-etcd-certs
 Name:         px-etcd-certs
@@ -41,14 +41,14 @@ client.key:  414  bytes
 #### Edit Portworx spec
 Once the secret is created we need to edit the Portworx spec file to consume the certificates from the secret.
 
-To mount the certificates under `/etc/pwx/etcdcerts` inside the portworx container, add the following under the _volumeMounts_ in portworx daemon set.
+To mount the certificates under `/etc/pwx/etcdcerts` inside the portworx container, add the following under the _volumeMounts_ in Portworx DaemonSet.
 ```
   volumeMounts:
   - mountPath: /etc/pwx/etcdcerts
     name: etcdcerts
 ```
 
-Now, we use the keys from the secret that we created and mount it under paths that portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-etcd-certs` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of portworx daemon set.
+Now, we use the keys from the secret that we created and mount it under paths that portworx will use to talk to the etcd server. In the `items` below, the `key` is the key from the `px-etcd-certs` secret and the `path` is the relative path from `/etc/pwx/etcdcerts` where Kubernetes will mount the certificates. Put the following under the _volumes_ section of Portworx DaemonSet.
 ```
   volumes:
   - name: etcdcerts
