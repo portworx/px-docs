@@ -36,6 +36,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting 
   port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
 * Provide ability to do a [license tranfer](https://docs.portworx.com/getting-started/px-licensing.html#px-enterprise-license) from one cluster to another cluster
+* Add support for [cloudsnap deletes](https://docs.portworx.com/control/cloud.html#pxctl-cloudsnap-delete)
 
 ### Key Fixes:
 
