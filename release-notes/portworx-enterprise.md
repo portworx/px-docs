@@ -12,9 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.4.0-rc2
-
-**Preview Release Only - NOT FOR PRODUCTION**
+## 1.4.0-rc2 (Release Candidate)
 
 **Expected GA date: 05/19**
 
