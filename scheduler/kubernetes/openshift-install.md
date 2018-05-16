@@ -1,10 +1,10 @@
 ---
 layout: page
-title: "Deploy Portworx on Openshift"
+title: "Deploy Portworx on OpenShift"
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 sidebar: home_sidebar
 
-meta-description: "Find out how to install PX within a Openshift cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
+meta-description: "Find out how to install PX within a OpenShift cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
 ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
@@ -18,12 +18,12 @@ meta-description: "Find out how to install PX within a Openshift cluster and hav
 
 **Red Hat account**
 
-Portworx container for Openshift resides in [RedHat's container repository](https://access.redhat.com/containers/#/registry.connect.redhat.com/portworx/px-enterprise), and needs to be installed using your Red Hat account's username and password.
+Portworx container for OpenShift resides in [RedHat's container repository](https://access.redhat.com/containers/#/registry.connect.redhat.com/portworx/px-enterprise), and needs to be installed using your Red Hat account's username and password.
 You can register Red Hat account for free at https://www.redhat.com/wapps/ugc/register.html.
 
-**Openshift Version**
+**OpenShift Version**
 
-Portworx supports Openshift 3.7 and above.
+Portworx supports OpenShift 3.7 and above.
 
 ## Install
 
@@ -39,7 +39,7 @@ oc adm policy add-scc-to-user anyuid system:serviceaccount:default:default
 
 ### Prepare docker-registry credentials secret
 
-To install Portworx for Openshift, you will require a valid Red Hat account ([register here](https://www.redhat.com/wapps/ugc/register.html)), and configured [Kubernetes secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config) with username/password credentials:
+To install Portworx for OpenShift, you will require a valid Red Hat account ([register here](https://www.redhat.com/wapps/ugc/register.html)), and configured [Kubernetes secret](https://kubernetes.io/docs/concepts/containers/images/#creating-a-secret-with-a-docker-config) with username/password credentials:
 
 ```bash
 # confirm the username/password works  (e.g. user:john-rhel, passwd:s3cret)
@@ -54,14 +54,14 @@ oc create secret docker-registry regcred --docker-server=registry.connect.redhat
 
 ### Generate the spec
 
->**Note:**<br/> Make sure to select "[x] Openshift" and provide "Kubernetes docker-registry secret: _regcred_" while generating the spec  (i.e. the spec-URL should have the _osft=true_ and _rsec=regcred_ parameters defined).
+>**Note:**<br/> Make sure to select "[x] OpenShift" and provide "Kubernetes docker-registry secret: _regcred_" while generating the spec  (i.e. the spec-URL should have the _osft=true_ and _rsec=regcred_ parameters defined).
 
 {% include k8s-spec-generate.md skip12="true" %}
 
 
 ### Apply the spec
 
->**Note:**<br/> Openshift Container Platform 3.9 started restricting where Daemonsets can install
+>**Note:**<br/> OpenShift Container Platform 3.9 started restricting where Daemonsets can install
 (see [reference](https://docs.openshift.com/container-platform/3.9/dev_guide/daemonsets.html)),
 which will prevent the installation of Portworx Daemonset.
 >
@@ -92,7 +92,7 @@ provisioner: kubernetes.io/portworx-volume
 parameters:
    repl: "3"
 ```
-* Log into Openshift console: https://MASTER-IP:8443/console
+* Log into OpenShift console: https://MASTER-IP:8443/console
 
 * Create a new project "hello-world".
 
