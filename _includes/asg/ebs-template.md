@@ -19,8 +19,8 @@ See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above
 
 Examples
 
-* `"-s", "type=gp2,size=200"`
-* `"-s", "type=gp2,size=100", "-s", "type=io1,size=200,iops=1000"`
+* `"type=gp2,size=200"`
+* `"type=gp2,size=100","type=io1,size=200,iops=1000"`
 
 
 **2. Using existing EBS volumes as templates**
@@ -41,7 +41,8 @@ Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in 
 
 ### Limiting storage nodes.
 
-PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the no. of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
+PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the number of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
+Modify the input arguments to PX as shown in the below examples.
 
 Examples:
 
@@ -49,6 +50,6 @@ Examples:
 
 For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total 3 EBS volumes of size 200 each and attach one EBS volume to each storage node.
 
-* `"-s", "type=gp2,size=200", "-s", "type=io1,size=100,iops=1000"`
+* `"-s", "type=gp2,size=200", "-s", "type=io1,size=100,iops=1000", "-max_drive_set_count", "3"`
 
 For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total of 6 EBS volumes (3 of size 200 and 3 of size 100). PX will attach a set of 2 EBS volumes (one of size 200 and one of size 100) to each of the 3 storage nodes..

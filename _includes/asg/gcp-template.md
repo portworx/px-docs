@@ -16,8 +16,8 @@ See [GCP disk](https://cloud.google.com/compute/docs/disks/) for more details on
 
 Examples:
 
-* `"-s", "type=pd-ssd,size=200"`
-* `"-s", "type=pd-standard,size=200", "-s", "type=pd-ssd,size=100"`
+* `"type=pd-ssd,size=200"`
+* `"type=pd-standard,size=200", "type=pd-ssd,size=100"`
 
 
 **2. Using existing GCP disks as templates**
@@ -30,7 +30,8 @@ Ensure that these disks are created in the same zone as the GCP node group.
 
 ### Limiting storage nodes.
 
-PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the no. of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
+PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the number of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
+Modify the input arguments to PX as shown in the below examples.
 
 Examples:
 
@@ -38,6 +39,6 @@ Examples:
 
 For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total 3 PDs of size 200 each and attach one PD to each storage node.
 
-* `"-s", "type=pd-standard,size=200", "-s", "type=pd-ssd,size=100"`
+* `"-s", "type=pd-standard,size=200", "-s", "type=pd-ssd,size=100", "-max_drive_set_count", "3"`
 
 For a cluster of 5 nodes, in the above example PX will have 3 storage nodes and 2 storage less nodes. PX will create a total of 6 PDs (3 PDs of size 200 and 3PDs of size 100). PX will attach a set of 2PDs (one of size 200 and one of size 100) to each of the 3 storage nodes..
