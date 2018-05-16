@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Amazon Elastic Container Service for Kubernetes (Amazon EKS)"
+title: "Amazon Elastic Container Service for Kubernetes (Amazon EKS) with Portworx"
 keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, eks
 sidebar: home_sidebar
 ---
@@ -10,7 +10,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-The steps below will help you enable dynamic provisioning of Portworx volumes in your GAmazon Elastic Container Service for Kubernetes (Amazon EKS) cluster.
+The steps below will help you enable dynamic provisioning of Portworx volumes in your Amazon Elastic Container Service for Kubernetes (Amazon EKS) cluster.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 **PX Version**
 
-Support for GKE is available only in portworx release version 1.4 and above.
+Support for EKS is available only in portworx release version 1.4 and above.
 
 ## Create a EKS cluster
 
