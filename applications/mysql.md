@@ -78,7 +78,7 @@ Volume successfully snapped:  1483421664452964115
 
 4. Verify that the database shows the cloned tables in the new mysql instance.
 
-```
+   ```
 # mysql --user=root --password=password
 MySQL [(none)]> show databases;
 +--------------------+
