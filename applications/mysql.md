@@ -15,72 +15,68 @@ Here is a three-minute video that shows how to set up a three-node cluster for m
 {% include vimeoPlayer.html id='163637386' %}
 
 
-## Step 1: Create a storage volume for mysql
+## Step 1: Run `mysql` with storage on demand
 
-To create a highly available storage volume for mysql, run the following command and note the returned volume ID. You will need the volume ID when you start the mysql container in the next step.
-
-```
-# docker volume create -d pxd --name mysql_volume --opt \
-        size=4 --opt block_size=64 --opt repl=3 --opt io_profile=db --opt fs=ext4
-```
-
-That command creates a volume called `mysql_volume`.  This volume has a replication factor of 3, which means that the data will be protected on 3 separate nodes.  We will use this volume to protect the `mysql` instances data.
-
-## Step 2: Start the mysql container
-
-To start the mysql container, run the following command. 
+The command below runs `mysql` and dynamically creates the `mysqlvol` volume, 
+with a size of 3G, with 3 replicas (data protected on 3 separate nodes), and with an I/O profile of `db`:
 
 ```
-# docker run -p 3306:3306                           \
-        --host localhost                            \
-        --name pxmysql                              \
-        -e MYSQL_ROOT_PASSWORD=password             \
-        -v mysql_volume:/var/lib/mysql -d mysql
+docker run --name pxmysql --volume-driver=pxd  \
+           -v name=mysqlvol,size=3,repl=3,io_profile=db:/var/lib/mysql \
+           -e MYSQL_ROOT_PASSWORD=password -d mysql:5.7.22
 ```
 
-Note the volume binding done via `-v mysql_volume:/var/lib/mysql`.  This causes the Portworx `mysql_volume` to get bind mounted at `/var/lib/mysql`, which is where the `mysql` Docker container stores it's data.
+Note the volume binding done via `-v mysqlvol:/var/lib/mysql`.  This causes the Portworx `mysqlvol` to get bind mounted at `/var/lib/mysql`, which is where the `mysql` Docker container stores it's data.
 
-Your mysql container is now available for use at port 3306.
+Also note the returned Container-ID
 
-## Step 3: Use `pxctl` to create snaps of your mysql volume
+## Step 2: Use `pxctl` to create snaps of your mysql volume
 
 To demonstrate the capabilities of the SAN-like functionality offered by Portworx, create a snapshot of a mysql volume.
 
 1. Create a database and a demo table in your mysql container.
 
-   ```
-# mysql --user=root --password=password
-MySQL [(none)]> create database pxdemo;
+```
+docker exec -it <Container-ID> mysql -uroot -ppassword
+[...]
+mysql> create database pxdemo;
 Query OK, 1 row affected (0.00 sec)
-MySQL [(none)]> use pxdemo;
+mysql> use pxdemo;
 Database changed
-MySQL [pxdemo]> create table grapevine (counter int unsigned);
+mysql> create table grapevine (counter int unsigned);
 Query OK, 0 rows affected (0.04 sec)
-MySQL [pxdemo]> quit;
+mysql> quit;
 Bye
 ```
 
-2. Create a snapshot of this database using `pxctl`.
+2. Create a snapshot/clone of this database using `pxctl`.
 
-   ```
-# /opt/pwx/bin/pxctl snap create 8927336170128555
-Volume successfully snapped:  1483421664452964115
+```
+[root@test1 ~]# /opt/pwx/bin/pxctl volume clone --name mysql_clone mysqlvol
+Volume clone successful: 858723406642053867
+[root@test1 ~]# /opt/pwx/bin/pxctl volume list
+ID            NAME        SIZE    HA    SHARED    ENCRYPTED    COMPRESSED    IO_PRIORITY    SCALE    STATUS
+858723406642053867    mysql_clone    3 GiB    3    no    no        no        LOW        1    up - detached
+972935509867294516    mysqlvol    3 GiB    3    no    no        no        LOW        0    up - attached on 70.0.164.113
 ```
 
-3. Note the snapshot volume ID.  Use this to launch a new instance of mysql.  Since you already have mysql running, you can go to another node in your cluster, or stop the original mysql instance.
+3. Start anohter instance of `mysql` using the volume clone just taken.  
 
-   ```
-# docker run -p 3306:3306 --volume-driver=pxd 				\
-                        --name pxmysqlclone                 \
-                        -e MYSQL_ROOT_PASSWORD=password     \
-                        -v 1483421664452964115:/var/lib/mysql -d mysql
 ```
+docker run -p 3306:3306 --volume-driver=pxd                  \
+            --name pxmysqlclone                              \
+            -e MYSQL_ROOT_PASSWORD=password                  \
+            -v mysql_clone:/var/lib/mysql -d mysql:5.7.22
+```
+
+Note the returned Container-ID
 
 4. Verify that the database shows the cloned tables in the new mysql instance.
 
-   ```
-# mysql --user=root --password=password
-MySQL [(none)]> show databases;
+```
+[root@test1 ~]# docker exec -it <Container-ID> mysql -uroot -ppassword
+[...]
+mysql> show databases;
 +--------------------+
 | Database           |
 +--------------------+
@@ -90,15 +86,20 @@ MySQL [(none)]> show databases;
 | pxdemo             |
 | sys                |
 +--------------------+
-5 rows in set (0.00 sec)
-MySQL [(none)]> use pxdemo;
+5 rows in set (0.01 sec)
+
+mysql> use pxdemo;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
 
 Database changed
-MySQL [pxdemo]> show tables;
+mysql> show tables;
 +------------------+
 | Tables_in_pxdemo |
 +------------------+
 | grapevine        |
 +------------------+
-1 rows in set (0.00 sec)
+1 row in set (0.00 sec)
+
+mysql>
 ```
