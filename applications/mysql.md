@@ -36,7 +36,7 @@ To demonstrate the capabilities of the SAN-like functionality offered by Portwor
 
 1. Create a database and a demo table in your mysql container.
 
-   ```
+```
 docker exec -it <Container-ID> mysql -uroot -ppassword
 [...]
 mysql> create database pxdemo;
@@ -51,7 +51,7 @@ Bye
 
 2. Create a snapshot/clone of this database using `pxctl`.
 
-   ```
+```
 [root@test1 ~]# /opt/pwx/bin/pxctl volume clone --name mysql_clone mysqlvol
 Volume clone successful: 858723406642053867
 [root@test1 ~]# /opt/pwx/bin/pxctl volume list
@@ -60,10 +60,10 @@ ID            NAME        SIZE    HA    SHARED    ENCRYPTED    COMPRESSED    IO_
 972935509867294516    mysqlvol    3 GiB    3    no    no        no        LOW        0    up - attached on 70.0.164.113
 ```
 
-3. Start anohter instance of `mysql` using the volume clone just taken.  
+3. Start another instance of `mysql` using the volume clone just taken.  
 
-   ```
-docker run -p 3306:3306 --volume-driver=pxd                  \
+```
+docker run --volume-driver=pxd                  \
             --name pxmysqlclone                              \
             -e MYSQL_ROOT_PASSWORD=password                  \
             -v mysql_clone:/var/lib/mysql -d mysql:5.7.22
@@ -73,7 +73,7 @@ Note the returned Container-ID
 
 4. Verify that the database shows the cloned tables in the new mysql instance.
 
-   ```
+```
 [root@test1 ~]# docker exec -it <Container-ID> mysql -uroot -ppassword
 [...]
 mysql> show databases;
