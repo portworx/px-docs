@@ -67,4 +67,4 @@ feature to automatically update the scheduler to stork if your application
 To enable the Initializer you need to:
 * [Enable the Intializer feature in your Kubernetes cluster](https://kubernetes.io/docs/admin/extensible-admission-controllers/#enable-initializers-alpha-feature) since it is an alpha feature in Kubernetes.
 * Add "--app-initializer=true" option in the stork deployment
-* Add the [stork-initializer spec](specs/stork-initializer.yaml) to you Kubernetes cluster using `kubectl create -f stork-initializer.yaml`
+* Add the [stork-initializer spec](https://github.com/libopenstorage/stork/specs/stork-initializer.yaml) to you Kubernetes cluster using `kubectl create -f stork-initializer.yaml`
