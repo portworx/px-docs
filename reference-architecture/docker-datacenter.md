@@ -41,7 +41,7 @@ Follow instructions to install [Docker CSE](https://docs.docker.com/cs-engine/1.
 
 ## Step 3:  Install Docker UCP
 
-Follow the instructions for [Installing Docker UCP](https://docs.docker.com/datacenter/ucp/2.2/guides/).
+Visit [Docker docs](https://docs.docker.com/) for instructions on Installing Docker UCP.
 
 ## Step 3a: (Optional) Update your docker.service file
 
