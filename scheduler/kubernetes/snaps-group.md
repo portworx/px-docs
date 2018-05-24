@@ -30,7 +30,7 @@ The group snapshot method supports the following annotations:
 * __portworx.selector/\<key\>: \<value\>__: When this annotation is provided, Portworx will select all PVCs with labels `<key>:<value>` and create a group snapshot. Example: `portworx.selector/stack: wordpress`.
 * __portworx.selector/group-id__: Group ID of the Portworx volumes if they were created using the `--group` parameter. Portworx will select all volumes that match this group ID and create a group snapshot.
 
-If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapped.
+If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapshotted.
 
 ## Examples
 

@@ -12,7 +12,7 @@ meta-description: "It is possible to run Portworx on your Docker Datacenter clus
 * TOC
 {:toc}
 
-Portworx has been qualified to work with [Docker Datacenter](https://www.docker.com/products/docker-datacenter)
+Portworx has been qualified to work with Docker Datacenter.
 
 Docker Datacenter (DDC) has 3 major components:
 
@@ -41,7 +41,7 @@ Follow instructions to install [Docker CSE](https://docs.docker.com/cs-engine/1.
 
 ## Step 3:  Install Docker UCP
 
-Visit [Docker docs](https://docs.docker.com/) for instructions on Installing Docker UCP.
+Visit [Docker docs](https://docs.docker.com/) for instructions for Installing Docker UCP.
 
 ## Step 3a: (Optional) Update your docker.service file
 
