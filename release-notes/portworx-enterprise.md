@@ -61,6 +61,14 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
+## 1.3.2
+
+This is a patch release with bug fixes handling sharedv4 related issues
+
+* PWX-5351 - Reduce the `pxctl volume list` time taken when a large number of volumes are present
+* PWX-5443 - Handle sharedv4 server node restarts and reattach PODs consuming such volumes automatically
+* PWX-4411 - Show IP address instead of NodeID in volume commands that show the node information
+
 ## 1.3.1.4
 
 This is a minor update that improves degraded cluster performance when one or more nodes are down for a long time and brought back online that starts the resync process
@@ -72,7 +80,7 @@ This is a minor update to fix install issues with RHEL Atomic and other fixes.
 * RHEL Atomic install fixes
 * Clean up any existing diag files before running diags command again
 * `pxctl upgrade` fixes to pull the latest image information from install.portworx.com
-* improvements in attached device detection logic in some cloud environments
+* Improvements in attached device detection logic in some cloud environments
 
 ## 1.3.1.1
 
