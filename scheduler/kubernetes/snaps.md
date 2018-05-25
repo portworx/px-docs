@@ -26,7 +26,7 @@ Using STORK, you can take 2 types of snapshots:
 
 ## Pre-snap and Post-snap commands
 
->**Note:** Pre-snap and Post-snap commands are supported in upcoming Portworx version 1.4 and above.
+>**Note:** Pre-snap and Post-snap commands are supported in an upcoming Portworx version 1.4 and above. Contact Portworx support for early access.
 
 For each of the above types, Portworx supports specifying pre and post commands that are run on the application pods using the volumes.
 
