@@ -50,6 +50,8 @@
         url: /scheduler/kubernetes/stork.html
       - title: Deploying using CSI
         url: /scheduler/kubernetes/csi.html
+      - title: Ark Plugin
+        url: /scheduler/kubernetes/ark.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
