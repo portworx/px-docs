@@ -263,6 +263,7 @@
         url: /control/service.html
       - title: Host
         url: /control/host.html
+      - title: Credentials
         url: /control/credentials.html
       - title: CloudDrives (ASG)
         url: /control/asg-clouddrive.html
