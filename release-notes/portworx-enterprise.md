@@ -65,7 +65,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ***NOTE***
 
-This release comes with an updated kernel driver and thus will require node restarts after an upgrade. 
+This release comes with an updated kernel driver and thus will require node restarts after an upgrade. For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
+ to manage the automatic rolling upgrade of the cluster.
 * Handle cases where more than 180 volumes remain attached to a PX node across restarts
 
 ## 1.3.2
