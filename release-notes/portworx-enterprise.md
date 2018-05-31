@@ -61,6 +61,13 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
+## 1.3.3-rc2
+
+***NOTE***
+
+This release comes with an updated kernel driver and thus will require node restarts after an upgrade. 
+* Handle cases where more than 180 volumes remain attached to a PX node across restarts
+
 ## 1.3.2
 
 This is a patch release with bug fixes handling sharedv4 related issues
