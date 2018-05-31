@@ -17,7 +17,7 @@ This guide is based on the DCOS guide to install a local universe: [https://docs
 First you will need to download 3 files and transfer them to each of you DCOS Master nodes
 * [dcos-local-px-universe-http.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-http.service)
 * [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-registry.service)
-* [local-universe.tar.gz](https://px-dcos.s3.amazonaws.com/local-universe_1.10_01082017.tar.gz)
+* [local-universe.tar.gz](https://s3-us-west-1.amazonaws.com/px-dcos/local-universe_1.11_31052018_0e1dac7.tar.gz)
 
 ### Install the services
 On each of your Master nodes run the following steps
