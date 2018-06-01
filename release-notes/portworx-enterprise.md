@@ -63,15 +63,21 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.3.3
 
-***NOTE***
+***NOTE 1***
 
 Upgrading to this release requires a node reboot if the node has attached Portworx volumes. To avoid a node reboot, migrate the containers using Portworx to a different node and then perform an upgrade.  For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
  to manage the automatic rolling upgrade of the cluster..
+ 
+***NOTE 2***
+
+If node in the cluster has more than 512 attached PX volumes, upon update to 1.3.3, that node will go into maintenance mode. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
 
 ### Key Fixes
 
 * Improve handling of etcd leader restarts in PX
-* Handle cases where more than 180 volumes remain attached to a PX node across restarts
+* Handle cases where more than 180 volumes remain attached to a PX node across restarts - Enforce PX support for 512 attached   volumes per node
+* Reduce time taken to decomission storageless nodes.
+
 
 ### Errata
 
