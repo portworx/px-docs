@@ -65,8 +65,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ***NOTE***
 
-This release comes with an updated kernel driver and thus will require node restarts after an upgrade if there volumes are attached to a container. For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
- to manage the automatic rolling upgrade of the cluster.
+Upgrading to this release requires a node reboot if the node has attached Portworx volumes. To avoid a node reboot, migrate the containers using Portworx to a different node and then perform an upgrade.  For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
+ to manage the automatic rolling upgrade of the cluster..
 
 ### Key Fixes
 
