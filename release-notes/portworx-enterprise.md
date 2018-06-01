@@ -70,7 +70,7 @@ Upgrading to this release requires a node reboot if the node has attached Portwo
  
 ***NOTE 2***
 
-If node in the cluster has more than 512 attached PX volumes, upon update to 1.3.3, that node will go into maintenance mode. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
+PX 1.3.3 enforces a maximum number of 512 _attached_ volumes per node. A request to attach more than 512 volumes on a node will return an error.  In the rare event that PX is upgraded from an old version that has more than 512 attached volumes on a node, PX 1.3.3, will enter maintenance mode on upgrade. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
 
 ### Key Fixes
 
