@@ -61,14 +61,21 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
-## 1.3.3-rc2
+## 1.3.3
 
 ***NOTE***
 
 This release comes with an updated kernel driver and thus will require node restarts after an upgrade if there volumes are attached to a container. For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
  to manage the automatic rolling upgrade of the cluster.
- 
+
+### Key Fixes
+
+* Improve handling of etcd leader restarts in PX
 * Handle cases where more than 180 volumes remain attached to a PX node across restarts
+
+### Errata
+
+* In the case of a three node etcd cluster, if the etcd leader node gets partitioned from the remaining two nodes because of a network link failure but the PX cluster nodes can access all the etcd nodes, the current etcdclient doesn't handle such a network partition case correctly. This is a known issue with etcd and Portworx is following up with the community on this.
 
 ## 1.3.2
 
