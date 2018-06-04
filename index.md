@@ -53,10 +53,9 @@ Read more about how Portworx provides storage volumes to your application contai
 * Configure Docker to use shared mounts.  The shared mounts configuration is required, as PX-Developer exports mount points.
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
-* Minimum resources dedicated to Portworx per server:
+* Minimum resources **recommended** per server:
   * 4 CPU cores
   * 4 GB RAM
-* Additional resources **recommended** per server:
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:
