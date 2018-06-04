@@ -24,4 +24,4 @@ Portworx takes in a disk spec which gets used to provision AWS persistent disks 
 
 ## Generate the spec
 
-{% include k8s-spec-generate.md env-addendum="We will supply the template(s) explained in previous section,  Select the EKS checkbox option when we create the Portworx spec." skip12="true" skip13="true" %}
+{% include k8s-spec-generate.md asg-addendum="We will supply the template(s) explained in previous section,  Select the EKS checkbox option when we create the Portworx spec." skip12="true" skip13="true" %}
