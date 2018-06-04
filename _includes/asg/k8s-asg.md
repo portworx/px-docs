@@ -30,8 +30,8 @@ Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/co
 
 ### Generate the Portworx Spec
 
-When generating the spec, following parameters are important for KOPS:
-1. __AWS environment variables__: In the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the KOPS IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. If you are using instance privileges you can ignore setting the environment variables.
+When generating the spec, following parameters are important:
+1. __AWS environment variables__: In the environment variables option (_e_), specify _AWS\_ACCESS\_KEY\_ID_ and _AWS\_SECRET\_ACCESS\_KEY_ for the IAM user. Example: AWS_ACCESS_KEY_ID=\<id>,AWS_SECRET_ACCESS_KEY=\<key>. If you are using instance privileges you can ignore setting the environment variables.
 
 2. __Volume template__: In the drives option (_s_), specify the EBS volume template that you created in [previous step](#ebs-volume-template). Portworx will dynamically create EBS volumes based on this template.
 

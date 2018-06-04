@@ -1,6 +1,5 @@
 {{ include.asg-addendum }}
 
-{{ include.env-addendum }}
 
 To generate the spec file, head on to the below URLs for the PX release you wish to use.
 
@@ -13,6 +12,8 @@ To generate the spec file, head on to the below URLs for the PX release you wish
 {% endunless %}
 
 Alternately, you can use curl to generate the spec as described in [Generating Portworx Kubernetes spec using curl](/scheduler/kubernetes/px-k8s-spec-curl.html).
+
+Note: For the EKS clusters, select the EKS checkbox option when we create the Portworx spec.
 
 #### Secure ETCD and Certificates
 If using secure etcd provide "https" in the URL and make sure all the certificates are in the _/etc/pwx/_ directory on each host which is bind mounted inside PX container.
