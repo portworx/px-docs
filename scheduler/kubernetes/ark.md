@@ -39,6 +39,28 @@ persistentVolumeProvider:
   name: portworx
 ```
 
+### Using local snapshots (default)
+By default, local snapshots will be created for PVCs backed by Portworx. You can explicitly configure this by specifying
+`local` as the `type` in the `config` section:
+```
+persistentVolumeProvider:
+  name: portworx
+  config:
+    type: local
+```
+
+### Using cloud snapshots
+To use cloud snapshots to backup your PVCs, you need to specify `cloud` as the `type` in the `config` section. If you have
+more than one credential configured with Portworx you also need to specify the UUID of the credential using `credId`:
+```
+persistentVolumeProvider:
+  name: portworx
+  config:
+    type: cloud
+    # Optional, required only if Portworx is configured with more than one credential
+    credId: <UUID>
+```
+
 ## Managing snapshots
 Once the plugin has been installed and configured, everytime you take backups
 using Ark and include PVCs, it will also take Portworx snapshots of your volumes.
