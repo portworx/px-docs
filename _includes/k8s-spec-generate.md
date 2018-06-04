@@ -1,5 +1,7 @@
 {{ include.asg-addendum }}
 
+{{ include.env-addendum }}
+
 To generate the spec file, head on to the below URLs for the PX release you wish to use.
 
 * [1.4 Tech Preview](https://install.portworx.com/1.4/).
