@@ -1,4 +1,4 @@
-{{ include.env-addendum }
+{{ include.env-addendum }}
 
 ## Portworx in an Auto Scaling Group
 
