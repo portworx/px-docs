@@ -13,7 +13,7 @@ sidebar: home_sidebar
 
 ## Create a EKS cluster
 
-Creating Amazon EKS is in Preview. Visit [here](https://aws.amazon.com/eks/), to sign up..
+Visit [the Amazon EKS page](https://aws.amazon.com/eks/) for details on signing up and install instructions.
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your Amazon Elastic Container Service for Kubernetes (Amazon EKS) cluster.
 
