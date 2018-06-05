@@ -9,10 +9,6 @@
 In AWS, this can be done through the security group of the VPC to which your instances belong.
 "%}
 
-**KOPS cluster in AWS**
-
-Detailed instructions on how to setup a KOPS cluster in AWS are documented [here](https://github.com/kubernetes/KOPS/blob/master/docs/aws.md).
-
 ## AWS Requirements
 
 {% include asg/aws-prereqs.md %}
