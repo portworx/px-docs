@@ -14,12 +14,9 @@ meta-description: "Find out how to install PX within a Kubernetes cluster and ha
 * TOC
 {:toc}
 
-## Interactive Tutorial
+## Interactive Tutorials
 
-Following are some interactive tutorials that give an overview about Portworx on Kubernetes.
-
-* [Portworx on Kubernetes](https://www.katacoda.com/portworx/scenarios/deploy-px-k8s) gives a high level overview on installing Portworx on Kubernetes.
-* [Persistent volumes on Kubernetes using Portworx](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-basic) explains how to create persistent volumes using Portworx on Kubernetes.
+If you wish to get an overview of using Portworx on Kubernetes, start with [these interactive tutorials](/scheduler/kubernetes/px-k8s-interactive.html). These serve as a playground for you to get an idea about the capabilities of Portworx without having to install it in your cluster.
 
 ## Prerequisites
 
