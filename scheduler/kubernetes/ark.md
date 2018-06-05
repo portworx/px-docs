@@ -49,7 +49,7 @@ persistentVolumeProvider:
     type: local
 ```
 
-### Using cloud snapshots
+### Using cloud snapshots (Supported from PX-Enterprise 1.4 onwards)
 To use cloud snapshots to backup your PVCs, you need to specify `cloud` as the `type` in the `config` section. If you have
 more than one credential configured with Portworx you also need to specify the UUID of the credential using `credId`:
 ```
