@@ -14,9 +14,9 @@ meta-description: "Find out how to install PX within a Kubernetes cluster and ha
 * TOC
 {:toc}
 
-## Interactive Tutorial
+## Interactive Tutorials
 
-If you wish to get an overview of using Portworx on Kubernetes, go over [these interactive tutorials](/scheduler/kubernetes/px-k8s-interactive.html). These serve as a playground for you to get an idea about the capabilities of Portworx without having to install in your cluster.
+If you wish to get an overview of using Portworx on Kubernetes, start with [these interactive tutorials](/scheduler/kubernetes/px-k8s-interactive.html). These serve as a playground for you to get an idea about the capabilities of Portworx without having to install it in your cluster.
 
 ## Prerequisites
 
