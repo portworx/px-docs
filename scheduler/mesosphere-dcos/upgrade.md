@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Upgrade Portworx on DCOS"
+title: "Upgrade Portworx on DCOS (Deprecated)"
 keywords: portworx, container, dcos, storage, Docker, mesos
 sidebar: home_sidebar
 meta-description: "Updating Portworx version on your DCOS cluster is simple. Follow this guide to find out how."
