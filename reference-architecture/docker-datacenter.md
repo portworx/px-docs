@@ -12,7 +12,8 @@ meta-description: "It is possible to run Portworx on your Docker Datacenter clus
 * TOC
 {:toc}
 
-Portworx has been qualified to work with Docker Datacenter.
+
+Portworx has been qualified to work with [Docker Datacenter](https://www.docker.com)
 
 Docker Datacenter (DDC) has 3 major components:
 
