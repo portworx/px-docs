@@ -1,3 +1,5 @@
+{{ include.env-addendum }
+
 ## Portworx in an Auto Scaling Group
 
 {% include asg/px-asg-intro.md %}

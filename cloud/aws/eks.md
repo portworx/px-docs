@@ -20,5 +20,4 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 ## Disk template
 Portworx takes in a disk spec which gets used to provision AWS persistent disks dynamically.
 
-{% include asg/k8s-asg.md %}
-
+{% include asg/k8s-asg.md env-addendum="We will supply the template(s) explained in previous section, when we create the Portworx spec. For the EKS clusters, select the EKS checkbox option when you create the Portworx spec." skip12="true" skip13="true" %}
