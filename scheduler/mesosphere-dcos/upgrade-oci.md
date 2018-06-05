@@ -1,46 +1,47 @@
 ---
 layout: page
-title: "Upgrade Portworx OCI on DCOS"
-keywords: portworx, container, dcos, storage, Docker, mesos
+title: "Upgrade Portworx on DCOS"
+keywords: portworx, container, dcos, storage, Docker, mesos, upgrade
 redirect_from: "/scheduler/mesosphere-dcos/upgrade_oci.html"
+meta-description: "This guide will help upgrading Portworx in DC/OS using the Portworx framework"
 ---
 
 * TOC
 {:toc}
 
-This guide walks through upgrading Portworx OCI container deployed on DCOS through the framework available in the DCOS catalog.
+This guide walks through upgrading Portworx deployed on DCOS through the framework available in the DCOS
+catalog. If you are using a Portworx framework version older than 1.2*, refer [this guide to perform the
+Portworx upgrade](/scheduler/mesosphere-dcos/upgrade-1.1.html).
 
-### Update the Portworx image in the framework config
+### Update the Portworx image from UI
 
-The Portworx image to be used on each node is specified by the framework variable PORTWORX_IMAGE_NAME.
-To upgrade to a newer version you need to point this to the desired version.
-For example, if you want to upgrade to v1.2.11 you would set this to "portworx/px-enterprise:1.2.11"
+The Portworx image to be used on each node is specified by the config variable `portworx image` under `node` section.
+To upgrade to a newer version, you just need to update this field to the desired version. For example, if you want
+to upgrade to v1.3.1.4 you would set this to `portworx/px-enterprise:1.3.1.4`.
 
-![Portworx image option](/images/dcos-px-image-option.png){:width="655px" height="200px"}
+![Portworx image option](/images/dcos-px-image-option2.png){:width="655px" height="200px"}
 
-### Run the upgrade task
+### Update the Portworx image using DCOS CLI
 
-Once the image name has been updated, the service file for Portworx needs to be updated on each node followed by a restart
-of the service. This can be done by running the `upgrade-portworx` plan.
-This will perform a rolling upgrade of Portworx so as not to cause an outage.
+If you want to update Portworx using the DCOS CLI instead of the UI, you can perform the following steps:
 
-```
-$ dcos portworx plan start upgrade-portworx
-{
-  "message": "Received cmd: start"
-}
-```
+```bash
+dcos portworx describe | \
+  jq '.node.portworx_image="portworx/px-enterprise:1.3.1.4"' > \
+  new-options.json
 
-Now wait for the upgrade tasks to go to COMPLETE state on all the agents
-```
-$ dcos portworx plan status upgrade-portworx
-upgrade-portworx (COMPLETE)
-└─ upgrade (COMPLETE)
-   ├─ portworx-0:[upgrade] (COMPLETE)
-   ├─ portworx-1:[upgrade] (COMPLETE)
-   ├─ portworx-2:[upgrade] (COMPLETE)
-   ├─ portworx-3:[upgrade] (COMPLETE)
-   └─ portworx-4:[upgrade] (COMPLETE)
+dcos portworx update start --options=new-options.json
 ```
 
+Now wait for the portworx install tasks to go to COMPLETE state on all the agents
+```
+dcos portworx --name=portworx update status
+deploy (serial strategy) (COMPLETE)
+└─ portworx-install (serial strategy) (COMPLETE)
+   ├─ portworx-0:[install] (COMPLETE)
+   ├─ portworx-1:[install] (COMPLETE)
+   ├─ portworx-2:[install] (COMPLETE)
+   ├─ portworx-3:[install] (COMPLETE)
+   └─ portworx-4:[install] (COMPLETE)
+```
 At this point your Portworx cluster should be upgraded to the specified version.
