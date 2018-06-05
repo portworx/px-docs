@@ -2,6 +2,8 @@
 
   - title: Get Started
     folderitems:
+    - title: Interactive tutorials
+      url: /scheduler/kubernetes/px-k8s-interactive.html
     - title: Install with a Container Orchestrator
       url: /#install-with-a-container-orchestrator
     - title: Install with OCI runC and systemd
@@ -45,11 +47,13 @@
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
-        url: /scheduler/kubernetes/install.html#interactive-tutorial
+        url: /scheduler/kubernetes/px-k8s-interactive.html
       - title: Using Stork
         url: /scheduler/kubernetes/stork.html
       - title: Deploying using CSI
         url: /scheduler/kubernetes/csi.html
+      - title: Ark Plugin
+        url: /scheduler/kubernetes/ark.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
@@ -261,6 +265,7 @@
         url: /control/service.html
       - title: Host
         url: /control/host.html
+      - title: Credentials
         url: /control/credentials.html
       - title: CloudDrives (ASG)
         url: /control/asg-clouddrive.html

@@ -15,7 +15,7 @@ Alternately, you can use curl to generate the spec as described in [Generating P
 #### Secure ETCD and Certificates
 If using secure etcd provide "https" in the URL and make sure all the certificates are in the _/etc/pwx/_ directory on each host which is bind mounted inside PX container.
 
-##### Using Secrets to Provision Certificates
+##### Using Kubernetes Secrets to Provision Certificates
 Instead of manually copying the certificates on all the nodes, it is recommended to use [Kubernetes Secrets to provide etcd certificates to Portworx](/scheduler/kubernetes/etcd-certs-using-secrets.html). This way, the certificates will be automatically available to new nodes joining the cluster.
 
 #### Installing behind the HTTP proxy

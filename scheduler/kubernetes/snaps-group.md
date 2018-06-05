@@ -27,16 +27,16 @@ To take group snapshots, one either specifies annotations that will match PVCs f
 
 The group snapshot method supports the following annotations:
 * __portworx/snapshot-type__: Indicates the type of snapshot. For group snapshots, the value should be **local**.
-* __Annotations to select volumes__: Portworx will select PVCs that match the annotations specified.
-* __portworx/group-id__: Group ID of the Portworx volumes if they were created using the `--group` parameter. Portworx will select all volumes that match this group ID.
+* __portworx.selector/\<key\>: \<value\>__: When this annotation is provided, Portworx will select all PVCs with labels `<key>:<value>` and create a group snapshot. Example: `portworx.selector/stack: wordpress`.
+* __portworx.selector/group-id__: Group ID of the Portworx volumes if they were created using the `--group` parameter. Portworx will select all volumes that match this group ID and create a group snapshot.
 
-If both annotations and group ID are specified above, all PVCs that either match annotations or group ID will be snapped.
+If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapshotted.
 
 ## Examples
 
 #### Creating snapshots of all PVCs that match certain annotations
 
-In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*.
+In below example, we are taking a group snapshot that will snap all PVCs in the *default* namespace and that have labels *tier: prod* and *type: db*. The prefix *portworx.selector/* before the annotation keys indiciate these are annotations that STORK will process to select PVCs.
 
 Portworx will quiesce I/O on all volumes before triggering their snapshots.
 
@@ -48,8 +48,8 @@ metadata:
   namespace: default
   annotations:
     portworx/snapshot-type: local
-    portworx/tier: prod
-    portworx/type: db
+    portworx.selector/tier: prod
+    portworx.selector/type: db
 spec:
   persistentVolumeClaimName: mysql-data
 ```
@@ -192,7 +192,7 @@ metadata:
   namespace: dev
   annotations:
     portworx/snapshot-type: local
-    portworx/namespace: dev
+    portworx.selector/namespace: dev
 spec:
   persistentVolumeClaimName: mysql-data
 ```

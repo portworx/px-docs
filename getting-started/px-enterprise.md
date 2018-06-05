@@ -18,12 +18,9 @@ redirect_from:
   * Run sudo mount --make-shared / in your SSH window
   * If you are using systemd, remove the `MountFlags=slave` line in your docker.service file.
 * A key/value store such as Etcd 3.0 or Consul 0.7.0
-* Minimum resources per server:
+* Minimum resources **recommended** per server:
   * 4 CPU cores
   * 4 GB RAM
-* Recommended resources per server:
-  * 8 CPU cores
-  * 8 GB RAM
   * 128 GB Storage
   * 10 GB Ethernet NIC
 * Maximum nodes per cluster:

@@ -24,9 +24,11 @@ By default, PX will try to auto tune the IO profile setting for a given volume b
 The IO profile can be selected while creating the volume via the `io_profile` flag.  For example:
 
 ```
-# pxctl volume create --size=10 --repl=3 --io_profile=sequential demovolume
+pxctl volume create --size=10 --repl=3 --io_profile=sequential demovolume
+
 or
-# docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=random,name=demovolume
+
+docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=random,name=demovolume
 ```
 
 It is highly recommended to let PX decide the correct IO profile tuning.  If you do however override the setting, you should understand the operation of each profile setting.

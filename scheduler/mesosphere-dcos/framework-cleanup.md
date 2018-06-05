@@ -12,69 +12,73 @@ redirect_from: "/scheduler/mesosphere-dcos/framework_cleanup.html"
 You will have to run the following steps after destroying a service to clean up all the resources in DCOS.  We are going to clean up the cassandra-px
 service in this example. These steps can be used to clean up any service in DCOS including the Portworx service.
 
-## 1. Shutdown the service if it is still running
+## Shutdown the service if it is still running
 
 Run `dcos service --inactive` to find the ID of the service that you want to cleanup. The service should in inactive state,
 ie ACTIVE should be set to False.
 
-```
+```bash
 $ dcos service --inactive
-NAME                     HOST            ACTIVE  TASKS  CPU    MEM      DISK   ID                                         
-cassandra-px  ip-10-0-2-15.ec2.internal   False     2    6.7  27530.0  59890.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051  
-marathon              10.0.4.203          True     4    3.1   3200.0    0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0001  
-metronome             10.0.4.203          True     0    0.0    0.0      0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0000  
-portworx      ip-10-0-2-15.ec2.internal   True     6    1.8   5632.0  16384.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0050 
+NAME                     HOST            ACTIVE  TASKS  CPU    MEM      DISK   ID
+cassandra-px  ip-10-0-2-15.ec2.internal   False    2    6.7  27530.0  59890.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
+marathon              10.0.4.203          True     4    3.1   3200.0    0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0001
+metronome             10.0.4.203          True     0    0.0    0.0      0.0    cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0000
+portworx      ip-10-0-2-15.ec2.internal   True     6    1.8   5632.0  16384.0  cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0050
 ```
 
 Then use the `dcos service shutdown` command to shutdown the service
 
-```
+```bash
 $ dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 ```
 
-## 2. Run the janitor script to clean up the reserved resources as well as any state stored in Zookeeper
-```
+## Run the janitor script to clean up the reserved resources as well as any state stored in Zookeeper
+```bash
 $ SERVICE_NAME=cassandra-px
 $ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
-## 3. Cleanup PX remnants from slave nodes
+## Cleanup PX remnants from slave nodes
 
 Stop the portworx service on all the nodes and remove the docker container
-```
+```bash
 sudo systemctl stop portworx
 sudo docker rm portworx.service -f
 ```
 
 Remove the portworx service file from all the nodes
-```
+```bash
 sudo rm /etc/systemd/system/portworx.service -f
 sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
 sudo systemctl daemon-reload
 ```
-		
-Remove the Portworx config and files from all the nodes
+
+**Note:** If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked
+up by Portworx in the next install. This can be done by running the following pxctl command
+```bash
+# Use with care since this will wipe data from all the disks given to Portworx
+sudo /opt/pwx/bin/pxctl service node-wipe --all
 ```
+If you are running Portworx version < 1.3, run the following command instead of `node-wipe`,
+```bash
+sudo wipefs -a /dev/sda123 # Replace with your disk names
+```
+
+Remove the Portworx config and files from all the nodes
+```bash
 sudo chattr -i /etc/pwx/.private.json
 sudo rm -rf /etc/pwx
-sudo umount /opt/pwx/oci 
+sudo umount /opt/pwx/oci
 sudo rm -rf /opt/pwx
 ```
 
 Also remove the Portworx kernel module from all the nodes
-```
+```bash
 sudo rmmod px -f
 ```
 
-NOTE: If you are going to re-install Portworx, you should wipe out the filesystem from the disks so that they can be picked 
-up by Portworx in the next install. This can be done by running the wipefs command
-```
-# Use with care since this will wipe data from that disk
-sudo wipefs -a /dev/sda123 # Replace with your disk names
-```
-
 If you have the dcos cli installed then you can execute the above steps on all the nodes by running the following script
-```
+```bash
 ips=( `dcos node --json | jq ' .[]' | jq .id -r` )
 for ip in "${ips[@]}"
 do
@@ -83,12 +87,11 @@ do
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo /opt/pwx/bin/pxctl service node-wipe --all'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo chattr -i /etc/pwx/.private.json'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /etc/pwx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo umount /opt/pwx/oci'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm -rf /opt/pwx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rmmod px -f'
-        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo wipefs -a /dev/sda123' # Replace with your disk names
 done
 ```
-

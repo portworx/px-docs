@@ -61,6 +61,36 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
+## 1.3.3
+
+***NOTE 1***
+
+Upgrading to this release requires a node reboot if the node has attached Portworx volumes. To avoid a node reboot, migrate the containers using Portworx to a different node and then perform an upgrade.  For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
+ to manage the automatic rolling upgrade of the cluster..
+ 
+***NOTE 2***
+
+PX 1.3.3 enforces a maximum number of 512 _attached_ volumes per node. A request to attach more than 512 volumes on a node will return an error.  In the rare event that PX is upgraded from an old version that has more than 512 attached volumes on a node, PX 1.3.3, will enter maintenance mode on upgrade. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
+
+### Key Fixes
+
+* Improve handling of etcd leader restarts in PX
+* Handle cases where more than 180 volumes remain attached to a PX node across restarts - Enforce PX support for 512 attached   volumes per node
+* Reduce time taken to decomission storageless nodes.
+
+
+### Errata
+
+* In the case of a three node etcd cluster, if the etcd leader node gets partitioned from the remaining two nodes because of a network link failure but the PX cluster nodes can access all the etcd nodes, the current etcdclient doesn't handle such a network partition case correctly. This is a known issue with etcd and Portworx is following up with the community on this.
+
+## 1.3.2
+
+This is a patch release with bug fixes handling sharedv4 related issues
+
+* PWX-5351 - Reduce the `pxctl volume list` time taken when a large number of volumes are present
+* PWX-5443 - Handle sharedv4 server node restarts and reattach PODs consuming such volumes automatically
+* PWX-4411 - Show IP address instead of NodeID in volume commands that show the node information
+
 ## 1.3.1.4
 
 This is a minor update that improves degraded cluster performance when one or more nodes are down for a long time and brought back online that starts the resync process
@@ -72,7 +102,7 @@ This is a minor update to fix install issues with RHEL Atomic and other fixes.
 * RHEL Atomic install fixes
 * Clean up any existing diag files before running diags command again
 * `pxctl upgrade` fixes to pull the latest image information from install.portworx.com
-* improvements in attached device detection logic in some cloud environments
+* Improvements in attached device detection logic in some cloud environments
 
 ## 1.3.1.1
 
