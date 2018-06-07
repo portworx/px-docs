@@ -61,16 +61,30 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
+## 1.3.4
+
+***NOTE 1***
+
+Upgrading to this release from any release prior to 1.3.3 requires a node reboot if the node has attached Portworx volumes. To avoid a node reboot, migrate the containers using Portworx to a different node and then perform an upgrade.  For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
+ to manage the automatic rolling upgrade of the cluster.
+ 
+ 
+This is a minor update with fixes for decomissioning nodes running PX and system options for optimized performance
+
+* PWX-5521 - Add a CLI command to purge alerts
+* PWX-5524 - Fix an issue with parsing the node names when decomissioning the nodes
+* Provide a way set the vm.dirty_bytes value via startup parameter.
+
 ## 1.3.3
 
 ***NOTE 1***
 
 Upgrading to this release requires a node reboot if the node has attached Portworx volumes. To avoid a node reboot, migrate the containers using Portworx to a different node and then perform an upgrade.  For Kubernetes clusters, please refer to the Kubernetes [upgrade process](https://docs.portworx.com/scheduler/kubernetes/upgrade.html#upgrading-portworx)
- to manage the automatic rolling upgrade of the cluster..
+ to manage the automatic rolling upgrade of the cluster.
  
 ***NOTE 2***
 
-PX 1.3.3 enforces a maximum number of 512 _attached_ volumes per node. A request to attach more than 512 volumes on a node will return an error.  In the rare event that PX is upgraded from an old version that has more than 512 attached volumes on a node, PX 1.3.3, will enter maintenance mode on upgrade. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
+From, PX 1.3.3 enforces a maximum number of 512 _attached_ volumes per node. A request to attach more than 512 volumes on a node will return an error.  In the rare event that PX is upgraded from an old version that has more than 512 attached volumes on a node, PX 1.3.3, will enter maintenance mode on upgrade. This node can be brought back by reattaching the volumes in another node and bring the number of attached volumes to the enforced 512 attached volumes per node limit. Please reach out to support@portworx.com or on Portworx Slack for help.
 
 ### Key Fixes
 
