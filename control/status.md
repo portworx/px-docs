@@ -85,7 +85,7 @@ The status command gives summary like node details, cluster members, global stor
 # sudo /opt/pwx/bin/pxctl status
 ```
 
-The following sample output of `pxctl status` shows that the global capacity for Docker containers is 128 GB.
+The following sample output of `pxctl status` shows that the global capacity for Docker containers is 192 GB.
 
 ```
 # /opt/pwx/bin/pxctl status
