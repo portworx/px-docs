@@ -34,7 +34,7 @@ Kubernetes supports many different types of PersistentVolumes, this step covers 
 
 #### Create MySQL Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC)
 
- `mysql-vol.yaml`
+ `kubectl -f apply mysql-vol.yaml`
 
 ```
 apiVersion: storage.k8s.io/v1beta1
@@ -62,7 +62,8 @@ spec:
 
 #### Create WordPress Portworx PersistentVolume(PV) and PersistentVolumeClaim(PVC) 
 
-`wordpress-vol.yaml`
+`kubectl -f apply wordpress-vol.yaml`
+
 ```
 apiVersion: storage.k8s.io/v1beta1
 kind: StorageClass
@@ -97,10 +98,6 @@ A Secret is an object that stores a piece of sensitive data like a password or k
 #### Create the Secret object from the following command:
 
 `kubectl create secret generic mysql-pass --from-file=password.txt`
-
-or 
-
-`kubectl create secret generic mysql-pass --from-literal=password=YOUR_PASSWORD`
 
 
 #### Verify that the Secret exists by running the following command:
@@ -255,7 +252,7 @@ spec:
 
 * Deleting wordpress
 
-`kubectl delete -f wordpress.yaml`
+`kubectl delete -f wordpress-deployment.yaml`
 
 `kubectl delete -f wordpress-vol.yaml`
 
