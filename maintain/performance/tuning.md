@@ -18,7 +18,7 @@ The journal device should be 2GB.  Using a larger device will not help, since PX
 
 >**Note 1:**<br/>You **must** ensure that the journal device is faster than your storage device allocated for PX.  If the journal device is slower than the actual storage drive, your overall performance will be lower and match the lower of two devices.
 
->**Note 2:**<br/>Cloud providers match the drive's performance based on it's size.  So if you select a small sized journal device, your performance will be worse.  For a cloud drive, provide a partition from the larger storage drive as your journal device.
+>**Note 2:**<br/>Cloud providers match the drive's performance based on its size.  So if you select a small sized journal device, your performance will be worse.  For a cloud drive, provide a partition from the larger storage drive as your journal device.
 
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/maintain/add-journal-dev.html).
 
