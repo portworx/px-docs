@@ -17,6 +17,13 @@ This document will show you how to create group snapshots of Portworx volumes an
 
 {% include k8s/stork/stork-prereq.md %}
 
+**Kubernetes Version**
+
+Group snapshots are supported in following Kubernetes versions
+* 1.10 and above
+* 1.9.4 and above
+* 1.8.9 and above
+
 **PX Version**
 
 Group snapshots are supported in upcoming Portworx version 1.4 and above.
