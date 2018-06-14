@@ -1,24 +1,29 @@
-## Add Lighthouse to an existing portworx cluster
+---
+layout: page
+title: "Add Lighthouse to existing Portworx cluster"
+keywords: portworx, container, Kubernetes, gui, docker, openshift, lighthouse
+meta-description: "Find out how to deploy lighthouse on a cluster where Portworx is already installed"
+---
 
-### Download and install the lighthouse
+### Download and install the Lighthouse
 
-Step 1: Download the [lighthouse yaml](https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/existing-lighthouse/k8-lighthouse.yaml):
-
+##### Step 1: Download the Lighthouse spec file
 ```
 wget https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/existing-lighthouse/k8-lighthouse.yaml
 ```
+For OpenShift,
+```
+wget https://raw.githubusercontent.com/portworx/px-docs/gh-pages/k8s-samples/existing-lighthouse/openshift/k8-lighthouse.yaml
+```
 
-Step 2: Edit `k8-lighthouse.yaml` and change the `etcd` entry to your existing etcd service where portworx is currently running:
-
+##### Step 2: Edit `k8-lighthouse.yaml` and change the `etcd` entry to your existing etcd service where portworx is currently running:
 ```
         - etcd:http://<etcd server>:<ETCD PORT>
 ```
 
 >**Note:**<br/> You can check `/etc/pwx/config.json` file to find your etcd service IP and Port info (ie. `grep -A2 kvdb /etc/pwx/config.json`)
 
-
-Step 3: Change the COMPANY NAME and ADMIN EMAIL 
-
+##### Step 3: Change the COMPANY NAME and ADMIN EMAIL
 ```
        - name: PWX_PX_COMPANY_NAME
           value: <COMPANY NAME>
@@ -26,14 +31,19 @@ Step 3: Change the COMPANY NAME and ADMIN EMAIL
           value: <ADMIN EMAIL>
 ```
 
-Step 4: Deploy Lighthouse 
-
+##### Step 4: Replace docker registry secret (OpenShift only)
+If you have created [docker registry secret during installation](/scheduler/kubernetes/openshift-install.html#prepare-docker-registry-credentials-secret), change the `regcred` below to use the secret name that you created.
 ```
-kubectl apply -f k8-lighthouse.yaml
+      imagePullSecrets:
+      - name: "regcred"
 ```
 
-Step 5: Login to Lighthouse at port 30062 
+##### Step 5: Deploy Lighthouse
+```
+kubectl -n kube-system apply -f k8-lighthouse.yaml
+```
 
+##### Step 6: Login to Lighthouse at port 30062
 ```
 http://<Your k8 Master>:30062
 ```
@@ -57,7 +67,7 @@ example configuration line:
 
 ```
     "loggingurl": "http://70.0.38.38:30062/api/stats/listen?token-97b7656a-7c86-11e7-a014-428db0678bce",
-```    
+```
 Step 4: You will need to restart the portworx container for the changes to take affect. Once restarted in Lighthouse under nodes you should see the servers start to populate
 
 Step 5: Add API server and Token fileds and create a new px-spec.yaml file for future servers
@@ -87,12 +97,12 @@ Step 5b: Or you can edit your existing `px-spec.yaml` file and add the `"-t", "<
           env:
            - name: API_SERVER
              value: http://70.0.38.38:30062
-```             
+```
 
 Step 6: Update the daemonset so new pods will automatically use your lighthouse server
 
 ```
-kubectl update -f px-spec.yaml            
+kubectl update -f px-spec.yaml
 ```
 
 Step 7: Verify the daemonset has been updated.  You should see the `-t <token>` and the `API_SERVER` fields populated
