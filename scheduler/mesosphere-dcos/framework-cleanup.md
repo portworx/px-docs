@@ -50,6 +50,7 @@ Remove the portworx service file from all the nodes
 ```bash
 sudo rm /etc/systemd/system/portworx.service -f
 sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f
+sudo rm /etc/systemd/system/multi-user.target.wants/portworx.service –f
 sudo systemctl daemon-reload
 ```
 
