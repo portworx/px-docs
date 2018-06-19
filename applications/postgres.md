@@ -107,16 +107,7 @@ spec:
       labels:
         app: postgres
     spec:
-      schedulerName: stork    
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: px/enabled
-                operator: NotIn
-                values:
-                - "false"
+      schedulerName: stork
       containers:
       - name: postgres
         image: postgres:9.5
