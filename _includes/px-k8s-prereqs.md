@@ -1,6 +1,10 @@
 **Key-value store**
 
-Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
+Portworx uses a key-value store for it's clustering metadata. Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer to [this doc](/maintain/etcd.html).
+
+**Storage**
+
+Portworx requires dedicated storage.  Please ensure at least one node in the cluster has extra storage available, in a form of unformatted partition or a disk-drive.
 
 **Shared mounts**
 
@@ -10,7 +14,7 @@ If you are installing Portworx 1.2, you *must* configure Docker to allow shared 
 
 **Firewall**
 
-Ensure ports 9001-9015 are open between the nodes that will run Portworx. Your nodes should also be able to reach the port KVDB is running on (for example etcd usually runs on port 2379).
+Ensure network ports 9001 through 9015 are open between the nodes that will run Portworx. Your nodes should also be able to reach the port KVDB is running on (for example etcd usually runs on port 2379).
 
 {{ include.firewall-custom-steps }}
 

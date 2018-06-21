@@ -32,7 +32,12 @@ If you are already running PX as a docker container and need to migrate to OCI, 
 * *FIREWALL*: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
 * *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
-* *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`) will be automatically formatted by PX.
+* *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (i.e. `px-runc install ... -s /dev/sdb -s /dev/sdc3`) will be automatically formatted by PX.
+
+>**Note:**<br/> If you plan on using Journal [disk partition](https://en.wikipedia.org/wiki/Partition_table)
+(e.g. `-j /dev/sda5`) along with your storage devices, please make sure you use a
+[GPT partition](https://en.wikipedia.org/wiki/GUID_Partition_Table) for the disk containing Journal disk partition.
+
 
 The installation and setup of PX OCI bundle is a 3-step process:
 
