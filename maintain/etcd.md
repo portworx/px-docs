@@ -33,10 +33,6 @@ If you have 3 static nodes where you want to run etcd follow [this](/maintain/et
 
 Follow [this](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
 
-#### Setup ETCD cluster using Ansible Playbook
-
-Follow [this](https://github.com/portworx/px-docs/blob/gh-pages/etcd/ansible/index.md) ansible playbook to install a 3 node etcd cluster.
-
 
 ### Tuning Etcd
 
