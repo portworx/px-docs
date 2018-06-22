@@ -54,7 +54,7 @@ and attach commands.
 ```
 # /opt/pwx/bin/pxctl volume create --secure --secret_key key1 enc_vol
 Volume successfully created: 374663852714325215
-docker run --rm -it -v secret_key=key1,name=enc_vol:/mnt busybox
+# docker run --rm -it -v secret_key=key1,name=enc_vol:/mnt busybox
 / #
 ```
 
