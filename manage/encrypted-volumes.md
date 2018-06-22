@@ -59,6 +59,7 @@ Volume successfully created: 374663852714325215
 / #
 
 # docker run --rm -it --mount src=secret_key=key1?name=enc_vol,dst=/mnt busybox
+/ #
 ```
 
 __Important: Make sure secret `key1` exists in the secret endpoint__
