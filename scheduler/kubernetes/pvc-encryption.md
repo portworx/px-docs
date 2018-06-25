@@ -31,7 +31,7 @@ apiVersion: v1
 metadata:
   name: ns.default-name.secure-pvc
   annotations:
-    px/secure: true
+    px/secure: "true"
 spec:
   storageClassName: portworx-sc
   accessModes:
