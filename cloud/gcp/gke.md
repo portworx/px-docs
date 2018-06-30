@@ -25,6 +25,8 @@ Support for GKE is available only in portworx release version 1.4 and above.
 
 Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images). So it is important to specify the node image as **Ubuntu** when creating clusters.
 
+To manage GCP disks, Portworx needs access to the GCP Compute Engine API. By default, all instances in a GKE cluster have these permissions. If you modify the permissions, ensure that the service account for the instances has atleast **Read Write** access to the **Compute Engine** API. This can be configured in the "Project Access" section when creating the GKE cluster.
+
 More information about creating GKE clusters can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
 
 ## Install
