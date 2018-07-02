@@ -61,6 +61,22 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
 
+## 1.3.6
+
+### Key Features
+
+* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting 
+  port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
+  
+### Key Fixes
+
+* PWX-5729 - pxctl volume list inspecting snapshots of a volume was getting skipped  
+* PWX-5710 - Diags uploading to S3 fails
+* PWX-3897 - Remount shared volumes as RW mounts after a PX restart if the volumes became read-only because PX was 
+  down for more than 10 minutes 
+* PWX-5624 - Skip wiping journal devices when performing a node wipe
+
+
 ## 1.3.4
 
 ***NOTE 1***
