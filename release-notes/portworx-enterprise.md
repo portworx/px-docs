@@ -75,6 +75,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-3897 - Remount shared volumes as RW mounts after a PX restart if the volumes became read-only because PX was 
   down for more than 10 minutes 
 * PWX-5624 - Skip wiping journal devices when performing a node wipe
+* PWX-5553 - In Kubernetes environments, only allow volume provisioning via the Kubernetes filter driver and 
+             not through the docker volume driver
 
 
 ## 1.3.4
