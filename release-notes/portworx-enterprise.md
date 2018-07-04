@@ -12,15 +12,18 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.4.0-rc2 (Release Candidate)
+## 1.4.0
 
-**Expected GA date: 05/19**
+If you are on any of the 1.4 RC builds, you will need to do a fresh install. Please reach out to us at support@portworx.com or on the slack to help assess upgrade options from 1.4 RC builds.
+
+All customers on 1.3.x release will be able to upgrade to 1.4
+
+All customers on 1.2.x release will be able to upgrade to 1.4 but in a few specific cases might need a node reboot after the upgrade. Please reach out to support for help with an upgrade or if there are any questions if you are running 1.2.x in production. 
 
 ### Notes
 
-* The kubernetes spec generator for 1.4-rc2 can be accessed [here](http://install.portworx.com/1.4/)
-* DC/OS PX Framework for 1.4 will be updated shortly. Watch this space!
-* Rancher Catalog for 1.4 will be updated shortly. Watch this space!
+* The kubernetes spec generator for 1.4 can be accessed [here](http://install.portworx.com/1.4/)
+
 
 ### Key Features
 
