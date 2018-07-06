@@ -107,7 +107,7 @@ Now you have to give Portworx the cluster wide secret key, that acts as the defa
 ```
 # PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
 # kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl secrets set-cluster-key \
-  --secret pwx/secrets/cluster-wide-secret-key
+  --secret cluster-wide-secret-key
 Successfully set cluster secret key
 ```
 This command needs to be run just once for the cluster. If you have added the [cluster secret key through the *config.json*](#update-configjson), the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in *config.json* will be ignored for the one set through the CLI.
