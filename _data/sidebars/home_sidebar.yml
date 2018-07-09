@@ -44,6 +44,8 @@
             url: /cloud/azure/k8s-acs-engine.html
         - title: Kubernetes on DC/OS
           url: /scheduler/mesosphere-dcos/kubernetes.html
+        - title: Rancher Kubernetes Engine(RKE)
+          url: /scheduler/rancher/RKE.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
@@ -176,8 +178,10 @@
           url: /scheduler/docker/volume-plugin.html
     - title: Rancher
       folderitems:
-      - title: Install
+      - title: Rancher 1.6.x and PX Install
         url: /scheduler/rancher/install.html
+      - title: Rancher Kubernetes Engine(RKE)
+        url: /scheduler/rancher/RKE.html
     - title: Nomad
       folderitems:
       - title: Install
