@@ -29,6 +29,21 @@ Following two points are important when creating your GKE cluster.
 
 2. To manage GCP disks, Portworx needs access to the GCP Compute Engine API. For GKE 1.10 and above, Compute Engine API access is disabled by default. This can be enabled in the "Project Access" section when creating the GKE cluster. You can either allow full access to all Cloud APIs or set access for each API. When settting access for each API, make sure to select **Read Write** for the **Compute Engine** dropdown.
 
+3. Portworx reuires a ClusterRoleBinding for your user. Without this `kubectl apply ...` command fails with an error like ```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```. 
+
+Create a ClusterRoleBinding for your user using the following commands:
+
+ ```
+   # get current google identity
+   $ gcloud info | grep Account
+   Account: [myname@example.org]
+
+   # grant cluster-admin to your current identity
+   $ kubectl create clusterrolebinding myname-cluster-admin-binding \
+      --clusterrole=cluster-admin --user=myname@example.org
+   Clusterrolebinding "myname-cluster-admin-binding" created
+   ```
+
 More information about creating GKE clusters can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
 
 ## Install
@@ -60,20 +75,6 @@ $ kubectl apply -f px-spec.yaml
 Now that you have Portworx installed, checkout various examples of [applications using Portworx on Kubernetes](/scheduler/kubernetes/k8s-px-app-samples.html).
 
 ## Troubleshooting Notes
-
-* The `kubectl apply ...` command fails with "forbidden" error:
-   - If you encounter an error with the cluster role permission (```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```), create a ClusterRoleBinding for your user using the following commands:
-
-   ```
-   # get current google identity
-   $ gcloud info | grep Account
-   Account: [myname@example.org]
-
-   # grant cluster-admin to your current identity
-   $ kubectl create clusterrolebinding myname-cluster-admin-binding \
-      --clusterrole=cluster-admin --user=myname@example.org
-   Clusterrolebinding "myname-cluster-admin-binding" created
-   ```
 
 * GKE instances under certain scenarios do not automatically re-attach the persistent disks used by PX.
    - Under the following scenarios, GKE will spin up a new VM as a replacement for older VMs with the same node name:
