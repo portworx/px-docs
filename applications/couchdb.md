@@ -14,7 +14,7 @@ Deploy couchdb 2.0 using PX volume; create a simple PX volume ``couch_vol01``
             -p 9100:9100         \
             rluiarch/couchdb2:001
 
-Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/2.1.1).
+Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/2.1.2).
 
 In Couchdb 2.0; four system databases ( "_users", "_replicator", "_metadata", "_global_changes" ) wasn't created by default and errors will be observed from docker logs; therefore these database need to be created after the couchdb container is up and running
 
@@ -24,17 +24,17 @@ In Couchdb 2.0; four system databases ( "_users", "_replicator", "_metadata", "_
     curl -X PUT http://127.0.0.1:5984/_global_changes
 
 
-Set up the admin user id/password; the default admin id is "admin" ; get into the couchdb docker container and use couchdb REAT API to add the admin user 
-     
+Set up the admin user id/password; the default admin id is "admin" ; get into the couchdb docker container and use couchdb REAT API to add the admin user
+
      docker exec -it  couchdb-container-name bash
      curl -X PUT http://admin:password@localhost:5986/_config/admins/admin -d '"password"'
- 
+
  you can also create  or change the admin ID / password from webUI
 
 ![](couchdb-pic-001.PNG){:width="910px" height="556px" alt="Change CouchDB credentials"}
 
 
-## Creating test database 
+## Creating test database
 
 Create three test couchdb database for testing purpose
 
@@ -47,7 +47,7 @@ Use the testscript to inject documents into those test databases. The test scrip
 And ``test-run.sh`` script will run parallel multiple of the above script processes. Below the example will run 100,200, and 300 jobs of 1000 document insertion into the target database testdb101, testdb102, and testdb103.
 
 
-    ./test-run.sh 100 testdb101 
+    ./test-run.sh 100 testdb101
     ./test-run.sh 200 testdb102
     ./test-run.sh 300 testdb103
 
