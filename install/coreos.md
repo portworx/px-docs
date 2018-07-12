@@ -21,7 +21,7 @@ one up, see the [etcd example](/maintain/etcd.html) for PX
 
 PX requires a minimum of Docker version 1.10 to be installed.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
 
->**Important:**<br/>If you are runnig a version prior to Docker 1.12, then you *must* configure Docker to allow shared mounts propogation.  Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+>**Important:**<br/>If you are runnig a version prior to Docker 1.12, then you *must* configure Docker to allow shared mounts propagation.  Please follow [these](/knowledgebase/shared-mount-propagation.html) instructions to enable shared mount propagation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ### Specify storage
 

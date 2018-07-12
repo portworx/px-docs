@@ -6,7 +6,7 @@ Portworx uses a key-value store for it's clustering metadata. Please have a clus
 
 Portworx 1.3 and higher automatically enables shared mounts.
 
-If you are installing Portworx 1.2, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propogation.html)), as otherwise Portworx will fail to start.
+If you are installing Portworx 1.2, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propagation.html)), as otherwise Portworx will fail to start.
 
 **Firewall**
 

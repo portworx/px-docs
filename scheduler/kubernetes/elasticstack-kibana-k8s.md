@@ -24,7 +24,7 @@ An Elasticsearch cluster node can have one or more purposes.
 
 ## Prerequisites
 -	A running Kubernetes cluster with v 1.6+
--	All the kubernetes nodes should allow [shared mount propagation](https://docs.portworx.com/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.
+-	All the kubernetes nodes should allow [shared mount propagation](https://docs.portworx.com/knowledgebase/shared-mount-propagation.html). PX requires this since it provisions volumes in containers.
 -	[Deploy Portworx on your kubernetes cluster](https://docs.portworx.com/scheduler/kubernetes/install.html). PX runs on each node of your kubernetes cluster as a daemonset.
 
 ## Install

@@ -392,7 +392,7 @@
     - title: Running with an SDN
       url: /knowledgebase/sdn.html
     - title: Shared Mount Propogation
-      url: /knowledgebase/shared-mount-propogation.html
+      url: /knowledgebase/shared-mount-propagation.html
     - title: Devicemapper Thinpool setup
       url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces

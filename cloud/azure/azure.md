@@ -33,7 +33,7 @@ Your deployment will look something like following:
 Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
 Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  
-If you are running Docker without shared mounts, please follow the steps listed [here](/knowledgebase/shared-mount-propogation.html)
+If you are running Docker without shared mounts, please follow the steps listed [here](/knowledgebase/shared-mount-propagation.html)
 
 ### Step 4: Launch PX-Enterprise
 [Follow the instructions to launch PX-Enterprise](/#install-with-a-container-orchestrator)
