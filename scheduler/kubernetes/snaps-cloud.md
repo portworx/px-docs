@@ -44,7 +44,7 @@ metadata:
   name: mysql-snapshot
   namespace: default
   annotations:
-    px/snapshot-type: cloud
+    portworx/snapshot-type: cloud
 spec:
   persistentVolumeClaimName: mysql-data
 ```
