@@ -16,7 +16,7 @@ Kubernetes provides management of stateful workloads using Statefulsets. Cassand
 ## Prerequisites
 
 -	A running Kubernetes cluster with v 1.6+
--	All the kubernetes nodes should allow [shared mount propagation](/knowledgebase/shared-mount-propogation.html). PX requires this since it provisions volumes in containers.  
+-	All the kubernetes nodes should allow [shared mount propagation](/knowledgebase/shared-mount-propagation.html). PX requires this since it provisions volumes in containers.  
 -	[Deploy Portworx on your kubernetes cluster](/scheduler/kubernetes/install.html). PX runs on each node of your kubernetes cluster as a daemonset.
 
 ### Install

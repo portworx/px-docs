@@ -231,7 +231,7 @@ This is a patch update with the following fix
 * PWX-4784 - Support SELinux in 4.12.x kernels and above by setting SELinux context correctly
 * PWX-4812 - Handle Kernel upgrades correctly
 * PWX-4814 - Synchronize snapshot operations per node
-* PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
+* PWX-4471 - Enhancements to OCI Mount propagation to automount relevant scheduler dirs
 * PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
 * PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
 * PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster

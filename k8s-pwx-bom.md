@@ -40,7 +40,7 @@ A recent enough Linux distribution is typically all that is needed.  We recommen
 
 Next, install Docker.  Portworx recommends Docker 1.12 with [Device Mapper](https://docs.docker.com/engine/userguide/storagedriver/device-mapper-driver/#/configure-docker-with-devicemapper).
 
-Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  If you are running Docker without shared mounts, please follow the steps listed on the Portworx [shared mount propogation documentation](/knowledgebase/shared-mount-propogation.html).
+Note: Portworx requires Docker to allow shared mounts.  This is standard as of Docker 1.12.  If you are running Docker without shared mounts, please follow the steps listed on the Portworx [shared mount propagation documentation](/knowledgebase/shared-mount-propagation.html).
 
 ## Step 3: Deploy PX with Kubernetes
 At this point, you have everything you need to deploy Portworx with Kubernetes to create a hyperconverged compute with storage cluster.
