@@ -23,13 +23,13 @@ For more information about licensing, please refer to our [licensing page](/gett
 
 ## Install
 
-Portworx Kubernetes installations will by default install a PX-Enterprise edition, and automatically start a Trial period unless license has already been installed.
-Starting with Portworx v1.4.1, we added a simple way how to install the PX-Developer -edition rather than default PX-Enterprise.
+Portworx Kubernetes installations will by default install a PX-Enterprise edition, and automatically start a Trial period unless a license has already been installed.
+Starting with Portworx v1.4.1, we have added a simple way how to install the PX-Developer edition package rather than the default PX-Enterprise.
 
 ### Generate the spec
 
 Start your deployment as usual, by following the Kubernetes installation guide for your specific variety of Kubernetes (e.g. [OpenShift](/scheduler/kubernetes/openshift-install.html).
-Once you entered your configuration data at https://install.portworx.com/1.4.1/, add the `&dev` at the end of the URL.
+Once you have entered your configuration data at https://install.portworx.com/1.4.1/, add the `&dev` at the end of the URL.
 
 For example:
 
@@ -41,7 +41,7 @@ kubectl apply -f \
 
 ### Label the nodes
 
-Since the PX-Developer edition can run only on upto 3 nodes, one will need to explicitly label the cluster nodes where Portworx should
+Since the PX-Developer edition can run only on up to 3 nodes, one will need to explicitly label the cluster nodes where Portworx should
 install, by using the `px/dev=true` label.
 
 Example:
@@ -50,4 +50,6 @@ Example:
 # instruct Kubernetes to install Portworx on mynode1, mynode2 and mynode3 cluster nodes
 kubectl label nodes mynode1 mynode2 mynode3 px/dev=true
 ```
+
+NOTE: One can label the nodes either before or after applying the YAML-spec.
 
