@@ -28,7 +28,7 @@ Starting with Portworx v1.4.1, we added a simple way how to install the PX-Devel
 
 ### Generate the spec
 
-Start your deployment as usual, by following the Kubernetes installation guide for your specific variety of Kubernetes (e.g. [OpenShift](openshift-install.html)).
+Start your deployment as usual, by following the Kubernetes installation guide for your specific variety of Kubernetes (e.g. [OpenShift](/scheduler/kubernetes/openshift-install.html).
 Once you entered your configuration data at https://install.portworx.com/1.4.1/, add the `&dev` at the end of the URL.
 
 For example:
