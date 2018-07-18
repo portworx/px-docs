@@ -46,6 +46,8 @@
           url: /scheduler/mesosphere-dcos/kubernetes.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
+        - title: Kubernetes (Developer Edition)
+          url: /developer/kubernetes-dev.html
       - title: Interactive tutorials
         url: /scheduler/kubernetes/px-k8s-interactive.html
       - title: Using Stork
