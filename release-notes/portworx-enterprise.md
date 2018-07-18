@@ -12,6 +12,16 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.4.1
+
+This is a minor update to 1.4.0 with fixes for issues found in ASG (Auto-Scaling Groups) in cloud environments.
+
+* PWX-5800 - When running under ASG as a storage-less node, on a restart, PX will attempt to mount the clouddrives 
+  previously mounted on that instance and try to start a storage node instead of starting as a storageless node by default. 
+* PWX-5681 - PX service to handle journald restarts. 
+* PWX-5814 - Fix automatic diag uploads
+* PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
+
 ## 1.4.0
 
 If you are on any of the 1.4 RC builds, you will need to do a fresh install. Please reach out to us at support@portworx.com or on the slack to help assess upgrade options from 1.4 RC builds.
