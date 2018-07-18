@@ -16,7 +16,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 This is a minor update to 1.4.0 with fixes for issues found in ASG (Auto-Scaling Groups) in cloud environments.
 
-Use install.portworx.com/1.4.1
+Use install.portworx.com/1.4.1 for K8S spec generation.
 
 * PWX-5800 - When running under ASG as a storage-less node, on a restart, PX will attempt to mount the clouddrives 
   previously mounted on that instance and try to start a storage node instead of starting as a storageless node by default. 
