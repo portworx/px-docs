@@ -18,8 +18,6 @@ This is a minor update to 1.4.0 with fixes for issues found in ASG (Auto-Scaling
 
 Use install.portworx.com/1.4.1 for K8S spec generation.
 
-* PWX-5800 - When running under ASG as a storage-less node, on a restart, PX will attempt to mount the clouddrives 
-  previously mounted on that instance and try to start a storage node instead of starting as a storageless node by default. 
 * PWX-5681 - PX service to handle journald restarts. 
 * PWX-5814 - Fix automatic diag uploads
 * PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
