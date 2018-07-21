@@ -15,7 +15,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.4.2
 
-Use install.portworx.com/1.4.2 for K8S spec generation.
+Use http://install.portworx.com/1.4/ for K8S spec generation.
 
 * PWX-5681 - PX service to handle journald restarts. 
 * PWX-5814 - Fix automatic diag uploads
