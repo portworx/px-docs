@@ -9,20 +9,18 @@ meta-description: "Etcd Disaster Recovery"
 * TOC
 {:toc}
 
-Portworx PX-Enterprise requires a key-value database like etcd or consul to store its metadata and configuration. This key-value database
-is a critical component for smooth functioning of PX. This page describes how to configure a resilient and highly available etcd cluster and
-recovery procedures in an event of an etcd disaster.
+Portworx PX-Enterprise requires a key-value database like etcd or consul to store its metadata and configuration. This key-value database is a critical component for smooth functioning of PX. This page describes how to configure a resilient and highly available etcd cluster and recovery procedures in an event of an etcd disaster.
 
 ### Recovering PX keys in etcd/consul
 
-From PX versions > 1.3 when PX nodes loose connectivity with etcd or consul, it dumps all the essential keys and values into a file. This file is
-dumped under /var/cores/kvdb_dump directory on the node.
+From PX versions > 1.3 when PX nodes loose connectivity with etcd or consul, it dumps all the essential keys and values into a file. This file is dumped under `/var/cores/kvdb_dump` directory on the node.
 
 Each file is dumped with a timestamp when it was generated like `pwx_kvdb_2018-05-25T22:59:08Z.dump`
 
 Each node will dump such a file. Choose one such file which you think has the latest keys and values.
 
 You will need a tool `px-kvdb-restore`, to recover the actual keys and values from this file and put it into your new etcd or consul cluster.
+
 To get access to this tool please contact Portworx Support.
 
 Before running the kvdb restore tool

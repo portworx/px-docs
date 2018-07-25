@@ -320,7 +320,7 @@
     - title: DR Best Practices
       folderitems:
       - title: Etcd/Consul Recovery
-        url: /maintain/etcd-consul-recovery.md
+        url: /maintain/etcd-consul-recovery.html
       - title: PX Disaster Recovery
         url: /maintain/dr-best-practices.html
   - title: Application Solutions
