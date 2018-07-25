@@ -318,7 +318,11 @@
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
     - title: DR Best Practices
-      url: /maintain/dr-best-practices.html
+      folderitems:
+      - title: Etcd/Consul Recovery
+        url: /maintain/etcd-consul-recovery.html
+      - title: PX Disaster Recovery
+        url: /maintain/dr-best-practices.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
