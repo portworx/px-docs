@@ -23,19 +23,18 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade.html#docker-to-oci).
 
-To upgrade to the **1.3 stable** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s`
+To upgrade to the **1.3** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s`
 
-To upgrade to the **1.4 tech preview** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.0-rc1`
-
+To upgrade to the **1.4** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2`
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
 
 1. Runs a DaemonSet on the cluster which fetches the new Portworx image. This reduces the time Portworx is down between the old and new versions as the image is already pulled.
 
-2. If the upgrade is from version 1.2 to 1.3, it will scale down all Deployments and StatefulSets that use shared Portworx PersistentVolumeClaims.
+2. If the upgrade is from version 1.2 to 1.3 or 1.4, it will scale down all Deployments and StatefulSets that use shared Portworx PersistentVolumeClaims. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
 
 3. Triggers RollingUpdate of the Portworx DaemonSet to the default stable image.
-    * If the upgrade is from version 1.2 to 1.3, all application pods using Portworx PersistentVolumeClaims will be rescheduled to other nodes in the cluster before the new Portworx version starts on that node.
+    * If the upgrade is from version 1.2 to 1.3 or 1.4, all application pods using Portworx PersistentVolumeClaims will be rescheduled to other nodes in the cluster before the new Portworx version starts on that node. If you are already at version 1.4 and upgrading to subsequent versions, this is not required.
 
 4. Restore any Deployments or StatefulSets that were scaled down in step 2 back to their original replicas.
 
@@ -46,10 +45,10 @@ This script will also monitor the above operations.
 ### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image.
-For example below command upgrades Portworx to _portworx/oci-monitor:1.4.0-rc1_ image.
+For example below command upgrades Portworx to _portworx/oci-monitor:1.4.2_ image.
 
 ```
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.0-rc1
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
 ```
 
 ### Disable scaling down of shared Portworx applications during the upgrade
