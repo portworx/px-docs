@@ -13,7 +13,7 @@
 -f                        [OPTIONAL] Instructs PX to use an unmounted drive even if it has a filesystem on it
 -a                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives
 -A                        [OPTIONAL] Instructs PX to use any available, unused and unmounted drives or partitions
--j                        [OPTIONAL] Specifies a journal device for PX
+-j                        [OPTIONAL] Specifies a journal device for PX.  Specify a persistent drive like /dev/sdc or use auto (recommended)
 -x <swarm|kubernetes>     [OPTIONAL] Specify scheduler being used in the environment
 -r <portnumber>           [OPTIONAL] Specifies the portnumber from which PX will start consuming. Ex: 9001 means 9001-9020
 ```

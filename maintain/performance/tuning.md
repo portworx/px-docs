@@ -18,6 +18,8 @@ The journal device should be 2GB.  Using a larger device will not help, since PX
 
 >**Note:**<br/>You **must** ensure that the journal device is faster than your storage device allocated for PX.  If the journal device is slower than the actual storage drive, your overall performance will be lower and match the lower of two devices.
 
+>**Note 3:**<br/>As of PX 1.4, we recommend using the `-j auto` option.  This allows PX to create it's own journal partition on the best drive.
+
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/maintain/add-journal-dev.html).
 
 ## Volume granular performance tuning

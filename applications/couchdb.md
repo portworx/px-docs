@@ -14,7 +14,7 @@ Deploy couchdb 2.0 using PX volume; create a simple PX volume ``couch_vol01``
             -p 9100:9100         \
             rluiarch/couchdb2:001
 
-Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/2.1.2).
+Couchdb Web API use tcp port ``5984`` and couchdb app runs on port ``5986``. Most of the couchdb operation involves REAT API port ``5984`` and couchdb cluster setup use port 5986. The docker image ``rluiarch/couchdb2:001`` is build from official couchdb 2.0 [Docker file on github](https://github.com/apache/couchdb-docker/tree/master/).
 
 In Couchdb 2.0; four system databases ( "_users", "_replicator", "_metadata", "_global_changes" ) wasn't created by default and errors will be observed from docker logs; therefore these database need to be created after the couchdb container is up and running
 
