@@ -19,7 +19,7 @@ This document will show you how to create cloud snapshots of Portworx volumes an
 
 **PX Version**
 
-Group snapshots are supported in upcoming Portworx version 1.4 and above.
+Group snapshots are supported in Portworx version 1.4 and above.
 
 **Configuring cloud secrets**
 

@@ -26,7 +26,7 @@ Group snapshots are supported in following Kubernetes versions
 
 **PX Version**
 
-Group snapshots are supported in upcoming Portworx version 1.4 and above.
+Group snapshots are supported in Portworx version 1.4 and above.
 
 ## Creating group snapshots
 
