@@ -12,15 +12,27 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.4.0-rc2 (Release Candidate)
 
-**Expected GA date: 05/19**
+## 1.4.2
+
+Use http://install.portworx.com/1.4/ for K8S spec generation.
+
+* PWX-5681 - PX service to handle journald restarts. 
+* PWX-5814 - Fix automatic diag uploads
+* PWX-5818 - Fix diag uploads via `pxctl service diags` when running under k8s environments
+
+## 1.4.0
+
+If you are on any of the 1.4 RC builds, you will need to do a fresh install. Please reach out to us at support@portworx.com or on the slack to help assess upgrade options from 1.4 RC builds.
+
+All customers on 1.3.x release will be able to upgrade to 1.4
+
+All customers on 1.2.x release will be able to upgrade to 1.4 but in a few specific cases might need a node reboot after the upgrade. Please reach out to support for help with an upgrade or if there are any questions if you are running 1.2.x in production. 
 
 ### Notes
 
-* The kubernetes spec generator for 1.4-rc2 can be accessed [here](http://install.portworx.com/1.4/)
-* DC/OS PX Framework for 1.4 will be updated shortly. Watch this space!
-* Rancher Catalog for 1.4 will be updated shortly. Watch this space!
+* The kubernetes spec generator for 1.4 can be accessed [here](http://install.portworx.com/1.4/)
+
 
 ### Key Features
 
@@ -60,6 +72,22 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-4765 - Fix resource contention issues when running heavy load on multiple shared volumes on many nodes
 * PWX-5039 - Fix PX OCI uninstall when shared volumes are in use
 * PWX-5153 - In Rancher, automatically manage container volume mounts if one of the cluster node restarts
+
+## 1.3.6
+
+### Key Features
+
+* Support port mapping used by PX from 9001-9015 to a custom port number range by passing the starting 
+  port number in [install arguments](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)
+  
+### Key Fixes
+
+* PWX-5729 - pxctl volume list inspecting snapshots of a volume was getting skipped  
+* PWX-5710 - Diags uploading to S3 fails
+* PWX-3897 - Remount shared volumes as RW mounts after a PX restart if the volumes became read-only because PX was 
+  down for more than 10 minutes 
+* PWX-5624 - Skip wiping journal devices when performing a node wipe
+* PWX-5553 - In Kubernetes environments, don't allow volume provisioning through the docker volume API
 
 ## 1.3.4
 
@@ -212,7 +240,7 @@ This is a patch update with the following fix
 * PWX-4784 - Support SELinux in 4.12.x kernels and above by setting SELinux context correctly
 * PWX-4812 - Handle Kernel upgrades correctly
 * PWX-4814 - Synchronize snapshot operations per node
-* PWX-4471 - Enhancements to OCI Mount propogation to automount relevant scheduler dirs
+* PWX-4471 - Enhancements to OCI Mount propagation to automount relevant scheduler dirs
 * PWX-4721 - When large number of volumes are cloudsnapped at the same time, PX container hits a panic
 * PWX-4789 - Handle cloudsnaps errors when the schedule has been moved or deleted
 * PWX-4709 - Support for adding CloudDrive (EBS volume) to an existing node in a cluster

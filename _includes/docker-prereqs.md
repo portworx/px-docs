@@ -10,7 +10,7 @@ Storage devices explicitly given to Portworx will be automatically formatted by 
 
 **Shared mounts**
 
-If you are running Docker v1.12, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propogation.html)), as otherwise Kubernetes will not be able to install Portworx.
+If you are running Docker v1.12, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propagation.html)), as otherwise Kubernetes will not be able to install Portworx.
 
 **Firewall**
 

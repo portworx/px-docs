@@ -20,7 +20,7 @@ This guide describes installing Portworx using the docker CLI.
 ## Install and configure Docker
 
 * PX requires a minimum of Docker version 1.10.  Follow the [Docker install](https://docs.docker.com/engine/installation/) guide to install and start the Docker Service.
-* You *must* configure Docker to allow shared mounts propogation. Please follow [these](/knowledgebase/shared-mount-propogation.html) instructions to enable shared mount propogation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
+* You *must* configure Docker to allow shared mounts propagation. Please follow [these](/knowledgebase/shared-mount-propagation.html) instructions to enable shared mount propagation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
 
 ## Identify storage
 

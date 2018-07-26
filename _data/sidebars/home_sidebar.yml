@@ -318,7 +318,11 @@
     - title: Maintenance Mode
       url: /maintain/maintenance-mode.html
     - title: DR Best Practices
-      url: /maintain/dr-best-practices.html
+      folderitems:
+      - title: Etcd/Consul Recovery
+        url: /maintain/etcd-consul-recovery.html
+      - title: PX Disaster Recovery
+        url: /maintain/dr-best-practices.html
   - title: Application Solutions
     folderitems:
     - title: Big Data
@@ -392,7 +396,7 @@
     - title: Running with an SDN
       url: /knowledgebase/sdn.html
     - title: Shared Mount Propogation
-      url: /knowledgebase/shared-mount-propogation.html
+      url: /knowledgebase/shared-mount-propagation.html
     - title: Devicemapper Thinpool setup
       url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces
@@ -443,3 +447,6 @@
       url: https://katacoda.com/portworx/scenarios/deploy-px-k8s
     - title: Persistent Volumes on Kubernetes
       url: https://katacoda.com/portworx/scenarios/px-k8s-vol-basic
+    - title: Portworx Shared Volumes on Kubernetes
+      url: https://katacoda.com/portworx/scenarios/px-k8s-vol-shared
+      

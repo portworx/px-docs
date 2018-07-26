@@ -24,11 +24,11 @@ Portworx PX-Enterprise supports the following cloud providerss
 ### Backing up a PX Volume to cloud storage
 
 The first backup uploaded to the cloud is a full backup. After that, subsequent backups are incremental.
-After 6 incremental backups, every 7th backup is a full backup. 
+After 6 incremental backups, every 7th backup is a full backup.
 
 ### Restoring a PX Volume from cloud storage
 
-Any PX Volume backup can be restored to a PX Volume in the cluster. The restored volume inherits the attributes such as file system, size and block size from the backup. Replication level and aggregation level of the restored volume defaults to 1 irrespective of the replication and aggregation level of the volume that was backed up. Users can increase replication or aggregation level level once the restore is complete on the restored volume.  
+Any PX Volume backup can be restored to a PX Volume in the cluster. The restored volume inherits the attributes such as file system, size and block size from the backup. Replication level and aggregation level of the restored volume defaults to 1 irrespective of the replication and aggregation level of the volume that was backed up. Users can increase replication or aggregation level level once the restore is complete on the restored volume.
 
 ### Performing Cloud Backups of a PX Volume
 
@@ -56,10 +56,10 @@ OPTIONS:
 
 #### Set the required cloud credentials ####
 
-For this, we will use `pxctl credentials create` command.
+For this, we will use `pxctl credentials create` command. These cloud credentials are stored in an external secret store. Before you use the command to create credentials, ensure that you have [configured a secret provider of your choice](/secrets).
 
 ```
-# pxctl credentials create 
+# pxctl credentials create
 
 NAME:
    pxctl credentials create - Create a credential for cloud-snap
@@ -78,20 +78,20 @@ OPTIONS:
    --azure-account-key value
    --google-project-id value
    --google-json-key-file value
-   --encryption-passphrase value, 
+   --encryption-passphrase value,
    --enc value  Passphrase to be used for encrypting data in the cloudsnaps
 ```
 
 For Azure:
 
 ```
-# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV 
+# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV
 ```
 
 For AWS:
 
 ```
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com 
+# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
 ```
 
 For Google Cloud:
@@ -101,13 +101,13 @@ For Google Cloud:
 ```
 `pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
 
-An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly. 
+An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly.
 
-These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed. 
+These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed.
 
 #### List the credentials to verify ####
 
-Use `pxctl credentials list` to verify the credentials supplied. 
+Use `pxctl credentials list` to verify the credentials supplied.
 
 ```
 # pxctl credentials list
@@ -133,7 +133,7 @@ UUID						PROJECT ID     ENCRYPTION
 The actual backup of the PX Volume is done via the `pxctl cloudsnap backup` command
 
 ```
-# pxctl cloudsnap backup 
+# pxctl cloudsnap backup
 
 NAME:
    pxctl cloudsnap backup - Backup a snapshot to cloud
@@ -148,8 +148,8 @@ OPTIONS:
 
 ```
 
-This command is used to backup a single volume to the cloud provider using the specified credentials. 
-This command decides whether to take a full or incremental backup depending on the existing backups for the volume. 
+This command is used to backup a single volume to the cloud provider using the specified credentials.
+This command decides whether to take a full or incremental backup depending on the existing backups for the volume.
 If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
 
 ```
@@ -189,7 +189,7 @@ Authenticate the nodes where the storage for volume to be backed up is provision
 Successful Login to Secrets Endpoint!
 ```
 
-* Now issue the backup command 
+* Now issue the backup command
 
 Note that in this particular example,  since only one credential is configured, there is no need to specify the credentials on the command line
 
@@ -220,7 +220,7 @@ NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21
 
 #### Restore from a Cloud Backup ####
 
-Use `pxctl cloudsnap restore` to restore from a cloud backup. 
+Use `pxctl cloudsnap restore` to restore from a cloud backup.
 
 Here is the command syntax.
 
@@ -237,14 +237,14 @@ OPTIONS:
    --snap value, -s value         Cloud-snap id
    --node value, -n value         Optional node ID for provisioning restore volume storage
    --cred-uuid value, --cr value  Cloud credentials ID to be used for the restore
-   
+
 ```
 
 This command is used to restore a successful backup from cloud. It requires the cloudsnap ID which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will have a replication factor of 1. The restored volume can be updated to different replication factors using `pxctl volume ha-update` command.
 
 The command usage is as follows.
 ```
-# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332​
+# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332
 ```
 
 Upon successful start of the command it returns the volume id created to restore the cloud snap

@@ -19,7 +19,7 @@ This document will show you how to create cloud snapshots of Portworx volumes an
 
 **PX Version**
 
-Group snapshots are supported in upcoming Portworx version 1.4 and above.
+Group snapshots are supported in Portworx version 1.4 and above.
 
 **Configuring cloud secrets**
 
@@ -44,7 +44,7 @@ metadata:
   name: mysql-snapshot
   namespace: default
   annotations:
-    px/snapshot-type: cloud
+    portworx/snapshot-type: cloud
 spec:
   persistentVolumeClaimName: mysql-data
 ```

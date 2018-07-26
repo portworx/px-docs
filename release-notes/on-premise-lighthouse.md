@@ -10,6 +10,10 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 * TOC
 {:toc}
 
+## Lighthouse 1.4 Release notes
+
+Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](https://docs.portworx.com/enterprise/lighthouse-new.html) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with PX 1.4 and above.
+
 To get access to Portworx PX-Lighthouse docker repository, contact us at support@portworx.com from your company email address.
 
 ## Lighthouse 1.1.11 Release notes

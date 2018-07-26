@@ -2,7 +2,7 @@
 
 To generate the spec file, head on to the below URLs for the PX release you wish to use.
 
-* [1.4 Tech Preview](https://install.portworx.com/1.4/).
+* [1.4 Stable](https://install.portworx.com/1.4.1/).
 {% unless include.skip13 == "true" %}
 * [1.3 Stable](https://install.portworx.com/1.3/).
 {% endunless %}

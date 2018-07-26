@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Disaster Recovery Best Practices"
+title: "PX Disaster Recovery"
 keywords: disaster recovery, disaster proof, site failure, node failure, power failure
 sidebar: home_sidebar
 meta-description: "Disaster Recovery Best Practices for Production Deployments of PX.  Try today!"
@@ -14,24 +14,6 @@ Portworx PX-Enterprise comes with many data services features that enable produc
 This page describes how to configure Portworx for high availability and disaster recovery so customers can easily recover from site-wide failures.
 
 Following are some of the recommended best practices for disaster-preparedness and recovery.
-
-### Recovering from etcd Failure
-
-* Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically. Make sure you follow all the etcd recommendations mentioned [here](/maintain/etcd.html)
-* Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrived from other sites if one of your site is down.
-* Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots.
-
-The following table summarizes how Portworx responds to an etcd disaster and its levels of recovery available.
-
-| PX state when snapshot was taken | PX state just before disaster | PX state after disaster recovery |
-|-----------------|:---------------|:-------------------------------|
-| PX running with few volumes | No PX or application activity    | PX is back online. Volumes are intact. No disruption. |
-| PX running with few volumes | New volumes created | PX is back online. New Volumes are lost. |
-| PX volumes were not in use by application. (Volumes are not attached) | Volumes are now in use by application (Volumes are attached) | PX is back online. The volume which was supposed to be attached is in detached state. Application is in CrashLoopBackOff state. Volumes may need to be restored from a previous snapshot. |
-| PX volumes were in use by application | Volume are now not in use by application | Volumes which are not in use by the application still stay attached. No data loss involved. |
-| All PX nodes are up | No PX Activity | All the expected nodes are still Up |
-| All PX nodes are up | A few nodes go down which have volume replica. Current Set changes. | Current Set is not in sync with what the storage actually has and when PX comes back up, the volumes attached on that node may need to be restored from a previous snapshot. |
-| A PX node with replica is down. The node is not in current set. | The node is now online and in Current Set. | PX volume starts with older current set, but eventually gets updated current set. No data loss involved. |
 
 ### Recovering application data in Portworx Volumes
 

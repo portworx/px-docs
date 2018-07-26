@@ -292,7 +292,7 @@ data:
           summary: Portworx volume {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is over 70%
             full and is predicted to fill within 2 weeks.
       - alert: PortworxStorageUsageCritical
-        expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes) < 20
+        expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes) < 20
         for: 5m
         labels:
           issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is high.
@@ -302,7 +302,7 @@ data:
             80% used for more than 10 minutes.
           summary: Portworx storage capacity is at {%raw%}{{$value}}{%endraw%}% used.
       - alert: PortworxStorageUsage
-        expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 30
+        expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)) < 30
         for: 5m
         labels:
           issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} usage on {%raw%}{{$labels.host}}{%endraw%} is critical.
@@ -313,7 +313,7 @@ data:
           summary: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is at {%raw%}{{$value}}{%endraw%}%
             used.
       - alert: PortworxStorageWillFill
-        expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes))) < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
+        expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes))) < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
         for: 10m
         labels:
           issue: Portworx storage {%raw%}{{$labels.volumeid}}{%endraw%} on {%raw%}{{$labels.host}}{%endraw%} is predicted
