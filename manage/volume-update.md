@@ -161,26 +161,26 @@ Volume	:  485002114762355071
 In order to update the size of the volume, a non-shared volume needs to be mounted on one of PX nodes. If it's a shared volume, then this operation can be done from any of the nodes where the volume is attached.
 
 ```
-sudo /opt/pwx/bin/pxctl host attach vol_resize_test
+/opt/pwx/bin/pxctl host attach vol_resize_test
 Volume successfully attached at: /dev/pxd/pxd485002114762355071
 
-sudo mkdir /mnt/voldir
+sudo mkdir /var/lib/osd/mounts/voldir
 
-sudo /opt/pwx/bin/pxctl host mount vol_resize_test /mnt/voldir
-Volume vol_resize_test successfully mounted at /mnt/voldir
+/opt/pwx/bin/pxctl host mount vol_resize_test /var/lib/osd/mounts/voldir
+Volume vol_resize_test successfully mounted at /var/lib/osd/mounts/voldir
 ```
 
 Let's update size of this volume to 5 GB. 
 
 ```
-sudo /opt/pwx/bin/pxctl volume update vol_resize_test --size=5
+/opt/pwx/bin/pxctl volume update vol_resize_test --size=5
 Update Volume: Volume update successful for volume vol_resize_test
 ```
 
 We can verify this with volume inspect command.
 
 ```
-sudo /opt/pwx/bin/pxctl volume inspect vol_resize_test
+/opt/pwx/bin/pxctl volume inspect vol_resize_test
 Volume	:  485002114762355071
 	Name            	 :  vol_resize_test
 	Size            	 :  5.0 GiB
