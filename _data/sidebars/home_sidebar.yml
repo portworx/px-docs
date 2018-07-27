@@ -234,6 +234,8 @@
       folderitems:
       - title: Google Kubernetes Engine (GKE)
         url: /cloud/gcp/gke.html
+      - title: Google Cloud Platform (GCP)
+        url: /cloud/gcp/gcp.html
     - title: SoftLayer
       url: /cloud/softlayer.html
     - title: Packet.net
