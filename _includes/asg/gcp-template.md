@@ -28,7 +28,7 @@ For example, if you created a template GCP disk called _px-disk-template-1_, you
 
 Ensure that these disks are created in the same zone as the GCP node group.
 
-### Limiting storage nodes.
+### Limiting storage nodes
 
 PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the number of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
 Modify the input arguments to PX as shown in the below examples.
