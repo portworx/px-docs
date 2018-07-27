@@ -20,9 +20,11 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 To manage and auto provision GCP disks, Portworx needs access to the GCP Compute Engine API.   There are two ways to do this.
 
 ### Using instance priviledges
+
 Give your instances priviledges to access the GCP API server.  This is the preferred method since it requires the least amount of setup on each instance.
 
 ### Using an account file
+
 Alternatively, you can give Portworx access to the GCP API server via an account file and environment variables. First, you will need to create a service account in GCP and download the account file.
 
 1. Create a service account in the "Service Account" section that has the Compute Engine admin role.
@@ -32,9 +34,11 @@ This json file needs to be made available on any GCP instance that will run Port
 
 ## Install
 
-Now configure the PX installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for PX, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. (See the installation arguments [here](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)).
+If you used an account file above, you will have to configure the PX installation arguments to access this file by way of it's environmnet variables.  In the installation arguments for PX, pass in the location of this file via the environment variable `GOOGLE_APPLICATION_CREDENTIALS`. (See the installation arguments [here](https://docs.portworx.com/runc/options.html#installation-arguments-to-px)).
 
 For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
+
+If you installing on Kuberentes, you can use a Secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
 
 Follow [these instructions](https://docs.portworx.com/#install-with-a-container-orchestrator) to install Portworx based on your container orchestration environment.
 
