@@ -38,7 +38,7 @@ If you used an account file above, you will have to configure the PX installatio
 
 For example, use `-e GOOGLE_APPLICATION_CREDENTIALS=/etc/pwx/gcp.json`.
 
-If you installing on Kuberentes, you can use a Secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
+If you installing on Kuberenetes, you can use a secret to mount `/etc/pwx/gcp.json` into the Portworx Daemonset and then expose `GOOGLE_APPLICATION_CREDENTIALS` as an env in the Daemonset.
 
 Follow [these instructions](https://docs.portworx.com/#install-with-a-container-orchestrator) to install Portworx based on your container orchestration environment.
 
