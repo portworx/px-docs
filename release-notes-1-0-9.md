@@ -6,7 +6,7 @@ sidebar: home_sidebar
 ---
 
 ## Changes from the last release
-* Add Amazon ECS Support. Refer to [Portworx-on-ECS](/portworx-on-ecs.html)
+* Add Amazon ECS Support. Refer to [Amazon ECS with Portworx](/cloud/aws/ecs.html)
 
 ## Key notes
 * Note that the shared namespace feature is still in beta.
