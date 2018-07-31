@@ -451,4 +451,6 @@
       url: https://katacoda.com/portworx/scenarios/px-k8s-vol-basic
     - title: Portworx Shared Volumes on Kubernetes
       url: https://katacoda.com/portworx/scenarios/px-k8s-vol-shared
+    - title: Deploying HA PostgreSQL on Kubernetes
+      url: https://www.katacoda.com/portworx/scenarios/px-k8s-postgres-all-in-one
       
