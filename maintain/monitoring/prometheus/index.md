@@ -58,7 +58,7 @@ px_cluster_status_nodes_storage_down: total storage down nodes
 px_cluster_status_nodes_offline: total offline nodes
 px_cluster_status_nodes_online: total online nodes 
 px_cluster_status_cluster_quorum: cluster_quorum, 1 = in quorum, 0 = not in quorum
-px_cluster_disk_total_bytes: total size of pools for this node
+px_cluster_disk_total_bytes: total storage in px cluster in bytes
 px_cluster_status_storage_nodes_online: number of nodes proving storage which are online (these participate in quorum)
 px_cluster_status_storage_nodes_offline: number of nodes proving storage which are offline (these participate in quorum)
 ```
@@ -111,6 +111,8 @@ px_disk_stats_used_bytes: used bytes
 px_disk_stats_write_bytes: write bytes
 px_disk_stats_write_seconds: write seconds
 px_disk_stats_writes: writes
+px_disk_stats_read_latency_seconds: read latency for disk  (read ms / number of reads)
+px_disk_stats_write_latency_seconds: write latency for disk (write ms / number of writes)
 ```
 
 
