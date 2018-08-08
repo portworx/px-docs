@@ -455,3 +455,7 @@
       url: https://www.katacoda.com/portworx/scenarios/px-k8s-postgres-all-in-one
     - title: Deploying Kafka and Zookeeper on Kubernetes
       url: https://www.katacoda.com/portworx/scenarios/px-kafka
+    - title: Deploying Cassandra on Kubernetes
+      url: https://www.katacoda.com/portworx/scenarios/px-cassandra
+    - title: Deploying MySQL on Kubernetes
+      url: https://www.katacoda.com/portworx/scenarios/px-mysql
