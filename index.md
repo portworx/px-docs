@@ -32,7 +32,7 @@ Portworx technology:
 
 ## Interactive tutorials
 
-{% include k8s/katacoda.md %}}
+{% include k8s/katacoda.md %}
 
 ## Cloud Native Storage
 {%
