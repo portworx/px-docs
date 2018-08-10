@@ -13,7 +13,7 @@ Portworx PX-Enterprise requires a key-value database like etcd or consul to stor
 
 ### Recovering PX keys in etcd/consul
 
-From PX versions > 1.3 when PX nodes loose connectivity with etcd or consul, it dumps all the essential keys and values into a file. This file is dumped under `/var/cores/kvdb_dump` directory on the node.
+From PX versions > 1.3 when PX nodes lose connectivity with etcd or consul, it dumps all the essential keys and values into a file. This file is dumped under `/var/cores/kvdb_dump` directory on the node.
 
 Each file is dumped with a timestamp when it was generated like `pwx_kvdb_2018-05-25T22:59:08Z.dump`
 
@@ -30,7 +30,7 @@ Before running the kvdb restore tool
 
 #### px-kvdb-restore
 ```
-$ px-kvdb-retore --help
+$ px-kvdb-restore --help
 NAME:
 px-kvdb-restore run - Runs the px kvdb restore operation.
 
@@ -55,7 +55,7 @@ command with the `--force` argument.
 ### Etcd disaster recovery best practices
 
 * Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically. Make sure you follow all the etcd recommendations mentioned [here](/maintain/etcd.html)
-* Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrived from other sites if one of your site is down.
+* Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrieved from other sites if one of your site is down.
 * Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots.
 
 ### PX behavior on etcd/consul failure
