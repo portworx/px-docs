@@ -45,6 +45,10 @@
 {% include google_analytics.html %}
 {% endif %}
 
+{% if site.leadlander_id and jekyll.environment == 'production' %}
+{% include leadlander.html %}
+{% endif %}
+
 {% if page.meta-description %}
     <meta name="description" content="{{ page.meta-description }}"/>
 {% endif %}
