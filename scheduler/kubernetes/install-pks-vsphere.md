@@ -18,7 +18,7 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation
 * Ensure that the options: Enable Privileged Containers and Disable DenyEscalatingExec are enabled on any PKS plan that you will use with a k8s Portworx enabled cluster.
 
-## Portworx Install
+## Portworx installation
 
 1. Deploy an ETCD for Portworx.  It is recommended that this ETCD cluster be external to your PKS environment.
 2. Create a secret using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment.
