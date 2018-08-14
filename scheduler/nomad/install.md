@@ -12,7 +12,6 @@ meta-description: "Install and consume Portworx from within a Nomad cluster."
 * TOC
 {:toc}
 
-**[Experimental]**
 Nomad is a scheduler and job orchestrator from HashiCorp for managing a 
 cluster of machines and running applications on them. 
 Nomad abstracts away machines and the location 
@@ -22,7 +21,6 @@ Portworx can run within Nomad and provide persistent volumes to other
 applications running on Nomad. This section describes how to deploy and consume 
 Portworx within a Nomad cluster. 
 
-Current use of Portworx with Nomad is **experimental**.
 
 ## Install
 
