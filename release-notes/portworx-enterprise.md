@@ -12,6 +12,10 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.4.2.2
+
+This is a patch release that adds capability to switch from shared to sharedv4 one volume at a time. Please contact portworx support before switching the volume types.
+
 
 ## 1.4.2
 
