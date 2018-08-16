@@ -147,7 +147,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.4.3-rc1
+          image: portworx/oci-monitor:1.5.1-rc1
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick"]
@@ -156,8 +156,6 @@ spec:
               value: "v2"
             - name: "PRE-EXEC"
               value: 'if [ ! -x /bin/systemctl ]; then apt-get update; apt-get install -y systemd; fi'
-            - name: PX_IMAGE
-              value: harshpx/px-enterprise:1.5-vsphere
             - name: VSPHERE_VCENTER
               value: pks-vcenter.k8s-demo.com
             - name: VSPHERE_VCENTER_PORT
