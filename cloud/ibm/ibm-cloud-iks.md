@@ -12,7 +12,7 @@ meta-description: "Deploy Portworx on IBM IKS. See for yourself how easy it is!"
 
 This guide shows you how you can easily deploy Portworx on [**IBM Cloud Kubernetes Service (IKS)**](https://www.ibm.com/cloud/container-service)
 
-# Install Portworx on IBM IKS
+## Install Portworx on IBM IKS
 
 Portworx has 2 pre-requisites for successful installation:
 * Some unformatted/umounted raw devices (or partitions) must be presented to at least 3 hosts.
