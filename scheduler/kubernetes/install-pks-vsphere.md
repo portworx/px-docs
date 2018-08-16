@@ -13,14 +13,17 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 
 ## Platform preparation
 
-* Install vSphere 6.5u1 or above
-* Install PKS 1.1 or above
-* On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation
-* Ensure that the options: Enable Privileged Containers and Disable DenyEscalatingExec are enabled on any PKS plan that you will use with a k8s Portworx enabled cluster.
+* Install vSphere 6.5u1 or above.
+* Install PKS 1.1 or above.
+* On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation.
+* Ensure that following options are enabled on any PKS plan that you will use with a Portworx enabled Kubernetes cluster:
+    * Enable Privileged Containers
+    * Disable DenyEscalatingExec
+
 
 ## Portworx installation
 
-1. Deploy an ETCD for Portworx.  It is recommended that this ETCD cluster be external to your PKS environment.
+1. Deploy an ETCD cluster for Portworx.  It is recommended that this ETCD cluster be external to your PKS environment.
 2. Create a secret using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment.
 3. Deploy the Portworx spec using [this template](#pks-px-spec). Replace values replace values corresponding to your vSphere environment.
 
@@ -31,7 +34,7 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 Below are the steps to wipe your entire Portworx installation on PKS.
 
 1. Run cluster-scoped wipe: ```curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks```
-2. Go to each VM and delete the additional vmdks Portworx created.
+2. Go to each virtual machine and delete the additional vmdks Portworx created.
 
 ## References
 
