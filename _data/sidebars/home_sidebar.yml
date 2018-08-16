@@ -42,6 +42,8 @@
             url: /cloud/azure/aks.html
           - title: Azure Container Engine with Kubernetes
             url: /cloud/azure/k8s-acs-engine.html
+        - title: IBM Kubernetes Service (IKS)
+          url: /cloud/ibm/ibm-cloud-iks.html
         - title: Kubernetes on DC/OS
           url: /scheduler/mesosphere-dcos/kubernetes.html
         - title: Kubernetes (Other)
@@ -236,8 +238,8 @@
         url: /cloud/gcp/gke.html
       - title: Google Cloud Platform (GCP)
         url: /cloud/gcp/gcp.html
-    - title: SoftLayer
-      url: /cloud/softlayer.html
+    - title: IBM Cloud
+      url: /cloud/ibm/ibm-cloud-iks.html
     - title: Packet.net
       url: /cloud/packet.html
     - title: DigitalOcean
