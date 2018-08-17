@@ -7,6 +7,8 @@ redirect_from: "/portworx-on-softlayer.html"
 meta-description: "Deploy Portworx on IBM IKS. See for yourself how easy it is!"
 ---
 
+![IBM CLoud Logo](/images/ibm-cloud.png){:height="188px" width="188px"}
+
 * TOC
 {:toc}
 
