@@ -11,6 +11,10 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * TOC
 {:toc}
 
+## Architecture
+
+![Portworx architecture for PKS on vSphere using shared datastores](/images/pks-vsphere-shared.png){:width="1992px" height="1156px"}
+
 ## Platform preparation
 
 * Install vSphere 6.5u1 or above.
