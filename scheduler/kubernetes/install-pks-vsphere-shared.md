@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Portworx install on PKS on vSphere"
+title: "Portworx install on PKS on vSphere using shared datastores"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 
 meta-description: "Find out how to install PX in a PKS Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
@@ -10,6 +10,16 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 
 * TOC
 {:toc}
+
+## Architecture
+
+Below diagram gives an overview of the Portworx architecture for PKS on vSphere using shared datastores.
+* Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
+* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared Datastore or Datastore Cluster.
+* Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
+* Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
+
+![Portworx architecture for PKS on vSphere using shared datastores](/images/pks-vsphere-shared.png){:width="1992px" height="1156px"}
 
 ## Platform preparation
 
