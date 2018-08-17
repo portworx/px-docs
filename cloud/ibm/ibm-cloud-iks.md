@@ -45,7 +45,7 @@ If you are configuring a `multi-zone` cluster, then ensure you have [enabled VLA
 
 Create and deploy an instance of [Compose for etcd](https://console.bluemix.net/catalog/services/compose-for-etcd)
 
-Obtain the `etcd` username, password and endpoints
+Obtain the `etcd` username, passwd and endpoints
 
 ```
 $ bx target bx target --cf
