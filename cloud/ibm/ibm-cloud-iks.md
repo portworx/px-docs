@@ -63,7 +63,7 @@ $ ETCDCTL_API=3 etcdctl --endpoints=https://portal-ssl294-1.bmix-wdc-yp-a7a89461
 +------------------+---------+------------------------------------------+-------------------------+-------------------------+
 ```
 
-Please make note of both of the `--etcd-endpoints` as well as the `--user=root:<ETCD-PASSWORD>` string 
+Please make note of both of the `--etcd-endpoints` as well as the `--user=root:PASSWORD` string 
 
 ## Deploy Portworx via Helm Chart
 
@@ -80,7 +80,7 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 
 The following values must be defined, either through `helm install --set ...` or through `values.yaml`:
 * clusterName      :   User defined
-* etcd.credentials :   `root:<ETCD-PASSWORD>` , where <ETCD-PASSWORD> is taken from the above etcd URL
+* etcd.credentials :   `root:PASSWORD` , where PASSWORD is taken from the above etcd URL
 * etcdEndPoint     :   of the form:
 
 ```
