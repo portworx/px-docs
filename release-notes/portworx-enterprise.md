@@ -12,6 +12,22 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.5.0 (Staging)
+
+### Key Features:
+
+* Eliminate private.json for stateless installs
+* Handle consul leader failures when running with consul as the preferred k/v store
+* 512B block size support
+* When a node is offline for longer than user configured timeout, move the replicas in that node out to 
+  other nodes with free space 
+* Improvements to AWS Auto-scaling Group handling with KOPS
+* Lighthouse Volume Analyzer View Support. 
+* Enable volume resize for volumes that are not attached
+* Periodic, light-weight pool rebalance for proactive capacity management
+
+
+
 ## 1.4.2.2
 
 This is a patch release that adds capability to switch from shared to sharedv4 one volume at a time. Please contact portworx support before switching the volume types.
