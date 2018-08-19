@@ -26,6 +26,20 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Enable volume resize for volumes that are not attached
 * Periodic, light-weight pool rebalance for proactive capacity management
 
+### Key Fixes
+
+ * PWX-5800 - In AWS Autoscaling mode, PX nodes with no storage should always try to attach available drives on restart
+ * PWX-5827 - Allow adding cloud drives using pxctl service drive add commands
+ * PWX-5915 - Add PX-DO-NOT-DELETE prefix to all cloud drive names
+ * PWX-6117 - Fix `pxctl cloudsnap s --local` command failing to execute
+ * PWX-5919 - Improve node decommission handling for volumes that are not in quorum
+ * PWX-5824 - Improve geo variable handling for kubernetes and DC/OS
+ * PWX-5902 - Support SuSE CaaS platform
+ * PWX-5815 - Enable diags collection via oci-monitor when shell access to the minions not allowed
+ * PWX-5816 - Incorrect bucket names will force a full backup instead of incremental backup
+ * PWX-5904 - Remove db_remote and random profiles from io_profile help
+ * PWX-5821 - Fix panics seen zone and rack labels are supplied on volume create
+
 
 
 ## 1.4.2.2
