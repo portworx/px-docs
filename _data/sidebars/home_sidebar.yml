@@ -42,8 +42,6 @@
             url: /cloud/azure/aks.html
           - title: Azure Container Engine with Kubernetes
             url: /cloud/azure/k8s-acs-engine.html
-        - title: IBM Kubernetes Service (IKS)
-          url: /cloud/ibm/ibm-cloud-iks.html
         - title: Kubernetes on DC/OS
           url: /scheduler/mesosphere-dcos/kubernetes.html
         - title: Kubernetes (Other)
