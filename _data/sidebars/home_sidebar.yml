@@ -236,8 +236,6 @@
         url: /cloud/gcp/gke.html
       - title: Google Cloud Platform (GCP)
         url: /cloud/gcp/gcp.html
-    - title: IBM Cloud
-      url: /cloud/ibm/ibm-cloud-iks.html
     - title: Packet.net
       url: /cloud/packet.html
     - title: DigitalOcean
