@@ -39,11 +39,14 @@ It has the following options available.
  
 **In Version 1.5**
 
-Version 1.5 changes the unit for block_size to Bytes:
+Version 1.5 changes the unit for block_size to Bytes. Use the best_effort_location_provisioning option to allocate volumes on nodes, zones, racks in addition to those requested.
 
+```
 OPTIONS:
    --block_size size, -b size                    block size in Bytes (default: 4096)
- 
+   --best_effort_location_provisioning           requested nodes, zones, racks are optional
+```
+
 Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --size=10 --repl=3
