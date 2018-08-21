@@ -13,7 +13,6 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 ## Lighthoust 1.5 Release notes
 
 * Adds a volume analyzer feature for Portworx 1.5.0 and above
-
 * In k8s, now service DNS name can also be given as cluster endpoint 
 
 ## Lighthouse 1.4 Release notes
