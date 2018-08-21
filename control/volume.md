@@ -37,6 +37,12 @@ It has the following options available.
 
 {% include pxctl/volume/volume-create-help-1.3.md %}
  
+**In Version 1.5**
+
+Version 1.5 changes the unit for block_size to Bytes:
+
+OPTIONS:
+   --block_size size, -b size                    block size in Bytes (default: 4096)
  
 Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
@@ -80,6 +86,15 @@ For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cl
 ```
 sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
 ```
+
+##### 512-byte Block Volumes
+
+Default block size for all volumes is 4K. For applications which require the device block size to be 512 bytes, volume should be created using the '--block_size' option. 
+```
+sudo /opt/pwx/bin/pxctl volume create db2vol --block_size 512 --size=2 --repl=2
+```
+
+512 bytes block size is currently not supported with Encrypted Volumes. 
 
 ##### Passing Zones and Rack Information
 
