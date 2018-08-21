@@ -41,8 +41,26 @@ Record the EBS volume ID (e.g. _vol-04e2283f1925ec9ee_), this will be passed in 
 
 ### Limiting storage nodes.
 
-PX allows you to create a homogenous cluster where some of the nodes are storage nodes and rest of them are storageless. You can specify the number of storage nodes in your cluster by setting the ```max_drive_set_count``` input argument.
-Modify the input arguments to PX as shown in the below examples.
+PX allows you to create a heterogenous cluster where some of the nodes are storage nodes and rest of them are storageless. Based on the PX version follow one of the below procedure.
+
+#### PX Version 1.5
+
+{% include asg/storage-less-node-1.5.md %}
+
+Examples:
+
+* `"-s", "type=gp2,size=200", "-max_storage_nodes_per_zone", "1"`
+
+For a cluster of 6 nodes spanning 3 zones (us-east-1a,us-east-1b,us-east-1c), in the above example PX will have 3 storage nodes (one in each zone) and 3 storage less nodes. PX will create a total 3 EBS volumes of size 200 each and attach one EBS volume to each storage node.
+
+* `"-s", "type=gp2,size=200", "-s", "type=io1,size=100,iops=1000", "-max_storage_nodes_per_zone", "2"`
+
+For a cluster of 9 nodes spanning 2 zones (us-east-1a,us-east-1b), in the above example PX will have 4 storage nodes and 5 storage less nodes. PX will create a total of 8 EBS volumes (4 of size 200 and 4 of size 100). PX will attach a set of 2 EBS volumes (one of size 200 and one of size 100) to each of the 4 storage nodes..
+
+
+#### PX Version 1.4 and older
+
+{% include asg/storage-less-node-1.4.md %}
 
 Examples:
 
