@@ -18,7 +18,6 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 * Eliminate private.json for stateless installs
 * Handle consul leader failures when running with consul as the preferred k/v store
-* 512B block size support
 * When a node is offline for longer than user configured timeout, move the replicas in that node out to 
   other nodes with free space 
 * Improvements to AWS Auto-scaling Group handling with KOPS
