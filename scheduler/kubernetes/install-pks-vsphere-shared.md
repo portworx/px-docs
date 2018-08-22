@@ -11,11 +11,13 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * TOC
 {:toc}
 
+>**Note:** vSphere shared datastores are supported in upcoming Portworx version 1.6.0-rc2 and above. Contact Portworx support for early access.
+
 ## Architecture
 
 Below diagram gives an overview of the Portworx architecture for PKS on vSphere using shared datastores.
 * Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
-* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared Datastore or Datastore Cluster.
+* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared datastore(s).
 * Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
 * Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
 
@@ -25,11 +27,10 @@ Below diagram gives an overview of the Portworx architecture for PKS on vSphere 
 
 * Install vSphere 6.5u1 or above.
 * Install PKS 1.1 or above.
-* On each ESXi host in the cluster, create a shared Datastore or a Datastore cluster which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation later in this guide.
+* On each ESXi host in the cluster, create one or more shared datastore(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation later in this guide. The shared datastores can be part of a vSphere datastore cluster.
 * Ensure that following options are enabled on any PKS plan that you will use with a Portworx enabled Kubernetes cluster:
     * Enable Privileged Containers
     * Disable DenyEscalatingExec
-
 
 ## Portworx installation
 
@@ -162,7 +163,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.4.3-rc1
+          image: portworx/oci-monitor:1.6.0-rc2
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "size=100,type=zeroedthick"]
@@ -171,8 +172,6 @@ spec:
               value: "v2"
             - name: "PRE-EXEC"
               value: 'if [ ! -x /bin/systemctl ]; then apt-get update; apt-get install -y systemd; fi'
-            - name: PX_IMAGE
-              value: harshpx/px-enterprise:1.5-vsphere
             - name: VSPHERE_VCENTER
               value: pks-vcenter.k8s-demo.com
             - name: VSPHERE_VCENTER_PORT
@@ -641,7 +640,3 @@ spec:
       hostPID: false
       serviceAccountName: stork-scheduler-account
 ```
-
-## Limitations
-
-If a PX storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.
