@@ -12,6 +12,18 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.6.0-rc1
+
+### Key Features:
+
+* OpenStorage SDK
+
+### Errata
+
+* PWX-6198 - SDK Cloud backup and credentials services is still undergoing tests
+* PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
+* PWX-6056 - Expected error not found when using Stats on a non-existent volume.
+
 ## 1.5.0
 
 ### Key Features:
