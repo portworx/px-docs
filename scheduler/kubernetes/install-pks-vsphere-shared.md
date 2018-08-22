@@ -178,6 +178,8 @@ spec:
               value: "443"
             - name: VSPHERE_DATASTORE_PREFIX
               value: "px-datastore"
+            - name: VSPHERE_INSTALL_MODE
+              value: "shared"
             - name: VSPHERE_INSECURE
               value: "true"
             - name: VSPHERE_USER

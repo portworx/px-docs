@@ -11,6 +11,8 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * TOC
 {:toc}
 
+>**Note:** vSphere local datastores are supported in upcoming Portworx version 1.6.0-rc2 and above. Contact Portworx support for early access.
+
 ## Architecture
 
 Below diagram gives an overview of the Portworx architecture for PKS on vSphere using local datastores.
@@ -177,6 +179,8 @@ spec:
               value: "443"
             - name: VSPHERE_DATASTORE_PREFIX
               value: "px-datastore"
+            - name: VSPHERE_INSTALL_MODE
+              value: "local"
             - name: VSPHERE_INSECURE
               value: "true"
             - name: VSPHERE_USER
