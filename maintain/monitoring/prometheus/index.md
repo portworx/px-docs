@@ -55,8 +55,6 @@ px_cluster_status_cluster_size: total cluster size
 px_cluster_status_nodes_offline: total offline nodes 
 px_cluster_status_nodes_online: total online nodes 
 px_cluster_status_nodes_storage_down: total storage down nodes 
-px_cluster_status_nodes_offline: total offline nodes
-px_cluster_status_nodes_online: total online nodes 
 px_cluster_status_cluster_quorum: cluster_quorum, 1 = in quorum, 0 = not in quorum
 px_cluster_disk_total_bytes: total storage in px cluster in bytes
 px_cluster_status_storage_nodes_online: number of nodes proving storage which are online (these participate in quorum)
