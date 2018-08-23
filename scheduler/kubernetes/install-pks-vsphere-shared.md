@@ -27,7 +27,7 @@ Below diagram gives an overview of the Portworx architecture for PKS on vSphere 
 
 * Install vSphere 6.5u1 or above.
 * Install PKS 1.1 or above.
-* On each ESXi host in the cluster, create one or more shared datastore(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation later in this guide. The shared datastores can be part of a vSphere datastore cluster.
+* Create one or more shared datastore(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation later in this guide. The shared datastores can be part of a vSphere datastore cluster.
 * Ensure that following options are enabled on any PKS plan that you will use with a Portworx enabled Kubernetes cluster:
     * Enable Privileged Containers
     * Disable DenyEscalatingExec
