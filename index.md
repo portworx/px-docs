@@ -9,7 +9,7 @@ redirect_from:
   - /getting-started/px-enterprise.html
   - /getting-started/px-developer.html
   - /hadoop.html
-  - /coming_soon.html	
+  - /coming_soon.html
 meta-description: "Find out more about Portworx, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!"
 ---
 
@@ -36,7 +36,7 @@ Portworx technology:
 
 ## Cloud Native Storage
 {%
-    include youtubePlayer.html 
+    include youtubePlayer.html
     id = "0zTjOly0vkA"
     description = "Here is a short video that shows how Portworx provides an entire platform of storage services for managing stateful containerized applications in any Cloud or On-Prem data center"
 %}
@@ -66,24 +66,24 @@ Read more about how Portworx provides storage volumes to your application contai
   * Unlimited for the Enterprise Edition
   * 3 for the Developer Edition
 * Open network ports:
-  * Ensure ports 9001-9016 are open between all nodes that will run Portworx.
-* All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time 
+  * Ensure ports 9001-9022 are open between all nodes that will run Portworx.
+* All nodes running PX container must be synchronized in time and recommend setting up NTP to keep the time
   synchronized between all the nodes
-* Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage. 
-  Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) 
- 
+* Before going production, ensure a 3-node clustered etcd is deployed that PX can use for configuration storage.
+  Follow the instructions here to deploy a [clustered etcd](https://coreos.com/etcd/docs/latest/op-guide/clustering.html)
+
 Portworx can run with heterogenously configured servers, including servers with different cpu/memory configurations.
 Portworx can also run with servers that have different local storage profiles (number and size of disks/SSD/NVMe, etc.)
-There is a definite benefit (but not an absolute requirement) for servers to have local storage to contribute, 
+There is a definite benefit (but not an absolute requirement) for servers to have local storage to contribute,
 since providing local storage enables high-performance features such as scheduler hyper-convergance.
-Nodes that do not contribute local storage can still fully participate in a Portworx cluster. 
+Nodes that do not contribute local storage can still fully participate in a Portworx cluster.
 However data access for any jobs scheduled on a "storage-less" or "head-only" node will be via implicit network access.
 
-From an operational standpoint, Portworx **recommends** installing on all nodes within a cluster. 
-Having Portworx installed on all nodes eliminates the overhead of configuring scheduler "constraints" that would then 
+From an operational standpoint, Portworx **recommends** installing on all nodes within a cluster.
+Having Portworx installed on all nodes eliminates the overhead of configuring scheduler "constraints" that would then
 be needed to prohibit a job from running on a node where Portworx is not installed.
 
-This ``ansible`` playbook can be used to deploy a 
+This ``ansible`` playbook can be used to deploy a
     [3-node etcd cluster](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible)
 
 
@@ -92,12 +92,12 @@ PX runs completely in a container.  It can be installed to run directly via `OCI
 
 ### Pre-install Check
 
-Run the pre-install check on each node to be added to Portworx cluster to ensure that the node is ready for deploying PX successfully and join a PX cluster. Follow this [link](https://docs.portworx.com/install/preinstallcheck.html) to run the pre-install check script. 
+Run the pre-install check on each node to be added to Portworx cluster to ensure that the node is ready for deploying PX successfully and join a PX cluster. Follow this [link](https://docs.portworx.com/install/preinstallcheck.html) to run the pre-install check script.
 
 ### Install with RunC
 You can run Portworx directly via OCI runC.  This will run Portworx as a standalone OCI container without any reliance on the Docker daemon.  In this method, PX is managed by `systemd`.
 [Install with RunC](/runc/)
-  
+
 ### Install with a Container Orchestrator
 You can also deploy Portworx via your container orchestrator.  Chose the appropriate installation instructions for your scheduler.
 

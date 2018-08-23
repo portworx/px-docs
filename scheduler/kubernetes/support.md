@@ -21,7 +21,7 @@ Following sections will guide you in troubleshooting issues with your Portworx i
 
 ### Portworx cluster
 * If the px container is failing to start on each node, ensure you have shared mounts enable. Please follow [these](/knowledgebase/shared-mount-propagation.html) instructions to enable shared mount propagation.  This is needed because PX runs as a container and it will be provisioning storage to other containers.
-* Ports 9001 - 9016 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
+* Ports 9001 - 9022 must be open for internal network traffic between nodes running PX. Without this, px cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
 * When the px container boots on a node for the first time, it attempts to download kernel headers to compile it's kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be `` `yum install kernel-headers-`uname -r` `` and  `` yum install kernel-devel-`uname -r` ``
 * If one of the px nodes is in maintenance mode, this could be because one or more of the drives has failed. In this mode, you can replace up to one failed drive. If there are multiple drive failures, a node can be decommissioned from the cluster. Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
@@ -53,7 +53,7 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
   # Apply change to DNS-Policy, wait for change to propagate (rollout) to all the nodes
   $ kubectl apply -f px_oci-updatedDnsPolicy.yaml
   $ kubectl rollout status -n kube-system ds/portworx
-  
+
   # Request restart of PX-OCI services
   $ kubectl label nodes --all px/service=restart --overwrite
   # [OPTIONAL] Clean up the node-label after services restarted
