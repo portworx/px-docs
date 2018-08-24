@@ -9,7 +9,8 @@ redirect_from:
 meta-description: "Find out how to install PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
+## Kuberneted asked us to take this logo down - https://github.com/cncf/k8s-conformance/pull/301
+## ![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
 
 * TOC
 {:toc}
