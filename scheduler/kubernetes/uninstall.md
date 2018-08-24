@@ -7,8 +7,6 @@ sidebar: home_sidebar
 meta-description: "Find out how to uninstall Portworx within a Kubernetes cluster."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 

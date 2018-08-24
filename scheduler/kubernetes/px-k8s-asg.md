@@ -6,8 +6,6 @@ sidebar: home_sidebar
 meta-description: "This page describes how to setup a production ready Portworx cluster with Kubernetes on AWS Autoscaling groups (ASG)."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 

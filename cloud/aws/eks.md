@@ -5,8 +5,6 @@ keywords: Amazon, portworx, container, Kubernetes, storage, Docker, k8s, pv, per
 sidebar: home_sidebar
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 
