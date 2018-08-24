@@ -6,8 +6,6 @@ sidebar: home_sidebar
 meta-description: "Find out how to install PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 
