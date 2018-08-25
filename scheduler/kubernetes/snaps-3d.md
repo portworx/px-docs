@@ -22,6 +22,7 @@ A Stork `Rule` is a Custom Resource Definition (CRD) that allows to define actio
 * **actions**: This contains a list of actions to be performed. Below are supported fields under actions:
     * **type**: The type of action to run. Only type _command_ is supported.
     * **background**: If _true_, the action will run in background and will be terminated by Stork after the snapshot has been initiated. If false, the action will first complete and then the snapshot will get initiated.
+      * If background is set to _true_, add `${WAIT_CMD}` as shown in the examples below. This is a placeholder and Stork will replace it with an appropriate command to wait after the command is done.
     * **value**: This is the actual action content. For example, the command to run.
     * **runInSinglePod**: If _true_, the action will be run on a single pod that matches the selectors.
 
@@ -42,6 +43,21 @@ spec:
       # this command will flush tables with read lock
       value: mysql --user=root --password=$MYSQL_ROOT_PASSWORD -Bse 'flush tables with read lock;system ${WAIT_CMD};'
 ```
+
+Below rule flushes the tables from the memtable on all cassandra pods. Note that this just flushes data from memory and doesn't lock the tables.
+```
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Rule
+metadata:
+  name: px-cassandra-rule
+spec:
+  - podSelector:
+      app: cassandra
+    actions:
+    - type: command
+      value: nodetool flush
+```
+
 
 Below rule will run an echo command on a single pod that matches the label selector app=foo.
 ```
