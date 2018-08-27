@@ -26,6 +26,8 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ## 1.5.0
 
+### Important note: Consul integration with 1.5.0 has a bug which results in PX querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix in by 08/31/2018
+
 ### Key Features:
 
 * Eliminate private.json for stateless installs
