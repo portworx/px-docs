@@ -10,6 +10,8 @@
 In AWS, this can be done through the security group of the VPC to which your instances belong.
 "%}
 
+{% include asg/asg-prereqs.md %}
+
 ## AWS Requirements
 
 {% include asg/aws-prereqs.md %}

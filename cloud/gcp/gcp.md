@@ -15,6 +15,8 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 {% include px-k8s-prereqs.md %}
 
+{% include asg/asg-prereqs.md %}
+
 ## Create a GCP cluster
 
 To manage and auto provision GCP disks, Portworx needs access to the GCP Compute Engine API.   There are two ways to do this.
