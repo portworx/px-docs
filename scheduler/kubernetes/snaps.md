@@ -22,34 +22,12 @@ Using STORK, you can take 2 types of snapshots:
 1. [Local](/scheduler/kubernetes/snaps-local.html): These are per volume snapshots where the snapshots are stored locally in the current Portworx cluster's storage pools.
 2. [Cloud](/scheduler/kubernetes/snaps-cloud.html): These snapshots are uploaded to the configured S3-compliant endpoint (e.g AWS S3).
 
-3DSnaps is the umbrella term that covers PX-Enterprise's capability to provide app-consistent cluster wide snapshots whether they are local or cloud. 3DSnaps support for local volumes will be in 1.4 release.
+## 3DSnaps
 
-## Pre-snap and Post-snap commands
+>**Note:** 3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above.
 
->**Note:** Pre-snap and Post-snap commands are supported in an upcoming Portworx version 1.4 and above. Contact Portworx support for early access.
+3DSnaps is the umbrella term that covers PX-Enterprise's capability to provide app-consistent cluster wide snapshots whether they are local or cloud.
 
-For each of the above types, Portworx supports specifying pre and post commands that are run on the application pods using the volumes.
+For each of the snapshot types, Portworx supports specifying pre and post rules that are run on the application pods using the volumes. This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. The commands will be run in pods which are using the PVC being snapshotted.
 
-This allows users to quiesce the applications before the snapshot is taken and resume I/O after the snapshot is taken. The commands will be run in pods which are using the PVC being snapshotted.
-
-Specify following annotations in the `VolumeSnapshot` spec that you use to create the corresponding snapshot type.
-
-* __portworx/pre-snap-command__: STORK will run the command which is given in the value of this annotation before taking the snapshot.
-* __portworx/post-snap-command__: STORK will run the command which is given in the value of this annotation after taking the snapshot.
-* __portworx/pre-snap-command-run-once__: If "true", STORK will run the pre-snap command on just the first pod using the parent PVC. The default is "false" and the command will be run on all pods.
-* __portworx/post-snap-command-run-once__: If "true", STORK will run the post-snap command on just the first pod using the parent PVC. The default is "false" and the command will be run on all pods.
-
-**Examples**
-
-Follow is an example of a cassandra volume snapshot where we run the `nodetool flush` command before triggering the snapshot.
-
-```
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: cassandra-snapshot
-  annotations:
-    portworx/pre-snap-command: "nodetool flush"
-spec:
-  persistentVolumeClaimName: cassandra-data
-```
+Read [Configuring 3DSnaps](/scheduler/kubernetes/snaps-3d.html) for further details on 3DSnaps.
