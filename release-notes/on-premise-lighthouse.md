@@ -10,7 +10,7 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 * TOC
 {:toc}
 
-## Lighthoust 1.5 Release notes
+## Lighthouse 1.5 Release notes
 
 * Adds a volume analyzer feature for Portworx 1.5.0 and above. 
   Note: It won't show files which are 0.00033% of the total storage. 
