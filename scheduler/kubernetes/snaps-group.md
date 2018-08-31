@@ -39,6 +39,8 @@ The group snapshot method supports the following annotations:
 
 If both annotations and group ID are specified above, all PVCs that match annotations *and* group ID will be snapshotted.
 
+To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/scheduler/kubernetes/snaps-local.html#pvc-from-snap).
+
 ## Examples
 
 #### Creating snapshots of all PVCs that match certain annotations

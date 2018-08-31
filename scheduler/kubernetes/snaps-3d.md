@@ -101,3 +101,5 @@ metadata:
 spec:
   persistentVolumeClaimName: mysql-data-1
 ```
+
+To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/scheduler/kubernetes/snaps-local.html#pvc-from-snap).

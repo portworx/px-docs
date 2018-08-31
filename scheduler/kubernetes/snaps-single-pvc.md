@@ -10,6 +10,8 @@ meta-description: "Learn to take a snapshot of a Kubernetes persistent volume cl
 
 This document will show you how to create snapshot of a PVC backed by a Portworx volume.
 
+## Creating snapshot within a single namespace
+
 If you have a PVC called mysql-data, you can create a snapshot for that PVC by using the following spec:
 
 ```
@@ -74,4 +76,92 @@ Status:
     Type:                  
   Creation Timestamp:      <nil>
 Events:                    <none>
+```
+
+To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/scheduler/kubernetes/snaps-local.html#pvc-from-snap).
+
+## Creating snapshots across namespaces
+
+* When creating snapshots, you can provide comma separated regexes with `stork/snapshot-restore-namespaces` annotation to specify which namespaces the snapshot can be restored to.
+* When creating PVC from snapshots, if a snapshot exists in another namespace, the snapshot namespace should be specified with `stork/snapshot-source-namespace` annotation.
+
+Let's take an example where we have 2 namespaces _dev_ and _prod_. We will create a PVC and snapshot in the _dev_ namespace and then create a PVC in the _prod_ namespace from the snapshot.
+
+Create the namespaces
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    name: dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+  labels:
+    name: prod
+```
+
+Create the PVC
+
+```
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql-data
+  namespace: dev
+  annotations:
+    volume.beta.kubernetes.io/storage-class: px-mysql-sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: px-mysql-sc
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "2"
+```
+
+Create the snapshot
+
+```
+apiVersion: volumesnapshot.external-storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: mysql-snapshot
+  namespace: dev
+  annotations:
+    stork/snapshot-restore-namespaces: "prod"
+spec:
+  persistentVolumeClaimName: mysql-data
+
+```
+
+Create a PVC in a different namespace from the snapshot
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-clone
+  namespace: prod
+  annotations:
+    snapshot.alpha.kubernetes.io/snapshot: mysql-snapshot
+    stork/snapshot-source-namespace: dev
+spec:
+  accessModes:
+     - ReadWriteOnce
+  storageClassName: stork-snapshot-sc
+  resources:
+    requests:
+      storage: 2Gi
 ```
