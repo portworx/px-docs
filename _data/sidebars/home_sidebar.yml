@@ -66,7 +66,7 @@
           url: /scheduler/kubernetes/wp-k8s.html
       - title: How To
         folderitems:
-        - title: Create PVCs
+        - title: Create PVCs and Snapshots
           folderitems:
           - title: Dynamic Provisioning
             url: /scheduler/kubernetes/dynamic-provisioning.html
