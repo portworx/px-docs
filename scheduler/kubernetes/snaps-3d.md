@@ -38,6 +38,23 @@ Once you have the rules applied in your cluster, you can reference them in the `
 
 This section covers examples of creating 3DSnapshots for various applications.
 
+### Hello world
+
+Below rule is a generic example on how to run an echo command on a single pod that matches the label selector app=foo.
+```
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Rule
+metadata:
+  name: px-hello-world-rule
+spec:
+  - podSelector:
+      app: foo
+    actions:
+    - type: command
+      value: echo "hello world"
+      runInSinglePod: true
+```
+
 ### Mysql
 
 **Pre-snapshot rule**
@@ -62,8 +79,8 @@ spec:
 
 Creating the below VolumeSnapshot will do the following:
 
-* Stork will run the _px-presnap-rule_ rule on all pods that are using PVCs that match labels _app=mysql_.
-* Once the rule is executed, Stork will take a snapshot of all PVCs that match labels _app=mysql_. Hence this will be a group snapshot.
+* Stork will run the _px-presnap-rule_ rule on the pod that's using the _mysql-data_ PVC.
+* Once the rule is executed, Stork will take a snapshot of the _mysql-data_ PVC.
 * After the snapshot has been triggered, Stork will terminate any background actions that may exist in the rule _px-presnap-rule_.
 
 ```
@@ -72,13 +89,12 @@ kind: VolumeSnapshot
 metadata:
   name: mysql-3d-snapshot
   annotations:
-    portworx.selector/app: mysql
     stork.rule/pre-snapshot: px-presnap-rule
 spec:
-  persistentVolumeClaimName: mysql-data-1
+  persistentVolumeClaimName: mysql-data
 ```
 
-### Mongodb
+### MongoDB
 
 **Pre-snapshot rule**
 
@@ -152,6 +168,8 @@ spec:
 
 **Snapshot**
 
+With this snapshot, Stork will run the _px-cassandra-rule_ rule on all pods that are using PVCs that match labels _app=cassandra_. Hence this will be a [group snapshot](/scheduler/kubernetes/snaps-group.html).
+
 ```
 apiVersion: volumesnapshot.external-storage.k8s.io/v1
 kind: VolumeSnapshot
@@ -162,23 +180,6 @@ metadata:
     stork.rule/pre-snapshot: px-cassandra-rule
 spec:
   persistentVolumeClaimName: cassandra-data-1
-```
-
-### Hello world
-
-Below rule will run an echo command on a single pod that matches the label selector app=foo.
-```
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: Rule
-metadata:
-  name: px-hello-world-rule
-spec:
-  - podSelector:
-      app: foo
-    actions:
-    - type: command
-      value: echo "hello world"
-      runInSinglePod: true
 ```
 
 To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/scheduler/kubernetes/snaps-local.html#pvc-from-snap).
