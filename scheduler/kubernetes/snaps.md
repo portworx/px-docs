@@ -24,7 +24,7 @@ Using STORK, you can take 2 types of snapshots:
 
 ## 3DSnaps
 
->**Note:** 3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above.
+>**Note:** 3DSnaps are supported in Portworx version 1.4 and above and Stork version 1.2 and above. Contact Portworx for early access to Stork 1.2.
 
 3DSnaps is the umbrella term that covers PX-Enterprise's capability to provide app-consistent cluster wide snapshots whether they are local or cloud.
 
