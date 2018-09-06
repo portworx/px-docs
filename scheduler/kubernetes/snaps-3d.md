@@ -15,7 +15,7 @@ For each of the snapshot types, Portworx supports specifying pre and post rules 
 
 The high level workflow for configuring 3DSnaps involves creating rules and later on referencing the rules when creating the snapshots.
 
-## 1. Create Rules
+## Step 1: Create Rules
 
 A Stork `Rule` is a Custom Resource Definition (CRD) that allows to define actions that get performed on pods matching selectors. Below are the supported fields:
 
@@ -27,11 +27,20 @@ A Stork `Rule` is a Custom Resource Definition (CRD) that allows to define actio
     * **value**: This is the actual action content. For example, the command to run.
     * **runInSinglePod**: If _true_, the action will be run on a single pod that matches the selectors.
 
-### Examples
+## Step 2: Create VolumeSnapshots that reference the rules
 
-This section covers examples of pre and post snapshot rules for various applications. Once you create these rules, you can reference them in the VolumeSnapshot spec.
+Once you have the rules applied in your cluster, you can reference them in the `VolumeSnapshot` using the following annotations.
 
-#### Mysql
+* __stork.rule/pre-snapshot__: Stork will execute the rule which is given in the value of this annotation _before_ taking the snapshot.
+* __stork.rule/post-snapshot__: Stork will execute the rule which is given in the value of this annotation _after_ taking the snapshot.
+
+## Examples
+
+This section covers examples of creating 3DSnapshots for various applications.
+
+### Mysql
+
+**Pre-snapshot rule**
 
 Below rule will flush tables on all mysql pods that match label app=mysql and take a read lock on the tables.
 ```
@@ -49,7 +58,29 @@ spec:
       value: mysql --user=root --password=$MYSQL_ROOT_PASSWORD -Bse 'flush tables with read lock;system ${WAIT_CMD};'
 ```
 
-#### Mongodb
+**Snapshot**
+
+Creating the below VolumeSnapshot will do the following:
+
+* Stork will run the _px-presnap-rule_ rule on all pods that are using PVCs that match labels _app=mysql_.
+* Once the rule is executed, Stork will take a snapshot of all PVCs that match labels _app=mysql_. Hence this will be a group snapshot.
+* After the snapshot has been triggered, Stork will terminate any background actions that may exist in the rule _px-presnap-rule_.
+
+```
+apiVersion: volumesnapshot.external-storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: mysql-3d-snapshot
+  annotations:
+    portworx.selector/app: mysql
+    stork.rule/pre-snapshot: px-presnap-rule
+spec:
+  persistentVolumeClaimName: mysql-data-1
+```
+
+### Mongodb
+
+**Pre-snapshot rule**
 
 Below pre-snapshot rule forces the mongod to flush all pending write operations to disk and locks the entire mongod instance to prevent additional writes until the user releases the lock with a corresponding db.fsyncUnlock() command. (See [reference](https://docs.mongodb.com/manual/reference/method/db.fsyncLock/))
 ```
@@ -65,6 +96,8 @@ spec:
       value: mongo --eval "printjson(db.fsyncLock())"
 ```
 
+**Post-snapshot rule**
+
 Below post-snapshot rule reduces the lock taken by db.fsyncLock() on a mongod instance by 1. (See [reference](https://docs.mongodb.com/manual/reference/method/db.fsyncUnlock/#db.fsyncUnlock))
 ```
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -79,72 +112,9 @@ spec:
       value: mongo --eval "printjson(db.fsyncUnlock())"
 ```
 
-#### Cassandra
+**Snapshot**
 
-Below rule flushes the tables from the memtable on all cassandra pods.
-```
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: Rule
-metadata:
-  name: px-cassandra-rule
-spec:
-  - podSelector:
-      app: cassandra
-    actions:
-    - type: command
-      value: nodetool flush
-```
-
-#### Hello world
-
-Below rule will run an echo command on a single pod that matches the label selector app=foo.
-```
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: Rule
-metadata:
-  name: px-hello-world-rule
-spec:
-  - podSelector:
-      app: foo
-    actions:
-    - type: command
-      value: echo "hello world"
-      runInSinglePod: true
-```
-
-## 2. Create VolumeSnapshots that reference the rules
-
-Once you have the rules applied in your cluster, you can reference them in the `VolumeSnapshot` using the following annotations.
-
-* __stork.rule/pre-snapshot__: Stork will execute the rule which is given in the value of this annotation _before_ taking the snapshot.
-* __stork.rule/post-snapshot__: Stork will execute the rule which is given in the value of this annotation _after_ taking the snapshot.
-
-### Examples
-
-#### Mysql 3DSnapshot
-
-Follow is an example of a VolumeSnapshot which will do the following:
-
-* Stork will run the _px-presnap-rule_ rule on all pods that are using PVCs that match labels _app=mysql_.
-* Once the rule is executed, Stork will take a snapshot of all PVCs that match labels _app=mysql_. Hence this will be a group snapshot.
-* After the snapshot has been triggered, Stork will terminate any background actions that may exist in the rule _px-presnap-rule_.
-
-```
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: mysql-3d-snapshot
-  namespace: default
-  annotations:
-    portworx.selector/app: mysql
-    stork.rule/pre-snapshot: px-presnap-rule
-spec:
-  persistentVolumeClaimName: mysql-data-1
-```
-
-#### Mongodb 3DSnapshot
-
-Follow is an example of a VolumeSnapshot which will do the following:
+Creating the below VolumeSnapshot will do the following:
 
 * Stork will run the _px-mongodb-presnap-rule_ rule on pod using the _px-mongo-pvc_ PVC.
 * Once the rule is executed, Stork will take a snapshot of the _px-mongo-pvc_ PVC.
@@ -160,6 +130,55 @@ metadata:
     stork.rule/post-snapshot: px-mongodb-postsnap-rule
 spec:
   persistentVolumeClaimName: px-mongo-pvc
+```
+
+### Cassandra
+
+**Pre-snapshot rule**
+
+Below rule flushes the tables from the memtable on all cassandra pods.
+```
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Rule
+metadata:
+  name: px-cassandra-rule
+spec:
+  - podSelector:
+      app: cassandra
+    actions:
+    - type: command
+      value: nodetool flush
+```
+
+**Snapshot**
+
+```
+apiVersion: volumesnapshot.external-storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: cassandra-3d-snapshot
+  annotations:
+    portworx.selector/app: cassandra
+    stork.rule/pre-snapshot: px-cassandra-rule
+spec:
+  persistentVolumeClaimName: cassandra-data-1
+```
+
+### Hello world
+
+Below rule will run an echo command on a single pod that matches the label selector app=foo.
+```
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Rule
+metadata:
+  name: px-hello-world-rule
+spec:
+  - podSelector:
+      app: foo
+    actions:
+    - type: command
+      value: echo "hello world"
+      runInSinglePod: true
 ```
 
 To create PVCs from existing snapshots, read [Creating PVCs from snapshots](/scheduler/kubernetes/snaps-local.html#pvc-from-snap).
