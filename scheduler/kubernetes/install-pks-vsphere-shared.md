@@ -9,23 +9,23 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * TOC
 {:toc}
 
->**Note:** vSphere shared datastores are supported in upcoming Portworx version 1.6.0-rc2 and above. Contact Portworx support for early access.
+>**Note:** vSphere shared datastores and datastore clusters are supported in upcoming Portworx version 1.6.0-rc3 and above. Contact Portworx support for early access.
 
 ## Architecture
 
 Below diagram gives an overview of the Portworx architecture for PKS on vSphere using shared datastores.
 * Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
-* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared datastore(s).
+* Based on the given spec by the end user, Portworx on each node will create it's disk on the configured shared datastore(s) or datastore cluster(s).
 * Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
 * Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
 
-![Portworx architecture for PKS on vSphere using shared datastores](/images/pks-vsphere-shared.png){:width="1992px" height="1156px"}
+![Portworx architecture for PKS on vSphere using shared datastores or datastore clusters](/images/pks-vsphere-shared.png){:width="1992px" height="1156px"}
 
 ## Platform preparation
 
 * Install vSphere 6.5u1 or above.
 * Install PKS 1.1 or above.
-* Create one or more shared datastore(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation later in this guide. The shared datastores can be part of a vSphere datastore cluster.
+* Create one or more shared datastore(s) or datastore cluster(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores or datastore cluster(s). We will be giving this prefix during Portworx installation later in this guide.
 * Ensure that following options are enabled on any PKS plan that you will use with a Portworx enabled Kubernetes cluster:
     * Enable Privileged Containers
     * Disable DenyEscalatingExec
@@ -161,7 +161,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.6.0-rc2
+          image: portworx/oci-monitor:1.6.0-rc3
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "size=100,type=zeroedthick"]
