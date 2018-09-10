@@ -6,7 +6,7 @@ For PX 1.3 and higher, you can specify a template spec which will be used by Por
 
 The spec follows the following format:
 ```
-"type=<EBS volume type>,size=<size of EBS volume>,iops=<IOPS value>"
+"type=<EBS volume type>,size=<size of EBS volume>,iops=<IOPS value>,enc=<true/false>,kms=<CMK>"
 ```
 
 * __type__: Following two types are supported
@@ -14,6 +14,8 @@ The spec follows the following format:
     * _io1_ (For io1 volumes specifying the iops value is mandatory.)
 * __size__: This is the size of the EBS volume in GB
 * __iops__: This is the required IOs per second from the EBS volume.
+* __enc__:  This needs to be set to true if EBS volumes need to be encrypted. Default: false
+* __kms__:  This is the Customer Master Key to encrypt the EBS volume.
 
 See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above parameters.
 
@@ -21,6 +23,7 @@ Examples
 
 * `"type=gp2,size=200"`
 * `"type=gp2,size=100","type=io1,size=200,iops=1000"`
+* `"type=gp2,size=100,enc=true,kms=AKXXXXXXXX123","type=io1,size=200,iops=1000,enc=true,kms=AKXXXXXXXXX123"`
 
 
 **2. Using existing EBS volumes as templates**
