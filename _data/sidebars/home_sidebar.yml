@@ -401,8 +401,6 @@
       url: /knowledgebase/devicemapper.html
     - title: Docker User Namespaces
       url: /knowledgebase/docker-user-namespace.html
-    - title: Running with SLES 12 SP1
-      url: /knowledgebase/sles-12-sp1.html
     - title: FAQs
       url: /knowledgebase/faqs.html
   - title: Release Notes
