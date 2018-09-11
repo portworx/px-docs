@@ -24,6 +24,22 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
 * PWX-6056 - Expected error not found when using Stats on a non-existent volume.
 
+## 1.5.1 (staging)
+
+### Key Fixes:
+
+* PWX-6115 - Consul integration fixes to reduce CPU utilization
+* PWX-6049 - Improved detection and handling cloud instance store drives in AWS
+* PWX-6197 - Fix issues with max drive per zone in GCP
+* When a storagless node loses connectivity to the remaining nodes, it should bring itself down.
+* PWX-6208 - Fix GCP provider issues for dynamic disk provisioning in GCP/GKE
+* PWX-5815 - Enable running `pxctl` from oci-monitor PODs in k8s
+* PWX-6295 - Fix LocalNode provisioning pattern when provisioning volumes with greater than 1 replication factor
+* PWX-6277 - PX fails to run sharedv4 volume support for Fedora
+* PWX-6268 - PX does not come up in Amazon Linux V2 AMIs
+* PWX-6229 - PX does not initialize fully in a GKE multi-zone cluster during a fresh install
+
+
 ## 1.5.0
 
 ### Important note: Consul integration with 1.5.0 has a bug which results in PX querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix by 08/31/2018
