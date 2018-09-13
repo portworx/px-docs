@@ -25,11 +25,11 @@ Ensure that following options are enabled on all plans on the PKS tile.
   * Enable Privileged Containers
   * Disable DenyEscalatingExec
 
-### Add runtime addon to stop the portworx service
+### Enable zero downtime upgrades for Portworx PKS clusters
 
-Use the following steps to add a runtime addon to the [Bosh Director](https://bosh.io/docs/bosh-components/#director) to stop the Portworx service. 
+Use the following steps to add a runtime addon to the [Bosh Director](https://bosh.io/docs/bosh-components/#director) to stop the Portworx service.
 
->**Why is this needed?** When stopping and upgrading instances bosh attempts to unmount _/var/vcap/store_. Portworx has it's rootfs for the runc container mounted on _/var/vcap/store/opt/pwx/oci_ and the runc container is running using it. So one needs to stop Portworx and unmount _/var/vcap/store/opt/pwx/oci_ in order to allow bosh to proceed with stopping the instances. The add ensures this is done automatically. 
+>**Why is this needed ?** When stopping and upgrading instances bosh attempts to unmount _/var/vcap/store_. Portworx has it's root filesystem for it's OCI container mounted on _/var/vcap/store/opt/pwx/oci_ and the runc container is running using it. So one needs to stop Portworx and unmount _/var/vcap/store/opt/pwx/oci_ in order to allow bosh to proceed with stopping the instances. The addon ensures this is done automatically and enables zero downtime upgrades.
 
 Perform these steps on any machine where you have the bosh CLI.
 
@@ -39,7 +39,6 @@ Perform these steps on any machine where you have the bosh CLI.
     ```
     git clone https://github.com/portworx/portworx-stop-bosh-release.git
     cd portworx-stop-bosh-release
-    bosh create-release --final
     bosh -e director-environment upload-release
     ```
 
