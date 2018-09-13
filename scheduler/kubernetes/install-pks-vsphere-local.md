@@ -3,7 +3,7 @@ layout: page
 title: "Portworx install on PKS on vSphere using local datastores"
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
 
-meta-description: "Find out how to install PX in a PKS Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
+meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSphere and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
 * TOC
@@ -21,14 +21,9 @@ Below diagram gives an overview of the Portworx architecture for PKS on vSphere 
 
 ![Portworx architecture for PKS on vSphere using local datastores](/images/pks-vsphere-local.png){:width="1992px" height="1156px"}
 
-## Platform preparation
+## ESXi datastore preparation
 
-* Install vSphere 6.5u1 or above.
-* Install PKS 1.1 or above.
-* On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation.
-* Ensure that following options are enabled on any PKS plan that you will use with a Portworx enabled Kubernetes cluster:
-    * Enable Privileged Containers
-    * Disable DenyEscalatingExec
+On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation.
 
 
 ## Portworx installation
