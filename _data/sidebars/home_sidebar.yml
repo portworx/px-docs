@@ -44,6 +44,8 @@
             url: /cloud/azure/k8s-acs-engine.html
         - title: Kubernetes on DC/OS
           url: /scheduler/mesosphere-dcos/kubernetes.html
+        - title: Kubernetes on PKS
+          url: /scheduler/kubernetes/install-pks.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
