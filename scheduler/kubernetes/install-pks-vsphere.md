@@ -19,13 +19,13 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSp
 
 Before installing Portworx, let's ensure the PKS environment is prepared correctly.
 
-### Enabling privileged containers and kubectl exec
+### Enable privileged containers and kubectl exec
 
 Ensure that following options are enabled on all plans on the PKS tile.
   * Enable Privileged Containers
   * Disable DenyEscalatingExec
 
-### Runtime addon to stop the portworx service
+### Add runtime addon to stop the portworx service
 
 Use the following steps to add a runtime addon to the [Bosh Director](https://bosh.io/docs/bosh-components/#director) to stop the Portworx service. 
 
