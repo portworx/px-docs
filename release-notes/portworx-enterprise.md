@@ -24,7 +24,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
 * PWX-6056 - Expected error not found when using Stats on a non-existent volume.
 
-## 1.5.1 (staging)
+## 1.5.1
 
 ### Key Fixes:
 
