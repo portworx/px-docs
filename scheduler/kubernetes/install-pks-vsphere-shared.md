@@ -9,7 +9,7 @@ meta-description: "Find out how to install PX in a PKS Kubernetes cluster and ha
 * TOC
 {:toc}
 
->**Note:** vSphere shared datastores and datastore clusters are supported in upcoming Portworx version 1.6.0-rc3 and above. Contact Portworx support for early access.
+>**Note:** vSphere shared datastores and datastore clusters are supported in upcoming Portworx version 1.6.0-rc4 and above. Contact Portworx support for early access.
 
 ## Architecture
 
@@ -156,7 +156,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.6.0-rc3
+          image: portworx/oci-monitor:1.6.0-rc4
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "size=100,type=zeroedthick"]
