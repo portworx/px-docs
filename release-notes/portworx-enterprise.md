@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.6.0-rc1
+## 1.6.0
 
 ### Key Features:
 
