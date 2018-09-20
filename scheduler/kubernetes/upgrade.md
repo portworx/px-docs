@@ -10,8 +10,6 @@ redirect_from:
 * TOC
 {:toc}
 
-To upgrade to a 1.2 release, refer to [Upgrading Portworx to a 1.2 release](/scheduler/kubernetes/upgrade-1.2.html)
-
 For all other releases, follow this page.
 
 >**Note:**<br/>We do not recommend upgrading Portworx using [Kubernetes instructions](https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/) (e.g. via `kubectl set image ds/portworx portworx=portworx/XXXX:### -n kube-system`).
@@ -21,11 +19,11 @@ For all other releases, follow this page.
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-You are running Portworx as OCI if the Portworx daemonset image is _portworx/oci-monitor_. If not, you first need to [migrate to OCI](/scheduler/kubernetes/upgrade.html#docker-to-oci).
+To upgrade to the **1.6** release, run the curl command: `curl -fsL https://install.portworx.com/1.6/upgrade | bash -s`
 
-To upgrade to the **1.3** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s`
+To upgrade to the **1.5** release, run the curl command: `curl -fsL https://install.portworx.com/1.5/upgrade | bash -s`
 
-To upgrade to the **1.4** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2`
+To upgrade to the **1.4** release, run the curl command: `curl -fsL https://install.portworx.com/1.4/upgrade | bash -s`
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
 
@@ -45,10 +43,10 @@ This script will also monitor the above operations.
 ### Specify a different Portworx upgrade image
 
 You can invoke the upgrade script with the _-t_ to override the default Portworx image.
-For example below command upgrades Portworx to _portworx/oci-monitor:1.4.2_ image.
+For example below command upgrades Portworx to _portworx/oci-monitor:1.5.1_ image.
 
 ```
-curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2
+curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.5.1
 ```
 
 ### Disable scaling down of shared Portworx applications during the upgrade
