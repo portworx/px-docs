@@ -19,11 +19,11 @@ For all other releases, follow this page.
 
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
-To upgrade to the **1.6** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.6.0`
+To upgrade to the **1.6** release, run the curl command: `curl -fsL https://install.portworx.com/1.6/upgrade | bash -s`
 
-To upgrade to the **1.5** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.5.1`
+To upgrade to the **1.5** release, run the curl command: `curl -fsL https://install.portworx.com/1.5/upgrade | bash -s`
 
-To upgrade to the **1.4** release, run the curl command: `curl -fsL https://install.portworx.com/upgrade | bash -s -- -t 1.4.2.2`
+To upgrade to the **1.4** release, run the curl command: `curl -fsL https://install.portworx.com/1.4/upgrade | bash -s`
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
 
