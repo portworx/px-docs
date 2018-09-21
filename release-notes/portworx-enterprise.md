@@ -16,13 +16,16 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Key Features:
 
-* OpenStorage SDK
+* OpenStorage SDK support. Link to [SDK](https://libopenstorage.github.io/w/)
+* Dynamic VM datastore provisioning support for vSphere/ESX environments
+* Pivotal Kubernetes Service (PKS) support with automated storage management for PKS
 
 ### Errata
 
 * PWX-6198 - SDK Cloud backup and credentials services is still undergoing tests
 * PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
 * PWX-6056 - Expected error not found when using Stats on a non-existent volume.
+
 
 ## 1.5.1
 
