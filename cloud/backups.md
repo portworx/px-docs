@@ -90,7 +90,7 @@ For Azure:
 
 For AWS:
 
-By default, portworx creates a bucket (ID same as cluster uuid) to upload cloudsnaps. With Portworx version 1.5.0 onwards,uploading to a pre-created bucket by user is supported. Thus AWS user provided to Portworx should either have capability to create bucket or bucket provided to Portworx at minimum must have permissions mentioned below. If you prefer that a user specified bucket be used for cloudsnaps, specify the bucket id with --bucket option while creating credentials.
+By default, Portworx creates a bucket (ID same as cluster UUID) to upload cloudsnaps. With Portworx version 1.5.0 onwards,uploading to a pre-created bucket by a user is supported. Thus the AWS credential provided to Portworx should either have the capability to create a bucket or the bucket provided to Portworx at minimum must have the permissions mentioned below. If you prefer that a user specified bucket be used for cloudsnaps, specify the bucket id with `--bucket` option while creating the credentials.
 
 With user specified bucket (applicable only from 1.5.0 onwards):
 ```
