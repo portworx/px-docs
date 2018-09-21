@@ -6,6 +6,9 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, pe
 meta-description: "Find out how to install PX in a PKS Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes."
 ---
 
+* TOC
+{:toc}
+
 ## Step 1: PKS preparation
 
 Before installing Portworx, let's ensure the PKS environment is prepared correctly.
