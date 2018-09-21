@@ -18,7 +18,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 * OpenStorage SDK support. Link to [SDK](https://libopenstorage.github.io/w/)
 * Dynamic VM datastore provisioning support for vSphere/ESX environments
-* Pivotal Kubernetes Service (PKS) support with automated storage management for PKS
+* Pivotal Kubernetes Service (PKS) support with automated storage management for [PKS](https://docs.portworx.com/scheduler/kubernetes/install-pks.html)
 
 ### Errata
 
