@@ -35,7 +35,7 @@ $ dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 ## Run the janitor script to clean up the reserved resources as well as any state stored in Zookeeper
 ```bash
 $ SERVICE_NAME=cassandra-px
-$ PRE_RESERVED_ROLE="role/" # Set this if you started the service with a pre-reserved-role
+$ PRE_RESERVED_ROLE="your_pre_reserved_role/" # Set this if you started the service with a pre-reserved-role
 $ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${PRE_RESERVED_ROLE}${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
