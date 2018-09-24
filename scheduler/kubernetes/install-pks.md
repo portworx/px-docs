@@ -44,14 +44,14 @@ Perform these steps on any machine where you have the bosh CLI.
     bosh -e director-environment runtime-config
     ```
 
-    If this is empty, you can simply use the runtime config at [runtime-configs/director-runtime.config.yaml](https://raw.githubusercontent.com/portworx/portworx-stop-bosh-release/master/runtime-configs/director-runtime-config.yaml).
+    If this is empty, you can simply use the runtime config at [runtime-configs/director-runtime-config.yaml](https://raw.githubusercontent.com/portworx/portworx-stop-bosh-release/master/runtime-configs/director-runtime-config.yaml).
 
     If you already have an existing runtime config, add the release and addon in [runtime-configs/director-runtime-config.yaml](https://raw.githubusercontent.com/portworx/portworx-stop-bosh-release/master/runtime-configs/director-runtime-config.yaml) to your existing runtime config.
 
 
     Once we have the runtime config file prepared, let's update it in the Director.
     ```
-    bosh update-runtime-config runtime-configs/director-runtime-config.yaml
+    bosh -e director-environment update-runtime-config runtime-configs/director-runtime-config.yaml
     ```
 
 3. Apply the changes
