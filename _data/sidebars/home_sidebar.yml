@@ -275,6 +275,8 @@
         url: /control/license.html
     - title: Installation Arguments to Portworx
       url: /runc/options.html
+    - title: OpenStorage SDK
+      url: /control/openstorage-sdk.html
     - title: REST API
       url: /control/rest-api.html
     - title: Node config data
