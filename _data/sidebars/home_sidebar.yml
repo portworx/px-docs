@@ -459,3 +459,5 @@
       url: https://www.katacoda.com/portworx/scenarios/px-cassandra
     - title: Deploying MySQL on Kubernetes
       url: https://www.katacoda.com/portworx/scenarios/px-mysql
+    - title: Minio on Kubernetes for Portworx Backups
+      url: https://www.katacoda.com/portworx/scenarios/px-minio
