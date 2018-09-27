@@ -6,3 +6,5 @@ metadata:
 provisioner: kubernetes.io/portworx-volume
 parameters:
    repl: "3"
+   io_profile: "db"
+allowVolumeExpansion: true
