@@ -70,7 +70,7 @@
         folderitems:
         - title: Create PVCs and Snapshots
           folderitems:
-          - title: Dynamic Provisioning
+          - title: Dynamic Provisioning of PVCs
             url: /scheduler/kubernetes/dynamic-provisioning.html
           - title: Using Pre-provisioned Volumes
             url: /scheduler/kubernetes/preprovisioned-volumes.html
@@ -78,6 +78,8 @@
             url: /scheduler/kubernetes/snaps.html
           - title: Create shared PVCs
             url: /scheduler/kubernetes/shared-volumes.html
+          - title: Resize PVCs
+            url: /scheduler/kubernetes/resize-pvc.html
           - title: Create encrypted PVCs
             url: /scheduler/kubernetes/encrypted-volumes.html
           - title: Access via non-root users
