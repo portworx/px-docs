@@ -50,12 +50,6 @@
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials
         url: /scheduler/kubernetes/px-k8s-interactive.html
-      - title: Using Stork
-        url: /scheduler/kubernetes/stork.html
-      - title: Deploying using CSI
-        url: /scheduler/kubernetes/csi.html
-      - title: Ark Plugin
-        url: /scheduler/kubernetes/ark.html
       - title: Stateful applications
         folderitems:
         - title: Cassandra
@@ -118,6 +112,12 @@
             url: /scheduler/kubernetes/logmanagement-efk-k8s.html
           - title: Manage PX using Prometheus and Grafana
             url: /scheduler/kubernetes/monitoring-px-prometheusAndGrafana.html
+      - title: Using Stork
+        url: /scheduler/kubernetes/stork.html
+      - title: Deploying using CSI
+        url: /scheduler/kubernetes/csi.html
+      - title: Ark Plugin
+        url: /scheduler/kubernetes/ark.html
     - title: Mesosphere DC/OS
       folderitems:
       - title: Install
