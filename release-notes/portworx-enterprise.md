@@ -12,6 +12,24 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+
+## 1.6.1
+
+
+### Key Features
+
+* Per volume queue depth to ensure volume level quality of service
+* Large discard sizes up to 10MB support faster file deletes. NOTE: You will need a px-fuse driver update to use 
+  this setting.  PX 1.6.1 will continue to work with old discard size of 1MB if no driver update was done. This is a 
+  backwards compatible change
+* Enable option to always perform a full clone back up for Cloudsnap
+* Reduce scheduled snapshot intervals to support snapping every 15 mins from the current limit of 1 hour
+
+
+### Key Fixes
+
+* Fix replica provisioning across availability zones for clusters running on DC/OS in a public cloud
+
 ## 1.6.0
 
 ### Key Features:
