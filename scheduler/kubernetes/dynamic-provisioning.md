@@ -6,6 +6,7 @@ sidebar: home_sidebar
 meta-description: "Looking to use a dynamically provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to dynamically provision volumes with k8s."
 redirect_from:
   - /scheduler/kubernetes/storage-class.html
+  - /k8s-samples/README.html
 ---
 * TOC
 {:toc}
