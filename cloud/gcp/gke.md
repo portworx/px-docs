@@ -13,17 +13,11 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 ## Prerequisites
 
-{% include px-k8s-prereqs.md %}
-
-{% include asg/asg-prereqs.md %}
-
-**PX Version**
-
-Support for GKE is available only in portworx release version 1.4 and above.
+{% include px-k8s-prereqs.md skip_ntp="true" skip_firewall="true" %}
 
 ## Create a GKE cluster
 
-Following two points are important when creating your GKE cluster.
+Following points are important when creating your GKE cluster.
 
 1. Portworx is supported on GKE cluster provisioned on [Ubuntu Node Images](https://cloud.google.com/kubernetes-engine/docs/node-images). So it is important to specify the node image as **Ubuntu** when creating clusters.
 
@@ -31,34 +25,27 @@ Following two points are important when creating your GKE cluster.
 
 3. Portworx requires a ClusterRoleBinding for your user. Without this `kubectl apply ...` command fails with an error like ```clusterroles.rbac.authorization.k8s.io "portworx-pvc-controller-role" is forbidden```.
 
-Create a ClusterRoleBinding for your user using the following commands:
+    Create a ClusterRoleBinding for your user using the following commands:
+    ```
+    # get current google identity
+    $ gcloud info | grep Account
+    Account: [myname@example.org]
 
- ```
-   # get current google identity
-   $ gcloud info | grep Account
-   Account: [myname@example.org]
-
-   # grant cluster-admin to your current identity
-   $ kubectl create clusterrolebinding myname-cluster-admin-binding \
-      --clusterrole=cluster-admin --user=myname@example.org
-   Clusterrolebinding "myname-cluster-admin-binding" created
-   ```
+    # grant cluster-admin to your current identity
+    $ kubectl create clusterrolebinding myname-cluster-admin-binding \
+        --clusterrole=cluster-admin --user=myname@example.org
+    Clusterrolebinding "myname-cluster-admin-binding" created
+    ```
 
 More information about creating GKE clusters can be found [here](https://cloud.google.com/kubernetes-engine/docs/clusters/operations).
 
 ## Install
 
-Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). Following sections describe how to generate the spec files and apply them.
-
-### Disk template
-
-Portworx takes in a disk spec which gets used to provision GCP persistent disks dynamically.
-
-{% include asg/gcp-template.md %}
+Portworx gets deployed as a [Kubernetes DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). We will use below sections to generate the specs.
 
 ### Generate the spec
 
-{% include k8s-spec-generate.md  asg-addendum="We will supply the template(s) explained in previous section, when we create the Portworx spec." skip12="true" skip13="true" %}
+{% include k8s-spec-generate.md %}
 
 ### Applying the spec
 
