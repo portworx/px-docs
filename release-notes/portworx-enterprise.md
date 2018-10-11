@@ -13,6 +13,17 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 {:toc}
 
 
+## 1.6.1.1
+
+This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
+
+* PWX-6494 - Fix rare spurious volume unmounts of attached volumes in case of Portworx service restart under heavy load
+* PWX-6559 - Add a timeout for all commands to docker so they timeout if docker hangs or crashes.
+
+### Key Fixes
+
+* PWX-6494
+
 ## 1.6.1
 
 
