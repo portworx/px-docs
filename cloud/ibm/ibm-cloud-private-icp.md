@@ -11,8 +11,6 @@ meta-description: "Deploy Portworx on IBM Cloud Private. See for yourself how ea
 
 This guide shows you how you can easily deploy Portworx on [**IBM Cloud Private and IBM Cloud Private for Data**](https://www.ibm.com/cloud/private)
 
-# Install Portworx on IBM Cloud Private (ICP) and Cloud Private for Data (ICPD)
-
 [Portworx is a technology ecosystem partner for IBM Cloud Private and Cloud Private for Data.](https://www.ibm.com/products/cloud-private-for-data/partners)
 
 ## Installation pre-requisites
