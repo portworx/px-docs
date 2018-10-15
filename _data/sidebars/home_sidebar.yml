@@ -437,7 +437,7 @@
       url: /video/shared-volumes.html
     - title: Multi-cloud High Availability
       url: /video/multi-cloud.html
-    - title: Portwork QuickStart Explainer
+    - title: Portworx QuickStart Explainer
       url: /video/quickstart.html
     - title: Hadoop on Portworx on DCOS
       url: /video/hadoop-px-dcos.html
