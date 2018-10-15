@@ -21,17 +21,19 @@ All worker nodes must have some unmounted disk or partition to contribute.   Ide
 
 
 ## Installation
-For ICP 3.1 and above, Portworx is installed by Helm:  [https://www.ibm.com/products/cloud-private-for-data/partners](https://www.ibm.com/products/cloud-private-for-data/partners)
+### ICP 3.1 and Above
+For ICP 3.1 and above, Portworx is installed by Helm:  [https://github.com/IBM/charts/tree/master/community/portworx](https://github.com/IBM/charts/tree/master/community/portworx)
 ```
        Ex:
-           helm install --name portworx-icpd --set "clusterName=px-icpd,usedrivesAndPartitions=true,usefileSystemDrive=true,internalKVDB=true,imageVersion=1.6.1" ./portworx
+           helm install --name portworx-icpd --set "clusterName=px-icpd,usedrivesAndPartitions=true,usefileSystemDrive=true,internalKVDB=true,imageVersion=1.6.1" ./community/portworx
 ```
 
 For the definitions, please refer to :
-[https://www.ibm.com/products/cloud-private-for-data/partners](https://www.ibm.com/products/cloud-private-for-data/partners)
+[https://github.com/IBM/charts/blob/master/community/portworx/values.yaml](https://github.com/IBM/charts/blob/master/community/portworx/values.yaml)
 
 >**Important:**<br/>Please note that `usefileSystemDrive` will make use of any drives/partitions that have formatted filesystems, but which are not mounted.
 
+### ICP 2.1.0.3
 For ICP 2.1.0.3, Portworx should be installed via the Portworx installer at [https://install.portworx.com/](https://install.portworx.com)
 
 Fill in the appropriate K8s version.  Choose the following:
