@@ -14,66 +14,60 @@ meta-description: "Deploy Portworx on IBM IKS. See for yourself how easy it is!"
 
 This guide shows you how you can easily deploy Portworx on [**IBM Cloud Kubernetes Service (IKS)**](https://www.ibm.com/cloud/container-service)
 
-**What do I need to provision Portworx in IBM Cloud Kubernetes Service?**
-IBM® Cloud Kubernetes Service provides worker node flavors that are optimized for software-defined storage (SDS) usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use SDS worker node machines that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Review the minimum requirements of a worker node to successfully run Portworx. 
+1. Sign up for an [IBM Cloud Pay-As-You-Go](https://console.bluemix.net/registration/) account. With an IBM Cloud Pay-As-You-Go account you can access the IBM Cloud Platform-as-a-Service and Infrastructure-as-a-Service portfolio. 
 
-## Setting up a key-value store for the Portworx cluster metadata
+## Step 1: Setting up a key-value store for the Portworx cluster metadata
+{: #key-value-store}
 Every Portworx cluster must be connected to a key-value store to store cluster metadata. The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
 In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up highly available. By using an IBM Cloud Database-as-a-Service, such as [**IBM Compose for etcd for IBM Cloud**](https://console.bluemix.com/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial) you can set up a highly available key-value store for your Portworx cluster. Each IBM Compose for etcd service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud region and data is replicated across all etcd data members. 
 
 Follow the [IBM Cloud Kubernetes Service documentation](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#portworx_database) to set up your IBM Compose for etcd key-value store for Portworx. 
 
-## Install Portworx on IBM IKS
+## Step 2: Installing Portworx on IBM Cloud Kubernetes Service
+{: #install}
+Install Portworx with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. In addition, [Stork](https://docs.portworx.com/scheduler/kubernetes/stork.html) is installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data and create and restore snapshots of Portworx volumes. 
 
-Portworx has 2 pre-requisites for successful installation:
-* Some unformatted/umounted raw devices (or partitions) must be presented to at least 3 hosts.
-* An existing key-value store such as `etcd` must be accessible
+**What worker node flavor in IBM Cloud Kubernetes Service is the right one for Portworx?** </br>
+IBM Cloud Kubernetes Service provides [bare metal worker node flavors that are optimized for software-defined storage (SDS) usage](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#sds) and that come with one or more raw, unformatted, and unmounted local disks that you can use for the Portworx storage layer. Portworx offers best performance when you use SDS worker node machines that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. 
 
-**Please ensure these pre-requisites are fulfilled before attempting to install Portworx in IKS.**
+Non-SDS worker nodes can be virtual or bare metal. If you want to use [virtual machines](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#vm), use a worker node flavor of `b2c.16x64` or better. Virtual machines with a flavor of `b2c.4x16` or `u2c.2x4` do not provide the required resources for Portworx to work properly. [Bare metal](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#bm) machines come with sufficient compute resources to support Portworx. For more information about the compute resources that are required by Portworx, see the [minimum requirements](https://docs.portworx.com/#minimum-requirements). 
 
-## IKS Worker node pre-reqs
-Ensure you have unmounted/unformatted raw block devices presented to 
-the worker nodes.   Either make sure your "bring-your-own hardware" nodes have
-available raw block devices.   Or follow the steps [here](https://github.com/akgunjal/block-volume-attacher)
-to allocate remote block devices
+To add non-SDS worker nodes to the Portworx storage layer, each worker node must have at least one tertiary raw, unformatted, and unmounted disk that is attached to the worker node. You can manually add these tertiary disks or use the IBM Cloud Block Attacher plug-in to automatically add the disks to your non-SDS worker nodes. For more information, see the [IBM Cloud Kubernetes Service documentation](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#attach_block_to_worker). 
+
+**How can I make sure that my data is stored highly available?** </br>
+You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) and replicate your volumes across SDS worker nodes in 3 or more zones.
+
+To install Portworx: 
+
+1. Make sure that you [set up your Portworx database](#key-value-store) to store your Portworx cluster metadata. 
+
+2. [Install the IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview) to create and manage your Kubernetes clusters in IBM Cloud Kubernetes Service. The IBM Cloud CLI includes the latest version of Docker, Helm, Git, and the `kubectl` CLI so that you do not need to install these packages separately. 
+
+3. If you want to create a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) for high availability, enable [VLAN spanning](https://console.bluemix.net/docs/infrastructure/vlans/vlan-spanning.html#vlan-spanning) for your IBM Cloud account. 
+
+4. [Create or use an existing cluster](https://console.bluemix.net/docs/containers/cs_clusters.html#clusters_ui) in IBM Cloud Kubernetes Service with a Kubernetes version of 1.9 or 1.10. Clusters that run the Kubernetes version 1.11 are not supported in Portworx. To ensure high availability for your data, set up a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) with at least 3 worker nodes and spread the worker nodes across zones. 
+
+5. If you created your cluster with non-SDS worker nodes, [add raw, unformatted, and unmounted block storage](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#attach_block_to_worker) to your worker nodes. The block storage devices are attached to your worker node and can be included into the Portworx storage layer. 
+
+6. 
+
+
+## Step 3: Adding Portworx storage to your apps
+
+## Step 4: Protecting your Portworx volumes with IBM Key Protect
+
+placeholder for Key Protect integration
+
+
 
 ## Kubernetes versions
 Portworx is not yet supported on IKS 1.11.2.
 All other versions are supported.
 
-## Machine types
-For Virtual instances, please use `b2c.16x64` or better.
-Please do not use `b2c.4x16` nor `u2c.2x4`, which do not have sufficient resources.
-All bare-metal types should work without problem.
-
-## Multi-zone clusters
-If you are configuring a `multi-zone` cluster, then ensure you have [enabled VLAN spanning](https://console.bluemix.net/docs/containers/cs_clusters.html#multizone)
 
 
-## Provision a `Compose etcd` instance
 
-Create and deploy an instance of [Compose for etcd](https://console.bluemix.net/catalog/services/compose-for-etcd)
-
-Obtain the `etcd` username, passwd and endpoints
-
-```
-$ bx target bx target --cf
-$ bx service list                        #  To find name of Compose etcd service
-$ bx service show 'Compose for etcd-8n'  #  Use appropriate service name to retrieve the `dashboard` parameter for your corresponding `etcd-service`
-
-
-$ ETCDCTL_API=3 etcdctl --endpoints=https://portal-ssl294-1.bmix-wdc-yp-a7a89461-abcc-45e5-84d7-cde68723e30d.588786498.composedb.com:15832,https://portal-ssl275-2.bmix-wdc-yp-a7a89461-abcc-45e5-84d7-cde68723e30d.588786498.composedb.com:15832 --user=root:XXXXXXXXXXXXXXX member list -w table
-+------------------+---------+------------------------------------------+-------------------------+-------------------------+
-|        ID        | STATUS  |                   NAME                   |       PEER ADDRS        |      CLIENT ADDRS       |
-+------------------+---------+------------------------------------------+-------------------------+-------------------------+
-|  418ef52006c5049 | started | etcd129.sl-us-wdc-1-memory.2.dblayer.com | http://10.96.146.3:2380 | http://10.96.146.3:2379 |
-|  bc4aa29071d56be | started | etcd113.sl-us-wdc-1-memory.0.dblayer.com | http://10.96.146.4:2380 | http://10.96.146.4:2379 |
-| a52c701de81e1e64 | started | etcd113.sl-us-wdc-1-memory.1.dblayer.com | http://10.96.146.2:2380 | http://10.96.146.2:2379 |
-+------------------+---------+------------------------------------------+-------------------------+-------------------------+
-```
-
-Please make note of both of the `--etcd-endpoints` as well as the `--user=root:PASSWORD` string 
 
 ## Deploy Portworx via Helm Chart
 
