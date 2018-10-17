@@ -14,6 +14,16 @@ meta-description: "Deploy Portworx on IBM IKS. See for yourself how easy it is!"
 
 This guide shows you how you can easily deploy Portworx on [**IBM Cloud Kubernetes Service (IKS)**](https://www.ibm.com/cloud/container-service)
 
+**What do I need to provision Portworx in IBM Cloud Kubernetes Service?**
+IBM® Cloud Kubernetes Service provides worker node flavors that are optimized for software-defined storage (SDS) usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use SDS worker node machines that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Review the minimum requirements of a worker node to successfully run Portworx. 
+
+## Setting up a key-value store for the Portworx cluster metadata
+Every Portworx cluster must be connected to a key-value store to store cluster metadata. The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
+
+In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up highly available. By using an IBM Cloud Database-as-a-Service, such as [**IBM Compose for etcd for IBM Cloud**](https://console.bluemix.com/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial) you can set up a highly available key-value store for your Portworx cluster. Each IBM Compose for etcd service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud region and data is replicated across all etcd data members. 
+
+Follow the [IBM Cloud Kubernetes Service documentation](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#portworx_database) to set up your IBM Compose for etcd key-value store for Portworx. 
+
 ## Install Portworx on IBM IKS
 
 Portworx has 2 pre-requisites for successful installation:
