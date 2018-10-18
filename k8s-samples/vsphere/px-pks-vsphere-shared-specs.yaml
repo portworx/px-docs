@@ -79,7 +79,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.6.0
+          image: portworx/oci-monitor:1.6.1.1
           imagePullPolicy: Always
           args:
              # CHANGEME to the user friendly cluster name you would like to give

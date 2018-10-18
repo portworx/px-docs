@@ -156,7 +156,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.6.0
+          image: portworx/oci-monitor:1.6.1.1
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick"]
