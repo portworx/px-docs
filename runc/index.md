@@ -28,7 +28,6 @@ If you are already running PX as a docker container and need to migrate to OCI, 
 
 * *SYSTEMD*: The installation below assumes the [systemd](https://en.wikipedia.org/wiki/Systemd) package is installed on your system (i.e. _systemctl_ command works).
     - Note, if you are running Ubuntu 16.04, CentoOS 7 or CoreOS v94 (or newer) the "systemd" is already installed and no actions will be required.
-    - If your host is using an older [upstart](https://en.wikipedia.org/wiki/Upstart) service management, and you cannot upgrade to `systemd`, please refer to [runc via upstart](/runc/upstart.html) document instead.
 * *SCHEDULERS*: If you are installing PX into **Kubernetes** or **Mesosphere DC/OS** cluster, we recommend to install the scheduler-specific Portworx package, which provides tighter integration, and better overall user experience.
 * *FIREWALL*: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.

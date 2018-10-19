@@ -3,7 +3,8 @@ layout: page
 title: "Run PX via upstart"
 keywords: portworx, px-developer, px-enterprise, plugin, install, configure, container, storage, runc, oci, upstart
 redirect_from:
-  - /run-with-upstart.html
+  - /runc-with-upstart.html
+  - /runc/upstart/index.html
 ---
 
 * TOC
