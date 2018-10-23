@@ -13,6 +13,7 @@ meta-description: "Portworx can integrate with Vault to store your encryption ke
 Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Vault endpoint. The vault endpoint could be used to store secrets that will be used for encrypting volumes.
 
 ### Setting up Vault
+
 Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, configuring secrets, etc
 
 ### Kubernetes users

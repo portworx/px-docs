@@ -12,6 +12,13 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.6.1.2
+
+This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
+
+* PWX-6567 - Provide a parameter to disable discards during volume create
+* PWX-6559 - Provide ability to map services listening on port 9001 to another port
+
 
 ## 1.6.1.1
 

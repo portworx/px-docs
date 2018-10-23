@@ -29,8 +29,7 @@ available raw block devices.   Or follow the steps [here](https://github.com/akg
 to allocate remote block devices
 
 ## Kubernetes versions
-Portworx is not yet supported on IKS 1.11.2.
-All other versions are supported.
+For IKS versions 1.11.2 and above, be sure to use Portworx version 1.7 and above
 
 ## Machine types
 For Virtual instances, please use `b2c.16x64` or better.
@@ -70,13 +69,6 @@ Please make note of both of the `--etcd-endpoints` as well as the `--user=root:P
 Make sure you have installed `helm` and run `helm init`
 
 Follow these instructions to [Deploy Portworx via Helm](https://github.com/portworx/helm/blob/master/charts/portworx/README.md)
-
-Be sure to execute the pre-requisite commands here:
-```
-kubectl create serviceaccount --namespace kube-system tiller
-kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-```
 
 The following values must be defined, either through `helm install --set ...` or through `values.yaml`:
 * clusterName      :   User defined
@@ -161,19 +153,6 @@ If a `wipe/delete` is being done as the result of a failed installation,
 then a best practice is to use a different `clusterName` when creating a new cluster.
 
 ## Troubleshooting
-
-### 'helm install' hangs
-
-This happens when helm/tiller is not provided with the correct RBAC permissions as [documented here](https://github.com/portworx/helm/tree/master/charts/portworx#pre-requisites)
-
-If trying to install Portworx on a new cluster and `helm install` hangs or timeouts, please Cntrl-C and try:
-
-```
-kubectl create serviceaccount --namespace kube-system tiller
-kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-```
-
 
 ### Retrying a previously failed installation
 
