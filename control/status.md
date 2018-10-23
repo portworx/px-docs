@@ -138,7 +138,7 @@ It is recommended to upgrade the nodes in a staggered manner so as to maintain q
 You must make PX login to the secrets endpoint when using encrypted volumes and ACLs.
 
 `pxctl secrets` can be used to configure authentication credentials and endpoints - Vault, Amazon KMS, KVDB are currently supported.
-Vault example (Note: To install and configure Vault, peruse [this link](https://www.vaultproject.io/intro/getting-started/install.html))
+Vault example (Note: To install and configure Vault, peruse [this link](https://www.vaultproject.io/docs/install/index.html)
 ```
 # sudo /opt/pwx/bin/pxctl secrets vault login --vault-address http://myvault.myorg.com --vault-token myvaulttoken
 Successfully authenticated with Vault.
