@@ -37,7 +37,6 @@ It has the following options available.
 
 {% include pxctl/volume/volume-create-help-1.3.md %}
  
- 
 Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --size=10 --repl=3

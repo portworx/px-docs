@@ -1,9 +1,12 @@
 ---
 layout: page
 title: "Dynamic Provisioning"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, StatefulSets
+keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets
 sidebar: home_sidebar
 meta-description: "Looking to use a dynamically provisioned volume with Kubernetes?  Follow this step-by-step tutorial on how to dynamically provision volumes with k8s."
+redirect_from:
+  - /scheduler/kubernetes/storage-class.html
+  - /k8s-samples/README.html
 ---
 * TOC
 {:toc}
@@ -28,7 +31,7 @@ Using Storage Classes objects an admin can define the different classes of Portw
 | nodes             	| Comma-separated Portworx Node ID's to use for replication sets of the volume                                                                                                                                                                                           	| nodes: "minion1,minion2" 	|
 | aggregation_level 	| Specifies the number of replication sets the volume can be aggregated from                                                                                                                                                                                             	| aggregation_level: "2"   	|
 | snap_schedule     	| Snapshot schedule (PX 1.3 and higher). {% include snap-schedule-format.md %}          	| snap_schedule: periodic=60,10<br><br>snap_schedule: daily=12:00,4<br><br>snap_schedule: weekly=sunday@12:00,2<br><br>snap_schedule: monthly=15@12:00     	|
-| snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60                                                                                                                                                                                                      	| snap_interval: "120"     	|
+| snap_interval     	| Snapshot interval in minutes. 0 disables snaps. Minimum value: 60. It is recommended to use snap_schedule above.                                                                                                                                                                      	| snap_interval: "120"     	|
 | sticky     	| Flag to create sticky volumes that cannot be deleted until the flag is disabled                                                                                                                                                                                                      	| sticky: "true"     	|
 | journal     	| (PX 1.3 and higher) Flag to indicate if you want to use journal device for the volume's metadata. This will use the journal device that you used when installing Portworx. As of PX version 1.3, it is recommended to use a journal device to absorb PX metadata writes. Default: false                                                                                                                                                                                             	| journal: "true"     	|
 

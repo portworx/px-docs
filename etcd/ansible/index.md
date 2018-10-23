@@ -5,7 +5,7 @@ sidebar: home_sidebar
 meta-description: "Rapidly deploy a three node Portworx cluster using our Ansible playbooks, find out how here!"
 ---
 
-The `ansible` script in this directory can be used to deploy a 
+The `ansible` script in [this directory](https://github.com/portworx/px-docs/tree/gh-pages/etcd/ansible) can be used to deploy a 
 fully functioning 3 node 'etcd3' cluster to existing servers or VMs with host persistent storage.
 
 The inventory file `inv.yml` should be structured as follows:

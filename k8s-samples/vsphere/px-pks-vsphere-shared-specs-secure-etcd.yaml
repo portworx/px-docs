@@ -1,80 +1,3 @@
----
-layout: page
-title: "Portworx install on PKS on vSphere using local datastores"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk
-
-meta-description: "Find out how to install PX in a PKS Kubernetes cluster on vSphere and have PX provide highly available volumes to any application deployed via Kubernetes."
----
-
-* TOC
-{:toc}
-
-## Pre-requisites
-
-* This page assumes you have a running etcd cluster. If not, return to [Installing etcd on PKS](/scheduler/kubernetes/install-pks.html#install-etcd-pks).
-
-## Architecture
-
-Below diagram gives an overview of the Portworx architecture for PKS on vSphere using local datastores.
-* Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
-* A **Single** Portworx instance on each ESXi host will create it's disk on the configured Datastore. So if there are 2 worker VMs on a single ESXi, Portworx instance on the first worker VM will create and manage the disks. Subsequent Portworx instances on that ESXi host will still be part of the cluster and will function as storageless nodes.
-* Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
-* Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
-
-![Portworx architecture for PKS on vSphere using local datastores](/images/pks-vsphere-local.png){:width="1992px" height="1156px"}
-
-## ESXi datastore preparation
-
-On each ESXi host in the cluster, create a local datastore which is dedicated for Portworx storage. Use a common prefix for the names of the datastores. We will be giving this prefix during Portworx installation.
-
-
-## Portworx installation
-
-1. Create a secret using [this template](#pks-px-vsphere-secret). Replace values replace values corresponding to your vSphere environment.
-2. Deploy the Portworx spec using [this template](#pks-px-spec). Replace values replace values corresponding to your vSphere environment.
-
-{% include k8s-monitor-install.md %}
-
-## Wipe Portworx installation
-
-Below are the steps to wipe your entire Portworx installation on PKS.
-
-1. Run cluster-scoped wipe: ```curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks```
-2. Go to each virtual machine and delete the additional vmdks Portworx created.
-
-## References
-
-<a name="pks-px-vsphere-secret"></a>
-### Secret for vSphere credentials
-
-Things to replace in the below spec to match your environment:
-
-1. **VSPHERE_USER**: Use output of `echo -n <vcenter-server-user> | base64`
-2. **VSPHERE_PASSWORD**: Use output of `echo -n <vcenter-server-password> | base64`
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: px-vsphere-secret
-  namespace: kube-system
-type: Opaque
-data:
-  VSPHERE_USER: YWRtaW5pc3RyYXRvckB2c3BoZXJlLmxvY2Fs
-  VSPHERE_PASSWORD: cHgxLjMuMEZUVw==
-```
-
-<a name="pks-px-spec"></a>
-### Portworx spec
-
-Things to replace in the below spec to match your environment:
-
-1. **PX etcd** endpoint in the -k argument.
-2. **Cluster ID** in the -c argument. Choose a unique cluster ID.
-3. **VSPHERE_VCENTER**: Hostname of the vCenter server.
-4. **VSPHERE_DATASTORE_PREFIX**: Prefix of the ESXi datastores that Portworx will use for storage.
-
-```
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -159,20 +82,30 @@ spec:
           image: portworx/oci-monitor:1.6.1.1
           imagePullPolicy: Always
           args:
-            ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick"]
+             # CHANGEME to the user friendly cluster name you would like to give
+            ["-c", "px-pks-demo-1",
+             # CHANGEME change to match your secured etcd endpoints.
+             # e.g etcd:https://087aca88-83ab-4d6a-9889-631f861c1032.etcd.pks-services.etcd.bosh:2379,etcd:https://2da63ebd-cd62-49df-910e-3790b6ebaa86.etcd.pks-services.etcd.bosh:2379,etcd:https://77e56a14-02f7-4f49-80f4-8ccb6ceb769a.etcd.pks-services.etcd.bosh:2379
+             "-k", "etcd:https://PUT-YOUR-ETCD-HOST-2:PUT-YOUR-ETCD-PORT,etcd:https://PUT-YOUR-ETCD-HOST-2:PUT-YOUR-ETCD-PORT,etcd:https://PUT-YOUR-ETCD-HOST-3:PUT-YOUR-ETCD-PORT",
+             "-x", "kubernetes",
+             # CHANGEME size from 100 to size in GB of the drive you want on each node
+             "-s", "size=100,type=zeroedthick",
+             -ca", "/etc/pwx/etcdcerts/etcd-ca.crt", "-cert", "/etc/pwx/etcdcerts/etcd.crt", "-key", "/etc/pwx/etcdcerts/etcd.key" ]
           env:
             - name: "PX_TEMPLATE_VERSION"
               value: "v2"
             - name: "PRE-EXEC"
               value: 'if [ ! -x /bin/systemctl ]; then apt-get update; apt-get install -y systemd; fi'
+            # CHANGEME to point to your vcenter server hostname
             - name: VSPHERE_VCENTER
               value: pks-vcenter.k8s-demo.com
             - name: VSPHERE_VCENTER_PORT
               value: "443"
+            # CHANGEME to prefix of datastore(s) or datastore cluster(s)
             - name: VSPHERE_DATASTORE_PREFIX
               value: "px-datastore"
             - name: VSPHERE_INSTALL_MODE
-              value: "local"
+              value: "shared"
             - name: VSPHERE_INSECURE
               value: "true"
             - name: VSPHERE_USER
@@ -212,6 +145,8 @@ spec:
               mountPath: /host_proc/1/ns
             - name: sysdmount
               mountPath: /etc/systemd/system
+            - name: etcdcerts
+              mountPath: /etc/pwx/etcdcerts
       restartPolicy: Always
       serviceAccountName: px-account
       volumes:
@@ -230,6 +165,16 @@ spec:
         - name: sysdmount
           hostPath:
             path: /etc/systemd/system
+        - name: etcdcerts
+          secret:
+            secretName: px-etcd-certs
+            items:
+            - key: etcd-ca.crt
+              path: etcd-ca.crt
+            - key: etcd.crt
+              path: etcd.crt
+            - key: etcd.key
+              path: etcd.key
 ---
 
 apiVersion: v1
@@ -634,8 +579,3 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       hostPID: false
       serviceAccountName: stork-scheduler-account
-```
-
-## Limitations
-
-If a PX storage node goes down and cluster is still in quorum, a storage less node will not automatically replace the storage node.

@@ -35,7 +35,8 @@ $ dcos service shutdown cc3a8927-1aec-4a8a-90d6-a9c317f9e8c6-0051
 ## Run the janitor script to clean up the reserved resources as well as any state stored in Zookeeper
 ```bash
 $ SERVICE_NAME=cassandra-px
-$ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
+$ PRE_RESERVED_ROLE="your_pre_reserved_role/" # Set this if you started the service with a pre-reserved-role
+$ dcos node ssh --master-proxy --leader "docker run mesosphere/janitor /janitor.py -r ${PRE_RESERVED_ROLE}${SERVICE_NAME}-role -p ${SERVICE_NAME}-principal -z dcos-service-${SERVICE_NAME}"
 ```
 
 ## Cleanup PX remnants from slave nodes
@@ -80,13 +81,14 @@ sudo rmmod px -f
 
 If you have the dcos cli installed then you can execute the above steps on all the nodes by running the following script
 ```bash
-ips=( `dcos node --json | jq ' .[]' | jq .id -r` )
+ips=(`dcos node --json | jq -r '.[] | select(.type == "agent") | .id'`)
 for ip in "${ips[@]}"
 do
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl stop portworx'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo docker rm portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/portworx.service -f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/dcos.target.wants/portworx.service -f'
+        dcos node ssh --mesos-id=${ip} --master-proxy 'sudo rm /etc/systemd/system/multi-user.target.wants/portworx.service –f'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo systemctl daemon-reload'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo /opt/pwx/bin/pxctl service node-wipe --all'
         dcos node ssh --mesos-id=${ip} --master-proxy 'sudo chattr -i /etc/pwx/.private.json'

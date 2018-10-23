@@ -7,8 +7,6 @@ redirect_from: "/cloud/aws/kops_asg.html"
 meta-description: "This page describes how to setup a production ready Portworx cluster with Kubernetes KOPS."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 

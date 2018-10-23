@@ -41,15 +41,15 @@ The installation and setup of PX OCI bundle is a 3-step process:
 3. Enable and start Portworx service
 
 <a name="install_step1"></a>
-#### Step 1: Install the PX OCI bundle
+### Step 1: Install the PX OCI bundle
 
 {% include runc/runc-install-bundle.md %}
 
-#### Step 2: Configure PX under runC
+### Step 2: Configure PX under runC
 
 {% include runc/runc-configure-portworx.md %}
 
-#### Step 3: Starting PX runC
+### Step 3: Starting PX runC
 
 {% include runc/runc-enable-portworx.md %}
 
@@ -108,8 +108,10 @@ sudo rm -fr /opt/pwx
 sudo rm -fr /etc/pwx
 ```
 
+## Miscellaneous
+
 <a name="upgrading-from-px-containers-to-px-oci"></a>
-## Migrating from PX-Containers to PX-OCI
+### Migrating from PX-Containers to PX-OCI
 If you already had PX running as a Docker container and now want to upgrade to runC, follow these instructions:
 
 Step 1: Download and deploy the PX OCI bundle
@@ -187,6 +189,9 @@ sudo journalctl -f -u portworx
 
 # Get a slice of Portworx logs
 sudo journalctl -u portworx --since 09:00 --until "1 hour ago"
+
+# Show only the currently running Portworx logs
+sudo journalctl --unit portworx _PID=$(systemctl show --property MainPID portworx | cut -d= -f2)
 ```
 
 However, if you prefer to capture Portworx service logs in a separate log file, you will need to modify your host system as follows:

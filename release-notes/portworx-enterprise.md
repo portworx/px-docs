@@ -12,13 +12,74 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-## 1.5.0 (Staging)
+
+## 1.6.1.1
+
+This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
+
+* PWX-6494 - Fix rare spurious volume unmounts of attached volumes in case of Portworx service restart under heavy load
+* PWX-6559 - Add a timeout for all commands to docker so they timeout if docker hangs or crashes.
+
+### Key Fixes
+
+* PWX-6494
+
+## 1.6.1
+
+
+### Key Features
+
+* Per volume queue depth to ensure volume level quality of service
+* Large discard sizes up to 10MB support faster file deletes. NOTE: You will need a px-fuse driver update to use 
+  this setting.  PX 1.6.1 will continue to work with old discard size of 1MB if no driver update was done. This is a 
+  backwards compatible change
+* Enable option to always perform a full clone back up for Cloudsnap
+* Reduce scheduled snapshot intervals to support snapping every 15 mins from the current limit of 1 hour
+
+
+### Key Fixes
+
+* Fix replica provisioning across availability zones for clusters running on DC/OS in a public cloud
+
+## 1.6.0
+
+### Key Features:
+
+* OpenStorage SDK support. Link to [SDK](https://libopenstorage.github.io/w/)
+* Dynamic VM datastore provisioning support Kubernetes in vSphere/ESX environment
+* Pivotal Kubernetes Service (PKS) support with automated storage management for [PKS](https://docs.portworx.com/scheduler/kubernetes/install-pks.html)
+
+### Errata
+
+* PWX-6198 - SDK Cloud backup and credentials services is still undergoing tests
+* PWX-6159 - Intermittent detach volume error seen by when calling the SDK Detach call
+* PWX-6056 - Expected error not found when using Stats on a non-existent volume.
+
+
+## 1.5.1
+
+### Key Fixes:
+
+* PWX-6115 - Consul integration fixes to reduce CPU utilization
+* PWX-6049 - Improved detection and handling cloud instance store drives in AWS
+* PWX-6197 - Fix issues with max drive per zone in GCP
+* When a storagless node loses connectivity to the remaining nodes, it should bring itself down.
+* PWX-6208 - Fix GCP provider issues for dynamic disk provisioning in GCP/GKE
+* PWX-5815 - Enable running `pxctl` from oci-monitor PODs in k8s
+* PWX-6295 - Fix LocalNode provisioning pattern when provisioning volumes with greater than 1 replication factor
+* PWX-6277 - PX fails to run sharedv4 volume support for Fedora
+* PWX-6268 - PX does not come up in Amazon Linux V2 AMIs
+* PWX-6229 - PX does not initialize fully in a GKE multi-zone cluster during a fresh install
+
+
+## 1.5.0
+
+### Important note: Consul integration with 1.5.0 has a bug which results in PX querying a Consul Cluster too often for a non-existent key. We will be pushing out a 1.5.1 release with a fix by 08/31/2018
 
 ### Key Features:
 
 * Eliminate private.json for stateless installs
 * Handle consul leader failures when running with consul as the preferred k/v store
-* 512B block size support
 * When a node is offline for longer than user configured timeout, move the replicas in that node out to 
   other nodes with free space 
 * Improvements to AWS Auto-scaling Group handling with KOPS

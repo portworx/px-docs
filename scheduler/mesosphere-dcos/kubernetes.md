@@ -20,12 +20,13 @@ to `mesos`.
 ## Install dependencies
 
 When using Kubernetes on DC/OS you will be able to use Portworx from your DC/OS
-cluster. You only need to create a Kubernetes Service for Portworx to allow the
-in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes.
+cluster. You only need to create a Kubernetes Service and proxy pods for Portworx to allow the
+in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes. This will also install [Stork](/scheduler/kubernetes/stork.html).
 
 You can create the Service by running the following command:
 ```
-$ kubectl apply -f 'https://install.portworx.com/1.4/?dcos=true&stork=true'
+$ version=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
+$ kubectl apply -f "https://install.portworx.com/?kbver=${version}&dcos=true&stork=true"
 ```
 
 ## Provisioning volumes

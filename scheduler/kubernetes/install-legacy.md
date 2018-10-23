@@ -12,8 +12,6 @@ meta-description: "Find out how to install PX within a Kubernetes cluster and ha
 
 Portworx can run alongside Kubernetes and provide Persistent Volumes to other applications running on Kubernetes. This section describes how to deploy PX within a Kubernetes cluster and have PX provide highly available volumes to any application deployed via Kubernetes.
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 ## Deploy PX with Kubernetes
 Since Kubernetes [v1.6 release](https://github.com/kubernetes/kubernetes/releases/tag/v1.6.0), Kubernetes includes the Portworx native driver support which allows Dynamic Volume Provisioning.
 
@@ -29,7 +27,7 @@ The native portworx driver in Kubernetes supports the following features:
 * *VERSIONS*: Portworx recommends running with Kubernetes 1.7.5 or newer
     - If your Kubernetes cluster version is between 1.6.0 and 1.6.4, you will need to set `mas=true` when creating the spec (see [install section](#install) below), to allow Portworx to run on the Kubernetes master node.
 * *SHARED MOUNTS*: If you are running Docker v1.12, you *must* configure Docker to allow shared mounts propagation (see [instructions](/knowledgebase/shared-mount-propagation.html)), as otherwise Kubernetes will not be able to install Portworx.<br/> Newer versions of Docker have shared mounts propagation already enabled, so no additional actions are required.
-* *FIREWALL*: Ensure ports 9001-9004 are open between the Kubernetes nodes that will run Portworx.<br/> Also ensure ports 9001-9015 are open for "localhost" (generally, this is a default firewalls setting, so in most cases no actions will be required to enable "localhost" ports).
+* *FIREWALL*: Ensure ports 9001-9022 are open between the Kubernetes nodes that will run Portworx.<br/> Also ensure ports 9001-9015 are open for "localhost" (generally, this is a default firewalls setting, so in most cases no actions will be required to enable "localhost" ports).
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
 * *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
 * *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `s=/dev/sdb,/dev/sdc3`) will be automatically formatted by PX.
@@ -128,7 +126,7 @@ Uninstalling or deleting the portworx daemonset only removes the portworx contai
   ```bash
   # If you deployed using custom px-spec.yaml file, we recommend uninstall using same file:
   kubectl delete -f px-spec.yaml
-  
+
   # Alternatively, delete PX using the Web-form
   VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
   kubectl delete -f 'https://install.portworx.com?type=dock&kbver=$VER'

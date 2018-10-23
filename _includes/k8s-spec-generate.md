@@ -2,13 +2,10 @@
 
 To generate the spec file, head on to the below URLs for the PX release you wish to use.
 
+* [Default](https://install.portworx.com).
+* [1.6 Stable](https://install.portworx.com/1.6/).
+* [1.5 Stable](https://install.portworx.com/1.5/).
 * [1.4 Stable](https://install.portworx.com/1.4/).
-{% unless include.skip13 == "true" %}
-* [1.3 Stable](https://install.portworx.com/1.3/).
-{% endunless %}
-{% unless include.skip12 == "true" %}
-* [1.2 Stable](https://install.portworx.com/1.2/).
-{% endunless %}
 
 Alternately, you can use curl to generate the spec as described in [Generating Portworx Kubernetes spec using curl](/scheduler/kubernetes/px-k8s-spec-curl.html).
 

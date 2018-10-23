@@ -28,12 +28,15 @@ With local snapshots, you can either snapshot individual PVCs one by one or snap
 
 * [Taking snapshots of a group of PVCs](/scheduler/kubernetes/snaps-group.html)
 
+<a name="pvc-from-snap"></a>
 ## Creating PVCs from snapshots
 
 When you install STORK, it also creates a storage class called _stork-snapshot-sc_. This storage class can be used to create PVCs from snapshots.
 
 To create a PVC from a snapshot, you would add the `snapshot.alpha.kubernetes.io/snapshot` annotation to refer to the snapshot
 name.
+
+Note that the storageClassName needs to be the Stork StorageClass `stork-snapshot-sc` as in the example below.
 
 For the above snapshot, the spec would like this:
 ```

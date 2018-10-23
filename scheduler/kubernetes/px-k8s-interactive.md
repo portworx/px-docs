@@ -7,8 +7,6 @@ sidebar: home_sidebar
 meta-description: "Run through Portworx interactive tutorials on Kubernetes."
 ---
 
-![k8s porx Logo](/images/k8s-porx.png){:height="188px" width="188px"}
-
 * TOC
 {:toc}
 

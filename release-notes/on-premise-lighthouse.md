@@ -10,6 +10,12 @@ meta-description: "Release notes for Lighthouse, the Portworx UI."
 * TOC
 {:toc}
 
+## Lighthouse 1.5 Release notes
+
+* Adds a volume analyzer feature for Portworx 1.5.0 and above. 
+  Note: It won't show files which are 0.00033% of the total storage. 
+* In k8s, now service DNS name can also be given as cluster endpoint 
+
 ## Lighthouse 1.4 Release notes
 
 Lighthouse 1.4 is a new GUI refresh for lighthouse. Follow this [link](https://docs.portworx.com/enterprise/lighthouse-new.html) to install Lighthouse in your environment. Please note that Lighthouse 1.4 only works with PX 1.4 and above.

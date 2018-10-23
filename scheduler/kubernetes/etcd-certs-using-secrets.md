@@ -11,9 +11,9 @@ This page will guide you on how to give your etcd certificates to Portworx using
 Copy all your etcd certificates and key in a directory `etcd-secrets/` to create a Kubernetes secret from it.
 ```
 # ls -1 etcd-secrets/
-ca.crt
-client.crt
-client.key
+etcd-ca.crt
+etcd.crt
+etcd.key
 ```
 
 Use `kubectl` to create the secret named `px-etcd-certs` from the above files:
@@ -21,7 +21,7 @@ Use `kubectl` to create the secret named `px-etcd-certs` from the above files:
 # kubectl -n kube-system create secret generic px-etcd-certs --from-file=etcd-secrets/
 ```
 
-Notice that the secret has 3 keys `ca.crt`, `client.crt` and `client.key`, corresponding to file names in the `etcd-secrets` folder. We will use these keys in the Portworx spec file to reference the certificates.
+Notice that the secret has 3 keys `etcd-ca.crt`, `etcd.crt` and `etcd.key`, corresponding to file names in the `etcd-secrets` folder. We will use these keys in the Portworx spec file to reference the certificates.
 ```
 # kubectl -n kube-system describe secret px-etcd-certs
 Name:         px-etcd-certs
@@ -33,9 +33,9 @@ Type:  Opaque
 
 Data
 ====
-ca.crt:      1679 bytes
-client.crt:  1680 bytes
-client.key:  414  bytes
+etcd-ca.crt:      1679 bytes
+etcd.crt:  1680 bytes
+etcd.key:  414  bytes
 ```
 
 #### Edit Portworx spec
@@ -55,12 +55,12 @@ Now, we use the keys from the secret that we created and mount it under paths th
     secret:
       secretName: px-etcd-certs
       items:
-      - key: ca.crt
-        path: ca.crt
-      - key: client.crt
-        path: client.crt
-      - key: client.key
-        path: client.key
+      - key: etcd-ca.crt
+        path: etcd-ca.crt
+      - key: etcd.crt
+        path: etcd.crt
+      - key: etcd.key
+        path: etcd.key
 ```
 
 Now that the certificates are mounted at `/etc/pwx/etcdcerts` and the sub-paths that we specified in the _volumes_ section, change the portworx container args to use the correct certificate paths.
@@ -69,8 +69,8 @@ Now that the certificates are mounted at `/etc/pwx/etcdcerts` and the sub-paths 
   - name: portworx
     args:
       ["-c", "test-cluster", "-a", "-f",
-      "-ca", "/etc/pwx/etcdcerts/ca.crt",
-      "-cert", "/etc/pwx/etcdcerts/client.crt",
-      "-key", "/etc/pwx/etcdcerts/client.key",
+      "-ca", "/etc/pwx/etcdcerts/etcd-etcd-ca.crt",
+      "-cert", "/etc/pwx/etcdcerts/etcd.crt",
+      "-key", "/etc/pwx/etcdcerts/etcd.key",
       "-x", "kubernetes"]
 ```

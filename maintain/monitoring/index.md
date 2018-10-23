@@ -24,6 +24,8 @@ Alert manager integration is described [here](alerting.html)
 
 Grafana templates are provided [here](grafana/index.html)
 
+Datadog integration with Portworx is described [here](https://docs.datadoghq.com/integrations/portworx/)
+
 
 
 
