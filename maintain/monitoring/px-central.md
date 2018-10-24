@@ -1,13 +1,13 @@
 ---
 layout: page
 title: "Portworx Monitoring Stack"
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, prometheus, grafana, lighthouse, alertmanager, manager, central, multi-cluster
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, Prometheus, Grafana, Lighthouse, Alertmanager, manager, central, multi-cluster
 
-meta-description: "Find out how to install the full monitoring stack including, prometheus, grafana, alertmanager and lighthouse."
+meta-description: "Find out how to install the full monitoring stack including, Prometheus, Grafana, AlertManager and Lighthouse."
 ---
 
-* TOC
-{:toc}
+- TOC
+  {:toc}
 
 ## Pre-requisites
 
@@ -83,7 +83,7 @@ You will now have the following:
 - 1 `Lighthouse` Instance
 - 1 `AlertManager` instance
 
-`Prometheus` will scrape the prometheus nodes configured in `prometheus-additional.yaml`
+`Prometheus` will scrape the `Prometheus` nodes configured in `prometheus-additional.yaml`
 
 `AlertManager` will report issues based on our given rules
 
