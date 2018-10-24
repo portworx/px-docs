@@ -6,8 +6,8 @@ keywords: portworx, container, Kubernetes, storage, Docker, k8s, prometheus, gra
 meta-description: "Find out how to install the full monitoring stack including, prometheus, grafana, alertmanager and lighthouse."
 ---
 
-- TOC
-  {:toc}
+* TOC
+{:toc}
 
 ## Pre-requisites
 
@@ -16,7 +16,7 @@ meta-description: "Find out how to install the full monitoring stack including, 
 
 ## Single Cluster Installation
 
-If your cluster has less than 20 nodes we recommend using this setup. Otherwise please refer to [this guide](/maintain/monitoring/px-central.html#multi-cluster).
+If your cluster has less than 20 nodes we recommend using this setup. Otherwise please refer to [this guide](/maintain/monitoring/px-central.html#multi-cluster-installation).
 
 1. Create a secret using [this template](https://gist.github.com/pault84/3a79f6f981ad25c422fdbe81df9f4fbb). Replace the values corresponding to your email settings.
 
@@ -28,7 +28,7 @@ If your cluster has less than 20 nodes we recommend using this setup. Otherwise 
 
    2b. replace `<cluster uuid>` with the given uuid from your portworx cluster
 
-   2c. replace the `<grafana nodeport>` and <prometheus nodeport> with the correct values.
+   2c. replace the `<grafana nodeport>` and `<prometheus nodeport>` with the correct values.
 
 3. `kubectl apply -f single-cluster.yaml`
 
