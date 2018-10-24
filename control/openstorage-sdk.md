@@ -11,7 +11,7 @@ meta-description: "Portworx data services can be managed and monitored through t
 {:toc}
 
 
-Portworx data services can be managed and monitored through the [OpenStorage SDK](https://libopenstorage.github.io). 
+Portworx data services can be managed and monitored through the [OpenStorage SDK](https://libopenstorage.github.io).
 
 
 ### OpenStorage SDK Ports
@@ -27,6 +27,6 @@ The following table shows the OpenStorage SDK version released in each version o
 
 | Portworx Version | OpenStorage SDK Version | OpenStorage SDK Clients |
 | ---------------- | ----------------------- | ----------------------- |
-| v1.6.0 | [v0.9.0](https://libopenstorage.github.io/w/v0.9.0) | [v0.9.0](https://github.com/libopenstorage/openstorage-sdk-clients/releases/tag/v0.9.0)
+| v1.6.x | [v0.9.x](https://libopenstorage.github.io/w/reference.html) | [v0.9.x](https://github.com/libopenstorage/openstorage-sdk-clients/releases)
 
 You may need to match the version of the OpenStorage SDK Client version.
