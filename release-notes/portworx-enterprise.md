@@ -16,7 +16,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 This is a minor patch release with the following fixex/enhancements.
 
-* PWX-6697: Add support for provisioning disks on VMware virtual machines on non-Kubernetes clusters 
+* PWX-6697: Add support for automatic provisioning of disks on VMware virtual machines on non-Kubernetes clusters 
             and Kubernetes clusters without vSphere Cloud Provider.
 
 ## 1.6.1.2
