@@ -163,3 +163,11 @@ then a `helm install` can be re-issued.
 When retrying, please note the following for the `helm install`
 * Pick a different value for `clusterName`.  This ensures no collision in `etcd` with the previous clusterName.
 * Set `usefileSystemDrive=true`.  This forces the re-use of a raw device that may have previously been formatted for Portworx.
+
+## Caveats and Limitations
+
+### Limitations on `Add workers` 
+Workers can only be added if the cluster type is `Bare Metal` with `Raw SSD local storage`.
+Workers cannot be added to Virtual instances, since there is currently no way to dynamically add the required raw block device(s).
+
+
