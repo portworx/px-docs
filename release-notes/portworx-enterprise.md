@@ -12,9 +12,16 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.6.1.3
+
+This is a minor patch release with the following fixex/enhancements.
+
+* PWX-6697: Add support for provisioning disks on VMware virtual machines on non-Kubernetes clusters 
+            and Kubernetes clusters without vSphere Cloud Provider.
+
 ## 1.6.1.2
 
-This is a minor patch release with fixes issues around volume unmounts as well as pending commands to docker
+This is a minor patch release with the following fixes/enhancements.
 
 * PWX-6567 - Provide a parameter to disable discards during volume create
 * PWX-6559 - Provide ability to map services listening on port 9001 to another port
