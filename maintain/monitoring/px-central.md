@@ -21,7 +21,7 @@ If your cluster has less than 20 nodes we recommend using this setup. Otherwise 
 1. Create a secret using [this template](https://gist.github.com/pault84/3a79f6f981ad25c422fdbe81df9f4fbb). 
   Replace the values corresponding to your email settings.
 
-   `create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
+   `kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
 
 2. Download the single-cluster [spec](https://gist.github.com/pault84/0f7e81dc7d95b46d5c54a3885bd9b795).
 
@@ -50,7 +50,7 @@ If not consider using the [single cluster installation](/maintain/monitoring/px-
 
 1. Create a secret using [this template](https://gist.github.com/pault84/3a79f6f981ad25c422fdbe81df9f4fbb). Replace the values corresponding to your email settings.
 
-   `create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
+   `kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
 
 2. Create a secret using [this template](https://gist.github.com/pault84/aa7eb60a75255d67f576719024961755). Replace the values corresponding to your other K8S clusters.
 
