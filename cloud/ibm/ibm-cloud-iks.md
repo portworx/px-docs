@@ -32,9 +32,24 @@ to allocate remote block devices
 For IKS versions 1.11.2 and above, be sure to use Portworx version 1.7 and above
 
 ## Machine types
+Portworx `strongly` prefers the IKS Bare-Metal machine types that include `Raw SSD local storage`.
+These machine types include:
+
+* ms2c.4x32.1.9tb.ssd : 4 Cores 32GB RAM
+
+* ms2c.16x64.1.9tb.ssd : 16 Cores 64GB RAM
+
+* ms2c.28x256.3.8tb.ssd : 28 Cores 256GB RAM
+
+* ms2c.28x512.4x3.8tb.ssd : 28 Cores 512GB RAM
+
+**NB**:  Not all Bare-Metal machine types are available in all Regions/Locations
+
+**NB**:  If the above Bare-Metal machine types are used, then no additional remote-block storage needs to be provisioned
+
 For Virtual instances, please use `b2c.16x64` or better.
 Please do not use `b2c.4x16` nor `u2c.2x4`, which do not have sufficient resources.
-All bare-metal types should work without problem.
+All bare-metal types should work without problem, though the above are strongly recommended.
 
 ## Multi-zone clusters
 If you are configuring a `multi-zone` cluster, then ensure you have [enabled VLAN spanning](https://console.bluemix.net/docs/containers/cs_clusters.html#multizone)
