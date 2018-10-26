@@ -11,14 +11,15 @@ meta-description: "Find out how to install the full monitoring stack including, 
 
 ## Pre-requisites
 
-- This page assumes you have a running etcd cluster or will be using the `internal-etcd` feature. If not, return to [Installing etcd](/scheduler/kubernetes/install-pks.html#step-2-install-etcd).
+- This page assumes you will be using the `internal-etcd` feature.
 - It also assumes that you have a K8S cluster running
 
 ## Single Cluster Installation
 
 If your cluster has less than 20 nodes we recommend using this setup. Otherwise please refer to [this guide](/maintain/monitoring/px-central.html#multi-cluster-installation).
 
-1. Create a secret using [this template](https://gist.github.com/pault84/3a79f6f981ad25c422fdbe81df9f4fbb). Replace the values corresponding to your email settings.
+1. Create a secret using [this template](https://gist.github.com/pault84/3a79f6f981ad25c422fdbe81df9f4fbb). 
+  Replace the values corresponding to your email settings.
 
    `create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system`
 
@@ -26,31 +27,21 @@ If your cluster has less than 20 nodes we recommend using this setup. Otherwise 
 
    2a. replace `<clusterid>` with the desired clustername
 
-   2b. replace `<cluster uuid>` with the given uuid from your portworx cluster
-
-   2c. replace the `<grafana nodeport>` and `<prometheus nodeport>` with the correct values.
-
-3. `kubectl apply -f single-cluster.yaml`
+3. `kubectl apply -f singlecluster.yaml`
 
 You will now have the following:
-
-- 3 Node Portworx Cluster
+- a `Portworx` Cluster
 - 1 `Grafana` Instance
 - 1 `Prometheus` Instance
 - 1 `Lighthouse` Instance
 - 1 `AlertManager` instance
 
-`Prometheus` will scrape the nodes
-
-`AlertManager` will report issues based on our given rules
-
-`Grafana` will use `Prometheus` as it’s datasource and has pre-baked dashboards
-
 `Lighthouse` will watch the portworx cluster and has `Grafana` and `Prometheus` available out-of-the-box as links on the overview page.
+- `Prometheus` will scrape the nodes
+- `AlertManager` will report issues based on our given rules
+- `Grafana` will use `Prometheus` as it’s datasource and has pre-baked dashboards
 
-Finally go to `Lighthouse`, login with `admin/Password1` and the cluster should be visible.
-
-`Grafana` won’t show any volume metrics until a volume has been created and mounted and/or attached.
+Visit `Lighthouse`, login with `admin/Password1` and the cluster should be visible.
 
 ## Multi Cluster Installation
 
