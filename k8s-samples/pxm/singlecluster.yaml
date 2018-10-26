@@ -1,0 +1,3596 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: stork-config
+  namespace: kube-system
+data:
+  policy.cfg: |-
+    {
+      "kind": "Policy",
+      "apiVersion": "v1",
+      "extenders": [
+        {
+          "urlPrefix": "http://stork-service.kube-system:8099",
+          "apiVersion": "v1beta1",
+          "filterVerb": "filter",
+          "prioritizeVerb": "prioritize",
+          "weight": 5,
+          "enableHttps": false,
+          "nodeCacheCapable": false
+        }
+      ]
+    }
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: stork-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: stork-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/exec"]
+    verbs: ["get", "list", "delete", "create"]
+  - apiGroups: [""]
+    resources: ["persistentvolumes"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["list", "watch", "create", "update", "patch"]
+  - apiGroups: ["stork.libopenstorage.org"]
+    resources: ["rules"]
+    verbs: ["get", "list"]
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["create", "list", "watch", "delete", "get"]
+  - apiGroups: ["volumesnapshot.external-storage.k8s.io"]
+    resources: ["volumesnapshots"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["volumesnapshot.external-storage.k8s.io"]
+    resources: ["volumesnapshotdatas"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "create", "update"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["*"]
+    resources: ["deployments", "deployments/extensions"]
+    verbs: ["list", "get", "watch", "patch", "update", "initialize"]
+  - apiGroups: ["*"]
+    resources: ["statefulsets", "statefulsets/extensions"]
+    verbs: ["list", "get", "watch", "patch", "update", "initialize"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: stork-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: stork-account
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: stork-role
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: stork-service
+  namespace: kube-system
+spec:
+  selector:
+    name: stork
+  ports:
+    - protocol: TCP
+      port: 8099
+      targetPort: 8099
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  labels:
+    tier: control-plane
+  name: stork
+  namespace: kube-system
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      labels:
+        name: stork
+        tier: control-plane
+    spec:
+      containers:
+        - command:
+            - /stork
+            - --driver=pxd
+            - --verbose
+            - --leader-elect=true
+            - --health-monitor-interval=120
+          imagePullPolicy: Always
+          image: openstorage/stork:1.2.0
+          resources:
+            requests:
+              cpu: "0.1"
+          name: stork
+      hostPID: false
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "name"
+                    operator: In
+                    values:
+                      - stork
+              topologyKey: "kubernetes.io/hostname"
+      serviceAccountName: stork-account
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: stork-snapshot-sc
+provisioner: stork-snapshot
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: stork-scheduler-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: stork-scheduler-role
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "update"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch", "update"]
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resourceNames: ["kube-scheduler"]
+    resources: ["endpoints"]
+    verbs: ["delete", "get", "patch", "update"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["delete", "get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["bindings", "pods/binding"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["pods/status"]
+    verbs: ["patch", "update"]
+  - apiGroups: [""]
+    resources: ["replicationcontrollers", "services"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["app", "extensions"]
+    resources: ["replicasets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["statefulsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["policy"]
+    resources: ["poddisruptionbudgets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims", "persistentvolumes"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: stork-scheduler-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: stork-scheduler-account
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: stork-scheduler-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    component: scheduler
+    tier: control-plane
+    name: stork-scheduler
+  name: stork-scheduler
+  namespace: kube-system
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        component: scheduler
+        tier: control-plane
+      name: stork-scheduler
+    spec:
+      containers:
+        - command:
+            - /usr/local/bin/kube-scheduler
+            - --address=0.0.0.0
+            - --leader-elect=true
+            - --scheduler-name=stork
+            - --policy-configmap=stork-config
+            - --policy-configmap-namespace=kube-system
+            - --lock-object-name=stork-scheduler
+          image: gcr.io/google_containers/kube-scheduler-amd64:v1.11.3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 10251
+            initialDelaySeconds: 15
+          name: stork-scheduler
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 10251
+          resources:
+            requests:
+              cpu: "0.1"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "name"
+                    operator: In
+                    values:
+                      - stork-scheduler
+              topologyKey: "kubernetes.io/hostname"
+      hostPID: false
+      serviceAccountName: stork-scheduler-account
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: portworx-service
+  namespace: kube-system
+  labels:
+    name: portworx
+spec:
+  selector:
+    name: portworx
+  type: NodePort
+  ports:
+    - name: px-api
+      protocol: TCP
+      port: 9001
+      targetPort: 9001
+      nodePort: 30901
+    - name: px-kvdb
+      protocol: TCP
+      port: 9019
+      targetPort: 9019
+      nodePort: 30919
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: px-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: node-get-put-list-role
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["watch", "get", "update", "list"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["delete", "get", "list"]
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims", "persistentvolumes"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "update", "create"]
+  - apiGroups: ["extensions"]
+    resources: ["podsecuritypolicies"]
+    resourceNames: ["privileged"]
+    verbs: ["use"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: node-role-binding
+subjects:
+  - kind: ServiceAccount
+    name: px-account
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: node-get-put-list-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: portworx
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-role
+  namespace: portworx
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "create", "update", "patch"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-role-binding
+  namespace: portworx
+subjects:
+  - kind: ServiceAccount
+    name: px-account
+    namespace: kube-system
+roleRef:
+  kind: Role
+  name: px-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: portworx
+  namespace: kube-system
+  annotations:
+    portworx.com/install-source: "http://localhost:8080/?kbver=1.11.3&c=${CLUSTER_ID}&stork=true&b=true"
+spec:
+  minReadySeconds: 0
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        name: portworx
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: px/enabled
+                    operator: NotIn
+                    values:
+                      - "false"
+                  - key: node-role.kubernetes.io/master
+                    operator: DoesNotExist
+      hostNetwork: true
+      hostPID: false
+      containers:
+        - name: portworx
+          image: portworx/oci-monitor:1.6.1.3
+          imagePullPolicy: Always
+          args: ["-c", "${CLUSTER_ID}", "-b", "-a", "-x", "kubernetes"]
+          env:
+            - name: "PX_TEMPLATE_VERSION"
+              value: "v4"
+            - name: "PX_IMAGE"
+              value: "portworx/px-enterprise:1.6.1.3"
+          livenessProbe:
+            periodSeconds: 30
+            initialDelaySeconds: 840 # allow image pull in slow networks
+            httpGet:
+              host: 127.0.0.1
+              path: /status
+              port: 9001
+          readinessProbe:
+            periodSeconds: 10
+            httpGet:
+              host: 127.0.0.1
+              path: /health
+              port: 9015
+          terminationMessagePath: "/tmp/px-termination-log"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: dockersock
+              mountPath: /var/run/docker.sock
+            - name: containerdsock
+              mountPath: /run/containerd
+            - name: etcpwx
+              mountPath: /etc/pwx
+            - name: optpwx
+              mountPath: /opt/pwx
+            - name: proc1nsmount
+              mountPath: /host_proc/1/ns
+            - name: sysdmount
+              mountPath: /etc/systemd/system
+            - name: diagsdump
+              mountPath: /var/cores
+            - name: journalmount1
+              mountPath: /var/run/log
+              readOnly: true
+            - name: journalmount2
+              mountPath: /var/log
+              readOnly: true
+            - name: dbusmount
+              mountPath: /var/run/dbus
+      restartPolicy: Always
+      serviceAccountName: px-account
+      volumes:
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+        - name: containerdsock
+          hostPath:
+            path: /run/containerd
+        - name: etcpwx
+          hostPath:
+            path: /etc/pwx
+        - name: optpwx
+          hostPath:
+            path: /opt/pwx
+        - name: proc1nsmount
+          hostPath:
+            path: /proc/1/ns
+        - name: sysdmount
+          hostPath:
+            path: /etc/systemd/system
+        - name: diagsdump
+          hostPath:
+            path: /var/cores
+        - name: journalmount1
+          hostPath:
+            path: /var/run/log
+        - name: journalmount2
+          hostPath:
+            path: /var/log
+        - name: dbusmount
+          hostPath:
+            path: /var/run/dbus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-operator
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-operator
+subjects:
+  - kind: ServiceAccount
+    name: prometheus-operator
+    namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus-operator
+  namespace: kube-system
+rules:
+  - apiGroups:
+      - extensions
+    resources:
+      - thirdpartyresources
+    verbs: ["*"]
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs: ["*"]
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - alertmanagers
+      - prometheuses
+      - prometheuses/finalizers
+      - servicemonitors
+    verbs: ["*"]
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+    verbs: ["*"]
+  - apiGroups: [""]
+    resources:
+      - configmaps
+      - secrets
+    verbs: ["*"]
+  - apiGroups: [""]
+    resources:
+      - pods
+    verbs: ["list", "delete"]
+  - apiGroups: [""]
+    resources:
+      - services
+      - endpoints
+    verbs: ["get", "create", "update"]
+  - apiGroups: [""]
+    resources:
+      - nodes
+    verbs: ["list", "watch"]
+  - apiGroups: [""]
+    resources:
+      - namespaces
+    verbs: ["list"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus-operator
+  namespace: kube-system
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: prometheus-operator
+  name: prometheus-operator
+  namespace: kube-system
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: prometheus-operator
+    spec:
+      containers:
+        - args:
+            - --kubelet-service=kube-system/kubelet
+            - --config-reloader-image=quay.io/coreos/configmap-reload:v0.0.1
+          image: quay.io/coreos/prometheus-operator:v0.25.0
+          name: prometheus-operator
+          ports:
+            - containerPort: 8080
+              name: http
+          resources:
+            limits:
+              cpu: 200m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      serviceAccountName: prometheus-operator
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  namespace: kube-system
+  name: portworx-prometheus-sm
+  labels:
+    name: portworx-prometheus-sm
+spec:
+  selector:
+    matchLabels:
+      name: portworx
+  namespaceSelector:
+    any: true
+  endpoints:
+    - port: px-api
+      targetPort: 9001
+    - port: px-kvdb
+      targetPort: 9019
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: portworx #This name is important since the Alertmanager pods wont start unless a secret named alertmanager-${ALERTMANAGER_NAME} is created. in this case if would expect alertmanager-portworx secret in the kube-system namespace
+  namespace: kube-system
+  labels:
+    alertmanager: portworx
+spec:
+  replicas: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-portworx
+  namespace: kube-system
+spec:
+  type: NodePort
+  ports:
+    - name: web
+      nodePort: 30903
+      port: 9093
+      protocol: TCP
+      targetPort: web
+  selector:
+    alertmanager: portworx
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-portworx-rules
+  namespace: kube-system
+  labels:
+    role: prometheus-portworx-rulefiles
+    prometheus: portworx
+data:
+  portworx.rules.yaml: |+
+    groups:
+    - name: portworx.rules
+      rules:
+      - alert: PortworxVolumeUsageCritical
+        expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 80
+        for: 5m
+        labels:
+          issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is high.
+          severity: critical
+        annotations:
+          description: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over
+            80% used for more than 10 minutes.
+          summary: Portworx volume capacity is at {{$value}}% used.
+      - alert: PortworxVolumeUsage
+        expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 70
+        for: 5m
+        labels:
+          issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.host}} is critical.
+          severity: warning
+        annotations:
+          description: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over
+            70% used for more than 10 minutes.
+          summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
+            used.
+      - alert: PortworxVolumeWillFill
+        expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7 and predict_linear(px_cluster_disk_available_bytes[1h],
+          14 * 86400) < 0
+        for: 10m
+        labels:
+          issue: Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to
+            fill within 2 weeks.
+          severity: warning
+        annotations:
+          description: Disk volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
+            full and has been predicted to fill within 2 weeks for more than 10 minutes.
+          summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
+            full and is predicted to fill within 2 weeks.
+      - alert: PortworxStorageUsageCritical
+        expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes) < 20
+        for: 5m
+        labels:
+          issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.
+          severity: critical
+        annotations:
+          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+            80% used for more than 10 minutes.
+          summary: Portworx storage capacity is at {{$value}}% used.
+      - alert: PortworxStorageUsage
+        expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)) < 30
+        for: 5m
+        labels:
+          issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.
+          severity: warning
+        annotations:
+          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+            70% used for more than 10 minutes.
+          summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
+            used.
+      - alert: PortworxStorageWillFill
+        expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes))) < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
+        for: 10m
+        labels:
+          issue: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is predicted
+            to fill within 2 weeks.
+          severity: warning
+        annotations:
+          description: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over
+            70% full and has been predicted to fill within 2 weeks for more than 10 minutes.
+          summary: Portworx storage {{$labels.volumeid}} on {{$labels.host}} is over 70%
+            full and is predicted to fill within 2 weeks.
+      - alert: PortworxStorageNodeDown
+        expr: max(px_cluster_status_nodes_storage_down) > 0
+        for: 5m
+        labels:
+          issue: Portworx Storage Node is Offline.
+          severity: critical
+        annotations:
+          description: Portworx Storage Node has been offline for more than 5 minutes.
+          summary: Portworx Storage Node is Offline.
+      - alert: PortworxQuorumUnhealthy
+        expr: max(px_cluster_status_cluster_quorum) > 1
+        for: 5m
+        labels:
+          issue: Portworx Quorum Unhealthy.
+          severity: critical
+        annotations:
+          description: Portworx cluster Quorum Unhealthy for more than 5 minutes.
+          summary: Portworx Quorum Unhealthy.
+      - alert: PortworxMemberDown
+        expr: (max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size)) > 0
+        for: 5m
+        labels:
+          issue: Portworx cluster member(s) is(are) down.
+          severity: critical
+        annotations:
+          description: "Portworx cluster member(s) has(have) been down for
+            more than 5 minutes."
+          summary: Portworx cluster member(s) is(are) down.
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+  namespace: kube-system
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources:
+      - configmaps
+    verbs: ["get"]
+  - nonResourceURLs: ["/metrics", "/federate"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+  - kind: ServiceAccount
+    name: prometheus
+    namespace: kube-system
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus
+  namespace: kube-system
+spec:
+  replicas: 2
+  logLevel: debug
+  serviceAccountName: prometheus
+  alerting:
+    alertmanagers:
+      - namespace: kube-system
+        name: alertmanager-portworx
+        port: web
+  serviceMonitorSelector:
+    matchLabels:
+      name: portworx-prometheus-sm
+    namespaceSelector:
+      matchNames:
+        - kube-system
+    resources:
+      requests:
+        memory: 400Mi
+  ruleSelector:
+    matchLabels:
+      role: prometheus-portworx-rulefiles
+      prometheus: portworx
+    namespaceSelector:
+      matchNames:
+        - kube-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: kube-system
+spec:
+  type: NodePort
+  ports:
+    - name: web
+      nodePort: 30900
+      port: 9090
+      protocol: TCP
+      targetPort: web
+  selector:
+    prometheus: prometheus
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-dashboards
+  namespace: kube-system
+  labels:
+    role: grafana-dashboardfiles
+    grafana: portworx
+data:
+  cluster.json: |-
+    {  
+      "annotations":{  
+        "list":[  
+
+        ]
+      },
+      "editable":true,
+      "gnetId":null,
+      "graphTooltip":0,
+      "hideControls":false,
+      "id":1,
+      "links":[  
+
+      ],
+      "refresh":"1m",
+      "rows":[  
+        {  
+          "collapse":false,
+          "height":"150",
+          "panels":[  
+            {  
+              "cacheTimeout":null,
+              "colorBackground":true,
+              "colorValue":false,
+              "colors":[  
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "datasource":"prometheus",
+              "format":"none",
+              "gauge":{  
+                "maxValue":100,
+                "minValue":0,
+                "show":false,
+                "thresholdLabels":false,
+                "thresholdMarkers":true
+              },
+              "height":"50",
+              "hideTimeOverride":true,
+              "id":32,
+              "interval":null,
+              "links":[  
+
+              ],
+              "mappingType":2,
+              "mappingTypes":[  
+                {  
+                  "name":"value to text",
+                  "value":1
+                },
+                {  
+                  "name":"range to text",
+                  "value":2
+                }
+              ],
+              "maxDataPoints":100,
+              "nullPointMode":"connected",
+              "nullText":null,
+              "postfix":"",
+              "postfixFontSize":"50%",
+              "prefix":"",
+              "prefixFontSize":"50%",
+              "rangeMaps":[  
+                {  
+                  "from":"0",
+                  "text":"All members online",
+                  "to":"0"
+                },
+                {  
+                  "from":"1",
+                  "text":"Member offline",
+                  "to":"1"
+                },
+                {  
+                  "from":"2",
+                  "text":"Members offline",
+                  "to":"1000"
+                }
+              ],
+              "span":4,
+              "sparkline":{  
+                "fillColor":"rgba(31, 118, 189, 0.18)",
+                "full":false,
+                "lineColor":"rgb(31, 120, 193)",
+                "show":false
+              },
+              "tableColumn":"",
+              "targets":[  
+                {  
+                  "expr":"min(px_cluster_status_cluster_size)-min(px_cluster_status_storage_nodes_online)",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"",
+                  "metric":"px_cluster_status_cluster_quorum",
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "thresholds":"0.5,1",
+              "timeFrom":"1m",
+              "title":"",
+              "type":"singlestat",
+              "valueFontSize":"80%",
+              "valueMaps":[  
+                {  
+                  "op":"=",
+                  "text":"Member Offline",
+                  "value":"1"
+                },
+                {  
+                  "op":"=",
+                  "text":"All Members Online",
+                  "value":"0"
+                },
+                {  
+                  "op":"=",
+                  "text":"Members Offline",
+                  "value":"3"
+                }
+              ],
+              "valueName":"current"
+            },
+            {  
+              "cacheTimeout":null,
+              "colorBackground":false,
+              "colorValue":false,
+              "colors":[  
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "datasource":"prometheus",
+              "format":"none",
+              "gauge":{  
+                "maxValue":100,
+                "minValue":0,
+                "show":false,
+                "thresholdLabels":false,
+                "thresholdMarkers":true
+              },
+              "height":"50",
+              "hideTimeOverride":true,
+              "id":3,
+              "interval":null,
+              "links":[  
+
+              ],
+              "mappingType":1,
+              "mappingTypes":[  
+                {  
+                  "name":"value to text",
+                  "value":1
+                },
+                {  
+                  "name":"range to text",
+                  "value":2
+                }
+              ],
+              "maxDataPoints":100,
+              "nullPointMode":"connected",
+              "nullText":null,
+              "postfix":"",
+              "postfixFontSize":"50%",
+              "prefix":"",
+              "prefixFontSize":"50%",
+              "rangeMaps":[  
+                {  
+                  "from":"null",
+                  "text":"N/A",
+                  "to":"null"
+                }
+              ],
+              "span":2,
+              "sparkline":{  
+                "fillColor":"rgba(31, 118, 189, 0.18)",
+                "full":false,
+                "lineColor":"rgb(31, 120, 193)",
+                "show":false
+              },
+              "tableColumn":"",
+              "targets":[  
+                {  
+                  "expr":"min(px_cluster_status_cluster_size)",
+                  "intervalFactor":2,
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "thresholds":"",
+              "timeFrom":"1m",
+              "title":"Members",
+              "type":"singlestat",
+              "valueFontSize":"80%",
+              "valueMaps":[  
+                {  
+                  "op":"=",
+                  "text":"N/A",
+                  "value":"null"
+                }
+              ],
+              "valueName":"avg"
+            },
+            {  
+              "cacheTimeout":null,
+              "colorBackground":false,
+              "colorValue":false,
+              "colors":[  
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "datasource":"prometheus",
+              "format":"none",
+              "gauge":{  
+                "maxValue":100,
+                "minValue":0,
+                "show":false,
+                "thresholdLabels":false,
+                "thresholdMarkers":true
+              },
+              "height":"50",
+              "hideTimeOverride":true,
+              "id":4,
+              "interval":null,
+              "links":[  
+
+              ],
+              "mappingType":1,
+              "mappingTypes":[  
+                {  
+                  "name":"value to text",
+                  "value":1
+                },
+                {  
+                  "name":"range to text",
+                  "value":2
+                }
+              ],
+              "maxDataPoints":100,
+              "nullPointMode":"connected",
+              "nullText":null,
+              "postfix":"",
+              "postfixFontSize":"50%",
+              "prefix":"",
+              "prefixFontSize":"50%",
+              "rangeMaps":[  
+                {  
+                  "from":"null",
+                  "text":"N/A",
+                  "to":"null"
+                }
+              ],
+              "span":2,
+              "sparkline":{  
+                "fillColor":"rgba(31, 118, 189, 0.18)",
+                "full":false,
+                "lineColor":"rgb(31, 120, 193)",
+                "show":false
+              },
+              "tableColumn":"",
+              "targets":[  
+                {  
+                  "expr":"min(px_cluster_status_storage_nodes_online)",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "thresholds":"",
+              "timeFrom":"1m",
+              "title":"Storage Providers",
+              "type":"singlestat",
+              "valueFontSize":"80%",
+              "valueMaps":[  
+                {  
+                  "op":"=",
+                  "text":"N/A",
+                  "value":"null"
+                }
+              ],
+              "valueName":"avg"
+            },
+            {  
+              "cacheTimeout":null,
+              "colorBackground":true,
+              "colorValue":false,
+              "colors":[  
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "datasource":"prometheus",
+              "format":"short",
+              "gauge":{  
+                "maxValue":100,
+                "minValue":0,
+                "show":false,
+                "thresholdLabels":false,
+                "thresholdMarkers":true
+              },
+              "height":"50",
+              "hideTimeOverride":true,
+              "id":33,
+              "interval":null,
+              "links":[  
+
+              ],
+              "mappingType":2,
+              "mappingTypes":[  
+                {  
+                  "name":"value to text",
+                  "value":1
+                },
+                {  
+                  "name":"range to text",
+                  "value":2
+                }
+              ],
+              "maxDataPoints":100,
+              "nullPointMode":"connected",
+              "nullText":null,
+              "postfix":"",
+              "postfixFontSize":"50%",
+              "prefix":"",
+              "prefixFontSize":"50%",
+              "rangeMaps":[  
+                {  
+                  "from":"2",
+                  "text":"Quorum Unhealthy",
+                  "to":"1000"
+                },
+                {  
+                  "from":"",
+                  "text":"Quorum Healthy",
+                  "to":""
+                }
+              ],
+              "span":4,
+              "sparkline":{  
+                "fillColor":"rgba(31, 118, 189, 0.18)",
+                "full":false,
+                "lineColor":"rgb(31, 120, 193)",
+                "show":false
+              },
+              "tableColumn":"",
+              "targets":[  
+                {  
+                  "expr":"min(px_cluster_status_cluster_size)/count(px_cluster_status_cluster_quorum)",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "thresholds":"1.1,1.9",
+              "timeFrom":"1m",
+              "timeShift":null,
+              "title":"",
+              "type":"singlestat",
+              "valueFontSize":"80%",
+              "valueMaps":[  
+                {  
+                  "op":"=",
+                  "text":"Quorum Healthy",
+                  "value":"1"
+                },
+                {  
+                  "op":"=",
+                  "text":"Quorum Unhealthy",
+                  "value":"0"
+                }
+              ],
+              "valueName":"current"
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Portworx Cluster Status",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":"",
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"250",
+              "id":13,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "max":false,
+                "min":false,
+                "rightSide":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_cluster_cpu_percent",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}",
+                  "metric":"",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"CPU Usage",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"CPU usage",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"250",
+              "hideTimeOverride":false,
+              "id":14,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_cluster_memory_utilized_percent",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Memory Usage",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"Memory Usage",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Member Stats",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"",
+              "id":15,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_cluster_pendingio",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}",
+                  "refId":"A",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Pending IO",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"Pending IO",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"250",
+              "hideTimeOverride":false,
+              "id":17,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":false,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"(px_cluster_disk_utilized_bytes/px_cluster_disk_available_bytes)*100",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}",
+                  "refId":"A",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk Space Used",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"Bytes",
+                  "logBase":1,
+                  "max":null,
+                  "min":"1",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"",
+              "hideTimeOverride":false,
+              "id":18,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate(px_disk_stats_io_seconds[5m])",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{node}} - {{disk}}",
+                  "metric":"px_disk_stats_io_seconds",
+                  "refId":"A",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk Utilization",
+              "tooltip":{  
+                "shared":true,
+                "sort":2,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Dashboard Row",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"",
+              "id":21,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate(px_disk_stats_write_seconds[5m])",
+                  "format":"time_series",
+                  "intervalFactor":4,
+                  "legendFormat":"{{cluster}} - {{instance}}_write",
+                  "refId":"A",
+                  "step":40
+                },
+                {  
+                  "expr":"1-irate(px_disk_stats_read_seconds[5m]) ",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}_read",
+                  "refId":"B",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk IOs",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"IO/second read (-) / write (+)",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "height":"",
+              "id":20,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate(px_disk_stats_write_bytes[5m]) ",
+                  "format":"time_series",
+                  "intervalFactor":4,
+                  "legendFormat":"{{cluster}} - {{instance}}_write",
+                  "refId":"A",
+                  "step":40
+                },
+                {  
+                  "expr":"1-irate(px_disk_stats_read_bytes[5m])",
+                  "format":"time_series",
+                  "intervalFactor":4,
+                  "legendFormat":"{{cluster}} - {{instance}}_read",
+                  "refId":"B",
+                  "step":40
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk Throughput",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"bytes",
+                  "label":"Bytes/second read (-) / write (+)",
+                  "logBase":1,
+                  "max":null,
+                  "min":"0",
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":34,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "rightSide":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"null",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate(px_network_io_received_bytes[5m])",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}_received",
+                  "refId":"A",
+                  "step":20
+                },
+                {  
+                  "expr":"1-irate(px_network_io_bytessent[5m])",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{cluster}} - {{instance}}_sent",
+                  "refId":"B",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Network IOs",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"IO\\second received(+)\\sent(-)",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Disk Read Stats",
+          "titleSize":"h6"
+        }
+      ],
+      "schemaVersion":14,
+      "style":"dark",
+      "tags":[  
+
+      ],
+      "templating":{  
+        "list":[  
+          {  
+            "allValue":null,
+            "current":{  
+
+            },
+            "datasource":"prometheus",
+            "hide":0,
+            "includeAll":true,
+            "label":"Host",
+            "multi":true,
+            "name":"host",
+            "options":[  
+
+            ],
+            "query":"label_values(px_cluster_cpu_percent,host)",
+            "refresh":1,
+            "regex":"",
+            "sort":0,
+            "tagValuesQuery":"",
+            "tags":[  
+
+            ],
+            "tagsQuery":"",
+            "type":"query",
+            "useTags":false
+          }
+        ]
+      },
+      "time":{  
+        "from":"now-1h",
+        "to":"now"
+      },
+      "timepicker":{  
+        "refresh_intervals":[  
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ],
+        "time_options":[  
+          "5m",
+          "15m",
+          "1h",
+          "6h",
+          "12h",
+          "24h",
+          "2d",
+          "7d",
+          "30d"
+        ]
+      },
+      "timezone":"browser",
+      "title":"Portworx Cluster Status",
+      "version":2
+    }
+  volumes.json: |-
+    {  
+      "__inputs":[  
+        {  
+          "name":"prometheus",
+          "label":"prometheus",
+          "description":"",
+          "type":"datasource",
+          "pluginId":"prometheus",
+          "pluginName":"Prometheus"
+        }
+      ],
+      "__requires":[  
+        {  
+          "type":"grafana",
+          "id":"grafana",
+          "name":"Grafana",
+          "version":"5.0.0"
+        },
+        {  
+          "type":"panel",
+          "id":"graph",
+          "name":"Graph",
+          "version":""
+        },
+        {  
+          "type":"datasource",
+          "id":"prometheus",
+          "name":"Prometheus",
+          "version":"1.0.0"
+        },
+        {  
+          "type":"panel",
+          "id":"table",
+          "name":"Table",
+          "version":""
+        }
+      ],
+      "annotations":{  
+        "list":[  
+          {  
+            "builtIn":1,
+            "datasource":"-- Grafana --",
+            "enable":true,
+            "hide":true,
+            "iconColor":"rgba(0, 211, 255, 1)",
+            "name":"Annotations & Alerts",
+            "type":"dashboard"
+          }
+        ]
+      },
+      "editable":true,
+      "gnetId":null,
+      "graphTooltip":0,
+      "hideControls":false,
+      "id":null,
+      "links":[  
+
+      ],
+      "refresh":"1m",
+      "rows":[  
+        {  
+          "collapse":false,
+          "height":"50",
+          "panels":[  
+            {  
+              "columns":[  
+                {  
+                  "text":"Current",
+                  "value":"current"
+                }
+              ],
+              "datasource":"prometheus",
+              "filterNull":false,
+              "fontSize":"100%",
+              "hideTimeOverride":true,
+              "id":12,
+              "links":[  
+
+              ],
+              "pageSize":null,
+              "scroll":false,
+              "showHeader":true,
+              "sort":{  
+                "col":0,
+                "desc":true
+              },
+              "span":3,
+              "styles":[  
+
+              ],
+              "targets":[  
+                {  
+                  "expr":"px_volume_halevel",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "timeFrom":"1m",
+              "title":"Volume HA Level",
+              "transform":"timeseries_aggregations",
+              "type":"table"
+            },
+            {  
+              "columns":[  
+                {  
+                  "text":"Current",
+                  "value":"current"
+                }
+              ],
+              "datasource":"prometheus",
+              "filterNull":false,
+              "fontSize":"100%",
+              "hideTimeOverride":true,
+              "id":9,
+              "links":[  
+
+              ],
+              "minSpan":null,
+              "pageSize":null,
+              "scroll":true,
+              "showHeader":true,
+              "sort":{  
+                "col":0,
+                "desc":true
+              },
+              "span":6,
+              "styles":[  
+                {  
+                  "colorMode":null,
+                  "colors":[  
+                    "rgba(245, 54, 54, 0.9)",
+                    "rgba(237, 129, 40, 0.89)",
+                    "rgba(50, 172, 45, 0.97)"
+                  ],
+                  "dateFormat":"YYYY-MM-DD HH:mm:ss",
+                  "decimals":0,
+                  "pattern":"/.*/",
+                  "thresholds":[  
+
+                  ],
+                  "type":"number",
+                  "unit":"bytes"
+                }
+              ],
+              "targets":[  
+                {  
+                  "expr":"px_volume_capacity_bytes",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "timeFrom":"1m",
+              "title":"Volume Sizes",
+              "transform":"timeseries_aggregations",
+              "type":"table"
+            },
+            {  
+              "columns":[  
+                {  
+                  "text":"Current",
+                  "value":"current"
+                }
+              ],
+              "datasource":"prometheus",
+              "description":"",
+              "filterNull":false,
+              "fontSize":"100%",
+              "hideTimeOverride":true,
+              "id":23,
+              "links":[  
+
+              ],
+              "pageSize":null,
+              "scroll":false,
+              "showHeader":true,
+              "sort":{  
+                "col":0,
+                "desc":true
+              },
+              "span":3,
+              "styles":[  
+                {  
+                  "colorMode":"row",
+                  "colors":[  
+                    "rgba(50, 172, 45, 0.97)",
+                    "rgba(237, 129, 40, 0.89)",
+                    "rgba(245, 54, 54, 0.9)"
+                  ],
+                  "dateFormat":"YYYY-MM-DD HH:mm:ss",
+                  "decimals":0,
+                  "pattern":"Current",
+                  "thresholds":[  
+                    "60",
+                    "70"
+                  ],
+                  "type":"number",
+                  "unit":"percent"
+                }
+              ],
+              "targets":[  
+                {  
+                  "expr":"(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "timeFrom":"1m",
+              "title":"Volume Usage Status",
+              "transform":"timeseries_aggregations",
+              "type":"table"
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"PX Volume Info",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "hideTimeOverride":true,
+              "id":13,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":true,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":true,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_depth_io{volumeid=~\"$volumeid\"}",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":"1h",
+              "timeShift":null,
+              "title":"Volume IO Depth",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"none",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":19,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":false,
+                "current":true,
+                "hideEmpty":false,
+                "hideZero":false,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"(px_volume_usage_bytes/px_volume_capacity_bytes)*100",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume Space Usage",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Dashboard Row",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":15,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":false,
+                "hideZero":false,
+                "max":true,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_vol_read_latency_seconds{volumeid=~\"$volumeid\"}",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume Read Latency",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"s",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":25,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":false,
+                "hideZero":false,
+                "max":true,
+                "min":false,
+                "show":true,
+                "sort":"current",
+                "sortDesc":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_vol_write_latency_seconds{volumeid=~\"$volumeid\"}",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":10
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume Write Latency",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"s",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "hideTimeOverride":true,
+              "id":17,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":false,
+                "hideZero":false,
+                "max":false,
+                "min":false,
+                "show":true,
+                "sort":null,
+                "sortDesc":null,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"null",
+              "percentage":true,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":4,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate(px_volume_iops{volumeid=~\"$volumeid\"}[5m])",
+                  "intervalFactor":2,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":2
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":"1m",
+              "timeShift":null,
+              "title":"Volume Utilization",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"percent",
+                  "label":"",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":true,
+          "title":"Volume Latency Stats",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":28,
+              "legend":{  
+                "avg":false,
+                "current":false,
+                "max":false,
+                "min":false,
+                "show":true,
+                "total":false,
+                "values":false
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"null",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":12,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_iops",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{ volumename }}",
+                  "refId":"A"
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume IOPS",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"IOPS",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":false,
+          "title":"Dashboard Row",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":16,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":2,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_readthroughput{volumeid=~\"$volumeid\"}",
+                  "format":"time_series",
+                  "intervalFactor":4,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"B",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume Read Throughput",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"bytes",
+                  "label":"Bytes/second",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":29,
+              "legend":{  
+                "alignAsTable":true,
+                "avg":true,
+                "current":true,
+                "hideEmpty":true,
+                "hideZero":true,
+                "max":false,
+                "min":false,
+                "show":true,
+                "total":false,
+                "values":true
+              },
+              "lines":true,
+              "linewidth":2,
+              "links":[  
+
+              ],
+              "nullPointMode":"connected",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"px_volume_writethroughput{volumeid=~\"$volumeid\"} ",
+                  "format":"time_series",
+                  "intervalFactor":4,
+                  "legendFormat":"{{volumename}}",
+                  "refId":"A",
+                  "step":20
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Volume Write Throughput",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"bytes",
+                  "label":"Bytes/second",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":false
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":true,
+          "title":"Volume Throughput Stats",
+          "titleSize":"h6"
+        },
+        {  
+          "collapse":false,
+          "height":250,
+          "panels":[  
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":27,
+              "legend":{  
+                "avg":false,
+                "current":false,
+                "max":false,
+                "min":false,
+                "show":true,
+                "total":false,
+                "values":false
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"null",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate( px_disk_stats_read_bytes[5m] )",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{ disk }} - {{ host }} ",
+                  "refId":"A"
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk Read Rate",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"Bytes per Second",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            },
+            {  
+              "aliasColors":{  
+
+              },
+              "bars":false,
+              "dashLength":10,
+              "dashes":false,
+              "datasource":"prometheus",
+              "fill":1,
+              "id":26,
+              "legend":{  
+                "avg":false,
+                "current":false,
+                "max":false,
+                "min":false,
+                "show":true,
+                "total":false,
+                "values":false
+              },
+              "lines":true,
+              "linewidth":1,
+              "links":[  
+
+              ],
+              "nullPointMode":"null",
+              "percentage":false,
+              "pointradius":5,
+              "points":false,
+              "renderer":"flot",
+              "seriesOverrides":[  
+
+              ],
+              "spaceLength":10,
+              "span":6,
+              "stack":false,
+              "steppedLine":false,
+              "targets":[  
+                {  
+                  "expr":"irate( px_disk_stats_write_bytes[5m] )",
+                  "format":"time_series",
+                  "intervalFactor":2,
+                  "legendFormat":"{{ disk }} - {{ host }} ",
+                  "refId":"A"
+                }
+              ],
+              "thresholds":[  
+
+              ],
+              "timeFrom":null,
+              "timeShift":null,
+              "title":"Disk Write Rate",
+              "tooltip":{  
+                "shared":true,
+                "sort":0,
+                "value_type":"individual"
+              },
+              "type":"graph",
+              "xaxis":{  
+                "buckets":null,
+                "mode":"time",
+                "name":null,
+                "show":true,
+                "values":[  
+
+                ]
+              },
+              "yaxes":[  
+                {  
+                  "format":"short",
+                  "label":"Bytes per Second",
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                },
+                {  
+                  "format":"short",
+                  "label":null,
+                  "logBase":1,
+                  "max":null,
+                  "min":null,
+                  "show":true
+                }
+              ]
+            }
+          ],
+          "repeat":null,
+          "repeatIteration":null,
+          "repeatRowId":null,
+          "showTitle":true,
+          "title":"Disk Stats",
+          "titleSize":"h6"
+        }
+      ],
+      "schemaVersion":14,
+      "style":"dark",
+      "tags":[  
+
+      ],
+      "templating":{  
+        "list":[  
+          {  
+            "allValue":null,
+            "current":{  
+
+            },
+            "datasource":"prometheus",
+            "hide":0,
+            "includeAll":true,
+            "label":"VolumeID",
+            "multi":true,
+            "name":"volumeid",
+            "options":[  
+
+            ],
+            "query":"label_values(px_volume_usage_bytes,volumeid)",
+            "refresh":1,
+            "regex":"",
+            "sort":0,
+            "tagValuesQuery":"",
+            "tags":[  
+
+            ],
+            "tagsQuery":"",
+            "type":"query",
+            "useTags":false
+          }
+        ]
+      },
+      "time":{  
+        "from":"now-1h",
+        "to":"now"
+      },
+      "timepicker":{  
+        "refresh_intervals":[  
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ],
+        "time_options":[  
+          "5m",
+          "15m",
+          "1h",
+          "6h",
+          "12h",
+          "24h",
+          "2d",
+          "7d",
+          "30d"
+        ]
+      },
+      "timezone":"browser",
+      "title":"Portworx Volume Status",
+      "version":2
+    }
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-source-config
+  namespace: kube-system
+  labels:
+    role: grafana-source-configfiles
+    grafana: portworx
+data:
+  datasource.yml: |-
+    # config file version
+    apiVersion: 1
+    # list of datasources that should be deleted from the database
+    deleteDatasources:
+      - name: prometheus
+        orgId: 1
+    # list of datasources to insert/update depending
+    # whats available in the database
+    datasources:
+      # <string, required> name of the datasource. Required
+    - name: prometheus
+      # <string, required> datasource type. Required
+      type: prometheus
+      # <string, required> access mode. direct or proxy. Required
+      access: proxy
+      # <int> org id. will default to orgId 1 if not specified
+      orgId: 1
+      # <string> url
+      url: http://prometheus:9090
+      # <string> database password, if used
+      password:
+      # <string> database user, if used
+      user:
+      # <string> database name, if used
+      database:
+      # <bool> enable/disable basic auth
+      basicAuth: true
+      # <string> basic auth username
+      basicAuthUser: admin
+      # <string> basic auth password
+      basicAuthPassword: foobar
+      # <bool> enable/disable with credentials headers
+      withCredentials:
+      # <bool> mark as default datasource. Max one per org
+      isDefault:
+      # <map> fields that will be converted to json and stored in json_data
+      jsonData:
+        graphiteVersion: "1.1"
+        tlsAuth: false
+        tlsAuthWithCACert: false
+      # <string> json object of data that will be encrypted.
+      secureJsonData:
+        tlsCACert: "..."
+        tlsClientCert: "..."
+        tlsClientKey: "..."
+      version: 1
+      # <bool> allow users to edit datasources from the UI.
+      editable: true
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-dashboard-config
+  namespace: kube-system
+  labels:
+    role: grafana-dashboard-configfiles
+    grafana: portworx
+data:
+  dashboards.yml: |-
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: false
+      options:
+        path: /var/lib/grafana/dashboards
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30950
+  selector:
+    app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: kube-system
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: grafana/grafana
+          name: grafana
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+          volumeMounts:
+            - name: grafana-dash-config
+              mountPath: /etc/grafana/provisioning/dashboards
+            - name: dashboard-templates
+              mountPath: /var/lib/grafana/dashboards
+            - name: grafana-source-config
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: grafana-source-config
+          configMap:
+            name: grafana-source-config
+        - name: grafana-dash-config
+          configMap:
+            name: grafana-dashboard-config
+        - name: dashboard-templates
+          configMap:
+            name: grafana-dashboards
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: px-lh-account
+  namespace: kube-system
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-lh-role
+  namespace: kube-system
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "create", "update"]
+  - apiGroups: [""]
+    resources: ["nodes", "services"]
+    verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-lh-role-binding
+  namespace: kube-system
+subjects:
+  - kind: ServiceAccount
+    name: px-lh-account
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: px-lh-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: px-lighthouse
+  namespace: kube-system
+  labels:
+    tier: px-web-console
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      nodePort: 32678
+    - name: https
+      port: 443
+      nodePort: 32679
+  selector:
+    tier: px-web-console
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: px-lighthouse
+  namespace: kube-system
+  labels:
+    tier: px-web-console
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      tier: px-web-console
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        tier: px-web-console
+    spec:
+      initContainers:
+        - name: config-init
+          image: paultheunis/lh-config-sync
+          imagePullPolicy: Always
+          args:
+            - "init"
+          volumeMounts:
+            - name: config
+              mountPath: /config/lh
+      containers:
+        - name: px-lighthouse
+          image: portworx/px-lighthouse:1.5.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          volumeMounts:
+            - name: config
+              mountPath: /config/lh
+        - name: config-sync
+          image: paultheunis/lh-config-sync
+          imagePullPolicy: Always
+          args:
+            - "sync"
+          volumeMounts:
+            - name: config
+              mountPath: /config/lh
+      serviceAccountName: px-lh-account
+      volumes:
+        - name: config
+          emptyDir: {}

@@ -1,0 +1,5 @@
+- job_name: "pxc_prometheus"
+  honor_labels: true
+  metrics_path: "/federate"
+  static_configs:
+    - targets: ["<cluster_external_ip>:<cluster_prometheus_endport>"]
