@@ -35,7 +35,7 @@ Any PX Volume backup can be restored to a PX Volume in the cluster. The restored
 Performing cloud backups of a PX Volume is available via `pxctl cloudsnap` command. This command has the following operations available for the full lifecycle management of cloud backups.
 
 ```
-# pxctl cloudsnap
+# /opt/pwx/bin/pxctl cloudsnap --help
 NAME:
    pxctl cloudsnap - Backup and restore snapshots to/from cloud
 
@@ -43,12 +43,15 @@ USAGE:
    pxctl cloudsnap command [command options] [arguments...]
 
 COMMANDS:
-     backup, b          Backup a snapshot to cloud
-     restore, r         Restore volume to a cloud snapshot
-     list, l            List snapshot in cloud
-     status, s          Report status of active backups/restores
-     schedule, sc       Update cloud-snap schedule
-     catalog, t         Display catalog for the backup in cloud
+     backup, b         Backup a snapshot to cloud
+     restore, r        Restore volume to a cloud snapshot
+     list, l           List snapshot in cloud
+     status, s         Report status of active backups/restores
+     history, h        Show history of cloudsnap operations
+     stop, st          stop an active backup/restore
+     schedules, sched  Manage schedules for cloud-snaps
+     catalog, t        Display catalog for the backup in cloud
+     delete, d         Delete a cloudsnap from the objectstore. This is not reversible.
 
 OPTIONS:
    --help, -h  show help
