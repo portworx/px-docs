@@ -90,7 +90,7 @@ spec:
              "-x", "kubernetes",
              # CHANGEME size from 100 to size in GB of the drive you want on each node
              "-s", "size=100,type=zeroedthick",
-             -ca", "/etc/pwx/etcdcerts/etcd-ca.crt", "-cert", "/etc/pwx/etcdcerts/etcd.crt", "-key", "/etc/pwx/etcdcerts/etcd.key" ]
+             "-ca", "/etc/pwx/etcdcerts/etcd-ca.crt", "-cert", "/etc/pwx/etcdcerts/etcd.crt", "-key", "/etc/pwx/etcdcerts/etcd.key" ]
           env:
             - name: "PX_TEMPLATE_VERSION"
               value: "v2"
