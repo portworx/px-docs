@@ -12,6 +12,14 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+## 1.6.1.4 
+
+This is a minor patch release with the following fixex/enhancements.
+
+* PWX-6655 - Fix to allow storageless nodes to reuse their node ids in k8s
+* PWX-6410 - Fix a bug where PX may detach unused loopback devices that are not owned by PX on restarts.
+* PWX-6713 - Allow update of per volume queue depth
+
 ## 1.6.1.3
 
 This is a minor patch release with the following fixex/enhancements.
