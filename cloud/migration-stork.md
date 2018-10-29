@@ -16,9 +16,21 @@ each running a Portworx cluster.
 * Make sure you have configured a [secret store](https://docs.portworx.com/secrets/) on both your clusters. This will be used to store the credentials for the 
 objectstore.
 * Download storkctl to a system that has access to kubectl:
-  * [Linux](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/linux/storkctl)
-  * [Mac](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/darwin/storkctl)
-  * [Windows](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/windows/storkctl.exe)
+  * Linux:
+  ```bash
+  curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/linux/storkctl -o storkctl &&
+  sudo mv storkctl /usr/local/bin &&
+  sudo chmod +x /usr/local/bin/storkctl
+  ```
+  * OS X:
+  ```bash
+  curl http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/darwin/storkctl -o storkctl &&
+  sudo mv storkctl /usr/local/bin &&
+  sudo chmod +x /usr/local/bin/storkctl
+  ```
+  * Windows:
+    * Download [storkctl.exe](http://openstorage-stork.s3-website-us-east-1.amazonaws.com/storkctl/latest/windows/storkctl.exe)
+    * Move `storkctl.exe` to a directory in your PATH
 
 ## Pairing clusters
 On Kubernetes the cluster pairs can be created using custom objects managed by stork. This creates a pairing with the storage
