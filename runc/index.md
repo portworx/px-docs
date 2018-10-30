@@ -148,6 +148,12 @@ Inspect the mounts so these can be provided to the runC installer.
         "Source": "/var/lib/kubelet",
         "Type": "bind"
     },
+
+# Alternatively, one can use 'jq' and 'egrep' to filter out the "standard" Portworx mounts,
+# and leave only your custom mounts (if any)
+sudo docker inspect px-enterprise | \
+  jq -c '.[].Mounts[]|{s:.Source,d:.Destination,m:.Mode}|join(":")' | \
+  egrep -v "/dev:|/proc:|/sys:|/etc/pwx:|:/export_bin|/docker/plugins:|/usr/src:|/lib/modules:|/var/cores:|/var/lib/osd:|/docker.sock:"
 ```
 
 Step 3: Install the PX OCI bundle
