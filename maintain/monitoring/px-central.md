@@ -28,6 +28,7 @@ If your cluster has less than 20 nodes we recommend using this setup. Otherwise 
 2. Download the single-cluster [spec](/k8s-samples/pxm/singlecluster.yaml).
 
 3. Replace `<unique id>` in the command given below
+   
    `CLUSTER_ID=<unique id> envsubst < singlecluster.yaml | kubectl apply -f -`
 
 You will now have the following:
@@ -64,6 +65,7 @@ If not consider using the [single cluster installation](/maintain/monitoring/px-
    a. replace `<clusterid>` with the desired clustername
 
 4. Replace `<unique id>` in the command given below
+   
    `CLUSTER_ID=<unique id> envsubst < multicluster.yaml | kubectl apply -f -`
 
 You will now have the following:
