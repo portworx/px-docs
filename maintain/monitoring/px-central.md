@@ -13,6 +13,8 @@ meta-description: "Find out how to install the full monitoring stack including, 
 
 - This page assumes you will be using the `internal-etcd` feature.
 - It also assumes that you have a K8S cluster running
+- Have the Prometheus Operator [spec](/k8s-samples/pxm/operator.yaml) installed.
+  `kubectl apply -f operator.yaml`
 
 ## Single Cluster Installation
 
@@ -25,7 +27,8 @@ If your cluster has less than 20 nodes we recommend using this setup. Otherwise 
 
 2. Download the single-cluster [spec](/k8s-samples/pxm/singlecluster.yaml).
 
-3. `CLUSTER_ID=px-cluster-$(uuidgen) envsubst < singlecluster.yaml | kubectl apply -f -`
+3. Replace `<unique id>` in the command given below
+   `CLUSTER_ID=<unique id> envsubst < singlecluster.yaml | kubectl apply -f -`
 
 You will now have the following:
 
@@ -60,7 +63,8 @@ If not consider using the [single cluster installation](/maintain/monitoring/px-
 3. Download the multi-cluster [spec](/k8s-samples/pxm/multicluster.yaml).
    a. replace `<clusterid>` with the desired clustername
 
-4. `CLUSTER_ID=px-cluster-$(uuidgen) envsubst < multicluster.yaml | kubectl apply -f -`
+4. Replace `<unique id>` in the command given below
+   `CLUSTER_ID=<unique id> envsubst < multicluster.yaml | kubectl apply -f -`
 
 You will now have the following:
 
@@ -70,11 +74,10 @@ You will now have the following:
 - 1 `Lighthouse` Instance
 - 1 `AlertManager` instance
 
-- `Prometheus` will scrape the `Prometheus` nodes configured in `prometheus-additional.yaml`
-- `AlertManager` will report issues based on our given rules -`Grafana` will use `Prometheus` as it’s datasource and has pre-baked dashboards
 - `Lighthouse` will watch the portworx cluster and has `Grafana` and `Prometheus` available out-of-the-box as links on the overview page.
-
-Finally go to `Lighthouse`, login with `admin/Password1` and the cluster should be visible.
+- `Prometheus` will scrape the nodes
+- `AlertManager` will report issues based on our given rules
+- `Grafana` will use `Prometheus` as it’s datasource and has pre-baked dashboards
 
 In order to have `Lighthouse` manage more than 1 cluster, add them with the `add cluster` option
 Provide an external ip and nodeport for the other cluster.
