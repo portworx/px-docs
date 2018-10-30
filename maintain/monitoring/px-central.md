@@ -70,13 +70,14 @@ If not consider using the [single cluster installation](/maintain/monitoring/px-
 
 You will now have the following:
 
-- 3 Node `Portworx` Cluster
+- a `Portworx` Cluster
 - 1 `Grafana` Instance
 - 1 `Prometheus` Instance
 - 1 `Lighthouse` Instance
 - 1 `AlertManager` instance
 
-- `Lighthouse` will watch the portworx cluster and has `Grafana` and `Prometheus` available out-of-the-box as links on the overview page.
+Visit `Lighthouse` on `http://<master_ip>:32678`, login with `admin/Password1` and the cluster should be visible.
+
 - `Prometheus` will scrape the nodes
 - `AlertManager` will report issues based on our given rules
 - `Grafana` will use `Prometheus` as it’s datasource and has pre-baked dashboards
