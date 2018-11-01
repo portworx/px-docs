@@ -2057,7 +2057,7 @@ data:
             "options":[  
 
             ],
-            "query":"label_values(px_cluster_cpu_percent,host)",
+            "query":"label_values(px_cluster_cpu_percent,instance)",
             "refresh":1,
             "regex":"",
             "sort":0,
