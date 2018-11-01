@@ -14,12 +14,25 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### 1.7.0 (Staging)
 
-* IKS (IBM Kubernetes Service Support)
+### Key Features and Enhancements
+
+* IBM Kubernetes Service (IKS) Support
 * IBM Key Protect Support for Encrypted Volumes
 * Containerd runtime Interface (CRI) support
 * Automatic VM Datastore provisioning for CentOS ESXi VMs
-* Tiered Snapshots for managing volume snapshots on only lower cost media
+* Tiered Snapshots for storing volume snapshots on only lower cost media
 * Encryption support for shared volumes
+
+### Key Fixes
+
+* PWX-6616 - [torpedo] nginx pod has fuse volume mounted with chattred host path
+* PWX-6551 - px_volume_read_bytes and px_volume_written_bytes are not available in 1.6.2
+* PWX-6479 - Debian 8: PX fails to come up if sharedv4 is enabled
+* PWX-6560 - [torpedo] PVC creation fails with "Already exists" perpetually
+* PWX-6527 - [torpedo] PX left orphaned volume paths
+* PWX-6425 - Cloudnsap schedule option to do full backup always.
+* PWX-6408 - Node alerts: Include hostname/IP in addition to node id
+* PWX-5963 - Report volumes with no snapshots
 
 
 ## 1.6.1.4 
