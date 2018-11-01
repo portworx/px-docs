@@ -415,7 +415,7 @@ spec:
             - name: "PX_TEMPLATE_VERSION"
               value: "v4"
             - name: "PX_IMAGE"
-              value: "portworx/px-enterprise:1.6.1.3"
+              value: "portworx/px-enterprise:2.0.0-rc1"
           livenessProbe:
             periodSeconds: 30
             initialDelaySeconds: 840 # allow image pull in slow networks
