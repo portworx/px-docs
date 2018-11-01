@@ -20,7 +20,6 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * Automatic VM Datastore provisioning for CentOS ESXi VMs
 * Tiered Snapshots for managing volume snapshots on only lower cost media
 * Encryption support for shared volumes
-* Retain kubernetes nodeid in the case of KOPS/Autoscaling groups across node reboots
 
 
 ## 1.6.1.4 
