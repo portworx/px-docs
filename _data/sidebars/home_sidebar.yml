@@ -377,6 +377,8 @@
       url: /secrets/portworx-with-kubernetes-secrets.html
     - title: Portworx with DC/OS Secrets
       url: /secrets/portworx-with-dcos-secrets.html
+    - title: Portworx with IBM Key Protect
+      url: /secrets/portworx-with-ibm-kp.html
   - title: Lighthouse
     folderitems:
     # - title: Install Lighthouse

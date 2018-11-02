@@ -9,10 +9,23 @@ meta-description: "Looking to use a encrypted volume with Kubernetes? Follow thi
 * TOC
 {:toc}
 
-This document describes how to provision an encrypted volume using Kubernetes and Portworx. For more information on encryption refer the [Encrypted Volumes page](/manage/encrypted-volumes.html).
+{% include secrets/intro.md %}
 
-Before you start using PVC encryption, you need to setup a secrets provider to store your secret keys and configure Portworx to use it. Refer the [Setup Secrets Provider](/secrets) page for more details on configuring various secret providers with Portworx.
+Based on your configured secret provider select one of the following volume encryption guides:
 
-There are a couple of ways you can create an encrypted Portworx volume in Kubernetes:
+### Kubernetes Secrets
+
 1. [Encryption using StorageClass](/scheduler/kubernetes/storage-class-encryption.html)
 2. [Encryption using PVC](/scheduler/kubernetes/pvc-encryption.html)
+
+### Vault
+
+[Encrypting PVCs with Vault](/scheduler/kubernetes/encrypted-pvc-vault.html)
+
+### AWS KMS
+
+[Encrypting PVCs with AWS KMS](/scheduler/kubernetes/encrypted-pvc-awskms.html)
+
+### IBM Key Protect
+
+[Encrypting PVCs with IBM Key Protect](/scheduler/kubernetes/encrypted-pvc-ibm-kp.html)
