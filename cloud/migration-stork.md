@@ -115,14 +115,59 @@ status:
   schedulerStatus: ""
   storageStatus: ""
 ```
-5. Once you apply the above spec you should be able to check the status of the pairing. On a successful pairing, you should 
+5. (EKS Only) When pairing with an EKS cluster, you also need to pass in your
+   AWS credentials which will be used to generate the IAM token. This can be
+   achieved in 2 ways
+   1. Create a secret and mount in the stork deployment (Secure)
+       1. Create a secret in kube-system namespace with your aws credentials file:
+       ```
+       $ kubectl create secret  generic --from-file=$HOME/.aws/credentials -n  kube-system aws-creds
+       secret/aws-creds created
+       ```
+       2. Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates.
+
+         Add the following under spec.template.spec:
+         ```
+           volumes:
+            - name: aws-creds
+              secret:
+                secretName: aws-creds
+         ```
+         Add the following under spec.template.spec.containers
+         ```
+            volumeMounts:
+              - mountPath: /root/.aws/
+                name: aws-creds
+                readOnly: true
+         ```
+   2. Add environment variable to the client authentication spec (Non-secure)
+
+      If you are pairing to an EKS cluster, the generated clusterpair spec will have a section for
+      performing client authentication using the `aws-iam-authenticator`. You can pass in your AWS
+      credentials through environment variables in this spec.
+      An updated spec would look like the following
+      ```
+      exec:
+        apiVersion: client.authentication.k8s.io/v1alpha1
+        env:
+        - name: "AWS_ACCESS_KEY"
+          value: "<your_access_key>
+        - name: "AWS_SECRET_ACCESS_KEY"
+          value: "<your_secret_key>"
+        args:
+        - token
+        - -i
+        - demo-ryan-cluster2
+        command: aws-iam-authenticator
+      ```
+6. Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
 see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl
 ```
 $ storkctl get clusterpair
 NAME            STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotepair      Ready            Ready              26 Oct 18 03:11 UTC
 ```
-6. If the status is in error state you can describe the clusterpair to get more information
+7. If the status is in error state you can describe the clusterpair to get more information
 ```
 $ kubectl describe clusterpair remotepair
 ```
