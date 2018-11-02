@@ -35,6 +35,9 @@ You can use them to filter the output of the `pxctl volume list` command.
 
 There is an implementation limit of 64 snapshots per volume.
 
+If a volume replica is on a pool which has a label "no_snapshot" with any value, snapshot will not be created for that replica
+(version 1.7 and later)
+
 ### Listing Snapshots
 
 {% include pxctl/volume/volume-list-help-1.3.md %}
