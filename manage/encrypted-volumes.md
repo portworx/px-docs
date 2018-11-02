@@ -63,3 +63,46 @@ Volume successfully created: 374663852714325215
 ```
 
 __Important: Make sure secret `key1` exists in the secret endpoint__
+
+## Encrypted Shared Volumes
+
+Encrypted shared volume allows access from multiple nodes to the same
+encrypted volume.
+
+Shared flag can be set while creating the encrypted volume using `--shared`
+It can also be enabled or disabled during run-time using `--shared on/off`.
+Volume must be in detached state to toggle shared flag during run-time.
+
+Portworx cluster must be authenticated to access secret store for
+the encryption keys.
+Both cluster wide and per volume secrets are supported. For example, using
+cluster wide secret key:
+
+```
+# pxctl volume create --shared --secure --size 10 encrypted_volume
+Encrypted Shared volume successfully created: 77957787758406722
+# pxctl volume inspect encrypted_volume
+Volume	:  77957787758406722
+Name            	 :  encrypted_volume
+Size            	 :  10 GiB
+Format          	 :  ext4
+HA              	 :  1
+IO Priority     	 :  LOW
+Creation time   	 :  Nov 1 17:22:59 UTC 2018
+Shared          	 :  yes
+Status          	 :  up
+State           	 :  detached
+Attributes      	 :  encrypted
+Reads           	 :  0
+Reads MS        	 :  0
+Bytes Read      	 :  0
+Writes          	 :  0
+Writes MS       	 :  0
+Bytes Written   	 :  0
+IOs in progress 	 :  0
+Bytes used      	 :  131 MiB
+Replica sets on nodes:
+	Set 0
+		Node 		 : 70.0.18.11 (Pool 0)
+Replication Status	 :  Detached
+```
