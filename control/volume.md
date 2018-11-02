@@ -47,6 +47,18 @@ OPTIONS:
    --best_effort_location_provisioning           requested nodes, zones, racks are optional
 ```
 
+**In Version 1.6**
+
+Version 1.6 allows user to specify a per volume queue depth setting during create. Older volumes retain their queue depth of 128 while the new default is set to 32. Also available 
+is the ability to turn off discard support for volumes. When used, volume is mounted with discard turned off which prevent the FS from releasing space back to the underlying storage.
+By default discard support is always on.
+
+```
+OPTIONS:
+   --queue_depth value, -q value                 block device queue depth [1..256] (default: 32)
+   --nodiscard                                   Disable discard support for this volume
+
+```
 Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --size=10 --repl=3
