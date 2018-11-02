@@ -71,15 +71,15 @@ encrypted volume.
 
 Shared flag can be set while creating the encrypted volume using `--shared`
 It can also be enabled or disabled during run-time using `--shared on/off`.
-Volume must be in detached to state to enable shared flag on during run-time.
+Volume must be in detached state to toggle shared flag during run-time.
 
-All nodes in the cluster must be authenticated to access secret store for
+Portworx cluster must be authenticated to access secret store for
 the encryption keys.
 Both cluster wide and per volume secrets are supported. For example, using
-cluster wide secret key;
+cluster wide secret key:
 
 ```
-#pxctl volume create --shared --secure --size 10 encrypted_volume
+# pxctl volume create --shared --secure --size 10 encrypted_volume
 Encrypted Shared volume successfully created: 77957787758406722
 # pxctl volume inspect encrypted_volume
 Volume	:  77957787758406722
@@ -104,6 +104,5 @@ Bytes used      	 :  131 MiB
 Replica sets on nodes:
 	Set 0
 		Node 		 : 70.0.18.11 (Pool 0)
-eplication Status	 :  Detached
-#
+Replication Status	 :  Detached
 ```
