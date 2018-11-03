@@ -1,4 +1,4 @@
-Cluster wide secret key is basically a key value pair where the value part is the secret that is used as a passphrase for encrypting volumes. A cluster wide secret key is a common key that can be used to encrypt all the volumes.
+Cluster wide secret key is basically a key value pair where the value part is the secret that is used as a passphrase for encrypting volumes. A cluster wide secret key is the default key that can be used to encrypt all the volumes.
 
 To create a volume using a cluster wide secret key run the following command
 
@@ -10,7 +10,7 @@ ID	      	     		NAME		SIZE	HA SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 822124500500459627	 encrypted_volume	10 GiB	1    no yes		LOW		1	up - detached
 ```
 
-To create a **shared encrypted** volume run the followin command
+To create a **shared encrypted** volume using the cluster wide secret key run the following command
 
 ```
 # /opt/pwx/bin/pxctl volume create --shared --secure --size 10 encrypted_volume
@@ -26,4 +26,4 @@ Volume successfully attached at: /dev/mapper/pxd-enc822124500500459627
 Volume encrypted_volume successfully mounted at /mnt
 ```
 
-When using cluster wide secret keys, the secret key does not need to be provided in any of the commands. When no secret key is provided in the pxctl volume commands, PX defaults to using the cluster wide secret key **if set**
+When using cluster wide secret key, the secret key does not need to be provided in any of the commands. When no secret key is provided in the pxctl volume commands, PX defaults to using the cluster wide secret key **if set**

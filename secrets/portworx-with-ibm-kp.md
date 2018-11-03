@@ -131,6 +131,8 @@ After ensuring the `portworx` namespace and the required permissions are present
 }
 ```
 
+Once the `/etc/pwx/config.json` is updated, restart PX for the changes to take effect.
+
 ##### Step 2c: Edit the Portworx Daemonset
 
 Edit the Portworx daemonset `secret_type` field to `ibm-kp`, so that all the new Portworx nodes will also start using IBM Key Protect. There is no need to change the *config.json* for the new nodes if the daemonset is edited

@@ -1,14 +1,14 @@
-For encrypting volumes using specific secret keys, you need to provide that key for every create and attach commands.
+For encrypting volumes using specific secret keys, you need to provide that key for every create and attach command.
 
-To create an **encrypted** volume using a specific secret through pxctl, run the following command
+To create an **encrypted** volume using a specific secret through Portworx CLI, run the following command
 
 ```
 # /opt/pwx/bin/pxctl volume create --secure --secret_key key1 enc_vol
-Volume successfully created: 374663852714325215
+Encrypted volume successfully created: 374663852714325215
 
 ```
 
-To create a **shared encrypted** volume run the followin command
+To create a **shared encrypted** volume run the following command
 
 ```
 # /opt/pwx/bin/pxctl volume create --shared --secret_key key1 --secure --size 10 enc_shared_vol
@@ -33,6 +33,5 @@ To attach and mount an encrypted volume through docker, run the following comman
 
 ```
 # docker run --rm -it -v secure=true,secret_key=key1,name=enc_vol:/mnt busybox
-/ #
 
 ```

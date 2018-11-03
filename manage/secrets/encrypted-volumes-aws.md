@@ -18,7 +18,7 @@ Follow [this](/secrets/portworx-with-aws-kms.html#key-generation-with-aws-kms) g
 
 {% include secrets/per-volume-secret.md %}
 
-__Important: Make sure secret `key1` was generated using the pxctl aws kms helper commands__
+__Important: Make sure secret `key1` was generated using the pxctl AWS KMS helper commands__
 
 ### Using cluster wide secret key
 

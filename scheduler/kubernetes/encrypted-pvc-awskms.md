@@ -10,9 +10,7 @@ meta-description: "This guide is a step-by-step tutorial on how to provision enc
 
 >**Note:**<br/>Supported from PX Enterprise 1.4 onwards
 
-There are two way in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
-
-There are two way in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
+There are two ways in which Portworx volumes can be encrypted and are dependent on how a secret passphrase is provided to PX.
 
 ### Encryption using Storage Class
 
@@ -36,4 +34,4 @@ In this method, each PVC can be encrypted with its own secret key.
 
 {% include /secrets/k8s/other-providers-pvc-encryption.md  %}
 
-__Important: Make sure secret `your_secret_key` was generated using the pxctl aws kms helper commands__
+__Important: Make sure secret `your_secret_key` was generated using the pxctl AWS KMS helper commands__
