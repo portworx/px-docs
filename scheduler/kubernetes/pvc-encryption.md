@@ -106,22 +106,3 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
-#### Other secrets provider
-Other secrets providers like Vault, AWS KMS, DC/OS, etc do not have namespaces. Hence, you need only `px/secret-name` annotation to specify the key to be used for encryption.
-```yaml
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: secure-mysql-pvc
-  annotations:
-    px/secret-name: your-secret-key
-spec:
-  storageClassName: portworx-sc
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
-```
-Portworx will look for `your-secret-key` in the secret store and use it's value to encrypt the above PVC.
