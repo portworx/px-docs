@@ -5,9 +5,10 @@ on your host system:
 ```bash
 # Uncomment appropriate `REL` below to select desired Portworx release
 REL=""          # DEFAULT portworx release
-#REL="/1.4"     # 1.4 portworx release
-#REL="/1.5"     # 1.5 portworx release
+#REL="/1.7"     # 1.7 portworx release
 #REL="/1.6"     # 1.6 portworx release
+#REL="/1.5"     # 1.5 portworx release
+#REL="/1.4"     # 1.4 portworx release
 
 latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false" | awk '/image: / {print $2}')
 

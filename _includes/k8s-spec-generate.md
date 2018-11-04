@@ -3,6 +3,7 @@
 To generate the spec file, head on to the below URLs for the PX release you wish to use.
 
 * [Default](https://install.portworx.com).
+* [1.7 Stable](https://install.portworx.com/1.7/).
 * [1.6 Stable](https://install.portworx.com/1.6/).
 * [1.5 Stable](https://install.portworx.com/1.5/).
 * [1.4 Stable](https://install.portworx.com/1.4/).

@@ -22,11 +22,13 @@
     folderitems:
     - title: Kubernetes
       folderitems:
+      - title: Portworx on Kubernetes
+        url: /scheduler/kubernetes/index.html
       - title: Install
         folderitems:
         - title: Openshift
           url: /scheduler/kubernetes/openshift-install.html
-        - title: AWS (Amazon Web Services)
+        - title: Amazon Web Services (AWS)
           folderitems:
           - title: Kubernetes Operations (KOPS)
             url: /cloud/aws/kops-asg.html
@@ -46,6 +48,8 @@
           url: /scheduler/mesosphere-dcos/kubernetes.html
         - title: Kubernetes on PKS
           url: /scheduler/kubernetes/install-pks.html
+        - title: IBM Kubernetes Service (IKS)
+          url: /cloud/ibm/ibm-cloud-iks.html
         - title: Kubernetes (Other)
           url: /scheduler/kubernetes/install.html
       - title: Interactive tutorials

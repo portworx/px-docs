@@ -8,7 +8,7 @@ sidebar: home_sidebar
 * TOC
 {:toc}
 
-[CSI](https://kubernetes-csi.github.io/), or _Container Storage Interface_, is
+The [Container Storage Interface (CSI)](https://kubernetes-csi.github.io/) is
 the new model for integrating storage system service with Kubernetes and other
 orchestration systems. Kubernetes has had support for CSI since 1.10 as beta.
 
@@ -23,8 +23,8 @@ Note, that currently this deployment mode is available only as a _Tech Preview_ 
 ## Install
 
 ### Install using the Portworx spec generator
-When installing Portworx through [install.portworx.com/1.4](https://install.portworx.com/1.4)
-you can select CSI as the model to use for deployment.
+When installing Portworx through [install.portworx.com](https://install.portworx.com/)
+you can select CSI as the model to use for deployment (see "Customize" tab, "Advanced Settings" and "Enable CSI").
 
 If you are using [curl to fetch the Portworx
 spec](https://docs.portworx.com/scheduler/kubernetes/px-k8s-spec-curl.html), you can add
