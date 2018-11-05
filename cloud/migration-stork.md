@@ -157,7 +157,7 @@ status:
         args:
         - token
         - -i
-        - demo-ryan-cluster2
+        - demo-destination-cluster
         command: aws-iam-authenticator
       ```
 6. Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
