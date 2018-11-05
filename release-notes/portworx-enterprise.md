@@ -12,7 +12,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-### 1.7.0 (Staging)
+### 1.7.0
 
 ### Key Features and Enhancements
 
@@ -25,11 +25,11 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### Key Fixes
 
-* PWX-6616 - [torpedo] nginx pod has fuse volume mounted with chattred host path
+* PWX-6616 - Fix shared volume mounts going readonly kubernetes in few corner cases
 * PWX-6551 - px_volume_read_bytes and px_volume_written_bytes are not available in 1.6.2
 * PWX-6479 - Debian 8: PX fails to come up if sharedv4 is enabled
-* PWX-6560 - [torpedo] PVC creation fails with "Already exists" perpetually
-* PWX-6527 - [torpedo] PX left orphaned volume paths
+* PWX-6560 - PVC creation fails with "Already exists" perpetually 
+* PWX-6527 - Clean up orphaned volume paths as PVC are attached and detached over a period of time
 * PWX-6425 - Cloudnsap schedule option to do full backup always.
 * PWX-6408 - Node alerts: Include hostname/IP in addition to node id
 * PWX-5963 - Report volumes with no snapshots
