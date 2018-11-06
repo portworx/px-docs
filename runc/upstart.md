@@ -28,7 +28,7 @@ For more information about Portworx installation, please see [docs.portworx.com/
 or _Mesosphere DC/OS_.  If you require such integration, please contact us at support@portworx.com .
 * *FIREWALL*: Ensure ports 9001-9015 are open between the cluster nodes that will run Portworx.
 * *NTP*: Ensure all nodes running PX are time-synchronized, and NTP service is configured and running.
-* *KVDB*: Please have a clustered key-value database (etcd or consul) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).
+* *KVDB*: Please have a clustered key-value database (_etcd_ or _consul_) installed and ready. For etcd installation instructions refer this [doc](/maintain/etcd.html).  For a Etcd Quick Setup as an upstart-service, please refer to [Appendix A](#etcd) below.
 * *STORAGE*: At least one of the PX-nodes should have extra storage available, in a form of unformatted partition or a disk-drive.<br/> Also please note that storage devices explicitly given to Portworx (ie. `px-runc ... -s /dev/sdb -s /dev/sdc3`) will be automatically formatted by PX.
 
 The installation and setup of PX OCI bundle is a 3-step process:
@@ -48,9 +48,10 @@ on your host system:
 ```bash
 # Uncomment appropriate `REL` below to select desired Portworx release
 REL=""          # DEFAULT portworx release
-#REL="/1.4"     # 1.4 portworx release
-#REL="/1.5"     # 1.5 portworx release
+#REL="/1.7"     # 1.7 portworx release
 #REL="/1.6"     # 1.6 portworx release
+#REL="/1.5"     # 1.5 portworx release
+#REL="/1.4"     # 1.4 portworx release
 
 latest_stable=$(curl -fsSL "https://install.portworx.com$REL/?type=dock&stork=false" | awk '/image: / {print $2}')
 
@@ -83,6 +84,9 @@ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
     -s /dev/xvdb -s /dev/xvdc \
     -sysd /dev/null
 ```
+
+>**NOTE:**<br/> If you encounter `Could not enable portworx-reboot` error during this step, please ignore it.
+This refers to a non-essential helper-service, that modifies timeouts before the reboot.
 
 
 #### Command-line arguments:
@@ -174,7 +178,7 @@ px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -d enp0s
 Run the command below to create the `/etc/init/portworx.conf` _upstart_-config file that controls Portworx service:
 
 ```bash
-sudo cat > /etc/init/portworx.conf << '_EOF'
+sudo /bin/sh -c 'cat > /etc/init/portworx.conf' << '_EOF'
 description "Portworx OCI service"
 author "Portworx"
 start on stopped rc RUNLEVEL=[345]
@@ -219,7 +223,10 @@ Once this is done, we can start and control PX runC directly via upstart:
 sudo initctl reload-configuration
 sudo initctl start portworx
 
-## NOTE: The following commands also work:
+## NOTE: Monitor the startup via
+# sudo tail -F /var/log/upstart/portworx.log
+#
+## NOTE: The following lifecycle commands also work:
 # sudo initctl stop portworx
 # sudo initctl restart portworx
 ```
@@ -247,8 +254,8 @@ To uninstall the PX OCI bundle, please run the following:
 
 ```bash
 # Step 1: Remove upstart service (if any)
-sudo upstart stop portworx
-sudo rm -f /etc/init/portworx.conf
+sudo initctl stop portworx
+sudo rm /etc/init/portworx.conf
 sudo initctl reload-configuration
 
 # NOTE: if the steps below fail, please reboot the node, and repeat the steps 2..5
@@ -322,4 +329,104 @@ sudo cat > /etc/logrotate.d/portworx << _EOF
   endscript
 }
 _EOF
+```
+
+<a name="etcd"></a>
+
+## Appendix A: Installing etcd cluster as upstart-service
+
+This Appendix explains how to install the
+[etcd-v3](https://en.wikipedia.org/wiki/Container_Linux_by_CoreOS#ETCD) cluster on 3 nodes as an [upstart](https://en.wikipedia.org/wiki/Upstart) service.
+
+
+### Step 1: Install binaries
+
+Please run the following scriplet on all 3 nodes, to download the _etcd_ daemon and client binaries:
+
+```bash
+REL=v3.2.7
+
+curl -fsSL https://github.com/coreos/etcd/releases/download/$REL/etcd-${REL}-linux-amd64.tar.gz | \
+  sudo tar -xvz --strip=1 -f - -C /usr/local/bin \
+    etcd-${REL}-linux-amd64/etcdctl etcd-${REL}-linux-amd64/etcd
+sudo chmod 755 /usr/local/bin/etcd /usr/local/bin/etcdctl
+```
+
+### Step 2: Prepare service-files
+
+There are two service-files:
+
+1. the `/etc/etcd.conf` file is _specific_ to the node, and contains the IP of the local node, as well as the IPs of two remaining nodes, and
+2. the `/etc/init/etcd3.conf` file is a _generic_ upstart-script, which will be identical on all nodes.
+
+
+Firstly, we will create a node-specific `/etc/etcd.conf` file, that should look similar to this:
+
+```bash
+cat /etc/etcd.conf
+
+# SELF_IP is the IP of the node where this file resides.
+SELF_IP=70.0.40.154
+# IP of Node 1
+NODE_1_IP=70.0.40.153
+# IP of Node 2
+NODE_2_IP=70.0.40.154
+# IP of Node 3
+NODE_3_IP=70.0.40.155
+```
+
+Now we can copy-paste the following content to create the `/etc/init/etcd3.conf` file.  This file should be identical on all nodes:
+
+```bash
+sudo /bin/sh -c 'cat > /etc/init/etcd3.conf' << '_EOF'
+description "etcd 3.0 distributed key-value store"
+
+start on (net-device-up and local-filesystems and runlevel [2345])
+stop on runlevel [016]
+
+respawn
+respawn limit 10 5
+
+script
+  [ -f /etc/default/etcd ] && . /etc/default/etcd
+  [ -f /etc/etcd.conf ] && . /etc/etcd.conf
+
+  exec /usr/local/bin/etcd --name etcd-${SELF_IP} --data-dir /var/lib/etcd \
+    --quota-backend-bytes 8589934592 --auto-compaction-retention 3 \
+    --listen-client-urls http://${SELF_IP}:2379,http://localhost:2379 \
+    --advertise-client-urls http://${SELF_IP}:2379,http://localhost:2379 \
+    --listen-peer-urls http://${SELF_IP}:2380 \
+    --initial-advertise-peer-urls http://${SELF_IP}:2380 \
+    --initial-cluster "etcd-${NODE_1_IP}=http://${NODE_1_IP}:2380,etcd-${NODE_2_IP}=http://${NODE_2_IP}:2380,etcd-${NODE_3_IP}=http://${NODE_3_IP}:2380" \
+      --initial-cluster-token my-etcd-token --initial-cluster-state new
+end script
+_EOF
+```
+
+### Step 3: Start etcd service
+
+Now that we have the service-files prepared, what remains is to refresh configurations, and start the Etcd service:
+
+```bash
+sudo initctl reload-configuration
+sudo initctl start etcd3
+
+etcdctl cluster-health
+
+## NOTE: Monitor the startup via
+# sudo tail -F /var/log/upstart/etcd3.log
+#
+## NOTE: The following lifecycle commands also work:
+# sudo initctl start etcd3
+# sudo initctl stop etcd3
+```
+
+
+**Example** portworx configuration, if used IP addresses from example `/etc/etcd.conf` form _Step 2)_ above:
+
+```bash
+# example portworx configuration
+sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
+    -k etcd://70.0.40.153,etcd://70.0.40.154,etcd://70.0.40.155 \
+    -s /dev/xdb -sysd /dev/null
 ```
