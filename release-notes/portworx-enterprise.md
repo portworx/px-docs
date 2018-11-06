@@ -12,6 +12,10 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
+### 1.7.1.1
+
+* Occasionally PVC creations can timeout when a large number of PVCs are created and deleted simulataneously.
+
 ### 1.7.1
 
 * Restart docker containers using shared volumes for DC/OS to enable automatic re-attach of the containers on PX upgrades
