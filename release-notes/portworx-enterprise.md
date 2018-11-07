@@ -14,7 +14,7 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 
 ### 1.7.1.1
 
-* Occasionally PVC creations can timeout when a large number of PVCs are created and deleted simulataneously.
+* Fix to add/remove node labels in Kubernetes to indicate where volume replicas are placed
 
 ### 1.7.1
 
