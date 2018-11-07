@@ -15,6 +15,8 @@ each running a Portworx cluster.
 * Requires PX-Enterprise v2.0+ and stork v1.3+
 * Make sure you have configured a [secret store](https://docs.portworx.com/secrets/) on both your clusters. This will be used to store the credentials for the 
 objectstore.
+* Make sure ports 9001 and 9010 on the destination cluster are reachable from the
+source cluster.
 * Download storkctl to a system that has access to kubectl:
   * Linux:
   ```bash
@@ -117,9 +119,10 @@ status:
 ```
 5. (EKS Only) When pairing with an EKS cluster, you also need to pass in your
    AWS credentials which will be used to generate the IAM token. This can be
-   achieved in 2 ways
+   achieved by performing one of the following steps:
    1. Create a secret and mount in the stork deployment (Secure)
-       1. Create a secret in kube-system namespace with your aws credentials file:
+       1. On the source cluster, create a secret in kube-system namespace with your aws credentials
+       file:
        ```
        $ kubectl create secret  generic --from-file=$HOME/.aws/credentials -n  kube-system aws-creds
        secret/aws-creds created
@@ -140,6 +143,8 @@ status:
                 name: aws-creds
                 readOnly: true
          ```
+       3. Wait for all the stork pods to be in running state after applying the
+          changes: `kubectl get pods -n kube-system -l name=stork`
    2. Add environment variable to the client authentication spec (Non-secure)
 
       If you are pairing to an EKS cluster, the generated clusterpair spec will have a section for
