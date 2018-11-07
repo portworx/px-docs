@@ -12,7 +12,7 @@ Portworx integrates with IBM Key Protect to store your encryption keys/secrets a
 
 Portworx requires the following IBM Key Protect credentials to use its APIs
 
-- Service Instance ID [IBM_SERVICE_INSTANCE_ID]
+- Service Instance ID [IBM_INSTANCE_ID]
 
 The Instance ID of the IBM Key Protect service can be found by running the following command
 
