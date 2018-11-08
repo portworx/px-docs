@@ -124,25 +124,24 @@ status:
        1. On the source cluster, create a secret in kube-system namespace with your aws credentials
        file:
        ```
-       $ kubectl create secret  generic --from-file=$HOME/.aws/credentials -n  kube-system aws-creds
+       $ kubectl create secret generic --from-file=$HOME/.aws/credentials -n  kube-system aws-creds
        secret/aws-creds created
        ```
        2. Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates.
-
-         Add the following under spec.template.spec:
-         ```
+           1. Add the following under spec.template.spec: 
+           ```yaml
            volumes:
-            - name: aws-creds
-              secret:
-                secretName: aws-creds
-         ```
-         Add the following under spec.template.spec.containers
-         ```
-            volumeMounts:
-              - mountPath: /root/.aws/
-                name: aws-creds
-                readOnly: true
-         ```
+           - name: aws-creds
+             secret:
+                  secretName: aws-creds
+           ```
+           2. Add the following under spec.template.spec.containers:
+           ```yaml
+           volumeMounts:
+           - mountPath: /root/.aws/
+             name: aws-creds
+             readOnly: true
+           ```
        3. Wait for all the stork pods to be in running state after applying the
           changes: `kubectl get pods -n kube-system -l name=stork`
    2. Add environment variable to the client authentication spec (Non-secure)
@@ -151,7 +150,7 @@ status:
       performing client authentication using the `aws-iam-authenticator`. You can pass in your AWS
       credentials through environment variables in this spec.
       An updated spec would look like the following
-      ```
+      ```yaml
       exec:
         apiVersion: client.authentication.k8s.io/v1alpha1
         env:
@@ -165,14 +164,48 @@ status:
         - demo-destination-cluster
         command: aws-iam-authenticator
       ```
-6. Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
+6. (GKE Only) When pairing with an GKE cluster, you also need to pass in your
+   Google Cloud credentials which will be used to generate the access tokens. This can be
+   achieved by performing all of the following steps:
+   1. Create a service account key using [the guide from Google
+      Cloud](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+   2. On the source cluster, create a secret in kube-system namespace with
+      the service account json created in the previous step:
+   ```
+   $ kubectl create secret  generic --from-file=<service_account.json> -n  kube-system gke-creds
+   secret/gke-creds created
+   ```
+   3. Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates.
+       1. Add the following under spec.template.spec:
+       ```yaml
+       volumes:
+       - name: gke-creds
+         secret:
+              secretName: gke-creds
+       ```
+       2. Add the following under spec.template.spec.containers
+       ```yaml
+       volumeMounts:
+       - mountPath: /root/.gke/
+         name: gke-creds
+         readOnly: true
+       ```
+       3. Add the following under spec.template.spec.containers
+       ```yaml
+       env:
+       - name: CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
+         value: /root/.gke/gke-creds
+       ```     
+   4. Wait for all the stork pods to be in running state after applying the
+      changes: `kubectl get pods -n kube-system -l name=stork`
+7. Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
 see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl
 ```
 $ storkctl get clusterpair
 NAME            STORAGE-STATUS   SCHEDULER-STATUS   CREATED
 remotepair      Ready            Ready              26 Oct 18 03:11 UTC
 ```
-7. If the status is in error state you can describe the clusterpair to get more information
+8. If the status is in error state you can describe the clusterpair to get more information
 ```
 $ kubectl describe clusterpair remotepair
 ```
