@@ -167,15 +167,25 @@ status:
 6. (GKE Only) When pairing with an GKE cluster, you also need to pass in your
    Google Cloud credentials which will be used to generate the access tokens. This can be
    achieved by performing all of the following steps:
-   1. Create a service account key using [the guide from Google
-      Cloud](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
-   2. On the source cluster, create a secret in kube-system namespace with
+   1. Create a service account key using [the guide from Google Cloud](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)
+   and save it as gcs-key.json. You can also create this using the following command: 
+   ```
+   $ gcloud iam service-accounts keys create gcs-key.json \
+         --iam-account <your_iam_account>
+   ```
+   2. Create a clusterrolebinding to give your account the cluster-admin role
+   ```
+   $ kubectl create clusterrolebinding stork-cluster-admin-binding \
+        --clusterrole=cluster-admin                                \
+        --user=<your_iam_account>                                  \
+   ```     
+   3. On the source cluster, create a secret in kube-system namespace with
       the service account json created in the previous step:
    ```
-   $ kubectl create secret  generic --from-file=<service_account.json> -n  kube-system gke-creds
+   $ kubectl create secret  generic --from-file=gcs-key.json -n kube-system gke-creds
    secret/gke-creds created
    ```
-   3. Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates.
+   4. Mount the secret created above in the stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates.
        1. Add the following under spec.template.spec:
        ```yaml
        volumes:
@@ -194,9 +204,9 @@ status:
        ```yaml
        env:
        - name: CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
-         value: /root/.gke/gke-creds
+         value: /root/.gke/gcs-key.json
        ```     
-   4. Wait for all the stork pods to be in running state after applying the
+   5. Wait for all the stork pods to be in running state after applying the
       changes: `kubectl get pods -n kube-system -l name=stork`
 7. Once you apply the above spec on the source cluster you should be able to check the status of the pairing. On a successful pairing, you should
 see the "Storage Status" and "Scheduler Status" as "Ready" using storkctl
