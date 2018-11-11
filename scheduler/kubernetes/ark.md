@@ -16,7 +16,7 @@ plugin.
 ## Install Ark Plugin
 Run the following command to install the Portworx plugin for Ark:
 ```
-$ ark plugin add portworx/ark-plugin:0.2
+$ ark plugin add portworx/ark-plugin:0.3
 ```
 
 This should add an init container to your Ark deployment to install the
