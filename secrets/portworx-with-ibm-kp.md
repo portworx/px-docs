@@ -107,6 +107,13 @@ data:
   IBM_CUSTOMER_ROOT_KEY: MGYxNGExNzMtODE2blahN2Q3LTg1ZGYtY2M3ZWI5YmYxNzRj
 
 ```
+
+Run the below command to create the secret
+
+```
+$ kubectl create -f px-ibm-secret.yaml
+```
+
 Portworx is going to look for this secret with name `px-ibm` under the `portworx` namespace.
 
 ### Step 2: Set up IBM Key Protect as the secrets provider for Portworx.
