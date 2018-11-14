@@ -1,5 +1,8 @@
 - job_name: "pxc_prometheus"
   honor_labels: true
   metrics_path: "/federate"
+  params:
+    "match[]":
+      - '{job="portworx-service"}'
   static_configs:
-    - targets: ["<cluster_external_ip>:<cluster_prometheus_endport>"]
+    - targets: ["<externalip:port>"]
