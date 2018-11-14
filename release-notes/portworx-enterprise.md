@@ -12,18 +12,18 @@ meta-description: "Stay up to date with the new releases and updates from Portwo
 * TOC
 {:toc}
 
-### 1.7.1.1
+## 1.7.1.1
 
 * Fix to add/remove node labels in Kubernetes to indicate where volume replicas are placed
 
-### 1.7.1
+## 1.7.1
 
 * Restart docker containers using shared volumes for DC/OS to enable automatic re-attach of the containers on PX upgrades
 * Preserve Kubernetes agent node ids across agent restarts when kubernetes agents are running statelessly in 
   auto-scaling based environments
 
 
-### 1.7.0
+## 1.7.0
 
 ### Key Features and Enhancements
 
