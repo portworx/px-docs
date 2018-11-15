@@ -156,7 +156,7 @@ spec:
       hostPID: true
       containers:
         - name: portworx
-          image: portworx/oci-monitor:1.6.1.1
+          image: portworx/oci-monitor:1.7.1.1
           imagePullPolicy: Always
           args:
             ["-c", "px-pks-demo-1", "-k", "etcd:http://PUT-YOUR-ETCD-HOST:PUT-YOUR-ETCD-PORT", "-x", "kubernetes", "-s", "type=zeroedthick"]
@@ -325,7 +325,7 @@ spec:
         - kube-controller-manager
         - --leader-elect=true
         - --address=0.0.0.0
-        - --controllers=persistentvolume-binder
+        - --controllers=persistentvolume-binder,persistentvolume-expander
         - --use-service-account-credentials=true
         - --leader-elect-resource-lock=configmaps
         image: gcr.io/google_containers/kube-controller-manager-amd64:v1.10.4
