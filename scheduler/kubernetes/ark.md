@@ -100,7 +100,7 @@ When restoring from backups, a clone volume will be created from the snapshot an
 bound to the restored PVC. To restore from the backup created above you can run
 the following command:
 ```
-$ ark restore create --from-backup default-ns-backup
+$ ark restore create --from-backup default-ns-local-backup
 Restore request "default-ns-local-backup-20181111201245" submitted successfully.
-Run `ark restore describe default-ns-backup-20180529201245` for more details.
+Run `ark restore describe default-ns-local-backup-20181111201245` for more details.
 ```
