@@ -11,9 +11,9 @@ keywords: portworx, etcd, Kubernetes, bosh, cfcr, storage, pkss
 ### 1. Clone the CFCR etcd release repo.
 
 ```bash
-git clone https://github.com/cloudfoundry-incubator/cfcr-etcd-release.git
+git clone https://github.com/portworx/cfcr-etcd-release.git
 cd cfcr-etcd-release
-git checkout tags/v1.5.0
+git checkout tags/v1.5.0-px
 ```
 
 ### 2. Deploy etcd
