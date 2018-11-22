@@ -15,6 +15,8 @@ not migrate any scheduler specific resources.
 * Requires PX-Enterprise v2.0+ 
 * Make sure you have configured a [secret store](https://docs.portworx.com/secrets/) on both your clusters. This will be used to store the credentials for the 
 objectstore.
+* Make sure ports 9001 and 9010 on the destination cluster are reachable from the
+source cluster.
 
 ## Pairing clusters
 
