@@ -35,7 +35,7 @@ You can install Portworx on non-SDS worker node flavors, but you might not get t
 To add non-SDS worker nodes to the Portworx storage layer, each worker node must have at least one tertiary raw, unformatted, and unmounted disk that is attached to the worker node. You can manually add these tertiary disks or use the [IBM Cloud Block Attacher plug-in](https://console.bluemix.net/docs/containers/cs_storage_utilities.html#block_storage_attacher) to automatically add the disks to your non-SDS worker nodes. For more information, see the [IBM Cloud Kubernetes Service documentation](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#create_block_storage). 
 
 **How can I make sure that my data is stored highly available?** </br>
-You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) and replicate your volumes across SDS worker nodes in 3 or more zones.
+You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) and replicate your volumes on SDS worker nodes across 3 zones.
 
 ## Step 2: Creating or preparing your cluster for Portworx
 {: #cluster-create}
@@ -50,14 +50,14 @@ To create or prepare your cluster for Portworx:
 
 3. [Create or use an existing cluster](https://console.bluemix.net/docs/containers/cs_clusters.html#clusters_ui) in IBM Cloud Kubernetes Service with a Kubernetes version of 1.10 or higher. To ensure high availability for your data, set up a [multizone cluster](https://console.bluemix.net/docs/containers/cs_clusters_planning.html#multizone) with at least 3 worker nodes and spread the worker nodes across zones. 
 
-4. If you created or want to use a cluster with non-SDS worker nodes, [add raw, unformatted, and unmounted block storage](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#create_block_storage) to your worker nodes. The block storage devices are attached to your worker node and can be included into the Portworx storage layer. 
+4. If you created or want to use a cluster with non-SDS worker nodes, [add raw, unformatted, and unmounted block storage](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#create_block_storage) to your worker nodes. The block storage devices are attached to your worker node and can be included in the Portworx storage layer. 
 
 ## Step 3: Setting up a key-value store for the Portworx metadata
 {: #key-value-store}
 
 Every Portworx cluster must be connected to a key-value store to store Portworx metadata. The Portworx key-value store serves as the single source of truth for your Portworx storage layer. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
-In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up highly available. By using an IBM Cloud Database-as-a-Service, such as [**IBM Compose for etcd for IBM Cloud**](https://console.bluemix.com/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial) you can set up a highly available key-value store for your Portworx cluster. Each IBM Compose for etcd service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud region and data is replicated across all etcd data members. 
+In order for your Portworx cluster to be highly available, you must ensure that the Portworx key-value store is set up highly available. By using an IBM Cloud Database-as-a-Service, such as [**IBM Compose for etcd for IBM Cloud**](https://console.bluemix.com/docs/services/ComposeForEtcd/getting_started.html#getting-started-tutorial) you can set up a highly available key-value store for your Portworx cluster. Each IBM Compose for etcd service instance contains three etcd data members that are added to a cluster. The etcd data members are spread across zones in an IBM Cloud location and data is replicated across all etcd data members. 
 
 Follow the [IBM Cloud Kubernetes Service documentation](https://console.bluemix.net/docs/containers/cs_storage_portworx.html#portworx_database) to set up your IBM Compose for etcd key-value store for Portworx. 
 
