@@ -37,6 +37,28 @@ It has the following options available.
 
 {% include pxctl/volume/volume-create-help-1.3.md %}
  
+**In Version 1.5**
+
+Version 1.5 changes the unit for block_size to Bytes. Use the best_effort_location_provisioning option to allocate volumes on nodes, zones, racks in addition to those requested.
+
+```
+OPTIONS:
+   --block_size size, -b size                    block size in Bytes (default: 4096)
+   --best_effort_location_provisioning           requested nodes, zones, racks are optional
+```
+
+**In Version 1.6**
+
+Version 1.6 allows user to specify a per volume queue depth setting during create. Older volumes retain their queue depth of 128 while the new default is set to 32. Also available 
+is the ability to turn off discard support for volumes. When used, volume is mounted with discard turned off which prevent the FS from releasing space back to the underlying storage.
+By default discard support is always on.
+
+```
+OPTIONS:
+   --queue_depth value, -q value                 block device queue depth [1..256] (default: 32)
+   --nodiscard                                   Disable discard support for this volume
+
+```
 Here is an example of how to create a  10 GB volume with replication factor set to 3
 ```
 sudo /opt/pwx/bin/pxctl volume create clitest1 --size=10 --repl=3
@@ -79,6 +101,15 @@ For encrypted volumes, pass a '--secure' flag. The secret, by default, is the cl
 ```
 sudo /opt/pwx/bin/pxctl volume create cliencr --secure --size=2 --repl=2
 ```
+
+##### 512-byte Block Volumes
+
+Default block size for all volumes is 4K. For applications which require the device block size to be 512 bytes, volume should be created using the '--block_size' option. 
+```
+sudo /opt/pwx/bin/pxctl volume create db2vol --block_size 512 --size=2 --repl=2
+```
+
+512 bytes block size is currently not supported with Encrypted Volumes. 
 
 ##### Passing Zones and Rack Information
 
